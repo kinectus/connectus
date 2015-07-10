@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/Dianna/connectus#readme",
   "dependencies": {
-    "express": "^4.13.1"
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
+    "nodemon": "^1.3.7"
   }
 }
