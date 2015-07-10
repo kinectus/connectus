@@ -1,0 +1,6 @@
+.DS_Store
+
+
+# Files in external disk
+node_modules/
+client/lib

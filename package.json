@@ -1,0 +1,24 @@
+{
+  "name": "connectus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dianna/connectus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dianna/connectus/issues"
+  },
+  "homepage": "https://github.com/Dianna/connectus#readme",
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
+    "nodemon": "^1.3.7"
+  }
+}
