@@ -21,6 +21,7 @@ var Connectus = React.createClass({
 
   outletInfoChange: function(){
     this.forceUpdate;
+
   },
 
   render: function() {
