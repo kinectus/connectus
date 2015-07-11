@@ -4,4 +4,4 @@ var Outlet = bookshelf.Model.extend({
   tableName: 'outlets'
 });
 
-module.exports = Outlet
+module.exports = Outlet;
