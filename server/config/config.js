@@ -77,6 +77,8 @@ db.schema.hasTable('transactions').then(function(exists){
       transaction.dateTime('end');
       transaction.decimal('totalEnergy', 5, 2); //random precision choice
       transaction.decimal('totalCost', 6, 2); //random precision choice
+    }).then(function(table){
+      console.log('Created transactions table', table);
     });
   }
 });
