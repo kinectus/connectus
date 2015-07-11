@@ -5,5 +5,6 @@ var User = bookshelf.Model.extend({
 });
 
 // User.hasMany('Outlet');
+// User.hasMany('Transaction');
 
 module.exports = User;
