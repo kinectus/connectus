@@ -9,9 +9,10 @@ var Outlet = bookshelf.Model.extend({
   },
   buyer: function() {
     return this.belongsTo(User, 'buyer_id');
+  },
+  transaction: function() {
+    return this.hasMany('Transaction');
   }
 });
-
-Outlet.hasMany('Transaction');
 
 module.exports = Outlet;
