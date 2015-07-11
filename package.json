@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Dianna/connectus#readme",
   "dependencies": {
+    "bluebird": "^2.9.33",
     "body-parser": "^1.13.2",
     "browserify": "^10.2.6",
     "express": "^4.13.1",
