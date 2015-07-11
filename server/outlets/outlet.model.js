@@ -1,5 +1,6 @@
 var bookshelf = require('../config/config');
 var User = require('../users/user.model');
+var Transaction = require('../transactions/transaction.model');
 
 var Outlet = bookshelf.Model.extend({
   tableName: 'outlets',
@@ -10,5 +11,7 @@ var Outlet = bookshelf.Model.extend({
     return this.belongsTo(User, 'buyer_id');
   }
 });
+
+Outlet.hasMany('Transaction');
 
 module.exports = Outlet;
