@@ -1,6 +1,10 @@
-var app = require('./server-config');
+//added
+var express = require('./config/express');
+
+var app = express();
 var port = process.env.PORT || 3000;
+// var db = require('./db/config.js');
+app.listen(port);
+module.exports = app;
 
-
-app.listen(3000);
 console.log('Connectus is listening on port ' + port + '...');
