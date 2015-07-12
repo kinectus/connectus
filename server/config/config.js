@@ -53,8 +53,8 @@ db.schema.hasTable('outlets').then(function(exists){
       outlet.decimal('priceSuggest', 5, 2).notNullable();
       // outlet.string('photo'); --store the path to a directory, not the photo (worstcase, longblob)
       outlet.string('address', 100).notNullable();
-      outlet.integer('seller_id', 11).notNullable();
-      outlet.integer('buyer_id', 11).notNullable();
+      outlet.integer('seller_id', 11).unsigned().references('users.id').notNullable();
+      outlet.integer('buyer_id', 11).unsigned().references('users.id').notNullable();
 
       // seller join
       // buyer join
@@ -77,9 +77,9 @@ db.schema.hasTable('transactions').then(function(exists){
       transaction.dateTime('end').notNullable();
       transaction.decimal('totalEnergy', 5, 2).notNullable(); //random precision choice
       transaction.decimal('totalCost', 6, 2).notNullable(); //random precision choice
-      transaction.integer('buyer_id', 11).notNullable();
-      transaction.integer('seller_id', 11).notNullable();
-      transaction.integer('outlet_id', 11).notNullable();
+      transaction.integer('buyer_id', 11).unsigned().references('users.id').notNullable();
+      transaction.integer('seller_id', 11).unsigned().references('users.id').notNullable();
+      transaction.integer('outlet_id', 11).unsigned().references('outlets.id').notNullable();
     }).then(function(table){
       console.log('Created transactions table', table);
     });
