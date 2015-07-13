@@ -6,9 +6,8 @@ var ReactMixin = require('react-mixin');
 var Signup = React.createClass({
   getInitialState: function(){
     return {
-      user: '',
-      password: '',
-      extra: ''
+      username: '',
+      password: ''
     };
   },
 
@@ -35,7 +34,7 @@ var Signup = React.createClass({
         <form role="form" className="ui form">
 	        <div className="field">
 	          <label htmlFor="username">Username</label>
-	          <input type="text" valueLink={this.linkState('user')} className="form-control" id="username" placeholder="Username" />
+	          <input type="text" valueLink={this.linkState('username')} className="form-control" id="username" placeholder="Username" />
 	        </div>
 	        <div className="field">
 	          <label htmlFor="password">Password</label>
