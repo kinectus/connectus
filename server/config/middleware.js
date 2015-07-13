@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var db = require('./db/config');
 require('../auth/auth.controller');
-// include morgan, 
 
 var app = express();
 app.use(express.static(path.join( __dirname + '/../../dist')));
