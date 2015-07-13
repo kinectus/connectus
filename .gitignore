@@ -4,4 +4,4 @@
 # Files in external disk
 node_modules/
 client/lib
-dist/
+dist/js/app.js
