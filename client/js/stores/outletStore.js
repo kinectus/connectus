@@ -23,7 +23,17 @@ var _outlets = [          // these will obviously actually come from the db when
 var outletStore = assign({}, EventEmitter.prototype, {
   getOutlets: function() {
     return _outlets;
-  }
+  },
+
+  emitChange: function() {
+    this.emit(CHANGE_EVENT);
+    console.log('i changed')
+  },
+
+  addChangeListener: function(callback) {
+    this.on(CHANGE_EVENT, callback);
+  },
+
 });
 
 ConnectusDispatcher.register(function(payload){
@@ -33,6 +43,8 @@ ConnectusDispatcher.register(function(payload){
       _outlets.map(function(outlet){
         if (outlet.id === payload.id){
           outlet.color = 'red';
+          console.log('Im red');
+          outletStore.emitChange();
           // trigger event!!
         }
       });
