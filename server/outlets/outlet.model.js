@@ -1,4 +1,4 @@
-var bookshelf = require('../config/config');
+var bookshelf = require('../config/db/config');
 var User = require('../users/user.model');
 var Transaction = require('../transactions/transaction.model');
 

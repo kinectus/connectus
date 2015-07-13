@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
-var db = require('./config');
+var db = require('./db/config');
 require('../auth/auth.controller');
 // include morgan, 
 

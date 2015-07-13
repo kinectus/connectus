@@ -18,17 +18,17 @@ passport.use(new FacebookStrategy({
 
 // routing for authentication
 
-app.get('/auth/facebook',
-  passport.authenticate('facebook'), function() {
-    console.log('in auth');
-  }
-);
+// app.get('/auth/facebook',
+//   passport.authenticate('facebook'), function() {
+//     console.log('in auth');
+//   }
+// );
 
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    console.log('authenticated');
-    res.redirect('/');
-  });
+// app.get('/auth/facebook/callback',
+//   passport.authenticate('facebook', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     console.log('authenticated');
+//     res.redirect('/');
+//   });
 
