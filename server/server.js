@@ -1,7 +1,7 @@
 //added
-var express = require('./config/middleware');
+var middleware = require('./config/middleware');
 
-var app = express();
+var app = middleware();
 var port = process.env.PORT || 3000;
 // var db = require('./db/config.js');
 app.listen(port);
