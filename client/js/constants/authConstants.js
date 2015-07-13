@@ -1,3 +1,5 @@
+//TEMP CODE - FILE IN PROGRESS
+
 var BASE_URL = 'http://localhost:3000/';
 
 var loginConstants = {
