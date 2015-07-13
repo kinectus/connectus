@@ -4,14 +4,6 @@ var outletStore = require('../stores/outletStore');
 
 var Connectus = React.createClass({
 
-  getInitialState: function(){
-    console.log('initial state gotten by component');
-
-    return {
-      list: outletStore.getOutlets()
-    };
-  },
-
   render: function() {
     return (
       <div>
