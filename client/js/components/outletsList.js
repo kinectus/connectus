@@ -23,6 +23,22 @@ var outletsList = React.createClass({
     });
   },
 
+  showOutletInfo: function(id){
+    ConnectusDispatcher.dispatch({
+        action: 'CLICK_OUTLET',
+        id: id
+    });
+  },
+
+  componentDidMount: function() {
+    outletStore.addChangeListener(this._onChange);
+  },
+
+  outletInfoChange: function(){
+    this.forceUpdate;
+
+  },
+
   outletInfoChange: function(){
     this.forceUpdate;
 
@@ -43,6 +59,10 @@ var outletsList = React.createClass({
           { outletHtml }
       </ul>
     </div>;
+  },
+
+  _onChange: function() {
+    this.setState(this.getInitialState());
   }
 
 });
