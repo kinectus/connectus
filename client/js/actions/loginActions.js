@@ -1,3 +1,5 @@
+//TEMP CODE - FILE IN PROGRESS
+
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher.js');
 var loginConstants = require('../constants/authConstants.js');
 var RouterContainer = require('../services/RouterContainer.js');
