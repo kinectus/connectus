@@ -8,7 +8,7 @@ var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
 
 module.exports = (
-  <Route name="connectus" path="/" handler={Connectus}>
+  <Route name="connectus" path="/" handler={Connectus} >
     <Route name="login" path="/login" handler={Login} />
     <Route name="signup" path="/signup" handler={Signup} />
     <Route name="landingPage" path="/landingPage" handler={LandingPage} />

@@ -12,6 +12,10 @@ var outletsList = React.createClass({
     }
   },
 
+  moreOutletInfo: function(){
+    console.log('in moreOutletInfo function in the component')
+  },
+
   showOutletInfo: function(id){
     ConnectusDispatcher.dispatch({
         action: 'CLICK_OUTLET',
