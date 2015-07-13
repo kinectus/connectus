@@ -1,6 +1,6 @@
 var React = require('react');
 var outletStore = require('../stores/outletStore');
-
+var RouteHandler = require('react-router').RouteHandler;
 var Connectus = React.createClass({
 
   getInitialState: function(){
@@ -16,7 +16,14 @@ var Connectus = React.createClass({
   },
 
   render: function() {
-    return <h1>ConnectUs!</h1>
+    return (
+      <div>
+        <h1>ConnectUs!</h1>
+        <div>
+          <RouteHandler />
+        </div>
+      </div>
+    )
   }
 });
 

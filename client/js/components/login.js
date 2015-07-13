@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactAddons = require('react/addons');
 var ReactMixin = require('react-mixin');
-var Auth = require('../services/AuthService');
+// var Auth = require('../services/AuthService');
 
 var Login = React.createClass({
 
