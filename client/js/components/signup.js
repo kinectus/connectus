@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactAddons = require('react/addons');
 var ReactMixin = require('react-mixin');
-// var Auth = require('../services/AuthService');
+var Auth = require('../services/authServices.js');
 
 var Signup = React.createClass({
   getInitialState: function(){
@@ -31,12 +31,12 @@ var Signup = React.createClass({
     return (
   	  <div className="signup">
         <h1>Signup</h1>
-        <form role="form" className="ui form">
-	        <div className="field">
+        <form role="form" className="ui large form">
+	        <div className="six wide field">
 	          <label htmlFor="username">Username</label>
 	          <input type="text" valueLink={this.linkState('username')} className="form-control" id="username" placeholder="Username" />
 	        </div>
-	        <div className="field">
+	        <div className="six wide field">
 	          <label htmlFor="password">Password</label>
 	          <input type="password" valueLink={this.linkState('password')} className="form-control" id="password" ref="password" placeholder="Password" />
 	        </div>

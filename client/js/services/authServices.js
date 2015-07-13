@@ -54,3 +54,5 @@ var authServices = function(){
   return authInstance;
   
 };
+
+module.exports = authServices;
