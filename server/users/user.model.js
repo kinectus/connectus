@@ -1,4 +1,4 @@
-var bookshelf = require('../config/config');
+var bookshelf = require('../config/db/config');
 var Outlet = require('../outlets/outlet.model');
 
 var User = bookshelf.Model.extend({

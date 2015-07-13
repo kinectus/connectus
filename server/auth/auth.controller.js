@@ -16,7 +16,7 @@ passport.use(new FacebookStrategy({
   }
 ));
 
-//routing for authentication
+// routing for authentication
 
 // app.get('/auth/facebook',
 //   passport.authenticate('facebook'), function() {

@@ -1,6 +1,6 @@
 var bookshelf = require('../config/config');
 var User = require('../users/user.model');
-var Outlet = require('../outlets/outlet.model');
+var Outlet = require('../outlets/db/outlet.model');
 
 var Transaction = bookshelf.Model.extend({
   tableName: 'transactions',
