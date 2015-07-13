@@ -11,5 +11,8 @@ module.exports = function() {
   //app.use(bodyParser.json());
   app.use(express.static( path.join( __dirname + '/../dist') ) );
 
+  // put these before routes.  order matters!
+  app.use(passport.initialize());
+  app.use(passport.session());
   return app;
 }
