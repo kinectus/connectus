@@ -1,6 +1,20 @@
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
-var app = require('../server.js');
+
+// Passport session setup.
+//   To support persistent login sessions, Passport needs to be able to
+//   serialize users into and deserialize users out of the session.  Typically,
+//   this will be as simple as storing the user ID when serializing, and finding
+//   the user by ID when deserializing.  However, since this example does not
+//   have a database of user records, the complete GitHub profile is serialized
+//   and deserialized.
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
 
 
 passport.use(new FacebookStrategy({
@@ -10,25 +24,23 @@ passport.use(new FacebookStrategy({
     enableProof: false
   },
   function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-      return done(err, user);
-    });
+    done(null, 'user');
+    // example code
+    // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    //   return done(err, user);
+    // });
   }
 ));
 
-// routing for authentication
 
-// app.get('/auth/facebook',
-//   passport.authenticate('facebook'), function() {
-//     console.log('in auth');
-//   }
-// );
+module.exports = {
+  isAuthenticated: function(req, res, next) {
+    if (req.isAuthenticated()) {
+      return next(); 
+    }
 
-// app.get('/auth/facebook/callback',
-//   passport.authenticate('facebook', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     // Successful authentication, redirect home.
-//     console.log('authenticated');
-//     res.redirect('/');
-//   });
+    // check with Valerie for correct signin
+    res.redirect('/#/signin')
+  }
+}
 
