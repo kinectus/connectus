@@ -49,12 +49,12 @@ var outletsList = React.createClass({
     var outlets = outletStore.getOutlets();
 
     var outletHtml = outlets.map( function( outlet ) {
-      return <li data-tag={outlet.id} onClick={that.showOutletInfo.bind(null, outlet.id)} key={ outlet.id }>
+      return <div className="item" data-tag={outlet.id} onClick={that.showOutletInfo.bind(null, outlet.id)} key={ outlet.id }>
         { outlet.name } { outlet.color }
-      </li>;
+      </div>;
     });
 
-    return <div>
+    return <div className="ui relaxed divided list">
       <ul>
           { outletHtml }
       </ul>
