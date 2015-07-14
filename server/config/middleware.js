@@ -10,20 +10,22 @@ require('../auth/auth.controller');
 
 var app = express();
 app.use(express.static(path.join( __dirname + '/../../dist')));
-var router = express.Router();
+var apiRouter = express.Router();
+var outletsRouter = express.Router();
 
 app.use(cookieParser());
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
-// Initialize Passport!  Also use passport.session() middleware, to support
-// persistent login sessions (recommended).
+
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 //be careful about the order of the routers and auth
-app.use(router);
+app.use('/api', apiRouter);
+app.use('/outlets', outletsRouter);
 
 
-require('../auth/auth.routes')(router);
+require('../auth/auth.routes')(apiRouter);
+require('../outlets/outlets.routes')(outletsRouter);
 
 module.exports = app;
