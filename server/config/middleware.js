@@ -6,7 +6,7 @@ var passport = require('passport');
 var path = require('path');
 var db = require('./db/config');
 require('../auth/auth.controller');
-require('./powerReader.js');
+// require('./powerReader.js');
 
 var app = express();
 app.use(express.static(path.join( __dirname + '/../../dist')));
