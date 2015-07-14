@@ -13,12 +13,11 @@ var Signup = React.createClass({
 
   signup: function(e){
     e.preventDefault();
-    //TODO: make Auth service call
-    // Auth.signup(this.state.user, this.state.password, this.state.extra)
-    //   .catch(function(err) {
-    //     alert("There's an error logging in");
-    //     console.log("Error logging in", err);
-    //   });
+    Auth.signup(this.state.user, this.state.password)
+      .catch(function(err) {
+        alert("There's an error logging in");
+        console.log("Error logging in", err);
+      });
     console.log('signup was called');
   },
   //comments for render - can't get comments to not show up in JSX markup

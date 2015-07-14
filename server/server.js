@@ -1,4 +1,3 @@
-//added
 var app = require('./config/middleware');
 
 var port = process.env.PORT || 3000;

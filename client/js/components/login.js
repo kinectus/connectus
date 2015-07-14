@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactAddons = require('react/addons');
 var ReactMixin = require('react-mixin');
-// var Auth = require('../services/AuthService');
+var Auth = require('../services/authServices.js');
 
 var Login = React.createClass({
   getInitialState: function(){
@@ -15,17 +15,17 @@ var Login = React.createClass({
     e.preventDefault();
     console.log('login was called');
     //TODO: Write calls in Auth services to send/check user and password
-    // Auth.login(this.state.user, this.state.password)
-    //   .catch(function(err) {
-    //     alert("There's an error logging in");
-    //     console.log("Error logging in", err);
-    //   });
+    Auth.login(this.state.user, this.state.password)
+      .catch(function(err) {
+        alert("There's an error logging in");
+        console.log("Error logging in", err);
+      });
   },
 
   render: function(){
     return (
   	  <div className="login">
-        <h1>Login</h1>
+        <h1>Login with Facebook</h1>
         <form role="form" className="ui large form">
 	        <div className="six wide field">
 	          <label htmlFor="username">Username</label>

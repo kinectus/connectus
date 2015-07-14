@@ -18,8 +18,8 @@ module.exports = function(app) {
 
     // check with valerie for login path
     passport.authenticate('facebook', {
-      successRedirect: '/#/',
-      failureRedirect: '/login'
+      successRedirect: '/#/landingPage',
+      failureRedirect: '/#/login'
     })
     // function(req, res) {
     //   // Successful authentication, redirect home.
@@ -27,4 +27,9 @@ module.exports = function(app) {
     //   res.redirect('/');
     // }
     );
+
+  app.get('/auth/logout', function(req, res){
+    req.logout();
+    res.redirect('/#/login');
+  });
 };

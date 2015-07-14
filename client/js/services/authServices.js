@@ -23,8 +23,7 @@ var authServices = function(){
 
   authInstance.logout = function(){
     //COMPONENT -> ACTION
-    //TODO: build out this action
-    // LoginActions.logoutUser();
+    LoginActions.logoutUser();
   };
 
   authInstance.signup = function(username, password){
@@ -33,7 +32,7 @@ var authServices = function(){
       url: SIGNUP_URL,
       method: 'POST',
       crossOrigin: true,
-      type: json,
+      type: 'json',
       data: {
         username, password
       }
@@ -44,9 +43,7 @@ var authServices = function(){
     return loginPromise
       .then(function(response){
         var jwt = response.id_token;
-        //COMPONENT -> ACTION
-        //TODO: build out loginActions function
-        //LoginActions.loginUser(jwt);
+        LoginActions.loginUser(jwt);
         return true;
       });
   };
@@ -55,4 +52,4 @@ var authServices = function(){
   
 };
 
-module.exports = authServices;
+module.exports = authServices();
