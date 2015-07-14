@@ -33,6 +33,8 @@ var reserveOutlet = React.createClass({
         { outlet.description }
       </div>
 
+    var outletPhoto = <div className="outletPhoto"></div>
+
     return (
       <div className='container'>
         <div>
@@ -54,6 +56,7 @@ var reserveOutlet = React.createClass({
           </Map>
         </div><div>
           {outletInfo}
+          {outletPhoto}
         </div>
       </div>
     )
