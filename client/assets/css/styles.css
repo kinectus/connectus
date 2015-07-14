@@ -46560,3 +46560,15 @@ h1 {
   color: #30302f;
   font-size: 30px;
 }
+.reservationMap {
+  width: 100%;
+  height: 300px;
+  border: 2px solid #30302f;
+}
+.outletPhoto {
+  width: 20%;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #f26964;
+  float: right;
+}

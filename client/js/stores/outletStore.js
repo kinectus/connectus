@@ -49,6 +49,16 @@ var outletStore = assign({}, EventEmitter.prototype, {
     return _outlets;
   },
 
+  getOutletById: function(id){
+    var outletById = null;
+    _outlets.forEach(function(outlet){
+      if (outlet.id === id) {
+        outletById = outlet;
+      }
+    })
+    return outletById;
+  },
+
   emitChange: function() {
     this.emit(CHANGE_EVENT);
     console.log('i changed')

@@ -6,3 +6,4 @@ node_modules/
 client/lib
 dist/js/app.js
 server/data.txt
+client/assets/css
