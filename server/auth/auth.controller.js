@@ -27,6 +27,7 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     done(null, 'user');
+    console.log('PROFEILLLLLLEEE------------>', profile)
     // example code
     // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
     //   return done(err, user);
@@ -44,5 +45,5 @@ module.exports = {
     // check with Valerie for correct signin
     res.redirect('/#/signin')
   }
-}
+};
 
