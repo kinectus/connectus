@@ -1,7 +1,6 @@
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
-// var Route = require('react-router-component');
 var Link = require('react-router').Link;
 
 var outletsList = React.createClass({

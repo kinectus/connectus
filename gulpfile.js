@@ -28,13 +28,14 @@ gulp.task('less', function () {
     .pipe(gulp.dest('./client/assets/css'));
 });
 
-gulp.task('default', ['browserify', 'copy'], function() {
-  return gulp.watch(['client/**/*.*'], ['browserify', 'copy']);
-});
-
 gulp.task('build', ['less'], function() {
   return gulp.watch('client/**/*.less', ['less']);
 });
+
+gulp.task('default', ['browserify', 'copy', 'build'], function() {
+  return gulp.watch(['client/**/*.*'], ['browserify', 'copy']);
+});
+
 
 
  
