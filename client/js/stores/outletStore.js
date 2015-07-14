@@ -6,17 +6,41 @@ var EventEmitter = require('events').EventEmitter;
 var CHANGE_EVENT = 'change';
 
 var _outlets = [          // these will obviously actually come from the db when we get one
-  { name: 'Jammies Outlet',
-    color: 'black',
-    type: 'high',
-    location: '944 Market St',
-    id: '4'
+  { name: 'Hack Reactor Outlet',
+    seller: 'Jammie Mountz',
+    voltage: 'high',
+    priceHr: '$2/hr',
+    pricekWh: '$5/kWh',
+    description: '944 Market St on the corner guarded by a purple dragon',
+    rating: '4',
+    id: '1'
   },
-  { name: 'Diannas Outlet',
-    color: 'yellow',
-    type: 'low',
-    location: '140 Hamerton Ave',
-    id: '5'
+  { name: 'Target Outlet',
+    seller: 'Bob Schmob',
+    voltage: 'low',
+    priceHr: '$2/hr',
+    pricekWh: '$4/kWh',
+    description: 'just dont look directly at it though',
+    rating: '3',
+    id: '2'
+  },
+  { name: 'Macy\'s Outlet',
+    seller: 'Stacey Smith',
+    voltage: 'high',
+    priceHr: '$4/hr',
+    pricekWh: '$3/kWh',
+    description: 'pay the troll to get access',
+    rating: '5',
+    id: '3'
+  },
+  { name: 'Burger Shack Outlet',
+    seller: 'Bob Belcher',
+    voltage: 'medium',
+    priceHr: '$2/hr',
+    pricekWh: '$5/kWh',
+    rating: '4',
+    description: 'watch out for broken dreams',
+    id: '4'
   }
 ];
 
