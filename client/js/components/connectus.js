@@ -7,7 +7,7 @@ var Connectus = React.createClass({
     return (
       <div className="ui container">
         <div className="ui menu">
-          <h1>ConnectUs!</h1>
+          <h1>Connectme!</h1>
         </div>
         <div>
           <RouteHandler />
