@@ -37,12 +37,10 @@ var reserveOutlet = React.createClass({
 
     return (
       <div className='container'>
-        <div>
+        <div className='reservationMap'>
           <Map
           initialZoom={10}
-          initialCenter={new GoogleMapsAPI.LatLng(-41.2864, 174.7762)}
-          width={700}
-          height={300}>
+          initialCenter={new GoogleMapsAPI.LatLng(-41.2864, 174.7762)}>
 
           <Marker
             onClick={this.handleClick}
