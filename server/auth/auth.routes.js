@@ -12,12 +12,14 @@ module.exports = function(app) {
     passport.authenticate('facebook', {failureRedirect: '/#/login'}),
     function(req, res) {
 
-      res.redirect('/#/landingPage');
+      res.redirect('/#/outlets');
     });
 
   app.get('/logout', function(req, res){
+    console.log('logout server was called again-------------------------------->');
     req.logout();
-    res.redirect('/#/login');
+    res.clearCookie('connect.sid');
+    res.send('logged out');
   });
   
   // app.get('/api', authController.isAuthenticated, function(req, res){
