@@ -12,24 +12,27 @@
 var shell = require('shelljs');
 var make = require('shelljs/make');
 var fs = require('fs');
+var watch = require('node-watch');
 
-setInterval(shell.exec, 10000, "hacklet read -n 0x2777 -s 0 > data.txt | cat");
-
-setInterval(function(){
+// COMMENTS ON GRABBING LAST 7 LINES
+var readFile = function(cb){
   fs.readFile('data.txt', 'utf-8', function(err, data){
     if (err){
       console.log('err', err);
     } else {
       // console.log('data',data);
+      // Grab last 7 lines
+      // var section = 
       var arr = data.split('\n');
-      getWatts(arr[arr.length-3]);
+      line = arr[arr.length-3];
+      cb(line);
       console.log('split', arr[arr.length-3]);
     }
   })
-}, 10000);
+};
 
-// split I, [2015-07-13T20:06:15.137579 #84220]  INFO -- : 45w at 2015-07-13 20:06:01 -0700
 var total = 0;
+
 var getWatts = function(string){
   var start = string.indexOf(': ')+2;
   var end = string.indexOf('w');
@@ -40,3 +43,25 @@ var getWatts = function(string){
   }
   console.log('total: ', total, 'start: ', start, 'end: ', end);
 }
+
+// CHANGED TO APPEND TO DATA.TXT
+setInterval(shell.exec, 10000, "hacklet read -n 0x2777 -s 0 >> data.txt | cat");
+
+watch('data.txt', { recursive: false }, function(){ readFile(getWatts); });
+//readFile(getWatts);
+
+
+// setInterval(function(){
+//   fs.readFile('data.txt', 'utf-8', function(err, data){
+//     if (err){
+//       console.log('err', err);
+//     } else {
+//       // console.log('data',data);
+//       var arr = data.split('\n');
+//       getWatts(arr[arr.length-3]);
+//       console.log('split', arr[arr.length-3]);
+//     }
+//   })
+// }, 10000);
+
+// split I, [2015-07-13T20:06:15.137579 #84220]  INFO -- : 45w at 2015-07-13 20:06:01 -0700
