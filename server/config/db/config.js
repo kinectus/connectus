@@ -6,11 +6,11 @@ var outletExamples = require('./outletDataExamples')
 var db = require('knex')({
   client: 'mysql',
   connection: {
-    host: 'mysql://bd88d20b6f0b67:7e80e308@us-cdbr-iron-east-02.cleardb.net/heroku_09dd1820db30399?reconnect=true',//mysql://bd88d20b6f0b67:7e80e308@
-    port: '',
-    user: 'bd88d20b6f0b67',
-    password: '7e80e308',
-    // database: 'connectus',
+    host: process.env.CLEARDB_DATABASE_URL || '127.0.0.1',//mysql://bd88d20b6f0b67:7e80e308@
+    // port: '',
+    user: 'root',
+    // password: '',
+    database: 'connectus',
     charset: 'utf8'
     // filename: path.join(__dirname, './kinectus/kinectus.mysql/')
   }
