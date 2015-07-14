@@ -5,17 +5,15 @@ var loginConstants = require('../constants/authConstants.js');
 var RouterContainer = require('../services/RouterContainer.js');
 
 var loginActions = {
-  //check to see if user is already logged in - if not, set the token and reroute
   // loginUser: function(jwt){
-  //   var savedJwt = localStorage.getItem('token');
-
+  //   var savedJwt = localStorage.getItem('jwt');
+  //   //if correct password    
   //   if(savedJwt !== jwt){
-  //     var nextPath = RouterContainer.get().getCurrentQuery().nextPath || '/';
 
-  //     RouterContainer.get().transitionTo(nextPath);
-  //     localStorage.setItem('jwt', jwt);
+  //     RouterContainer.get().transitionTo('/landingPage');//TODO: change parameter to be dyname
+  //     // localStorage.setItem('jwt', jwt);
   //   }
-
+  //   //ACTION -> DISPATCH
   //   AppDispatcher.dispatch({
   //     actionType: LOGIN_USER,
   //     jwt: jwt
@@ -30,3 +28,5 @@ var loginActions = {
   //   });
   // }
 };
+
+module.exports = loginActions;

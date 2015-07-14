@@ -8,6 +8,8 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 //   the user by ID when deserializing.  However, since this example does not
 //   have a database of user records, the complete GitHub profile is serialized
 //   and deserialized.
+
+
 passport.serializeUser(function(user, done) {
   done(null, user);
 });

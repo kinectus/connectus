@@ -3,11 +3,12 @@ var RouteHandler = require('react-router').RouteHandler;
 var outletStore = require('../stores/outletStore');
 
 var Connectus = React.createClass({
-
   render: function() {
     return (
-      <div>
-        <h1>ConnectUs!</h1>
+      <div className="ui container">
+        <div className="ui menu">
+          <h1>Connectme!</h1>
+        </div>
         <div>
           <RouteHandler />
         </div>
