@@ -15,6 +15,7 @@ module.exports = function(app) {
     });
 
   app.get('/logout', function(req, res){
+    console.log('logout server was called again-------------------------------->');
     req.logout();
     res.clearCookie('connect.sid');
     res.send('logged out');
