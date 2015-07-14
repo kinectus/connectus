@@ -37,6 +37,8 @@ var outletsList = React.createClass({
   },
 
   render: function() {
+    //pageHtml is what will be rendered - defaults to this message if users are not logged in
+    var pageHtml = (<h1>You are not authorized to see this page. Please sign in</h1>);
     var that = this;
     var outlets = outletStore.getOutlets();
 
@@ -66,19 +68,29 @@ var outletsList = React.createClass({
           </Link>
     });
 
-    return <table className="ui selectable celled padded table">
-      <thead>
-        <tr><th className="single line">Outlet Name</th>
-        <th>Seller</th>
-        <th>Rating</th>
-        <th>Voltage</th>
-        <th>Price</th>
-        <th>Description</th>
-      </tr></thead>
-      <tbody>
-        { outletHtml }
-      </tbody>
-    </table>
+    if(document.cookie){
+      pageHtml = (
+        <table className="ui selectable celled padded table">
+          <thead>
+            <tr><th className="single line">Outlet Name</th>
+            <th>Seller</th>
+            <th>Rating</th>
+            <th>Voltage</th>
+            <th>Price</th>
+            <th>Description</th>
+          </tr></thead>
+          <tbody>
+            { outletHtml }
+          </tbody>
+        </table>
+      );
+    }
+
+    return (
+      <div className="outletsList container">
+        {pageHtml}
+      </div>
+    )
   },
 
   _onChange: function() {
