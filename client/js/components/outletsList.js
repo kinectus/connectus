@@ -30,19 +30,13 @@ var outletsList = React.createClass({
     outletStore.addChangeListener(this._onChange);
   },
 
-  reserveOutlet: function(id){
-    console.log(id.target)
-    debugger;
-    window.location.href = '#/outlets/'+id.target.data;
-  },
-
   render: function() {
     var that = this;
     var outlets = outletStore.getOutlets();
 
     var outletHtml = outlets.map(function(outlet) {
-        return <Link to="reserveOutlet" params={{id: outlet.id}}>
-      <tr key={outlet.id} onClick={that.reserveOutlet}>
+      return <Link to="reserveOutlet" params={{id: outlet.id}}>
+        <tr key={outlet.id} onClick={that.reserveOutlet}>
           <td>
             <h2 className="ui center aligned header"> { outlet.name } </h2>
           </td>
@@ -62,8 +56,8 @@ var outletsList = React.createClass({
           <td>
           { outlet.description }
           </td>
-      </tr>
-          </Link>
+        </tr>
+      </Link>
     });
 
     return <table className="ui selectable celled padded table">
