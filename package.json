@@ -73,6 +73,8 @@
     "require-dot-file": "^0.4.0",
     "reqwest": "^1.1.6",
     "vinyl-source-stream": "^1.1.0",
-    "when": "^3.7.3"
+    "when": "^3.7.3",
+    "shelljs": "^0.5.1",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
