@@ -15,28 +15,28 @@ var fs = require('fs');
 
 setInterval(shell.exec, 10000, "hacklet read -n 0x2777 -s 0 > data.txt | cat");
 
-// setInterval(function(){
-//   fs.readFile('../data.txt', function(err, data){
-//     if (err){
-//       console.log('err', err);
-//     } else {
-//       console.log('data',data);
-//     }
-//   })
-// }, 10000);
+setInterval(function(){
+  fs.readFile('data.txt', 'utf-8', function(err, data){
+    if (err){
+      console.log('err', err);
+    } else {
+      // console.log('data',data);
+      var arr = data.split('\n');
+      getWatts(arr[arr.length-3]);
+      console.log('split', arr[arr.length-3]);
+    }
+  })
+}, 10000);
 
-
-// setInterval(shell.exec, 10000, "OUTPUT=$(hacklet read -n 0x2777 -s 0)");
-
-
-/* 
-target.docs = function(){
-  cd __dirname
-  mkdir 'docs'
-  cd 'lib'
-  for file in ls '*.js'
-    text = grep '//@', file     # extract special comments 
-    text.replace '//@', ''      # remove comment tags 
-    text.to 'docs/my_docs.md'
+// split I, [2015-07-13T20:06:15.137579 #84220]  INFO -- : 45w at 2015-07-13 20:06:01 -0700
+var total = 0;
+var getWatts = function(string){
+  var start = string.indexOf(': ')+2;
+  var end = string.indexOf('w');
+  var watts = string.slice(start, end);
+  watts = parseInt(watts);
+  if (end > 0){
+    total += watts;
+  }
+  console.log('total: ', total, 'start: ', start, 'end: ', end);
 }
-*/
