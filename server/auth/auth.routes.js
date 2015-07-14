@@ -11,12 +11,10 @@ module.exports = function(app) {
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {failureRedirect: '/#/login'}),
     function(req, res) {
-
       res.redirect('/#/outlets');
     });
 
   app.get('/logout', function(req, res){
-    console.log('logout server was called again-------------------------------->');
     req.logout();
     res.clearCookie('connect.sid');
     res.send('logged out');

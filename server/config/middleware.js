@@ -42,5 +42,11 @@ app.use(router);
 
 require('../auth/auth.routes')(router);
 // require('../outlets/outlets.routes')(outletsRouter);
+// app.use('/api', apiRouter);
+// app.use('/outlets', outletsRouter);
+
+
+// require('../auth/auth.routes')(apiRouter);
+// require('../outlets/outlets.routes')(outletsRouter);
 
 module.exports = app;
