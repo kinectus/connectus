@@ -26,7 +26,7 @@ var getWatts = function(string){
     total += watts;
   }
   // console.log('string: ', string, ' total: ', total, ' start: ', start, ' end: ', end, ' watts: ', watts);
-  // console.log('total: ', total);
+  console.log('total: ', total);
   cbDone = true;
 }
 
