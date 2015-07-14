@@ -11,9 +11,19 @@
 
 var shell = require('shelljs');
 var make = require('shelljs/make');
+var fs = require('fs');
 
+setInterval(shell.exec, 10000, "hacklet read -n 0x2777 -s 0 > data.txt | cat");
 
-setInterval(shell.exec, 10000, "hacklet read -n 0x2777 -s 0 >> data.txt | cat");
+// setInterval(function(){
+//   fs.readFile('../data.txt', function(err, data){
+//     if (err){
+//       console.log('err', err);
+//     } else {
+//       console.log('data',data);
+//     }
+//   })
+// }, 10000);
 
 
 // setInterval(shell.exec, 10000, "OUTPUT=$(hacklet read -n 0x2777 -s 0)");
