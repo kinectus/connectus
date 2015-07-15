@@ -13,14 +13,6 @@ var outletsList = React.createClass({
 
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
 
-  moreOutletInfo: function(){
-    return <div className="ui relaxed divided list">
-      <ul>
-          { outletHtml }
-      </ul>
-    </div>;
-  },
-
   // reserveOutlet: function(id){
   //   ConnectusDispatcher.dispatch({
   //       action: 'CLICK_OUTLET',
@@ -31,12 +23,13 @@ var outletsList = React.createClass({
   componentDidMount: function() {
     var that = this;
     outletStore.getOutlets().then(function(outletData){
-      console.log('in the componentDidMount and setting data to: ', outletData);
       that.setState({data: outletData});
     });
   },
 
   render: function() {
+
+    // is the user authenticated?
     if(!document.cookie){
       this.transitionTo('login');
       return <h1></h1>;
@@ -44,8 +37,6 @@ var outletsList = React.createClass({
 
     var that = this;
 
-    // outletStore.getOutlets().then(function(retrievedOutlets) {
-    //   var outlets = retrievedOutlets;
     if (this.state.data.length !==0) {
       var outletHtml = this.state.data.map(function(outlet) {
         return <Link to="reserveOutlet" params={{id: outlet.id }}>
