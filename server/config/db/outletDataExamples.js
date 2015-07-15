@@ -47,18 +47,6 @@ var outletExamples = [
 
 module.exports = outletExamples;
 
-      // outlet.string('name', 30).notNullable();
-      // outlet.decimal('priceEnergy', 5, 2).notNullable();
-      // outlet.decimal('priceHourly', 5, 2).notNullable();
-      // outlet.decimal('lat', 7, 5).notNullable();
-      // outlet.decimal('long', 7 ,5).notNullable();
-      // outlet.string('description', 300).notNullable();
-      // outlet.decimal('priceSuggest', 5, 2).notNullable();
-      // // outlet.string('photo'); --store the path to a directory, not the photo (worstcase, longblob)
-      // outlet.string('address', 100).notNullable();
-      // outlet.integer('seller_id', 11).unsigned().references('users.id').notNullable();
-      // outlet.integer('buyer_id', 11).unsigned().references('users.id').notNullable();
-
 
 
 
