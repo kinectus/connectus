@@ -23,8 +23,8 @@ app.use(function(err, req, res, next){
 });
 
 app.use(express.static(path.join( __dirname + '/../../dist')));
-var router = express.Router();
-// var apiRouter = express.Router();
+var router = new express.Router();
+var apiRouter = new express.Router();
 // var outletsRouter = express.Router();
 
 app.use(cookieParser());
@@ -36,10 +36,11 @@ app.use(passport.session());
 
 //be careful about the order of the routers and auth
 app.use(router);
-// app.use('/api', apiRouter);
+app.use('/api', apiRouter);
 // app.use('/outlets', outletsRouter);
 
 require('../auth/auth.routes')(router);
+require('../api/api.routes')(apiRouter);
 // require('../outlets/outlets.routes')(outletsRouter);
 // app.use('/api', apiRouter);
 // app.use('/outlets', outletsRouter);
