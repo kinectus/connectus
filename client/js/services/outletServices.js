@@ -7,15 +7,20 @@ var outletServices = function(){
 
   outletData.retrieve = function(outletID){
 
-    return handleAuth(when(request({
-      url: OUTLET_DATA,
+    console.log('getting data from: ', OutletListConstants.OUTLET_DATA)
+
+    return request({
+      url: OutletListConstants.OUTLET_DATA,
       method: 'GET',
       crossOrigin: true,
       type: 'json',
       data: {
         // not sure what this will look like yet
+      },
+      success: function(res) {
+        console.log('success: ', res.data, res)
       }
-    })));
+    });
   };
 
   // outletData.turnOff = function(){
