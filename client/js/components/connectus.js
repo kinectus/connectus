@@ -1,3 +1,6 @@
+//this is the main React component that will be shown at all times
+//Essentially, it is just the navigation bar, which renders conditionally based on whether or not a user is logged in
+
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
 var outletStore = require('../stores/outletStore');
@@ -31,7 +34,8 @@ var Connectus = React.createClass({
         </div>
       </div>
     );
-  
+
+    //reset the html that will be shown if the user is logged in(cookie present)
     if(document.cookie){
       pageHtml = (
         <div className="main">
@@ -57,8 +61,8 @@ var Connectus = React.createClass({
         </div>  
       );
     }
-    //final return statement
 
+    //actual rendering happens here - logic to decide what {pageHtml} is happens above
     return (
     <div>
       {pageHtml}

@@ -2,14 +2,16 @@ var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var Link = require('react-router').Link;
-
+var Router = require('react-router'); //need this for redirection
 var outletsList = React.createClass({
 
   getInitialState: function(){
     return {
       list: outletStore.getOutlets()
-    }
+    };
   },
+
+  mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
 
   moreOutletInfo: function(){
     return <div className="ui relaxed divided list">
@@ -31,11 +33,9 @@ var outletsList = React.createClass({
   },
 
   render: function() {
-    //pageHtml is what will be rendered - defaults to this message if users are not logged in
-    var pageHtml = (<h1>You are not authorized to see this page. Please sign in</h1>);
     var that = this;
     var outlets = outletStore.getOutlets();
-
+    
     var outletHtml = outlets.map(function(outlet) {
       return <Link to="reserveOutlet" params={{id: outlet.id}}>
         <tr key={outlet.id} onClick={that.reserveOutlet}>
@@ -62,8 +62,14 @@ var outletsList = React.createClass({
       </Link>
     });
 
-    if(document.cookie){
-      pageHtml = (
+    //if user is not loggedin, they will be redirected to login
+    if(!document.cookie){
+      this.transitionTo('login');
+      return <h1></h1>;
+    }
+
+    return (
+      <div className="outletsList container">
         <table className="ui selectable celled padded table">
           <thead>
             <tr><th className="single line">Outlet Name</th>
@@ -77,12 +83,6 @@ var outletsList = React.createClass({
             { outletHtml }
           </tbody>
         </table>
-      );
-    }
-
-    return (
-      <div className="outletsList container">
-        {pageHtml}
       </div>
     )
   },
