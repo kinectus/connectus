@@ -19,6 +19,10 @@ module.exports = function(app) {
     res.clearCookie('connect.sid');
     res.send('logged out');
   });
+
+  // app.get('/turnOff', function(req, res){
+  //   // Send here using sockets?
+  // });
   
   // app.get('/api', authController.isAuthenticated, function(req, res){
   //   console.log('req', req.user.username);

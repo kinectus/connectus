@@ -18,6 +18,18 @@ var outletServices = function(){
     })));
   };
 
+  // outletData.turnOff = function(){
+  //   return request({
+  //     url: '/turnOff',
+  //     method: 'POST',
+  //     crossOrigin: true,
+  //     type: 'json',
+  //     success: function(res){
+  //       console.log('SUCCESS TURNOFF: ', res)
+  //     }
+  //   });
+  // };
+
   return outletData;
   
 };
