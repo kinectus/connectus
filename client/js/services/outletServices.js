@@ -14,11 +14,8 @@ var outletServices = function(){
       method: 'GET',
       crossOrigin: true,
       type: 'json',
-      data: {
-        // not sure what this will look like yet
-      },
-      success: function(res) {
-        console.log('success: ', res.data, res)
+      success: function(outlets) {
+        return outlets;
       }
     });
   };

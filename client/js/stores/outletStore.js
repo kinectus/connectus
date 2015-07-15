@@ -6,51 +6,10 @@ var OutletServices = require('../services/OutletServices')
 
 var CHANGE_EVENT = 'change';
 
-var _outlets = [          // these will obviously actually come from the db when we get one
-  { name: 'Hack Reactor Outlet',
-    seller: 'Jammie Mountz',
-    voltage: 'high',
-    priceHr: '$2/hr',
-    pricekWh: '$5/kWh',
-    description: '944 Market St on the corner guarded by a purple dragon',
-    rating: '4',
-    id: '1'
-  },
-  { name: 'Target Outlet',
-    seller: 'Bob Schmob',
-    voltage: 'low',
-    priceHr: '$2/hr',
-    pricekWh: '$4/kWh',
-    description: 'just dont look directly at it though',
-    rating: '3',
-    id: '2'
-  },
-  { name: 'Macy\'s Outlet',
-    seller: 'Stacey Smith',
-    voltage: 'high',
-    priceHr: '$4/hr',
-    pricekWh: '$3/kWh',
-    description: 'pay the troll to get access',
-    rating: '5',
-    id: '3'
-  },
-  { name: 'Burger Shack Outlet',
-    seller: 'Bob Belcher',
-    voltage: 'medium',
-    priceHr: '$2/hr',
-    pricekWh: '$5/kWh',
-    rating: '4',
-    description: 'watch out for broken dreams',
-    id: '4'
-  }
-];
-
 var outletStore = assign({}, EventEmitter.prototype, {
   getOutlets: function() {
-    // return _outlets;
-    console.log('in the get outlets function in the store')
-    OutletServices.retrieve().then(function(outlets){
-      console.log('in the then of the outlet services function ')
+    return OutletServices.retrieve().then(function(outlets){
+      console.log('outlets in the store: ', outlets)
       return outlets;
     })
   },
