@@ -3,12 +3,10 @@ var when = require('when'); //promises
 var OutletListConstants = require('../constants/OutletListConstants.js');
 
 var outletServices = function(){
+
   var outletData = {};
 
-  outletData.retrieve = function(outletID){
-
-    console.log('getting data from: ', OutletListConstants.OUTLET_DATA)
-
+  outletData.retrieve = function(){
     return request({
       url: OutletListConstants.OUTLET_DATA,
       method: 'GET',
@@ -18,6 +16,18 @@ var outletServices = function(){
         return outlets;
       }
     });
+  };
+
+  outletData.retrieveOutletById = function(outletID){
+    return request({
+      url: OutletListConstants.OUTLET_DATA,
+      method: 'GET',
+      crossOrigin: true,
+      type: 'json',
+      success: function(outlets) {
+        return outlets;
+      }
+    })
   };
 
   // outletData.turnOff = function(){

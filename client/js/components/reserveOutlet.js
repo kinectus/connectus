@@ -20,10 +20,18 @@ var OverlayView = ReactGoogleMaps.OverlayView;
 
 var reserveOutlet = React.createClass({
 
+  getInitialState: function(){
+    return {
+      data: []
+    }
+  },
+
   render: function() {
 
     var outletID = this.props.params.id
-    var outlet = outletStore.getOutletById(outletID)
+    outletStore.getOutletById(outletID).then(function(outlet){
+      console.log('got outlet in the component: ', outlet)
+    })
 
     var outletInfo = <div><h2 className="ui center aligned header"> { outlet.name } </h2>
         { outlet.seller }

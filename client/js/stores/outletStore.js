@@ -15,13 +15,14 @@ var outletStore = assign({}, EventEmitter.prototype, {
   },
 
   getOutletById: function(id){
-    var outletById = null;
-    _outlets.forEach(function(outlet){
-      if (outlet.id === id) {
-        outletById = outlet;
-      }
+    return OutletServices.retrieve().then(function(outlets){
+      outlets.forEach(function(outlet){
+        if (parseInt(outlet.id) === parseInt(id)) {
+          console.log('in the outlet store "if" with outlet: ', outlet,' looking for this id: ', id)
+          return outlet
+        }
+      })
     })
-    return outletById;
   },
 
   emitChange: function() {
