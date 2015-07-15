@@ -4,6 +4,9 @@ var Auth = require('../services/authServices.js');
 var Signup = React.createClass({
 
   render: function(){
+    //comments here because cannot be kept in markup:
+    //user clicks on Facebook login to go to facebook auth
+    //on successful auth, users are redirected to outlets page
     return (
   	  <div className="login">
         <h1>Signup with Facebook</h1>
