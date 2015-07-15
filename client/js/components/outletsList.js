@@ -7,8 +7,8 @@ var outletsList = React.createClass({
 
   getInitialState: function(){
     return {
-      list: outletStore.getOutlets()
-    };
+      data: []
+    }
   },
 
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
@@ -29,18 +29,26 @@ var outletsList = React.createClass({
   // },
 
   componentDidMount: function() {
-    outletStore.addChangeListener(this._onChange);
+    var that = this;
+    outletStore.getOutlets().then(function(outletData){
+      console.log('in the componentDidMount and setting data to: ', outletData);
+      that.setState({data: outletData});
+    });
   },
 
   render: function() {
+    if(!document.cookie){
+      this.transitionTo('login');
+      return <h1></h1>;
+    }
+
     var that = this;
 
-    outletStore.getOutlets().then(function(retrievedOutlets) {
-      var outlets = retrievedOutlets;
-
-      var outletHtml = outlets.map(function(outlet) {
-        console.log('mapping: ', outlet)
-        return <Link to="reserveOutlet" params={{id: outlet.id}}>
+    // outletStore.getOutlets().then(function(retrievedOutlets) {
+    //   var outlets = retrievedOutlets;
+    if (this.state.data.length !==0) {
+      var outletHtml = this.state.data.map(function(outlet) {
+        return <Link to="reserveOutlet" params={{id: outlet.id }}>
           <tr key={outlet.id} onClick={that.reserveOutlet}>
             <td>
               <h2 className="ui center aligned header"> { outlet.name } </h2>
@@ -55,8 +63,8 @@ var outletsList = React.createClass({
               Voltage: { outlet.voltage }
             </td>
             <td>
-              Price by hour: { outlet.priceHr }
-              Price by kWh: { outlet.pricekWh }
+              Price by hour: { outlet.priceHourly }
+              Price by kWh: { outlet.priceEnergy }
             </td>
             <td>
             { outlet.description }
@@ -64,11 +72,7 @@ var outletsList = React.createClass({
           </tr>
         </Link>
       });
-
-      if(!document.cookie){
-        this.transitionTo('login');
-        return <h1></h1>;
-      }
+    }
 
       return (
         <div className="outletsList container">
@@ -87,7 +91,7 @@ var outletsList = React.createClass({
           </table>
         </div>
       )
-    });
+    // });  from the promise closing
   },
 
   _onChange: function() {
