@@ -5,11 +5,11 @@ var outletExamples = require('./outletDataExamples')
 // Initialize database
 var db = require('knex')({
   client: 'mysql',
-  connection: {
-    host: '127.0.0.1',
-    port: '',
+  connection: process.env.CLEARDB_DATABASE_URL || {
+    host: '127.0.0.1',//mysql://bd88d20b6f0b67:7e80e308@
+    // port: '',
     user: 'root',
-    password: '',
+    // password: '',
     database: 'connectus',
     charset: 'utf8'
     // filename: path.join(__dirname, './kinectus/kinectus.mysql/')

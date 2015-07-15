@@ -6,7 +6,6 @@ var passport = require('passport');
 var path = require('path');
 var db = require('./db/config');
 var authController = require('../auth/auth.controller');
-// require('./powerReader.js');
 var cors = require('cors');
 
 var app = express();
