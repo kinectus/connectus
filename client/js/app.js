@@ -6,6 +6,7 @@ var Router = require('react-router');
 var Login = require('./components/login.js');
 var Signup = require('./components/signup.js');
 var LandingPage = require('./components/landingPage.js');
+var AddOutlet = require('./components/addOutlet.js');
 var RouterContainer = require('./services/RouterContainer.js');
 var routes = require('./config/routes');
 

@@ -58,8 +58,9 @@ db.schema.hasTable('outlets').then(function(exists){
       outlet.decimal('priceSuggest', 5, 2).notNullable();
       // outlet.string('photo'); --store the path to a directory, not the photo (worstcase, longblob)
       outlet.string('address', 100).notNullable();
+      outlet.string('voltage', 8).notNullable();
       // outlet.integer('seller_id', 11).unsigned().references('users.id').notNullable();
-      // outlet.integer('buyer_id', 11).unsigned().references('users.id').notNullable();
+      // outlet.integer('buyer_id', 11).unsigned().references('users.id');
 
       // seller join
       // buyer join

@@ -7,6 +7,7 @@ var outletExamples = [
     long: -122.408999,
     priceSuggest: '3',
     address: '125 Sky Pie Ave',
+    voltage: 'standard'
     // seller_id: 12,
     // buyer_id: 6
   },
@@ -18,6 +19,7 @@ var outletExamples = [
     long: -122.400755,
     priceSuggest: '9',
     address: '123 Main St',
+    voltage: 'standard'
     // seller_id: 13,
     // buyer_id: 7
   },
@@ -29,6 +31,7 @@ var outletExamples = [
     long: -122.413756,
     priceSuggest: '6',
     address: 'BART stop on Market',
+    voltage: 'high'
     // seller_id: 15,
     // buyer_id: 8
   },
@@ -40,6 +43,7 @@ var outletExamples = [
     long: -122.413726,
     priceSuggest: '8',
     address: '639 Leavenworth Ave',
+    voltage: 'standard'
     // seller_id: 14,
     // buyer_id: 9
   }
