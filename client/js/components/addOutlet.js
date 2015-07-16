@@ -2,7 +2,6 @@ var React = require('react');
 var outletStore = require('../stores/outletStore');
 
 /* TODO
-Send values to database as new outlet
 Style page
 Change state and voltage to dropdown
 
@@ -27,7 +26,7 @@ var addOutlet = React.createClass({
     outletStore.submitOutlet(newOutlet).then(function(res){
       console.log('ADDOUTLET submit response: ', res)
     });
-    // TODO: send request to the server
+    
     React.findDOMNode(this.refs.street).value = '';
     React.findDOMNode(this.refs.city).value = '';
     React.findDOMNode(this.refs.state).value = '';
