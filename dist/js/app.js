@@ -74,7 +74,7 @@ var addOutlet = React.createClass({displayName: "addOutlet",
     e.preventDefault();
 
     var newOutlet = {
-      address: React.findDOMNode(this.refs.street).value.trim() + ';' + React.findDOMNode(this.refs.city).value.trim() + ';' +  React.findDOMNode(this.refs.state).value.trim() + ';' + React.findDOMNode(this.refs.zip).value.trim(),
+      address: React.findDOMNode(this.name.street).value.trim() + ';' + React.findDOMNode(this.refs.city).value.trim() + ';' +  React.findDOMNode(this.refs.state).value.trim() + ';' + React.findDOMNode(this.refs.zip).value.trim(),
       name: React.findDOMNode(this.refs.name).value.trim(),
       description: React.findDOMNode(this.refs.description).value.trim(),
       voltage: React.findDOMNode(this.refs.voltage).value.trim(),
@@ -88,6 +88,7 @@ var addOutlet = React.createClass({displayName: "addOutlet",
     outletStore.submitOutlet(newOutlet).then(function(res){
       console.log('ADDOUTLET submit response: ', res)
     });
+<<<<<<< HEAD
     // TODO: send request to the server
     React.findDOMNode(this.refs.street).value = '';
     React.findDOMNode(this.refs.city).value = '';
@@ -97,12 +98,24 @@ var addOutlet = React.createClass({displayName: "addOutlet",
     React.findDOMNode(this.refs.description).value = '';
     React.findDOMNode(this.refs.voltage).value = '';
     React.findDOMNode(this.refs.charge).value = '';
+=======
+    
+    React.findDOMNode(this.name.street).value = '';
+    React.findDOMNode(this.name.city).value = '';
+    React.findDOMNode(this.name.state).value = '';
+    React.findDOMNode(this.name.zip).value = '';
+    React.findDOMNode(this.name.name).value = '';
+    React.findDOMNode(this.name.description).value = '';
+    React.findDOMNode(this.name.voltage).value = '';
+    React.findDOMNode(this.name.charge).value = '';
+>>>>>>> added form validation
     console.log('submitted!')
     return;
   },
   render: function(){
     // var value = this.state.value;
     return (
+<<<<<<< HEAD
       React.createElement("div", null, 
         React.createElement("form", {className: "form", onSubmit: this.handleSubmit}, 
           "Street ", React.createElement("input", {type: "text", ref: "street", placeholder: "Enter your street address..."}), 
@@ -115,6 +128,43 @@ var addOutlet = React.createClass({displayName: "addOutlet",
           "Your hourly rate: $3/hr   Suggested price/kWh: $10/kWh" + ' ' +
           "Your price/kWh charge: $", React.createElement("input", {type: "text", ref: "charge", placeholder: "10"}), "/kWh", 
           React.createElement("input", {type: "submit", value: "Post"})
+=======
+      React.createElement("div", {className: "addoutlet ui container center"}, 
+        React.createElement("form", {className: "ui form", onSubmit: this.handleSubmit}, 
+          React.createElement("div", {className: "field"}, 
+            React.createElement("label", null, "Street"), 
+            React.createElement("input", {type: "text", name: "street", placeholder: "Enter your street address..."}), React.createElement("br", null)
+          ), 
+          React.createElement("div", {className: "field"}, 
+            "City ", React.createElement("input", {type: "text", name: "city", placeholder: "Enter city..."}), " ", React.createElement("br", null)
+          ), 
+          React.createElement("div", {className: "field"}, 
+            "State ", React.createElement("input", {type: "text", name: "state", placeholder: "Enter state..."}), React.createElement("br", null)
+          ), 
+          React.createElement("div", {className: "field"}, 
+            "Zip-code ", React.createElement("input", {type: "text", name: "zip", placeholder: "Enter zip-code..."}), React.createElement("br", null)
+          ), 
+          React.createElement("div", {className: "field"}, 
+            "Name ", React.createElement("input", {type: "text", name: "name", placeholder: "What do you want to call this outlet?"}), React.createElement("br", null)
+          ), 
+          React.createElement("div", {className: "field"}, 
+            "Description ", React.createElement("textarea", {name: "description", name: "description", placeholder: "This is a description."}), React.createElement("br", null)
+          ), 
+          React.createElement("div", {className: "field"}, 
+            React.createElement("label", null, "Voltage"), 
+            React.createElement("select", {className: "ui dropdown"}, 
+              React.createElement("option", {value: "1"}, "Standard"), 
+              React.createElement("option", {value: "0"}, "High")
+            ), React.createElement("br", null)
+          ), 
+          React.createElement("div", {className: "field"}, 
+            "Your hourly rate: $3/hr   Suggested price/kWh: $10/kWh", React.createElement("br", null)
+          ), 
+          React.createElement("div", {className: "field"}, 
+            "Your price/kWh charge: $", React.createElement("input", {type: "text", name: "charge", placeholder: "ex. 10"}), "/kWh", React.createElement("br", null)
+          ), 
+          React.createElement("div", {className: "ui submit button"}, "Submit"), React.createElement("br", null)
+>>>>>>> added form validation
         )
       )
     )
