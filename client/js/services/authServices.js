@@ -1,5 +1,6 @@
 var request = require('reqwest');
 var when = require('when'); //promises
+var AuthConstants = require('../constants/authConstants.js');
 
 var authService = function(){
   var authInstance = {};
@@ -8,7 +9,7 @@ var authService = function(){
   authInstance.logout = function(){
     console.log('auth logout called');
     return request({
-      url: '/logout',
+      url: AuthConstants.LOGOUT,
       method: 'GET',
       crossOrigin: true,
       success: function(){
