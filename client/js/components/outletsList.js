@@ -1,3 +1,4 @@
+
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
@@ -39,10 +40,14 @@ var outletsList = React.createClass({
 
     if (this.state.data.length !==0) {
       var outletHtml = this.state.data.map(function(outlet) {
-        return <Link to="reserveOutlet" params={{id: outlet.id }}>
+        return (
           <tr key={outlet.id} onClick={that.reserveOutlet}>
             <td>
-              <h2 className="ui center aligned header"> { outlet.name } </h2>
+              <h2 className="ui center aligned header"> 
+                <Link to="reserveOutlet" params={{id: outlet.id }}>
+                  { outlet.name } 
+                </Link>
+              </h2>
             </td>
             <td className="single line">
               Seller: { outlet.seller }
@@ -51,7 +56,7 @@ var outletsList = React.createClass({
               <div className="ui star rating" data-rating={ outlet.rating } data-max-rating={ outlet.rating }>{ outlet.rating }</div>
             </td>
             <td className="right aligned">
-              Voltage: { outlet.voltage }
+              { outlet.voltage }
             </td>
             <td>
               Price by hour: { outlet.priceHourly }
@@ -61,7 +66,7 @@ var outletsList = React.createClass({
             { outlet.description }
             </td>
           </tr>
-        </Link>
+        )
       });
     }
 
@@ -69,7 +74,7 @@ var outletsList = React.createClass({
         <div className="outletsList container">
           <table className="ui selectable celled padded table">
             <thead>
-              <tr><th className="single line">Outlet Name</th>
+              <tr><th className="single line">Outlet Name hahha</th>
               <th>Seller</th>
               <th>Rating</th>
               <th>Voltage</th>
