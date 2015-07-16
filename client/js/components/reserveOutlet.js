@@ -4,6 +4,7 @@ var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var ReactGoogleMaps = require('react-googlemaps');
 var GoogleMapsAPI = window.google.maps;
 var outletStore = require('../stores/outletStore');
+var TimePicker = require('sm-datepicker');
 
 var Map = ReactGoogleMaps.Map;
 var Marker = ReactGoogleMaps.Marker;
