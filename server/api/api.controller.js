@@ -39,7 +39,7 @@ module.exports = {
           // long: data.long,
           description: data.description,
           // priceSuggest: data.priceSuggest,
-          address: address,
+          address: data.address,
           voltage: data.voltage
         });
 
