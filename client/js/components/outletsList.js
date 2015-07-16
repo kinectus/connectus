@@ -45,7 +45,7 @@ var outletsList = React.createClass({
               <h2 className="ui center aligned header"> { outlet.name } </h2>
             </td>
             <td className="single line">
-              { outlet.seller }
+              Seller: { outlet.seller }
             </td>
             <td>
               <div className="ui star rating" data-rating={ outlet.rating } data-max-rating={ outlet.rating }>{ outlet.rating }</div>

@@ -47,15 +47,16 @@ var reserveOutlet = React.createClass({
 
             </Map></div>)
 
-      var outletInfo = <div><h2 className="ui center aligned header"> { this.state.data.name } </h2>
+      var outletInfo = <div className="ui raised text container segment outletInfoRes">
+        <h2 className="ui center aligned header"> { this.state.data.name } </h2>
           <br></br>
-          Voltage: High
+          <h4>Voltage: High</h4>
           <br></br>
-          Price by hour: { this.state.data.priceHourly }
+          <h4>Price by hour: { this.state.data.priceHourly }</h4>
           <br></br>
-          Price by kWh: { this.state.data.priceEnergy }
+          <h4>Price by kWh: { this.state.data.priceEnergy }</h4>
           <br></br>
-          { this.state.data.description }
+          <h4>{ this.state.data.description }</h4>
         </div>
     } else {
       var outletInfo = ''
