@@ -1,4 +1,6 @@
 var React = require('react');
+var outletStore = require('../stores/outletStore');
+
 /* TODO
 Send values to database as new outlet
 Style page
@@ -9,18 +11,22 @@ Change state and voltage to dropdown
 var addOutlet = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
-    var street = React.findDOMNode(this.refs.street).value.trim();
-    var city = React.findDOMNode(this.refs.city).value.trim();
-    var state = React.findDOMNode(this.refs.state).value.trim();
-    var zip = React.findDOMNode(this.refs.zip).value.trim();
-    var name = React.findDOMNode(this.refs.name).value.trim();
-    var description = React.findDOMNode(this.refs.description).value.trim();
-    var voltage = React.findDOMNode(this.refs.voltage).value.trim();
-    var charge = React.findDOMNode(this.refs.charge).value.trim();
-    console.log(street, city, state, zip, description, voltage, charge);
+
+    var newOutlet = {
+      address: React.findDOMNode(this.refs.street).value.trim() + ';' + React.findDOMNode(this.refs.city).value.trim() + ';' +  React.findDOMNode(this.refs.state).value.trim() + ';' + React.findDOMNode(this.refs.zip).value.trim(),
+      name: React.findDOMNode(this.refs.name).value.trim(),
+      description: React.findDOMNode(this.refs.description).value.trim(),
+      voltage: React.findDOMNode(this.refs.voltage).value.trim(),
+      charge: React.findDOMNode(this.refs.charge).value.trim()
+    };
+
+    console.log(newOutlet);
     // if (!text || !author) {
     //   return;
     // }
+    outletStore.submitOutlet(newOutlet).then(function(res){
+      console.log('ADDOUTLET submit response: ', res)
+    });
     // TODO: send request to the server
     React.findDOMNode(this.refs.street).value = '';
     React.findDOMNode(this.refs.city).value = '';

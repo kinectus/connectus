@@ -4,8 +4,6 @@
 # Files in external disk
 node_modules/
 client/lib
-dist/js/app.js
-dist/js
-dist/index.html
+dist/**/*.*
 server/data.txt
 client/assets/css

@@ -26,6 +26,13 @@ var outletStore = assign({}, EventEmitter.prototype, {
     })
   },
 
+  submitOutlet: function(newOutlet){
+    console.log('IN OUTLETSTORE, SUMBITOUTLET: ', newOutlet)
+    return OutletServices.addOutlet(newOutlet).then(function(res){
+      console.log('OUTLETSTORE res in submitOutlet', res);
+    });
+  },
+
   emitChange: function() {
     this.emit(CHANGE_EVENT);
     console.log('i changed')

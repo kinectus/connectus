@@ -14,8 +14,9 @@ module.exports = {
   },
 
   addOutlet: function(req, res) {
+    console.log('IN API.CONTROLLER, req', req);
     var data = req.body;
-    var address = data.street + ';' + data.city + ';' + data.state + ';' + data.zip;
+    console.log('IN API.CONTROLLER, ADDOUTLET', data);
     new Outlet({
       name: data.name,
       priceEnergy: data.charge,
@@ -24,7 +25,7 @@ module.exports = {
       // long: data.long,
       description: data.description,
       // priceSuggest: data.priceSuggest,
-      address: address,
+      address: data.address,
       voltage: data.voltage
     }).fetch().then(function(found) {
       if (found) {
@@ -38,7 +39,7 @@ module.exports = {
           // long: data.long,
           description: data.description,
           // priceSuggest: data.priceSuggest,
-          address: address,
+          address: data.address,
           voltage: data.voltage
         });
 
