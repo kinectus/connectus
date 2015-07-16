@@ -7,6 +7,7 @@ var LandingPage = require('../components/landingPage.js');
 var About = require('../components/about.js');
 var OutletsList = require('../components/outletsList.js');
 var ReserveOutlet = require('../components/reserveOutlet.js');
+var AddOutlet = require('../components/addOutlet.js');
 var Router = require('react-router'); //npm component for routing
 var DefaultRoute = Router.DefaultRoute; 
 var Route = Router.Route;
@@ -20,6 +21,7 @@ module.exports = (
     <Route name="landingPage" path="/landingPage" handler={LandingPage} />
     <Route name="outletsList" path="/outlets" handler={OutletsList} />
     <Route name="reserveOutlet" path="/outlets/:id" handler={ReserveOutlet} />
+    <Route name="addOutlet" path="/addOutlet" handler={AddOutlet} />
     <DefaultRoute handler={About} /> 
   </Route>
 );
