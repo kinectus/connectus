@@ -1,55 +1,70 @@
 // Semantic dependency
 @import "../../dist/semantic/src/semantic.less";
 
-@yellow: #FFD464;
-@salmon: #F26964;
-@blue: #1253A4;
-@greywhite: #F4F4F2;
-@charcoal: #30302F;
+@turquoise: #159594;
+@blue: #1A8CAB;
+@yellow: #FBCB15;
+@maroon: #8B1C55;
+@red: #FF1900;
 
-@font-face {
-  font-family:'Karla';
-  src: url('../fonts/Karla-Regular.ttf');
-}
+// @font-face {
+//   font-family:'Karla';
+//   src: url('../fonts/Karla-Regular.ttf');
+// }
 
-* {
-  font-family: Karla;
-}
+// * {
+//   font-family: Karla;
+// }
 
 .main {
+  .logo{
+    font-weight: bold;
+    font-size: 30px;
+    padding-top: 7.5px;
+  }
   ul.ui.secondary.pointing.menu {
-    height: 50px;
-    span{
-	    font-size: 40px;
-      height: 30px;
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-
-    a{
-	    font-size: 30px;
-      height: 30px;
-      margin-top: 20px;
-      margin-bottom: 20px;
+    background-color: @yellow;
+    height: 35px;
+    a {
+      padding-right:15px;
+      padding-top: 10px;      
+      font-size: 20px;
+      font: black;
+      font-weight: bold;
     }
   }
 }
 
+.about {
+  .section{
+    height: 500px;
+  }
+  .info{
+    background-color: #FFFFFF;
+  }
+  .howitworks{
+    background-color: @turquoise;
+  }
+  .energyInfo{
+    background-color: @maroon;
+  }
+}
+
 h1 {
-  color: @charcoal;
+  color: black;
   font-size: 30px;
 }
 
 .reservationMap {
   width: 100%;
   height: 300px;
-  border: 2px solid @charcoal;
+  border: 2px solid black;
 }
 
 .outletPhoto {
   width: 20%;
   height: 200px;
   border-radius: 50%;
-  background-color: @salmon;
+  background-color: @maroon;
   float: right;
 }

@@ -46534,41 +46534,47 @@ html.ios body {
 /*******************************
          Site Overrides
 *******************************/
-@font-face {
-  font-family: 'Karla';
-  src: url('../fonts/Karla-Regular.ttf');
-}
-* {
-  font-family: Karla;
+.main .logo {
+  font-weight: bold;
+  font-size: 30px;
+  padding-top: 7.5px;
 }
 .main ul.ui.secondary.pointing.menu {
-  height: 50px;
-}
-.main ul.ui.secondary.pointing.menu span {
-  font-size: 40px;
-  height: 30px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  background-color: #fbcb15;
+  height: 35px;
 }
 .main ul.ui.secondary.pointing.menu a {
-  font-size: 30px;
-  height: 30px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  padding-right: 15px;
+  padding-top: 10px;
+  font-size: 20px;
+  font: black;
+  font-weight: bold;
+}
+.about .section {
+  height: 500px;
+}
+.about .info {
+  background-color: #FFFFFF;
+}
+.about .howitworks {
+  background-color: #159594;
+}
+.about .energyInfo {
+  background-color: #8b1c55;
 }
 h1 {
-  color: #30302f;
+  color: black;
   font-size: 30px;
 }
 .reservationMap {
   width: 100%;
   height: 300px;
-  border: 2px solid #30302f;
+  border: 2px solid black;
 }
 .outletPhoto {
   width: 20%;
   height: 200px;
   border-radius: 50%;
-  background-color: #f26964;
+  background-color: #8b1c55;
   float: right;
 }

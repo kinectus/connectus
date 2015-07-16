@@ -528,7 +528,7 @@ body {
   padding: 0px;
   overflow-x: hidden;
   min-width: 320px;
-  background: #ffffff;
+  background: #159594;
   font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 14px;
   line-height: 1.4285em;
@@ -611,7 +611,7 @@ p:last-child {
 --------------------*/
 
 a {
-  color: #4183c4;
+  color:#ffffff;
   text-decoration: none;
 }
 

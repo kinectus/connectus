@@ -21,11 +21,8 @@ var Connectus = React.createClass({
             Connectus
           </span>
           <div className="right menu">
-            <a className="ui item">
+            <a className="ui item loginlink">
               <Link to="login">Login</Link>
-            </a>
-            <a className="ui item">
-              <Link to="signup">Signup</Link>
             </a>
           </div>
         </ul>
