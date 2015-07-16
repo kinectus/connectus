@@ -5,5 +5,7 @@
 node_modules/
 client/lib
 dist/js/app.js
+dist/js
+dist/index.html
 server/data.txt
 client/assets/css
