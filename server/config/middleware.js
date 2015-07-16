@@ -22,9 +22,9 @@ app.use(function(err, req, res, next){
 });
 
 app.use(express.static(path.join( __dirname + '/../../dist')));
-var router = new express.Router();
+var authRouter = new express.Router();
 var apiRouter = new express.Router();
-// var outletsRouter = express.Router();
+
 
 app.use(cookieParser());
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: {httpOnly: false}}));
@@ -34,18 +34,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //be careful about the order of the routers and auth
-app.use(router);
+app.use('/auth', authRouter);
 app.use('/api', apiRouter);
-// app.use('/outlets', outletsRouter);
 
-require('../auth/auth.routes')(router);
+
+require('../auth/auth.routes')(authRouter);
 require('../api/api.routes')(apiRouter);
-// require('../outlets/outlets.routes')(outletsRouter);
-// app.use('/api', apiRouter);
-// app.use('/outlets', outletsRouter);
 
 
-// require('../auth/auth.routes')(apiRouter);
-// require('../outlets/outlets.routes')(outletsRouter);
 
 module.exports = app;
