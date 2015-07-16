@@ -30,17 +30,25 @@ var outletServices = function(){
     })
   };
 
-  // outletData.addOutlet = function(){
-  //   return request({
-  //     url: OutletListConstants.OUTLET_DATA,
-  //     method: 'POST',
-  //     crossOrigin: true,
-  //     type: 'json',
-  //     success: function(res) {
-  //       console.log('addOutlet res: ', res);
-  //     }
-  //   })
-  // }
+  outletData.addOutlet = function(newOutlet){
+    console.log('IN OUTLETSERVICES, ADDOUTLET: ', newOutlet);
+    return request({
+      url: OutletListConstants.ADD_OUTLET,
+      method: 'POST',
+      crossOrigin: true,
+      type: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify(newOutlet),
+      error: function(res) {
+        console.log('---------------------------------> ERROR');
+        console.dir(res);
+      },
+      success: function(res) {
+        console.log('---------------------------------> SUCCESS');
+        console.dir(res);
+      }
+    })
+  }
 
   // outletData.turnOff = function(){
   //   return request({
