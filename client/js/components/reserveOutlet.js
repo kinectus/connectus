@@ -9,15 +9,6 @@ var Map = ReactGoogleMaps.Map;
 var Marker = ReactGoogleMaps.Marker;
 var OverlayView = ReactGoogleMaps.OverlayView;
 
-// var outletInfo = React.createClass({
-//   render: function() {
-//     var outletID = this.props.params.id
-//     var outlet = outletStore.getOutletById(outletID)
-//     console.log(outlet);
-//     return <h4>outlet</h4>
-//   }
-// });
-
 var reserveOutlet = React.createClass({
 
   getInitialState: function(){
@@ -26,43 +17,60 @@ var reserveOutlet = React.createClass({
     }
   },
 
-  render: function() {
+  _onChange: function() {
+    this.setState(this.getInitialState());
+  },
 
+  componentDidMount: function() {
+    var that = this;
     var outletID = this.props.params.id
     outletStore.getOutletById(outletID).then(function(outlet){
-      console.log('got outlet in the component: ', outlet)
-    })
+      // setState automatically forces a re-render
+      console.log(outlet);
+      that.setState({data: outlet});
+    });
 
-    var outletInfo = <div><h2 className="ui center aligned header"> { outlet.name } </h2>
-        { outlet.seller }
-        Voltage: { outlet.voltage }
-        Price by hour: { outlet.priceHr }
-        Price by kWh: { outlet.pricekWh }
-        { outlet.description }
-      </div>
+    
+  },
+
+  render: function() {
+    this.getInitialState();
+    if (this.state.data.length !== 0){
+      var map = (<div className='reservationMap'>
+
+            <Map
+            initialZoom={10}
+            initialCenter={new GoogleMapsAPI.LatLng(this.state.data.lat, this.state.data.long)}>
+
+            <Marker
+              onClick={this.handleClick}
+              position={new GoogleMapsAPI.LatLng(this.state.data.lat, this.state.data.long)} />
+
+            </Map></div>)
+
+      var outletInfo = <div><h2 className="ui center aligned header"> { this.state.data.name } </h2>
+          <br></br>
+          Voltage: High
+          <br></br>
+          Price by hour: { this.state.data.priceHourly }
+          <br></br>
+          Price by kWh: { this.state.data.priceEnergy }
+          <br></br>
+          { this.state.data.description }
+        </div>
+    } else {
+      var outletInfo = ''
+    }
 
     var outletPhoto = <div className="outletPhoto"></div>
 
     return (
       <div className='container'>
-        <div className='reservationMap'>
-          <Map
-          initialZoom={10}
-          initialCenter={new GoogleMapsAPI.LatLng(-41.2864, 174.7762)}>
-
-          <Marker
-            onClick={this.handleClick}
-            position={new GoogleMapsAPI.LatLng(-41.2864, 174.7762)} />
-
-          <OverlayView
-            style={{backgroundColor: '#fff'}}
-            position={new GoogleMapsAPI.LatLng(-41.2864, 174.7762)}>
-            <p>Some content</p>
-          </OverlayView>
-          </Map>
-        </div><div>
-          {outletInfo}
-          {outletPhoto}
+        <div>
+        { map }
+        </div>
+        <div>
+          { outletInfo }
         </div>
       </div>
     )
@@ -70,30 +78,4 @@ var reserveOutlet = React.createClass({
 
 });
 
-
-// module.exports = {
-//   outletMap: outletMap,
-//   outletInfo: outletInfo
-// }
-
 module.exports = reserveOutlet;
-
-// taken from the docs ..
-
-// React.render(
-//   <Map
-//     initialZoom={10}
-//     initialCenter={new GoogleMapsAPI.LatLng(-41.2864, 174.7762)}>
-
-//     <Marker
-//       onClick={handleClick}
-//       position={new GoogleMapsAPI.LatLng(-41.2864, 174.7762)} />
-
-//     <OverlayView
-//       style={{backgroundColor: '#fff'}}
-//       position={new GoogleMapsAPI.LatLng(-41.2864, 174.7762)}>
-//       <p>Some content</p>
-//     </OverlayView>
-//   </Map>,
-//   mountNode
-// );
