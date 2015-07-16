@@ -3,6 +3,7 @@ var passport = require('passport');
 
 module.exports = function(app) {
   console.log(app);
+
   app.get('/facebook',
     passport.authenticate('facebook', { scope: ['user_status', 'email','public_profile']}), function() {
       console.log('in auth');
