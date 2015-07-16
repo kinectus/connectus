@@ -30,6 +30,18 @@ var outletServices = function(){
     })
   };
 
+  // outletData.addOutlet = function(){
+  //   return request({
+  //     url: OutletListConstants.OUTLET_DATA,
+  //     method: 'POST',
+  //     crossOrigin: true,
+  //     type: 'json',
+  //     success: function(res) {
+  //       console.log('addOutlet res: ', res);
+  //     }
+  //   })
+  // }
+
   // outletData.turnOff = function(){
   //   return request({
   //     url: '/turnOff',
