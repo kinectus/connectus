@@ -1,17 +1,10 @@
 var React = require('react');
+/* TODO
+Send values to database as new outlet
+Style page
+*/
 
 var addOutlet = React.createClass({
-  // getInitialState: function(){
-  //   return {
-  //     value: 'Enter your street address...'
-  //   };
-  // },
-  // handleChange: function(event) {
-  //   this.setState({value: event.target.value});
-  // }, onChange={this.handleChange} would go in input
-  // selectLog: function(val) {
-  //   console.log("Selected: " + val);
-  // },
   handleSubmit: function(e) {
     e.preventDefault();
     var street = React.findDOMNode(this.refs.street).value.trim();
@@ -21,7 +14,7 @@ var addOutlet = React.createClass({
     var description = React.findDOMNode(this.refs.description).value.trim();
     var voltage = React.findDOMNode(this.refs.voltage).value.trim();
     var charge = React.findDOMNode(this.refs.charge).value.trim();
-
+    console.log(street, city, state, zip, description, voltage, charge);
     // if (!text || !author) {
     //   return;
     // }
