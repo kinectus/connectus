@@ -34,7 +34,6 @@ var reserveOutlet = React.createClass({
   },
 
   render: function() {
-    this.getInitialState();
     if (this.state.data.length !== 0){
       var map = (<div className='reservationMap'>
 
