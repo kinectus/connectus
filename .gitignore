@@ -7,3 +7,4 @@ client/lib
 dist/**/*.*
 server/data.txt
 client/assets/css
+bower_components/
