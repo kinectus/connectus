@@ -1,0 +1,20 @@
+{
+  "name": "connectus",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jammiemountz/connectus",
+  "authors": [
+    "Jammie Mountz <jmmountz@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chai": "~3.1.0",
+    "mocha": "~2.2.5"
+  }
+}
