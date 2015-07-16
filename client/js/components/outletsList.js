@@ -20,13 +20,9 @@ var outletsList = React.createClass({
   //   });
   // },
 
-  // this function runs like init in backbone
   componentDidMount: function() {
-
     var that = this;
     outletStore.getOutlets().then(function(outletData){
-
-      // setState automatically forces a re-render
       that.setState({data: outletData});
     });
   },
@@ -43,9 +39,8 @@ var outletsList = React.createClass({
 
     if (this.state.data.length !==0) {
       var outletHtml = this.state.data.map(function(outlet) {
-        console.log('outlet: ', outlet);
-        return (<Link to="reserveOutlet" params={{id: outlet.id }}>
-          <tr key={outlet.id}>
+        return <Link to="reserveOutlet" params={{id: outlet.id }}>
+          <tr key={outlet.id} onClick={that.reserveOutlet}>
             <td>
               <h2 className="ui center aligned header"> { outlet.name } </h2>
             </td>
@@ -66,7 +61,7 @@ var outletsList = React.createClass({
             { outlet.description }
             </td>
           </tr>
-        </Link>)
+        </Link>
       });
     }
 
@@ -87,6 +82,7 @@ var outletsList = React.createClass({
           </table>
         </div>
       )
+    // });  from the promise closing
   },
 
   _onChange: function() {
