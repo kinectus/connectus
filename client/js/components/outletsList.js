@@ -65,7 +65,6 @@ var outletsList = React.createClass({
             <td>
             { outlet.description }
             </td>
-            
           </tr>
         )
       });
