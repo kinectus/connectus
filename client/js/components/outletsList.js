@@ -39,8 +39,7 @@ var outletsList = React.createClass({
 
     if (this.state.data.length !==0) {
       var outletHtml = this.state.data.map(function(outlet) {
-        //%3F allows the service to parse the url when making a GET request
-        return <Link to="reserveOutlet" params={{id: '%3Fid=' + outlet.id }}>
+        return <Link to="reserveOutlet" params={{id: outlet.id }}>
           <tr key={outlet.id} onClick={that.reserveOutlet}>
             <td>
               <h2 className="ui center aligned header"> { outlet.name } </h2>
