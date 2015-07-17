@@ -30,10 +30,16 @@ var reserveOutlet = React.createClass({
       console.log(outlet);
       that.setState({data: outlet});
     });
-
-    
   },
-
+  handleSubmit: function(e) {
+    e.preventDefault();
+    console.log('transaction');
+    var transaction = {
+      start: React.findDOMNode(this.refs.startTime).value,
+      end: React.findDOMNode(this.refs.endTime).value
+    };
+    console.log(transaction);
+  },
   render: function() {
     if (this.state.data.length !== 0){
       var map = (<div className='reservationMap'>
@@ -65,15 +71,24 @@ var reserveOutlet = React.createClass({
 
     var outletPhoto = <div className="outletPhoto"></div>
     
+    // http://jquense.github.io/react-widgets/docs/#/datetime-picker
+    // var change = function(name, value) {
+    //   this.setState({
+    //     ['value' + name]: value;
+    //   });
+    // }
+    // <DateTimePicker value={this.state.value0} onChange={change.bind(null, '0')} defaultValue={new Date()} />
+    // <DateTimePicker value={this.state.value1} onChange={change.bind(null, '1')} defaultValue={null} />
+    
     var dateTimePicker = (
       <div>
-        <DateTimePicker defaultValue={new Date()} />
-        <DateTimePicker defaultValue={null} />
+        <DateTimePicker name="starTime" ref="startTime" defaultValue={new Date()} />
+        <DateTimePicker name="endTime" ref="endTime" defaultValue={null} />
       </div>
     )
 
     var reserveButton = (
-      <div className="ui button">Reserve Outlet</div>
+      <div className="ui button" onClick={this.handleSubmit}>Reserve Outlet</div>
     )
     return (
       <div className='container'>
