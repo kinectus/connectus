@@ -50,6 +50,7 @@
     "react-mixin": "^1.6.0",
     "react-router": "^0.13.3",
     "react-router-component": "^0.26.0",
+    "react-widgets": "^2.7.2",
     "reactify": "^1.1.1",
     "semantic-ui": "^2.0.3",
     "vinyl-source-stream": "^1.1.0",
@@ -77,7 +78,6 @@
     "reqwest": "^1.1.6",
     "vinyl-source-stream": "^1.1.0",
     "when": "^3.7.3",
-    "shelljs": "^0.5.1",
-    "vinyl-source-stream": "^1.1.0"
+    "shelljs": "^0.5.1"
   }
 }

@@ -4,10 +4,11 @@ var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var ReactGoogleMaps = require('react-googlemaps');
 var GoogleMapsAPI = window.google.maps;
 var outletStore = require('../stores/outletStore');
-
+var require
 var Map = ReactGoogleMaps.Map;
 var Marker = ReactGoogleMaps.Marker;
 var OverlayView = ReactGoogleMaps.OverlayView;
+var DateTimePicker = require('react-widgets').DateTimePicker
 
 var reserveOutlet = React.createClass({
 
@@ -63,7 +64,17 @@ var reserveOutlet = React.createClass({
     }
 
     var outletPhoto = <div className="outletPhoto"></div>
+    
+    var dateTimePicker = (
+      <div>
+        <DateTimePicker defaultValue={new Date()} />
+        <DateTimePicker defaultValue={null} />
+      </div>
+    )
 
+    var reserveButton = (
+      <div className="ui button">Reserve Outlet</div>
+    )
     return (
       <div className='container'>
         <div>
@@ -71,6 +82,12 @@ var reserveOutlet = React.createClass({
         </div>
         <div>
           { outletInfo }
+        </div>
+        <div>
+          { dateTimePicker }
+        </div>
+        <div>
+          { reserveButton }
         </div>
       </div>
     )

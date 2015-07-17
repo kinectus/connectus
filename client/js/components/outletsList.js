@@ -74,7 +74,7 @@ var outletsList = React.createClass({
         <div className="outletsList container">
           <table className="ui selectable celled padded table">
             <thead>
-              <tr><th className="single line">Outlet Name hahha</th>
+              <tr><th className="single line">Outlet Name</th>
               <th>Seller</th>
               <th>Rating</th>
               <th>Voltage</th>
