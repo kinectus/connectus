@@ -35,6 +35,7 @@ describe('Outlet Store', function(){
       outletStore.getOutlets().then(function(outlets){
         assert.equal(outlets.length, 4);
       });
+      done();
     })
   })
 })
