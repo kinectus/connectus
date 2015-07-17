@@ -46539,14 +46539,14 @@ html.ios body {
   font-size: 30px;
   padding-top: 7.5px;
 }
-.main ul.ui.secondary.pointing.menu {
+.main .ui.secondary.pointing.menu {
   background-color: #fbcb15;
   height: 35px;
 }
-.main ul.ui.secondary.pointing.menu a {
+.main .ui.secondary.pointing.menu .item {
   padding-right: 15px;
   padding-top: 10px;
-  font-size: 20px;
+  font-size: 25px;
   font: black;
   font-weight: bold;
 }

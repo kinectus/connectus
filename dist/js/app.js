@@ -78,6 +78,7 @@ var addOutlet = React.createClass({displayName: "addOutlet",
 
     var newOutlet = {
 <<<<<<< HEAD
+<<<<<<< HEAD
       address: React.findDOMNode(this.name.street).value.trim() + ';' + React.findDOMNode(this.refs.city).value.trim() + ';' +  React.findDOMNode(this.refs.state).value.trim() + ';' + React.findDOMNode(this.refs.zip).value.trim(),
 =======
       address: React.findDOMNode(this.refs.street).value.trim() + ';' + React.findDOMNode(this.refs.city).value.trim() + ';' +  React.findDOMNode(this.refs.state).value.trim() + ';' + React.findDOMNode(this.refs.zip).value.trim(),
@@ -86,6 +87,13 @@ var addOutlet = React.createClass({displayName: "addOutlet",
       description: React.findDOMNode(this.refs.description).value.trim(),
       voltage: React.findDOMNode(this.refs.voltage).value.trim(),
       charge: React.findDOMNode(this.refs.charge).value.trim()
+=======
+      address: React.findDOMNode(this.name.street).value.trim() + ';' + React.findDOMNode(this.name.city).value.trim() + ';' +  React.findDOMNode(this.name.state).value.trim() + ';' + React.findDOMNode(this.name.zip).value.trim(),
+      name: React.findDOMNode(this.name.name).value.trim(),
+      description: React.findDOMNode(this.name.description).value.trim(),
+      voltage: React.findDOMNode(this.name.voltage).value.trim(),
+      charge: React.findDOMNode(this.name.charge).value.trim()
+>>>>>>> icons working
     };
 
     console.log(newOutlet);
@@ -157,6 +165,7 @@ var addOutlet = React.createClass({displayName: "addOutlet",
           React.createElement("div", {className: "field"}, 
             "Your price/kWh charge: $", React.createElement("input", {type: "text", name: "charge", placeholder: "ex. 10"}), "/kWh", React.createElement("br", null)
           ), 
+<<<<<<< HEAD
           React.createElement("div", {className: "ui submit button", type: "POST"}, "Submit"), React.createElement("br", null)
 =======
       React.createElement("div", null, 
@@ -172,6 +181,9 @@ var addOutlet = React.createClass({displayName: "addOutlet",
           "Your price/kWh charge: $", React.createElement("input", {type: "text", ref: "charge", placeholder: "10"}), "/kWh", 
           React.createElement("input", {type: "submit", value: "Post"})
 >>>>>>> ignoring dist?
+=======
+          React.createElement("div", {className: "ui submit button", type: "Post"}, "Submit"), React.createElement("br", null)
+>>>>>>> icons working
         )
       )
     )
@@ -236,7 +248,7 @@ var Connectus = React.createClass({displayName: "Connectus",
                 React.createElement(Link, {to: "about"}, "About")
               ), 
               React.createElement("a", {className: "item", onClick: this.logout}, 
-                "Logout"
+                React.createElement(Link, {to: "/"}, "Logout")
               )
             )
           ), 
