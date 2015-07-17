@@ -73,7 +73,7 @@ var reserveOutlet = React.createClass({
     )
 
     var reserveButton = (
-      <div class="ui button"></div>
+      <div className="ui button">Reserve Outlet</div>
     )
     return (
       <div className='container'>
