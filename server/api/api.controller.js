@@ -47,5 +47,9 @@ module.exports = {
         });
       }
     });
+  },
+  addTransaction: function(req, res) {
+    console.log(req);
   }
+
 };

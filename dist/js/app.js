@@ -554,7 +554,8 @@ var BASE_URL = 'http://localhost:3000/';
 var loginConstants = {
   BASE_URL: BASE_URL,
   OUTLET_DATA: BASE_URL + 'api/outlets',
-  ADD_OUTLET: BASE_URL + 'api/addOutlet'
+  ADD_OUTLET: BASE_URL + 'api/addOutlet',
+  ADD_TRANSACTION: BASE_URL + 'api/addTransaction'
 };
 
 module.exports = loginConstants;
@@ -641,7 +642,7 @@ var outletServices = function(){
   outletData.addTransaction = function(newTransaction){
     console.log('IN OUTLETSERVICES, addTransaction: ', newTransaction);
     return request({
-      url: OutletListConstants.ADD_Transaction,
+      url: OutletListConstants.ADD_TRANSACTION,
       method: 'POST',
       crossOrigin: true,
       type: 'json',
@@ -777,7 +778,7 @@ var outletServices = function(){
   outletData.addTransaction = function(newTransaction){
     console.log('IN OUTLETSERVICES, addTransaction: ', newTransaction);
     return request({
-      url: OutletListConstants.ADD_Transaction,
+      url: OutletListConstants.ADD_TRANSACTION,
       method: 'POST',
       crossOrigin: true,
       type: 'json',
