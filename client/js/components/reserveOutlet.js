@@ -1,3 +1,5 @@
+// TODO: validate data, possibly change format of date, allow only one click on reserve outlet.
+
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
@@ -31,14 +33,18 @@ var reserveOutlet = React.createClass({
       that.setState({data: outlet});
     });
   },
-  handleSubmit: function(e) {
-    e.preventDefault();
-    console.log('transaction');
-    var transaction = {
-      start: React.findDOMNode(this.refs.startTime).value,
-      end: React.findDOMNode(this.refs.endTime).value
-    };
-    console.log(transaction);
+  // getInitialState: function() {
+  //   return {value: 'Hello!'};
+  // },
+  handleSubmit: function(event) {
+    event.preventDefault();
+    var newTransaction = {
+        start: this.refs.startTime.state.value,
+        end: this.refs.endTime.state.value
+    }
+    outletStore.submitTransaction(newTransaction).then(function(res){
+      console.log('ADDed Transaction, response', res)
+    });
   },
   render: function() {
     if (this.state.data.length !== 0){
@@ -72,24 +78,14 @@ var reserveOutlet = React.createClass({
     var outletPhoto = <div className="outletPhoto"></div>
     
     // http://jquense.github.io/react-widgets/docs/#/datetime-picker
-    // var change = function(name, value) {
-    //   this.setState({
-    //     ['value' + name]: value;
-    //   });
-    // }
-    // <DateTimePicker value={this.state.value0} onChange={change.bind(null, '0')} defaultValue={new Date()} />
-    // <DateTimePicker value={this.state.value1} onChange={change.bind(null, '1')} defaultValue={null} />
-    
     var dateTimePicker = (
       <div>
-        <DateTimePicker name="starTime" ref="startTime" defaultValue={new Date()} />
-        <DateTimePicker name="endTime" ref="endTime" defaultValue={null} />
+        <DateTimePicker  ref="startTime" defaultValue={new Date()} />
+        <DateTimePicker  ref="endTime" defaultValue={null} />
+        <div className="ui button" onClick={this.handleSubmit}>Reserve Outlet</div>
       </div>
     )
 
-    var reserveButton = (
-      <div className="ui button" onClick={this.handleSubmit}>Reserve Outlet</div>
-    )
     return (
       <div className='container'>
         <div>
@@ -100,9 +96,6 @@ var reserveOutlet = React.createClass({
         </div>
         <div>
           { dateTimePicker }
-        </div>
-        <div>
-          { reserveButton }
         </div>
       </div>
     )
