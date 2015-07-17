@@ -29,10 +29,13 @@ var assert = chai.assert,
 // })
 
 
-describe('Outlet Componenets', function(){
-  describe('outletsList.render()', function(){
-    it('should return something', function() {
-      assert.equal(3,3);
+describe('Outlet Store', function(){
+  describe('outletStore.getOutlets()', function(){
+    it('should retrieve the fake data from the database', function(done) {
+      outletStore.getOutlets().then(function(outlets){
+        assert.equal(outlets.length, 4);
+      });
+      done();
     })
   })
 })
