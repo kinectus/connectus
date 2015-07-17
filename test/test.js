@@ -1,22 +1,60 @@
+// these requires are for testing the server
 var expect = require('chai').expect;
 var request = require('request');
+var server = require('../server/server');
+var http = require('http')
+var assert = require('assert')
 
+// these requires are for testing the database
 var db = require('../server/config/db/config');
 var Outlets = require('../server/outlets/outlets.collection');
-// var User = require('../app/models/user');
-// var Links = require('../app/collections/links');
-// var Link = require('../app/models/link');
 
-/************************************************************/
-// Mocha doesn't have a way to designate pending before blocks.
-// Mimic the behavior of xit and xdescribe with xbeforeEach.
-// Remove the 'x' from beforeEach block when working on
-// authentication tests.
-/************************************************************/
-// var xbeforeEach = function(){};
-/************************************************************/
+// ---------------------------------------------------------------------------------
+                  /*            TESTY TESTS             */
+// ---------------------------------------------------------------------------------
+
+// this starts the server before each test and then closes it after all tests are run
+describe('server', function () {
+  before(function () {
+    server.listen(3000);
+  });
+
+  after(function () {
+    server.close();
+  });
+});
+
+// this test makes a get request to the homepage
+describe('a request to the homepage should return a 200 code', function () {
+  it('should return 200', function (done) {
+    http.get('http://localhost:3000', function (res) {
+      assert.equal(200, res.statusCode);
+      done();
+    });
+  });
+});
+
+// this test makes a get request to the homepage
+describe('a request to the outlets api should return data for outlets', function () {
+  it('should return 200', function (done) {
+    http.get('http://localhost:3000/api/outlets', function (res) {var data = '';
+
+      res.on('data', function (chunk) {
+        data += chunk;
+      });
 
 
+      res.on('end', function () {
+        var outlets = JSON.parse(data);
+        assert.equal('object', typeof outlets);
+        done();
+      });
+    });
+  });
+});
+
+
+// these are copy/pasted but maybe can be modified to test our database
 describe('', function() {
 
   beforeEach(function() {
