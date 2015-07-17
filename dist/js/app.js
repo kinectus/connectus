@@ -63,7 +63,6 @@ var React = require('react');
 var outletStore = require('../stores/outletStore');
 
 /* TODO
-Send values to database as new outlet
 Style page
 Change state and voltage to dropdown
 
@@ -88,17 +87,6 @@ var addOutlet = React.createClass({displayName: "addOutlet",
     outletStore.submitOutlet(newOutlet).then(function(res){
       console.log('ADDOUTLET submit response: ', res)
     });
-<<<<<<< HEAD
-    // TODO: send request to the server
-    React.findDOMNode(this.refs.street).value = '';
-    React.findDOMNode(this.refs.city).value = '';
-    React.findDOMNode(this.refs.state).value = '';
-    React.findDOMNode(this.refs.zip).value = '';
-    React.findDOMNode(this.refs.name).value = '';
-    React.findDOMNode(this.refs.description).value = '';
-    React.findDOMNode(this.refs.voltage).value = '';
-    React.findDOMNode(this.refs.charge).value = '';
-=======
     
     React.findDOMNode(this.name.street).value = '';
     React.findDOMNode(this.name.city).value = '';
@@ -108,27 +96,12 @@ var addOutlet = React.createClass({displayName: "addOutlet",
     React.findDOMNode(this.name.description).value = '';
     React.findDOMNode(this.name.voltage).value = '';
     React.findDOMNode(this.name.charge).value = '';
->>>>>>> added form validation
     console.log('submitted!')
     return;
   },
   render: function(){
     // var value = this.state.value;
     return (
-<<<<<<< HEAD
-      React.createElement("div", null, 
-        React.createElement("form", {className: "form", onSubmit: this.handleSubmit}, 
-          "Street ", React.createElement("input", {type: "text", ref: "street", placeholder: "Enter your street address..."}), 
-          "City ", React.createElement("input", {type: "text", ref: "city", placeholder: "Enter city..."}), 
-          "State ", React.createElement("input", {type: "text", ref: "state", placeholder: "Enter state..."}), 
-          "Zip-code ", React.createElement("input", {type: "text", ref: "zip", placeholder: "Enter zip-code..."}), 
-          "Name ", React.createElement("input", {type: "text", ref: "name", placeholder: "What do you want to call this outlet?"}), 
-          "Description ", React.createElement("textarea", {name: "description", ref: "description", placeholder: "This is a description."}), 
-          "Voltage ", React.createElement("input", {type: "text", ref: "voltage", placeholder: "Standard or High?"}), 
-          "Your hourly rate: $3/hr   Suggested price/kWh: $10/kWh" + ' ' +
-          "Your price/kWh charge: $", React.createElement("input", {type: "text", ref: "charge", placeholder: "10"}), "/kWh", 
-          React.createElement("input", {type: "submit", value: "Post"})
-=======
       React.createElement("div", {className: "addoutlet ui container center"}, 
         React.createElement("form", {className: "ui form", onSubmit: this.handleSubmit}, 
           React.createElement("div", {className: "field"}, 
@@ -163,8 +136,7 @@ var addOutlet = React.createClass({displayName: "addOutlet",
           React.createElement("div", {className: "field"}, 
             "Your price/kWh charge: $", React.createElement("input", {type: "text", name: "charge", placeholder: "ex. 10"}), "/kWh", React.createElement("br", null)
           ), 
-          React.createElement("div", {className: "ui submit button"}, "Submit"), React.createElement("br", null)
->>>>>>> added form validation
+          React.createElement("div", {className: "ui submit button", type: "POST"}, "Submit"), React.createElement("br", null)
         )
       )
     )
@@ -314,6 +286,7 @@ var Login = React.createClass({displayName: "Login",
 module.exports = Login;
 
 },{"react":255,"react-router":68}],7:[function(require,module,exports){
+
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
@@ -355,10 +328,14 @@ var outletsList = React.createClass({displayName: "outletsList",
 
     if (this.state.data.length !==0) {
       var outletHtml = this.state.data.map(function(outlet) {
-        return React.createElement(Link, {to: "reserveOutlet", params: {id: outlet.id}}, 
+        return (
           React.createElement("tr", {key: outlet.id, onClick: that.reserveOutlet}, 
             React.createElement("td", null, 
-              React.createElement("h2", {className: "ui center aligned header"}, " ",  outlet.name, " ")
+              React.createElement("h2", {className: "ui center aligned header"}, 
+                React.createElement(Link, {to: "reserveOutlet", params: {id: outlet.id}}, 
+                   outlet.name
+                )
+              )
             ), 
             React.createElement("td", {className: "single line"}, 
               "Seller: ",  outlet.seller
@@ -367,7 +344,7 @@ var outletsList = React.createClass({displayName: "outletsList",
               React.createElement("div", {className: "ui star rating", "data-rating":  outlet.rating, "data-max-rating":  outlet.rating},  outlet.rating)
             ), 
             React.createElement("td", {className: "right aligned"}, 
-              "Voltage: ",  outlet.voltage
+               outlet.voltage
             ), 
             React.createElement("td", null, 
               "Price by hour: ",  outlet.priceHourly, 
@@ -385,7 +362,7 @@ var outletsList = React.createClass({displayName: "outletsList",
         React.createElement("div", {className: "outletsList container"}, 
           React.createElement("table", {className: "ui selectable celled padded table"}, 
             React.createElement("thead", null, 
-              React.createElement("tr", null, React.createElement("th", {className: "single line"}, "Outlet Name"), 
+              React.createElement("tr", null, React.createElement("th", {className: "single line"}, "Outlet Name hahha"), 
               React.createElement("th", null, "Seller"), 
               React.createElement("th", null, "Rating"), 
               React.createElement("th", null, "Voltage"), 
@@ -799,10 +776,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
   },
 
   submitOutlet: function(newOutlet){
-    console.log('IN OUTLETSTORE, SUMBITOUTLET: ', newOutlet)
-    return OutletServices.addOutlet(newOutlet).then(function(res){
-      console.log('OUTLETSTORE res in submitOutlet', res);
-    });
+    return OutletServices.addOutlet(newOutlet);
   },
 
   emitChange: function() {
