@@ -388,6 +388,8 @@ var outletsList = React.createClass({displayName: "outletsList",
 module.exports = outletsList;
 
 },{"../dispatcher/ConnectusDispatcher":13,"../stores/outletStore":18,"react":331,"react-router":68}],8:[function(require,module,exports){
+// TODO: validate data, possibly change format of date, allow only one click on reserve outlet.
+
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
@@ -420,10 +422,20 @@ var reserveOutlet = React.createClass({displayName: "reserveOutlet",
       console.log(outlet);
       that.setState({data: outlet});
     });
-
-    
   },
-
+  // getInitialState: function() {
+  //   return {value: 'Hello!'};
+  // },
+  handleSubmit: function(event) {
+    event.preventDefault();
+    var newTransaction = {
+        start: this.refs.startTime.state.value,
+        end: this.refs.endTime.state.value
+    }
+    outletStore.submitTransaction(newTransaction).then(function(res){
+      console.log('ADDed Transaction, response', res)
+    });
+  },
   render: function() {
     if (this.state.data.length !== 0){
       var map = (React.createElement("div", {className: "reservationMap"}, 
@@ -455,16 +467,15 @@ var reserveOutlet = React.createClass({displayName: "reserveOutlet",
 
     var outletPhoto = React.createElement("div", {className: "outletPhoto"})
     
+    // http://jquense.github.io/react-widgets/docs/#/datetime-picker
     var dateTimePicker = (
       React.createElement("div", null, 
-        React.createElement(DateTimePicker, {defaultValue: new Date()}), 
-        React.createElement(DateTimePicker, {defaultValue: null})
+        React.createElement(DateTimePicker, {ref: "startTime", defaultValue: new Date()}), 
+        React.createElement(DateTimePicker, {ref: "endTime", defaultValue: null}), 
+        React.createElement("div", {className: "ui button", onClick: this.handleSubmit}, "Reserve Outlet")
       )
     )
 
-    var reserveButton = (
-      React.createElement("div", {className: "ui button"}, "Reserve Outlet")
-    )
     return (
       React.createElement("div", {className: "container"}, 
         React.createElement("div", null, 
@@ -475,9 +486,6 @@ var reserveOutlet = React.createClass({displayName: "reserveOutlet",
         ), 
         React.createElement("div", null, 
            dateTimePicker 
-        ), 
-        React.createElement("div", null, 
-           reserveButton 
         )
       )
     )
@@ -628,6 +636,26 @@ var outletServices = function(){
         console.dir(res);
       }
     })
+  };
+
+  outletData.addTransaction = function(newTransaction){
+    console.log('IN OUTLETSERVICES, addTransaction: ', newTransaction);
+    return request({
+      url: OutletListConstants.ADD_Transaction,
+      method: 'POST',
+      crossOrigin: true,
+      type: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify(newTransaction),
+      error: function(res) {
+        console.log('---------------------------------> ERROR');
+        console.dir(res);
+      },
+      success: function(res) {
+        console.log('---------------------------------> SUCCESS');
+        console.dir(res);
+      }
+    })
   }
 
   // outletData.turnOff = function(){
@@ -744,6 +772,26 @@ var outletServices = function(){
         console.dir(res);
       }
     })
+  };
+
+  outletData.addTransaction = function(newTransaction){
+    console.log('IN OUTLETSERVICES, addTransaction: ', newTransaction);
+    return request({
+      url: OutletListConstants.ADD_Transaction,
+      method: 'POST',
+      crossOrigin: true,
+      type: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify(newTransaction),
+      error: function(res) {
+        console.log('---------------------------------> ERROR');
+        console.dir(res);
+      },
+      success: function(res) {
+        console.log('---------------------------------> SUCCESS');
+        console.dir(res);
+      }
+    })
   }
 
   // outletData.turnOff = function(){
@@ -795,6 +843,9 @@ var outletStore = assign({}, EventEmitter.prototype, {
 
   submitOutlet: function(newOutlet){
     return OutletServices.addOutlet(newOutlet);
+  },
+  submitTransaction: function(newTransaction) {
+    return OutletServices.addTransaction(newTransaction);
   },
 
   emitChange: function() {

@@ -48,6 +48,26 @@ var outletServices = function(){
         console.dir(res);
       }
     })
+  };
+
+  outletData.addTransaction = function(newTransaction){
+    console.log('IN OUTLETSERVICES, addTransaction: ', newTransaction);
+    return request({
+      url: OutletListConstants.ADD_Transaction,
+      method: 'POST',
+      crossOrigin: true,
+      type: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify(newTransaction),
+      error: function(res) {
+        console.log('---------------------------------> ERROR');
+        console.dir(res);
+      },
+      success: function(res) {
+        console.log('---------------------------------> SUCCESS');
+        console.dir(res);
+      }
+    })
   }
 
   // outletData.turnOff = function(){

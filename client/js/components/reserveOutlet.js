@@ -1,3 +1,5 @@
+// TODO: validate data, possibly change format of date, allow only one click on reserve outlet.
+
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
@@ -30,10 +32,20 @@ var reserveOutlet = React.createClass({
       console.log(outlet);
       that.setState({data: outlet});
     });
-
-    
   },
-
+  // getInitialState: function() {
+  //   return {value: 'Hello!'};
+  // },
+  handleSubmit: function(event) {
+    event.preventDefault();
+    var newTransaction = {
+        start: this.refs.startTime.state.value,
+        end: this.refs.endTime.state.value
+    }
+    outletStore.submitTransaction(newTransaction).then(function(res){
+      console.log('ADDed Transaction, response', res)
+    });
+  },
   render: function() {
     if (this.state.data.length !== 0){
       var map = (<div className='reservationMap'>
@@ -65,16 +77,15 @@ var reserveOutlet = React.createClass({
 
     var outletPhoto = <div className="outletPhoto"></div>
     
+    // http://jquense.github.io/react-widgets/docs/#/datetime-picker
     var dateTimePicker = (
       <div>
-        <DateTimePicker defaultValue={new Date()} />
-        <DateTimePicker defaultValue={null} />
+        <DateTimePicker  ref="startTime" defaultValue={new Date()} />
+        <DateTimePicker  ref="endTime" defaultValue={null} />
+        <div className="ui button" onClick={this.handleSubmit}>Reserve Outlet</div>
       </div>
     )
 
-    var reserveButton = (
-      <div className="ui button">Reserve Outlet</div>
-    )
     return (
       <div className='container'>
         <div>
@@ -85,9 +96,6 @@ var reserveOutlet = React.createClass({
         </div>
         <div>
           { dateTimePicker }
-        </div>
-        <div>
-          { reserveButton }
         </div>
       </div>
     )

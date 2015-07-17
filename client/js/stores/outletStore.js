@@ -29,6 +29,9 @@ var outletStore = assign({}, EventEmitter.prototype, {
   submitOutlet: function(newOutlet){
     return OutletServices.addOutlet(newOutlet);
   },
+  submitTransaction: function(newTransaction) {
+    return OutletServices.addTransaction(newTransaction);
+  },
 
   emitChange: function() {
     this.emit(CHANGE_EVENT);
