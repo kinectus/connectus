@@ -21,6 +21,11 @@
   - Generate the documentation with ``yuidoc .``
   - The documentation will reside in the './out' folder and can be served as static html files.
 
+## Testing
+- run bower install to get mocha and chai
+- run tests/index.html in the browser to run front-end tests
+- write tests in tests/tests.js
+
 
 ## Directory Layout and Description of Files
 
