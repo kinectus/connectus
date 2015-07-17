@@ -12,7 +12,7 @@ var addOutlet = React.createClass({
     e.preventDefault();
 
     var newOutlet = {
-      address: React.findDOMNode(this.name.street).value.trim() + ';' + React.findDOMNode(this.refs.city).value.trim() + ';' +  React.findDOMNode(this.refs.state).value.trim() + ';' + React.findDOMNode(this.refs.zip).value.trim(),
+      address: React.findDOMNode(this.refs.street).value.trim() + ';' + React.findDOMNode(this.refs.city).value.trim() + ';' +  React.findDOMNode(this.refs.state).value.trim() + ';' + React.findDOMNode(this.refs.zip).value.trim(),
       name: React.findDOMNode(this.refs.name).value.trim(),
       description: React.findDOMNode(this.refs.description).value.trim(),
       voltage: React.findDOMNode(this.refs.voltage).value.trim(),
@@ -27,14 +27,14 @@ var addOutlet = React.createClass({
       console.log('ADDOUTLET submit response: ', res)
     });
     
-    React.findDOMNode(this.name.street).value = '';
-    React.findDOMNode(this.name.city).value = '';
-    React.findDOMNode(this.name.state).value = '';
-    React.findDOMNode(this.name.zip).value = '';
-    React.findDOMNode(this.name.name).value = '';
-    React.findDOMNode(this.name.description).value = '';
-    React.findDOMNode(this.name.voltage).value = '';
-    React.findDOMNode(this.name.charge).value = '';
+    React.findDOMNode(this.refs.street).value = '';
+    React.findDOMNode(this.refs.city).value = '';
+    React.findDOMNode(this.refs.state).value = '';
+    React.findDOMNode(this.refs.zip).value = '';
+    React.findDOMNode(this.refs.name).value = '';
+    React.findDOMNode(this.refs.description).value = '';
+    React.findDOMNode(this.refs.voltage).value = '';
+    React.findDOMNode(this.refs.charge).value = '';
     console.log('submitted!')
     return;
   },
@@ -45,37 +45,37 @@ var addOutlet = React.createClass({
         <form className="ui form" onSubmit={this.handleSubmit}>
           <div className="field">
             <label>Street</label>
-            <input type="text" name="street" placeholder='Enter your street address...' /><br />
+            <input type="text" name="street" ref="street" placeholder='Enter your street address...' /><br />
           </div>
           <div className="field">
-            City <input type="text" name="city" placeholder='Enter city...' /> <br />
+            City <input type="text" name="city" ref="city" placeholder='Enter city...' /> <br />
           </div>
           <div className="field">
-            State <input type="text" name="state" placeholder='Enter state...' /><br />
+            State <input type="text" name="state" ref="state" placeholder='Enter state...' /><br />
           </div>
           <div className="field">
-            Zip-code <input type="text" name="zip" placeholder='Enter zip-code...' /><br />
+            Zip-code <input type="text" name="zip" ref="zip" placeholder='Enter zip-code...' /><br />
           </div>
           <div className="field">
-            Name <input type="text" name="name" placeholder='What do you want to call this outlet?' /><br />
+            Name <input type="text" name="name" ref="name" placeholder='What do you want to call this outlet?' /><br />
           </div>
           <div className="field">
-            Description <textarea name="description" name="description" placeholder="This is a description." /><br />
+            Description <textarea name="description" name="description" ref="description" placeholder="This is a description." /><br />
           </div>
           <div className="field">
             <label>Voltage</label>
-            <select className="ui dropdown">
-              <option value="1">Standard</option>
-              <option value="0">High</option>
+            <select className="ui dropdown" ref="voltage">
+              <option value="standard">Standard</option>
+              <option value="high">High</option>
             </select><br />
           </div>
           <div className="field">
             Your hourly rate: $3/hr   Suggested price/kWh: $10/kWh<br />
           </div>
           <div className="field">
-            Your price/kWh charge: $<input type="text" name="charge" placeholder='ex. 10' />/kWh<br />
+            Your price/kWh charge: $<input type="text" name="charge" ref="charge" placeholder='ex. 10' />/kWh<br />
           </div>
-          <div className="ui submit button" type="POST">Submit</div><br />
+          <input type="submit" value="Submit" />
         </form>
       </div>
     )
@@ -83,6 +83,7 @@ var addOutlet = React.createClass({
 });
 
 module.exports = addOutlet;
+          // <div className="ui submit button" type="POST">Submit</div><br />
 
 // <select className="select" onChange={this.selectLog}>
 //           <option value='AK'>AK</option>
