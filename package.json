@@ -50,9 +50,9 @@
     "react-mixin": "^1.6.0",
     "react-router": "^0.13.3",
     "react-router-component": "^0.26.0",
+    "react-widgets": "^2.7.2",
     "reactify": "^1.1.1",
     "semantic-ui": "^2.0.3",
-    "sm-datepicker": "0.0.2",
     "vinyl-source-stream": "^1.1.0",
     "yamljs": "^0.2.3"
   },
