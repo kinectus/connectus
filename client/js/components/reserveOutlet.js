@@ -63,17 +63,19 @@ var reserveOutlet = React.createClass({
       return <h1></h1>;
     }
     if (this.state.data.length !== 0){
-      var map = (<div className='reservationMap'>
+      var map = (
+        <div className='reservationMap'>
+          <Map
+          initialZoom={10}
+          initialCenter={new GoogleMapsAPI.LatLng(this.state.data.lat, this.state.data.long)}>
 
-            <Map
-            initialZoom={10}
-            initialCenter={new GoogleMapsAPI.LatLng(this.state.data.lat, this.state.data.long)}>
+          <Marker
+            onClick={this.handleClick}
+            position={new GoogleMapsAPI.LatLng(this.state.data.lat, this.state.data.long)} />
 
-            <Marker
-              onClick={this.handleClick}
-              position={new GoogleMapsAPI.LatLng(this.state.data.lat, this.state.data.long)} />
-
-            </Map></div>)
+          </Map>
+        </div>
+      );
 
       var outletInfo = <div className="ui raised text container segment outletInfoRes">
         <h2 className="ui center aligned header"> { this.state.data.name } </h2>
