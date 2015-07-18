@@ -37,7 +37,7 @@ var outletsList = React.createClass({
     }
 
     var that = this;
-
+    // outlet data list
     if (this.state.data.length !==0) {
       var outletHtml = this.state.data.map(function(outlet) {
         return (
@@ -69,24 +69,46 @@ var outletsList = React.createClass({
         )
       });
     }
-
-      return (
-        <div className="outletsList container">
-          <table className="ui selectable celled padded table">
-            <thead>
-              <tr><th className="single line">Outlet Name</th>
-              <th>Seller</th>
-              <th>Rating</th>
-              <th>Voltage</th>
-              <th>Price</th>
-              <th>Description</th>
-            </tr></thead>
-            <tbody>
-              { outletHtml }
-            </tbody>
-          </table>
+    // includes search bar, map/list button and possibly filter/sort buttons
+    
+    //onClick={this.handleSubmit}
+    var listMenu = (
+      <div>
+        <div className="ui button"> map</div> 
+        <div className="ui input">
+          <input type="text" placeholder="Search..."> </input>
         </div>
-      )
+      </div>
+    );
+
+    var outletTable = 
+      <div className="outletsList container">
+        <table className="ui selectable celled padded table">
+          <thead>
+            <tr><th className="single line">Outlet Name</th>
+            <th>Seller</th>
+            <th>Rating</th>
+            <th>Voltage</th>
+            <th>Price</th>
+            <th>Description</th>
+          </tr></thead>
+          <tbody>
+            { outletHtml }
+          </tbody>
+        </table>
+      </div>
+
+    return (
+      <div>
+        <div>
+          {listMenu}
+        </div>
+        <div>
+          {outletTable}
+        </div>
+        
+      </div>
+    )
     // });  from the promise closing
   },
 

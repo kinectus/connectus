@@ -61,7 +61,7 @@ var Connectus = React.createClass({
           <div>
             <RouteHandler />
           </div>
-        </div>  
+        </div> 
       );
     }
 
