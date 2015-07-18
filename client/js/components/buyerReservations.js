@@ -4,7 +4,7 @@ var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var Link = require('react-router').Link;
 var Router = require('react-router'); //need this for redirection
-var outletsList = React.createClass({
+var buyerReservations = React.createClass({
 
   getInitialState: function(){
     return {
@@ -65,6 +65,10 @@ var outletsList = React.createClass({
             <td>
             { outlet.description }
             </td>
+            <td>
+              <div className="ui button" onClick={this.handleSubmit}>Turn on</div>
+            </td>
+            
           </tr>
         )
       });
@@ -96,4 +100,4 @@ var outletsList = React.createClass({
 
 });
 
-module.exports = outletsList;
+module.exports = buyerReservations;

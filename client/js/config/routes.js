@@ -6,6 +6,7 @@ var Login = require('../components/login.js');
 var LandingPage = require('../components/landingPage.js');
 var About = require('../components/about.js');
 var OutletsList = require('../components/outletsList.js');
+var buyerReservations = require('../components/buyerReservations.js');
 var ReserveOutlet = require('../components/reserveOutlet.js');
 var AddOutlet = require('../components/addOutlet.js');
 var Router = require('react-router'); //npm component for routing
@@ -22,6 +23,7 @@ module.exports = (
     <Route name="outletsList" path="/outlets" handler={OutletsList} />
     <Route name="reserveOutlet" path="/outlets/:id" handler={ReserveOutlet} />
     <Route name="addOutlet" path="/addOutlet" handler={AddOutlet} />
+    <Route name="buyerReservations" path="/buyerReservations" handler={buyerReservations} />
     <DefaultRoute handler={About} /> 
   </Route>
 );
