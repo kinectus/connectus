@@ -20,7 +20,7 @@ passport.use(new FacebookStrategy({
     enableProof: false
   },
   function(accessToken, refreshToken, profile, done) {
-    console.log('PROFEILLLLLLEEE------------>', profile)
+    // console.log('PROFEILLLLLLEEE------------>', profile)
     //user is saved to the database here - see queries folder for the specific db query
     createUser(profile, function(error){
       console.log(error);
@@ -33,10 +33,13 @@ passport.use(new FacebookStrategy({
 
 module.exports = {
   isAuthenticated: function(req, res, next) {
+    console.log('IS AUTHENITCATING---------------->');
     if (req.isAuthenticated()) {
       return next(); 
+    }else{
+      console.log('authentication failed - cannot move to next page   ');
     }
-    res.redirect('/#/login')
+    res.redirect('/#/login');
   }
 };
 

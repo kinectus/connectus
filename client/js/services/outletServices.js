@@ -39,15 +39,15 @@ var outletServices = function(){
       type: 'json',
       contentType: 'application/json',
       data: JSON.stringify(newOutlet),
-      error: function(res) {
+      error: function(res, err) {
         console.log('---------------------------------> ERROR');
-        console.dir(res);
+        console.dir(res, err);
       },
       success: function(res) {
         console.log('---------------------------------> SUCCESS');
         console.dir(res);
       }
-    })
+    });
   };
 
   outletData.addTransaction = function(newTransaction){
@@ -67,8 +67,8 @@ var outletServices = function(){
         console.log('---------------------------------> SUCCESS');
         console.dir(res);
       }
-    })
-  }
+    });
+  };
 
   // outletData.turnOff = function(){
   //   return request({
