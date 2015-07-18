@@ -10,7 +10,8 @@ var require
 var Map = ReactGoogleMaps.Map;
 var Marker = ReactGoogleMaps.Marker;
 var OverlayView = ReactGoogleMaps.OverlayView;
-var DateTimePicker = require('react-widgets').DateTimePicker
+var DateTimePicker = require('react-widgets').DateTimePicker;
+var moment = require('moment');
 
 var reserveOutlet = React.createClass({
 
@@ -39,10 +40,17 @@ var reserveOutlet = React.createClass({
   handleSubmit: function(event) {
     event.preventDefault();
     var newTransaction = {
-        outletID: this.props.params.id,
-        start: this.refs.startTime.state.value,
-        end: this.refs.endTime.state.value
+      outletID: this.props.params.id,
+      start: {
+        date: moment(this.refs.startTime.state.value).utc().format('MM/DD/YYYY'),
+        time: moment(this.refs.startTime.state.value).utc().format('HH:MM')
+      },
+      end: {
+        date: moment(this.refs.endTime.state.value).utc().format('MM/DD/YYYY'),
+        time: moment(this.refs.endTime.state.value).utc().format('HH:MM')
+      }
     }
+    console.log(newTransaction);
     outletStore.submitTransaction(newTransaction).then(function(res){
       console.log('ADDed Transaction, response', res)
     });

@@ -49,6 +49,8 @@ module.exports = {
     });
   },
   addTransaction: function(req, res) {
+
+    // user passport adds facebook user profile to req so it can be accessed anywhere in express
     console.log('request from user', req.user.id);
   }
 
