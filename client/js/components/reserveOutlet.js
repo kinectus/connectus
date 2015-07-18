@@ -39,6 +39,7 @@ var reserveOutlet = React.createClass({
   handleSubmit: function(event) {
     event.preventDefault();
     var newTransaction = {
+        outletID: this.props.params.id,
         start: this.refs.startTime.state.value,
         end: this.refs.endTime.state.value
     }
@@ -47,6 +48,12 @@ var reserveOutlet = React.createClass({
     });
   },
   render: function() {
+
+    // is user authenticate
+    if(!document.cookie){
+      this.transitionTo('login');
+      return <h1></h1>;
+    }
     if (this.state.data.length !== 0){
       var map = (<div className='reservationMap'>
 
