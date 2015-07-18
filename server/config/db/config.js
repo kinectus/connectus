@@ -1,6 +1,7 @@
 var path = require('path');
 var Promise = require('bluebird');
-var outletExamples = require('./outletDataExamples')
+var outletExamples = require('./outletDataExamples');
+var timeSlotInfo = require('./timeSlotInfo');
 
 // Initialize database
 var db = require('knex')({
@@ -66,7 +67,8 @@ db.schema.hasTable('outlets').then(function(exists){
       // buyer join
     }).then(function(table){
       console.log('Created outlets table', table);
-      insertInfoInTable('outlets', null)
+      insertInfoInTable('outlets', null, outletExamples, 'name');
+      insertInfoInTable('timeSlots', null, timeSlotInfo, 'start');
     }); 
   }
 });
@@ -80,17 +82,44 @@ db.schema.hasTable('transactions').then(function(exists){
   if(!exists){
     db.schema.createTable('transactions', function(transaction){
       transaction.increments('id').primary();
-      transaction.dateTime('start').notNullable();
-      transaction.dateTime('end').notNullable();
       transaction.decimal('totalEnergy', 5, 2).notNullable(); //random precision choice
       transaction.decimal('totalCost', 6, 2).notNullable(); //random precision choice
-      transaction.integer('buyer_id', 11).unsigned().references('users.id').notNullable();
-      transaction.integer('seller_id', 11).unsigned().references('users.id').notNullable();
-      transaction.integer('outlet_id', 11).unsigned().references('outlets.id').notNullable();
+      transaction.string('paid', 5).notNullable();
     }).then(function(table){
       console.log('Created transactions table', table);
     });
   }
+});
+
+db.schema.hasTable('timeSlots').then(function(exists){
+  if(!exists){
+    db.schema.createTable('timeSlots', function(timeSlot){
+      timeSlot.increments('id').primary();
+      timeSlot.string('start').notNullable();
+      timeSlot.string('end').notNullable();
+    }).then(function(table){
+      console.log('Created timeSlots table', table);
+    });
+  }
+  //TODO: Prepopulate with time data - create function below
+});
+
+db.schema.hasTable('reservations').then(function(exists){
+  if(!exists){
+    db.schema.createTable('reservations', function(reservation){
+      reservation.increments('id').primary();
+      reservation.integer('outlet_id').notNullable();
+      reservation.integer('seller_id').notNullable();
+      reservation.integer('buyer_id').notNullable();
+      reservation.string('available').notNullable();
+      reservation.integer('slot_id').notNullable();
+      reservation.string('date').notNullable();
+      reservation.integer('transaction_id').notNullable();
+    }).then(function(table){
+      console.log('Created reservations table', table);
+    });
+  }
+  //TODO: Prepopulate with time data - create function below
 });
 
 var tableDataContainsInfo = function(tableData, field, value) {
@@ -103,8 +132,8 @@ var tableDataContainsInfo = function(tableData, field, value) {
   return false;
 };
 
-var insertInfoInTable = function(tableName, callback) {
-  var tableInfo = outletExamples;
+var insertInfoInTable = function(tableName, callback, tableInfo, fieldToCheck) {
+  // var tableInfo = outletExamples;
   console.log('======================================== INSERTING YO FAKE DATA', outletExamples)
   // if (tableName === 'users') {
   //   tableInfo = sampleUsers;
@@ -113,7 +142,7 @@ var insertInfoInTable = function(tableName, callback) {
   // }
 
   db.select().table(tableName).then(function(results) {
-    var fieldToCheck = 'name';
+    // var fieldToCheck = 'name';
     if (!tableDataContainsInfo(results, fieldToCheck, tableInfo[0][fieldToCheck])) {
       console.log('inserting sample info in table');
       db(tableName).insert(tableInfo).then(function(insert) {

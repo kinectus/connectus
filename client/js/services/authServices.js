@@ -12,6 +12,7 @@ var authService = function(){
       method: 'GET',
       crossOrigin: true,
       success: function(){
+        document.cookie='';
         document.location ='/';
       }
     })

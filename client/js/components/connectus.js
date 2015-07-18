@@ -54,7 +54,7 @@ var Connectus = React.createClass({
                 <Link to="about">About</Link>
               </a>
               <a className="item" onClick={this.logout}>
-                Logout
+                <Link to="/">Logout</Link>
               </a>
             </div>
           </ul>

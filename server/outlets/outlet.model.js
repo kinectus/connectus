@@ -12,12 +12,6 @@ var Outlet = bookshelf.Model.extend({
   },
   seller: function() {
     return this.belongsTo(User, 'seller_id'); // trying to find converse in User model
-  },
-  buyer: function() {
-    return this.belongsTo(User, 'buyer_id');
-  },
-  transaction: function() {
-    return this.hasMany('Transaction');
   }
 });
 
