@@ -51,6 +51,7 @@ db.schema.hasTable('outlets').then(function(exists){
     db.schema.createTable('outlets', function(outlet){
       outlet.increments('id').primary();
       outlet.string('name', 30).notNullable();
+      outlet.integer('seller_id', 30).notNullable();
       outlet.decimal('priceEnergy', 5, 2).notNullable();
       outlet.decimal('priceHourly', 5, 2).notNullable();
       outlet.float('lat').notNullable();
@@ -68,7 +69,6 @@ db.schema.hasTable('outlets').then(function(exists){
     }).then(function(table){
       console.log('Created outlets table', table);
       insertInfoInTable('outlets', null, outletExamples, 'name');
-      insertInfoInTable('timeSlots', null, timeSlotInfo, 'start');
     }); 
   }
 });
@@ -99,6 +99,7 @@ db.schema.hasTable('timeSlots').then(function(exists){
       timeSlot.string('end').notNullable();
     }).then(function(table){
       console.log('Created timeSlots table', table);
+      insertInfoInTable('timeSlots', null, timeSlotInfo, 'start');
     });
   }
   //TODO: Prepopulate with time data - create function below

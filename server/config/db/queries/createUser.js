@@ -8,17 +8,18 @@ module.exports = createUser = function (user, next){
   .fetch()
   .then(function(userExists){
     if(userExists) {
-      throw new Error('User already Exists!')
+      console.log('User already Exists! Logging in');
+    }else{
+      console.log('creating user');
+      User.forge({
+        username: user.id,
+        fullname: user.displayName,
+        email: user.emails[0].value,
+        profileImage: user.photos[0].value,
+        profileUrl: user.profileUrl
+      })
+      .save();
     }
-    console.log('creating user');
-    User.forge({
-      username: user.id,
-      fullname: user.displayName,
-      email: user.emails[0].value,
-      profileImage: user.photos[0].value,
-      profileUrl: user.profileUrl
-    })
-    .save();
   })
   .catch(function(error){
     next(error);
