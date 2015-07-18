@@ -53,7 +53,7 @@ var outletServices = function(){
   outletData.addTransaction = function(newTransaction){
     console.log('IN OUTLETSERVICES, addTransaction: ', newTransaction);
     return request({
-      url: OutletListConstants.ADD_Transaction,
+      url: OutletListConstants.ADD_TRANSACTION,
       method: 'POST',
       crossOrigin: true,
       type: 'json',
