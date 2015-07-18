@@ -429,6 +429,7 @@ var reserveOutlet = React.createClass({displayName: "reserveOutlet",
   handleSubmit: function(event) {
     event.preventDefault();
     var newTransaction = {
+        outletID: this.props.params.id,
         start: this.refs.startTime.state.value,
         end: this.refs.endTime.state.value
     }
