@@ -39,6 +39,11 @@ var addOutlet = React.createClass({
     return;
   },
   render: function(){
+    // is user authenticated
+    if(!document.cookie){
+      this.transitionTo('login');
+      return <h1></h1>;
+    }
     // var value = this.state.value;
     return (
       <div className="addoutlet ui container center">

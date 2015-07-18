@@ -48,6 +48,12 @@ var reserveOutlet = React.createClass({
     });
   },
   render: function() {
+
+    // is user authenticate
+    if(!document.cookie){
+      this.transitionTo('login');
+      return <h1></h1>;
+    }
     if (this.state.data.length !== 0){
       var map = (<div className='reservationMap'>
 

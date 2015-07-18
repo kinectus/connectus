@@ -100,6 +100,11 @@ var addOutlet = React.createClass({displayName: "addOutlet",
     return;
   },
   render: function(){
+    // is user authenticated
+    if(!document.cookie){
+      this.transitionTo('login');
+      return React.createElement("h1", null);
+    }
     // var value = this.state.value;
     return (
       React.createElement("div", {className: "addoutlet ui container center"}, 
@@ -438,6 +443,12 @@ var reserveOutlet = React.createClass({displayName: "reserveOutlet",
     });
   },
   render: function() {
+
+    // is user authenticate
+    if(!document.cookie){
+      this.transitionTo('login');
+      return React.createElement("h1", null);
+    }
     if (this.state.data.length !== 0){
       var map = (React.createElement("div", {className: "reservationMap"}, 
 
