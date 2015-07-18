@@ -2,6 +2,8 @@ var assert = chai.assert,
     expect = chai.expect,
     should = chai.should(); // Note that should has to be executed
 
+var React = require('react/addons');
+
 // HERE'S AN EXAMPLE OF TESTING THE 'foobar' FUNCTION
 // SHOWS THE SYNTAX FOR USING ASSERT, EQUAL, AND EXPECT
 
@@ -17,7 +19,7 @@ var assert = chai.assert,
 //       assert.equal(foobar.sayHello(), 'funky chicken!');
 //     })
 
-//     it('should work with expect', function() {
+//     it('should work with expect', () {
 //       expect(foobar.sayHello()).to.equal('funky chicken!');
 //     })
 
