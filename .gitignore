@@ -4,7 +4,10 @@
 # Files in external disk
 node_modules/
 client/lib
-dist
+dist/bower_components
+dist/js
+dist/semantic
+dist/assets
 server/data.txt
 client/assets/css
 bower_components/

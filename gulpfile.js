@@ -18,6 +18,8 @@ gulp.task('copy', function(){
     .pipe(gulp.dest('dist'));
   gulp.src('client/assets/**/*.*')
     .pipe(gulp.dest('dist/assets'));
+  gulp.src('bower_components/**/*.*')
+    .pipe(gulp.dest('dist/bower_components'))
 });
 
 gulp.task('less', function () {

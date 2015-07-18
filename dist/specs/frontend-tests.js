@@ -2,7 +2,6 @@ var assert = chai.assert,
     expect = chai.expect,
     should = chai.should(); // Note that should has to be executed
 
-
 // HERE'S AN EXAMPLE OF TESTING THE 'foobar' FUNCTION
 // SHOWS THE SYNTAX FOR USING ASSERT, EQUAL, AND EXPECT
 
