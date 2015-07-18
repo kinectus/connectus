@@ -1,10 +1,11 @@
 var apiController = require('./api.controller.js');
+var authController = require('../auth/auth.controller');
 
 module.exports = function(app) {
   
-  app.get('/outlets', apiController.getAllOutlets);
+  app.get('/outlets', authController.isAuthenticated, apiController.getAllOutlets);
 
-  app.post('/addOutlet', apiController.addOutlet);
-  app.post('/addTransaction', apiController.addTransaction);
+  app.post('/addOutlet', authController.isAuthenticated, apiController.addOutlet);
+  app.post('/addTransaction', authController.isAuthenticated, apiController.addTransaction);
 
 }

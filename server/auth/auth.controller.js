@@ -20,23 +20,23 @@ passport.use(new FacebookStrategy({
     enableProof: false
   },
   function(accessToken, refreshToken, profile, done) {
-    done(null, 'user');
     console.log('PROFEILLLLLLEEE------------>', profile)
     //user is saved to the database here - see queries folder for the specific db query
     createUser(profile, function(error){
       console.log(error);
     });
+
+    // in this done function, passport adds facebook user profile to req so it can be accessed anywhere in express
+    return done(null, profile);
   }
 ));
-
 
 module.exports = {
   isAuthenticated: function(req, res, next) {
     if (req.isAuthenticated()) {
       return next(); 
     }
-
-    res.redirect('/#/signin')
+    res.redirect('/#/login')
   }
 };
 

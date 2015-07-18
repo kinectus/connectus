@@ -49,7 +49,7 @@ module.exports = {
     });
   },
   addTransaction: function(req, res) {
-    console.log(req);
+    console.log('request from user', req.user.id);
   }
 
 };
