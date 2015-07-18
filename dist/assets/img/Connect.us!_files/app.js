@@ -191,6 +191,7 @@ var outletsList = React.createClass({displayName: "outletsList",
   render: function() {
     var that = this;
 <<<<<<< HEAD:dist/assets/img/Connect.us!_files/app.js
+<<<<<<< HEAD:dist/assets/img/Connect.us!_files/app.js
     var outlets = outletStore.getOutlets();
 
     var outletHtml = outlets.map(function(outlet) {
@@ -217,6 +218,8 @@ var outletsList = React.createClass({displayName: "outletsList",
           )
       )
 =======
+=======
+>>>>>>> added search bar and map button to outlets:dist/js/app.js
     // outlet data list
     if (this.state.data.length !==0) {
       var outletHtml = this.state.data.map(function(outlet) {
@@ -274,6 +277,9 @@ var outletsList = React.createClass({displayName: "outletsList",
           )), 
           React.createElement("tbody", null, 
              outletHtml 
+<<<<<<< HEAD:dist/assets/img/Connect.us!_files/app.js
+>>>>>>> added search bar and map button to outlets:dist/js/app.js
+=======
 >>>>>>> added search bar and map button to outlets:dist/js/app.js
           )
     });
@@ -304,6 +310,20 @@ var outletsList = React.createClass({displayName: "outletsList",
         )
         
       )
+<<<<<<< HEAD:dist/assets/img/Connect.us!_files/app.js
+=======
+
+    return (
+      React.createElement("div", null, 
+        React.createElement("div", null, 
+          listMenu
+        ), 
+        React.createElement("div", null, 
+          outletTable
+        )
+        
+      )
+>>>>>>> added search bar and map button to outlets:dist/js/app.js
     )
     // });  from the promise closing
 >>>>>>> added search bar and map button to outlets:dist/js/app.js
