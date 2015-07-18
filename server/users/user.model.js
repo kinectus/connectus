@@ -5,9 +5,6 @@ var User = bookshelf.Model.extend({
   tableName: 'users',
   outlet: function() {
     return this.hasMany('Outlet');
-  },
-  transaction: function() {
-    return this.hasMany('Transaction');
   }
 });
 
