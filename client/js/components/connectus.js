@@ -48,6 +48,9 @@ var Connectus = React.createClass({
                 <Link to="addOutlet">Add Outlet</Link>
               </a>
               <a className="item">
+                <Link to="buyerReservations">Buyer Reservations</Link>
+              </a>
+              <a className="item">
                 <Link to="about">About</Link>
               </a>
               <a className="item" onClick={this.logout}>
