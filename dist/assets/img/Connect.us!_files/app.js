@@ -90,7 +90,7 @@ var Connectus = React.createClass({displayName: "Connectus",
           React.createElement("div", null, 
             React.createElement(RouteHandler, null)
           )
-        )  
+        ) 
       );
     }
     //final return statement
@@ -190,6 +190,7 @@ var outletsList = React.createClass({displayName: "outletsList",
 
   render: function() {
     var that = this;
+<<<<<<< HEAD:dist/assets/img/Connect.us!_files/app.js
     var outlets = outletStore.getOutlets();
 
     var outletHtml = outlets.map(function(outlet) {
@@ -215,6 +216,65 @@ var outletsList = React.createClass({displayName: "outletsList",
            outlet.description
           )
       )
+=======
+    // outlet data list
+    if (this.state.data.length !==0) {
+      var outletHtml = this.state.data.map(function(outlet) {
+        return (
+          React.createElement("tr", {key: outlet.id, onClick: that.reserveOutlet}, 
+            React.createElement("td", null, 
+              React.createElement("h2", {className: "ui center aligned header"}, 
+                React.createElement(Link, {to: "reserveOutlet", params: {id: outlet.id}}, 
+                   outlet.name
+                )
+              )
+            ), 
+            React.createElement("td", null, 
+              "Seller: ",  outlet.seller
+            ), 
+            React.createElement("td", null, 
+              React.createElement("div", {className: "ui star rating", "data-rating":  outlet.rating, "data-max-rating":  outlet.rating},  outlet.rating)
+            ), 
+            React.createElement("td", null, 
+               outlet.voltage
+            ), 
+            React.createElement("td", null, 
+              "Price by hour: ",  outlet.priceHourly, 
+              "Price by kWh: ",  outlet.priceEnergy
+            ), 
+            React.createElement("td", null, 
+             outlet.description
+            )
+          )
+        )
+      });
+    }
+    // includes search bar, map/list button and possibly filter/sort buttons
+    
+    //onClick={this.handleSubmit}
+    var listMenu = (
+      React.createElement("div", null, 
+        React.createElement("div", {className: "ui button"}, " map"), 
+        React.createElement("div", {className: "ui input"}, 
+          React.createElement("input", {type: "text", placeholder: "Search..."}, " ")
+        )
+      )
+    );
+
+    var outletTable = 
+      React.createElement("div", {className: "outletsList container"}, 
+        React.createElement("table", {className: "ui selectable celled padded table"}, 
+          React.createElement("thead", null, 
+            React.createElement("tr", null, React.createElement("th", {className: "single line"}, "Outlet Name"), 
+            React.createElement("th", null, "Seller"), 
+            React.createElement("th", null, "Rating"), 
+            React.createElement("th", null, "Voltage"), 
+            React.createElement("th", null, "Price"), 
+            React.createElement("th", null, "Description")
+          )), 
+          React.createElement("tbody", null, 
+             outletHtml 
+>>>>>>> added search bar and map button to outlets:dist/js/app.js
           )
     });
 
@@ -230,7 +290,23 @@ var outletsList = React.createClass({displayName: "outletsList",
       React.createElement("tbody", null, 
          outletHtml 
       )
+<<<<<<< HEAD:dist/assets/img/Connect.us!_files/app.js
     )
+=======
+
+    return (
+      React.createElement("div", null, 
+        React.createElement("div", null, 
+          listMenu
+        ), 
+        React.createElement("div", null, 
+          outletTable
+        )
+        
+      )
+    )
+    // });  from the promise closing
+>>>>>>> added search bar and map button to outlets:dist/js/app.js
   },
 
   _onChange: function() {
