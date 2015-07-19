@@ -6,6 +6,7 @@ var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var ReactGoogleMaps = require('react-googlemaps');
 var GoogleMapsAPI = window.google.maps;
 var outletStore = require('../stores/outletStore');
+var ReactAddons = require('react/addons');
 var require
 var Map = ReactGoogleMaps.Map;
 var Marker = ReactGoogleMaps.Marker;

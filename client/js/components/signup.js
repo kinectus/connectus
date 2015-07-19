@@ -1,5 +1,6 @@
 var React = require('react');
 var Auth = require('../services/authServices.js');
+// var ReactAddons = require('react/addons');
 
 var Signup = React.createClass({
 

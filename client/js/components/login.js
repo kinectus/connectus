@@ -1,5 +1,6 @@
 var React = require('react');
 var Link = require('react-router').Link;
+// var ReactAddons = require('react/addons');
 
 
 var Login = React.createClass({
