@@ -19,7 +19,13 @@ var outletStore = assign({}, EventEmitter.prototype, {
       return outlets;
     });
   },
-
+  userLocation: {
+    lat: 37.783830, 
+    long: -122.408935
+  },
+  getLocation: function() {
+    return OutletServices.getLocation(this.userLocation.lat, this.userLocation.long);
+  },   
   getOutletById: function(id){
     return OutletServices.retrieve().then(function(outlets){
       var myOutlet = null;

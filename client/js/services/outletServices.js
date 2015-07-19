@@ -6,6 +6,13 @@ var outletServices = function(){
 
   var outletData = {};
 
+  outletData.getLocation = function(lat, long){
+    navigator.geolocation.getCurrentPosition(function(position) {
+     lat = position.coords.latitude;
+     long = position.coords.longitude;
+    });
+  };
+
   outletData.retrieve = function(){
     return request({
       url: OutletListConstants.OUTLET_DATA,
