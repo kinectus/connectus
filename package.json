@@ -49,6 +49,7 @@
     "path": "^0.11.14",
     "react": "^0.13.3",
     "react-async": "^2.1.0",
+    "react-google-maps": "^1.7.1",
     "react-googlemaps": "^0.4.0",
     "react-mixin": "^1.6.0",
     "react-router": "^0.13.3",
