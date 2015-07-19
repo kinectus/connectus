@@ -10,8 +10,8 @@ var Outlet = bookshelf.Model.extend({
     lat: 37.783624,
     long: -122.408999
   },
-  seller: function() {
-    return this.belongsTo(User, 'seller_id'); // trying to find converse in User model
+  seller_id: function() {
+    return this.belongsTo(User); // trying to find converse in User model
   }
 });
 

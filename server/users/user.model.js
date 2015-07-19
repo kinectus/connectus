@@ -4,7 +4,7 @@ var Outlet = require('../outlets/outlet.model');
 var User = bookshelf.Model.extend({
   tableName: 'users',
   outlet: function() {
-    return this.hasMany('Outlet');
+    return this.hasMany(Outlet);
   }
 });
 
