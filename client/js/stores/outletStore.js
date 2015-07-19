@@ -19,20 +19,13 @@ var outletStore = assign({}, EventEmitter.prototype, {
       return outlets;
     });
   },
-
+  
   getBuyerReservations: function(){
     return OutletServices.seeBuyerReservations().then(function(reservations){
       console.log('seeing buyer reservations in outletstore', reservations);
       return reservations;
     });
   },
-  userLocation: {
-    lat: 37.783830, 
-    long: -122.408935
-  },
-  getLocation: function() {
-    return OutletServices.getLocation(this.userLocation.lat, this.userLocation.long);
-  },   
   getOutletById: function(id){
     return OutletServices.retrieve().then(function(outlets){
       var myOutlet = null;
