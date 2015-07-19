@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/test.js;"
+    "test": "mocha test/test.js;",
+    "test-front": "jest THIS DOESNT WORK"
   },
   "repository": {
     "type": "git",
@@ -52,6 +53,7 @@
     "react-mixin": "^1.6.0",
     "react-router": "^0.13.3",
     "react-router-component": "^0.26.0",
+    "react-tools": "^0.13.3",
     "react-widgets": "^2.7.2",
     "reactify": "^1.1.1",
     "semantic-ui": "^2.0.3",
@@ -77,12 +79,23 @@
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.3.1",
+    "jest": "^0.1.40",
     "request": "^2.58.0",
     "require-dot-file": "^0.4.0",
     "reqwest": "^1.1.6",
     "shelljs": "^0.5.1",
     "should": "^7.0.2",
     "vinyl-source-stream": "^1.1.0",
-    "when": "^3.7.3"
+    "when": "^3.7.3",
+    "jest-cli": "^0.1.13"
+  },
+  "jest": {
+    "scriptPreprocessor": "dist/js/preproccessor.js",
+    "testFileExtensions": [
+      "js"
+    ],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
   }
 }

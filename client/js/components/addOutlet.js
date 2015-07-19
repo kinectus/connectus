@@ -1,5 +1,6 @@
 var React = require('react');
 var outletStore = require('../stores/outletStore');
+// var ReactAddons = require('react/addons');
 
 /* TODO
 Style page

@@ -2,6 +2,7 @@
 //Should end up being similar to zipcar's homepage where users can scroll down
 var React = require('react');
 var Link = require('react-router').Link;
+// var ReactAddons = require('react/addons');
 
 var About = React.createClass({
   render: function(){
