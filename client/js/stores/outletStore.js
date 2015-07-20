@@ -2,7 +2,7 @@ var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 // var ConnectusConstants = require('');          // omg what is this even
 var assign = require('react/lib/Object.assign');    // allows us to extend objects similarly to jquery and underscore lib...
 var EventEmitter = require('events').EventEmitter;
-var OutletServices = require('../services/OutletServices')
+var OutletServices = require('../services/OutletServices');
 
 var CHANGE_EVENT = 'change';
 
@@ -11,7 +11,13 @@ var outletStore = assign({}, EventEmitter.prototype, {
     return OutletServices.retrieve().then(function(outlets){
       console.log('outlets in the store: ', outlets)
       return outlets;
-    })
+    });
+  },
+  getSellerOutlets: function(){
+    return OutletServices.retrieveOutletByUser().then(function(outlets){
+      console.log('outlets in the seller outlets list', outlets);
+      return outlets;
+    });
   },
 
   getOutletById: function(id){
