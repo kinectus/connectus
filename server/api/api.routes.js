@@ -8,6 +8,5 @@ module.exports = function(app) {
   app.get('/users/manageMyOutlets', authController.isAuthenticated, apiController.getSellerOutlets);
   app.post('/addOutlet', authController.isAuthenticated, apiController.addOutlet);
   app.post('/makeReservation', authController.isAuthenticated, apiController.makeReservation);
- 
   app.get('/users/seeBuyerReservations', authController.isAuthenticated, apiController.buyerReservations);
 }
