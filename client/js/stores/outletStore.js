@@ -35,8 +35,8 @@ var outletStore = assign({}, EventEmitter.prototype, {
   submitOutlet: function(newOutlet){
     return OutletServices.addOutlet(newOutlet);
   },
-  submitTransaction: function(newTransaction) {
-    return OutletServices.addTransaction(newTransaction);
+  submitReservation: function(newReservation) {
+    return OutletServices.makeReservation(newReservation);
   },
 
   emitChange: function() {

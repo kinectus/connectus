@@ -6,6 +6,6 @@ module.exports = function(app) {
   app.get('/outlets', authController.isAuthenticated, apiController.getAllOutlets);
   app.get('/manageMyOutlets', authController.isAuthenticated, apiController.getSellerOutlets);
   app.post('/addOutlet', authController.isAuthenticated, apiController.addOutlet);
-  app.post('/addTransaction', authController.isAuthenticated, apiController.addTransaction);
+  app.post('/makeReservation', authController.isAuthenticated, apiController.makeReservation);
 
 }
