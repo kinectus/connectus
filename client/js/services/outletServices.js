@@ -64,15 +64,15 @@ var outletServices = function(){
     });
   };
 
-  outletData.addTransaction = function(newTransaction){
-    console.log('IN OUTLETSERVICES, addTransaction: ', newTransaction);
+  outletData.makeReservation = function(newReservation){
+    console.log('IN OUTLETSERVICES, makeReservation: ', newReservation);
     return request({
-      url: OutletListConstants.ADD_TRANSACTION,
+      url: OutletListConstants.MAKE_RESERVATION,
       method: 'POST',
       crossOrigin: true,
       type: 'json',
       contentType: 'application/json',
-      data: JSON.stringify(newTransaction),
+      data: JSON.stringify(newReservation),
       error: function(res) {
         console.log('---------------------------------> ERROR');
         console.dir(res);

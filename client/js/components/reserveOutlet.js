@@ -40,7 +40,7 @@ var reserveOutlet = React.createClass({
   // },
   handleSubmit: function(event) {
     event.preventDefault();
-    var newTransaction = {
+    var newReservation = {
       outletID: this.props.params.id,
       start: {
         date: moment(this.refs.startTime.state.value).utc().format('MM/DD/YYYY'),
@@ -51,9 +51,9 @@ var reserveOutlet = React.createClass({
         time: moment(this.refs.endTime.state.value).utc().format('HH:MM')
       }
     }
-    console.log(newTransaction);
-    outletStore.submitTransaction(newTransaction).then(function(res){
-      console.log('ADDed Transaction, response', res)
+    console.log(newReservation);
+    outletStore.submitReservation(newReservation).then(function(res){
+      console.log('submitReservation, response', res)
     });
   },
   render: function() {
