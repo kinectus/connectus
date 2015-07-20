@@ -40,15 +40,31 @@ var reserveOutlet = React.createClass({
   // },
   handleSubmit: function(event) {
     event.preventDefault();
+    var timeConvert = function(time){
+      if(time < 10){
+        return "0" + time;
+      }
+      return time;
+    };
+    var start = this.refs.startTime.state.value;
+    var end = this.refs.endTime.state.value;
+    var startMonth = start.getMonth() < 10 ? "0"+(start.getMonth()+1) : start.getMonth() +1;
+    var endMonth = end.getMonth() < 10 ? "0"+(end.getMonth()+1) : end.getMonth() + 1;
+    var startDateString = start.getFullYear() + "-" + startMonth + "-" + start.getDate();
+    var endDateString = end.getFullYear() + "-" + endMonth + "-" + end.getDate();
+    var startTimeString = timeConvert(start.getHours())+":"+timeConvert(start.getMinutes());
+    var endTimeString = timeConvert(end.getHours())+":"+timeConvert(end.getMinutes());
+    console.log(startTimeString, endTimeString);
+
     var newReservation = {
       outletID: this.props.params.id,
       start: {
-        date: moment(this.refs.startTime.state.value).utc().format('MM/DD/YYYY'),
-        time: moment(this.refs.startTime.state.value).utc().format('HH:MM')
+        date: startDateString,
+        time: startTimeString
       },
       end: {
-        date: moment(this.refs.endTime.state.value).utc().format('MM/DD/YYYY'),
-        time: moment(this.refs.endTime.state.value).utc().format('HH:MM')
+        date: endDateString,
+        time: endTimeString
       }
     }
     console.log(newReservation);
