@@ -4,6 +4,9 @@ var Outlet = require('../outlets/outlet.model');
 var AuthController = require('../auth/auth.controller');
 var User = require('../users/user.model');
 var getOutletsByUser = require('../config/db/queries/getOutletsByUserId.js');
+var Reservation = require('../reservations/reservation.model');
+var Reservations = require('../reservations/reservations.collection');
+var moment = require('moment');
 
 module.exports = {
 
@@ -21,8 +24,6 @@ module.exports = {
     // AuthController.isAuthenticated(req, res, function(user){
     //   console.log('THIS IS WHAT COMES BACK FROM AUTH--------->',user);
     // });
-    // console.log('>>>>>>>>>>>>>>>>>>>>>>in addoutlet');
-    // res.send(200);
     var data = req.body;
 
     new User({
@@ -54,14 +55,14 @@ module.exports = {
             address: data.address,
             voltage: data.voltage
           });
-
+    
           outlet.save().then(function(newOutlet){
-            Outlets.add(newOutlet);
-            res.send(200, newOutlet);
+            console.log('newOutlet before addReservations: ', newOutlet.attributes);
+            module.exports.addReservations(newOutlet.attributes);
             return newOutlet;
           })
           .then(function(newOutlet){
-            this.addReservations(newOutlet);
+            res.send(200, newOutlet);
           })
           .catch(function(error){
             console.log(error);
@@ -82,7 +83,37 @@ module.exports = {
   },
 
   addReservations: function(newOutlet){
-    console.log('THIS IS THE NEW OUTLET ->>>>>>>>>>>>>', newOutlet);
+    //2013-02-09 00:00:00.000
+    // var day = moment().format('YYYY-MM-DD HH:mm:ss:SSS');
+    var day = moment();
+    var slot = 1;
+
+    var addSlot = function(){
+      var reservation = new Reservation({
+        outlet_id: newOutlet.id,
+        seller_id: newOutlet.seller_id,
+        available: true,
+        slot_id: slot,
+        date: day.format('YYYY-MM-DD')
+      });
+
+      reservation.save().then(function(newReservation){
+        Reservations.add(newReservation);
+        slot = slot < 48 ? ++slot : 1;
+        if (slot === 1){
+          day = day.add(1, 'days');
+        }
+        // return newReservation;
+      }).then(function(){
+        if (day.diff( moment().add(31, 'days') ) < 0){
+          addSlot();
+        }
+      }).catch(function(err){
+        console.log('addSlot err: ', err);
+      });
+    }
+
+    addSlot();
   },
 
   addTransaction: function(req, res) {

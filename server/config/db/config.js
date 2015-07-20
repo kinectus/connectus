@@ -92,11 +92,11 @@ db.schema.hasTable('reservations').then(function(exists){
       reservation.increments('id').primary();
       reservation.integer('outlet_id').notNullable();
       reservation.integer('seller_id').notNullable();
-      reservation.integer('buyer_id').notNullable();
+      reservation.integer('buyer_id');
       reservation.string('available').notNullable();
       reservation.integer('slot_id').notNullable();
       reservation.string('date').notNullable();
-      reservation.integer('transaction_id').notNullable();
+      reservation.integer('transaction_id');
     }).then(function(table){
       console.log('Created reservations table', table);
     });
