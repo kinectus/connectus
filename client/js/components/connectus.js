@@ -15,8 +15,15 @@ var Connectus = React.createClass({
   },
 
   componentDidMount: function() {
+    var that = this; 
     // for some reason, semantic needs this to make the menu to drop down
-    $('.ui.dropdown').dropdown();
+    $('.ui.dropdown').dropdown()
+
+    // resizing the screen renders mobile or full menu
+    var isMobile = mobile();
+    window.onresize = function() {
+        that.forceUpdate();
+    };
   },
 
   render: function() {
@@ -24,9 +31,6 @@ var Connectus = React.createClass({
 
     // check if the screen is mobile-y sized
     var isMobile = mobile();
-    if (isMobile) {
-      console.log('MOBILE')
-    }
 
     var pageHtml = (
       <div className="main">
