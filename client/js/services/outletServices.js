@@ -18,6 +18,20 @@ var outletServices = function(){
     });
   };
 
+  outletData.retrieveOutletByUser = function(){
+    console.log('retrieving outlet by user id');
+    return request({
+      url: OutletListConstants.OUTLETS_BYUSER,
+      method: 'GET',
+      crossOrigin: true,
+      type: 'json',
+      success: function(outlets){
+        console.log(outlets);
+        return outlets;
+      }
+    });
+  };
+
   outletData.retrieveOutletById = function(outletID){
     return request({
       url: OutletListConstants.OUTLET_DATA,
@@ -27,7 +41,7 @@ var outletServices = function(){
       success: function(outlets) {
         return outlets;
       }
-    })
+    });
   };
 
   outletData.addOutlet = function(newOutlet){

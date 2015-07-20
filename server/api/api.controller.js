@@ -3,6 +3,7 @@ var Outlets = require('../outlets/outlets.collection');
 var Outlet = require('../outlets/outlet.model');
 var AuthController = require('../auth/auth.controller');
 var User = require('../users/user.model');
+var getOutletsByUser = require('../config/db/queries/getOutletsByUserId.js');
 
 module.exports = {
 
@@ -70,6 +71,13 @@ module.exports = {
     })
     .catch(function(error){
       console.log(error);
+    });
+  },
+
+  getSellerOutlets: function(req, res){
+    getOutletsByUser(req.user)
+    .then(function(outlets){
+      res.send(200, outlets.models);
     });
   },
 
