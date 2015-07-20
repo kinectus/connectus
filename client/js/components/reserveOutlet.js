@@ -14,8 +14,41 @@ var OverlayView = ReactGoogleMaps.OverlayView;
 var DateTimePicker = require('react-widgets').DateTimePicker;
 var moment = require('moment');
 
-var reserveOutlet = React.createClass({
 
+// http://jquense.github.io/react-widgets/docs/#/datetime-picker
+var DateTime = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <DateTimePicker  ref="startTime" defaultValue={new Date()} />
+        <DateTimePicker  ref="endTime" defaultValue={null} />
+        <div className="ui button" onClick={this.handleSubmit}>Reserve Outlet</div>
+      </div>
+    )
+  }
+});
+var OutletInfo = React.createClass({
+  render: function() {
+    console.log(this.props);
+
+    return (
+      <div className="ui raised text container segment outletInfoRes">
+        <h2 className="ui center aligned header"> { this.props.outletData.name } </h2>
+          <br></br>
+          <h4>Voltage: High</h4>
+          <br></br>
+          <h4>Price by hour: { this.props.outletData.priceHourly }</h4>
+          <br></br>
+          <h4>Price by kWh: { this.props.outletData.priceEnergy }</h4>
+          <br></br>
+          <h4>{ this.props.outletData.description }</h4>
+      </div>
+    )
+  }
+})
+  
+
+var reserveOutlet = React.createClass({
   getInitialState: function(){
     return {
       data: []
@@ -111,25 +144,18 @@ var reserveOutlet = React.createClass({
 
     var outletPhoto = <div className="outletPhoto"></div>
     
-    // http://jquense.github.io/react-widgets/docs/#/datetime-picker
-    var dateTimePicker = (
-      <div>
-        <DateTimePicker  ref="startTime" defaultValue={new Date()} />
-        <DateTimePicker  ref="endTime" defaultValue={null} />
-        <div className="ui button" onClick={this.handleSubmit}>Reserve Outlet</div>
-      </div>
-    )
-
+    
+    console.log('props', this.props);
     return (
       <div className='container'>
         <div>
         { map }
         </div>
         <div>
-          { outletInfo }
+          <OutletInfo outletData = {this.state.data}/>
         </div>
         <div>
-          { dateTimePicker }
+         <DateTime />
         </div>
       </div>
     )
