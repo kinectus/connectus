@@ -5,6 +5,12 @@ var addNewOutlet = require('../config/db/queries/addNewOutlet');
 var addReservationSlots = require('../config/db/queries/addReservationSlots');
 var updateReservation = require('../config/db/queries/updateReservation');
 var getAllUsers = require('../config/db/queries/getUserInfo');
+var Outlet = require('../outlets/outlet.model');
+var AuthController = require('../auth/auth.controller');
+var User = require('../users/user.model');
+var getOutletsByUser = require('../config/db/queries/getOutletsByUserId.js');
+var moment = require('moment');
+var getBuyerReservations = require('../config/db/queries/getBuyerReservations');
 
 module.exports = {
 
@@ -30,6 +36,10 @@ module.exports = {
 
   addReservations: function(newOutlet){
     addReservationSlots(newOutlet);
+  },
+
+  buyerReservations: function(req, res){
+    getBuyerReservations(req.user);
   },
 
   makeReservation: function(req, res) {

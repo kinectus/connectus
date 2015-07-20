@@ -24,8 +24,9 @@ var buyerReservations = React.createClass({
 
   componentDidMount: function() {
     var that = this;
-    outletStore.getOutlets().then(function(outletData){
-      that.setState({data: outletData});
+    outletStore.getBuyerReservations().then(function(outletData){
+      // that.setState({data: outletData});
+      console.log(outletData);
     });
   },
 

@@ -19,7 +19,7 @@ var reserveOutlet = React.createClass({
   getInitialState: function(){
     return {
       data: []
-    }
+    };
   },
 
   _onChange: function() {
