@@ -10,12 +10,14 @@ module.exports = updateReservation = function(req, res){
   var data = req.body;
   var startSlot, endSlot;
   var currentSlot;
+  console.log('AWESOME NEW FIXED UP DATAAAAAA:', data)
 
   var newReservation = function(user){
     currentSlot = currentSlot || startSlot;
     var reservation = new Reservation({
       outlet_id: data.outletID,
-      slot_id: currentSlot
+      slot_id: currentSlot,
+      date: data.start.date
     }).fetch()
     .then(function(reservation){
       var transaction = new Transaction({
