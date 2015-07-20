@@ -3,6 +3,7 @@ var Outlets = require('../outlets/outlets.collection');
 var getOutletsByUser = require('../config/db/queries/getOutletsByUserId');
 var addNewOutlet = require('../config/db/queries/addNewOutlet');
 var addReservationSlots = require('../config/db/queries/addReservationSlots');
+var updateReservation = require('../config/db/queries/updateReservation');
 
 module.exports = {
 
@@ -16,9 +17,7 @@ module.exports = {
   },
 
   addOutlet: function(req, res) {
-    console.log(req.user.id);
     addNewOutlet(req, res);
-    
   },
 
   getSellerOutlets: function(req, res){
@@ -33,9 +32,7 @@ module.exports = {
   },
 
   makeReservation: function(req, res) {
-
-    // user passport adds facebook user profile to req so it can be accessed anywhere in express
-    console.log('request from user', req.user.id);
+    updateReservation(req, res);
   }
 
 };
