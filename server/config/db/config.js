@@ -16,15 +16,11 @@ var db = require('knex')({
     // filename: path.join(__dirname, './kinectus/kinectus.mysql/')
   }
 });
-// db.schema.raw('DROP SCHEMA IF EXISTS connectus; CREATE SCHEMA IF NOT EXISTS connectus; USE connectus');
+
 var Bookshelf = require('bookshelf')(db);
+
 // Add users table to db, store authentication
 db.schema.hasTable('users').then(function(exists){
-  // For design process ease, drop tables
-  // if(exists){
-  //   db.schema.dropTable('users');
-  //   console.log('dropped')
-  // }
   console.log(exists)
   if(!exists){
     db.schema.createTable('users', function(user){
@@ -42,16 +38,12 @@ db.schema.hasTable('users').then(function(exists){
 });
 
 db.schema.hasTable('outlets').then(function(exists){
-  // For design process ease, drop tables
-  // if(exists){
-  //   db.schema.dropTable('outlets');
-  //   console.log('dropped')
-  // }
   if(!exists){
     db.schema.createTable('outlets', function(outlet){
       outlet.increments('id').primary();
       outlet.string('name', 30).notNullable();
       outlet.integer('seller_id', 30).notNullable();
+      outlet.integer('transaction_id', 30);
       outlet.decimal('priceEnergy', 5, 2).notNullable();
       outlet.decimal('priceHourly', 5, 2).notNullable();
       outlet.float('lat').notNullable();
@@ -61,11 +53,6 @@ db.schema.hasTable('outlets').then(function(exists){
       // outlet.string('photo'); --store the path to a directory, not the photo (worstcase, longblob)
       outlet.string('address', 100).notNullable();
       outlet.string('voltage', 8).notNullable();
-      // outlet.integer('seller_id', 11).unsigned().references('users.id').notNullable();
-      // outlet.integer('buyer_id', 11).unsigned().references('users.id');
-
-      // seller join
-      // buyer join
     }).then(function(table){
       console.log('Created outlets table', table);
       insertInfoInTable('outlets', null, outletExamples, 'name');
@@ -74,11 +61,6 @@ db.schema.hasTable('outlets').then(function(exists){
 });
 
 db.schema.hasTable('transactions').then(function(exists){
-  // For design process ease, drop tables
-  // if(exists){
-  //   db.schema.dropTable('transactions');
-  //   console.log('dropped')
-  // }
   if(!exists){
     db.schema.createTable('transactions', function(transaction){
       transaction.increments('id').primary();
@@ -102,7 +84,6 @@ db.schema.hasTable('timeSlots').then(function(exists){
       insertInfoInTable('timeSlots', null, timeSlotInfo, 'start');
     });
   }
-  //TODO: Prepopulate with time data - create function below
 });
 
 db.schema.hasTable('reservations').then(function(exists){
@@ -120,7 +101,6 @@ db.schema.hasTable('reservations').then(function(exists){
       console.log('Created reservations table', table);
     });
   }
-  //TODO: Prepopulate with time data - create function below
 });
 
 var tableDataContainsInfo = function(tableData, field, value) {
