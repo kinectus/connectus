@@ -1,43 +1,118 @@
-// Semantic dependency
-@import "../../dist/semantic/src/semantic.less";
-@import '../../node_modules/react-widgets/lib/less/react-widgets.less';
+// Semantic dependency - no longer in use
+// @import "../../dist/semantic/src/semantic.less";
+// @import '../../node_modules/react-widgets/lib/less/react-widgets.less';
 
 @turquoise: #159594;
 @blue: #1A8CAB;
 @yellow: #FBCB15;
 @maroon: #8B1C55;
 @red: #FF1900;
+@dark: #343434;
 
-// @font-face {
-//   font-family:'Karla';
-//   src: url('../fonts/Karla-Regular.ttf');
-// }
+@font-face {
+ font-family:'Karla';
+   src: url('../fonts/Karla-Regular.ttf');
+ }
 
-// * {
-//   font-family: Karla;
-// }
+a {
+  text-decoration: none !important;
+  color: inherit;
+}
 
-.main {
-  .logo{
-    font-weight: bold;
+a:hover {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+* {
+   font-family: Karla;
+ }
+
+.nav .navbar-nav {
+  display: block;
+}
+
+.topNavBar {
+  background-color: @dark;
+  height: 70px;
+  .logo {
     font-size: 30px;
-    padding-top: 7.5px;
+    float: left;
+    display: inline;
+    color: @yellow !important;
+    padding-left: 40px;
+    padding-top: 10px;
+    text-decoration: none !important;
   }
-  .ui.secondary.pointing.menu {
-    background-color: @yellow;
-    height: 35px;
-    .item {
-      padding-right:15px;
-      padding-top: 10px;      
-      font-size: 25px;
-      font: black;
-      font-weight: bold;
+  .mobile {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    display: block !important;
+    height: 30px;
+    .dropdown-menu {
+      background-color: @dark;
+    }
+    li a.active {
+    background-color: lighten(@dark, 10%);
+    }
+    .dropdown-toggle {
+      text-align: center;
+      background-color: @dark;
+    }
+  }
+  .nav>li {
+    padding-top: 15px;
+    a {
+      color: white;
+    }
+    a:hover {
+      background-color: lighten(@dark, 10%);
+    }
+    .logout {
+      color: @yellow;
+    }
+  }
+  .nav>li a.active {
+    background-color: lighten(@dark, 10%);
+  }
+}
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+  background-color: lighten(@dark, 10%);
+}
+
+
+.header-about {
+  height: 500px;
+  width: 100%;
+  background: url(http://m.wsj.net/video/20150203/020315lunchenergy/020315lunchenergy_1280x720.jpg) top center no-repeat;
+  background-size: cover;
+  .text {
+    padding-top: 210px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    font-size: 40px;
+    color: white;
+    p {
+      text-align: center;
     }
   }
 }
 
+.container-fluid {
+  padding: 0px !important;
+}
+
+.section {
+  padding: 0px;
+  width: 100%;
+  margin: auto;
+}
 
 .about {
+  width: 100%;
   .section{
     height: 500px;
   }
@@ -55,6 +130,7 @@
 h1 {
   color: black;
   font-size: 30px;
+  margin: 0px;
 }
 
 .reservationMap {
