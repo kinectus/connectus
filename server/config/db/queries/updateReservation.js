@@ -22,10 +22,6 @@ module.exports = updateReservation = function(req, res){
   var newReservation = function(user, passedSlot){
     currentSlot = passedSlot;
     currentDate = currentDate || startDate;
-    console.log('currentSlot', currentSlot, 'currentDate', currentDate);
-    console.log('startSlot: ', startSlot, ' endSlot: ', endSlot);
-    console.log('data.outletID', data.outletID);
-    console.log('startDate: ', startDate, ', endDate: ', endDate, ', currentDate: ', currentDate);
     
     var transaction = new Transaction({
       totalEnergy: 0,
@@ -43,7 +39,9 @@ module.exports = updateReservation = function(req, res){
 
       // Update reservation
       .then(function(newReservation){
-        console.log('newReservation after fetch: ', newReservation)
+        if (!newReservation) {
+          res.status(404).send('No open reservation found');
+        }
         newReservation.set({
           buyer_id: user,
           available: false,
