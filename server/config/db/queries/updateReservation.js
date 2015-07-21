@@ -36,13 +36,22 @@ module.exports = updateReservation = function(req, res){
       // Find reservation
     .then(function(newTransaction){
       transactionID = newTransaction.id;
-      var reservation = new Reservation({
-        outlet_id: data.outletID,
-        slot_id: currentSlot,
-        date: currentDate
-      }).fetch()
+
+      // var reservation = new Reservation({
+      //   outlet_id: data.outletID,
+      //   slot_id: currentSlot,
+      //   date: currentDate
+      // }).fetch();
+      // console.log('reservation in first then: ', reservation);
+      // return reservation;
+
+      return new Reservation()
+      .query({where: {outlet_id: data.outletID, slot_id: currentSlot, date: currentDate} })
+      .fetch()
+
       // Update reservation
       .then(function(newReservation){
+        console.log('newReservation after fetch: ', newReservation)
         newReservation.set({
           buyer_id: user,
           available: false,
