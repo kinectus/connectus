@@ -76,10 +76,13 @@ module.exports = updateReservation = function(req, res){
         }
       });
     });
-  }
+
+  };
 
   // START RESERVATION PROCESS
   // Fetch user by request user id
+
+
   new User({
     username: req.user.id
   }).fetch().then(function(user){
@@ -99,4 +102,4 @@ module.exports = updateReservation = function(req, res){
       });
     });
   });
-}
+};

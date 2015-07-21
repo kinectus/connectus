@@ -20,6 +20,13 @@ var outletStore = assign({}, EventEmitter.prototype, {
     });
   },
 
+  getBuyerReservations: function(){
+    return OutletServices.seeBuyerReservations().then(function(reservations){
+      console.log('seeing buyer reservations in outletstore', reservations);
+      return reservations;
+    });
+  },
+
   getOutletById: function(id){
     return OutletServices.retrieve().then(function(outlets){
       var myOutlet = null;

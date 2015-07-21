@@ -13,6 +13,7 @@ var Reservation = bookshelf.Model.extend({
     return this.belongsTo(User, 'seller_id');
   },
   outlet: function() {
+    var Outlet = require('../outlets/outlet.model');
     return this.belongsTo(Outlet, 'outlet_id');
   },
   timeSlot: function() {

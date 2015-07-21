@@ -10,7 +10,7 @@ var buyerReservations = React.createClass({
   getInitialState: function(){
     return {
       data: []
-    }
+    };
   },
 
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
@@ -24,8 +24,9 @@ var buyerReservations = React.createClass({
 
   componentDidMount: function() {
     var that = this;
-    outletStore.getOutlets().then(function(outletData){
-      that.setState({data: outletData});
+    outletStore.getBuyerReservations().then(function(outletData){
+      // that.setState({data: outletData});
+      console.log(outletData);
     });
   },
 

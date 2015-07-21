@@ -84,6 +84,25 @@ var outletServices = function(){
     });
   };
 
+  outletData.seeBuyerReservations = function(){
+    return request({
+      url: OutletListConstants.SEEBUYER_RESERVATIONS,
+      method: 'GET',
+      crossOrigin: true,
+      type: 'json',
+      contentType: 'application/json',
+      error: function(res) {
+        console.log('---------------------------------> ERROR');
+        console.dir(res);
+      },
+      success: function(reservations) {
+        console.log('---------------------------------> SUCCESS');
+        console.log(reservations);
+        return reservations;
+      }
+    });
+  };
+
   // outletData.turnOff = function(){
   //   return request({
   //     url: '/turnOff',
