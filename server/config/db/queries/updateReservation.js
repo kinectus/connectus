@@ -16,6 +16,11 @@ module.exports = updateReservation = function(req, res){
   var sameDay = (startDate === endDate);
   // Transaction tracking
   var transactionID;
+  // Response
+  var status, message;
+  if (status && message){
+    return res.status(status).send(message);
+  }
 
   // Recursive function updates reservation slots and creates transaction models for each
   // time slot from beginning to end 
@@ -40,9 +45,15 @@ module.exports = updateReservation = function(req, res){
       // Update reservation
       .then(function(newReservation){
         if (!newReservation) {
-          res.status(404).send('No open reservation found');
+          // res.status(404).send('No open reservation found');
+          status = 404;
+          message = 'No open reservation found';
+          return;
         } else if (!newReservation.available) {
-          res.status(404).send('Reservation is not available: ', newReservation);
+          // res.status(404).send('Reservation is not available: ', newReservation);
+          status = 404;
+          message = 'Reservation is not available'
+          return;
         } else {
           newReservation.set({
             buyer_id: user,
@@ -59,7 +70,10 @@ module.exports = updateReservation = function(req, res){
           if (++currentSlot <= endSlot){
             newReservation(user, currentSlot);
           } else {
-            res.status(201).send('POST reservations complete');
+            // res.status(201).send('POST reservations complete');
+            status = 201;
+            message = 'POST reservations complete';
+            return;
           }
         // Completion check for multi-day reservations
         } else {
@@ -71,7 +85,10 @@ module.exports = updateReservation = function(req, res){
             if ( currentSlot <= endSlot  || difference < 0){
               newReservation(user, currentSlot);
             } else {
-              res.status(201).send('POST reservations complete');
+              // res.status(201).send('POST reservations complete');
+              status = 201;
+              message = 'POST reservations complete';
+              return;
             }
           }
         }
@@ -83,8 +100,7 @@ module.exports = updateReservation = function(req, res){
   // START RESERVATION PROCESS
   // Fetch user by request user id
 
-
-  new User({
+  return new User({
     username: req.user.id
   }).fetch().then(function(user){
     // Find start timeSlot
@@ -99,7 +115,7 @@ module.exports = updateReservation = function(req, res){
       // Start making reservations for user
       .then(function(slot2){
         endSlot = slot2.id;
-        newReservation(user.id, startSlot);
+        newReservation(user.id, startSlot)
       });
     });
   });
