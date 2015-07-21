@@ -41,12 +41,15 @@ module.exports = updateReservation = function(req, res){
       .then(function(newReservation){
         if (!newReservation) {
           res.status(404).send('No open reservation found');
+        } else if (!newReservation.available) {
+          res.status(404).send('Reservation is not available: ', newReservation);
+        } else {
+          newReservation.set({
+            buyer_id: user,
+            available: false,
+            transaction_id: transactionID
+          }).save();
         }
-        newReservation.set({
-          buyer_id: user,
-          available: false,
-          transaction_id: transactionID
-        }).save();
       })
       // Determine if more reservations need to be updated
       .then(function(){
