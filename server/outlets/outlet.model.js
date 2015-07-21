@@ -13,6 +13,9 @@ var Outlet = bookshelf.Model.extend({
   seller: function() {
     return this.belongsTo(User, 'seller_id'); // trying to find converse in User model
   }
+  // reservations: function(){
+  //   return this.hasMany(Outlet, 'outlet_id');
+  // }
 });
 
 module.exports = Outlet;

@@ -39,7 +39,7 @@ module.exports = {
   },
 
   buyerReservations: function(req, res){
-    getBuyerReservations(req.user);
+    getBuyerReservations(req.user, res);
   },
 
   makeReservation: function(req, res) {
