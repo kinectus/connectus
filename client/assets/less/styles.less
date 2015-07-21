@@ -14,6 +14,16 @@
    src: url('../fonts/Karla-Regular.ttf');
  }
 
+a {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none !important;
+  color: inherit;
+}
+
 * {
    font-family: Karla;
  }
@@ -32,7 +42,7 @@
     color: @yellow !important;
     padding-left: 40px;
     padding-top: 10px;
-    text-decoration: none;
+    text-decoration: none !important;
   }
   .mobile {
     margin-left: auto;
@@ -46,6 +56,10 @@
     li a.active {
     background-color: lighten(@dark, 10%);
     }
+    .dropdown-toggle {
+      text-align: center;
+      background-color: @dark;
+    }
   }
   .nav>li {
     padding-top: 15px;
@@ -53,7 +67,7 @@
       color: white;
     }
     a:hover {
-      background-color: @yellow;
+      background-color: lighten(@dark, 10%);
     }
     .logout {
       color: @yellow;
@@ -72,7 +86,7 @@
 .header-about {
   height: 500px;
   width: 100%;
-  background: url(https://djkochphotography.files.wordpress.com/2012/10/power-grid.jpg) top center no-repeat;
+  background: url(http://m.wsj.net/video/20150203/020315lunchenergy/020315lunchenergy_1280x720.jpg) top center no-repeat;
   background-size: cover;
   .text {
     padding-top: 210px;
