@@ -38,19 +38,33 @@ describe('a request to the homepage should return a 200 code', function () {
 });
 
 // this test makes a get request to the outlets api
-describe('a request to the outlets api should return data for outlets', function () {
-  it('should return 200', function (done) {
+describe('a request to the outlets api', function () {
+  it('should return data for outlets', function (done) {
     http.get('http://localhost:3000/api/outlets', function (res) {
       var data = '';
-
       res.on('data', function (chunk) {
         data += chunk;
       });
-
-
       res.on('end', function () {
         var outlets = JSON.parse(data);
         assert.equal('object', typeof outlets);
+        done();
+      });
+    });
+  });
+});
+
+describe('a request to the users api', function () {
+  it('should return data for users', function (done) {
+    http.get('http://localhost:3000/api/users/1', function (res) {
+      var data = '';
+      res.on('data', function (chunk) {
+        data += chunk;
+      });
+      console.log('between')
+      res.on('end', function () {
+        var users = JSON.parse(data);
+        assert.equal('object', typeof users);
         done();
       });
     });

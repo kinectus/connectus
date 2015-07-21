@@ -47268,17 +47268,28 @@ ul.rw-list.rw-list-grouped > li.rw-list-option,
   font-weight: bold;
   font-size: 30px;
   padding-top: 7.5px;
+  padding-left: 15px;
 }
 .main .ui.secondary.pointing.menu {
   background-color: #fbcb15;
   height: 35px;
 }
-.main .ui.secondary.pointing.menu .item {
-  padding-right: 15px;
+.main .ui.secondary.pointing.menu a {
+  color: white;
   padding-top: 10px;
+}
+.main .ui.secondary.pointing.menu .item {
+  float: right;
   font-size: 25px;
-  font: black;
   font-weight: bold;
+  text-decoration: none;
+}
+.main .ui.secondary.pointing.menu .logout {
+  font-size: 20px;
+  padding-left: 50px;
+}
+.about {
+  width: 100%;
 }
 .about .section {
   height: 500px;

@@ -103,11 +103,10 @@ var Connectus = React.createClass({
 
         pageHtml = (
           <div className="main">
-          <ul className="ui secondary pointing menu">
+          <div className="ui secondary pointing menu">
               <span className="logo">
                 Connectus
               </span>
-              <div className="ui secondary pointing stackable menu">
                 <a className="item">
                   <Link to="outletsList">Outlets</Link>
                 </a>
@@ -120,11 +119,10 @@ var Connectus = React.createClass({
                 <a className="item">
                   <Link to="about">About</Link>
                 </a>
-                <a className="item" onClick={this.logout}>
+                <a className="logout" onClick={this.logout}>
                   Logout
                 </a>
               </div>
-              </ul>
             <div>
               <RouteHandler />
             </div>
