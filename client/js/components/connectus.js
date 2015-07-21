@@ -56,74 +56,54 @@ var Connectus = React.createClass({
 
     //reset the html that will be shown if the user is logged in(cookie present)
     // secondary pointing
+
     if(document.cookie){
 
-      if(isMobile){
+          if(isMobile){
+            console.log('mobile')
 
-        pageHtml = (
-          <div className="main">
-            <span className="logo">
-              Connectus
-            </span>
-            <div className="ui right dropdown item">
-              More
-              <i className="dropdown icon"></i>
-              <div className="menu">
-                <div className="item">
-                  <a>
-                    <Link to="outletsList">Outlets</Link>
-                  </a>
+            pageHtml = (
+              <div className="topNavBar">
+                <div className="mobile">
+                  <span className="logo">
+                    <Link to="about">Connect.us</Link>
+                  </span>
                 </div>
-                <div className="item">
-                  <a>
-                    <Link to="addOutlet">Add Outlet</Link>
-                  </a>
+                <div className="mobile">
+                  <ul className="nav navbar-nav">
+                    <li className="dropdown">
+                      <a className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu<span className="caret"></span></a>
+                      <ul className="dropdown-menu">
+                        <li role="presentation"><Link to="outletsList">Outlets</Link></li>
+                        <li role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
+                        <li role="presentation"><Link to="buyerReservations">Buyer Reservations</Link></li>
+                        <li role="separator" className="divider"></li>
+                        <li><a className="logout" onClick={this.logout}>Logout</a></li>
+                      </ul>
+                    </li>
+                  </ul>
                 </div>
-                <div className="item">
-                  <a>
-                    <Link to="buyerReservations">Buyer Reservations</Link>
-                  </a>
-                </div>
-                <div className="item">
-                  <a>
-                    <Link to="about">About</Link>
-                  </a>
-                </div>
-                <div className="item">
-                  <a onClick={this.logout}>
-                    Logout
-                  </a>
-                </div>
-              </div>
-            </div>
-        </div> 
-      )
+              </div> 
+          )
 
-      // if NOT mobile, make it this... 
-      } else {
+          // if NOT mobile, make it this... 
+          } else {
 
-        pageHtml = (
-          <div className="topNavBar">
-          <span className="logo">
-            Connectus
-          </span>
-          <nav className="navbar navbar-right">
-            <div className="navbar-header">
-              <ul class="nav navbar-nav">
-                <li><Link to="outletsList">Outlets</Link></li>
-                <li><Link to="addOutlet">Add Outlet</Link></li>
-                <li><Link to="buyerReservations">Buyer Reservations</Link></li>
-                <li><Link to="about">About</Link></li>
-                <li><a className="logout" onClick={this.logout}>
-                  Logout
-                </a></li>
-              </ul>
-            </div>
-          </nav>
-          </div> 
-          );
-        } 
-    }
+            pageHtml = (
+              <div className="topNavBar">
+              <span className="logo">
+                <Link to="about">Connect.us</Link>
+              </span>
+                <ul className="nav nav-pills pull-right">
+                  <li role="presentation"><Link to="outletsList">Outlets</Link></li>
+                  <li role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
+                  <li role="presentation"><Link to="buyerReservations">Buyer Reservations</Link></li>
+                  <li role="presentation"><a className="logout" onClick={this.logout}>Logout</a></li>
+                </ul>
+              </div> 
+              );
+            } 
+        }
 
     //actual rendering happens here - logic to decide what {pageHtml} is happens above
     return (

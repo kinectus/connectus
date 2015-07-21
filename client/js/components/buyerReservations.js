@@ -61,6 +61,7 @@ var buyerReservations = React.createClass({
               { outlet.voltage }
             </td>
             <td>
+              
               Price by hour: { outlet.priceHourly }
               Price by kWh: { outlet.priceEnergy }
             </td>

@@ -5,17 +5,54 @@
 * {
   font-family: Karla;
 }
-.topNavBar {
-  background-color: #1a8cab;
-  height: 200px;
+.nav .navbar-nav {
+  display: block;
 }
-.logo {
+.topNavBar {
+  background-color: #343434;
+  height: 70px;
+}
+.topNavBar .logo {
   font-size: 30px;
   float: left;
   display: inline;
-  color: #fbcb15;
+  color: #fbcb15 !important;
   padding-left: 40px;
   padding-top: 10px;
+  text-decoration: none;
+}
+.topNavBar .mobile {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  display: block !important;
+  height: 30px;
+}
+.topNavBar .mobile .dropdown-menu {
+  background-color: #343434;
+}
+.topNavBar .mobile li a.active {
+  background-color: #4e4e4e;
+}
+.topNavBar .nav > li {
+  padding-top: 15px;
+}
+.topNavBar .nav > li a {
+  color: white;
+}
+.topNavBar .nav > li a:hover {
+  background-color: #fbcb15;
+}
+.topNavBar .nav > li .logout {
+  color: #fbcb15;
+}
+.topNavBar .nav > li a.active {
+  background-color: #4e4e4e;
+}
+.nav .open > a,
+.nav .open > a:focus,
+.nav .open > a:hover {
+  background-color: #4e4e4e;
 }
 .header-about {
   height: 500px;
@@ -24,7 +61,7 @@
   background-size: cover;
 }
 .header-about .text {
-  padding-top: 250px;
+  padding-top: 210px;
   margin-left: auto;
   margin-right: auto;
   width: 100%;

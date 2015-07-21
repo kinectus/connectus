@@ -21,13 +21,11 @@ var outletsList = React.createClass({
   componentDidMount: function() {
     var that = this;
     outletStore.getOutlets().then(function(outletData){
-      $('.ui.rating').rating();
         outletData.map(function(outlet){
           userStore.getUsernameById(outlet.id).then(function(user){
             console.log(user.username)
             outlet['seller'] = user.username;
             that.setState({data: outletData});
-            $('.ui.rating').rating();
           })
         })
     });
@@ -54,7 +52,7 @@ var outletsList = React.createClass({
           return (
             <tr key={outlet.id} onClick={that.reserveOutlet}>
               <td>
-                <h2 className="ui center aligned header"> 
+                <h2> 
                   <Link to="reserveOutlet" params={{id: outlet.id }}>
                     { outlet.name } 
                   </Link>
@@ -63,9 +61,6 @@ var outletsList = React.createClass({
               <td>
                 <h5>Seller:</h5> 
                 <p className="description-text">{ outlet.seller }</p>
-              </td>
-              <td>
-                <p className="description-text"><div className="ui star rating" data-rating={ outlet.rating } data-max-rating={ outlet.rating }></div></p>
               </td>
               <td>
                 <h5>Voltage:</h5> 
@@ -88,7 +83,7 @@ var outletsList = React.createClass({
           return (
             <tr key={outlet.id} onClick={that.reserveOutlet}>
               <td>
-                <h2 className="ui center aligned header"> 
+                <h2> 
                   <Link to="reserveOutlet" params={{id: outlet.id }}>
                     { outlet.name } 
                   </Link>
@@ -96,9 +91,6 @@ var outletsList = React.createClass({
               </td>
               <td>
                 { outlet.seller }
-              </td>
-              <td>
-                <div className="ui star rating" data-rating={ outlet.rating } data-max-rating={ outlet.rating }>{ outlet.rating }</div>
               </td>
               <td>
                 { outlet.voltage }
@@ -118,7 +110,7 @@ var outletsList = React.createClass({
 
     if(isMobile) {
       var tableHead = (
-        <table className="ui selectable celled padded table">
+        <table className="table table-hover">
         <tbody>
           { outletHtml }
         </tbody>
@@ -126,11 +118,10 @@ var outletsList = React.createClass({
       )
     } else {
       var tableHead = (
-        <table className="ui selectable celled padded table">
+        <table className="table table-hover">
           <thead>
             <tr><th className="single line">Outlet Name</th>
             <th>Seller</th>
-            <th>Rating</th>
             <th>Voltage</th>
             <th>Price</th>
             <th>Description</th>
