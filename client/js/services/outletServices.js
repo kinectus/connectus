@@ -53,10 +53,6 @@ var outletServices = function(){
       type: 'json',
       contentType: 'application/json',
       data: JSON.stringify(newOutlet),
-      error: function(res, err) {
-        console.log('---------------------------------> ERROR');
-        console.dir(res, err);
-      },
       success: function(res) {
         console.log('---------------------------------> SUCCESS');
         console.dir(res);
@@ -73,10 +69,6 @@ var outletServices = function(){
       type: 'json',
       contentType: 'application/json',
       data: JSON.stringify(newReservation),
-      error: function(res) {
-        console.log('---------------------------------> ERROR');
-        console.dir(res);
-      },
       success: function(res) {
         console.log('---------------------------------> SUCCESS');
         console.dir(res);

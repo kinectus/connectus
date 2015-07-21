@@ -22,10 +22,6 @@ module.exports = updateReservation = function(req, res){
   var newReservation = function(user, passedSlot){
     currentSlot = passedSlot;
     currentDate = currentDate || startDate;
-    console.log('currentSlot', currentSlot, 'currentDate', currentDate);
-    console.log('startSlot: ', startSlot, ' endSlot: ', endSlot);
-    console.log('data.outletID', data.outletID);
-    console.log('startDate: ', startDate, ', endDate: ', endDate, ', currentDate: ', currentDate);
     
     var transaction = new Transaction({
       totalEnergy: 0,
@@ -43,12 +39,21 @@ module.exports = updateReservation = function(req, res){
 
       // Update reservation
       .then(function(newReservation){
-        console.log('newReservation after fetch: ', newReservation)
-        newReservation.set({
-          buyer_id: user,
-          available: false,
-          transaction_id: transactionID
-        }).save();
+        if (!newReservation) {
+          console.log('sending res 404 no slot');
+          res.send(404, 'No slot found');
+          return;
+        } else if (newReservation.available == false) {
+          console.log('sending res 404 not available');
+          res.send(404, 'Reservation is not available');
+          return;
+        } else {
+          newReservation.set({
+            buyer_id: user,
+            available: false,
+            transaction_id: transactionID
+          }).save();
+        }
       })
       // Determine if more reservations need to be updated
       .then(function(){
@@ -56,9 +61,11 @@ module.exports = updateReservation = function(req, res){
         // Completion check for same day reservations
         if (sameDay){
           if (++currentSlot <= endSlot){
-            newReservation(user, currentSlot);
+            return newReservation(user, currentSlot);
           } else {
-            res.status(201).send('POST reservations complete');
+            console.log('sending res 201 sameday posted');
+            res.send(201, 'POST reservations complete');
+            return;
           }
         // Completion check for multi-day reservations
         } else {
@@ -68,9 +75,11 @@ module.exports = updateReservation = function(req, res){
           console.log('startDate: ', startDate, ', endDate: ', endDate, ', currentDate: ', currentDate, ', difference: ', difference);
           if ( difference <= 0 ){
             if ( currentSlot <= endSlot  || difference < 0){
-              newReservation(user, currentSlot);
+              return newReservation(user, currentSlot);
             } else {
-              res.status(201).send('POST reservations complete');
+              console.log('sending res 201 multi-day posted');
+              res.send(201, 'POST reservations complete');
+              return;
             }
           }
         }
@@ -81,8 +90,6 @@ module.exports = updateReservation = function(req, res){
 
   // START RESERVATION PROCESS
   // Fetch user by request user id
-
-
   new User({
     username: req.user.id
   }).fetch().then(function(user){

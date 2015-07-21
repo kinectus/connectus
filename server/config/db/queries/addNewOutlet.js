@@ -21,7 +21,7 @@ module.exports = addNewOutlet = function(req, res){
       voltage: data.voltage
     }).fetch().then(function(found) {
       if (found) {
-        res.status(200).send(found.attributes);
+        res.send(201, found.attributes);
       } else {
         var outlet = new Outlet({
           name: data.name,
@@ -42,7 +42,7 @@ module.exports = addNewOutlet = function(req, res){
           return newOutlet;
         })
         .then(function(newOutlet){
-          res.status(200).send(newOutlet);
+          res.send(200, newOutlet);
         })
         .catch(function(error){
           console.log(error);
