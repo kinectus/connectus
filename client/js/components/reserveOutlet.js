@@ -7,13 +7,8 @@ var GoogleMap = require('google-map-react');
 // var GoogleMapsAPI = window.google.maps;
 var outletStore = require('../stores/outletStore');
 var ReactAddons = require('react/addons');
-
 var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
 
-// var GoogleMap = ReactGoogleMaps.Map;
-// var LatLng = GoogleMapsAPI.LatLng;
-// var Marker = ReactGoogleMaps.Marker;
-// var OverlayView = ReactGoogleMaps.OverlayView;
 var DateTimePicker = require('react-widgets').DateTimePicker;
 var moment = require('moment');
 var Router = require('react-router'); //need this for redirection
@@ -21,23 +16,14 @@ var Router = require('react-router'); //need this for redirection
 
 // http://jquense.github.io/react-widgets/docs/#/datetime-picker
 var Map = React.createClass({
-  // getInitialState: function() {
-  //   console.log('props', this.props.loc)
-  //   return {
-  //     center: new LatLng(this.props.loc.lat, this.props.loc.long),
-  //     count: 0
-  //   };
-  // },
-  render: function() {
 
-    console.log('in map props', GoogleMap);
-    console.log('marker',Marker);
+  render: function() {
     return (
       <div className='reservationMap'>
         <GoogleMap
           zoom={15}
           center={[this.props.outletData.lat,this.props.outletData.long]}
-          googleMapsApi={google.maps}>
+        >
           <Marker lat={this.props.outletData.lat} lng={this.props.outletData.long} />
         </GoogleMap>
       </div>
@@ -103,9 +89,9 @@ var reserveOutlet = React.createClass({
   mixins: [Router.Navigation],
   
   // is onchange necessary?????
-  _onChange: function() {
-    this.setState(this.getInitialState());
-  },
+  // _onChange: function() {
+  //   this.setState(this.getInitialState());
+  // },
   componentDidMount: function() {
     var that = this;
     var outletID = this.props.params.id
@@ -114,22 +100,6 @@ var reserveOutlet = React.createClass({
       console.log('outlet',outlet);
       that.setState({data: outlet});
     });
-    setTimeout(function() {
-      var outlet = {
-        address: "125 Sky Pie Ave",
-        description: "on the corner guarded by a purple dragon",
-        id: 1,
-        lat: 20,
-        long: -160,
-        name: "Hack Reactor Outlet",
-        priceEnergy: 5,
-        priceHourly: 2,
-        priceSuggest: 3,
-        voltage: "standard"
-      };
-      that.setState({data: outlet});
-      console.log('new gps',that.state.data);
-    }, 2000)
   },
   handleSubmit: function(event) {
     event.preventDefault();
