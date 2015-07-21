@@ -17,7 +17,7 @@ var Connectus = React.createClass({
   componentDidMount: function() {
     var that = this; 
     // for some reason, semantic needs this to make the menu to drop down
-    $('.ui.dropdown').dropdown()
+    // $('.ui.dropdown').dropdown()
 
     // resizing the screen renders mobile or full menu
     var isMobile = mobile();
@@ -32,21 +32,25 @@ var Connectus = React.createClass({
     // check if the screen is mobile-y sized
     var isMobile = mobile();
 
+    var routeHandler = (
+      <div>
+        <RouteHandler />
+      </div>
+    )
+
     var pageHtml = (
-      <div className="main">
-        <ul className="ui secondary pointing menu">
-          <span className="logo">
-            Connectus
-          </span>
-          <div className="right menu">
-            <a className="ui item loginlink">
-              <Link to="login">Login</Link>
-            </a>
-          </div>
-        </ul>
-        <div>
-          <RouteHandler />
+      <div>
+        <div className="logo">
+          Connectus
         </div>
+        <ul className="nav nav-pills pull-right">
+          <li role="presentation">
+            <Link to="login">Login</Link>
+          </li>
+          <li role="presentation">
+            <Link to="signup">Sign Up</Link>
+          </li>
+        </ul>
       </div>
     );
 
@@ -92,9 +96,6 @@ var Connectus = React.createClass({
                 </div>
               </div>
             </div>
-          <div>
-            <RouteHandler />
-          </div>
         </div> 
       )
 
@@ -102,30 +103,23 @@ var Connectus = React.createClass({
       } else {
 
         pageHtml = (
-          <div className="main">
-          <div className="ui secondary pointing menu">
-              <span className="logo">
-                Connectus
-              </span>
-                <a className="item">
-                  <Link to="outletsList">Outlets</Link>
-                </a>
-                <a className="item">
-                  <Link to="addOutlet">Add Outlet</Link>
-                </a>
-                <a className="item">
-                  <Link to="buyerReservations">Buyer Reservations</Link>
-                </a>
-                <a className="item">
-                  <Link to="about">About</Link>
-                </a>
-                <a className="logout" onClick={this.logout}>
+          <div className="topNavBar">
+          <span className="logo">
+            Connectus
+          </span>
+          <nav className="navbar navbar-right">
+            <div className="navbar-header">
+              <ul class="nav navbar-nav">
+                <li><Link to="outletsList">Outlets</Link></li>
+                <li><Link to="addOutlet">Add Outlet</Link></li>
+                <li><Link to="buyerReservations">Buyer Reservations</Link></li>
+                <li><Link to="about">About</Link></li>
+                <li><a className="logout" onClick={this.logout}>
                   Logout
-                </a>
-              </div>
-            <div>
-              <RouteHandler />
+                </a></li>
+              </ul>
             </div>
+          </nav>
           </div> 
           );
         } 
@@ -133,8 +127,9 @@ var Connectus = React.createClass({
 
     //actual rendering happens here - logic to decide what {pageHtml} is happens above
     return (
-    <div>
+    <div className="container-fluid">
       {pageHtml}
+      {routeHandler}
     </div>
     );
   }

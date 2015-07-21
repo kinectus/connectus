@@ -1,6 +1,6 @@
-// Semantic dependency
-@import "../../dist/semantic/src/semantic.less";
-@import '../../node_modules/react-widgets/lib/less/react-widgets.less';
+// Semantic dependency - no longer in use
+// @import "../../dist/semantic/src/semantic.less";
+// @import '../../node_modules/react-widgets/lib/less/react-widgets.less';
 
 @turquoise: #159594;
 @blue: #1A8CAB;
@@ -8,42 +8,56 @@
 @maroon: #8B1C55;
 @red: #FF1900;
 
-// @font-face {
-//   font-family:'Karla';
-//   src: url('../fonts/Karla-Regular.ttf');
-// }
+@font-face {
+ font-family:'Karla';
+   src: url('../fonts/Karla-Regular.ttf');
+ }
 
-// * {
-//   font-family: Karla;
-// }
+* {
+   font-family: Karla;
+ }
 
-.main {
-  .logo{
-    font-weight: bold;
-    font-size: 30px;
-    padding-top: 7.5px;
-    padding-left: 15px;
-  }
-  .ui.secondary.pointing.menu {
-    background-color: @yellow;
-    a {
-      color: white;
-      padding-top: 10px;
-    }
-    height: 35px;
-    .item {
-      float: right;
-      font-size: 25px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    .logout {
-      font-size: 20px;
-      padding-left: 50px;
+.topNavBar {
+  background-color: @blue;
+  height: 200px;
+}
+
+.logo {
+  font-size: 30px;
+  float: left;
+  display: inline;
+  color: @yellow;
+  padding-left: 40px;
+  padding-top: 10px;
+}
+
+.header-about {
+  height: 500px;
+  width: 100%;
+  background: url(https://djkochphotography.files.wordpress.com/2012/10/power-grid.jpg) top center no-repeat;
+  background-size: cover;
+  .text {
+    padding-top: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    font-size: 40px;
+    color: white;
+    p {
+      text-align: center;
     }
   }
 }
 
+.container-fluid {
+  padding: 0px !important;
+}
+
+.section {
+  padding: 0px;
+  width: 100%;
+  margin: auto;
+}
 
 .about {
   width: 100%;
@@ -64,6 +78,7 @@
 h1 {
   color: black;
   font-size: 30px;
+  margin: 0px;
 }
 
 .reservationMap {
