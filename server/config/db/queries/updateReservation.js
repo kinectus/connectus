@@ -33,18 +33,10 @@ module.exports = updateReservation = function(req, res){
       paid: false
     });
     transaction.save()
-      // Find reservation
     .then(function(newTransaction){
       transactionID = newTransaction.id;
 
-      // var reservation = new Reservation({
-      //   outlet_id: data.outletID,
-      //   slot_id: currentSlot,
-      //   date: currentDate
-      // }).fetch();
-      // console.log('reservation in first then: ', reservation);
-      // return reservation;
-
+      // Find reservation
       return new Reservation()
       .query({where: {outlet_id: data.outletID, slot_id: currentSlot, date: currentDate} })
       .fetch()
