@@ -3,14 +3,16 @@
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
-var ReactGoogleMaps = require('react-googlemaps');
-var GoogleMapsAPI = window.google.maps;
+var GoogleMap = require('google-map-react');
+// var GoogleMapsAPI = window.google.maps;
 var outletStore = require('../stores/outletStore');
 var ReactAddons = require('react/addons');
-var GoogleMap = ReactGoogleMaps.Map;
-var LatLng = GoogleMapsAPI.LatLng;
-var Marker = ReactGoogleMaps.Marker;
-var OverlayView = ReactGoogleMaps.OverlayView;
+var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
+
+// var GoogleMap = ReactGoogleMaps.Map;
+// var LatLng = GoogleMapsAPI.LatLng;
+// var Marker = ReactGoogleMaps.Marker;
+// var OverlayView = ReactGoogleMaps.OverlayView;
 var DateTimePicker = require('react-widgets').DateTimePicker;
 var moment = require('moment');
 var Router = require('react-router'); //need this for redirection
@@ -26,21 +28,15 @@ var Map = React.createClass({
   //   };
   // },
   render: function() {
-    console.log('in map', new LatLng(this.props.outletData.lat,this.props.outletData.long));
-      // <OverlayView
-      //       mapPane="floatPane"
-      //       style={{padding: 15, backgroundColor: '#fff', border: '1px solid #000'}}
-      //       position={new LatLng(37.78,-122.41)}>
-      //       <h1>Simple overlay!</h1>
-            
-      //     </OverlayView>
-      return (
+    console.log('in map props', GoogleMap);
+console.log('marker',Marker);
+    return (
       <div className='reservationMap'>
         <GoogleMap
-          initialZoom={10}
-          initialCenter={new LatLng(37.78,-122.41)}
-          width={500}
-          height={300}>
+          zoom={15}
+          center={[this.props.outletData.lat,this.props.outletData.long]}
+          googleMapsApi={google.maps}>
+          <Marker lat={this.props.outletData.lat} lng={this.props.outletData.long} />
         </GoogleMap>
       </div>
     )
@@ -60,18 +56,6 @@ var DateTime = React.createClass({
 var OutletInfo = React.createClass({
   render: function() {
     // do something with the photo
-
-
-        // <h2 className="ui center aligned header"> { this.props.outletData.name } </h2>
-        //   <br></br>
-        //   <h4>Voltage: High</h4>
-        //   <br></br>
-        //   <h4>Price by hour: { this.props.outletData.priceHourly }</h4>
-        //   <br></br>
-        //   <h4>Price by kWh: { this.props.outletData.priceEnergy }</h4>
-        //   <br></br>
-        //   <h4>{ this.props.outletData.description }</h4>
-
     var outletPhoto = <div className="outletPhoto"></div>
     console.log('outletinfo',this.props);
     return (
@@ -108,7 +92,6 @@ var OutletInfo = React.createClass({
   }
 });
   
-
 var reserveOutlet = React.createClass({
   getInitialState: function(){
    return {
@@ -116,9 +99,9 @@ var reserveOutlet = React.createClass({
     }
   },
   mixins: [Router.Navigation],
-  _onChange: function() {
-    this.setState(this.getInitialState());
-  },
+  // _onChange: function() {
+  //   // this.setState(this.getInitialState());
+  // },
   componentDidMount: function() {
     var that = this;
     var outletID = this.props.params.id
@@ -126,27 +109,26 @@ var reserveOutlet = React.createClass({
       // setState automatically forces a re-render
       console.log('outlet',outlet);
       that.setState({data: outlet});
+
+      // var initialize = function() {
+      //   var mapOptions = {
+      //     zoom: 8,
+      //     center: new google.maps.LatLng(-34.397, 150.644)
+      //   };
+      //   var elem = document.getElementByClassId('map-canvas');
+      //   console.log(elem);
+      //   var map = new google.maps.Map(elem, mapOptions)
+      // };
+      // var loadScript = function() {
+      //   var script = document.createElement('script');
+      //   script.type = 'text/javascript';
+      //   script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
+      //       '&signed_in=true&callback=initialize';
+      //   document.body.appendChild(script);
+      // }
+      // window.onload = loadScript;
     });
-    setTimeout(function() {
-      var outlet = {
-        address: "125 Sky Pie Ave",
-        description: "on the corner guarded by a purple dragon",
-        id: 1,
-        lat: 20,
-        long: -160,
-        name: "Hack Reactor Outlet",
-        priceEnergy: 5,
-        priceHourly: 2,
-        priceSuggest: 3,
-        voltage: "standard"
-      };
-      that.setState({data: outlet});
-      console.log('new gps',that.state.data);
-    }, 2000)
   },
-  // getInitialState: function() {
-  //   return {value: 'Hello!'};
-  // },
   handleSubmit: function(event) {
     event.preventDefault();
     var newTransaction = {
@@ -175,7 +157,7 @@ var reserveOutlet = React.createClass({
     return (
       <div className='container'>
         <div>
-        <Map outletData={this.state.data} />
+          <Map outletData={this.state.data} />
         </div>
         <div>
           <OutletInfo outletData = {this.state.data}/>

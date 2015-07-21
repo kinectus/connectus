@@ -6,6 +6,7 @@ var Login = require('../components/login.js');
 var LandingPage = require('../components/landingPage.js');
 var About = require('../components/about.js');
 var OutletsList = require('../components/outletsList.js');
+var OutletsListMap = require('../components/outletsListMap.js');
 var buyerReservations = require('../components/buyerReservations.js');
 var ReserveOutlet = require('../components/reserveOutlet.js');
 var AddOutlet = require('../components/addOutlet.js');
@@ -21,6 +22,8 @@ module.exports = (
     <Route name="about" path="/about" handler={About} />
     <Route name="landingPage" path="/landingPage" handler={LandingPage} />
     <Route name="outletsList" path="/outlets" handler={OutletsList} />
+    <Route name="outletsListMap" path="/outlets/map" handler={OutletsListMap} />
+
     <Route name="reserveOutlet" path="/outlets/:id" handler={ReserveOutlet} />
     <Route name="addOutlet" path="/addOutlet" handler={AddOutlet} />
     <Route name="buyerReservations" path="/buyerReservations" handler={buyerReservations} />
