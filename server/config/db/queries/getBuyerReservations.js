@@ -16,7 +16,7 @@ module.exports = getBuyerReservations = function(user, res){
 	    return reservations.mapThen(function(reservation){
         return reservation.outlet().fetch()
         .then(function(outlet){
-          return reservation.outlet_info = outlet;
+          return reservation.set('outlet_info', outlet);
         });
       })
       .then(function(modifiedRes){
