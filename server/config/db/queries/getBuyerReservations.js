@@ -1,5 +1,7 @@
 var User = require('../../../users/user.model.js');
 var Outlet = require('../../../outlets/outlet.model.js');
+var Promise = require('bluebird');
+var Reservation = require('../../../outlets/outlet.model.js');
 
 
 module.exports = getBuyerReservations = function(user, res){
