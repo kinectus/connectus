@@ -5,56 +5,62 @@ var Reservation = require('../../../reservations/reservation.model');
 var Transaction = require('../../../transactions/transaction.model');
 
 module.exports = updateReservation = function(req, res){
-  // user passport adds facebook user profile to req so it can be accessed anywhere in express
-  console.log('request from user', req.user.id);
   var data = req.body;
-  var startSlot, endSlot;
-  var currentSlot;
-  console.log('AWESOME NEW FIXED UP DATAAAAAA:', data)
+  var startSlot, endSlot, currentSlot;
 
+  // Recursive function updates reservation slots and creates transaction models for each
+  // time slot from beginning to end 
   var newReservation = function(user){
     currentSlot = currentSlot || startSlot;
+    // Find reservation
     var reservation = new Reservation({
       outlet_id: data.outletID,
       slot_id: currentSlot,
       date: data.start.date
     }).fetch()
+    // Create transaction for reservation
     .then(function(reservation){
       var transaction = new Transaction({
         totalEnergy: 0,
         totalCost: 0,
         paid: false
       });
-
-      console.log('transaction: ', transaction);
-
-      transaction.save().then(function(newTransaction){
-        console.log('reservation attributes: ', reservation.attributes);
+      transaction.save()
+      // Update reservation
+      .then(function(newTransaction){
         reservation.set({
           buyer_id: user,
           available: false,
           transaction_id: newTransaction.id 
         }).save();
-      }).then(function(){
+      })
+      // Determine if more reservations need to be updated
+      .then(function(){
         if (++currentSlot <= endSlot){
           newReservation(user);
         }
       });
     });
   }
+
+  // Fetch user by request user id
   new User({
     username: req.user.id
-  }).fetch().then(function(user){
-    console.log('start: ', data.start.date, data.start.time.slice(0, data.start.time.length-1) + '0')
+  }).fetch()
+  // Find corresponding start time slot based on user start input
+  .then(function(user){
     new TimeSlot({
-      start: data.start.time.slice(0, data.start.time.length-1) + '0'
-    }).fetch().then(function(slot){
+      start: data.start.time
+    }).fetch()
+    // Find corresponding end time slot based on user end input
+    .then(function(slot){
       startSlot = slot.id;
       new TimeSlot({
-        end: data.end.time.slice(0, data.start.time.length-1) + '0'
-      }).fetch().then(function(slot){
+        end: data.end.time
+      }).fetch()
+      // Start making reservations for user
+      .then(function(slot){
         endSlot = slot.id;
-        console.log('start slot.id: ', startSlot, ' end slot.id: ', endSlot);
         newReservation(user.id);
       });
     });
