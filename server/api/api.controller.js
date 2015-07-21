@@ -4,6 +4,7 @@ var getOutletsByUser = require('../config/db/queries/getOutletsByUserId');
 var addNewOutlet = require('../config/db/queries/addNewOutlet');
 var addReservationSlots = require('../config/db/queries/addReservationSlots');
 var updateReservation = require('../config/db/queries/updateReservation');
+var getAllUsers = require('../config/db/queries/getUserInfo');
 
 module.exports = {
 
@@ -33,6 +34,16 @@ module.exports = {
 
   makeReservation: function(req, res) {
     updateReservation(req, res);
+
+    // user passport adds facebook user profile to req so it can be accessed anywhere in express
+    console.log('request from user', req.user.id);
+  },
+
+  getUserInfo: function(req, res){
+    getAllUsers(req, res)
+      .then(function(user){
+        res.send(200, user);
+      });
   }
 
 };

@@ -1,6 +1,7 @@
 var path = require('path');
 var Promise = require('bluebird');
 var outletExamples = require('./outletDataExamples');
+var userExamples = require('./userDataExamples');
 var timeSlotInfo = require('./timeSlotInfo');
 
 // Initialize database
@@ -33,6 +34,7 @@ db.schema.hasTable('users').then(function(exists){
       // user.timestamps();
     }).then(function(table){
       console.log('Created users table', table);
+      insertInfoInTable('users', null, userExamples, 'username');
     }); 
   }
 });
@@ -114,16 +116,7 @@ var tableDataContainsInfo = function(tableData, field, value) {
 };
 
 var insertInfoInTable = function(tableName, callback, tableInfo, fieldToCheck) {
-  // var tableInfo = outletExamples;
-  console.log('======================================== INSERTING YO FAKE DATA', outletExamples)
-  // if (tableName === 'users') {
-  //   tableInfo = sampleUsers;
-  // } else if (tableName === 'events') {
-  //   tableInfo = sampleEvents;
-  // }
-
   db.select().table(tableName).then(function(results) {
-    // var fieldToCheck = 'name';
     if (!tableDataContainsInfo(results, fieldToCheck, tableInfo[0][fieldToCheck])) {
       console.log('inserting sample info in table');
       db(tableName).insert(tableInfo).then(function(insert) {

@@ -9,8 +9,6 @@ var outletExamples = [
     seller_id: 1,
     address: '125 Sky Pie Ave',
     voltage: 'standard'
-    // seller_id: 12,
-    // buyer_id: 6
   },
   { name: 'Yerba Buena Center',
     priceHourly: '2',
@@ -19,11 +17,9 @@ var outletExamples = [
     lat: 37.782666,
     long: -122.400755,
     priceSuggest: '9',
-    seller_id: 1,
+    seller_id: 2,
     address: '123 Main St',
     voltage: 'standard'
-    // seller_id: 13,
-    // buyer_id: 7
   },
   { name: 'Civic Center/UN Plaza',
     priceHourly: '4',
@@ -32,11 +28,9 @@ var outletExamples = [
     lat: 37.779528,
     long: -122.413756,
     priceSuggest: '6',
-    seller_id: 1,
+    seller_id: 3,
     address: 'BART stop on Market',
     voltage: 'high'
-    // seller_id: 15,
-    // buyer_id: 8
   },
   { name: 'Burger Shack Outlet',
     priceHourly: '2',
@@ -45,11 +39,9 @@ var outletExamples = [
     lat: 37.779558,
     long: -122.413726,
     priceSuggest: '8',
-    seller_id: 1,
+    seller_id: 4,
     address: '639 Leavenworth Ave',
     voltage: 'standard'
-    // seller_id: 14,
-    // buyer_id: 9
   }
 ];
 

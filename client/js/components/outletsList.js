@@ -1,6 +1,7 @@
 
 var React = require('react');
 var outletStore = require('../stores/outletStore');
+var userStore = require('../stores/userStore');
 var ReactAddons = require('react/addons');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var Link = require('react-router').Link;
@@ -17,19 +18,18 @@ var outletsList = React.createClass({
 
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
 
-  // reserveOutlet: function(id){
-  //   ConnectusDispatcher.dispatch({
-  //       action: 'CLICK_OUTLET',
-  //       id: id
-  //   });
-  // },
-
   componentDidMount: function() {
     var that = this;
-    console.log('component mounted')
     outletStore.getOutlets().then(function(outletData){
-      that.setState({data: outletData});
       $('.ui.rating').rating();
+        outletData.map(function(outlet){
+          userStore.getUsernameById(outlet.id).then(function(user){
+            console.log(user.username)
+            outlet['seller'] = user.username;
+            that.setState({data: outletData});
+            $('.ui.rating').rating();
+          })
+        })
     });
   },
 
@@ -62,7 +62,7 @@ var outletsList = React.createClass({
               </td>
               <td>
                 <h5>Seller:</h5> 
-                <p className="description-text">Bob Belcher</p>
+                <p className="description-text">{ outlet.seller }</p>
               </td>
               <td>
                 <p className="description-text"><div className="ui star rating" data-rating={ outlet.rating } data-max-rating={ outlet.rating }></div></p>
@@ -95,7 +95,7 @@ var outletsList = React.createClass({
                 </h2>
               </td>
               <td>
-                Seller: { outlet.seller }
+                { outlet.seller }
               </td>
               <td>
                 <div className="ui star rating" data-rating={ outlet.rating } data-max-rating={ outlet.rating }>{ outlet.rating }</div>
