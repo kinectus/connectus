@@ -24,7 +24,6 @@ module.exports = (
     <Route name="landingPage" path="/landingPage" handler={LandingPage} />
     <Route name="outletsList" path="/outlets" handler={OutletsList} />
     <Route name="outletsListMap" path="/outlets/map" handler={OutletsListMap} />
-
     <Route name="reserveOutlet" path="/outlets/:id" handler={ReserveOutlet} />
     <Route name="addOutlet" path="/addOutlet" handler={AddOutlet} />
     <Route name="buyerReservations" path="/buyerReservations" handler={buyerReservations} />
