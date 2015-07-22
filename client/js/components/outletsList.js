@@ -143,10 +143,14 @@ var outletsList = React.createClass({
       </div>
     );
 
-      return (
+      return (   
         <div className="outletsList container">
+          <Link to="outletsListMap">
+            <button type='button' class='btn btn-default'>Map Outlets</button>
+          </Link>
           {tableHead}
         </div>
+
     )
     // });  from the promise closing
   },

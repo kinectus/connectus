@@ -14,6 +14,7 @@ var MainMapBlock =require('./outletsListMap/main_map_block.js');
 // var IceTable = require('components/controls/fixed_table_examples/ice_table.js');
 var Redux = require('redux');
 var ReduxReact = require('redux/react');
+var _ = require('underbar');
 
 
 var Map = React.createClass({
@@ -24,39 +25,84 @@ var Map = React.createClass({
     //   e.preventDefault();
     //   console.log('clicked');
     // })
-
   },
-  displayOutletData: function(event) {
-    event.preventDefault();
-    console.log('clicked-----------');
+  displayOutletData: function(key, childProps) {
+    // <table className="table table-hover">
+    //     <thead>
+    //       <tr><th className="single line">Outlet Name</th>
+    //       <th>Seller</th>
+    //       <th>Voltage</th>
+    //       <th>Price</th>
+    //       <th>Description</th>
+    //     </tr></thead>
+    //     <tbody>
+    //       <tr>
+    //           <td>
+    //             <Link to="reserveOutlet" params={{id: outlet.id }}>
+    //               { outlet.name } 
+    //             </Link>
+    //           </td>
+    //           <td>
+    //             { outlet.seller }
+    //           </td>
+    //           <td>
+    //             { outlet.voltage }
+    //           </td>
+    //           <td>
+    //             Price by hour: { outlet.priceHourly }
+    //             Price by kWh: { outlet.priceEnergy }
+    //           </td>
+    //           <td>
+    //             { outlet.description }
+    //           </td>
+    //           <td>
+  
+    //           </td>
+    //       </tr>
+    //     </tbody>
+    //   </table>
+    console.log('clicked-----------', childProps);
+    var outlet = childProps.data;
+    console.log('before change',this.state);
+    this.setState({
+      outletTable: 'goodbye'
+    }, this.forceUpdate);
+    console.log('afterchange', this.state);
+  
   },
   render: function() {
-    // console.log('inmapslistmap', this.props.data);
-    var markers = this.props.data.map(function(outlet) {
-      return <Marker className ='mapMarker' onClick={this.displayOutletData} data={outlet} lat={outlet.lat} lng={outlet.long} />
+    console.log('props',this.props);
+    var that = this;
+    var markers = this.props.outletsData.outletData.map(function(outlet) {
+      return (
+        <Marker className ='mapMarker' data={outlet} lat={outlet.lat} lng={outlet.long} />
+      )
     });
-
+  // change this class name and adjust the css jamie
     return (
-      // change this class name and adjust the css jamie
-      <div className='reservationMap'>
-        <GoogleMap
-          zoom={15}
-          // eventually use user's gps coordinates
-          center={[37.78,-122.4]}
-        >
-          {markers}
-        </GoogleMap>
+      <div>
+        <div>
+          {this.props.outletsData.outletTable}
+        </div>
+        <div className='reservationMap'>
+          <GoogleMap onChildClick={that.displayOutletData}
+            zoom={15}
+            // eventually use user's gps coordinates
+            center={[37.78,-122.4]}
+          >
+            {markers}
+          </GoogleMap>
+        </div>
       </div>
     )
-    
   }
 });
-
 
 var outletsListMap = React.createClass({
   getInitialState: function(){
     return {
-      data: []
+      outletData: [],
+      outletTable: 'hello'
     }
   },
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
@@ -68,7 +114,7 @@ var outletsListMap = React.createClass({
         userStore.getUsernameById(outlet.id).then(function(user){
           console.log(user.username)
           outlet['seller'] = user.username;
-          that.setState({data: outletData});
+          that.setState({outletData: outletData});
         })
       })
     })
@@ -82,9 +128,12 @@ var outletsListMap = React.createClass({
     var that = this;
    
     return (
-      <div className='container'>
+      <div onClick={this.displayOutletData} className='container'>
+        <Link to="outletsList">
+          <button type='button' className='btn btn-default'>List Outlets</button>
+        </Link>
         <div>
-           <Map data={this.state.data} />
+           <Map outletsData={this.state} />
         </div>
       </div>
     )
