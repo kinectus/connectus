@@ -26,47 +26,54 @@ var Map = React.createClass({
     //   console.log('clicked');
     // })
   },
+  outletTableData: <div></div>,
   displayOutletData: function(key, childProps) {
-    // <table className="table table-hover">
-    //     <thead>
-    //       <tr><th className="single line">Outlet Name</th>
-    //       <th>Seller</th>
-    //       <th>Voltage</th>
-    //       <th>Price</th>
-    //       <th>Description</th>
-    //     </tr></thead>
-    //     <tbody>
-    //       <tr>
-    //           <td>
-    //             <Link to="reserveOutlet" params={{id: outlet.id }}>
-    //               { outlet.name } 
-    //             </Link>
-    //           </td>
-    //           <td>
-    //             { outlet.seller }
-    //           </td>
-    //           <td>
-    //             { outlet.voltage }
-    //           </td>
-    //           <td>
-    //             Price by hour: { outlet.priceHourly }
-    //             Price by kWh: { outlet.priceEnergy }
-    //           </td>
-    //           <td>
-    //             { outlet.description }
-    //           </td>
-    //           <td>
-  
-    //           </td>
-    //       </tr>
-    //     </tbody>
-    //   </table>
     console.log('clicked-----------', childProps);
     var outlet = childProps.data;
+                //     <Link to="reserveOutlet" params={{id: outlet.id }}>
+                //   { outlet.name } 
+                // </Link>
+    this.outletTableData = (
+      <table className="table table-hover">
+        <thead>
+          <tr><th className="single line">Outlet Name</th>
+          <th>Seller</th>
+          <th>Voltage</th>
+          <th>Price</th>
+          <th>Description</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+              <td>
+
+              </td>
+              <td>
+                { outlet.seller }
+              </td>
+              <td>
+                { outlet.voltage }
+              </td>
+              <td>
+                Price by hour: { outlet.priceHourly }
+                Price by kWh: { outlet.priceEnergy }
+              </td>
+              <td>
+                { outlet.description }
+              </td>
+              <td>
+  
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    )
+    this.forceUpdate();
+
     console.log('before change',this.state);
-    this.setState({
-      outletTable: 'goodbye'
-    }, this.forceUpdate);
+    // this.setState({
+    //   outletTable: 'goodbye'
+    // }, this.forceUpdate);
+    
     console.log('afterchange', this.state);
   
   },
@@ -78,11 +85,12 @@ var Map = React.createClass({
         <Marker className ='mapMarker' data={outlet} lat={outlet.lat} lng={outlet.long} />
       )
     });
-  // change this class name and adjust the css jamie
+    // change this class name and adjust the css jamie
+    // {this.props.outletsData.outletTable}
     return (
       <div>
         <div>
-          {this.props.outletsData.outletTable}
+          {this.outletTableData}
         </div>
         <div className='reservationMap'>
           <GoogleMap onChildClick={that.displayOutletData}
