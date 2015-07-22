@@ -3,6 +3,7 @@ var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var assign = require('react/lib/Object.assign');    // allows us to extend objects similarly to jquery and underscore lib...
 var EventEmitter = require('events').EventEmitter;
 var OutletServices = require('../services/OutletServices');
+var timeSlots = require('./data/timeSlots');
 
 var CHANGE_EVENT = 'change';
 
@@ -21,9 +22,36 @@ var outletStore = assign({}, EventEmitter.prototype, {
   },
   
   getBuyerReservations: function(){
-    return OutletServices.seeBuyerReservations().then(function(reservations){
-      console.log('seeing buyer reservations in outletstore', reservations);
-      return reservations;
+    return OutletServices.seeBuyerReservations().then(function(outletData){
+      var transactions = {};
+      var transactionsData = [];
+      console.log(outletData);
+      for(var i = 0; i < outletData.length; i++){
+        var transactionId = outletData[i].transaction_id;
+        if(!transactions[transactionId]){
+          transactions[transactionId] = {};
+          transactions[transactionId].id = transactionId;
+          transactions[transactionId].buyer_id = outletData[i].buyer_id;
+          transactions[transactionId].seller_id = outletData[i].seller_id;
+          transactions[transactionId].outlet = outletData[i].outlet_info;
+          transactions[transactionId].seller = outletData[i].seller_info;
+          transactions[transactionId].startTime = {slot: {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].start}, date: outletData[i].date};
+          transactions[transactionId].endTime = {slot: {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].end}, date: outletData[i].date};
+    
+        }else{
+          
+          if(new Date(outletData[i].date).getDate() === new Date(transactions[transactionId].endTime.date).getDate() && outletData[i].slot_id > transactions[transactionId].endTime.slot.number){
+            transactions[transactionId].endTime.slot = {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].end};
+          }
+          else if(new Date(outletData[i].date).getDate() > new Date(transactions[transactionId].endTime.date).getDate()){
+            transactions[transactionId].endTime = {slot: {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].end}, date: outletData[i].date};
+          }
+        }
+      }
+      for(var key in transactions){
+        transactionsData.push(transactions[key]);
+      }
+      return transactionsData;
     });
   },
   getOutletById: function(id){

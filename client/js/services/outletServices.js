@@ -91,12 +91,9 @@ var outletServices = function(){
       type: 'json',
       contentType: 'application/json',
       error: function(res) {
-        console.log('---------------------------------> ERROR');
-        console.dir(res);
+        console.log('error----------------------->', res);
       },
       success: function(reservations) {
-        console.log('---------------------------------> SUCCESS');
-        console.log(reservations);
         return reservations;
       }
     });

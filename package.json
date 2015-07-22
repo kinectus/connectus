@@ -23,6 +23,7 @@
     "bluebird": "^2.9.33",
     "body-parser": "^1.13.2",
     "bookshelf": "^0.8.1",
+    "braintree": "^1.27.0",
     "browserify": "^10.2.6",
     "chai": "^3.1.0",
     "classnames": "^2.1.3",

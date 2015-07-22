@@ -4,6 +4,7 @@ var TimeSlot = require('../../../reservations/timeSlot.model');
 var Reservation = require('../../../reservations/reservation.model');
 var Transaction = require('../../../transactions/transaction.model');
 var moment = require('moment');
+var transactionID;
 
 module.exports = updateReservation = function(req, res){
   var data = req.body;
@@ -15,25 +16,15 @@ module.exports = updateReservation = function(req, res){
   var currentDate;
   var sameDay = (startDate === endDate);
   // Transaction tracking
-  var transactionID;
 
   // Recursive function updates reservation slots and creates transaction models for each
   // time slot from beginning to end 
   var newReservation = function(user, passedSlot){
     currentSlot = passedSlot;
     currentDate = currentDate || startDate;
-    
-    var transaction = new Transaction({
-      totalEnergy: 0,
-      totalCost: 0,
-      paid: false
-    });
-    transaction.save()
-    .then(function(newTransaction){
-      transactionID = newTransaction.id;
 
       // Find reservation
-      return new Reservation()
+      new Reservation()
       .query({where: {outlet_id: data.outletID, slot_id: currentSlot, date: currentDate} })
       .fetch()
 
@@ -84,19 +75,35 @@ module.exports = updateReservation = function(req, res){
           }
         }
       });
-    });
 
   };
+
+//create the transaction
+
+  Transaction.forge({
+        totalEnergy: 0,
+        totalCost: 0,
+        paid: false
+  })
+  .save()
+  .then(function(newTransaction){
+        transactionID = newTransaction.id;
+  })
+  .catch(function(error){
+    console.log('error saving transaction id', error);
+  });
 
   // START RESERVATION PROCESS
   // Fetch user by request user id
   new User({
     username: req.user.id
-  }).fetch().then(function(user){
+  }).fetch()
+  .then(function(user){
     // Find start timeSlot
     new TimeSlot({
       start: data.start.time
-    }).fetch().then(function(slot){
+    }).fetch()
+    .then(function(slot){
       startSlot = slot.id;
       // Find end timeslot
       new TimeSlot({

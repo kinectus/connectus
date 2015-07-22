@@ -8,7 +8,7 @@ var userServices = function(){
 
   userData.retrieveUserById = function(id){
 
-    console.log('in the userservices with id: ', id)
+    // console.log('in the userservices with id: ', id)
 
     return request({
       url: UserConstants.USER_DATA + '/' + id,

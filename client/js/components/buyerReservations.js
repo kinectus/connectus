@@ -24,9 +24,8 @@ var buyerReservations = React.createClass({
 
   componentDidMount: function() {
     var that = this;
-    outletStore.getBuyerReservations().then(function(outletData){
-      // that.setState({data: outletData});
-      console.log(outletData);
+    outletStore.getBuyerReservations().then(function(transactionsData){
+      that.setState({data: transactionsData});
     });
   },
 
@@ -41,32 +40,32 @@ var buyerReservations = React.createClass({
     var that = this;
 
     if (this.state.data.length !==0) {
-      var outletHtml = this.state.data.map(function(outlet) {
+      var transactionHtml = this.state.data.map(function(transaction) {
         return (
-          <tr key={outlet.id} onClick={that.reserveOutlet}>
+          <tr key={ transaction.outlet.id } onClick={ that.reserveOutlet }>
             <td>
-              <h2 className="ui center aligned header"> 
-                <Link to="reserveOutlet" params={{id: outlet.id }}>
-                  { outlet.name } 
+              Start: { transaction.startTime.date} - { transaction.startTime.slot.time }
+              <br />
+              End: { transaction.endTime.date } - { transaction.endTime.slot.time } 
+            </td>
+            <td>
+                <Link to="reserveOutlet" params={{id: transaction.outlet.id }}>
+                  { transaction.outlet.name } 
                 </Link>
-              </h2>
             </td>
             <td>
-              Seller: { outlet.seller }
+              Seller: { transaction.seller.fullname }
             </td>
             <td>
-              <div className="ui star rating" data-rating={ outlet.rating } data-max-rating={ outlet.rating }>{ outlet.rating }</div>
+              { transaction.outlet.voltage }
             </td>
             <td>
-              { outlet.voltage }
+              Price by hour: { transaction.outlet.priceHourly }
+              <br />
+              Price by kWh: { transaction.outlet.priceEnergy }
             </td>
             <td>
-              
-              Price by hour: { outlet.priceHourly }
-              Price by kWh: { outlet.priceEnergy }
-            </td>
-            <td>
-            { outlet.description }
+            { transaction.outlet.description }
             </td>
             <td>
               <div className="ui button" onClick={this.handleSubmit}>Turn on</div>
@@ -81,15 +80,17 @@ var buyerReservations = React.createClass({
         <div className="outletsList container">
           <table className="ui selectable celled padded table">
             <thead>
-              <tr><th className="single line">Outlet Name</th>
+              <tr>
+              <th>Reservation Info</th>
+              <th className="">Outlet Name</th>
               <th>Seller</th>
-              <th>Rating</th>
               <th>Voltage</th>
               <th>Price</th>
               <th>Description</th>
+              <th>Controller</th>
             </tr></thead>
             <tbody>
-              { outletHtml }
+              { transactionHtml }
             </tbody>
           </table>
         </div>

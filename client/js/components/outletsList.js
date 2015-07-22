@@ -1,4 +1,3 @@
-
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var userStore = require('../stores/userStore');

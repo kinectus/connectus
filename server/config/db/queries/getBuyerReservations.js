@@ -5,7 +5,6 @@ var Reservation = require('../../../outlets/outlet.model.js');
 
 
 module.exports = getBuyerReservations = function(user, res){
-  console.log('user', user.id);
   
   User.forge({
     username: user.id
@@ -19,6 +18,12 @@ module.exports = getBuyerReservations = function(user, res){
         return reservation.outlet().fetch()
         .then(function(outlet){
           return reservation.set('outlet_info', outlet);
+        })
+        .then(function(){
+          return reservation.seller().fetch()
+          .then(function(seller){
+            return reservation.set('seller_info', seller);
+          });
         });
       })
       .then(function(modifiedRes){
