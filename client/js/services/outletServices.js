@@ -25,6 +25,17 @@ var outletServices = function(){
     });
   };
 
+  outletData.calculateOutletRating = function(outlets) {
+    console.log('calculating outlet rating in the store')
+    outlets.map(function(outlet){
+      if (outlet.thumbs_up + outlet.thumbs_down < 10) {
+        outlet.rating = 'no rating availabile';
+      } else {
+        outlet.rating = Math.floor((100/(outlet.thumbs_up + outlet.thumbs_down)) * outlet.thumbs_up) + "% buyer approval"
+      }
+    })
+  };
+
   outletData.retrieveOutletByUser = function(){
     console.log('retrieving outlet by user id');
     return request({

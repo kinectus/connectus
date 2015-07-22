@@ -45,6 +45,8 @@ db.schema.hasTable('outlets').then(function(exists){
       outlet.increments('id').primary();
       outlet.string('name', 30).notNullable();
       outlet.integer('seller_id', 30).notNullable();
+      outlet.integer('thumbs_up', 30).notNullable();
+      outlet.integer('thumbs_down', 30).notNullable();
       outlet.integer('transaction_id', 30);
       outlet.decimal('priceEnergy', 5, 2).notNullable();
       outlet.decimal('priceHourly', 5, 2).notNullable();

@@ -7,19 +7,31 @@
 @yellow: #FBCB15;
 @maroon: #8B1C55;
 @red: #FF1900;
+
 @dark: #343434;
 
+@purple: #666699;
+@orangemed: #f9a92a;
+@blue: #2da2c4;
+@greymed: #b2c0c4;
+@orangelight: #fdc52e;
+@greylight: #d0d8da;
+
+
+
 @font-face {
- font-family:'Karla';
-   src: url('../fonts/Karla-Regular.ttf');
+  font-family:'Karla';
+    src: url('../fonts/Karla-Regular.ttf');
+  color: @purple;
  }
 
-a {
-  text-decoration: none !important;
-  color: inherit;
-}
+ .form-group {
+  margin-bottom: 0px;
+ }
 
-a:hover {
+a,
+a:hover,
+a:focus {
   text-decoration: none !important;
   color: inherit;
 }
@@ -33,13 +45,13 @@ a:hover {
 }
 
 .topNavBar {
-  background-color: @dark;
+  background-color: @purple;
   height: 70px;
   .logo {
     font-size: 30px;
     float: left;
     display: inline;
-    color: @yellow !important;
+    color: @orangemed !important;
     padding-left: 40px;
     padding-top: 10px;
     text-decoration: none !important;
@@ -51,14 +63,14 @@ a:hover {
     display: block !important;
     height: 30px;
     .dropdown-menu {
-      background-color: @dark;
+      background-color: @purple;
     }
     li a.active {
-    background-color: lighten(@dark, 10%);
+    background-color: lighten(@purple, 10%);
     }
     .dropdown-toggle {
       text-align: center;
-      background-color: @dark;
+      background-color: @purple;
     }
   }
   .nav>li {
@@ -67,19 +79,19 @@ a:hover {
       color: white;
     }
     a:hover {
-      background-color: lighten(@dark, 10%);
+      background-color: lighten(@purple, 10%);
     }
     .logout {
       color: @yellow;
     }
   }
   .nav>li a.active {
-    background-color: lighten(@dark, 10%);
+    background-color: lighten(@purple, 10%);
   }
 }
 
 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
-  background-color: lighten(@dark, 10%);
+  background-color: lighten(@purple, 10%);
 }
 
 
@@ -94,15 +106,20 @@ a:hover {
     margin-right: auto;
     width: 100%;
     font-size: 40px;
-    color: white;
+    color: @greylight;
     p {
       text-align: center;
     }
   }
 }
 
+.addoutlet {
+  margin-bottom: 40px;
+}
+
 .container-fluid {
   padding: 0px !important;
+  background-color: @greylight;
 }
 
 .section {
