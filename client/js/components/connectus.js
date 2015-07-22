@@ -11,6 +11,7 @@ var mobile = require('./mobilecheck');
 
 var Connectus = React.createClass({
   logout: function(){
+    console.log('this logout triggered')
     Auth.logout();
   },
 
@@ -39,10 +40,10 @@ var Connectus = React.createClass({
     )
 
     var pageHtml = (
-      <div>
-        <div className="logo">
-          Connectus
-        </div>
+      <div className="topNavBar">
+        <span className="logo">
+          <Link to="about">Connect.us</Link>
+        </span>
         <ul className="nav nav-pills pull-right">
           <li role="presentation">
             <Link to="login">Login</Link>
@@ -102,7 +103,8 @@ var Connectus = React.createClass({
                 </ul>
               </div> 
               );
-            } 
+
+          } 
         }
 
     //actual rendering happens here - logic to decide what {pageHtml} is happens above
