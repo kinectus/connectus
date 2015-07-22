@@ -16,6 +16,7 @@ var Redux = require('redux');
 var ReduxReact = require('redux/react');
 
 
+
 var Map = React.createClass({
   componentDidMount: function() {
 
@@ -24,28 +25,71 @@ var Map = React.createClass({
     //   e.preventDefault();
     //   console.log('clicked');
     // })
-
   },
-  displayOutletData: function(event) {
-    event.preventDefault();
-    console.log('clicked-----------');
+  outletTable: <div></div>,
+  displayOutletData: function(key, childProps) {
+    console.log('clicked-----------', childProps);
+    var outlet = childProps.data;
+    this.outletTable = (
+      <table className="table table-hover">
+        <thead>
+          <tr><th className="single line">Outlet Name</th>
+          <th>Seller</th>
+          <th>Voltage</th>
+          <th>Price</th>
+          <th>Description</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+              <td>
+                <Link to="reserveOutlet" params={{id: outlet.id }}>
+                  { outlet.name } 
+                </Link>
+              </td>
+              <td>
+                { outlet.seller }
+              </td>
+              <td>
+                { outlet.voltage }
+              </td>
+              <td>
+                Price by hour: { outlet.priceHourly }
+                Price by kWh: { outlet.priceEnergy }
+              </td>
+              <td>
+                { outlet.description }
+              </td>
+              <td>
+  
+              </td>
+            </tr>
+        </tbody>
+      </table>
+    )
   },
   render: function() {
-    // console.log('inmapslistmap', this.props.data);
+    var that = this;
     var markers = this.props.data.map(function(outlet) {
-      return <Marker className ='mapMarker' onClick={this.displayOutletData} data={outlet} lat={outlet.lat} lng={outlet.long} />
+      return (
+        <Marker className ='mapMarker' data={outlet} lat={outlet.lat} lng={outlet.long} />
+      )
     });
 
     return (
       // change this class name and adjust the css jamie
-      <div className='reservationMap'>
-        <GoogleMap
-          zoom={15}
-          // eventually use user's gps coordinates
-          center={[37.78,-122.4]}
-        >
-          {markers}
-        </GoogleMap>
+      <div>
+        <div>
+          {this.outletTable}
+        </div>
+        <div className='reservationMap'>
+          <GoogleMap onChildClick={that.displayOutletData}
+            zoom={15}
+            // eventually use user's gps coordinates
+            center={[37.78,-122.4]}
+          >
+            {markers}
+          </GoogleMap>
+        </div>
       </div>
     )
     
@@ -82,7 +126,10 @@ var outletsListMap = React.createClass({
     var that = this;
    
     return (
-      <div className='container'>
+      <div onClick={this.displayOutletData} className='container'>
+        <Link to="outletsList">
+          <button type='button' className='btn btn-default'>List Outlets</button>
+        </Link>
         <div>
            <Map data={this.state.data} />
         </div>
