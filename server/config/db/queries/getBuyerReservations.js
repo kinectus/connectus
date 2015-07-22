@@ -5,7 +5,6 @@ var Reservation = require('../../../outlets/outlet.model.js');
 
 
 module.exports = getBuyerReservations = function(user, res){
-  console.log('user', user.id);
   
   User.forge({
     username: user.id
