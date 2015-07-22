@@ -7,6 +7,8 @@ var path = require('path');
 var db = require('./db/config');
 var authController = require('../auth/auth.controller');
 var cors = require('cors');
+var braintree = require('braintree');
+
 
 var app = express();
 app.use(bodyParser.json());
@@ -23,6 +25,34 @@ app.use(function(err, req, res, next){
 });
 
 app.use(express.static(path.join( __dirname + '/../../dist')));
+
+//BRAINTREE------------>//
+var gateway = braintree.connect({
+  environment: braintree.Environment.Sandbox,
+  merchantId: "fnrgqqwdcfc5wtvh",
+  publicKey: "9wzszhdgj9rq8z8y",
+  privateKey: "6910d378ab21d286f37ed123e70022f6"
+});
+
+app.get("/client_token", function (req, res) {
+  gateway.clientToken.generate({}, function (err, response) {
+    res.send(response.clientToken);
+  });
+});
+
+app.post("/checkout", function (req, res) {
+  var nonce = req.body.payment_method_nonce;
+  // Use payment method nonce here
+  gateway.transaction.sale({
+    amount: '10.00',
+    paymentMethodNonce: nonce,
+  }, function (err, result) {
+    res.redirect('/#/buyerReservations');
+  });
+});
+
+//BRAINTREE------------>//
+
 var authRouter = new express.Router();
 var apiRouter = new express.Router();
 
