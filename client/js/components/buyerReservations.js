@@ -49,11 +49,11 @@ var buyerReservations = React.createClass({
               End: { transaction.endTime.date } - { transaction.endTime.slot.time } 
             </td>
             <td>
-              <h2 className="ui center aligned header"> 
+              <h3 className=""> 
                 <Link to="reserveOutlet" params={{id: transaction.outlet.id }}>
                   { transaction.outlet.name } 
                 </Link>
-              </h2>
+              </h3>
             </td>
             <td>
               Seller: { transaction.outlet.seller_id }
@@ -83,12 +83,12 @@ var buyerReservations = React.createClass({
             <thead>
               <tr>
               <th>Reservation Info</th>
-              <th className="single line">Outlet Name</th>
+              <th className="">Outlet Name</th>
               <th>Seller</th>
-              <th>Rating</th>
               <th>Voltage</th>
               <th>Price</th>
               <th>Description</th>
+              <th>Controller</th>
             </tr></thead>
             <tbody>
               { transactionHtml }

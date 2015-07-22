@@ -40,11 +40,9 @@ var outletStore = assign({}, EventEmitter.prototype, {
         }else{
           
           if(new Date(outletData[i].date).getDate() === new Date(transactions[transactionId].endTime.date).getDate() && outletData[i].slot_id > transactions[transactionId].endTime.slot.number){
-            console.log('resetting slot id');
             transactions[transactionId].endTime.slot = {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].end};
           }
           else if(new Date(outletData[i].date).getDate() > new Date(transactions[transactionId].endTime.date).getDate()){
-            console.log('resetting slot id');
             transactions[transactionId].endTime = {slot: {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].end}, date: outletData[i].date};
           }
         }
@@ -52,7 +50,6 @@ var outletStore = assign({}, EventEmitter.prototype, {
       for(var key in transactions){
         transactionsData.push(transactions[key]);
       }
-      console.log('transactions -------------> ', transactionsData);
       return transactionsData;
     });
   },
