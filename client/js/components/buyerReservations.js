@@ -49,20 +49,19 @@ var buyerReservations = React.createClass({
               End: { transaction.endTime.date } - { transaction.endTime.slot.time } 
             </td>
             <td>
-              <h3 className=""> 
                 <Link to="reserveOutlet" params={{id: transaction.outlet.id }}>
                   { transaction.outlet.name } 
                 </Link>
-              </h3>
             </td>
             <td>
-              Seller: { transaction.outlet.seller_id }
+              Seller: { transaction.seller.fullname }
             </td>
             <td>
               { transaction.outlet.voltage }
             </td>
             <td>
               Price by hour: { transaction.outlet.priceHourly }
+              <br />
               Price by kWh: { transaction.outlet.priceEnergy }
             </td>
             <td>
