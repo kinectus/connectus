@@ -18,12 +18,9 @@
   },
   "homepage": "https://github.com/Dianna/connectus#readme",
   "dependencies": {
-<<<<<<< HEAD
     "bluebird": "^2.9.34",
-=======
     "async-decorators": "^0.1.3",
     "bluebird": "^2.9.33",
->>>>>>> outletListMap
     "body-parser": "^1.13.2",
     "bookshelf": "^0.8.1",
     "browserify": "^10.2.6",
@@ -58,12 +55,7 @@
     "path": "^0.11.14",
     "react": "^0.13.3",
     "react-async": "^2.1.0",
-<<<<<<< HEAD
-    "react-google-maps": "^1.7.1",
-    "react-googlemaps": "^0.4.0",
-=======
     "react-controllables": "^0.3.3",
->>>>>>> outletListMap
     "react-mixin": "^1.6.0",
     "react-pure-render": "^1.0.2",
     "react-router": "^0.13.3",

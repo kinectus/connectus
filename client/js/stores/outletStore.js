@@ -19,7 +19,6 @@ var outletStore = assign({}, EventEmitter.prototype, {
       return outlets;
     });
   },
-<<<<<<< HEAD
   
   getBuyerReservations: function(){
     return OutletServices.seeBuyerReservations().then(function(reservations){
@@ -27,15 +26,6 @@ var outletStore = assign({}, EventEmitter.prototype, {
       return reservations;
     });
   },
-=======
-  userLocation: {
-    lat: 37.783830, 
-    long: -122.408935
-  },
-  getLocation: function() {
-    return OutletServices.getLocation(this.userLocation.lat, this.userLocation.long);
-  },   
->>>>>>> outletListMap
   getOutletById: function(id){
     return OutletServices.retrieve().then(function(outlets){
       var myOutlet = null;
