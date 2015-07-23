@@ -115,7 +115,25 @@ var OutletInfo = React.createClass({
     )
   }
 });
-
+var Availability = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <button className="toggle">BACK</button>
+        <Slot />
+        <button className="toggle">FORWARD</button>
+      </div>
+    )
+  }
+});
+var Slot = React.createClass({
+  render: function() {
+    return (
+      <div className="slot">
+      </div>
+    )
+  }
+})
 var reserveOutlet = React.createClass({
   getInitialState: function(){
    return {
