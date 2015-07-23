@@ -7,7 +7,7 @@ var AuthController = require('../auth/auth.controller');
 
 var getOutletsByUser = require('../config/db/queries/getOutletsByUserId');
 var addNewOutlet = require('../config/db/queries/addNewOutlet');
-var getAvailability = require('../config/db/queries/getAvailability');
+var getOutletAvailability = require('../config/db/queries/getAvailability');
 var addReservationSlots = require('../config/db/queries/addReservationSlots');
 var updateReservation = require('../config/db/queries/updateReservation');
 var getAllUsers = require('../config/db/queries/getUserInfo');
