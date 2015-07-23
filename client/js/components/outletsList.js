@@ -146,7 +146,7 @@ var outletsList = React.createClass({
       return (   
         <div className="outletsList container">
           <Link to="outletsListMap">
-            <button type='button' class='btn btn-default'>Map Outlets</button>
+            <button type='button' className='btn btn-default'>Map Outlets</button>
           </Link>
           {tableHead}
         </div>
