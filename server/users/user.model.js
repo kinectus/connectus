@@ -8,6 +8,7 @@ var User = bookshelf.Model.extend({
     return this.hasMany(Outlet, 'seller_id');
   },
   reservations: function(){
+  	var Reservation = require('../reservations/reservation.model');
     return this.hasMany(Reservation, 'buyer_id');
   }
 });

@@ -10,9 +10,12 @@ module.exports = findCurrentTransaction = function(user, next){
   return User.forge({
     username: user
   })
-  .fetch({withRelated: ['reservations']})
+  .fetch()
   .then(function(user){
-    console.log(user.related('reservations').toJSON());
+    return user.reservations().fetch({withRelated:['transaction']});
+  })
+  .then(function(reservations){
+    console.log(reservations.toJSON());
   });
 
 };

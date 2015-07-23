@@ -80,18 +80,8 @@ module.exports = updateReservation = function(req, res){
 
 //create the transaction
 
-  Transaction.forge({
-        totalEnergy: 0,
-        totalCost: 0,
-        paid: false
-  })
-  .save()
-  .then(function(newTransaction){
-        transactionID = newTransaction.id;
-  })
-  .catch(function(error){
-    console.log('error saving transaction id', error);
-  });
+  
+
 
   // START RESERVATION PROCESS
   // Fetch user by request user id
@@ -112,7 +102,18 @@ module.exports = updateReservation = function(req, res){
       // Start making reservations for user
       .then(function(slot2){
         endSlot = slot2.id;
-        newReservation(user.id, startSlot);
+
+        Transaction.forge({
+              totalEnergy: 0,
+              totalCost: 0,
+              paid: false,
+              current: false
+        })
+        .save()
+        .then(function(newTransaction){
+          transactionID = newTransaction.id;
+          newReservation(user.id, startSlot);
+        });
       });
     });
   });
