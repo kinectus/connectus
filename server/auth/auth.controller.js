@@ -1,6 +1,7 @@
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var createUser = require('../config/db/queries/createUser.js');
+var AuthConstants = require('../constants/serverConstants.js');
 
 //passport support for persistent login sessions
 passport.serializeUser(function(user, done) {

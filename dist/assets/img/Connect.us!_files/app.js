@@ -241,7 +241,191 @@ var outletsList = React.createClass({displayName: "outletsList",
 
 module.exports = outletsList;
 
+<<<<<<< HEAD:dist/assets/img/Connect.us!_files/app.js
 },{"../dispatcher/ConnectusDispatcher":10,"../stores/outletStore":13,"react":233,"react-router":46}],7:[function(require,module,exports){
+=======
+},{"../dispatcher/ConnectusDispatcher":22,"../stores/outletStore":29,"../stores/userStore":31,"./mobilecheck":10,"react":376,"react-router":113,"react/addons":204}],12:[function(require,module,exports){
+var React = require('react');
+var outletStore = require('../stores/outletStore');
+var userStore = require('../stores/userStore');
+var ReactAddons = require('react/addons');
+var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
+var Router = require('react-router'); //need this for redirection
+var Link = require('react-router').Link;
+var mobile = require('./mobilecheck');
+var GoogleMap = require('google-map-react');
+var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
+// var shouldPureComponentUpdate = require('react-pure-render/function');
+// var MainMapLayout =require('./outletsListMap/main_map_layout.js');
+// var MainMapBlock =require('./outletsListMap/main_map_block.js');
+// var IceTable = require('components/controls/fixed_table_examples/ice_table.js');
+var Redux = require('redux');
+var ReduxReact = require('redux/react');
+
+var Map = React.createClass({displayName: "Map",
+  outletTableData: React.createElement("div", null),
+  displayOutletData: function(key, childProps) {
+    console.log('clicked-----------', childProps);
+    var outlet = childProps.data;
+      //     <Link to="reserveOutlet" params={{id: outlet.id }}>
+      //   { outlet.name } 
+      // </Link>
+    this.outletTableData = (
+      React.createElement("table", {className: "table table-hover"}, 
+          React.createElement("thead", null, 
+            React.createElement("tr", null, React.createElement("th", {className: "single line"}, "Outlet Name"), 
+            React.createElement("th", null, "Seller"), 
+            React.createElement("th", null, "Voltage"), 
+            React.createElement("th", null, "Price"), 
+            React.createElement("th", null, "Description")
+          )), 
+
+        React.createElement("tbody", null, 
+          React.createElement("tr", {key: outlet.id}, 
+              React.createElement("td", null, 
+                  React.createElement("a", {href: OutletListConstants.BASE_URL+'#/outlets/'+outlet.id},  outlet.name)
+              ), 
+              React.createElement("td", null, 
+                 outlet.seller
+              ), 
+              React.createElement("td", null, 
+                 outlet.voltage
+              ), 
+              React.createElement("td", null, 
+                "Price by hour: ",  outlet.priceHourly, 
+                "Price by kWh: ",  outlet.priceEnergy
+              ), 
+              React.createElement("td", null, 
+                 outlet.description
+              ), 
+              React.createElement("td", null
+  
+              )
+          )
+        )
+      )
+    )
+    this.forceUpdate();  
+  },
+  render: function() {
+    var that = this;
+    var markers = this.props.outletsData.outletData.map(function(outlet) {
+      return (
+        React.createElement(Marker, {className: "mapMarker", data: outlet, lat: outlet.lat, lng: outlet.long})
+      )
+    });
+    // change this class name and adjust the css jamie
+    // {this.props.outletsData.outletTable}
+    return (
+      React.createElement("div", null, 
+        React.createElement("div", {className: "reservationMap"}, 
+          React.createElement(GoogleMap, {onChildClick: that.displayOutletData, 
+            zoom: 15, 
+            // eventually use user's gps coordinates
+            center: [37.78,-122.4]
+          }, 
+            markers
+          )
+        ), 
+        React.createElement("div", null, 
+          this.outletTableData
+        )
+      )
+    )
+  }
+});
+
+var outletsListMap = React.createClass({displayName: "outletsListMap",
+  getInitialState: function(){
+    return {
+      outletData: [],
+      outletTable: 'hello'
+    }
+  },
+  mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
+  componentDidMount: function() {
+    var that = this;
+    // change function so that it retrieves only outlets near users location
+    outletStore.getOutlets().then(function(outletData){
+      outletData.map(function(outlet){
+        userStore.getUsernameById(outlet.id).then(function(user){
+          console.log(user.username)
+          outlet['seller'] = user.username;
+          that.setState({outletData: outletData});
+        })
+      })
+    })
+  },
+  render: function() {
+    // is the user authenticated?
+    if(!document.cookie){
+      this.transitionTo('login');
+      return React.createElement("h1", null);
+    }
+    var that = this;
+   
+    return (
+      React.createElement("div", {onClick: this.displayOutletData, className: "container"}, 
+        React.createElement(Link, {to: "outletsList"}, 
+          React.createElement("button", {type: "button", className: "btn btn-default"}, "List Outlets")
+        ), 
+        React.createElement("div", null, 
+           React.createElement(Map, {outletsData: this.state})
+        )
+      )
+    )
+  },
+
+  _onChange: function() {
+    this.setState(this.getInitialState());
+  }
+});
+
+module.exports = outletsListMap;
+
+},{"../../assets/markers/reserveOutlet/marker.jsx":1,"../dispatcher/ConnectusDispatcher":22,"../stores/outletStore":29,"../stores/userStore":31,"./mobilecheck":10,"google-map-react":41,"react":376,"react-router":113,"react/addons":204,"redux":385,"redux/react":399}],13:[function(require,module,exports){
+var React = require('react');
+var RouteHandler = require('react-router').RouteHandler;
+var outletStore = require('../stores/outletStore');
+var ReactAddons = require('react/addons');
+var PaymentStore = require('../stores/paymentStore');
+var Auth = require('../services/authServices.js');
+var Link = require('react-router').Link;
+var mobile = require('./mobilecheck');
+
+var Connectus = React.createClass({displayName: "Connectus",
+  componentDidMount: function() {
+    var that = this;
+    //get the client token from the view and set it into local storage or set it as the variable here
+    PaymentStore.getClientToken().then(function(clientToken){
+      console.log(clientToken);
+      braintree.setup(clientToken, "dropin", {
+        container: "payment-form"
+      });
+    });
+  // var clientToken = "eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiI5ZGRlZmUyMjkxYzlmYWQ1ZDE0MmFkODMyOGU0NDdhZjVkNDEyZWQ0NjZkNjc4ODNmY2IxYjk4ZWU2NmUzMTFlfGNyZWF0ZWRfYXQ9MjAxNS0wNy0yMlQxNzo1Nzo1OS44MjYzNTkzNjgrMDAwMFx1MDAyNm1lcmNoYW50X2lkPWRjcHNweTJicndkanIzcW5cdTAwMjZwdWJsaWNfa2V5PTl3d3J6cWszdnIzdDRuYzgiLCJjb25maWdVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvZGNwc3B5MmJyd2RqcjNxbi9jbGllbnRfYXBpL3YxL2NvbmZpZ3VyYXRpb24iLCJjaGFsbGVuZ2VzIjpbXSwiZW52aXJvbm1lbnQiOiJzYW5kYm94IiwiY2xpZW50QXBpVXJsIjoiaHR0cHM6Ly9hcGkuc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbTo0NDMvbWVyY2hhbnRzL2RjcHNweTJicndkanIzcW4vY2xpZW50X2FwaSIsImFzc2V0c1VybCI6Imh0dHBzOi8vYXNzZXRzLmJyYWludHJlZWdhdGV3YXkuY29tIiwiYXV0aFVybCI6Imh0dHBzOi8vYXV0aC52ZW5tby5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIiwiYW5hbHl0aWNzIjp7InVybCI6Imh0dHBzOi8vY2xpZW50LWFuYWx5dGljcy5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIn0sInRocmVlRFNlY3VyZUVuYWJsZWQiOnRydWUsInRocmVlRFNlY3VyZSI6eyJsb29rdXBVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvZGNwc3B5MmJyd2RqcjNxbi90aHJlZV9kX3NlY3VyZS9sb29rdXAifSwicGF5cGFsRW5hYmxlZCI6dHJ1ZSwicGF5cGFsIjp7ImRpc3BsYXlOYW1lIjoiQWNtZSBXaWRnZXRzLCBMdGQuIChTYW5kYm94KSIsImNsaWVudElkIjpudWxsLCJwcml2YWN5VXJsIjoiaHR0cDovL2V4YW1wbGUuY29tL3BwIiwidXNlckFncmVlbWVudFVybCI6Imh0dHA6Ly9leGFtcGxlLmNvbS90b3MiLCJiYXNlVXJsIjoiaHR0cHM6Ly9hc3NldHMuYnJhaW50cmVlZ2F0ZXdheS5jb20iLCJhc3NldHNVcmwiOiJodHRwczovL2NoZWNrb3V0LnBheXBhbC5jb20iLCJkaXJlY3RCYXNlVXJsIjpudWxsLCJhbGxvd0h0dHAiOnRydWUsImVudmlyb25tZW50Tm9OZXR3b3JrIjp0cnVlLCJlbnZpcm9ubWVudCI6Im9mZmxpbmUiLCJ1bnZldHRlZE1lcmNoYW50IjpmYWxzZSwiYnJhaW50cmVlQ2xpZW50SWQiOiJtYXN0ZXJjbGllbnQzIiwibWVyY2hhbnRBY2NvdW50SWQiOiJzdGNoMm5mZGZ3c3p5dHc1IiwiY3VycmVuY3lJc29Db2RlIjoiVVNEIn0sImNvaW5iYXNlRW5hYmxlZCI6dHJ1ZSwiY29pbmJhc2UiOnsiY2xpZW50SWQiOiIxMWQyNzIyOWJhNThiNTZkN2UzYzAxYTA1MjdmNGQ1YjQ0NmQ0ZjY4NDgxN2NiNjIzZDI1NWI1NzNhZGRjNTliIiwibWVyY2hhbnRBY2NvdW50IjoiY29pbmJhc2UtZGV2ZWxvcG1lbnQtbWVyY2hhbnRAZ2V0YnJhaW50cmVlLmNvbSIsInNjb3BlcyI6ImF1dGhvcml6YXRpb25zOmJyYWludHJlZSB1c2VyIiwicmVkaXJlY3RVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbS9jb2luYmFzZS9vYXV0aC9yZWRpcmVjdC1sYW5kaW5nLmh0bWwiLCJlbnZpcm9ubWVudCI6Im1vY2sifSwibWVyY2hhbnRJZCI6ImRjcHNweTJicndkanIzcW4iLCJ2ZW5tbyI6Im9mZmxpbmUiLCJhcHBsZVBheSI6eyJzdGF0dXMiOiJtb2NrIiwiY291bnRyeUNvZGUiOiJVUyIsImN1cnJlbmN5Q29kZSI6IlVTRCIsIm1lcmNoYW50SWRlbnRpZmllciI6Im1lcmNoYW50LmNvbS5icmFpbnRyZWVwYXltZW50cy5zYW5kYm94LkJyYWludHJlZS1EZW1vIiwic3VwcG9ydGVkTmV0d29ya3MiOlsidmlzYSIsIm1hc3RlcmNhcmQiLCJhbWV4Il19fQ==";
+
+  // braintree.setup(clientToken, "dropin", {
+  //   container: "payment-form"
+  // });
+ },
+
+  render: function() {
+    return(
+    React.createElement("form", {id: "checkout", method: "post", action: "/checkout"}, 
+      React.createElement("div", {id: "payment-form"}), 
+      React.createElement("input", {type: "submit", value: "Pay $10"})
+    )
+    );
+  }
+});
+
+module.exports = Connectus;
+
+},{"../services/authServices.js":24,"../stores/outletStore":29,"../stores/paymentStore":30,"./mobilecheck":10,"react":376,"react-router":113,"react/addons":204}],14:[function(require,module,exports){
+// TODO: validate data, possibly change format of date, allow only one click on reserve outlet.
+
+>>>>>>> added server constants and added constant in auths:dist/js/app.js
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
