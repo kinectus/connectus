@@ -73,8 +73,6 @@ var DateTime = React.createClass({
         <DateTimePicker  ref="startTime" defaultValue={new Date()} />
         <DateTimePicker  ref="endTime" defaultValue={null} />
         <div className="btn btn-default" onClick={that.handleSubmit}>Reserve Outlet</div>
-        <button onClick={this.handleSubmit}>Reserve Outlet</button>
-
       </div>
     )
   }
