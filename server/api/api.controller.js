@@ -10,6 +10,7 @@ var addNewOutlet = require('../config/db/queries/addNewOutlet');
 var getOutletAvailability = require('../config/db/queries/getAvailability');
 var addReservationSlots = require('../config/db/queries/addReservationSlots');
 var updateReservation = require('../config/db/queries/updateReservation');
+var getTimeSlotInfo = require('../config/db/queries/getTimeSlotInfo');
 var getAllUsers = require('../config/db/queries/getUserInfo');
 var getOutletsByUser = require('../config/db/queries/getOutletsByUserId.js');
 var getBuyerReservations = require('../config/db/queries/getBuyerReservations');
@@ -79,6 +80,13 @@ module.exports = {
 
   getAvailability: function(req, res){
     getOutletAvailability(req, res);
+  },
+
+  seeTimeSlots: function(req, res){
+    getTimeSlotInfo(req, res)
+    .then(function(slots){
+      res.send(200, slots.models)
+    });
   },
 
   addReservations: function(newOutlet){

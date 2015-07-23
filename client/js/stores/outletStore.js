@@ -62,6 +62,12 @@ var outletStore = assign({}, EventEmitter.prototype, {
     });
   },
 
+  getTimeSlotInfo: function(){
+    return OutletServices.retrieveSlots().then(function(slots){
+      return slots;
+    });
+  },
+
   getOutletById: function(id){
     return OutletServices.retrieve().then(function(outlets){
       var myOutlet = null;

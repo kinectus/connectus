@@ -65,6 +65,18 @@ var outletServices = function(){
     });
   };
 
+  outletData.retrieveSlots = function(){
+    return request({
+      url: OutletListConstants.TIME_SLOTS,
+      method: 'GET',
+      crossOrigin: true,
+      type: 'json',
+      success: function(slots){
+        return slots;
+      }
+    });
+  };
+
   outletData.retrieveOutletById = function(outletID){
     return request({
       url: OutletListConstants.OUTLET_DATA,

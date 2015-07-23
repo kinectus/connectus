@@ -119,7 +119,7 @@ var Availability = React.createClass({
   render: function() {
   // console.log('this.props.reservationData: ', this.props.reservationData)
     return (
-      <div>
+      <div className="timeblock">
         <button className="toggle" >BACK</button>
         <div className = "viewBox"><TimeBlock reservationData = {this.props.reservationData}/></div>
         <button className="toggle">FORWARD</button>
@@ -230,9 +230,13 @@ var reserveOutlet = React.createClass({
     //GET OUTLET RESERVATIONS
     outletStore.getOutletReservations(outletID).then(function(reservations){
       that.setState({reservations: reservations});
-      // that.setState({resIndex: 0});
       // console.log('reservations in reserveOutlet: ', that.state.reservations);
     });
+
+    outletStore.getTimeSlotInfo().then(function(slots){
+      that.setState({timeSlots: slots});
+      console.log('yo slots: ', that.state.timeSlots);
+    })
   },
 
   render: function() {
