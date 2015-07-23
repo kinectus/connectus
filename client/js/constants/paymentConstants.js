@@ -1,4 +1,4 @@
-var BASE_URL = 'http://localhost:3000/';
+var BASE_URL = 'https://econnectus.herokuapp.com';
 
 var paymentConstants = {
   BASE_URL: BASE_URL,
