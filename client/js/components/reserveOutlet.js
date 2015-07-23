@@ -132,22 +132,40 @@ var Availability = React.createClass({
 var TimeBlock = React.createClass({
   render: function() {
   console.log('this.props.reservationData in timeblock: ', this.props.reservationData)
-      return (
-        <tr>
-          <Slot reservationData = {this.props.reservationData}/>
-        </tr>
-      )
-  }
-});
-var Slot = React.createClass({
-  render: function() {
-    console.log('this.props.reservationData in slot: ', this.props.reservationData)
+    if (this.props.reservationData){
+      var outerHTML = this.props.reservationData.map(function(reservation){
+        return (
+          <td className={reservation.available} >
+          </td>
+        )
+      });
+      // var outerHTML = function() {
+      //   return (
+      //     <td className="slot" >
+      //     </td>
+      //   )
+      // }();
+    } else {
+      var outerHTML = this.props.reservationData.map(function(reservation){
+        return (
+          <td className="slot" >
+          </td>
+        )
+      });
+    }
+
     return (
-      <td className="slot">
-      </td>
+      <tr>
+        {outerHTML}
+      </tr>
     )
   }
 });
+// var Slot = React.createClass({
+//   render: function() {
+//     console.log('this.props.reservationData in slot: ', this.props.reservationData)
+//   }
+// });
 
 var reserveOutlet = React.createClass({
   getInitialState: function(){
