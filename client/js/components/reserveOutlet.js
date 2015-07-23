@@ -135,7 +135,7 @@ var TimeBlock = React.createClass({
     if (this.props.reservationData){
       var outerHTML = this.props.reservationData.map(function(reservation){
         return (
-          <td className={reservation.available} >
+          <td className={reservation.available} key={reservation.id}>
           </td>
         )
       });
