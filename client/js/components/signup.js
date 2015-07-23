@@ -1,5 +1,6 @@
 var React = require('react');
 var Auth = require('../services/authServices.js');
+var AuthConstants = require('../constants/authConstants.js');
 // var ReactAddons = require('react/addons');
 
 var Signup = React.createClass({
@@ -11,7 +12,7 @@ var Signup = React.createClass({
     return (
   	  <div className="login ui center container">
         <h3>Signup with Facebook</h3>
-        <a href="http://localhost:3000/auth/facebook">
+        <a href={AuthConstants.BASE_URL+'/auth/facebook'}>
           <img src="../assets/img/connect.png" />
         </a>
       </div>
