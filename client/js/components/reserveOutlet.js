@@ -117,10 +117,11 @@ var OutletInfo = React.createClass({
 });
 var Availability = React.createClass({
   render: function() {
+  // console.log('this.props.reservationData: ', this.props.reservationData)
     return (
       <div>
         <button className="toggle" >BACK</button>
-        <table><tbody><TimeBlock /></tbody></table>
+        <table><tbody><TimeBlock reservationData = {this.props.reservationData}/></tbody></table>
         <button className="toggle">FORWARD</button>
       </div>
     )
@@ -130,15 +131,17 @@ var Availability = React.createClass({
     // })
 var TimeBlock = React.createClass({
   render: function() {
+  console.log('this.props.reservationData in timeblock: ', this.props.reservationData)
       return (
         <tr>
-          <Slot />
+          <Slot reservationData = {this.props.reservationData}/>
         </tr>
       )
   }
 });
 var Slot = React.createClass({
   render: function() {
+    console.log('this.props.reservationData in slot: ', this.props.reservationData)
     return (
       <td className="slot">
       </td>
@@ -149,7 +152,8 @@ var Slot = React.createClass({
 var reserveOutlet = React.createClass({
   getInitialState: function(){
    return {
-      data: []
+      data: [],
+      reservations: []
     }
   },
   mixins: [Router.Navigation],
@@ -163,14 +167,14 @@ var reserveOutlet = React.createClass({
     var outletID = this.props.params.id
     outletStore.getOutletById(outletID).then(function(outlet){
       // setState automatically forces a re-render
-      console.log('outlet',outlet);
+      // console.log('outlet',outlet);
       that.setState({data: outlet});
     });
 
     //GET OUTLET RESERVATIONS
     outletStore.getOutletReservations(outletID).then(function(reservations){
-      console.log('reservations: ', reservations);
       that.setState({reservations: reservations});
+      // console.log('reservations in reserveOutlet: ', that.state.reservations);
     });
   },
 
@@ -188,6 +192,9 @@ var reserveOutlet = React.createClass({
         </div>
         <div>
           <OutletInfo outletData = {this.state.data}/>
+        </div>
+        <div>
+          <Availability reservationData = {this.state.reservations}/>
         </div>
         <div>
          <DateTime outletData = {this.state.data}/>
