@@ -29,6 +29,12 @@ var buyerReservations = React.createClass({
     });
   },
 
+  // createTransaction: function(){
+  //   outletStore.createTransaction().then(function(transaction){
+  //     return transaction;
+  //   });
+  // },
+
   render: function() {
 
     // is the user authenticated?
@@ -69,6 +75,7 @@ var buyerReservations = React.createClass({
             </td>
             <td>
               <div className="btn" onClick={this.handleSubmit}>Turn on</div>
+              <div className="btn" onClick={this.createTransaction}>End</div>
             </td>
             
           </tr>

@@ -31,12 +31,48 @@ var Map = React.createClass({
   }
 });
 var DateTime = React.createClass({
+  handleSubmit: function(event) {
+    event.preventDefault();
+    var timeConvert = function(time){
+      if(time < 10){
+        return "0" + time;
+      }
+      return time;
+    };
+    var start = this.refs.startTime.state.value;
+    var end = this.refs.endTime.state.value;
+    var startMonth = start.getMonth() < 10 ? "0"+(start.getMonth()+1) : start.getMonth() +1;
+    var endMonth = end.getMonth() < 10 ? "0"+(end.getMonth()+1) : end.getMonth() + 1;
+    var startDateString = start.getFullYear() + "-" + startMonth + "-" + start.getDate();
+    var endDateString = end.getFullYear() + "-" + endMonth + "-" + end.getDate();
+    var startTimeString = timeConvert(start.getHours())+":"+timeConvert(start.getMinutes());
+    var endTimeString = timeConvert(end.getHours())+":"+timeConvert(end.getMinutes());
+    console.log(startTimeString, endTimeString);
+
+    var newReservation = {
+      outletID: this.props.outletData.id,
+      start: {
+        date: startDateString,
+        time: startTimeString
+      },
+      end: {
+        date: endDateString,
+        time: endTimeString
+      }
+    }
+    console.log(newReservation);
+    outletStore.submitReservation(newReservation).then(function(res){
+      console.log('submitReservation, response', res)
+    });
+  },
+
   render: function() {
+    var that = this;
     return (
       <div>
         <DateTimePicker  ref="startTime" defaultValue={new Date()} />
         <DateTimePicker  ref="endTime" defaultValue={null} />
-        <button className="btn btn-default" onClick={this.handleSubmit}>Reserve Outlet</button>
+        <div className="btn btn-default" onClick={that.handleSubmit}>Reserve Outlet</div>
       </div>
     )
   }
@@ -101,41 +137,7 @@ var reserveOutlet = React.createClass({
       that.setState({data: outlet});
     });
   },
-  handleSubmit: function(event) {
-    console.log('submitted reservation')
-    event.preventDefault();
-    var timeConvert = function(time){
-      if(time < 10){
-        return "0" + time;
-      }
-      return time;
-    };
-    var start = this.refs.startTime.state.value;
-    var end = this.refs.endTime.state.value;
-    var startMonth = start.getMonth() < 10 ? "0"+(start.getMonth()+1) : start.getMonth() +1;
-    var endMonth = end.getMonth() < 10 ? "0"+(end.getMonth()+1) : end.getMonth() + 1;
-    var startDateString = start.getFullYear() + "-" + startMonth + "-" + start.getDate();
-    var endDateString = end.getFullYear() + "-" + endMonth + "-" + end.getDate();
-    var startTimeString = timeConvert(start.getHours())+":"+timeConvert(start.getMinutes());
-    var endTimeString = timeConvert(end.getHours())+":"+timeConvert(end.getMinutes());
-    console.log(startTimeString, endTimeString);
 
-    var newReservation = {
-      outletID: this.props.params.id,
-      start: {
-        date: startDateString,
-        time: startTimeString
-      },
-      end: {
-        date: endDateString,
-        time: endTimeString
-      }
-    }
-    console.log(newReservation);
-    outletStore.submitReservation(newReservation).then(function(res){
-      console.log('submitReservation, response', res)
-    });
-  },
   render: function() {
 
     // is user authenticate
@@ -152,7 +154,7 @@ var reserveOutlet = React.createClass({
           <OutletInfo outletData = {this.state.data}/>
         </div>
         <div>
-         <DateTime />
+         <DateTime outletData = {this.state.data}/>
         </div>
       </div>
     )

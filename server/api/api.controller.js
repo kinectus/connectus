@@ -11,8 +11,45 @@ var User = require('../users/user.model');
 var getOutletsByUser = require('../config/db/queries/getOutletsByUserId.js');
 var moment = require('moment');
 var getBuyerReservations = require('../config/db/queries/getBuyerReservations');
+var braintree = require('braintree');
+var findCurrentTransaction = require('../config/db/queries/findCurrentTransaction');
+
+var gateway = braintree.connect({
+environment: braintree.Environment.Sandbox,
+merchantId: "fnrgqqwdcfc5wtvh",
+publicKey: "9wzszhdgj9rq8z8y",
+privateKey: "6910d378ab21d286f37ed123e70022f6"
+});
 
 module.exports = {
+  
+  client_token: function (req, res) {
+  gateway.clientToken.generate({}, function (err, response) {
+    res.send(response.clientToken);
+  });
+  },
+
+  checkout: function (req, res) {
+  var nonce = req.body.payment_method_nonce;
+  console.log('is user attached?--------->', req.user);
+  // Use payment method nonce here
+  findCurrentTransaction(req.user.id).then(function(trans){
+    console.log('totalCost---------->', trans.totalCost);
+    gateway.transaction.sale({
+      amount: 10,
+      paymentMethodNonce: nonce,
+    }, function (err, result) {
+      if(err){
+        console.log(err);
+        return;
+      }
+      res.redirect('/#/paymentConfirmation');
+    });
+  })
+  .catch(function(error){
+    console.log(error);
+  });
+  },
 
   getAllOutlets: function(req, res) {
     Outlets.reset().fetch().then(function(outlets) {
