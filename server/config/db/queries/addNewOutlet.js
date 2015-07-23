@@ -33,7 +33,9 @@ module.exports = addNewOutlet = function(req, res){
           description: data.description,
           // priceSuggest: data.priceSuggest,
           address: data.address,
-          voltage: data.voltage
+          voltage: data.voltage,
+          thumbs_up: 0,
+          thumbs_down: 0
         });
 
         outlet.save().then(function(newOutlet){

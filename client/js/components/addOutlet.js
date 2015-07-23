@@ -45,43 +45,50 @@ var addOutlet = React.createClass({
       this.transitionTo('login');
       return <h1></h1>;
     }
-    // var value = this.state.value;
+
     return (
-      <div className="addoutlet ui container center">
-        <form className="ui form" onSubmit={this.handleSubmit}>
-          <div className="field">
-            <label>Street</label>
-            <input type="text" name="street" ref="street" placeholder='Enter your street address...' /><br />
+      <div className="addoutlet col-md-6 col-md-offset-3">
+        <h3>Add an outlet:</h3>
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <label>Street</label><br />
+            <input type="text" name="street" ref="street" className="form-control" placeholder='Enter your street address...' /><br />
           </div>
-          <div className="field">
-            City <input type="text" name="city" ref="city" placeholder='Enter city...' /> <br />
+          <div className="form-group">
+            <label>City</label><br />
+            <input type="text" name="city" ref="city" className="form-control" placeholder='Enter city...' /> <br />
           </div>
-          <div className="field">
-            State <input type="text" name="state" ref="state" placeholder='Enter state...' /><br />
+          <div className="form-group">
+            <label>State</label><br />
+            <input type="text" name="state" ref="state" className="form-control" placeholder='Enter state...' /><br />
           </div>
-          <div className="field">
-            Zip-code <input type="text" name="zip" ref="zip" placeholder='Enter zip-code...' /><br />
+          <div className="form-group">
+            <label>Zip Code</label><br />
+            <input type="text" name="zip" ref="zip" className="form-control" placeholder='Enter zip-code...' /><br />
           </div>
-          <div className="field">
-            Name <input type="text" name="name" ref="name" placeholder='What do you want to call this outlet?' /><br />
+          <div className="form-group">
+            <label>Outlet Name</label><br />
+            <input type="text" name="name" ref="name" className="form-control" placeholder='What do you want to call this outlet?' /><br />
           </div>
-          <div className="field">
-            Description <textarea name="description" name="description" ref="description" placeholder="This is a description." /><br />
+          <div className="form-group">
+            <label>Instructions for user</label><br />
+            <textarea name="description" name="description" ref="description" className="form-control" placeholder="This is a description." /><br />
           </div>
-          <div className="field">
-            <label>Voltage</label>
-            <select className="ui dropdown" ref="voltage">
+          <div className="form-group">
+            <label>Outlet Voltage</label><br />
+            <select className="ui dropdown" className="form-control" ref="voltage">
               <option value="standard">Standard</option>
               <option value="high">High</option>
             </select><br />
           </div>
-          <div className="field">
-            Your hourly rate: $3/hr   Suggested price/kWh: $10/kWh<br />
+          <div className="form-group">
+            <label>Your hourly rate: $3/hr   Suggested price/kWh: $0.20/kWh</label><br />
           </div>
-          <div className="field">
-            Your price/kWh charge: $<input type="text" name="charge" ref="charge" placeholder='ex. 10' />/kWh<br />
+          <div className="form-group">
+            <label>Your price/kWh charge: </label><br />
+            <input type="text" name="charge" ref="charge" className="form-control" placeholder='ex. 10' />/kWh<br />
           </div>
-          <input type="submit" value="Submit" />
+          <button type="submit" className="btn btn-primary btn-lg btn-block" value="Submit">Submit</button>
         </form>
       </div>
     )
@@ -89,7 +96,9 @@ var addOutlet = React.createClass({
 });
 
 module.exports = addOutlet;
-          // <div className="ui submit button" type="POST">Submit</div><br />
+
+
+// <div className="ui submit button" type="POST">Submit</div><br />
 
 // <select className="select" onChange={this.selectLog}>
 //           <option value='AK'>AK</option>

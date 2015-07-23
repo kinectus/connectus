@@ -36,7 +36,7 @@ var DateTime = React.createClass({
       <div>
         <DateTimePicker  ref="startTime" defaultValue={new Date()} />
         <DateTimePicker  ref="endTime" defaultValue={null} />
-        <div className="ui button" onClick={this.handleSubmit}>Reserve Outlet</div>
+        <button className="btn btn-default" onClick={this.handleSubmit}>Reserve Outlet</button>
       </div>
     )
   }
@@ -102,6 +102,7 @@ var reserveOutlet = React.createClass({
     });
   },
   handleSubmit: function(event) {
+    console.log('submitted reservation')
     event.preventDefault();
     var timeConvert = function(time){
       if(time < 10){

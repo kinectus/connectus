@@ -17,8 +17,6 @@ var Connectus = React.createClass({
 
   componentDidMount: function() {
     var that = this; 
-    // for some reason, semantic needs this to make the menu to drop down
-    // $('.ui.dropdown').dropdown()
 
     // resizing the screen renders mobile or full menu
     var isMobile = mobile();
@@ -55,63 +53,69 @@ var Connectus = React.createClass({
       </div>
     );
 
+    var footerHtml = (<div />);
+
     //reset the html that will be shown if the user is logged in(cookie present)
     // secondary pointing
 
     if(document.cookie){
 
-          if(isMobile){
-            console.log('mobile')
+      if(isMobile){
+        console.log('mobile')
 
-            pageHtml = (
-              <div className="topNavBar">
-                <div className="mobile">
-                  <span className="logo">
-                    <Link to="about">Connect.us</Link>
-                  </span>
-                </div>
-                <div className="mobile">
-                  <ul className="nav navbar-nav">
-                    <li className="dropdown">
-                      <a className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu<span className="caret"></span></a>
-                      <ul className="dropdown-menu">
-                        <li role="presentation"><Link to="outletsList">Outlets</Link></li>
-                        <li role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
-                        <li role="presentation"><Link to="buyerReservations">Buyer Reservations</Link></li>
-                        <li role="separator" className="divider"></li>
-                        <li><a className="logout" onClick={this.logout}>Logout</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </div> 
-          )
-
-          // if NOT mobile, make it this... 
-          } else {
-
-            pageHtml = (
-              <div className="topNavBar">
+        pageHtml = (
+          <div className="topNavBar">
+            <div className="mobile">
               <span className="logo">
                 <Link to="about">Connect.us</Link>
               </span>
-                <ul className="nav nav-pills pull-right">
-                  <li role="presentation"><Link to="outletsList">Outlets</Link></li>
-                  <li role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
-                  <li role="presentation"><Link to="buyerReservations">Buyer Reservations</Link></li>
-                  <li role="presentation"><a className="logout" onClick={this.logout}>Logout</a></li>
-                </ul>
-              </div> 
-              );
+            </div>
+            <div className="mobile">
+              <ul className="nav navbar-nav">
+                <li className="dropdown">
+                  <a className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu<span className="caret"></span></a>
+                  <ul className="dropdown-menu">
+                    <li role="presentation"><Link to="outletsList">Outlets</Link></li>
+                    <li role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
+                    <li role="presentation"><Link to="buyerReservations">Buyer Reservations</Link></li>
+                    <li role="separator" className="divider"></li>
+                    <li><a className="logout" onClick={this.logout}>Logout</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div> 
+      )
 
-          } 
-        }
+        footerHtml = (<div />);
+
+      // if NOT mobile, make it this... 
+      } else {
+
+        pageHtml = (
+          <div className="topNavBar">
+          <span className="logo">
+            <Link to="about">Connect.us</Link>
+          </span>
+            <ul className="nav nav-pills pull-right">
+              <li role="presentation"><Link to="outletsList">Outlets</Link></li>
+              <li role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
+              <li role="presentation"><Link to="buyerReservations">Buyer Reservations</Link></li>
+              <li role="presentation"><a className="logout" onClick={this.logout}>Logout</a></li>
+            </ul>
+          </div> 
+          );
+
+        footerHtml = (<div />);
+      } 
+    }
 
     //actual rendering happens here - logic to decide what {pageHtml} is happens above
     return (
     <div className="container-fluid">
       {pageHtml}
       {routeHandler}
+      {footerHtml}
     </div>
     );
   }

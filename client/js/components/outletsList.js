@@ -67,12 +67,13 @@ var outletsList = React.createClass({
               </td>
               <td>
                 <h5>Pricing: </h5>
-                <p className="description-text">Price by hour: { outlet.priceHourly }</p>
-                <p className="description-text">Price by kWh: { outlet.priceEnergy }</p>
+                <p className="description-text">${ outlet.priceHourly }/hr</p>
+                <p className="description-text">${ outlet.priceEnergy }/kWh</p>
               </td>
               <td>
                 <h5>Description:</h5> 
                 <p className="description-text">{ outlet.description }</p>
+                <p className="rating">{ outlet.rating }</p>
               </td>
             </tr>
           )
@@ -95,11 +96,12 @@ var outletsList = React.createClass({
                 { outlet.voltage }
               </td>
               <td>
-                Price by hour: { outlet.priceHourly }
-                Price by kWh: { outlet.priceEnergy }
+                <p>${ outlet.priceHourly }/hr</p>
+                <p>${ outlet.priceEnergy }/kWh</p>
               </td>
               <td>
-              { outlet.description }
+              <p>{ outlet.description }</p>
+              <p className="rating">{ outlet.rating }</p>
               </td>
             </tr>
           )

@@ -11,6 +11,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
   getOutlets: function() {
     return OutletServices.retrieve().then(function(outlets){
       console.log('outlets in the store: ', outlets)
+      OutletServices.calculateOutletRating(outlets);
       return outlets;
     });
   },
@@ -80,7 +81,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
 
   addChangeListener: function(callback) {
     this.on(CHANGE_EVENT, callback);
-  },
+  }
 
 });
 
