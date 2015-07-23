@@ -55,7 +55,11 @@ var buyerReservations = React.createClass({
               End: { transaction.endTime.date } - { transaction.endTime.slot.time } 
             </td>
             <td>
+<<<<<<< HEAD
                   { transaction.outlet.name }
+=======
+                  { transaction.outlet.name } 
+>>>>>>> (fixing merge conflicts)
             </td>
             <td>
               Seller: { transaction.seller.fullname }
@@ -108,5 +112,8 @@ var buyerReservations = React.createClass({
   }
 
 });
+
+// <Link to="seeReservedOutlet" params={{id: transaction.outlet.id }}>
+//  </Link>
 
 module.exports = buyerReservations;
