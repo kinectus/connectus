@@ -73,6 +73,8 @@ var DateTime = React.createClass({
         <DateTimePicker  ref="startTime" defaultValue={new Date()} />
         <DateTimePicker  ref="endTime" defaultValue={null} />
         <div className="btn btn-default" onClick={that.handleSubmit}>Reserve Outlet</div>
+        <button onClick={this.handleSubmit}>Reserve Outlet</button>
+
       </div>
     )
   }
@@ -131,7 +133,7 @@ var Availability = React.createClass({
     // })
 var TimeBlock = React.createClass({
   render: function() {
-  console.log('this.props.reservationData in timeblock: ', this.props.reservationData)
+  // console.log('this.props.reservationData in timeblock: ', this.props.reservationData)
     if (this.props.reservationData){
       var previousDate;
       var outerHTML = this.props.reservationData.map(function(reservation){
@@ -140,9 +142,9 @@ var TimeBlock = React.createClass({
         if (reservation.date !== previousDate){
           previousDate = reservation.date;
           return(
-            <div className="timeblock">
+            <div className="timeblock" key={reservation.id}>
               <div className="divider"><p>{reservation.date}</p></div>
-              <div className={goOrNoGo} key={reservation.id}></div>
+              <div className={goOrNoGo}></div>
             </div>
           )
         } else {
