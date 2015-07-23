@@ -121,7 +121,7 @@ var Availability = React.createClass({
     return (
       <div>
         <button className="toggle" >BACK</button>
-        <table><tbody><TimeBlock reservationData = {this.props.reservationData}/></tbody></table>
+        <div><TimeBlock reservationData = {this.props.reservationData}/></div>
         <button className="toggle">FORWARD</button>
       </div>
     )
@@ -133,31 +133,37 @@ var TimeBlock = React.createClass({
   render: function() {
   console.log('this.props.reservationData in timeblock: ', this.props.reservationData)
     if (this.props.reservationData){
+      var previousDate;
       var outerHTML = this.props.reservationData.map(function(reservation){
-        return (
-          <td className={reservation.available} key={reservation.id}>
-          </td>
-        )
+        previousDate = previousDate || reservation.date;
+        var goOrNoGo= reservation.available ? "on" : "off";
+        if (reservation.date !== previousDate){
+          previousDate = reservation.date;
+          return(
+            <div>
+              <div className="divider"><p>{reservation.date}</p></div>
+              <div className={goOrNoGo} key={reservation.id}></div>
+            </div>
+          )
+        } else {
+          return (
+            <div className={goOrNoGo} key={reservation.id}>
+            </div>
+          )
+        }
       });
-      // var outerHTML = function() {
-      //   return (
-      //     <td className="slot" >
-      //     </td>
-      //   )
-      // }();
     } else {
       var outerHTML = this.props.reservationData.map(function(reservation){
         return (
-          <td className="slot" >
-          </td>
+          <div className="slot"></div>
         )
       });
     }
 
     return (
-      <tr>
+      <div>
         {outerHTML}
-      </tr>
+      </div>
     )
   }
 });
