@@ -79,7 +79,7 @@ module.exports = {
 
   getAvailability: function(req, res){
     getOutletAvailability(req, res);
-  }
+  },
 
   addReservations: function(newOutlet){
     addReservationSlots(newOutlet);
