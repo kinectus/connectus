@@ -55,9 +55,9 @@ var outletStore = assign({}, EventEmitter.prototype, {
       return transactionsData;
     });
   },
-  
-  getOutletReservations: function(){
-    return OutletServices.retrieveOutletReservations().then(function(reservations){
+
+  getOutletReservations: function(outletID){
+    return OutletServices.retrieveOutletReservations(outletID).then(function(reservations){
       return reservations;
     });
   },
