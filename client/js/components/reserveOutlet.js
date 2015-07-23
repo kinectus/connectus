@@ -120,9 +120,9 @@ var Availability = React.createClass({
   // console.log('this.props.reservationData: ', this.props.reservationData)
     return (
       <div className="timeblock">
-        <button className="toggle" >BACK</button>
-        <div className = "viewBox"><TimeBlock reservationData = {this.props.reservationData}/></div>
-        <button className="toggle">FORWARD</button>
+        <button className="toggle glyphicon glyphicon-chevron-left"></button>
+        <div className = "viewBox"><TimeBlock reservationData = {this.props.reservationData} timeSlots = {this.props.timeSlots}/></div>
+        <button className="toggle glyphicon glyphicon-chevron-right"></button>
       </div>
     )
   }
@@ -146,18 +146,37 @@ var TimeBlock = React.createClass({
       //     )
       //   }
       // }(this.props.resIndex, this.props.reservationData);
-    if (this.props.reservationData){
+    if (this.props.reservationData && this.props.timeSlots){
       var start = start || 0;
       var end = end || 47;
       var subset = subset || this.props.reservationData.slice(start, end);
       var next = next || this.props.reservationData.slice(end+1, end+48);
+      var slotProps = slotProps || this.props.timeSlots;
+      console.log('slotProps', slotProps)
+      var centerCount = centerCount ? centerCount > 48 ? 0 : centerCount : 0;
       console.log('subset: ', subset);
       console.log('next: ', next);
       var outerHTML = subset.map(function(reservation){
+        console.log('centerCount now: ', centerCount);
         var goOrNoGo = reservation.available ? "on" : "off";
-        return(
-            <div className={goOrNoGo} key={reservation.id}></div>
-        )
+        var center = (centerCount===24) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
+        centerCount++;
+        var begin, end;
+        if (centerCount===25){
+          for (var j=0; j<slotProps.length; j++){
+            if (slotProps[j].id === reservation.slot_id){
+              begin = slotProps[j].start;
+              end = slotProps[j].end;
+            }
+          }
+          return(
+            <div className={center} key={reservation.id}><p>{begin}-{end}</p></div>
+          )
+        } else {
+          return(
+            <div className={center} key={reservation.id}></div>
+          )
+        }
       });
     } else {
       var outerHTML =
@@ -235,7 +254,7 @@ var reserveOutlet = React.createClass({
 
     outletStore.getTimeSlotInfo().then(function(slots){
       that.setState({timeSlots: slots});
-      console.log('yo slots: ', that.state.timeSlots);
+      // console.log('yo slots: ', that.state.timeSlots);
     })
   },
 
@@ -254,7 +273,7 @@ var reserveOutlet = React.createClass({
           <OutletInfo outletData = {this.state.data}/>
         </div>
         <div>
-          <Availability reservationData = {this.state.reservations} resIndex = {this.state.resIndex}/>
+          <Availability reservationData = {this.state.reservations} timeSlots = {this.state.timeSlots}/>
         </div>
         <div>
          <DateTime outletData = {this.state.data}/>
