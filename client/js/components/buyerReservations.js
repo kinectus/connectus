@@ -48,16 +48,14 @@ var buyerReservations = React.createClass({
     if (this.state.data.length !==0) {
       var transactionHtml = this.state.data.map(function(transaction) {
         return (
-          <tr key={ transaction.outlet.id } onClick={ that.reserveOutlet }>
+          <tr key={ transaction.id } onClick={ that.reserveOutlet }>
             <td>
               Start: { transaction.startTime.date} - { transaction.startTime.slot.time }
               <br />
               End: { transaction.endTime.date } - { transaction.endTime.slot.time } 
             </td>
             <td>
-                <Link to="seeReservedOutlet" params={{id: transaction.outlet.id }}>
-                  { transaction.outlet.name } 
-                </Link>
+                  { transaction.outlet.name }
             </td>
             <td>
               Seller: { transaction.seller.fullname }
