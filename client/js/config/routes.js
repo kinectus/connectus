@@ -18,6 +18,8 @@ var Router = require('react-router'); //npm component for routing
 var DefaultRoute = Router.DefaultRoute; 
 var Route = Router.Route;
 
+// <Route name="seeReservedOutlet" path="/seeReservedOutlet/:transId" handler={seeReservedOutlet} />
+
 //connectus - always shown on the home page - holdes a <RouteHandler> that displays the other compnents
 module.exports = (
   <Route name="connectus" path="/" handler={Connectus} > 
@@ -36,4 +38,3 @@ module.exports = (
     <DefaultRoute handler={About} /> 
   </Route>
 );
-    // <Route name="seeReservedOutlet" path="/seeReservedOutlet/:transId" handler={seeReservedOutlet} />
