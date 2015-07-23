@@ -121,7 +121,7 @@ var Availability = React.createClass({
     return (
       <div>
         <button className="toggle" >BACK</button>
-        <div><TimeBlock reservationData = {this.props.reservationData}/></div>
+        <div className = "viewBox"><TimeBlock reservationData = {this.props.reservationData}/></div>
         <button className="toggle">FORWARD</button>
       </div>
     )
@@ -132,33 +132,65 @@ var Availability = React.createClass({
 var TimeBlock = React.createClass({
   render: function() {
   // console.log('this.props.reservationData in timeblock: ', this.props.reservationData)
+    // if (this.props.reservationData && this.props.resIndex){
+    //   console.log('resData in render', this.props.reservationData)
+    //   console.log('props res index', this.props.resIndex);
+    //   var previousDate;
+      // var outerHTML = function(index, reservationData){
+      //   for (var i=index; i<index+48; i++){
+      //     // previousDate = previousDate || reservation.date;
+      //     console.log(reservationData[i])
+      //     var goOrNoGo = reservationData[i].available ? "on" : "off";
+      //     return(
+      //       <div className = {goOrNoGo} key={reservationData[i].id}></div>
+      //     )
+      //   }
+      // }(this.props.resIndex, this.props.reservationData);
     if (this.props.reservationData){
-      var previousDate;
-      var outerHTML = this.props.reservationData.map(function(reservation){
-        previousDate = previousDate || reservation.date;
-        var goOrNoGo= reservation.available ? "on" : "off";
-        if (reservation.date !== previousDate){
-          previousDate = reservation.date;
-          return(
-            <div className="timeblock" key={reservation.id}>
-              <div className="divider"><p>{reservation.date}</p></div>
-              <div className={goOrNoGo}></div>
-            </div>
-          )
-        } else {
-          return (
-            <div className={goOrNoGo} key={reservation.id}>
-            </div>
-          )
-        }
-      });
-    } else {
-      var outerHTML = this.props.reservationData.map(function(reservation){
-        return (
-          <div className="slot"></div>
+      var start = start || 0;
+      var end = end || 47;
+      var subset = subset || this.props.reservationData.slice(start, end);
+      var next = next || this.props.reservationData.slice(end+1, end+48);
+      console.log('subset: ', subset);
+      console.log('next: ', next);
+      var outerHTML = subset.map(function(reservation){
+        var goOrNoGo = reservation.available ? "on" : "off";
+        return(
+            <div className={goOrNoGo} key={reservation.id}></div>
         )
       });
+    } else {
+      var outerHTML =
+          <div className="slot"></div>
+
     }
+
+
+      // var outerHTML = this.props.reservationData.map(function(reservation){
+      //   previousDate = previousDate || reservation.date;
+      //   var goOrNoGo= reservation.available ? "on" : "off";
+      //   if (reservation.date !== previousDate){
+      //     previousDate = reservation.date;
+      //     return(
+      //       <div className="timeblock" key={reservation.id}>
+      //         <div className="divider"><p>{reservation.date}</p></div>
+      //         <div className={goOrNoGo}></div>
+      //       </div>
+      //     )
+      //   } else {
+      //     return (
+      //       <div className={goOrNoGo} key={reservation.id}>
+      //       </div>
+      //     )
+      //   }
+      // });
+    // } else {
+    //   var outerHTML = this.props.reservationData.map(function(reservation){
+    //     return (
+    //       <div className="slot"></div>
+    //     )
+    //   });
+    // }
 
     return (
       <div>
@@ -198,12 +230,12 @@ var reserveOutlet = React.createClass({
     //GET OUTLET RESERVATIONS
     outletStore.getOutletReservations(outletID).then(function(reservations){
       that.setState({reservations: reservations});
+      // that.setState({resIndex: 0});
       // console.log('reservations in reserveOutlet: ', that.state.reservations);
     });
   },
 
   render: function() {
-
     // is user authenticate
     if(!document.cookie){
       this.transitionTo('login');
@@ -218,7 +250,7 @@ var reserveOutlet = React.createClass({
           <OutletInfo outletData = {this.state.data}/>
         </div>
         <div>
-          <Availability reservationData = {this.state.reservations}/>
+          <Availability reservationData = {this.state.reservations} resIndex = {this.state.resIndex}/>
         </div>
         <div>
          <DateTime outletData = {this.state.data}/>
