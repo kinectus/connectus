@@ -1,4 +1,5 @@
-var BASE_URL = 'https://econnectus.herokuapp.com';
+
+var BASE_URL = process.ENV.port===undefined? 'http://localhost:3000/' : 'https://econnectus.herokuapp.com/';
 
 var authConstants = {
   BASE_URL: BASE_URL,
