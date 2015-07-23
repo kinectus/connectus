@@ -140,7 +140,7 @@ var TimeBlock = React.createClass({
         if (reservation.date !== previousDate){
           previousDate = reservation.date;
           return(
-            <div>
+            <div className="timeblock">
               <div className="divider"><p>{reservation.date}</p></div>
               <div className={goOrNoGo} key={reservation.id}></div>
             </div>
