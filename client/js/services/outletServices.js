@@ -50,6 +50,18 @@ var outletServices = function(){
     });
   };
 
+  outletData.retrieveOutletReservations = function(outletID){
+    return request({
+      url: OutletListConstants.OUTLET_RESERVATIONS,
+      method: 'GET',
+      crossOrigin: true,
+      type: 'json',
+      success: function(reservations){
+        return reservations;
+      }
+    });
+  };
+
   outletData.retrieveOutletById = function(outletID){
     return request({
       url: OutletListConstants.OUTLET_DATA,

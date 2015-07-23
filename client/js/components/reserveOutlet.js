@@ -144,7 +144,8 @@ var Slot = React.createClass({
       </td>
     )
   }
-})
+});
+
 var reserveOutlet = React.createClass({
   getInitialState: function(){
    return {
@@ -164,6 +165,12 @@ var reserveOutlet = React.createClass({
       // setState automatically forces a re-render
       console.log('outlet',outlet);
       that.setState({data: outlet});
+    });
+
+    //GET OUTLET RESERVATIONS
+    outletStore.getOutletReservations(outletID).then(function(reservations){
+      that.setState({reservations: reservations});
+      console.log('reservations: ', reservations);
     });
   },
 
