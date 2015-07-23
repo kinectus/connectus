@@ -33,7 +33,7 @@ module.exports = (
     <Route name="paymentConfirmation" path="/paymentConfirmation" handler={PaymentConfirmation} />
     <Route name="buyerReservations" path="/buyerReservations" handler={buyerReservations} />
     <Route name="sellerOutlets" path="/sellerOutlets" handler={SellerOutlets} />
-    <Route name="seeReservedOutlet" path="/seeReservedOutlet/:transId" handler={seeReservedOutlet} />
     <DefaultRoute handler={About} /> 
   </Route>
 );
+    // <Route name="seeReservedOutlet" path="/seeReservedOutlet/:transId" handler={seeReservedOutlet} />
