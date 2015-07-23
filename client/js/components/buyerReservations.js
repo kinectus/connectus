@@ -49,7 +49,7 @@ var buyerReservations = React.createClass({
               End: { transaction.endTime.date } - { transaction.endTime.slot.time } 
             </td>
             <td>
-                <Link to="reserveOutlet" params={{id: transaction.outlet.id }}>
+                <Link to="seeReservedOutlet" params={{id: transaction.outlet.id }}>
                   { transaction.outlet.name } 
                 </Link>
             </td>
@@ -68,7 +68,7 @@ var buyerReservations = React.createClass({
             { transaction.outlet.description }
             </td>
             <td>
-              <div className="ui button" onClick={this.handleSubmit}>Turn on</div>
+              <div className="btn" onClick={this.handleSubmit}>Turn on</div>
             </td>
             
           </tr>

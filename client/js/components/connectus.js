@@ -53,6 +53,8 @@ var Connectus = React.createClass({
       </div>
     );
 
+    var footerHtml = (<div />);
+
     //reset the html that will be shown if the user is logged in(cookie present)
     // secondary pointing
 
@@ -85,7 +87,7 @@ var Connectus = React.createClass({
           </div> 
       )
 
-        footerHtml = (<div />)
+        footerHtml = (<div />);
 
       // if NOT mobile, make it this... 
       } else {
@@ -104,6 +106,7 @@ var Connectus = React.createClass({
           </div> 
           );
 
+        footerHtml = (<div />);
       } 
     }
 

@@ -12,6 +12,7 @@ var ReserveOutlet = require('../components/reserveOutlet.js');
 var AddOutlet = require('../components/addOutlet.js');
 var SellerOutlets = require('../components/sellerOutlets.js');
 var PaymentsPage = require('../components/payments.js');
+var seeReservedOutlet = require('../components/seeReservedOutlet.js');
 var Router = require('react-router'); //npm component for routing
 var DefaultRoute = Router.DefaultRoute; 
 var Route = Router.Route;
@@ -30,6 +31,7 @@ module.exports = (
     <Route name="addOutlet" path="/addOutlet" handler={AddOutlet} />
     <Route name="buyerReservations" path="/buyerReservations" handler={buyerReservations} />
     <Route name="sellerOutlets" path="/sellerOutlets" handler={SellerOutlets} />
+    <Route name="seeReservedOutlet" path="/seeReservedOutlet/:transId" handler={seeReservedOutlet} />
     <DefaultRoute handler={About} /> 
   </Route>
 );
