@@ -74,6 +74,10 @@ var outletStore = assign({}, EventEmitter.prototype, {
     return OutletServices.makeReservation(newReservation);
   },
 
+  // createTransaction: function(){
+  //   return OutletServices.makeTransaction();
+  // },
+
   emitChange: function() {
     this.emit(CHANGE_EVENT);
     console.log('i changed')

@@ -110,6 +110,13 @@ var outletServices = function(){
     });
   };
 
+  // outletData.updateTransaction = function(){
+  //   return request({
+  //     url: OutletListConstants.UPDATE_TRANSACTION,
+  //     method: 'POST'
+  //   });
+  // };
+
   // outletData.turnOff = function(){
   //   return request({
   //     url: '/turnOff',

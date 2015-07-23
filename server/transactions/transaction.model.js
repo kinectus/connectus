@@ -5,8 +5,8 @@ var Reservation = require('../reservations/reservation.model');
 
 var Transaction = bookshelf.Model.extend({
   tableName: 'transactions',
-  reservation: function(){
-    return this.hasOne('Reservation');
+  reservations: function(){
+    return this.belongsToMany('Reservation');
   }
 });
 

@@ -21,7 +21,7 @@ var Reservation = bookshelf.Model.extend({
     return this.belongsTo(TimeSlot, 'slot_id');
   },
   transaction: function() {
-    return this.belongsTo(Transaction, 'transaction_id');
+    return this.hasOne(Transaction, 'transaction_id');
   },
 });
 

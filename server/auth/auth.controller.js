@@ -38,8 +38,8 @@ module.exports = {
       return next(); 
     }else{
       console.log('authentication failed - cannot move to next page   ');
+      res.redirect('/#/login');
     }
-    res.redirect('/#/login');
   }
 };
 
