@@ -119,18 +119,29 @@ var Availability = React.createClass({
   render: function() {
     return (
       <div>
-        <button className="toggle">BACK</button>
-        <Slot />
+        <button className="toggle" >BACK</button>
+        <table><tbody><TimeBlock /></tbody></table>
         <button className="toggle">FORWARD</button>
       </div>
     )
   }
 });
+    // var outerHTML = this.state.data.map(function(outlet){
+    // })
+var TimeBlock = React.createClass({
+  render: function() {
+      return (
+        <tr>
+          <Slot />
+        </tr>
+      )
+  }
+});
 var Slot = React.createClass({
   render: function() {
     return (
-      <div className="slot">
-      </div>
+      <td className="slot">
+      </td>
     )
   }
 })
