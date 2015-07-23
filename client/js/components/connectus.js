@@ -17,8 +17,6 @@ var Connectus = React.createClass({
 
   componentDidMount: function() {
     var that = this; 
-    // for some reason, semantic needs this to make the menu to drop down
-    // $('.ui.dropdown').dropdown()
 
     // resizing the screen renders mobile or full menu
     var isMobile = mobile();
@@ -87,6 +85,8 @@ var Connectus = React.createClass({
           </div> 
       )
 
+        footerHtml = (<div />)
+
       // if NOT mobile, make it this... 
       } else {
 
@@ -112,6 +112,7 @@ var Connectus = React.createClass({
     <div className="container-fluid">
       {pageHtml}
       {routeHandler}
+      {footerHtml}
     </div>
     );
   }

@@ -1,12 +1,17 @@
 @font-face {
   font-family: 'Karla';
   src: url('../fonts/Karla-Regular.ttf');
+  color: #666699;
 }
-a {
-  text-decoration: none !important;
-  color: inherit;
+.form-group {
+  margin-bottom: 0px;
 }
-a:hover {
+body {
+  background-color: #d0d8da;
+}
+a,
+a:hover,
+a:focus {
   text-decoration: none !important;
   color: inherit;
 }
@@ -24,7 +29,7 @@ a:hover {
   font-size: 30px;
   float: left;
   display: inline;
-  color: #fbcb15 !important;
+  color: #f9a92a !important;
   padding-left: 40px;
   padding-top: 10px;
   text-decoration: none !important;
@@ -37,14 +42,14 @@ a:hover {
   height: 30px;
 }
 .topNavBar .mobile .dropdown-menu {
-  background-color: #343434;
+  background-color: #414141;
 }
 .topNavBar .mobile li a.active {
   background-color: #4e4e4e;
 }
 .topNavBar .mobile .dropdown-toggle {
   text-align: center;
-  background-color: #343434;
+  background-color: #414141;
 }
 .topNavBar .nav > li {
   padding-top: 15px;
@@ -56,7 +61,7 @@ a:hover {
   background-color: #4e4e4e;
 }
 .topNavBar .nav > li .logout {
-  color: #fbcb15;
+  color: #f9a92a;
 }
 .topNavBar .nav > li a.active {
   background-color: #4e4e4e;
@@ -78,13 +83,17 @@ a:hover {
   margin-right: auto;
   width: 100%;
   font-size: 40px;
-  color: white;
+  color: #d0d8da;
 }
 .header-about .text p {
   text-align: center;
 }
+.addoutlet {
+  margin-bottom: 40px;
+}
 .container-fluid {
   padding: 0px !important;
+  background-color: #d0d8da;
 }
 .section {
   padding: 0px;

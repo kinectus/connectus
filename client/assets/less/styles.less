@@ -29,6 +29,10 @@
   margin-bottom: 0px;
  }
 
+ body {
+ background-color: @greylight;
+ }
+
 a,
 a:hover,
 a:focus {
@@ -45,7 +49,7 @@ a:focus {
 }
 
 .topNavBar {
-  background-color: @purple;
+  background-color: @dark;
   height: 70px;
   .logo {
     font-size: 30px;
@@ -63,14 +67,14 @@ a:focus {
     display: block !important;
     height: 30px;
     .dropdown-menu {
-      background-color: @purple;
+      background-color: lighten(@dark, 5%);
     }
     li a.active {
-    background-color: lighten(@purple, 10%);
+    background-color: lighten(@dark, 10%);
     }
     .dropdown-toggle {
       text-align: center;
-      background-color: @purple;
+      background-color: lighten(@dark, 5%);
     }
   }
   .nav>li {
@@ -79,19 +83,19 @@ a:focus {
       color: white;
     }
     a:hover {
-      background-color: lighten(@purple, 10%);
+      background-color: lighten(@dark, 10%);
     }
     .logout {
-      color: @yellow;
+      color: @orangemed;
     }
   }
   .nav>li a.active {
-    background-color: lighten(@purple, 10%);
+    background-color: lighten(@dark, 10%);
   }
 }
 
 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
-  background-color: lighten(@purple, 10%);
+  background-color: lighten(@dark, 10%);
 }
 
 
