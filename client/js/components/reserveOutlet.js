@@ -169,8 +169,8 @@ var reserveOutlet = React.createClass({
 
     //GET OUTLET RESERVATIONS
     outletStore.getOutletReservations(outletID).then(function(reservations){
-      that.setState({reservations: reservations});
       console.log('reservations: ', reservations);
+      that.setState({reservations: reservations});
     });
   },
 
