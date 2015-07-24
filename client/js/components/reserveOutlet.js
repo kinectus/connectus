@@ -139,19 +139,19 @@ var Availability = React.createClass({
     });
   },
 
+  // Check for button events
   componentDidUpdate: function(){
-    // Check for button events
-    // console.log('this has happened? ', this.hasHappened)
-    // console.log('this.props.move: ', this.props.move)
-    // console.log('start conditions: ', this.props.mouseDown && this.props.forward && this.props.move && !this.state.calledToMove && this.hasHappened === false)
+    // Move forward event
     if (this.props.mouseDown && this.props.forward && this.props.move && this.hasHappened === false){
       this.hasHappened = true;
-      console.log('ITS HAPPENING')
-      console.log('SETTING INTERVAL');
       this.interval = setInterval(this.goForward, 100);
-    } else if (!this.props.mouseDown && this.props.forward && !this.props.move && this.hasHappened === false){
+    // Move backward event  
+    } else if (this.props.mouseDown && !this.props.forward && this.props.move && this.hasHappened === false) {
       this.hasHappened = true;
-      console.log('ITS HAPPENING')
+      this.interval = setInterval(this.goBack, 100);
+    // Stop event  
+    } else if (!this.props.mouseDown && !this.props.move && this.hasHappened === false){
+      this.hasHappened = true;
       this.stop();
     }
   },
@@ -165,6 +165,12 @@ var Availability = React.createClass({
     var that = this;
     console.log('forward');
     this.setState({ start: this.state.start+1, end: this.state.end+1 });
+  },
+
+  goBack: function() {
+    var that = this;
+    console.log('back');
+    this.setState({ start: this.state.start-1, end: this.state.end-1 });
   },
 
   stop: function() {
@@ -247,8 +253,16 @@ var Viewer = React.createClass({
     this.setState({move: true});
   },
 
+  // On forward mouse hold
+  mouseDownBack: function(){
+    console.log('DOWN')
+    this.setState({mouseDown: true});
+    this.setState({forward: false});
+    this.setState({move: true});
+  },
+
   // On forward mouse release
-  mouseUpForward: function(){
+  mouseUp: function(){
     console.log('UP')
     this.setState({mouseDown: false});
     this.setState({move: false});
@@ -259,8 +273,8 @@ var Viewer = React.createClass({
     return (
       <div className="timeblock">
         <Availability move={this.state.move} mouseDown={this.state.mouseDown} forward={this.state.forward} outletID = {this.props.outletID}/>
-        <button className="toggle glyphicon glyphicon-chevron-left" onMouseUp={this.mouseUpBack}></button>
-        <button className="toggle glyphicon glyphicon-chevron-right" onMouseDown={this.mouseDownForward} onMouseUp={this.mouseUpForward}></button>
+        <button className="toggle glyphicon glyphicon-chevron-left" onMouseDown={this.mouseDownBack} onMouseUp={this.mouseUp}></button>
+        <button className="toggle glyphicon glyphicon-chevron-right" onMouseDown={this.mouseDownForward} onMouseUp={this.mouseUp}></button>
       </div>
     )
   }
