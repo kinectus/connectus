@@ -10,21 +10,24 @@ var mobile = require('./mobilecheck');
 var Connectus = React.createClass({
   getInitialState: function(){
     return {
-      amount: ''
+      amount: '',
+      confirmation: ''
     };
   },
   componentDidMount: function() {
     var that = this;
+   
     PaymentStore.getTransactionInfo().then(function(transaction){
       console.log('transaction in payment confirmation', transaction);
-      that.setState({amount:transaction.totalCost});
+      that.setState({amount:transaction.totalCost, confirmation: transaction.confirmation});
     });
  },
 
   render: function() {
     
     return(
-    <div><h1>Your payment of ${this.state.amount} has been successfully received.</h1>
+    <div><h1>Your payment of ${this.state.amount} has been successfully received.</h1><br />
+    <h3>Please retain this confirmation for your records: #{this.state.confirmation}</h3>
     <btn class="btn"><Link to="outletsList">
       Make Another Reservation
     </Link></btn>
