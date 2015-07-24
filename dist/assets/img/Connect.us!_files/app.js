@@ -1445,7 +1445,7 @@ module.exports = (
 },{"../components/about.js":2,"../components/connectus.js":3,"../components/landingPage.js":4,"../components/login.js":5,"../components/outletsList.js":6,"../components/reserveOutlet.js":7,"../components/signup.js":8,"react":233,"react-router":46}],10:[function(require,module,exports){
 =======
 },{"../components/about.js":4,"../components/addOutlet.js":5,"../components/buyerReservations.js":6,"../components/connectus.js":7,"../components/landingPage.js":8,"../components/login.js":9,"../components/outletsList.js":11,"../components/outletsListMap.js":12,"../components/paymentConfirmation.js":13,"../components/payments.js":14,"../components/reserveOutlet.js":15,"../components/seeReservedOutlet.js":16,"../components/sellerOutlets.js":17,"../components/signup.js":18,"react":378,"react-router":115}],20:[function(require,module,exports){
-var BASE_URL = window.location.origin;
+var BASE_URL = window.location.origin+'/';
 
 var loginConstants = {
   BASE_URL: BASE_URL,
@@ -1459,7 +1459,7 @@ var loginConstants = {
 module.exports = loginConstants;
 
 },{}],21:[function(require,module,exports){
-var BASE_URL = window.location.origin;
+var BASE_URL = window.location.origin+'/';
 
 var authConstants = {
   BASE_URL: BASE_URL,
@@ -1470,7 +1470,7 @@ var authConstants = {
 module.exports = authConstants;
 
 },{}],22:[function(require,module,exports){
-var BASE_URL = window.location.origin;
+var BASE_URL = window.location.origin+'/';
 
 var paymentConstants = {
   BASE_URL: BASE_URL,
@@ -1481,7 +1481,7 @@ var paymentConstants = {
 module.exports = paymentConstants;
 
 },{}],23:[function(require,module,exports){
-var BASE_URL = window.location.origin;
+var BASE_URL = window.location.origin+'/';
 
 var userConstants = {
   BASE_URL: BASE_URL,

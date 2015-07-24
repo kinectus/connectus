@@ -1,4 +1,4 @@
-var BASE_URL = window.location.origin;
+var BASE_URL = window.location.origin+'/';
 
 var paymentConstants = {
   BASE_URL: BASE_URL,
