@@ -122,7 +122,8 @@ var Availability = React.createClass({
   getInitialState: function(){
    return {
       reservations: [],
-      timeSlots: []
+      timeSlots: [],
+      scrolling: null
     }
   },
 
@@ -131,45 +132,50 @@ var Availability = React.createClass({
 
     outletStore.getOutletReservations(this.props.outletID).then(function(reservations){
       that.setState({reservations: reservations});
-      // console.log('reservations in Availability: ', that.state.reservations);
     });
 
     outletStore.getTimeSlotInfo().then(function(slots){
       that.setState({timeSlots: slots, start: 0, end: 47});
-      // console.log('yo slots: ', that.state.timeSlots);
     });
   },
 
-  forwards: function() {
-    console.log('scroll forwards');
-    if (this.state.end < this.state.reservations.length - 49){
-      var val1 = this.state.start + 48;
-      var val2 = this.state.end + 48;
-      this.setState({start: val1});
-      this.setState({end: val2});
-    } else if (this.state.end < this.state.reservations.length){
-      this.setState({start: this.state.reservations.length - 49});
-      this.setState({end: this.state.reservations.length});
+  componentDidUpdate: function(){
+    // Check for button events
+    // console.log('this has happened? ', this.hasHappened)
+    // console.log('this.props.move: ', this.props.move)
+    // console.log('start conditions: ', this.props.mouseDown && this.props.forward && this.props.move && !this.state.calledToMove && this.hasHappened === false)
+    if (this.props.mouseDown && this.props.forward && this.props.move && this.hasHappened === false){
+      this.hasHappened = true;
+      console.log('ITS HAPPENING')
+      console.log('SETTING INTERVAL');
+      this.interval = setInterval(this.goForward, 100);
+    } else if (!this.props.mouseDown && this.props.forward && !this.props.move && this.hasHappened === false){
+      this.hasHappened = true;
+      console.log('ITS HAPPENING')
+      this.stop();
     }
   },
 
-  backwards: function() {
-    console.log('scroll backwards');
-    if (this.state.start > 47){
-      var val1 = this.state.start - 48
-      var val2 = this.state.end - 48
-      this.setState({start: val1});
-      this.setState({end: val2});
-    } else if (this.state.start > 0) {
-      this.setState({start: 0});
-      this.setState({end: 48});
-    }
-    console.log('START',this.state.start)
+  componentWillReceiveProps: function(){
+    var that = this;
+    this.hasHappened = false;
+  },
+
+  goForward: function() {
+    var that = this;
+    console.log('forward');
+    this.setState({ start: this.state.start+1, end: this.state.end+1 });
+  },
+
+  stop: function() {
+    console.log('ENDING INTERVAL');
+    clearInterval(this.interval);
   },
 
   render: function() {
     var date;
 
+    // If reservations API call has completed
     if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 ){
 
       // Current subset of reservation information
@@ -181,13 +187,16 @@ var Availability = React.createClass({
       // Track center time slot
       var centerCount = centerCount ? centerCount > 48 ? 0 : centerCount : 0;
 
+      // Create custom availability viewer using subset
       var outerHTML = subset.map(function(reservation){
         var goOrNoGo = reservation.available ? "on" : "off";
-        // label slot properties
+
+        // Label slot properties based on subset location
         var blockClass = (centerCount===24) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
         centerCount++;
         var begin, end;
 
+        // Specially label center slot to display its information
         if (centerCount===25){
           date = moment(reservation.date).format('MMMM Do YYYY');
           for (var j=0; j<slotProps.length; j++){
@@ -199,27 +208,62 @@ var Availability = React.createClass({
           return(
             <div className={blockClass} key={reservation.id}><p>{begin}-{end}</p></div>
           )
+        // Regularly label all slots but center
         } else {
           return(
             <div className={blockClass} key={reservation.id}></div>
           )
         }
       });
+    // Fallback before API call is complete
+    } else { var outerHTML = <div className="slot"></div> }
 
-    } else {
-      var outerHTML = <div className="slot"></div>
-    }
-    console.log(date);
+    // Render availability viewer
     return (
-      <div className="timeblock">
+      <div>
         <p>{date}</p>
-        <button className="toggle glyphicon glyphicon-chevron-left" onClick={this.backwards}></button>
         <div className = "viewBox">{outerHTML}</div>
-        <button className="toggle glyphicon glyphicon-chevron-right" onClick={this.forwards}></button>
       </div>
     )
   }
 
+});
+
+// Contains buttons, passes their events to Availability
+var Viewer = React.createClass({
+  getInitialState: function(){
+    return { 
+      mouseDown: false,
+      forward: false,
+      move: false
+    }
+  },
+
+  // On forward mouse hold
+  mouseDownForward: function(){
+    console.log('DOWN')
+    this.setState({mouseDown: true});
+    this.setState({forward: true});
+    this.setState({move: true});
+  },
+
+  // On forward mouse release
+  mouseUpForward: function(){
+    console.log('UP')
+    this.setState({mouseDown: false});
+    this.setState({move: false});
+  },
+
+  // Render buttons, pass states to Availability
+  render: function(){
+    return (
+      <div className="timeblock">
+        <Availability move={this.state.move} mouseDown={this.state.mouseDown} forward={this.state.forward} outletID = {this.props.outletID}/>
+        <button className="toggle glyphicon glyphicon-chevron-left" onMouseUp={this.mouseUpBack}></button>
+        <button className="toggle glyphicon glyphicon-chevron-right" onMouseDown={this.mouseDownForward} onMouseUp={this.mouseUpForward}></button>
+      </div>
+    )
+  }
 });
 
 var reserveOutlet = React.createClass({
@@ -259,7 +303,7 @@ var reserveOutlet = React.createClass({
           <OutletInfo outletData = {this.state.data}/>
         </div>
         <div>
-          <Availability outletID = {this.props.params.id}/>
+          <Viewer outletID = {this.props.params.id}/>
         </div>
         <div>
            <DateTime outletData = {this.state.data}/>
