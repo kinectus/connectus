@@ -21,6 +21,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
       return outlets;
     });
   },
+  
   getSellerOutlets: function(){
     return OutletServices.retrieveOutletByUser().then(function(outlets){
       // console.log('outlets in the seller outlets list', outlets);

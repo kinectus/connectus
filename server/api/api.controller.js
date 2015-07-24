@@ -45,6 +45,7 @@ module.exports = {
   },
 
   getSellerOutlets: function(req, res){
+    console.log('got to getSellerOutlets')
     getOutletsByUser(req.user)
     .then(function(outlets){
       res.send(200, outlets.models);
