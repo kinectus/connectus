@@ -371,16 +371,14 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
     if (this.state.data.length !==0) {
       var transactionHtml = this.state.data.map(function(transaction) {
         return (
-          React.createElement("tr", {key:  transaction.outlet.id, onClick:  that.reserveOutlet}, 
+          React.createElement("tr", {key:  transaction.id, onClick:  that.reserveOutlet}, 
             React.createElement("td", null, 
               "Start: ",  transaction.startTime.date, " - ",  transaction.startTime.slot.time, 
               React.createElement("br", null), 
               "End: ",  transaction.endTime.date, " - ",  transaction.endTime.slot.time
             ), 
             React.createElement("td", null, 
-                React.createElement(Link, {to: "seeReservedOutlet", params: {id: transaction.outlet.id}}, 
-                   transaction.outlet.name
-                )
+               transaction.outlet.name
             ), 
             React.createElement("td", null, 
               "Seller: ",  transaction.seller.fullname
@@ -433,6 +431,9 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
   }
 
 });
+
+// <Link to="seeReservedOutlet" params={{id: transaction.outlet.id }}>
+//  </Link>
 
 module.exports = buyerReservations;
 
@@ -1411,6 +1412,12 @@ var DefaultRoute = Router.DefaultRoute;
 >>>>>>> ...:dist/js/app.js
 var Route = Router.Route;
 
+<<<<<<< HEAD:dist/assets/img/Connect.us!_files/app.js
+=======
+// <Route name="seeReservedOutlet" path="/seeReservedOutlet/:transId" handler={seeReservedOutlet} />
+
+//connectus - always shown on the home page - holdes a <RouteHandler> that displays the other compnents
+>>>>>>> changed base url in client:dist/js/app.js
 module.exports = (
   React.createElement(Route, {name: "connectus", path: "/", handler: Connectus}, 
     React.createElement(Route, {name: "login", path: "/login", handler: Login}), 
@@ -1425,8 +1432,11 @@ module.exports = (
     React.createElement(Route, {name: "paymentConfirmation", path: "/paymentConfirmation", handler: PaymentConfirmation}), 
     React.createElement(Route, {name: "buyerReservations", path: "/buyerReservations", handler: buyerReservations}), 
     React.createElement(Route, {name: "sellerOutlets", path: "/sellerOutlets", handler: SellerOutlets}), 
+<<<<<<< HEAD:dist/assets/img/Connect.us!_files/app.js
     React.createElement(Route, {name: "seeReservedOutlet", path: "/seeReservedOutlet/:transId", handler: seeReservedOutlet}), 
 >>>>>>> ...:dist/js/app.js
+=======
+>>>>>>> changed base url in client:dist/js/app.js
     React.createElement(DefaultRoute, {handler: About})
   )
 );
@@ -1435,8 +1445,7 @@ module.exports = (
 },{"../components/about.js":2,"../components/connectus.js":3,"../components/landingPage.js":4,"../components/login.js":5,"../components/outletsList.js":6,"../components/reserveOutlet.js":7,"../components/signup.js":8,"react":233,"react-router":46}],10:[function(require,module,exports){
 =======
 },{"../components/about.js":4,"../components/addOutlet.js":5,"../components/buyerReservations.js":6,"../components/connectus.js":7,"../components/landingPage.js":8,"../components/login.js":9,"../components/outletsList.js":11,"../components/outletsListMap.js":12,"../components/paymentConfirmation.js":13,"../components/payments.js":14,"../components/reserveOutlet.js":15,"../components/seeReservedOutlet.js":16,"../components/sellerOutlets.js":17,"../components/signup.js":18,"react":378,"react-router":115}],20:[function(require,module,exports){
-(function (process){
-var BASE_URL = process.env.PORT===undefined? 'http://localhost:3000/' : 'https://econnectus.herokuapp.com/';
+var BASE_URL = window.location.origin;
 
 var loginConstants = {
   BASE_URL: BASE_URL,
@@ -1449,11 +1458,8 @@ var loginConstants = {
 
 module.exports = loginConstants;
 
-}).call(this,require('_process'))
-},{"_process":35}],21:[function(require,module,exports){
-(function (process){
-
-var BASE_URL = process.env.PORT===undefined? 'http://localhost:3000/' : 'https://econnectus.herokuapp.com/';
+},{}],21:[function(require,module,exports){
+var BASE_URL = window.location.origin;
 
 var authConstants = {
   BASE_URL: BASE_URL,
@@ -1463,10 +1469,8 @@ var authConstants = {
 
 module.exports = authConstants;
 
-}).call(this,require('_process'))
-},{"_process":35}],22:[function(require,module,exports){
-(function (process){
-var BASE_URL = process.env.PORT===undefined? 'http://localhost:3000/' : 'https://econnectus.herokuapp.com/';
+},{}],22:[function(require,module,exports){
+var BASE_URL = window.location.origin;
 
 var paymentConstants = {
   BASE_URL: BASE_URL,
@@ -1476,10 +1480,8 @@ var paymentConstants = {
 
 module.exports = paymentConstants;
 
-}).call(this,require('_process'))
-},{"_process":35}],23:[function(require,module,exports){
-(function (process){
-var BASE_URL = process.env.PORT===undefined? 'http://localhost:3000/' : 'https://econnectus.herokuapp.com/';
+},{}],23:[function(require,module,exports){
+var BASE_URL = window.location.origin;
 
 var userConstants = {
   BASE_URL: BASE_URL,
@@ -1488,9 +1490,13 @@ var userConstants = {
 
 module.exports = userConstants;
 
+<<<<<<< HEAD:dist/assets/img/Connect.us!_files/app.js
 }).call(this,require('_process'))
 },{"_process":35}],24:[function(require,module,exports){
 >>>>>>> ...:dist/js/app.js
+=======
+},{}],24:[function(require,module,exports){
+>>>>>>> changed base url in client:dist/js/app.js
 var Dispatcher = require('flux').Dispatcher;
 var assign = require('react/lib/Object.assign'); 
 
