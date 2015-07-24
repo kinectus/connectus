@@ -145,12 +145,12 @@ var Availability = React.createClass({
     if (this.props.mouseDown && this.props.forward && this.props.move && this.hasHappened === false){
       this.hasHappened = true;
       this.goForward();
-      this.interval = setInterval(this.goForward, 100);
+      this.interval = setInterval(this.goForward, 10);
     // Move backward event  
     } else if (this.props.mouseDown && !this.props.forward && this.props.move && this.hasHappened === false) {
       this.hasHappened = true;
       this.goBack();
-      this.interval = setInterval(this.goBack, 100);
+      this.interval = setInterval(this.goBack, 10);
     // Stop event  
     } else if (!this.props.mouseDown && !this.props.move && this.hasHappened === false){
       this.hasHappened = true;
