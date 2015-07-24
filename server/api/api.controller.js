@@ -13,6 +13,8 @@ var moment = require('moment');
 var getBuyerReservations = require('../config/db/queries/getBuyerReservations');
 var braintree = require('braintree');
 var findCurrentTransaction = require('../config/db/queries/findCurrentTransaction');
+var turnOnOutlet = require('../config/db/queries/turnOnOutlet');
+var rp = require('request-promise');
 
 var gateway = braintree.connect({
 environment: braintree.Environment.Sandbox,
@@ -91,6 +93,18 @@ module.exports = {
       .then(function(user){
         res.send(200, user);
       });
+  },
+
+  turnOnOutlet: function(req, res){
+    console.log('turnOnOutlet function in the api controller: ', req.body.id)
+    // query the database for validation - CAN they turn on this outlet??
+    // if so...
+    var outletId = req.body.id;
+    var options = {
+      method: 'POST',
+      uri: 'http://localhost:3030/api/on'
+    }
+    return rp(options);
   }
 
 };
