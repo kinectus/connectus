@@ -10,6 +10,12 @@ var paymentStore = assign({}, EventEmitter.prototype, {
     return PaymentServices.getToken().then(function(token){
       return token;
     });
+  },
+  getTransactionInfo: function(){
+    console.log('calling paymentstore');
+    return PaymentServices.getTransactionInfo().then(function(transaction){
+      return transaction;
+    });
   }
 });
 

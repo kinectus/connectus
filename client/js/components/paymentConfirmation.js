@@ -8,15 +8,23 @@ var Link = require('react-router').Link;
 var mobile = require('./mobilecheck');
 
 var Connectus = React.createClass({
+  getInitialState: function(){
+    return {
+      amount: ''
+    };
+  },
   componentDidMount: function() {
-  var paymentStatus = true;
-  // var pageHtml = paymentStatus ? "<h1>Your payment has been successfully received. <br /> Confirmation #: </h1>" : "<h1>Your payment was declined. Please try again</h1>";
+    var that = this;
+    PaymentStore.getTransactionInfo().then(function(transaction){
+      console.log('transaction in payment confirmation', transaction);
+      that.setState({amount:transaction.totalCost});
+    });
  },
 
   render: function() {
     
     return(
-    <div><h1>Your payment has been successfully received. <br /> Confirmation #: </h1>
+    <div><h1>Your payment of ${this.state.amount} has been successfully received.</h1>
     <btn class="btn"><Link to="outletsList">
       Make Another Reservation
     </Link></btn>
