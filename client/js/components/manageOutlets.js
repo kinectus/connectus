@@ -45,7 +45,7 @@ var myOutlets = React.createClass({
     }
 
     var that = this;
-    // outlet data list
+    // Outlet data list
     if (this.state.data.length !==0) {
       if(isMobile) {
         var outletHtml = this.state.data.map(function(outlet) {
@@ -101,8 +101,12 @@ var myOutlets = React.createClass({
                 <p>${ outlet.priceEnergy }/kWh</p>
               </td>
               <td>
-              <p>{ outlet.description }</p>
-              <p className="rating">{ outlet.rating }</p>
+                <p>{ outlet.description }</p>
+                <p className="rating">{ outlet.rating }</p>
+              </td>
+              <td>
+                <button>Edit</button><br></br>
+                <button>Reservations</button>
               </td>
             </tr>
           )
