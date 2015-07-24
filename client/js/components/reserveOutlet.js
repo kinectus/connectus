@@ -166,13 +166,17 @@ var Availability = React.createClass({
   goForward: function() {
     var that = this;
     console.log('forward');
-    this.setState({ start: this.state.start+1, end: this.state.end+1 });
+    if (this.state.end < this.state.reservations.length-1){
+      this.setState({ start: this.state.start+1, end: this.state.end+1 });
+    }
   },
 
   goBack: function() {
     var that = this;
     console.log('back');
-    this.setState({ start: this.state.start-1, end: this.state.end-1 });
+    if (this.state.start > 0){
+      this.setState({ start: this.state.start-1, end: this.state.end-1 });
+    }
   },
 
   stop: function() {
