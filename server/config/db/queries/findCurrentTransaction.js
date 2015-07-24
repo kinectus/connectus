@@ -13,9 +13,10 @@ module.exports = findCurrentTransaction = function(user, next){
   .fetch()
   .then(function(user){
     return user.reservations().fetch({withRelated:['transaction_current']});
+  })
+  .then(function(reservations){
+    // console.log('resrvations2', reservations);
+    return reservations;
   });
-  // .then(function(reservations){
-  //   return reservations;
-  // });
 
 };

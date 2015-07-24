@@ -51,9 +51,10 @@ module.exports = {
   checkout: function (req, res) {
   var nonce = req.body.payment_method_nonce;
   findCurrentTransaction(req.user.id).then(function(reservations){
-    console.log('totalCost---------->', reservations[0].transaction_current.totalCost);
+    // console.log('reservations-------------------->>>>>>>',reservations.models[0].relations.transaction_current.attributes.totalCost);
+    // console.log('totalCost---------->', reservations.models[0].relations.transaction_current.attributes.totalCost);
     gateway.transaction.sale({
-      amount: reservations[0].transaction_current.totalCost,
+      amount: reservations.models[0].relations.transaction_current.attributes.totalCost,
       paymentMethodNonce: nonce,
     }, function (err, result) {
       if(err){
