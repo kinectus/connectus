@@ -40,10 +40,10 @@ module.exports = {
   var nonce = req.body.payment_method_nonce;
   console.log('is user attached?--------->', req.user);
   // Use payment method nonce here
-  findCurrentTransaction(req.user.id).then(function(trans){
-    console.log('totalCost---------->', trans.totalCost);
+  findCurrentTransaction(req.user.id).then(function(reservations){
+    console.log('totalCost---------->', reservations[0].transaction_current.totalCost);
     gateway.transaction.sale({
-      amount: 10,
+      amount: reservations[0].transaction_current.totalCost,
       paymentMethodNonce: nonce,
     }, function (err, result) {
       if(err){

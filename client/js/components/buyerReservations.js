@@ -63,7 +63,7 @@ var buyerReservations = React.createClass({
               End: { transaction.endTime.date } - { transaction.endTime.slot.time } 
             </td>
             <td>
-              { transaction.outlet.name } 
+              { transaction.outlet.name }
             </td>
             <td>
               Seller: { transaction.seller.fullname }

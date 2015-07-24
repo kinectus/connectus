@@ -20,9 +20,9 @@ var Reservation = bookshelf.Model.extend({
   timeSlot: function() {
     return this.belongsTo(TimeSlot, 'slot_id');
   },
-  transaction: function() {
+  transaction_current: function() {
     var Transaction = require('../transactions/transaction.model');
-    return this.hasOne(Transaction, 'transaction_id');
+    return this.belongsTo(Transaction, 'transaction_id').query({where: {current:'true'}});
   },
 });
 
