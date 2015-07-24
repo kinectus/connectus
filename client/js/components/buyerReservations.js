@@ -5,6 +5,9 @@ var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var ReactAddons = require('react/addons');
 var Link = require('react-router').Link;
 var Router = require('react-router'); //need this for redirection
+var outletServices = require('../services/outletServices.js')
+
+
 var buyerReservations = React.createClass({
 
   getInitialState: function(){
@@ -35,6 +38,11 @@ var buyerReservations = React.createClass({
   //   });
   // },
 
+  handleSubmit: function(id) {
+    console.log('handleSumbit in the buyer reservations passing something: ', id)
+    outletServices.turnOutletOn(id)
+  },
+
   render: function() {
 
     // is the user authenticated?
@@ -55,11 +63,7 @@ var buyerReservations = React.createClass({
               End: { transaction.endTime.date } - { transaction.endTime.slot.time } 
             </td>
             <td>
-<<<<<<< HEAD
-                  { transaction.outlet.name }
-=======
                   { transaction.outlet.name } 
->>>>>>> (fixing merge conflicts)
             </td>
             <td>
               Seller: { transaction.seller.fullname }
@@ -76,8 +80,8 @@ var buyerReservations = React.createClass({
             { transaction.outlet.description }
             </td>
             <td>
-              <div className="btn" onClick={this.handleSubmit}>Turn on</div>
-              <div className="btn" onClick={this.createTransaction}>End</div>
+              <div className="btn" onClick={that.handleSubmit.bind(that, transaction.outlet.id)}>Turn on</div>
+              <div className="btn" onClick={that.createTransaction}>End</div>
             </td>
             
           </tr>
