@@ -9,6 +9,9 @@
 body {
   background-color: #d0d8da;
 }
+table.transaction-rows {
+  margin-top: 50px;
+}
 a,
 a:hover,
 a:focus {
@@ -155,7 +158,11 @@ h1 {
   border: 2px solid grey;
 }
 .centerSlot {
+<<<<<<< HEAD
   width: 83px;
+=======
+  width: 80px;
+>>>>>>> (live power data) table has row for real-time data
   height: 20px;
   border: 2px solid black;
   color: white;

@@ -27,6 +27,7 @@ var buyerReservations = React.createClass({
   componentDidMount: function() {
     var that = this;
     outletStore.getBuyerReservations().then(function(transactionsData){
+      console.log(transactionsData)
       that.setState({data: transactionsData});
     });
   },
@@ -58,57 +59,51 @@ var buyerReservations = React.createClass({
     var that = this;
 
     if (this.state.data.length !==0) {
-      var transactionHtml = this.state.data.map(function(transaction) {
+      var transactionRows = this.state.data.map(function(transaction) {
         return (
-          <tr key={ transaction.id } onClick={ that.reserveOutlet }>
-            <td>
-              Start: { transaction.startTime.date} - { transaction.startTime.slot.time }
-              <br />
-              End: { transaction.endTime.date } - { transaction.endTime.slot.time } 
-            </td>
-            <td>
-              { transaction.outlet.name }
-            </td>
-            <td>
-              Seller: { transaction.seller.fullname }
-            </td>
-            <td>
-              { transaction.outlet.voltage }
-            </td>
-            <td>
-              Price by hour: { transaction.outlet.priceHourly }
-              <br />
-              Price by kWh: { transaction.outlet.priceEnergy }
-            </td>
-            <td>
-            { transaction.outlet.description }
-            </td>
-            <td>
-              <div className="btn" onClick={that.turnOn.bind(that, transaction.outlet.id)}>ON</div>
-              <div className="btn" onClick={that.setCurrentTransaction.bind(that, transaction.id)}>OFF</div>
-            </td>
-            
-          </tr>
+          <table className='table-hover transaction-rows'>
+            <tr key={ transaction.id } onClick={ that.reserveOutlet } className='regTransRow'>
+              <td className='regTrans'>
+                Start: { transaction.startTime.date} - { transaction.startTime.slot.time }
+                <br />
+                End: { transaction.endTime.date } - { transaction.endTime.slot.time } 
+              </td>
+              <td className='regTrans'>
+                { transaction.outlet.name } 
+              </td>
+              <td className='regTrans'>
+                Seller: { transaction.seller.fullname }
+              </td>
+              <td className='regTrans'>
+                { transaction.outlet.voltage }
+              </td>
+              <td className='regTrans'>
+                Price by hour: { transaction.outlet.priceHourly }
+                <br />
+                Price by kWh: { transaction.outlet.priceEnergy }
+              </td>
+              <td className='regTrans'>
+              { transaction.outlet.description }
+              </td>
+              <td className='regTrans'>
+                <div className="btn" onClick={that.turnOn.bind(that, transaction.outlet.id)}>ON</div>
+                <div className="btn" onClick={that.turnOff.bind(that, transaction.outlet.id)}>OFF</div>
+              </td>
+            </tr>
+            <ActiveTransaction />
+          </table>
         )
       });
     }
 
+    // for active transactions ------
+    // is there active transactions for this user?
+      // set active transactions html element to that data
+
       return (
         <div className="outletsList container">
           <table className="ui selectable celled padded table">
-            <thead>
-              <tr>
-              <th>Reservation Info</th>
-              <th className="">Outlet Name</th>
-              <th>Seller</th>
-              <th>Voltage</th>
-              <th>Price</th>
-              <th>Description</th>
-              <th>Controller</th>
-            </tr></thead>
-            <tbody>
-              { transactionHtml }
-            </tbody>
+            { transactionRows }
           </table>
         </div>
       )
@@ -121,7 +116,19 @@ var buyerReservations = React.createClass({
 
 });
 
-// <Link to="seeReservedOutlet" params={{id: transaction.outlet.id }}>
-//  </Link>
+var ActiveTransaction = React.createClass({
+  // returns power usage data
+  render: function() {
+    return (
+      <tr>
+        <td>hello</td>
+        <td>hello</td>
+        <td>hello</td>
+        <td>hello</td>
+      </tr>
+    )
+  }
+})
+
 
 module.exports = buyerReservations;
