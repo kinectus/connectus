@@ -118,23 +118,7 @@ var OutletInfo = React.createClass({
   }
 });
 
-// var Availability = React.createClass({
-//   render: function() {
-//   // console.log('this.props.reservationData: ', this.props.reservationData)
-//     return (
-//       <div className="timeblock">
-//         <button className="toggle glyphicon glyphicon-chevron-left"></button>
-//         <div className = "viewBox"><TimeBlock reservationData = {this.props.reservationData} timeSlots = {this.props.timeSlots}/></div>
-//         <button className="toggle glyphicon glyphicon-chevron-right"></button>
-//       </div>
-//     )
-//   }
-// });
-
 var Availability = React.createClass({
-  // getInitialState: function() {
-  //   return {start: 0, end: 47};
-  // },
   getInitialState: function(){
    return {
       reservations: [],
@@ -184,8 +168,8 @@ var Availability = React.createClass({
   },
 
   render: function() {
-      console.log('this.state: ', this.state);
-      console.log('this.props: ', this.props);
+    var date;
+
     if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 ){
 
       // Current subset of reservation information
@@ -193,12 +177,9 @@ var Availability = React.createClass({
       var end = this.state.end;
       var subset = subset || this.state.reservations.slice(this.state.start, this.state.end);
       var slotProps = slotProps || this.state.timeSlots;
+
       // Track center time slot
       var centerCount = centerCount ? centerCount > 48 ? 0 : centerCount : 0;
-
-      console.log('slotProps', slotProps);
-      console.log('subset: ', subset);
-      console.log('start', start);
 
       var outerHTML = subset.map(function(reservation){
         var goOrNoGo = reservation.available ? "on" : "off";
@@ -208,6 +189,7 @@ var Availability = React.createClass({
         var begin, end;
 
         if (centerCount===25){
+          date = moment(reservation.date).format('MMMM Do YYYY');
           for (var j=0; j<slotProps.length; j++){
             if (slotProps[j].id === reservation.slot_id){
               begin = slotProps[j].start;
@@ -227,8 +209,10 @@ var Availability = React.createClass({
     } else {
       var outerHTML = <div className="slot"></div>
     }
+    console.log(date);
     return (
       <div className="timeblock">
+        <p>{date}</p>
         <button className="toggle glyphicon glyphicon-chevron-left" onClick={this.backwards}></button>
         <div className = "viewBox">{outerHTML}</div>
         <button className="toggle glyphicon glyphicon-chevron-right" onClick={this.forwards}></button>
