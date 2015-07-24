@@ -33,17 +33,20 @@ var buyerReservations = React.createClass({
 
   setCurrentTransaction: function(transactionId){
     var that =this;
-    console.log('calling create transaction in html');
     outletStore.setCurrentTransaction({id: transactionId, currentStatus: true, paid: false}).then(function(transaction){
+      outletServices.turnOutletOff(id);
       that.transitionTo('paymentsPage');
       return transaction;
     });
   },
 
-  handleSubmit: function(id) {
-    console.log('handleSumbit in the buyer reservations passing something: ', id)
-    outletServices.turnOutletOn(id)
+  turnOn: function(id) {
+    outletServices.turnOutletOn(id);
   },
+
+  // turnOff: function(id) {
+  //   outletServices.turnOutletOff(id);
+  // },
 
   render: function() {
     // is the user authenticated?
@@ -81,8 +84,8 @@ var buyerReservations = React.createClass({
             { transaction.outlet.description }
             </td>
             <td>
-              <div className="btn" onClick={that.handleSubmit}>Turn on</div>
-              <div className="btn" onClick={that.setCurrentTransaction.bind(that, transaction.id)}>End</div>
+              <div className="btn" onClick={that.turnOn.bind(that, transaction.outlet.id)}>ON</div>
+              <div className="btn" onClick={that.setCurrentTransaction.bind(that, transaction.id)}>OFF</div>
             </td>
             
           </tr>

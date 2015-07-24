@@ -83,13 +83,19 @@ module.exports = {
   },
 
   turnOnOutlet: function(req, res){
-    console.log('turnOnOutlet function in the api controller: ', req.body.id)
     // query the database for validation - CAN they turn on this outlet??
     // if so...
-    var outletId = req.body.id;
     var options = {
       method: 'POST',
       uri: 'http://localhost:3030/api/on'
+    }
+    return rp(options);
+  },
+
+  turnOffOutlet: function(req, res){
+    var options = {
+      method: 'POST',
+      uri: 'http://localhost:3030/api/off'
     }
     return rp(options);
   }

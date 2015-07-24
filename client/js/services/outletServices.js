@@ -153,7 +153,6 @@ var outletServices = function(){
   };
 
   outletData.turnOutletOn = function(outletId){
-    console.log('IN OUTLETSERVICES, turnoutleton: ', outletId);
     return request({
       url: OutletListConstants.TURNON_OUTLET,
       method: 'POST',
@@ -166,7 +165,21 @@ var outletServices = function(){
         console.dir(res);
       }
     });
+  }
 
+  outletData.turnOutletOff = function(outletId){
+    return request({
+      url: OutletListConstants.TURNOFF_OUTLET,
+      method: 'POST',
+      crossOrigin: true,
+      type: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify({id: outletId}),
+      success: function(res) {
+        console.log('---------------------------------> SUCCESS, outletId sent to server.');
+        console.dir(res);
+      }
+    });
   }
 
   // outletData.turnOff = function(){
