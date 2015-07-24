@@ -16,8 +16,12 @@ var getOutletsByUser = require('../config/db/queries/getOutletsByUserId.js');
 var getBuyerReservations = require('../config/db/queries/getBuyerReservations');
 var braintree = require('braintree');
 var findCurrentTransaction = require('../config/db/queries/findCurrentTransaction');
+<<<<<<< HEAD
 var turnOnOutlet = require('../config/db/queries/turnOnOutlet');
 var rp = require('request-promise');
+=======
+var setCurrentTransaction = require('../config/db/queries/setCurrentTransaction');
+>>>>>>> ending transaction sets database transaction to current transaction
 
 var gateway = braintree.connect({
 environment: braintree.Environment.Sandbox,
@@ -35,11 +39,17 @@ module.exports = {
     res.send(response.clientToken);
   });
   },
+  
+  setTransaction: function(req, res){
+    var username = req.user.id;
+    setCurrentTransaction(req).then(function(result){
+      res.send('transaction' + result.id + ' for user ' + username + ' set to current transaction');
+    });
+    
+  },
 
   checkout: function (req, res) {
   var nonce = req.body.payment_method_nonce;
-  console.log('is user attached?--------->', req.user);
-  // Use payment method nonce here
   findCurrentTransaction(req.user.id).then(function(reservations){
     console.log('totalCost---------->', reservations[0].transaction_current.totalCost);
     gateway.transaction.sale({
@@ -50,6 +60,7 @@ module.exports = {
         console.log(err);
         return;
       }
+      console.log('transaction result-------->', result);
       res.redirect('/#/paymentConfirmation');
     });
   })

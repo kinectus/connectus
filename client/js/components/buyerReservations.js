@@ -32,11 +32,12 @@ var buyerReservations = React.createClass({
     });
   },
 
-  // createTransaction: function(){
-  //   outletStore.createTransaction().then(function(transaction){
-  //     return transaction;
-  //   });
-  // },
+  setCurrentTransaction: function(transactionId){
+    console.log('calling create transaction in html');
+    outletStore.setCurrentTransaction(transactionId).then(function(transaction){
+      return transaction;
+    });
+  },
 
   handleSubmit: function(id) {
     console.log('handleSumbit in the buyer reservations passing something: ', id)
@@ -44,7 +45,12 @@ var buyerReservations = React.createClass({
   },
 
   render: function() {
-
+    // var setCurrentTransaction =  function(transactionId){
+    //   console.log('calling create transaction in html');
+    //   outletStore.setCurrentTransaction(transactionId).then(function(transaction){
+    //     return transaction;
+    //   });
+    // };
     // is the user authenticated?
     if(!document.cookie){
       this.transitionTo('login');
@@ -80,8 +86,8 @@ var buyerReservations = React.createClass({
             { transaction.outlet.description }
             </td>
             <td>
-              <div className="btn" onClick={that.handleSubmit.bind(that, transaction.outlet.id)}>Turn on</div>
-              <div className="btn" onClick={that.createTransaction}>End</div>
+              <div className="btn" onClick={that.handleSubmit}>Turn on</div>
+              <div className="btn" onClick={that.setCurrentTransaction.bind(that, transaction.id)}>End</div>
             </td>
             
           </tr>

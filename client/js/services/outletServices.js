@@ -6,6 +6,22 @@ var outletServices = function(){
 
   var outletData = {};
 
+  outletData.setTransaction = function(transactionId){
+    console.log('changing transaction in outlet services', transactionId);
+    return request({
+      url: OutletListConstants.TRANSACTION_CURRENT,
+      method: 'POST',
+      crossOrigin:true,
+      type: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify(transactionId),
+      success: function(result){
+        console.log(result);
+        return result;
+      }
+    });
+  };
+
   outletData.getLocation = function(lat, long){
     navigator.geolocation.getCurrentPosition(function(position) {
      lat = position.coords.latitude;
