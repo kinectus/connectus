@@ -30,6 +30,7 @@ var Map = React.createClass({
     )
   }
 });
+
 var DateTime = React.createClass({
   handleSubmit: function(event) {
     event.preventDefault();
@@ -77,6 +78,7 @@ var DateTime = React.createClass({
     )
   }
 });
+
 var OutletInfo = React.createClass({
   render: function() {
     // do something with the photo
@@ -116,10 +118,137 @@ var OutletInfo = React.createClass({
   }
 });
 
+// var Availability = React.createClass({
+//   render: function() {
+//   // console.log('this.props.reservationData: ', this.props.reservationData)
+//     return (
+//       <div className="timeblock">
+//         <button className="toggle glyphicon glyphicon-chevron-left"></button>
+//         <div className = "viewBox"><TimeBlock reservationData = {this.props.reservationData} timeSlots = {this.props.timeSlots}/></div>
+//         <button className="toggle glyphicon glyphicon-chevron-right"></button>
+//       </div>
+//     )
+//   }
+// });
+
+var Availability = React.createClass({
+  // getInitialState: function() {
+  //   return {start: 0, end: 47};
+  // },
+  getInitialState: function(){
+   return {
+      reservations: [],
+      timeSlots: []
+    }
+  },
+
+  componentDidMount: function() {
+    var that = this;
+
+    outletStore.getOutletReservations(this.props.outletID).then(function(reservations){
+      that.setState({reservations: reservations});
+      // console.log('reservations in Availability: ', that.state.reservations);
+    });
+
+    outletStore.getTimeSlotInfo().then(function(slots){
+      that.setState({timeSlots: slots, start: 0, end: 47});
+      // console.log('yo slots: ', that.state.timeSlots);
+    });
+  },
+
+  forwards: function() {
+    console.log('scroll forwards');
+
+    if (this.state.end < this.state.reservations.length - 49){
+      var val1 = this.state.start + 48;
+      var val2 = this.state.end + 48;
+      this.setState({start: val1});
+      this.setState({end: val2});
+    } else if (this.state.end < this.state.reservations.length){
+      this.setState({start: this.state.reservations.length - 49});
+      this.setState({end: this.state.reservations.length});
+    }
+    console.log('START',this.state.start)
+    // this.forceUpdate();
+    // console.log('forward', this.state.start);
+  },
+
+  backwards: function() {
+    console.log('scroll backwards');
+    if (this.state.start > 47){
+      var val1 = this.state.start - 48
+      var val2 = this.state.end - 48
+      this.setState({start: val1});
+      this.setState({end: val2});
+    } else if (this.state.start > 0) {
+      this.setState({start: 0});
+      this.setState({end: 48});
+    }
+    console.log('START',this.state.start)
+  },
+
+  render: function() {
+      console.log('this.state: ', this.state);
+      console.log('this.props: ', this.props);
+    // if (Array.isArray(this.state.reservationData) && Array.isArray(this.state.timeSlots) ){
+    if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 ){
+
+      // Current subset of reservation information
+      var start = this.state.start;
+      var end = this.state.end;
+      var subset = subset || this.state.reservations.slice(this.state.start, this.state.end);
+      var slotProps = slotProps || this.state.timeSlots;
+      // Track center time slot
+      var centerCount = centerCount ? centerCount > 48 ? 0 : centerCount : 0;
+
+      console.log('slotProps', slotProps);
+      console.log('subset: ', subset);
+      // console.log('next: ', next);
+      console.log('start', start);
+
+      var outerHTML = subset.map(function(reservation){
+        // console.log('centerCount now: ', centerCount);
+        var goOrNoGo = reservation.available ? "on" : "off";
+        // label slot properties
+        var blockClass = (centerCount===24) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
+        centerCount++;
+        var begin, end;
+        if (centerCount===25){
+          for (var j=0; j<slotProps.length; j++){
+            if (slotProps[j].id === reservation.slot_id){
+              begin = slotProps[j].start;
+              end = slotProps[j].end;
+            }
+          }
+          return(
+            <div className={blockClass} key={reservation.id}><p>{begin}-{end}</p></div>
+          )
+        } else {
+          return(
+            <div className={blockClass} key={reservation.id}></div>
+          )
+        }
+      });
+    } else {
+      var outerHTML =
+          <div className="slot"></div>
+    }
+    return (
+      <div className="timeblock">
+        <button className="toggle glyphicon glyphicon-chevron-left" onClick={this.backwards}></button>
+        <div className = "viewBox">{outerHTML}</div>
+        <button className="toggle glyphicon glyphicon-chevron-right" onClick={this.forwards}></button>
+      </div>
+    )
+  }
+
+});
+
 var reserveOutlet = React.createClass({
   getInitialState: function(){
    return {
-      data: []
+      data: [],
+      // reservations: []
     }
   },
   mixins: [Router.Navigation],
@@ -133,18 +262,29 @@ var reserveOutlet = React.createClass({
     var outletID = this.props.params.id
     outletStore.getOutletById(outletID).then(function(outlet){
       // setState automatically forces a re-render
-      console.log('outlet',outlet);
+      // console.log('outlet',outlet);
       that.setState({data: outlet});
     });
+
+    // //GET OUTLET RESERVATIONS
+    // outletStore.getOutletReservations(outletID).then(function(reservations){
+    //   that.setState({reservations: reservations});
+    //   // console.log('reservations in reserveOutlet: ', that.state.reservations);
+    // });
+
+    // outletStore.getTimeSlotInfo().then(function(slots){
+    //   that.setState({timeSlots: slots, start: 0, end: 47});
+    //   // console.log('yo slots: ', that.state.timeSlots);
+    // })
   },
 
   render: function() {
-
     // is user authenticate
     if(!document.cookie){
       this.transitionTo('login');
       return <h1></h1>;
     }
+    //reservationData = {this.state.reservations} timeSlots = {this.state.timeSlots} start = {this.state.start} end = {this.state.end}
     return (
       <div className='container'>
         <div>
@@ -154,7 +294,10 @@ var reserveOutlet = React.createClass({
           <OutletInfo outletData = {this.state.data}/>
         </div>
         <div>
-         <DateTime outletData = {this.state.data}/>
+          <Availability outletID = {this.props.params.id}/>
+        </div>
+        <div>
+           <DateTime outletData = {this.state.data}/>
         </div>
       </div>
     )

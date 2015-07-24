@@ -1,15 +1,18 @@
 var db = require('../config/db/config');
+var Outlet = require('../outlets/outlet.model');
 var Outlets = require('../outlets/outlets.collection');
+var User = require('../users/user.model');
+
+var AuthController = require('../auth/auth.controller');
+
 var getOutletsByUser = require('../config/db/queries/getOutletsByUserId');
 var addNewOutlet = require('../config/db/queries/addNewOutlet');
+var getOutletAvailability = require('../config/db/queries/getAvailability');
 var addReservationSlots = require('../config/db/queries/addReservationSlots');
 var updateReservation = require('../config/db/queries/updateReservation');
+var getTimeSlotInfo = require('../config/db/queries/getTimeSlotInfo');
 var getAllUsers = require('../config/db/queries/getUserInfo');
-var Outlet = require('../outlets/outlet.model');
-var AuthController = require('../auth/auth.controller');
-var User = require('../users/user.model');
 var getOutletsByUser = require('../config/db/queries/getOutletsByUserId.js');
-var moment = require('moment');
 var getBuyerReservations = require('../config/db/queries/getBuyerReservations');
 var braintree = require('braintree');
 var findCurrentTransaction = require('../config/db/queries/findCurrentTransaction');
@@ -22,6 +25,8 @@ merchantId: "fnrgqqwdcfc5wtvh",
 publicKey: "9wzszhdgj9rq8z8y",
 privateKey: "6910d378ab21d286f37ed123e70022f6"
 });
+
+var moment = require('moment');
 
 module.exports = {
   
@@ -70,6 +75,17 @@ module.exports = {
     getOutletsByUser(req.user)
     .then(function(outlets){
       res.send(200, outlets.models);
+    });
+  },
+
+  getAvailability: function(req, res){
+    getOutletAvailability(req, res);
+  },
+
+  seeTimeSlots: function(req, res){
+    getTimeSlotInfo(req, res)
+    .then(function(slots){
+      res.send(200, slots.models)
     });
   },
 

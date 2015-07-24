@@ -50,6 +50,33 @@ var outletServices = function(){
     });
   };
 
+  outletData.retrieveOutletReservations = function(outletID){
+    console.log('outletID in retrieve reservations SERVICES', outletID);
+    return request({
+      url: OutletListConstants.OUTLET_RESERVATIONS,
+      method: 'POST',
+      crossOrigin: true,
+      type: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify({outletID: outletID}),
+      success: function(reservations){
+        return reservations;
+      }
+    });
+  };
+
+  outletData.retrieveSlots = function(){
+    return request({
+      url: OutletListConstants.TIME_SLOTS,
+      method: 'GET',
+      crossOrigin: true,
+      type: 'json',
+      success: function(slots){
+        return slots;
+      }
+    });
+  };
+
   outletData.retrieveOutletById = function(outletID){
     return request({
       url: OutletListConstants.OUTLET_DATA,
