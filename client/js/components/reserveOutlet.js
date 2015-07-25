@@ -127,14 +127,22 @@ var Availability = React.createClass({
     }
   },
 
-  componentDidMount: function() {
-    var that = this;
+  handleResize: function(e) {
     console.log('window.innerWidth<627', window.innerWidth<627)
     if (window.innerWidth<627){
       this.setState({end: 13, middle: 6});
-    } else {
+    } else if (window.innerWidth<1010){
       this.setState({end: 25, middle: 12});
+    } else {
+      this.setState({end: 41, middle: 20});
     }
+  },
+
+  componentDidMount: function() {
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
+
+    var that = this;
 
     outletStore.getOutletReservations(this.props.outletID).then(function(reservations){
       that.setState({reservations: reservations});
@@ -144,6 +152,10 @@ var Availability = React.createClass({
       that.setState({timeSlots: slots, start: 0});
     });
 
+  },
+
+  componentWillUnmount: function() {
+    window.removeEventListener('resize', this.handleResize);
   },
 
   // Check for button events
@@ -195,7 +207,7 @@ var Availability = React.createClass({
     var date;
 
     // If reservations API call has completed
-    if (this.state.reservations.length > 0 && this.state.timeSlots.length>0){
+    if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 && this.state.end && this.state.middle){
       // Current subset of reservation information
       var start = this.state.start;
       var end = this.state.end;
