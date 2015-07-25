@@ -115,7 +115,11 @@ var myOutlets = React.createClass({
                 <p className="rating">{ outlet.rating }</p>
               </td>
               <td>
-                <button>Edit</button><br></br>
+                <button>
+                  <Link to="editOutlet" params={{id: outlet.id }}>
+                    Edit
+                  </Link>
+                </button><br></br>
                 <button>Reservations</button>
               </td>
             </tr>
