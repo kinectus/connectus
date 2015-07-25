@@ -23,8 +23,16 @@ var editOutlet = React.createClass({
     outletStore.getOutletById(outletID).then(function(outlet){
       // setState automatically forces a re-render
       // console.log('outlet',outlet);
-      // that.setState({data: outlet});
-      console.log('YA GURRRRL HERES YO OUTLETTTT: ', outlet)
+      that.setState({outlet: outlet});
+      var semicolon = outlet.address.indexOf(';');
+      that.setState({ street: outlet.address.slice( 0, semicolon)});
+      semicolon = outlet.address.indexOf(';', semicolon+1);
+      that.setState({ city: outlet.address.slice( 0, semicolon)});
+      semicolon = outlet.address.indexOf(';', semicolon+1);
+      that.setState({ state: outlet.address.slice( 0, semicolon)});
+      semicolon = outlet.address.indexOf(';', semicolon+1);
+      that.setState({ zip: outlet.address.slice( 0, semicolon)});
+      console.log('YA GURRRRL HERES YO OUTLETTTT: ', this.state)
     });
   },
 
@@ -71,7 +79,7 @@ var editOutlet = React.createClass({
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Street</label><br />
-            <input type="text" name="street" ref="street" className="form-control" placeholder='Enter your street address...' /><br />
+            <input type="text" name="street" ref="street" className="form-control" value={this.state.street} /><br />
           </div>
           <div className="form-group">
             <label>City</label><br />
