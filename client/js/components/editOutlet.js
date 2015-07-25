@@ -80,53 +80,59 @@ var editOutlet = React.createClass({
       this.transitionTo('login');
       return <h1></h1>;
     }
-
-    return (
-      <div className="editOutlet col-md-6 col-md-offset-3">
-        <h3>Add an outlet:</h3>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label>Street</label><br />
-            <input type="text" name="street" ref="street" className="form-control" value={this.state.street} /><br />
-          </div>
-          <div className="form-group">
-            <label>City</label><br />
-            <input type="text" name="city" ref="city" className="form-control" value={this.state.city} /> <br />
-          </div>
-          <div className="form-group">
-            <label>State</label><br />
-            <input type="text" name="state" ref="state" className="form-control" value={this.state.state} /><br />
-          </div>
-          <div className="form-group">
-            <label>Zip Code</label><br />
-            <input type="text" name="zip" ref="zip" className="form-control" value={this.state.zip} /><br />
-          </div>
-          <div className="form-group">
-            <label>Outlet Name</label><br />
-            <input type="text" name="name" ref="name" className="form-control" /><br />
-          </div>
-          <div className="form-group">
-            <label>Instructions for user</label><br />
-            <textarea name="description" name="description" ref="description" className="form-control" placeholder="This is a description." /><br />
-          </div>
-          <div className="form-group">
-            <label>Outlet Voltage</label><br />
-            <select className="ui dropdown" className="form-control" ref="voltage">
-              <option value="standard">Standard</option>
-              <option value="high">High</option>
-            </select><br />
-          </div>
-          <div className="form-group">
-            <label>Your hourly rate: $3/hr   Suggested price/kWh: $0.20/kWh</label><br />
-          </div>
-          <div className="form-group">
-            <label>Your price/kWh charge: </label><br />
-            <input type="text" name="charge" ref="charge" className="form-control" placeholder='ex. 10' />/kWh<br />
-          </div>
-          <button type="submit" className="btn btn-primary btn-lg btn-block" value="Submit">Submit</button>
-        </form>
-      </div>
-    )
+    if (this.state.zip){
+      var outlet = this.state.outlet;
+      return (
+        <div className="editOutlet col-md-6 col-md-offset-3">
+          <h3>Add an outlet:</h3>
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <label>Street</label><br />
+              <input type="text" name="street" ref="street" className="form-control" defaultValue={this.state.street} /><br />
+            </div>
+            <div className="form-group">
+              <label>City</label><br />
+              <input type="text" name="city" ref="city" className="form-control" defaultValue={this.state.city} /> <br />
+            </div>
+            <div className="form-group">
+              <label>State</label><br />
+              <input type="text" name="state" ref="state" className="form-control" defaultValue={this.state.state} /><br />
+            </div>
+            <div className="form-group">
+              <label>Zip Code</label><br />
+              <input type="text" name="zip" ref="zip" className="form-control" defaultValue={this.state.zip} /><br />
+            </div>
+            <div className="form-group">
+              <label>Outlet Name</label><br />
+              <input type="text" name="name" ref="name" className="form-control" defaultValue={outlet.name}/><br />
+            </div>
+            <div className="form-group">
+              <label>Instructions for user</label><br />
+              <textarea name="description" name="description" ref="description" className="form-control" defaultValue={outlet.description} /><br />
+            </div>
+            <div className="form-group">
+              <label>Outlet Voltage</label><br />
+              <select className="ui dropdown" className="form-control" ref="voltage" defaultValue={outlet.voltage}>
+                <option value="standard">Standard</option>
+                <option value="high">High</option>
+              </select><br />
+            </div>
+            <div className="form-group">
+              <label>Your hourly rate: $3/hr   Suggested price/kWh: $0.20/kWh</label><br />
+            </div>
+            <div className="form-group">
+              <label>Your price/kWh charge: </label><br />
+              <input type="text" name="charge" ref="charge" className="form-control" defaultValue={outlet.priceEnergy} />/kWh<br />
+            </div>
+            <button type="submit" className="btn btn-primary btn-lg btn-block" value="Submit">Submit</button>
+          </form>
+        </div>
+      )
+    } else {
+      return (
+        <div></div>
+      )
+    }
   }
 });
 
