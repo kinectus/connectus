@@ -32,7 +32,6 @@ module.exports = {
   },
   setTransaction: function(req, res){
     var username = req.user.id;
-    console.log('calling set current transaction the first time', req.body);
     setCurrentTransaction(req).then(function(result){
       res.send(200, result);
     });

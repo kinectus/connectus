@@ -6,7 +6,6 @@ var Transaction = require('../../../transactions/transaction.model.js');
 
 
 module.exports = setCurrentTransaction = function(req){
-  console.log('request pased through', req);
   var transactionId = req.body.id;
   var currentStatus = req.body.currentStatus;
   

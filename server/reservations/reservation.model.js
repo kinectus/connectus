@@ -22,7 +22,7 @@ var Reservation = bookshelf.Model.extend({
   },
   transaction_current: function() {
     var Transaction = require('../transactions/transaction.model');
-    return this.belongsTo(Transaction, 'transaction_id').query({where: {current:true}});
+    return this.belongsTo(Transaction, 'transaction_id').query({where: {current:1}});
   },
 });
 

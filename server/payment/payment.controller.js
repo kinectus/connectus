@@ -20,17 +20,17 @@ module.exports = {
 	
   getTransactionInfo: function(req, res){
     console.log('getting transaction info in payment controller')
-  	findCurrentTransaction(req.user.id).then(function(reservations){
-      res.send(reservations.models[0].relations.transaction_current);
+  	findCurrentTransaction(req.user.id).then(function(reservation){
+      res.send(reservation.relations.transaction_current);
     });
   },
   
 
 	checkout: function (req, res) {
 	var nonce = req.body.payment_method_nonce;
-	findCurrentTransaction(req.user.id).then(function(reservations){
+	findCurrentTransaction(req.user.id).then(function(reservation){
 	  gateway.transaction.sale({
-	    amount: reservations.models[0].relations.transaction_current.attributes.totalCost,
+	    amount: reservation.relations.transaction_current.attributes.totalCost,
 	    paymentMethodNonce: nonce,
 	  }, function (err, result) {
 	    if(err){
