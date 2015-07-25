@@ -135,7 +135,7 @@ var Availability = React.createClass({
     });
 
     outletStore.getTimeSlotInfo().then(function(slots){
-      that.setState({timeSlots: slots, start: 0, end: 47});
+      that.setState({timeSlots: slots, start: 0, end: 25});
     });
   },
 
@@ -197,19 +197,19 @@ var Availability = React.createClass({
       var slotProps = slotProps || this.state.timeSlots;
 
       // Track center time slot
-      var centerCount = centerCount ? centerCount > 48 ? 0 : centerCount : 0;
+      var centerCount = centerCount ? centerCount > 24 ? 0 : centerCount : 0;
 
       // Create custom availability viewer using subset
       var outerHTML = subset.map(function(reservation){
         var goOrNoGo = reservation.available ? "on" : "off";
 
         // Label slot properties based on subset location
-        var blockClass = (centerCount===24) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
+        var blockClass = (centerCount===12) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
         centerCount++;
         var begin, end;
 
         // Specially label center slot to display its information
-        if (centerCount===25){
+        if (centerCount===13){
           date = moment(reservation.date).format('MMMM Do YYYY');
           for (var j=0; j<slotProps.length; j++){
             if (slotProps[j].id === reservation.slot_id){
