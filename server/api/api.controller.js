@@ -17,6 +17,15 @@ var getBuyerReservations = require('../config/db/queries/getBuyerReservations');
 var turnOnOutlet = require('../config/db/queries/turnOnOutlet');
 var rp = require('request-promise');
 
+// socket.io
+var io = require('../config/middleware').io;
+
+var gateway = braintree.connect({
+environment: braintree.Environment.Sandbox,
+merchantId: "fnrgqqwdcfc5wtvh",
+publicKey: "9wzszhdgj9rq8z8y",
+privateKey: "6910d378ab21d286f37ed123e70022f6"
+});
 
 var moment = require('moment');
 
@@ -82,11 +91,28 @@ module.exports = {
       });
   },
 
+  realtimeData: function(req, res){
+    console.log('realtimedata from powerserver', req.body);
+    // grab the reservation id from req.body
+    var reservationId = req.body.reservation.id;
+    // socket.on(reservationId, function(){
+    //   io.emit(reservationId, req.body)
+    //   console.log('emit')
+    // });
+    io.sockets.emit('energy', req.body);
+
+  },
+
   turnOnOutlet: function(req, res){
     // query the database for validation - CAN they turn on this outlet??
     // if so...
+    res.send(200, 'you turn me on!')
+    console.log('reservation info in the api controller: ', req.body);
+    var info = req.body;
     var options = {
       method: 'POST',
+      body: info,
+      json: true,
       uri: 'http://localhost:3030/api/on'
     }
     return rp(options);

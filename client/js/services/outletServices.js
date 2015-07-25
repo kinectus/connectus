@@ -152,31 +152,32 @@ var outletServices = function(){
     });
   };
 
-  outletData.turnOutletOn = function(outletId){
+  outletData.turnOutletOn = function(reservation){
+    console.log('reservation info on the client: ', reservation);
     return request({
       url: OutletListConstants.TURNON_OUTLET,
       method: 'POST',
       crossOrigin: true,
       type: 'json',
       contentType: 'application/json',
-      data: JSON.stringify({id: outletId}),
+      data: JSON.stringify(reservation),
       success: function(res) {
-        console.log('---------------------------------> SUCCESS, outletId sent to server.');
+        console.log('---------------------------------> SUCCESS, reservation info sent to server.');
         console.dir(res);
       }
     });
   }
 
-  outletData.turnOutletOff = function(outletId){
+  outletData.turnOutletOff = function(reservation){
     return request({
       url: OutletListConstants.TURNOFF_OUTLET,
       method: 'POST',
       crossOrigin: true,
       type: 'json',
       contentType: 'application/json',
-      data: JSON.stringify({id: outletId}),
+      data: JSON.stringify(reservation),
       success: function(res) {
-        console.log('---------------------------------> SUCCESS, outletId sent to server.');
+        console.log('---------------------------------> SUCCESS, reservation info sent to server.');
         console.dir(res);
       }
     });
