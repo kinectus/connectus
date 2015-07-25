@@ -96,7 +96,7 @@ var buyerReservations = React.createClass({
             </tr>
             <ActiveTransaction />
           </table>
-        )
+
       });
     }
 
