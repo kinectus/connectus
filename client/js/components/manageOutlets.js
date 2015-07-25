@@ -50,6 +50,7 @@ var myOutlets = React.createClass({
       if(isMobile) {
         var outletHtml = this.state.data.map(function(outlet) {
           return (
+            <div>
             <tr key={outlet.id} onClick={that.reserveOutlet}>
               <td>
                 <h2> 
@@ -77,6 +78,15 @@ var myOutlets = React.createClass({
                 <p className="rating">{ outlet.rating }</p>
               </td>
             </tr>
+            <tr>
+              <td>
+                <button>Edit</button>
+              </td>
+              <td>
+                <button>Reservations</button>
+              </td>
+            </tr>
+            </div>
           )
         });
       } else {

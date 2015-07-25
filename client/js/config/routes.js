@@ -10,6 +10,7 @@ var OutletsListMap = require('../components/outletsListMap.js');
 var buyerReservations = require('../components/buyerReservations.js');
 var ReserveOutlet = require('../components/reserveOutlet.js');
 var AddOutlet = require('../components/addOutlet.js');
+var EditOutlet = require('../components/editOutlet.js');
 var ManageOutlets = require('../components/manageOutlets.js');
 var SellerOutlets = require('../components/sellerOutlets.js');
 var PaymentsPage = require('../components/payments.js');
@@ -33,6 +34,7 @@ module.exports = (
     <Route name="outletsListMap" path="/outlets/map" handler={OutletsListMap} />
     <Route name="reserveOutlet" path="/outlets/:id" handler={ReserveOutlet} />
     <Route name="addOutlet" path="/addOutlet" handler={AddOutlet} />
+    <Route name="editOutlet" path="/editOutlet" handler={EditOutlet} />
     <Route name="manageOutlets" path="/manageOutlets" handler={ManageOutlets} />
     <Route name="paymentConfirmation" path="/paymentConfirmation" handler={PaymentConfirmation} />
     <Route name="buyerReservations" path="/buyerReservations" handler={buyerReservations} />
