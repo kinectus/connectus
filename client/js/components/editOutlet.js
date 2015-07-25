@@ -1,6 +1,6 @@
 var React = require('react');
 var outletStore = require('../stores/outletStore');
-// var ReactAddons = require('react/addons');
+var Alert = require('react-bootstrap').Alert;
 
 /* TODO
 Style page
@@ -12,6 +12,7 @@ var editOutlet = React.createClass({
   getInitialState: function(){
    return {
       data: [],
+      alert: false
     }
   },
   // mixins: [Router.Navigation],
@@ -71,17 +72,16 @@ var editOutlet = React.createClass({
       console.log('editOutlet submit response: ', res)
     });
     
-    // React.findDOMNode(this.refs.street).value = '';
-    // React.findDOMNode(this.refs.city).value = '';
-    // React.findDOMNode(this.refs.state).value = '';
-    // React.findDOMNode(this.refs.zip).value = '';
-    // React.findDOMNode(this.refs.name).value = '';
-    // React.findDOMNode(this.refs.description).value = '';
-    // React.findDOMNode(this.refs.voltage).value = '';
-    // React.findDOMNode(this.refs.charge).value = '';
-    // console.log('submitted!')
-    // return;
+    // POPUP confirmation: updated
+    // redirect to their outlet list
+
   },
+
+  confirm: function(e){
+    e.preventDefault();
+    this.setState({alert: true});
+  },
+
   render: function(){
     // is user authenticated
     if(!document.cookie){
@@ -90,6 +90,7 @@ var editOutlet = React.createClass({
     }
     if (this.state.zip){
       var outlet = this.state.outlet;
+      var hidden = !this.state.alert ? "hidden" : "notHidden";
       return (
         <div className="editOutlet col-md-6 col-md-offset-3">
           <h3>Add an outlet:</h3>
@@ -132,7 +133,12 @@ var editOutlet = React.createClass({
               <label>Your price/kWh charge: </label><br />
               <input type="text" name="charge" ref="charge" className="form-control" defaultValue={outlet.priceEnergy} />/kWh<br />
             </div>
-            <button type="submit" className="btn btn-primary btn-lg btn-block" value="Submit">Submit</button>
+            <Alert className={hidden} bsStyle='danger' onDismiss={this.handleAlertDismiss}>
+              <h4>Update information on {outlet.name}?</h4>
+              <button type="submit">Go go go!</button>
+              <button>STOP</button>
+            </Alert>
+            <button className="btn btn-primary btn-lg btn-block" onClick={this.confirm} >Submit</button>
           </form>
         </div>
       )
