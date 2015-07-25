@@ -96,6 +96,7 @@ var editOutlet = React.createClass({
     if (this.state.zip){
       var outlet = this.state.outlet;
       var hidden = !this.state.alert ? "hidden" : "notHidden";
+      var buttonHid = !this.state.alert ? "notHidden btn btn-primary btn-lg btn-block" : "hidden btn btn-primary btn-lg btn-block";
       return (
         <div className="editOutlet col-md-6 col-md-offset-3">
           <h3>Add an outlet:</h3>
@@ -145,7 +146,7 @@ var editOutlet = React.createClass({
                 <button onClick={this.hideMe} className="btn btn-default confirming">Cancel</button>
               </div>
             </Alert>
-            <button className="btn btn-primary btn-lg btn-block" onClick={this.confirm} >Submit</button>
+            <button className={buttonHid} onClick={this.confirm} >Submit</button>
           </form>
         </div>
       )
