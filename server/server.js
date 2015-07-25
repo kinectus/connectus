@@ -1,4 +1,4 @@
-var app = require('./config/middleware');
+var app = require('./config/middleware').app;
 
 var port = process.env.PORT || 3000;
 // var db = require('./db/config.js');

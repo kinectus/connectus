@@ -10,7 +10,8 @@ var loginConstants = {
   OUTLETS_BYUSER: BASE_URL + 'api/users/manageMyOutlets',
   SEEBUYER_RESERVATIONS: BASE_URL + 'api/users/seeBuyerReservations',
   TURNON_OUTLET: BASE_URL + 'api/on',
-  TRANSACTION_CURRENT: BASE_URL + 'api/setTransaction'
+  TRANSACTION_CURRENT: BASE_URL + 'api/setTransaction',
+  TURNOFF_OUTLET: BASE_URL + 'api/off'
 };
 
 module.exports = loginConstants;

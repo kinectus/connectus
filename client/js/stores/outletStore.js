@@ -9,6 +9,7 @@ var CHANGE_EVENT = 'change';
 
 var outletStore = assign({}, EventEmitter.prototype, {
   setCurrentTransaction: function(data){
+    console.log('data recieved in outlet store', data)
     return OutletServices.setTransaction(data).then(function(result){
       return result;
     });

@@ -6,14 +6,18 @@ var passport = require('passport');
 var path = require('path');
 var db = require('./db/config');
 var authController = require('../auth/auth.controller');
+var apiController = require('../api/api.controller');
 var cors = require('cors');
 
 
 var app = express();
+
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors());
-
 
 app.use(function(err, req, res, next){
   if (err.name === 'StatusError') {
@@ -41,6 +45,12 @@ app.use(passport.session());
 app.use('/auth', authRouter);
 app.use('/api', apiRouter);
 app.use('/payment', paymentRouter);
+// app.use('/realtimeData', function(req, res){
+//   var io = require('socket.io')(http)
+//   io.on('connection', function(){
+//     apiController.realtimeData(req, res)
+//   })
+// });
 
 
 require('../auth/auth.routes')(authRouter);
@@ -49,4 +59,4 @@ require('../payment/payment.routes')(paymentRouter);
 
 
 
-module.exports = app;
+module.exports = {app: app, io: io};

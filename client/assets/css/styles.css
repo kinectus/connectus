@@ -9,6 +9,9 @@
 body {
   background-color: #d0d8da;
 }
+table.transaction-rows {
+  margin-top: 50px;
+}
 a,
 a:hover,
 a:focus {
