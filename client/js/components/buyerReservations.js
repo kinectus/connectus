@@ -32,25 +32,18 @@ var buyerReservations = React.createClass({
     });
   },
 
-<<<<<<< HEAD
-  setCurrentTransaction: function(transactionId){
+  setCurrentTransaction: function(transaction){
+    console.log(transaction)
     var that =this;
-    outletStore.setCurrentTransaction({id: transactionId, currentStatus: true, paid: false}).then(function(transaction){
-      outletServices.turnOutletOff(id);
+    outletStore.setCurrentTransaction({id: transaction.id, currentStatus: true, paid: false}).then(function(transaction){
+      // outletServices.turnOutletOff(transaction);
       that.transitionTo('paymentsPage');
       return transaction;
     });
   },
-=======
-  // createTransaction: function(){
-  //   outletStore.createTransaction().then(function(reservation){
-  //     return reservation;
-  //   });
-  // },
->>>>>>> (realtime data) pulls from power into connectus, debugging socket.io
 
-  turnOn: function(reservation) {
-    outletServices.turnOutletOn(reservation);
+  turnOn: function(transaction) {
+    outletServices.turnOutletOn(transaction);
 
   },
 
@@ -70,38 +63,38 @@ var buyerReservations = React.createClass({
     console.log('STATE.DATA:  ', this.state.data)
 
     if (this.state.data.length !==0) {
-      var reservationRows = this.state.data.map(function(reservation) {
+      var transactionRows = this.state.data.map(function(transaction) {
         return (
-          <table className='table-hover reservation-rows'>
-            <tr key={ reservation.id } onClick={ that.reserveOutlet } className='regTransRow'>
+          <table className='table-hover transaction-rows'>
+            <tr key={ transaction.id } onClick={ that.reserveOutlet } className='regTransRow'>
               <td className='regTrans'>
-                Start: { reservation.startTime.date} - { reservation.startTime.slot.time }
+                Start: { transaction.startTime.date} - { transaction.startTime.slot.time }
                 <br />
-                End: { reservation.endTime.date } - { reservation.endTime.slot.time } 
+                End: { transaction.endTime.date } - { transaction.endTime.slot.time } 
               </td>
               <td className='regTrans'>
-                { reservation.outlet.name } 
+                { transaction.outlet.name } 
               </td>
               <td className='regTrans'>
-                Seller: { reservation.seller.fullname }
+                Seller: { transaction.seller.fullname }
               </td>
               <td className='regTrans'>
-                { reservation.outlet.voltage }
+                { transaction.outlet.voltage }
               </td>
               <td className='regTrans'>
-                Price by hour: { reservation.outlet.priceHourly }
+                Price by hour: { transaction.outlet.priceHourly }
                 <br />
-                Price by kWh: { reservation.outlet.priceEnergy }
+                Price by kWh: { transaction.outlet.priceEnergy }
               </td>
               <td className='regTrans'>
-              { reservation.outlet.description }
+              { transaction.outlet.description }
               </td>
               <td className='regTrans'>
-                <div className="btn" onClick={that.turnOn.bind(that, reservation)}>ON</div>
-                <div className="btn" onClick={that.turnOff.bind(that, reservation)}>OFF</div>
+                <div className="btn" onClick={that.turnOn.bind(that, transaction)}>ON</div>
+                <div className="btn" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
               </td>
             </tr>
-            <ActiveReservation />
+            <ActiveTransaction />
           </table>
         )
       });
@@ -114,7 +107,7 @@ var buyerReservations = React.createClass({
       return (
         <div className="outletsList container">
           <table className="ui selectable celled padded table">
-            { reservationRows }
+            { transactionRows }
           </table>
         </div>
       )
@@ -127,14 +120,16 @@ var buyerReservations = React.createClass({
 
 });
 
-var ActiveReservation = React.createClass({
+var ActiveTransaction = React.createClass({
 
   // returns power usage data
   render: function() {
-    var socket = io();
-    socket.on('energy', function(energy){
-      console.log('energy in appjs', energy)
-    });
+
+    // DOESNT WORK YET
+    // var socket = io();
+    // socket.on('energy', function(energy){
+    //   console.log('energy in appjs', energy)
+    // });
 
     return (
       <tr>

@@ -20,13 +20,6 @@ var rp = require('request-promise');
 // socket.io
 var io = require('../config/middleware').io;
 
-var gateway = braintree.connect({
-environment: braintree.Environment.Sandbox,
-merchantId: "fnrgqqwdcfc5wtvh",
-publicKey: "9wzszhdgj9rq8z8y",
-privateKey: "6910d378ab21d286f37ed123e70022f6"
-});
-
 var moment = require('moment');
 
 module.exports = {
