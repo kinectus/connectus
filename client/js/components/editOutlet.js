@@ -24,15 +24,23 @@ var editOutlet = React.createClass({
       // setState automatically forces a re-render
       // console.log('outlet',outlet);
       that.setState({outlet: outlet});
+
       var semicolon = outlet.address.indexOf(';');
+
       that.setState({ street: outlet.address.slice( 0, semicolon)});
+      var lastSemicolon = semicolon+1;
       semicolon = outlet.address.indexOf(';', semicolon+1);
-      that.setState({ city: outlet.address.slice( 0, semicolon)});
+
+      that.setState({ city: outlet.address.slice( lastSemicolon, semicolon)});
+      lastSemicolon = semicolon+1;
       semicolon = outlet.address.indexOf(';', semicolon+1);
-      that.setState({ state: outlet.address.slice( 0, semicolon)});
-      semicolon = outlet.address.indexOf(';', semicolon+1);
-      that.setState({ zip: outlet.address.slice( 0, semicolon)});
-      console.log('YA GURRRRL HERES YO OUTLETTTT: ', this.state)
+
+      that.setState({ state: outlet.address.slice( lastSemicolon, semicolon)});
+      lastSemicolon = semicolon+1;
+      semicolon = outlet.address.length;
+
+      that.setState({ zip: outlet.address.slice( lastSemicolon, semicolon)});
+      console.log('YA GURRRRL HERES YO OUTLETTTT: ', that.state.outlet);
     });
   },
 
@@ -83,19 +91,19 @@ var editOutlet = React.createClass({
           </div>
           <div className="form-group">
             <label>City</label><br />
-            <input type="text" name="city" ref="city" className="form-control" placeholder='Enter city...' /> <br />
+            <input type="text" name="city" ref="city" className="form-control" value={this.state.city} /> <br />
           </div>
           <div className="form-group">
             <label>State</label><br />
-            <input type="text" name="state" ref="state" className="form-control" placeholder='Enter state...' /><br />
+            <input type="text" name="state" ref="state" className="form-control" value={this.state.state} /><br />
           </div>
           <div className="form-group">
             <label>Zip Code</label><br />
-            <input type="text" name="zip" ref="zip" className="form-control" placeholder='Enter zip-code...' /><br />
+            <input type="text" name="zip" ref="zip" className="form-control" value={this.state.zip} /><br />
           </div>
           <div className="form-group">
             <label>Outlet Name</label><br />
-            <input type="text" name="name" ref="name" className="form-control" placeholder='What do you want to call this outlet?' /><br />
+            <input type="text" name="name" ref="name" className="form-control" /><br />
           </div>
           <div className="form-group">
             <label>Instructions for user</label><br />
