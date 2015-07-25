@@ -34,7 +34,7 @@ module.exports = (
     <Route name="outletsListMap" path="/outlets/map" handler={OutletsListMap} />
     <Route name="reserveOutlet" path="/outlets/:id" handler={ReserveOutlet} />
     <Route name="addOutlet" path="/addOutlet" handler={AddOutlet} />
-    <Route name="editOutlet" path="/editOutlet" handler={EditOutlet} />
+    <Route name="editOutlet" path="/editOutlet/:id" handler={EditOutlet} />
     <Route name="manageOutlets" path="/manageOutlets" handler={ManageOutlets} />
     <Route name="paymentConfirmation" path="/paymentConfirmation" handler={PaymentConfirmation} />
     <Route name="buyerReservations" path="/buyerReservations" handler={buyerReservations} />

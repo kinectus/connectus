@@ -9,6 +9,25 @@ Change state and voltage to dropdown
 */
 
 var editOutlet = React.createClass({
+  getInitialState: function(){
+   return {
+      data: [],
+    }
+  },
+  // mixins: [Router.Navigation],
+
+  componentDidMount: function() {
+    var that = this;
+    var outletID = this.props.params.id;
+    console.log('OUTLET ID: ', outletID)
+    outletStore.getOutletById(outletID).then(function(outlet){
+      // setState automatically forces a re-render
+      // console.log('outlet',outlet);
+      // that.setState({data: outlet});
+      console.log('YA GURRRRL HERES YO OUTLETTTT: ', outlet)
+    });
+  },
+
   handleSubmit: function(e) {
     e.preventDefault();
 

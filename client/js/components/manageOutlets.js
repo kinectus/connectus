@@ -21,13 +21,13 @@ var myOutlets = React.createClass({
     var that = this;
     // CHANGE TO GET OUTLETS BY ID
     outletStore.getSellerOutlets().then(function(outletData){
-        outletData.map(function(outlet){
-          userStore.getUsernameById(outlet.id).then(function(user){
-            console.log(user.username)
-            outlet['seller'] = user.username;
-            that.setState({data: outletData});
-          })
-        })
+      outletData.map(function(outlet){
+        userStore.getUsernameById(outlet.id).then(function(user){
+          console.log(user.username)
+          outlet['seller'] = user.username;
+          that.setState({data: outletData});
+        });
+      });
     });
   },
 
