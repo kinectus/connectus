@@ -35,7 +35,6 @@ var outletStore = assign({}, EventEmitter.prototype, {
       var transactionsData = [];
       console.log(outletData);
       for(var i = 0; i < outletData.length; i++){
-        console.log(outletData[i]);
         var transactionId = outletData[i].transaction_id;
         if(!transactions[transactionId]){
           transactions[transactionId] = {};

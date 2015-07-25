@@ -4,8 +4,14 @@ var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var ReactAddons = require('react/addons');
 var Link = require('react-router').Link;
 var Router = require('react-router'); //need this for redirection
+<<<<<<< HEAD
 var outletServices = require('../services/outletServices.js')
 // var io = require('socket.io');
+=======
+var outletServices = require('../services/outletServices.js');
+var moment = require('moment');
+
+>>>>>>> differentiated between current and expired on buyer resservations
 
 var buyerReservations = React.createClass({
 
@@ -26,9 +32,9 @@ var buyerReservations = React.createClass({
 
   componentDidMount: function() {
     var that = this;
-    outletStore.getBuyerReservations().then(function(reservationData){
-      console.log(reservationData)
-      that.setState({data: reservationData});
+    console.log(moment("2015-07-30 00:30", "YYYY-MM-DD HH:mm") > moment());
+    outletStore.getBuyerReservations().then(function(transactionsData){
+      that.setState({data: transactionsData});
     });
   },
 
@@ -65,6 +71,7 @@ var buyerReservations = React.createClass({
     if (this.state.data.length !==0) {
       var transactionRows = this.state.data.map(function(transaction) {
         return (
+<<<<<<< HEAD
           <table className='table-hover transaction-rows'>
             <tr key={ transaction.id } onClick={ that.reserveOutlet } className='regTransRow'>
               <td className='regTrans'>
@@ -97,6 +104,38 @@ var buyerReservations = React.createClass({
             <ActiveTransaction />
           </table>
 
+=======
+          <tr key={ transaction.id } className = { moment(transaction.endTime.date + " " + transaction.endTime.slot.time, "YYYY-MM-DD HH:mm") > moment() ? "expired" : "current"} onClick={ that.reserveOutlet }>
+            <td>
+              Start: { transaction.startTime.date} - { transaction.startTime.slot.time }
+              <br />
+              End: { transaction.endTime.date } - { transaction.endTime.slot.time } 
+            </td>
+            <td>
+              { transaction.outlet.name }
+            </td>
+            <td>
+              Seller: { transaction.seller.fullname }
+            </td>
+            <td>
+              { transaction.outlet.voltage }
+            </td>
+            <td>
+              Price by hour: { transaction.outlet.priceHourly }
+              <br />
+              Price by kWh: { transaction.outlet.priceEnergy }
+            </td>
+            <td>
+            { transaction.outlet.description }
+            </td>
+            <td>
+              <div className="btn" onClick={that.handleSubmit}>Turn on</div>
+              <div className="btn" onClick={that.setCurrentTransaction.bind(that, transaction.id)}>End</div>
+            </td>
+            
+          </tr>
+        )
+>>>>>>> differentiated between current and expired on buyer resservations
       });
     }
 
