@@ -9,11 +9,7 @@ var authController = require('../auth/auth.controller');
 var apiController = require('../api/api.controller');
 var cors = require('cors');
 
-
 var app = express();
-
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -33,10 +29,8 @@ var authRouter = new express.Router();
 var apiRouter = new express.Router();
 var paymentRouter = new express.Router();
 
-
 app.use(cookieParser());
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: {httpOnly: false}}));
-
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -45,6 +39,8 @@ app.use(passport.session());
 app.use('/auth', authRouter);
 app.use('/api', apiRouter);
 app.use('/payment', paymentRouter);
+
+// DOESNT WORK
 // app.use('/realtimeData', function(req, res){
 //   var io = require('socket.io')(http)
 //   io.on('connection', function(){
@@ -52,11 +48,9 @@ app.use('/payment', paymentRouter);
 //   })
 // });
 
-
 require('../auth/auth.routes')(authRouter);
 require('../api/api.routes')(apiRouter);
 require('../payment/payment.routes')(paymentRouter);
 
 
-
-module.exports = {app: app, io: io};
+module.exports = app;
