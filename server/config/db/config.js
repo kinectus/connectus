@@ -3,7 +3,6 @@ var Promise = require('bluebird');
 var outletExamples = require('./outletDataExamples');
 var userExamples = require('./userDataExamples');
 var timeSlotInfo = require('./timeSlotInfo');
-var transactionExamples = require('./transactionDataExamples');
 
 // Initialize database
 var db = require('knex')({
@@ -75,7 +74,6 @@ db.schema.hasTable('transactions').then(function(exists){
       transaction.string('current', 5).notNullable();
     }).then(function(table){
       console.log('Created transactions table', table);
-      insertInfoInTable('transactions', null, transactionExamples, 'id');
     });
   }
 });

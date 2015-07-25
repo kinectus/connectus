@@ -6,6 +6,23 @@ var outletServices = function(){
 
   var outletData = {};
 
+  outletData.validateAddress = function(data){
+    console.log('calling validate address in services', data);
+    return request({
+      url: OutletListConstants.VALIDATE_ADDRESS,
+      method: 'POST',
+      crossOrigin: true,
+      type: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function(result){
+        console.log('validatedAddress: coordinates are:', result);
+        return result;
+      }
+      
+    });
+  };
+
   outletData.setTransaction = function(data){
     return request({
       url: OutletListConstants.TRANSACTION_CURRENT,

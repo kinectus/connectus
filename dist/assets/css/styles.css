@@ -1,0 +1,175 @@
+@font-face {
+  font-family: 'Karla';
+  src: url('../fonts/Karla-Regular.ttf');
+  color: #666699;
+}
+.form-group {
+  margin-bottom: 0px;
+}
+body {
+  background-color: #d0d8da;
+}
+table.transaction-rows {
+  margin-top: 50px;
+}
+a,
+a:hover,
+a:focus {
+  text-decoration: none !important;
+  color: inherit;
+}
+* {
+  font-family: Karla;
+}
+.nav .navbar-nav {
+  display: block;
+}
+.topNavBar {
+  background-color: #343434;
+  height: 70px;
+}
+.topNavBar .logo {
+  font-size: 30px;
+  float: left;
+  display: inline;
+  color: #f9a92a !important;
+  padding-left: 40px;
+  padding-top: 10px;
+  text-decoration: none !important;
+}
+.topNavBar .mobile {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  display: block !important;
+  height: 30px;
+}
+.topNavBar .mobile .dropdown-menu {
+  background-color: #414141;
+}
+.topNavBar .mobile li a.active {
+  background-color: #4e4e4e;
+}
+.topNavBar .mobile .dropdown-toggle {
+  text-align: center;
+  background-color: #414141;
+}
+.topNavBar .nav > li {
+  padding-top: 15px;
+}
+.topNavBar .nav > li a {
+  color: white;
+}
+.topNavBar .nav > li a:hover {
+  background-color: #4e4e4e;
+}
+.topNavBar .nav > li .logout {
+  color: #f9a92a;
+}
+.topNavBar .nav > li a.active {
+  background-color: #4e4e4e;
+}
+.nav .open > a,
+.nav .open > a:focus,
+.nav .open > a:hover {
+  background-color: #4e4e4e;
+}
+.header-about {
+  height: 500px;
+  width: 100%;
+  background: url(http://m.wsj.net/video/20150203/020315lunchenergy/020315lunchenergy_1280x720.jpg) top center no-repeat;
+  background-size: cover;
+}
+.header-about .text {
+  padding-top: 210px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  font-size: 40px;
+  color: #d0d8da;
+}
+.header-about .text p {
+  text-align: center;
+}
+.addoutlet {
+  margin-bottom: 40px;
+}
+.container-fluid {
+  padding: 0px !important;
+  background-color: #d0d8da;
+}
+.section {
+  padding: 0px;
+  width: 100%;
+  margin: auto;
+}
+.about {
+  width: 100%;
+}
+.about .section {
+  height: 500px;
+}
+.about .info {
+  background-color: #FFFFFF;
+}
+.about .howitworks {
+  background-color: #159594;
+}
+.about .energyInfo {
+  background-color: #8b1c55;
+}
+h1 {
+  color: black;
+  font-size: 30px;
+  margin: 0px;
+}
+.reservationMap {
+  width: 100%;
+  height: 300px;
+  border: 2px solid black;
+}
+.outletPhoto {
+  width: 20%;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #8b1c55;
+  float: right;
+}
+.viewBox {
+  display: inline-box;
+  height: 20px;
+  width: 82vw;
+}
+.timeblock {
+  display: inline-block;
+}
+.on {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  border: 2px solid grey;
+}
+.off {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #ff1900;
+  border: 2px solid grey;
+}
+.centerSlot {
+  width: 83px;
+  height: 20px;
+  border: 2px solid black;
+  color: white;
+}
+.divider {
+  display: inline-block;
+  width: 80px;
+  height: 20px;
+  background-color: #2da2c4;
+  border: 2px solid grey;
+}
+.toggle {
+  display: inline-block;
+}

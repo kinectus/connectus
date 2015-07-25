@@ -8,8 +8,13 @@ var timeSlots = require('./data/timeSlots');
 var CHANGE_EVENT = 'change';
 
 var outletStore = assign({}, EventEmitter.prototype, {
+  validateAddress: function(data){
+    return OutletServices.validateAddress(data).then(function(result){
+      return result;
+    });
+  },
+  
   setCurrentTransaction: function(data){
-    console.log('data recieved in outlet store', data)
     return OutletServices.setTransaction(data).then(function(result){
       return result;
     });
