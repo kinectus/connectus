@@ -138,10 +138,12 @@ var editOutlet = React.createClass({
               <label>Your price/kWh charge: </label><br />
               <input type="text" name="charge" ref="charge" className="form-control" defaultValue={outlet.priceEnergy} />/kWh<br />
             </div>
-            <Alert className={hidden} bsStyle='danger' onDismiss={this.handleAlertDismiss}>
-              <h4>Update information on {outlet.name}?</h4>
-              <button type="submit">Go go go!</button>
-              <button onClick={this.hideMe}>STOP</button>
+            <Alert className={hidden} bsStyle="info" onDismiss={this.handleAlertDismiss}>
+              <h4 className="text-center">Update information on {outlet.name}?</h4>
+              <div className="text-center">
+                <button type="submit" className="btn btn-default confirming">Update</button>
+                <button onClick={this.hideMe} className="btn btn-default confirming">Cancel</button>
+              </div>
             </Alert>
             <button className="btn btn-primary btn-lg btn-block" onClick={this.confirm} >Submit</button>
           </form>
