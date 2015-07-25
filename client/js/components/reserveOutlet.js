@@ -129,14 +129,21 @@ var Availability = React.createClass({
 
   componentDidMount: function() {
     var that = this;
+    console.log('window.innerWidth<627', window.innerWidth<627)
+    if (window.innerWidth<627){
+      this.setState({end: 13, middle: 6});
+    } else {
+      this.setState({end: 25, middle: 12});
+    }
 
     outletStore.getOutletReservations(this.props.outletID).then(function(reservations){
       that.setState({reservations: reservations});
     });
 
     outletStore.getTimeSlotInfo().then(function(slots){
-      that.setState({timeSlots: slots, start: 0, end: 25});
+      that.setState({timeSlots: slots, start: 0});
     });
+
   },
 
   // Check for button events
@@ -188,8 +195,7 @@ var Availability = React.createClass({
     var date;
 
     // If reservations API call has completed
-    if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 ){
-
+    if (this.state.reservations.length > 0 && this.state.timeSlots.length>0){
       // Current subset of reservation information
       var start = this.state.start;
       var end = this.state.end;
@@ -197,19 +203,19 @@ var Availability = React.createClass({
       var slotProps = slotProps || this.state.timeSlots;
 
       // Track center time slot
-      var centerCount = centerCount ? centerCount > 24 ? 0 : centerCount : 0;
-
+      var centerCount = centerCount ? centerCount > end-1 ? 0 : centerCount : 0;
+      var that = this;
       // Create custom availability viewer using subset
       var outerHTML = subset.map(function(reservation){
         var goOrNoGo = reservation.available ? "on" : "off";
 
         // Label slot properties based on subset location
-        var blockClass = (centerCount===12) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
+        var blockClass = (centerCount === that.state.middle) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
         centerCount++;
         var begin, end;
 
         // Specially label center slot to display its information
-        if (centerCount===13){
+        if (centerCount === that.state.middle+1){
           date = moment(reservation.date).format('MMMM Do YYYY');
           for (var j=0; j<slotProps.length; j++){
             if (slotProps[j].id === reservation.slot_id){
@@ -227,8 +233,13 @@ var Availability = React.createClass({
           )
         }
       });
+
+    // } else if (this.state.reservations.length > 0 && this.state.timeSlots.length>0){
+      // console.log('too small!');
+
+
     // Fallback before API call is complete
-    } else { var outerHTML = <div className="slot"></div> }
+    } else {var outerHTML = <div className="slot"></div> }
 
     // Render availability viewer
     return (
