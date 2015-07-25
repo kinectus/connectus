@@ -1,5 +1,6 @@
 var React = require('react');
 var outletStore = require('../stores/outletStore');
+var _=require('underscore');
 // var ReactAddons = require('react/addons');
 
 /* TODO
@@ -14,20 +15,28 @@ var addOutlet = React.createClass({
       lat:'',
       long: '',
       validated: false,
-      validationMessage: 'invalid Address'
+      validationMessage: 'Please enter a valid address'
     };
   },
 
   handleAddressSubmit: function(e){
     e.preventDefault();
+    var that = this;
     var street = React.findDOMNode(this.refs.street).value.trim();
     var city = React.findDOMNode(this.refs.city).value.trim();
     var state = React.findDOMNode(this.refs.state).value.trim();
     var zip = React.findDOMNode(this.refs.zip).value.trim();
 
-    OutletStore.validateAddress({street:street, city:city, state: state, zip: zip}).then(function(result){
-      this.setState({lat: result[0].location.lat});
-      this.setState({long: result[0].location.lon});
+    outletStore.validateAddress({street:street, city:city, state: state, zip: zip}).then(function(result){
+      if(result.err){
+        that.setState({validationMessage: 'There is an error with your adddress. Please try again'});
+      }else if(result.inexact.length > 0){
+        console.log(result.inexact);
+        var suggestion = result.inexact[0].streetNumber + " " + result.inexact[0].street + ", " + result.inexact[0].city + ", " + result.inexact[0].stateAbbr + ", " + result.inexact[0].postalCode;
+        that.setState({validationMessage: 'Address not valid. Did you mean: ' + suggestion + " ?", validated: false});
+      }else{
+        that.setState({lat: result.exact[0].location.lat, long: result.exact[0].location.lon, validated: true, validationMessage: 'Address Validated'});
+      }
     });
     
   },
@@ -68,10 +77,15 @@ var addOutlet = React.createClass({
     return;
   },
   render: function(){
+    var buttonHtml = (<button className="btn btn-warning">Address Validation Needed</button>);
     // is user authenticated
     if(!document.cookie){
       this.transitionTo('login');
       return <h1></h1>;
+    }
+    
+    if(this.state.validated){
+      buttonHtml = (<button type="submit" className="btn btn-primary btn-lg btn-block">Submit</button>);
     }
 
     return (
@@ -120,7 +134,7 @@ var addOutlet = React.createClass({
             <label>Your price/kWh charge: </label><br />
             <input type="text" name="charge" ref="charge" className="form-control" placeholder='ex. 10' />/kWh<br />
           </div>
-          <button type="submit" className="btn btn-primary btn-lg btn-block" value="Submit">Submit</button>
+          {buttonHtml}
         </form>
       </div>
     )

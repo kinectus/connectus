@@ -29,16 +29,17 @@ var moment = require('moment');
 
 module.exports = {
   validateAddress: function(req, res){
-    console.log('address information sent from user', req.body);
     var address = new Address({
         street: req.body.street,
         city: req.body.city,
         state: req.body.state,
         country: 'US'
     });
-    console.log(address);
 
     addressValidator.validate(address, addressValidator.match.streetAddress, function(err, exact, inexact){
+        console.log('error:', err);
+        console.log('exact:', exact);
+        console.log('inexact', inexact);
         console.log('input: ', address.toString());
 
         console.log('match: ', _.map(exact, function(a) {
@@ -49,10 +50,7 @@ module.exports = {
           return a.toString();
         }));
      
-        //access some props on the exact match 
-        var first = exact[0];
-        console.log(first.streetNumber + ' '+ first.street);
-        res.send(200, exact);
+        res.send(200, {exact:exact, err: err, inexact:inexact});
     });
 
     
