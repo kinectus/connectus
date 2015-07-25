@@ -229,9 +229,9 @@ var Availability = React.createClass({
 
     // Render availability viewer
     return (
-      <div>
-        <p>{date}</p>
-        <div className = "viewBox">{outerHTML}</div>
+      <div className = "holder">
+        <p className="date">{date}</p>
+        <div className = "viewBox centering">{outerHTML}</div>
       </div>
     )
   }
@@ -278,7 +278,7 @@ var Viewer = React.createClass({
         <div className="centering">
           <Availability move={this.state.move} mouseDown={this.state.mouseDown} forward={this.state.forward} outletID = {this.props.outletID}/>
         </div>
-        <div className="centering">
+        <div className="centering pad-top">
           <button className="toggle glyphicon glyphicon-chevron-left" onMouseDown={this.mouseDownBack} onMouseUp={this.mouseUp}></button>
           <button className="toggle glyphicon glyphicon-chevron-right" onMouseDown={this.mouseDownForward} onMouseUp={this.mouseUp}></button>
         </div>
