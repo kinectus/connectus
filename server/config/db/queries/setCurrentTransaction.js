@@ -5,13 +5,15 @@ var Reservation = require('../../../reservations/reservation.model.js');
 var Transaction = require('../../../transactions/transaction.model.js');
 
 
-module.exports = setCurrentTransaction = function(req, next){
+module.exports = setCurrentTransaction = function(req){
+  console.log('request pased through', req);
   var transactionId = req.body.id;
-  var username = req.user.id;
+  var currentStatus = req.body.currentStatus;
+  
   
   return new Transaction({
     id: transactionId
-  }).save({current: true},{patch: true});
+  }).save({current: currentStatus},{patch: true});
   // .then(function(transaction){
   //   return transaction.set('current', true);
   // });

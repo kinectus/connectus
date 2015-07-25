@@ -3,6 +3,7 @@ var RouteHandler = require('react-router').RouteHandler;
 var outletStore = require('../stores/outletStore');
 var ReactAddons = require('react/addons');
 var PaymentStore = require('../stores/paymentStore');
+var OutletStore = require('../stores/outletStore');
 var Auth = require('../services/authServices.js');
 var Link = require('react-router').Link;
 var mobile = require('./mobilecheck');
@@ -20,6 +21,13 @@ var Connectus = React.createClass({
     PaymentStore.getTransactionInfo().then(function(transaction){
       console.log('transaction in payment confirmation', transaction);
       that.setState({amount:transaction.totalCost, confirmation: transaction.confirmation});
+      return transaction;
+    })
+    .then(function(transaction){
+      return OutletStore.setCurrentTransaction({id:transaction.id, currentStatus: false})
+      .then(function(transaction){
+        console.log('transaction changed to false');
+      });
     });
  },
 

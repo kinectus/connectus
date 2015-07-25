@@ -1,4 +1,3 @@
-
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
@@ -33,8 +32,10 @@ var buyerReservations = React.createClass({
   },
 
   setCurrentTransaction: function(transactionId){
+    var that =this;
     console.log('calling create transaction in html');
-    outletStore.setCurrentTransaction(transactionId).then(function(transaction){
+    outletStore.setCurrentTransaction({id: transactionId, currentStatus: true}).then(function(transaction){
+      that.transitionTo('paymentsPage');
       return transaction;
     });
   },
@@ -45,12 +46,6 @@ var buyerReservations = React.createClass({
   },
 
   render: function() {
-    // var setCurrentTransaction =  function(transactionId){
-    //   console.log('calling create transaction in html');
-    //   outletStore.setCurrentTransaction(transactionId).then(function(transaction){
-    //     return transaction;
-    //   });
-    // };
     // is the user authenticated?
     if(!document.cookie){
       this.transitionTo('login');

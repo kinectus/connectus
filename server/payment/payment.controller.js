@@ -11,19 +11,13 @@ privateKey: "6910d378ab21d286f37ed123e70022f6"
 
 module.exports = {
 	client_token: function (req, res) {
+    console.log('set this as user id',req.user.id);
 	gateway.clientToken.generate({}, function (err, response) {
 	  res.send(response.clientToken);
 	});
 	},
 	
-	setTransaction: function(req, res){
-	  var username = req.user.id;
-	  setCurrentTransaction(req).then(function(result){
-	    res.send('transaction' + result.id + ' for user ' + username + ' set to current transaction');
-	  });
-	  
-	},
-
+	
   getTransactionInfo: function(req, res){
     console.log('getting transaction info in payment controller')
   	findCurrentTransaction(req.user.id).then(function(reservations){
@@ -35,8 +29,6 @@ module.exports = {
 	checkout: function (req, res) {
 	var nonce = req.body.payment_method_nonce;
 	findCurrentTransaction(req.user.id).then(function(reservations){
-	  // console.log('reservations-------------------->>>>>>>',reservations.models[0].relations.transaction_current.attributes.totalCost);
-	  // console.log('totalCost---------->', reservations.models[0].relations.transaction_current.attributes.totalCost);
 	  gateway.transaction.sale({
 	    amount: reservations.models[0].relations.transaction_current.attributes.totalCost,
 	    paymentMethodNonce: nonce,
@@ -45,9 +37,8 @@ module.exports = {
 	      console.log(err);
 	      return;
 	    }
-	    console.log('transaction result-------->', result);
 	    res.redirect('/#/paymentConfirmation');
-	  });
+    });
 	})
 	.catch(function(error){
 	  console.log(error);

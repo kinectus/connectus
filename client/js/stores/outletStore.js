@@ -8,8 +8,8 @@ var timeSlots = require('./data/timeSlots');
 var CHANGE_EVENT = 'change';
 
 var outletStore = assign({}, EventEmitter.prototype, {
-  setCurrentTransaction: function(transactionId){
-    return OutletServices.setTransaction({id: transactionId}).then(function(result){
+  setCurrentTransaction: function(data){
+    return OutletServices.setTransaction(data).then(function(result){
       return result;
     });
   },

@@ -11,4 +11,5 @@ module.exports = function(app) {
   app.post('/makeReservation', authController.isAuthenticated, apiController.makeReservation);
   app.get('/users/seeBuyerReservations', authController.isAuthenticated, apiController.buyerReservations);
   app.post('/on', authController.isAuthenticated, apiController.turnOnOutlet);
+  app.post('/setTransaction', authController.isAuthenticated, apiController.setTransaction);
 };

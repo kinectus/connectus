@@ -6,17 +6,16 @@ var outletServices = function(){
 
   var outletData = {};
 
-  outletData.setTransaction = function(transactionId){
-    console.log('changing transaction in outlet services', transactionId);
+  outletData.setTransaction = function(data){
     return request({
       url: OutletListConstants.TRANSACTION_CURRENT,
       method: 'POST',
       crossOrigin:true,
       type: 'json',
       contentType: 'application/json',
-      data: JSON.stringify(transactionId),
+      data: JSON.stringify(data),
       success: function(result){
-        console.log(result);
+        console.log('settingtransaction was successful', result);
         return result;
       }
     });
