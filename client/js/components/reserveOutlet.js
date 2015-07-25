@@ -86,25 +86,30 @@ var OutletInfo = React.createClass({
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-sm-3 col-xs-12">
             <h2 className="ui center aligned header"> 
                 { this.props.outletData.name }
             </h2>
           </div>
-          <div className="col-md-7">
+          <div className="col-md-7 col-sm-4 col-xs-12">
             <h4>{ this.props.outletData.description }</h4>
           </div>
         </div>
         <div className="row">
-          <div className="col-md-4">
+        </div>
+        <div className="row">
+          <div className="col-sm-4 col-xs-6">
+            <h4>Seller:</h4>
+          </div>
+          <div className="col-sm-4 col-xs-6">
             <h4>Voltage: { this.props.outletData.voltage }</h4> 
           </div>
-          <div className="col-md-4">
+          <div className="col-sm-4 col-xs-6">
             <h4>Price by hour: { this.props.outletData.priceHourly }</h4>
-            <h4>Price by kWh: { this.props.outletData.priceEnergy }</h4>
           </div>
-          <div className="col-md-4">
-            <h4>Seller:</h4>
+          <div className="col-sm-8"></div>
+          <div className="col-sm-4 col-xs-6">
+            <h4>Price by kWh: { this.props.outletData.priceEnergy }</h4>
           </div>
         </div>      
       </div>
