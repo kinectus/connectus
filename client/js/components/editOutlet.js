@@ -82,6 +82,11 @@ var editOutlet = React.createClass({
     this.setState({alert: true});
   },
 
+  hideMe: function(e){
+    e.preventDefault();
+    this.setState({alert: false});
+  },
+
   render: function(){
     // is user authenticated
     if(!document.cookie){
@@ -136,7 +141,7 @@ var editOutlet = React.createClass({
             <Alert className={hidden} bsStyle='danger' onDismiss={this.handleAlertDismiss}>
               <h4>Update information on {outlet.name}?</h4>
               <button type="submit">Go go go!</button>
-              <button>STOP</button>
+              <button onClick={this.hideMe}>STOP</button>
             </Alert>
             <button className="btn btn-primary btn-lg btn-block" onClick={this.confirm} >Submit</button>
           </form>
