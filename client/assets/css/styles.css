@@ -173,3 +173,7 @@ h1 {
 .toggle {
   display: inline-block;
 }
+
+.expired {
+  background-color: #FFFFFF;
+}
