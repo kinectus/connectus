@@ -21,10 +21,9 @@ var editOutlet = React.createClass({
     var outletID = this.props.params.id;
     console.log('OUTLET ID: ', outletID)
     outletStore.getOutletById(outletID).then(function(outlet){
-      // setState automatically forces a re-render
-      // console.log('outlet',outlet);
       that.setState({outlet: outlet});
 
+      // Parse outlet address
       var semicolon = outlet.address.indexOf(';');
 
       that.setState({ street: outlet.address.slice( 0, semicolon)});
@@ -40,7 +39,6 @@ var editOutlet = React.createClass({
       semicolon = outlet.address.length;
 
       that.setState({ zip: outlet.address.slice( lastSemicolon, semicolon)});
-      console.log('YA GURRRRL HERES YO OUTLETTTT: ', that.state.outlet);
     });
   },
 
@@ -55,24 +53,33 @@ var editOutlet = React.createClass({
       charge: React.findDOMNode(this.refs.charge).value.trim()
     };
 
-    console.log(newOutlet);
-    // if (!text || !author) {
-    //   return;
-    // }
-    outletStore.submitOutlet(newOutlet).then(function(res){
-      console.log('editOutlet submit response: ', res)
-    });
+    var same = true;
+    console.log('newOutlet: ', newOutlet);
+    console.log('state outlet: ', this.state.outlet)
+    for (key in newOutlet){
+      if (key === 'charge' && newOutlet[key] !== this.state.outlet.priceEnergy.toString()){
+        same = false;
+      } else if (key !== 'charge' && newOutlet[key] !== this.state.outlet[key]){
+        console.log('newOutlet['+key+']: ', newOutlet[key], ' this.state.outlet['+key+']: ', this.state.outlet[key])
+        same = false;
+      }
+    }
+    console.log('same? ', same);
+
+    // outletStore.submitOutlet(newOutlet).then(function(res){
+    //   console.log('editOutlet submit response: ', res)
+    // });
     
-    React.findDOMNode(this.refs.street).value = '';
-    React.findDOMNode(this.refs.city).value = '';
-    React.findDOMNode(this.refs.state).value = '';
-    React.findDOMNode(this.refs.zip).value = '';
-    React.findDOMNode(this.refs.name).value = '';
-    React.findDOMNode(this.refs.description).value = '';
-    React.findDOMNode(this.refs.voltage).value = '';
-    React.findDOMNode(this.refs.charge).value = '';
-    console.log('submitted!')
-    return;
+    // React.findDOMNode(this.refs.street).value = '';
+    // React.findDOMNode(this.refs.city).value = '';
+    // React.findDOMNode(this.refs.state).value = '';
+    // React.findDOMNode(this.refs.zip).value = '';
+    // React.findDOMNode(this.refs.name).value = '';
+    // React.findDOMNode(this.refs.description).value = '';
+    // React.findDOMNode(this.refs.voltage).value = '';
+    // React.findDOMNode(this.refs.charge).value = '';
+    // console.log('submitted!')
+    // return;
   },
   render: function(){
     // is user authenticated
