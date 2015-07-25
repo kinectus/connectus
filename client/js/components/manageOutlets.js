@@ -92,10 +92,10 @@ var myOutlets = React.createClass({
       } else {
         var outletHtml = this.state.data.map(function(outlet) {
           return (
-            <tr key={outlet.id} onClick={that.reserveOutlet}>
+            <tr key={outlet.id} onClick={that.editOutlet}>
               <td>
                 <h2> 
-                  <Link to="reserveOutlet" params={{id: outlet.id }}>
+                  <Link to="editOutlet" params={{id: outlet.id }}>
                     { outlet.name } 
                   </Link>
                 </h2>
