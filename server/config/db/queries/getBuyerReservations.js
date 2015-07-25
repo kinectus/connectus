@@ -27,7 +27,7 @@ module.exports = getBuyerReservations = function(user, res){
         });
       })
       .then(function(modifiedRes){
-        console.log('this is the modified reservations', modifiedRes);
+        // console.log('this is the modified reservations', modifiedRes);
         res.send(JSON.stringify(modifiedRes));
       });
 		});

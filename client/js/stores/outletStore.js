@@ -8,16 +8,21 @@ var timeSlots = require('./data/timeSlots');
 var CHANGE_EVENT = 'change';
 
 var outletStore = assign({}, EventEmitter.prototype, {
+  setCurrentTransaction: function(data){
+    return OutletServices.setTransaction(data).then(function(result){
+      return result;
+    });
+  },
   getOutlets: function() {
     return OutletServices.retrieve().then(function(outlets){
-      console.log('outlets in the store: ', outlets)
+      // console.log('outlets in the store: ', outlets)
       OutletServices.calculateOutletRating(outlets);
       return outlets;
     });
   },
   getSellerOutlets: function(){
     return OutletServices.retrieveOutletByUser().then(function(outlets){
-      console.log('outlets in the seller outlets list', outlets);
+      // console.log('outlets in the seller outlets list', outlets);
       return outlets;
     });
   },

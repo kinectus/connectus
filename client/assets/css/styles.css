@@ -132,3 +132,41 @@ h1 {
   background-color: #8b1c55;
   float: right;
 }
+.viewBox {
+  display: inline-box;
+  height: 20px;
+  width: 82vw;
+}
+.timeblock {
+  display: inline-block;
+}
+.on {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  border: 2px solid grey;
+}
+.off {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #ff1900;
+  border: 2px solid grey;
+}
+.centerSlot {
+  width: 83px;
+  height: 20px;
+  border: 2px solid black;
+  color: white;
+}
+.divider {
+  display: inline-block;
+  width: 80px;
+  height: 20px;
+  background-color: #2da2c4;
+  border: 2px solid grey;
+}
+.toggle {
+  display: inline-block;
+}

@@ -6,6 +6,21 @@ var outletServices = function(){
 
   var outletData = {};
 
+  outletData.setTransaction = function(data){
+    return request({
+      url: OutletListConstants.TRANSACTION_CURRENT,
+      method: 'POST',
+      crossOrigin:true,
+      type: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      success: function(result){
+        console.log('settingtransaction was successful', result);
+        return result;
+      }
+    });
+  };
+
   outletData.getLocation = function(lat, long){
     navigator.geolocation.getCurrentPosition(function(position) {
      lat = position.coords.latitude;
@@ -153,13 +168,6 @@ var outletServices = function(){
     });
 
   }
-
-  // outletData.updateTransaction = function(){
-  //   return request({
-  //     url: OutletListConstants.UPDATE_TRANSACTION,
-  //     method: 'POST'
-  //   });
-  // };
 
   // outletData.turnOff = function(){
   //   return request({

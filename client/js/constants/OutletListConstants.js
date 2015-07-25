@@ -9,8 +9,8 @@ var loginConstants = {
   MAKE_RESERVATION: BASE_URL + 'api/makeReservation',
   OUTLETS_BYUSER: BASE_URL + 'api/users/manageMyOutlets',
   SEEBUYER_RESERVATIONS: BASE_URL + 'api/users/seeBuyerReservations',
-  TURNON_OUTLET: BASE_URL + 'api/on'
-
+  TURNON_OUTLET: BASE_URL + 'api/on',
+  TRANSACTION_CURRENT: BASE_URL + 'api/setTransaction'
 };
 
 module.exports = loginConstants;

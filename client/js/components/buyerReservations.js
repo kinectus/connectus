@@ -1,4 +1,3 @@
-
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
@@ -32,11 +31,14 @@ var buyerReservations = React.createClass({
     });
   },
 
-  // createTransaction: function(){
-  //   outletStore.createTransaction().then(function(transaction){
-  //     return transaction;
-  //   });
-  // },
+  setCurrentTransaction: function(transactionId){
+    var that =this;
+    console.log('calling create transaction in html');
+    outletStore.setCurrentTransaction({id: transactionId, currentStatus: true, paid: false}).then(function(transaction){
+      that.transitionTo('paymentsPage');
+      return transaction;
+    });
+  },
 
   handleSubmit: function(id) {
     console.log('handleSumbit in the buyer reservations passing something: ', id)
@@ -44,7 +46,6 @@ var buyerReservations = React.createClass({
   },
 
   render: function() {
-
     // is the user authenticated?
     if(!document.cookie){
       this.transitionTo('login');
@@ -63,7 +64,7 @@ var buyerReservations = React.createClass({
               End: { transaction.endTime.date } - { transaction.endTime.slot.time } 
             </td>
             <td>
-              { transaction.outlet.name } 
+              { transaction.outlet.name }
             </td>
             <td>
               Seller: { transaction.seller.fullname }
@@ -80,8 +81,8 @@ var buyerReservations = React.createClass({
             { transaction.outlet.description }
             </td>
             <td>
-              <div className="btn" onClick={that.handleSubmit.bind(that, transaction.outlet.id)}>Turn on</div>
-              <div className="btn" onClick={that.createTransaction}>End</div>
+              <div className="btn" onClick={that.handleSubmit}>Turn on</div>
+              <div className="btn" onClick={that.setCurrentTransaction.bind(that, transaction.id)}>End</div>
             </td>
             
           </tr>

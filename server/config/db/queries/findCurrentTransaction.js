@@ -12,10 +12,18 @@ module.exports = findCurrentTransaction = function(user, next){
   })
   .fetch()
   .then(function(user){
-    return user.reservations().fetch({withRelated:['transaction']});
+    console.log('user', user);
+    return user.reservations().fetch({withRelated: ['transaction_current']});
+    // return user.reservations().fetch();
   })
   .then(function(reservations){
-    console.log(reservations.toJSON());
+    for(var key in reservations._byId){
+      if(reservations._byId[key].relations.transaction_current.attributes.current==='1'){
+        console.log(reservations._byId[key]);
+        return reservations._byId[key];
+      }
+    }
+    return reservations;
   });
 
 };
