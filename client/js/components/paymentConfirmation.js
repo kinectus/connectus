@@ -24,7 +24,7 @@ var Connectus = React.createClass({
       return transaction;
     })
     .then(function(transaction){
-      return OutletStore.setCurrentTransaction({id:transaction.id, currentStatus: false})
+      return OutletStore.setCurrentTransaction({id:transaction.id, currentStatus: false, paid: true})
       .then(function(transaction){
         console.log('transaction changed to false');
       });
