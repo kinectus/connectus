@@ -77,7 +77,8 @@ var Connectus = React.createClass({
                   <ul className="dropdown-menu">
                     <li role="presentation"><Link to="outletsList">Outlets</Link></li>
                     <li role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
-                    <li role="presentation"><Link to="buyerReservations">Buyer Reservations</Link></li>
+                    <li role="presentation"><Link to="buyerReservations">My Reservations</Link></li>
+                    <li role="presentation"><Link to="manageOutlets">Manage Outlets</Link></li>
                     <li role="separator" className="divider"></li>
                     <li><a className="logout" onClick={this.logout}>Logout</a></li>
                   </ul>
@@ -100,7 +101,8 @@ var Connectus = React.createClass({
             <ul className="nav nav-pills pull-right">
               <li role="presentation"><Link to="outletsList">Outlets</Link></li>
               <li role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
-              <li role="presentation"><Link to="buyerReservations">Buyer Reservations</Link></li>
+              <li role="presentation"><Link to="buyerReservations">My Reservations</Link></li>
+              <li role="presentation"><Link to="manageOutlets">Manage Outlets</Link></li>
               <li role="presentation"><a className="logout" onClick={this.logout}>Logout</a></li>
             </ul>
           </div> 

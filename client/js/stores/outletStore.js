@@ -21,6 +21,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
       return outlets;
     });
   },
+  
   getSellerOutlets: function(){
     return OutletServices.retrieveOutletByUser().then(function(outlets){
       // console.log('outlets in the seller outlets list', outlets);
@@ -89,6 +90,11 @@ var outletStore = assign({}, EventEmitter.prototype, {
   submitOutlet: function(newOutlet){
     return OutletServices.addOutlet(newOutlet);
   },
+
+  editOutlet: function(newOutlet){
+    return OutletServices.editOutlet(newOutlet);
+  },
+
   submitReservation: function(newReservation) {
     return OutletServices.makeReservation(newReservation);
   },

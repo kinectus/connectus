@@ -7,6 +7,7 @@ var AuthController = require('../auth/auth.controller');
 
 var getOutletsByUser = require('../config/db/queries/getOutletsByUserId');
 var addNewOutlet = require('../config/db/queries/addNewOutlet');
+var updateOutlet = require('../config/db/queries/updateOutlet');
 var getOutletAvailability = require('../config/db/queries/getAvailability');
 var addReservationSlots = require('../config/db/queries/addReservationSlots');
 var updateReservation = require('../config/db/queries/updateReservation');
@@ -44,7 +45,12 @@ module.exports = {
     addNewOutlet(req, res);
   },
 
+  editOutlet: function(req, res){
+    updateOutlet(req, res);
+  },
+
   getSellerOutlets: function(req, res){
+    console.log('got to getSellerOutlets')
     getOutletsByUser(req.user)
     .then(function(outlets){
       res.send(200, outlets.models);

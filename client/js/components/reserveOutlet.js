@@ -13,7 +13,6 @@ var DateTimePicker = require('react-widgets').DateTimePicker;
 var moment = require('moment');
 var Router = require('react-router'); //need this for redirection
 
-
 // http://jquense.github.io/react-widgets/docs/#/datetime-picker
 var Map = React.createClass({
 
@@ -86,37 +85,40 @@ var OutletInfo = React.createClass({
     console.log('outletinfo',this.props);
     return (
       <div className="container">
-        <tr>
-          <td>
+        <div className="row">
+          <div className="col-sm-3 col-xs-12">
             <h2 className="ui center aligned header"> 
-                { this.props.outletData.name } 
+                { this.props.outletData.name }
             </h2>
-          </td>
-          <td>
-            <h5>Seller:</h5> 
-            <p className="description-text">Bob Belcher</p>
-          </td>
-          <td>
-            <p className="description-text"><div className="ui star rating" data-rating={ this.props.outletData.rating } data-max-rating={ this.props.outletData.rating }></div></p>
-          </td>
-          <td>
-            <h5>Voltage:</h5> 
-            <p className="description-text">{ this.props.outletData.voltage }</p>
-          </td>
-          <td>
-            <h5>Pricing: </h5>
-            <p className="description-text">Price by hour: { this.props.outletData.priceHourly }</p>
-            <p className="description-text">Price by kWh: { this.props.outletData.priceEnergy }</p>
-          </td>
-          <td>
-            <h5>Description:</h5> 
-            <p className="description-text">{ this.props.outletData.description }</p>
-          </td>
-        </tr>        
+          </div>
+          <div className="col-md-7 col-sm-4 col-xs-12">
+            <h4>{ this.props.outletData.description }</h4>
+          </div>
+        </div>
+        <div className="row">
+        </div>
+        <div className="row">
+          <div className="col-sm-4 col-xs-6">
+            <h4>Seller:</h4>
+          </div>
+          <div className="col-sm-4 col-xs-6">
+            <h4>Voltage: { this.props.outletData.voltage }</h4> 
+          </div>
+          <div className="col-sm-4 col-xs-6">
+            <h4>Price by hour: { this.props.outletData.priceHourly }</h4>
+          </div>
+          <div className="col-sm-8"></div>
+          <div className="col-sm-4 col-xs-6">
+            <h4>Price by kWh: { this.props.outletData.priceEnergy }</h4>
+          </div>
+        </div>      
       </div>
     )
   }
 });
+          // <div>
+          //   <p className="description-text"><div className="ui star rating" data-rating={ this.props.outletData.rating } data-max-rating={ this.props.outletData.rating }></div></p>
+          // </div>
 
 var Availability = React.createClass({
   getInitialState: function(){
@@ -135,7 +137,7 @@ var Availability = React.createClass({
     });
 
     outletStore.getTimeSlotInfo().then(function(slots){
-      that.setState({timeSlots: slots, start: 0, end: 47});
+      that.setState({timeSlots: slots, start: 0, end: 25});
     });
   },
 
@@ -197,19 +199,19 @@ var Availability = React.createClass({
       var slotProps = slotProps || this.state.timeSlots;
 
       // Track center time slot
-      var centerCount = centerCount ? centerCount > 48 ? 0 : centerCount : 0;
+      var centerCount = centerCount ? centerCount > 24 ? 0 : centerCount : 0;
 
       // Create custom availability viewer using subset
       var outerHTML = subset.map(function(reservation){
         var goOrNoGo = reservation.available ? "on" : "off";
 
         // Label slot properties based on subset location
-        var blockClass = (centerCount===24) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
+        var blockClass = (centerCount===12) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
         centerCount++;
         var begin, end;
 
         // Specially label center slot to display its information
-        if (centerCount===25){
+        if (centerCount===13){
           date = moment(reservation.date).format('MMMM Do YYYY');
           for (var j=0; j<slotProps.length; j++){
             if (slotProps[j].id === reservation.slot_id){
@@ -232,9 +234,9 @@ var Availability = React.createClass({
 
     // Render availability viewer
     return (
-      <div>
-        <p>{date}</p>
-        <div className = "viewBox">{outerHTML}</div>
+      <div className = "holder">
+        <p className="date">{date}</p>
+        <div className = "viewBox centering">{outerHTML}</div>
       </div>
     )
   }
@@ -277,10 +279,14 @@ var Viewer = React.createClass({
   // Render buttons, pass states to Availability
   render: function(){
     return (
-      <div className="timeblock">
-        <Availability move={this.state.move} mouseDown={this.state.mouseDown} forward={this.state.forward} outletID = {this.props.outletID}/>
-        <button className="toggle glyphicon glyphicon-chevron-left" onMouseDown={this.mouseDownBack} onMouseUp={this.mouseUp}></button>
-        <button className="toggle glyphicon glyphicon-chevron-right" onMouseDown={this.mouseDownForward} onMouseUp={this.mouseUp}></button>
+      <div className="timeblock holder">
+        <div className="centering">
+          <Availability move={this.state.move} mouseDown={this.state.mouseDown} forward={this.state.forward} outletID = {this.props.outletID}/>
+        </div>
+        <div className="centering pad-top">
+          <button className="toggle glyphicon glyphicon-chevron-left" onMouseDown={this.mouseDownBack} onMouseUp={this.mouseUp}></button>
+          <button className="toggle glyphicon glyphicon-chevron-right" onMouseDown={this.mouseDownForward} onMouseUp={this.mouseUp}></button>
+        </div>
       </div>
     )
   }
