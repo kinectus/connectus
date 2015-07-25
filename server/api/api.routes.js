@@ -8,6 +8,7 @@ module.exports = function(app) {
   app.get('/seeTimeSlots', authController.isAuthenticated, apiController.seeTimeSlots);
   app.post('/outletReservations', authController.isAuthenticated, apiController.getAvailability);
   app.post('/addOutlet', authController.isAuthenticated, apiController.addOutlet);
+  app.post('/editOutlet', authController.isAuthenticated, apiController.editOutlet);
   app.post('/makeReservation', authController.isAuthenticated, apiController.makeReservation);
   app.get('/users/seeBuyerReservations', authController.isAuthenticated, apiController.buyerReservations);
   app.post('/on', authController.isAuthenticated, apiController.turnOnOutlet);

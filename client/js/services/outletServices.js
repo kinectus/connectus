@@ -105,7 +105,6 @@ var outletServices = function(){
   };
 
   outletData.addOutlet = function(newOutlet){
-    console.log('IN OUTLETSERVICES, ADDOUTLET: ', newOutlet);
     return request({
       url: OutletListConstants.ADD_OUTLET,
       method: 'POST',
@@ -114,11 +113,24 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(newOutlet),
       success: function(res) {
-        console.log('---------------------------------> SUCCESS');
-        console.dir(res);
+        console.log(res);
       }
     });
   };
+
+  outletData.editOutlet = function(newOutlet){
+    return request({
+      url: OutletListConstants.EDIT_OUTLET,
+      method: 'POST',
+      crossOrigin: true,
+      type: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify(newOutlet),
+      success: function(res) {
+        console.log(res);
+      }
+    });
+  }
 
   outletData.makeReservation = function(newReservation){
     console.log('IN OUTLETSERVICES, makeReservation: ', newReservation);
@@ -130,7 +142,6 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(newReservation),
       success: function(res) {
-        console.log('---------------------------------> SUCCESS');
         console.dir(res);
       }
     });

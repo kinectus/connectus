@@ -4,6 +4,7 @@ var loginConstants = {
   BASE_URL: BASE_URL,
   OUTLET_DATA: BASE_URL + 'api/outlets',
   ADD_OUTLET: BASE_URL + 'api/addOutlet',
+  EDIT_OUTLET: BASE_URL +  'api/editOutlet',
   OUTLET_RESERVATIONS: BASE_URL + 'api/outletReservations',
   TIME_SLOTS: BASE_URL + 'api/seeTimeSlots',
   MAKE_RESERVATION: BASE_URL + 'api/makeReservation',

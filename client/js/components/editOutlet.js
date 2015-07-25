@@ -46,6 +46,8 @@ var editOutlet = React.createClass({
     e.preventDefault();
 
     var newOutlet = {
+      id: this.state.outlet.id,
+      seller_id: this.state.seller_id,
       address: React.findDOMNode(this.refs.street).value.trim() + ';' + React.findDOMNode(this.refs.city).value.trim() + ';' +  React.findDOMNode(this.refs.state).value.trim() + ';' + React.findDOMNode(this.refs.zip).value.trim(),
       name: React.findDOMNode(this.refs.name).value.trim(),
       description: React.findDOMNode(this.refs.description).value.trim(),
@@ -60,15 +62,14 @@ var editOutlet = React.createClass({
       if (key === 'charge' && newOutlet[key] !== this.state.outlet.priceEnergy.toString()){
         same = false;
       } else if (key !== 'charge' && newOutlet[key] !== this.state.outlet[key]){
-        console.log('newOutlet['+key+']: ', newOutlet[key], ' this.state.outlet['+key+']: ', this.state.outlet[key])
         same = false;
       }
     }
     console.log('same? ', same);
 
-    // outletStore.submitOutlet(newOutlet).then(function(res){
-    //   console.log('editOutlet submit response: ', res)
-    // });
+    outletStore.editOutlet(newOutlet).then(function(res){
+      console.log('editOutlet submit response: ', res)
+    });
     
     // React.findDOMNode(this.refs.street).value = '';
     // React.findDOMNode(this.refs.city).value = '';

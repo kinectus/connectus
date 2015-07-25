@@ -90,6 +90,11 @@ var outletStore = assign({}, EventEmitter.prototype, {
   submitOutlet: function(newOutlet){
     return OutletServices.addOutlet(newOutlet);
   },
+
+  editOutlet: function(newOutlet){
+    return OutletServices.editOutlet(newOutlet);
+  },
+
   submitReservation: function(newReservation) {
     return OutletServices.makeReservation(newReservation);
   },
