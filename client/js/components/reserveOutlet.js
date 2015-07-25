@@ -84,12 +84,12 @@ var OutletInfo = React.createClass({
     return (
       <div className="container">
         <div className="row">
-          <div className="col-sm-3 col-xs-12">
+          <div className="col-sm-4 col-xs-12">
             <h2 className="ui center aligned header"> 
                 { this.props.outletData.name }
             </h2>
           </div>
-          <div className="col-md-7 col-sm-4 col-xs-12">
+          <div className="col-md-7 col-sm-8 col-xs-12">
             <h4>{ this.props.outletData.description }</h4>
           </div>
         </div>
