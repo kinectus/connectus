@@ -33,23 +33,11 @@ module.exports = {
         street: req.body.street,
         city: req.body.city,
         state: req.body.state,
+        postalCode: req.body.zip,
         country: 'US'
     });
 
-    addressValidator.validate(address, addressValidator.match.streetAddress, function(err, exact, inexact){
-        console.log('error:', err);
-        console.log('exact:', exact);
-        console.log('inexact', inexact);
-        console.log('input: ', address.toString());
-
-        console.log('match: ', _.map(exact, function(a) {
-          return a.toString();
-        }));
-
-        console.log('did you mean: ', _.map(inexact, function(a) {
-          return a.toString();
-        }));
-     
+    addressValidator.validate(address, addressValidator.match.streetAddress, function(err, exact, inexact){     
         res.send(200, {exact:exact, err: err, inexact:inexact});
     });
 

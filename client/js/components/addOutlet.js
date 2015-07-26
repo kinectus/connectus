@@ -5,8 +5,6 @@ var _=require('underscore');
 
 /* TODO
 Style page
--first validate address and set lat and long coordinates
--then figure out how to prevent submission before validation
 */
 
 var addOutlet = React.createClass({
@@ -15,8 +13,12 @@ var addOutlet = React.createClass({
       lat:'',
       long: '',
       validated: false,
-      validationMessage: 'Please enter a valid address'
+      validationMessage: 'Please validate your address'
     };
+  },
+
+  handleChange: function(){
+    this.setState({validated:false, validationMessage: 'Please validate your address'});
   },
 
   handleAddressSubmit: function(e){
@@ -27,15 +29,16 @@ var addOutlet = React.createClass({
     var state = React.findDOMNode(this.refs.state).value.trim();
     var zip = React.findDOMNode(this.refs.zip).value.trim();
 
-    outletStore.validateAddress({street:street, city:city, state: state, zip: zip}).then(function(result){
+    return outletStore.validateAddress({street:street, city:city, state: state, zip: zip}).then(function(result){
       if(result.err){
-        that.setState({validationMessage: 'There is an error with your adddress. Please try again'});
+        that.setState({validationMessage: (<div className="error">There is an error with your adddress. Please try again</div>)});
       }else if(result.inexact.length > 0){
-        console.log(result.inexact);
         var suggestion = result.inexact[0].streetNumber + " " + result.inexact[0].street + ", " + result.inexact[0].city + ", " + result.inexact[0].stateAbbr + ", " + result.inexact[0].postalCode;
-        that.setState({validationMessage: 'Address not valid. Did you mean: ' + suggestion + " ?", validated: false});
+        that.setState({validationMessage: (<div className="error"> Address not valid. Did you mean: {suggestion} ?</div>), validated: false});
+      }else if(result.exact.length > 0){
+        that.setState({lat: result.exact[0].location.lat, long: result.exact[0].location.lon, validated: true, validationMessage: (<div className="success">Address Validated</div>)});
       }else{
-        that.setState({lat: result.exact[0].location.lat, long: result.exact[0].location.lon, validated: true, validationMessage: 'Address Validated'});
+        that.setState({validationMessage: (<div className="error">There is an error with your adddress. Please try again</div>)});
       }
     });
     
@@ -44,9 +47,7 @@ var addOutlet = React.createClass({
 
   handleInfoSubmit: function(e) {
     e.preventDefault();
-/* TODO
--add lat and long values to be sent over after validating address
-*/    
+    var that = this;
     var newOutlet = {
       address: React.findDOMNode(this.refs.street).value.trim() + ';' + React.findDOMNode(this.refs.city).value.trim() + ';' +  React.findDOMNode(this.refs.state).value.trim() + ';' + React.findDOMNode(this.refs.zip).value.trim(),
       name: React.findDOMNode(this.refs.name).value.trim(),
@@ -62,7 +63,8 @@ var addOutlet = React.createClass({
     //   return;
     // }
     outletStore.submitOutlet(newOutlet).then(function(res){
-      console.log('ADDOUTLET submit response: ', res)
+      that.setState({validated:false, validationMessage: 'Please validate your address'});
+      // console.log('ADDOUTLET submit response: ', res)
     });
     
     React.findDOMNode(this.refs.street).value = '';
@@ -77,7 +79,7 @@ var addOutlet = React.createClass({
     return;
   },
   render: function(){
-    var buttonHtml = (<button className="btn btn-warning">Address Validation Needed</button>);
+    var buttonHtml = (<button className="btn btn-warning btn-lg btn-block">Address Validation Needed</button>);
     // is user authenticated
     if(!document.cookie){
       this.transitionTo('login');
@@ -95,21 +97,21 @@ var addOutlet = React.createClass({
         <form className = "outletAddressForm" onSubmit={this.handleAddressSubmit}>
           <div className="form-group">
             <label>Street</label><br />
-            <input type="text" name="street" ref="street" className="form-control" placeholder='Enter your street address...' /><br />
+            <input type="text" name="street" ref="street" className="form-control" placeholder='Enter your street address...' onChange={this.handleChange}/><br />
           </div>
           <div className="form-group">
             <label>City</label><br />
-            <input type="text" name="city" ref="city" className="form-control" placeholder='Enter city...' /> <br />
+            <input type="text" name="city" ref="city" className="form-control" placeholder='Enter city...' onChange={this.handleChange}/> <br />
           </div>
           <div className="form-group">
             <label>State</label><br />
-            <input type="text" name="state" ref="state" className="form-control" placeholder='Enter state...' /><br />
+            <input type="text" name="state" ref="state" className="form-control" placeholder='Enter state...' onChange={this.handleChange}/><br />
           </div>
           <div className="form-group">
             <label>Zip Code</label><br />
             <input type="text" name="zip" ref="zip" className="form-control" placeholder='Enter zip-code...' /><br />
           </div>
-          <button type="submit" className="btn btn-primary btn-lg btn-block" value="Submit">Submit</button>
+          <button type="submit" className="btn btn-primary" value="Submit">Validate Address</button>
         </form>
         <form className = "outletInfoForm" onSubmit={this.handleInfoSubmit}>
           <div className="form-group">

@@ -173,3 +173,9 @@ h1 {
 .toggle {
   display: inline-block;
 }
+.error {
+  color: #FF0000;
+}
+.success {
+  color: #007F00;
+}
