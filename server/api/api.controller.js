@@ -18,14 +18,32 @@ var getBuyerReservations = require('../config/db/queries/getBuyerReservations');
 var turnOnOutlet = require('../config/db/queries/turnOnOutlet');
 var rp = require('request-promise');
 
+var addressValidator = require('address-validator');
+var Address = addressValidator.Address;
+var _ = require('underscore');
+
 // socket.io
 var io = require('../config/middleware').io;
 
 var moment = require('moment');
 
 module.exports = {
-  
-    getAllOutlets: function(req, res) {
+  validateAddress: function(req, res){
+    var address = new Address({
+        street: req.body.street,
+        city: req.body.city,
+        state: req.body.state,
+        postalCode: req.body.zip,
+        country: 'US'
+    });
+
+    addressValidator.validate(address, addressValidator.match.streetAddress, function(err, exact, inexact){     
+        res.send(200, {exact:exact, err: err, inexact:inexact});
+    });
+
+    
+  },
+  getAllOutlets: function(req, res) {
     Outlets.reset().fetch().then(function(outlets) {
       res.send(outlets);
     })

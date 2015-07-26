@@ -1,5 +1,3 @@
-// TODO: validate data, possibly change format of date, allow only one click on reserve outlet.
-
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');

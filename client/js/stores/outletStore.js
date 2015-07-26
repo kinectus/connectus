@@ -8,8 +8,13 @@ var timeSlots = require('./data/timeSlots');
 var CHANGE_EVENT = 'change';
 
 var outletStore = assign({}, EventEmitter.prototype, {
+  validateAddress: function(data){
+    return OutletServices.validateAddress(data).then(function(result){
+      return result;
+    });
+  },
+  
   setCurrentTransaction: function(data){
-    console.log('data recieved in outlet store', data)
     return OutletServices.setTransaction(data).then(function(result){
       return result;
     });
@@ -39,6 +44,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
         if(!transactions[transactionId]){
           transactions[transactionId] = {};
           transactions[transactionId].id = transactionId;
+          transactions[transactionId].paid = outletData[i].transaction_info.paid;
           transactions[transactionId].buyer_id = outletData[i].buyer_id;
           transactions[transactionId].seller_id = outletData[i].seller_id;
           transactions[transactionId].outlet = outletData[i].outlet_info;

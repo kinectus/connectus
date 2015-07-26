@@ -14,6 +14,7 @@ module.exports = function(app) {
   app.post('/on', authController.isAuthenticated, apiController.turnOnOutlet);
   app.post('/setTransaction', authController.isAuthenticated, apiController.setTransaction);
   app.post('/off', authController.isAuthenticated, apiController.turnOffOutlet);
-  app.post('/realtimeData', apiController.realtimeData)
+  app.post('/realtimeData', apiController.realtimeData);
+  app.post('/validateAddress', apiController.validateAddress);
 };
 

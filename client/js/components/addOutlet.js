@@ -1,23 +1,61 @@
 var React = require('react');
 var outletStore = require('../stores/outletStore');
+var _=require('underscore');
 // var ReactAddons = require('react/addons');
 
 /* TODO
 Style page
-Change state and voltage to dropdown
-
 */
 
 var addOutlet = React.createClass({
-  handleSubmit: function(e) {
-    e.preventDefault();
+  getInitialState: function(){
+    return {
+      lat:'',
+      long: '',
+      validated: false,
+      validationMessage: 'Please validate your address'
+    };
+  },
 
+  handleChange: function(){
+    this.setState({validated:false, validationMessage: 'Please validate your address'});
+  },
+
+  handleAddressSubmit: function(e){
+    e.preventDefault();
+    var that = this;
+    var street = React.findDOMNode(this.refs.street).value.trim();
+    var city = React.findDOMNode(this.refs.city).value.trim();
+    var state = React.findDOMNode(this.refs.state).value.trim();
+    var zip = React.findDOMNode(this.refs.zip).value.trim();
+
+    return outletStore.validateAddress({street:street, city:city, state: state, zip: zip}).then(function(result){
+      if(result.err){
+        that.setState({validationMessage: (<div className="error">There is an error with your adddress. Please try again</div>)});
+      }else if(result.inexact.length > 0){
+        var suggestion = result.inexact[0].streetNumber + " " + result.inexact[0].street + ", " + result.inexact[0].city + ", " + result.inexact[0].stateAbbr + ", " + result.inexact[0].postalCode;
+        that.setState({validationMessage: (<div className="error"> Address not valid. Did you mean: {suggestion} ?</div>), validated: false});
+      }else if(result.exact.length > 0){
+        that.setState({lat: result.exact[0].location.lat, long: result.exact[0].location.lon, validated: true, validationMessage: (<div className="success">Address Validated</div>)});
+      }else{
+        that.setState({validationMessage: (<div className="error">There is an error with your adddress. Please try again</div>)});
+      }
+    });
+    
+  },
+
+
+  handleInfoSubmit: function(e) {
+    e.preventDefault();
+    var that = this;
     var newOutlet = {
       address: React.findDOMNode(this.refs.street).value.trim() + ';' + React.findDOMNode(this.refs.city).value.trim() + ';' +  React.findDOMNode(this.refs.state).value.trim() + ';' + React.findDOMNode(this.refs.zip).value.trim(),
       name: React.findDOMNode(this.refs.name).value.trim(),
       description: React.findDOMNode(this.refs.description).value.trim(),
       voltage: React.findDOMNode(this.refs.voltage).value.trim(),
-      charge: React.findDOMNode(this.refs.charge).value.trim()
+      charge: React.findDOMNode(this.refs.charge).value.trim(),
+      lat: this.state.lat,
+      long: this.state.long
     };
 
     console.log(newOutlet);
@@ -25,7 +63,8 @@ var addOutlet = React.createClass({
     //   return;
     // }
     outletStore.submitOutlet(newOutlet).then(function(res){
-      console.log('ADDOUTLET submit response: ', res)
+      that.setState({validated:false, validationMessage: 'Please validate your address'});
+      // console.log('ADDOUTLET submit response: ', res)
     });
     
     React.findDOMNode(this.refs.street).value = '';
@@ -40,32 +79,41 @@ var addOutlet = React.createClass({
     return;
   },
   render: function(){
+    var buttonHtml = (<button className="btn btn-warning btn-lg btn-block">Address Validation Needed</button>);
     // is user authenticated
     if(!document.cookie){
       this.transitionTo('login');
       return <h1></h1>;
     }
+    
+    if(this.state.validated){
+      buttonHtml = (<button type="submit" className="btn btn-primary btn-lg btn-block">Submit</button>);
+    }
 
     return (
       <div className="addoutlet col-md-6 col-md-offset-3">
         <h3>Add an outlet:</h3>
-        <form onSubmit={this.handleSubmit}>
+        <h4>{this.state.validationMessage}</h4>
+        <form className = "outletAddressForm" onSubmit={this.handleAddressSubmit}>
           <div className="form-group">
             <label>Street</label><br />
-            <input type="text" name="street" ref="street" className="form-control" placeholder='Enter your street address...' /><br />
+            <input type="text" name="street" ref="street" className="form-control" placeholder='Enter your street address...' onChange={this.handleChange}/><br />
           </div>
           <div className="form-group">
             <label>City</label><br />
-            <input type="text" name="city" ref="city" className="form-control" placeholder='Enter city...' /> <br />
+            <input type="text" name="city" ref="city" className="form-control" placeholder='Enter city...' onChange={this.handleChange}/> <br />
           </div>
           <div className="form-group">
             <label>State</label><br />
-            <input type="text" name="state" ref="state" className="form-control" placeholder='Enter state...' /><br />
+            <input type="text" name="state" ref="state" className="form-control" placeholder='Enter state...' onChange={this.handleChange}/><br />
           </div>
           <div className="form-group">
             <label>Zip Code</label><br />
             <input type="text" name="zip" ref="zip" className="form-control" placeholder='Enter zip-code...' /><br />
           </div>
+          <button type="submit" className="btn btn-primary" value="Submit">Validate Address</button>
+        </form>
+        <form className = "outletInfoForm" onSubmit={this.handleInfoSubmit}>
           <div className="form-group">
             <label>Outlet Name</label><br />
             <input type="text" name="name" ref="name" className="form-control" placeholder='What do you want to call this outlet?' /><br />
@@ -88,7 +136,7 @@ var addOutlet = React.createClass({
             <label>Your price/kWh charge: </label><br />
             <input type="text" name="charge" ref="charge" className="form-control" placeholder='ex. 10' />/kWh<br />
           </div>
-          <button type="submit" className="btn btn-primary btn-lg btn-block" value="Submit">Submit</button>
+          {buttonHtml}
         </form>
       </div>
     )

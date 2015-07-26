@@ -4,8 +4,9 @@ var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var ReactAddons = require('react/addons');
 var Link = require('react-router').Link;
 var Router = require('react-router'); //need this for redirection
-var outletServices = require('../services/outletServices.js')
 // var io = require('socket.io');
+var outletServices = require('../services/outletServices.js');
+var moment = require('moment');
 
 var buyerReservations = React.createClass({
 
@@ -26,9 +27,9 @@ var buyerReservations = React.createClass({
 
   componentDidMount: function() {
     var that = this;
-    outletStore.getBuyerReservations().then(function(reservationData){
-      console.log(reservationData)
-      that.setState({data: reservationData});
+    console.log(moment("2015-07-30 00:30", "YYYY-MM-DD HH:mm") > moment());
+    outletStore.getBuyerReservations().then(function(transactionsData){
+      that.setState({data: transactionsData});
     });
   },
 

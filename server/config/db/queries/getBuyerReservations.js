@@ -24,6 +24,12 @@ module.exports = getBuyerReservations = function(user, res){
           .then(function(seller){
             return reservation.set('seller_info', seller);
           });
+        })
+        .then(function(){
+          return reservation.transaction().fetch()
+          .then(function(transaction){
+            return reservation.set('transaction_info', transaction);
+          });
         });
       })
       .then(function(modifiedRes){
