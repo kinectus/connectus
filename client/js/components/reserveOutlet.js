@@ -12,6 +12,13 @@ var moment = require('moment');
 var Router = require('react-router'); //need this for redirection
 
 // http://jquense.github.io/react-widgets/docs/#/datetime-picker
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+  //MAP
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
 var Map = React.createClass({
 
   render: function() {
@@ -27,6 +34,12 @@ var Map = React.createClass({
     )
   }
 });
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+  //DATETIME
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 
 var DateTime = React.createClass({
   handleSubmit: function(event) {
@@ -66,15 +79,33 @@ var DateTime = React.createClass({
 
   render: function() {
     var that = this;
+
+    // Format default date to be closest upcoming time at 30-minute interval
+    var firstDate = new Date();
+    var remainder1 = (30 - firstDate.getMinutes()) % 30;
+    var remainder2 = (60 - firstDate.getMinutes()) % 60;
+    console.log('remainder2', remainder2);
+    if (remainder1 > 0){
+      firstDate = new Date(firstDate.getTime() + remainder1*60000)
+    } else if (remainder2 > 0){
+      firstDate = new Date(firstDate.getTime() + remainder2*60000)
+    }
+
     return (
       <div>
-        <DateTimePicker  ref="startTime" defaultValue={new Date()} />
+        <DateTimePicker  ref="startTime" defaultValue={firstDate} />
         <DateTimePicker  ref="endTime" defaultValue={null} />
         <div className="btn btn-default" onClick={that.handleSubmit}>Reserve Outlet</div>
       </div>
     )
   }
 });
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+  // OUTLETINFO
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 
 var OutletInfo = React.createClass({
   render: function() {
@@ -84,12 +115,12 @@ var OutletInfo = React.createClass({
     return (
       <div className="container">
         <div className="row">
-          <div className="col-sm-3 col-xs-12">
+          <div className="col-sm-4 col-xs-12">
             <h2 className="ui center aligned header"> 
                 { this.props.outletData.name }
             </h2>
           </div>
-          <div className="col-md-7 col-sm-4 col-xs-12">
+          <div className="col-md-7 col-sm-8 col-xs-12">
             <h4>{ this.props.outletData.description }</h4>
           </div>
         </div>
@@ -118,6 +149,13 @@ var OutletInfo = React.createClass({
           //   <p className="description-text"><div className="ui star rating" data-rating={ this.props.outletData.rating } data-max-rating={ this.props.outletData.rating }></div></p>
           // </div>
 
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+  //AVAILABILITY
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
 var Availability = React.createClass({
   getInitialState: function(){
    return {
@@ -127,7 +165,20 @@ var Availability = React.createClass({
     }
   },
 
+  handleResize: function(e) {
+    if (window.innerWidth<627){
+      this.setState({end: 13, middle: 6});
+    } else if (window.innerWidth<1010){
+      this.setState({end: 25, middle: 12});
+    } else {
+      this.setState({end: 41, middle: 20});
+    }
+  },
+
   componentDidMount: function() {
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
+
     var that = this;
 
     outletStore.getOutletReservations(this.props.outletID).then(function(reservations){
@@ -135,8 +186,13 @@ var Availability = React.createClass({
     });
 
     outletStore.getTimeSlotInfo().then(function(slots){
-      that.setState({timeSlots: slots, start: 0, end: 25});
+      that.setState({timeSlots: slots, start: 0});
     });
+
+  },
+
+  componentWillUnmount: function() {
+    window.removeEventListener('resize', this.handleResize);
   },
 
   // Check for button events
@@ -188,8 +244,7 @@ var Availability = React.createClass({
     var date;
 
     // If reservations API call has completed
-    if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 ){
-
+    if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 && this.state.end && this.state.middle){
       // Current subset of reservation information
       var start = this.state.start;
       var end = this.state.end;
@@ -197,19 +252,19 @@ var Availability = React.createClass({
       var slotProps = slotProps || this.state.timeSlots;
 
       // Track center time slot
-      var centerCount = centerCount ? centerCount > 24 ? 0 : centerCount : 0;
-
+      var centerCount = centerCount ? centerCount > end-1 ? 0 : centerCount : 0;
+      var that = this;
       // Create custom availability viewer using subset
       var outerHTML = subset.map(function(reservation){
         var goOrNoGo = reservation.available ? "on" : "off";
 
         // Label slot properties based on subset location
-        var blockClass = (centerCount===12) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
+        var blockClass = (centerCount === that.state.middle) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
         centerCount++;
         var begin, end;
 
         // Specially label center slot to display its information
-        if (centerCount===13){
+        if (centerCount === that.state.middle+1){
           date = moment(reservation.date).format('MMMM Do YYYY');
           for (var j=0; j<slotProps.length; j++){
             if (slotProps[j].id === reservation.slot_id){
@@ -227,8 +282,13 @@ var Availability = React.createClass({
           )
         }
       });
+
+    // } else if (this.state.reservations.length > 0 && this.state.timeSlots.length>0){
+      // console.log('too small!');
+
+
     // Fallback before API call is complete
-    } else { var outerHTML = <div className="slot"></div> }
+    } else {var outerHTML = <div className="slot"></div> }
 
     // Render availability viewer
     return (
@@ -240,6 +300,12 @@ var Availability = React.createClass({
   }
 
 });
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+  //VIEWER
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 
 // Contains buttons, passes their events to Availability
 var Viewer = React.createClass({
@@ -290,6 +356,12 @@ var Viewer = React.createClass({
   }
 });
 
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+  //RESERVE OUTLET
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
 var reserveOutlet = React.createClass({
   getInitialState: function(){
    return {
@@ -330,7 +402,7 @@ var reserveOutlet = React.createClass({
           <Viewer outletID = {this.props.params.id}/>
         </div>
         <div>
-           <DateTime outletData = {this.state.data}/>
+          <DateTime outletData = {this.state.data}/>
         </div>
       </div>
     )
