@@ -4,7 +4,6 @@ var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var ReactAddons = require('react/addons');
 var Link = require('react-router').Link;
 var Router = require('react-router'); //need this for redirection
-// var io = require('socket.io');
 var outletServices = require('../services/outletServices.js');
 var moment = require('moment');
 
@@ -37,7 +36,7 @@ var buyerReservations = React.createClass({
     console.log(transaction)
     var that =this;
     outletStore.setCurrentTransaction({id: transaction.id, currentStatus: true, paid: false}).then(function(transaction){
-      // outletServices.turnOutletOff(transaction);
+      outletServices.turnOutletOff(transaction);
       that.transitionTo('paymentsPage');
       return transaction;
     });
@@ -48,6 +47,7 @@ var buyerReservations = React.createClass({
 
   },
 
+  // moved to set current transaction
   // turnOff: function(id) {
   //   outletServices.turnOutletOff(id);
   // },
@@ -58,6 +58,8 @@ var buyerReservations = React.createClass({
       this.transitionTo('login');
       return <h1></h1>;
     }
+
+
 
     var that = this;
 
@@ -123,20 +125,35 @@ var buyerReservations = React.createClass({
 
 var ActiveTransaction = React.createClass({
 
+  getInitialState: function(){
+    return {
+      data: []
+    };
+  },
+
+  componentDidMount: function(){
+    this.updateData();
+  },
+
+  updateData: function() {
+    var that = this;
+
+    var socket = io.connect('http://localhost:3000');
+
+    socket.on("energy", function (data) {
+      console.log("got energy!", data);
+      that.setState({data: data})
+    });
+  },
+
   // returns power usage data
   render: function() {
 
-    // DOESNT WORK YET
-    // var socket = io();
-    // socket.on('energy', function(energy){
-    //   console.log('energy in appjs', energy)
-    // });
-
     return (
       <tr>
-        <td><h4>Total kWh</h4><p>hello</p></td>
-        <td><h4>Total $</h4><p>hello</p></td>
-        <td><h4>Watts</h4><p>hello</p></td>
+        <td><h4>Total kWh</h4><p>{ this.state.data.total }</p></td>
+        <td><h4>Total $</h4><p>{ this.state.data.total * (.3)}</p></td>
+        <td><h4>Watts</h4><p>{ this.state.data.watts }</p></td>
       </tr>
     )
   }

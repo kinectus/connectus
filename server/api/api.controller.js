@@ -23,11 +23,13 @@ var Address = addressValidator.Address;
 var _ = require('underscore');
 
 // socket.io
-var io = require('../config/middleware').io;
+var io = require('../server.js');
+
 
 var moment = require('moment');
 
 module.exports = {
+  
   validateAddress: function(req, res){
     var address = new Address({
         street: req.body.street,
@@ -40,9 +42,8 @@ module.exports = {
     addressValidator.validate(address, addressValidator.match.streetAddress, function(err, exact, inexact){     
         res.send(200, {exact:exact, err: err, inexact:inexact});
     });
-
-    
   },
+
   getAllOutlets: function(req, res) {
     Outlets.reset().fetch().then(function(outlets) {
       res.send(outlets);
@@ -51,6 +52,7 @@ module.exports = {
       console.log('error:', error);
     });
   },
+
   setTransaction: function(req, res){
     var username = req.user.id;
     setCurrentTransaction(req).then(function(result){
@@ -108,23 +110,21 @@ module.exports = {
       });
   },
 
-  realtimeData: function(req, res){
-    console.log('realtimedata from powerserver', req.body);
-    // grab the reservation id from req.body
-    var reservationId = req.body.reservation.id;
-    // socket.on(reservationId, function(){
-    //   io.emit(reservationId, req.body)
-    //   console.log('emit')
-    // });
-    io.sockets.emit('energy', req.body);
+  // data hitting server from the power server (UP)
+  // realtimeData: function(req, res){
+  //   var reservationId = req.body.reservation.id;
+  //   io.on('connection', function(socket) {
+  //     console.log('whats up')
+  //       socket.emit('energy', 'hi')
+  //   });
+  // },
 
-  },
-
+  // request hitting server from the client (DOWN)
   turnOnOutlet: function(req, res){
     // query the database for validation - CAN they turn on this outlet??
     // if so...
     res.send(200, 'you turn me on!')
-    console.log('reservation info in the api controller: ', req.body);
+    console.log('reservation info in they api controller: ', req.body);
     var info = req.body;
     var options = {
       method: 'POST',
