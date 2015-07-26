@@ -29,6 +29,7 @@ var io = require('../server.js');
 var moment = require('moment');
 
 module.exports = {
+  
   validateAddress: function(req, res){
     var address = new Address({
         street: req.body.street,
@@ -41,9 +42,8 @@ module.exports = {
     addressValidator.validate(address, addressValidator.match.streetAddress, function(err, exact, inexact){     
         res.send(200, {exact:exact, err: err, inexact:inexact});
     });
-
-    
   },
+
   getAllOutlets: function(req, res) {
     Outlets.reset().fetch().then(function(outlets) {
       res.send(outlets);
@@ -52,6 +52,7 @@ module.exports = {
       console.log('error:', error);
     });
   },
+
   setTransaction: function(req, res){
     var username = req.user.id;
     setCurrentTransaction(req).then(function(result){
@@ -110,10 +111,13 @@ module.exports = {
   },
 
   // data hitting server from the power server (UP)
-  realtimeData: function(req, res){
-    var reservationId = req.body.reservation.id;
-    // io.listener()
-  },
+  // realtimeData: function(req, res){
+  //   var reservationId = req.body.reservation.id;
+  //   io.on('connection', function(socket) {
+  //     console.log('whats up')
+  //       socket.emit('energy', 'hi')
+  //   });
+  // },
 
   // request hitting server from the client (DOWN)
   turnOnOutlet: function(req, res){

@@ -125,24 +125,35 @@ var buyerReservations = React.createClass({
 
 var ActiveTransaction = React.createClass({
 
-  // returns power usage data
-  render: function() {
+  getInitialState: function(){
+    return {
+      data: []
+    };
+  },
+
+  componentDidMount: function(){
+    this.updateData();
+  },
+
+  updateData: function() {
+    var that = this;
 
     var socket = io.connect('http://localhost:3000');
 
-    socket.on("connect", function () {
-      console.log("Connected!");
-    });
-
     socket.on("energy", function (data) {
       console.log("got energy!", data);
+      that.setState({data: data})
     });
+  },
+
+  // returns power usage data
+  render: function() {
 
     return (
       <tr>
-        <td><h4>Total kWh</h4><p>hello</p></td>
-        <td><h4>Total $</h4><p>hello</p></td>
-        <td><h4>Watts</h4><p>hello</p></td>
+        <td><h4>Total kWh</h4><p>{ this.state.data.total }</p></td>
+        <td><h4>Total $</h4><p>{ this.state.data.total * (.3)}</p></td>
+        <td><h4>Watts</h4><p>{ this.state.data.watts }</p></td>
       </tr>
     )
   }

@@ -7,17 +7,19 @@ var port = process.env.PORT || 3000;
 var server = app.listen(port);
 var io = require('socket.io').listen(server);
 
-// var socketFunc = {
-//   listener: function() {
-//     io.on('connection', function(socket) {
-//         socket.emit('energy', 'hi')
-//     });
-//   }
-// }
+var mySocket;
+
+io.on('connection', function(socket){
+  mySocket = socket;
+})
+
+app.post('/realtimeData', function(req, res){
+  console.log('in the realtimeData post', req.body.reservation)
+  mySocket.emit('energy', req.body)
+})
 
 console.log('Connectus is listening on port ' + port + '...');
 
-// module.exports = socketFunc;
-module.exports = io;
+// module.exports = io;
 
 

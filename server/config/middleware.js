@@ -40,14 +40,6 @@ app.use('/auth', authRouter);
 app.use('/api', apiRouter);
 app.use('/payment', paymentRouter);
 
-// DOESNT WORK
-// app.use('/realtimeData', function(req, res){
-//   var io = require('socket.io')(http)
-//   io.on('connection', function(){
-//     apiController.realtimeData(req, res)
-//   })
-// });
-
 require('../auth/auth.routes')(authRouter);
 require('../api/api.routes')(apiRouter);
 require('../payment/payment.routes')(paymentRouter);
