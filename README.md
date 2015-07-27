@@ -1,7 +1,9 @@
 # Connectus
 
 ## About
-Connectus is a peer to peer energy sales platform integrated with registered smart meters to monitor and control energy use. Coming this week, [econnectus.co](http://www.econnectus.co/) will run an app demo and contain further information.
+Connectus is a peer to peer energy sales platform integrated with registered smart meters to monitor and control energy use.  
+  
+Users can register their meters for energy sales and/or make a reservation at an existing meter. During their reservation time, a user can turn the outlet on/off and monitor their energy usage. Connectus uses the [Modlet TE1010](http://shop.thinkecoinc.com/products/home-starter-kit#.VbZw6xNVikp) smart meter from ThinkEco, Inc. as a prototype for monitoring and controling energy use. Coming this week, [econnectus.co](http://www.econnectus.co/) will host the app and demo hardware features.
 
 ## Tech Stack
 - Front End
@@ -15,6 +17,7 @@ Connectus is a peer to peer energy sales platform integrated with registered sma
   - Flux utilizes [unidirectional data flow](https://facebook.github.io/flux/docs/overview.html) using Actions, Dispatchers, Stores and Views for efficient DOM manipulation
   - There are two servers, the server and the powerServer. The server interfaces with the database and the powerServer maintains communication with hardware.
   - Database structure and relationships: ![Schema and relationships](./client/assets/img/database.png)
+  - Connectus can run without a hardware connection, the only impact is a user cannot turn an outlet on/off or see live data updates
 
 ## Development
 - __Web App__
@@ -22,13 +25,16 @@ Connectus is a peer to peer energy sales platform integrated with registered sma
   - Clone from your fork
   - npm install
   - bower install
-  - gulp
 - __Database__
   - [Install mysql](https://dev.mysql.com/doc/refman/5.6/en/osx-installation-pkg.html) (or brew install mysql) and start the mysql service with ``mysql.server start``
 - __Hardware__
   - Connectus uses the [Modlet TE1010](http://shop.thinkecoinc.com/products/home-starter-kit#.VbZw6xNVikp) smart meter from ThinkEco, Inc. as a prototype for monitoring and controling energy use
   - To interface with the Modlet, use mcolyer's [hacklet program](https://github.com/mcolyer/hacklet) and follow instructions for integration
   - Turn on the Modlet and type "hacklet commission" into the terminal
+- __Run the App__
+  - gulp
+  - nodemon server/server.js
+  - nodemon powerServer/powerServer.js
 
 ## Team
 Product Owners: Sean Connor, Valerie Liang  
