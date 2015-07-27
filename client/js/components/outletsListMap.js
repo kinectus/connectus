@@ -104,7 +104,7 @@ var outletsListMap = React.createClass({
       <div>
         <div className='reservationMap'>
           <GoogleMap onChildClick={that.displayOutletData}
-            zoom={15}
+            zoom={10}
             // eventually use user's gps coordinates
             center={[37.78,-122.4]}
           >
