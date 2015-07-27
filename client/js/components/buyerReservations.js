@@ -1,6 +1,7 @@
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
+var OutletListConstants = require('../constants/OutletListConstants')
 var ReactAddons = require('react/addons');
 var Link = require('react-router').Link;
 var Router = require('react-router'); //need this for redirection
@@ -138,7 +139,7 @@ var ActiveTransaction = React.createClass({
   updateData: function() {
     var that = this;
 
-    var socket = io.connect('http://localhost:3000');
+    var socket = io.connect(OutletListConstants.BASE_URL);
 
     socket.on("energy", function (data) {
       console.log("got energy!", data);

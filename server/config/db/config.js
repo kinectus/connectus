@@ -8,7 +8,7 @@ var timeSlotInfo = require('./timeSlotInfo');
 var db = require('knex')({
   client: 'mysql',
   connection: process.env.CLEARDB_DATABASE_URL || {
-    host: '127.0.0.1',//mysql://bd88d20b6f0b67:7e80e308@
+    host: '127.0.0.1',
     // port: '',
     user: 'root',
     // password: '',
