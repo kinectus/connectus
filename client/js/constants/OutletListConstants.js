@@ -1,4 +1,4 @@
-var BASE_URL = 'http://localhost:3000/';
+var BASE_URL = window.location.origin+'/';
 
 var loginConstants = {
   BASE_URL: BASE_URL,

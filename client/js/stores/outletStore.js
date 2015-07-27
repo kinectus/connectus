@@ -2,7 +2,7 @@ var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 // var ConnectusConstants = require('');          // omg what is this even
 var assign = require('react/lib/Object.assign');    // allows us to extend objects similarly to jquery and underscore lib...
 var EventEmitter = require('events').EventEmitter;
-var OutletServices = require('../services/OutletServices');
+var OutletServices = require('../services/outletServices');
 var timeSlots = require('./data/timeSlots');
 
 var CHANGE_EVENT = 'change';

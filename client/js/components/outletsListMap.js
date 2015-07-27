@@ -1,4 +1,5 @@
 var React = require('react');
+var OutletListConstants = require('../constants/OutletListConstants');
 var outletStore = require('../stores/outletStore');
 var userStore = require('../stores/userStore');
 var ReactAddons = require('react/addons');
@@ -58,11 +59,9 @@ var outletsListMap = React.createClass({
           </tr></thead>
 
         <tbody>
-          <tr key={outlet.id} >
+          <tr>
               <td>
-             
-                  { outlet.name } 
-              
+                <a href={OutletListConstants.BASE_URL+'#/outlets/'+outlet.id}>{ outlet.name}</a>
               </td>
               <td>
                 { outlet.seller }
