@@ -14,6 +14,7 @@ Connectus is a peer to peer energy sales platform integrated with registered sma
 ## App Structure Notes
   - Flux utilizes [unidirectional data flow](https://facebook.github.io/flux/docs/overview.html) using Actions, Dispatchers, Stores and Views for efficient DOM manipulation
   - There are two servers, the server and the powerServer. The server interfaces with the database and the powerServer maintains communication with hardware.
+  - Database structure and relationships: ![Schema and relationships](./client/assets/img/database.png)
 
 ## Development
 - __Web App__
@@ -30,5 +31,5 @@ Connectus is a peer to peer energy sales platform integrated with registered sma
   - Turn on the Modlet and type "hacklet commission" into the terminal
 
 ## Team
-Product Owners: Sean Connor, Valerie Liang
+Product Owners: Sean Connor, Valerie Liang  
 Scrum Masters: Jammie Mountz, Dianna Faulk
