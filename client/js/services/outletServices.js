@@ -159,9 +159,11 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(newReservation),
       success: function(res) {
-        console.log('--------------------------------> DIANNA IT SUCCEEDED')
-        console.log(res);
+        return res;
       }
+      // error: function(res){
+      //   console.
+      // }
     });
   };
 

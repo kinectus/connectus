@@ -98,7 +98,7 @@ module.exports = {
 
   makeReservation: function(req, res) {
     updateReservation(req, res);
-
+    // res.send('reservation completed');
     // user passport adds facebook user profile to req so it can be accessed anywhere in express
     // console.log('request from user', req.user.id);
   },

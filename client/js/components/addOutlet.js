@@ -1,6 +1,7 @@
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var _=require('underscore');
+var Router = require('react-router'); //need this for redirection
 // var ReactAddons = require('react/addons');
 
 /* TODO
@@ -8,6 +9,8 @@ Style page
 */
 
 var addOutlet = React.createClass({
+  mixins: [Router.Navigation],
+
   getInitialState: function(){
     return {
       lat:'',
@@ -16,6 +19,7 @@ var addOutlet = React.createClass({
       validationMessage: 'Please validate your address'
     };
   },
+
 
   handleChange: function(){
     this.setState({validated:false, validationMessage: 'Please validate your address'});
@@ -63,7 +67,8 @@ var addOutlet = React.createClass({
     //   return;
     // }
     outletStore.submitOutlet(newOutlet).then(function(res){
-      that.setState({validated:false, validationMessage: 'Please validate your address'});
+      that.transitionTo("outletsList");
+      // that.setState({validated:false, validationMessage: 'Please validate your address'});
       // console.log('ADDOUTLET submit response: ', res)
     });
     

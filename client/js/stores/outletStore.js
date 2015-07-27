@@ -102,7 +102,9 @@ var outletStore = assign({}, EventEmitter.prototype, {
   },
 
   submitReservation: function(newReservation) {
-    return OutletServices.makeReservation(newReservation);
+    return OutletServices.makeReservation(newReservation).then(function(reservation){
+      return reservation;
+    });
   },
 
   // createTransaction: function(){

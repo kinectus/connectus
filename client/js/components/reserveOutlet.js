@@ -42,6 +42,11 @@ var Map = React.createClass({
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var DateTime = React.createClass({
+  getInitialState: function(){
+    return {
+      refresh: true
+    };
+  },
   handleSubmit: function(event) {
     event.preventDefault();
     var timeConvert = function(time){
@@ -71,6 +76,9 @@ var DateTime = React.createClass({
       }
     }
     outletStore.submitReservation(newReservation).then(function(res){
+      location.reload();
+      return res;
+      // console.log('submitReservation, response', res)
     });
   },
 
