@@ -45,7 +45,9 @@ var buyerReservations = React.createClass({
 
   turnOn: function(transaction) {
     outletServices.turnOutletOn(transaction)
-    .then(this.updateData); //streams data from power server
+    // .then(this.updateData); streams data from power server
+
+    // this.updateData();
   },
 
   // moved to set current transaction
@@ -132,14 +134,15 @@ var ActiveTransaction = React.createClass({
     };
   },
 
-  // componentDidMount: function(){
-  //   this.updateData();
-  // },
+  componentDidMount: function(){
+    this.updateData();
+  },
 
   updateData: function() {
     var that = this;
 
-    var socket = io.connect(OutletListConstants.BASE_URL);
+    // var socket = io.connect(OutletListConstants.BASE_URL);
+    var socket = io.connect('http://localhost:3000');
 
     socket.on("energy", function (data) {
       console.log("got energy!", data);
@@ -152,8 +155,8 @@ var ActiveTransaction = React.createClass({
 
     return (
       <tr>
-        <td><h4>Total kWh</h4><p>{ this.state.data.total }</p></td>
-        <td><h4>Total $</h4><p>{ this.state.data.total * (.3)}</p></td>
+        <td><h4>Total kWh</h4><p>{ this.state.data.totalKwh }</p></td>
+        <td><h4>Total $</h4><p>{ this.state.data.totalKwh * (.3)}</p></td>
         <td><h4>Watts</h4><p>{ this.state.data.watts }</p></td>
       </tr>
     )

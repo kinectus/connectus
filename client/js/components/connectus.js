@@ -21,6 +21,7 @@ var Connectus = React.createClass({
     // resizing the screen renders mobile or full menu
     var isMobile = mobile();
     window.onresize = function() {
+        console.log(isMobile);
         that.forceUpdate();
     };
   },

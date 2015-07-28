@@ -1,15 +1,22 @@
--// Hardware ID and network ID: 0xc528100000584f80 on network 0x2777
+// Hardware ID and network ID: 0xc528100000584f80 on network 0x2777
 // ^These are always the same
 
 // I, [2015-07-13T20:06:15.137579 #84220]  INFO -- : 45w at 2015-07-13 20:06:01 -0700
 // ^This is what the wattage line of data looks like
+var express = require('express');
+var bodyParser = require('body-parser');
+var path = require('path');
+// require('./powerReader.js');
+
 
 var shell = require('shelljs'),
     make = require('shelljs/make'),
-    fs = require('fs');
-    app = require('./powerServer.js');
+    fs = require('fs'),
+    app = require('./powerServer.js'),
     rp = require('request-promise');
 
+
+var app = express();
 
     // watch = require('node-watch'); If necessary, can be used to execute function on file change
 
@@ -24,8 +31,8 @@ var totalKwh = 0;
 var postDataToConnectus = function(data) {
   var options = {
     method: 'POST',
-    uri: 'http://localhost:3000/api/realtimeData',
-    body: energy,
+    uri: 'http://localhost:3000/realtimeData',
+    body: data,
     json: true
   };
   rp(options);
@@ -35,12 +42,14 @@ var getWatts = function(string){
   var end = string.indexOf('w');
   var watts = string.slice(start, end);
   watts = parseInt(watts);
+  console.log('watts', watts);
   kwh = watts/1000/(60*60) * 10;
   if (end > 0){
-    totalKwh += watts;
+    console.log('in the if statement')
+    totalKwh += kwh;
   }
   // console.log('string: ', string, ' total: ', total, ' start: ', start, ' end: ', end, ' watts: ', watts);
-  console.log('total: ', total); // logs to server
+  console.log('total: ', totalKwh); // logs to server
   cbDone = true;
   var data = {
     avgWatts: watts,
@@ -105,9 +114,11 @@ var execute = function(command){
   readLines(input, getWatts);
 };
 // Runs execute every 10s
-setInterval(execute, 10000, 'hacklet read -n 0x2777 -s 0 >> data.txt | cat');
+
 app.post('/api/on', function(req,res) {
   shell.exec('hacklet on -n 0x2777 -s 0');
+  setInterval(execute, 10000, 'hacklet read -n 0x2777 -s 0 >> data.txt | cat');
+
 });
 
 app.post('/api/off', function(req,res) {
@@ -154,3 +165,7 @@ shell.exec('hacklet off -n 0x2777 -s 1')
 //{ recursive: false },
 
 // watch('data.txt', { recursive: false }, function(){ readFile(getWatts); });
+
+var port = process.env.PORT || 3030;
+app.listen(port);
+console.log('Connectus is listening on port ' + port + '...');
