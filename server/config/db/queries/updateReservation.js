@@ -15,7 +15,8 @@ module.exports = updateReservation = function(req, res){
   var endDate = data.end.date;
   var currentDate;
   var sameDay = (startDate === endDate);
-  // Transaction tracking
+  var complete = false;
+  var is404 = false;
 
   // Recursive function updates reservation slots and creates transaction models for each
   // time slot from beginning to end 
@@ -31,12 +32,12 @@ module.exports = updateReservation = function(req, res){
       // Update reservation
       .then(function(newReservation){
         if (!newReservation) {
-          console.log('sending res 404 no slot');
-          res.send(404, 'No slot found');
+          is404 = true;
+          complete = true;
           return;
         } else if (newReservation.available == false) {
-          console.log('sending res 404 not available');
-          res.send(404, 'Reservation is not available');
+          is404 = true;
+          complete = true;
           return;
         } else {
           newReservation.set({
@@ -48,14 +49,12 @@ module.exports = updateReservation = function(req, res){
       })
       // Determine if more reservations need to be updated
       .then(function(){
-
         // Completion check for same day reservations
         if (sameDay){
           if (++currentSlot <= endSlot){
             return newReservation(user, currentSlot);
           } else {
-            console.log('sending res 201 sameday posted');
-            res.send(201, 'POST reservations complete');
+            complete = true;
             return;
           }
         // Completion check for multi-day reservations
@@ -68,19 +67,19 @@ module.exports = updateReservation = function(req, res){
             if ( currentSlot <= endSlot  || difference < 0){
               return newReservation(user, currentSlot);
             } else {
-              console.log('sending res 201 multi-day posted');
-              res.send(201, 'POST reservations complete');
+              complete = true;
               return;
             }
           }
         }
+      }).then(function(){
+        if (complete === true && !is404){
+          return res.send(201, JSON.stringify('Reservation complete'));
+        } else if (complete === true && is404) {
+          return res.send(404, JSON.stringify('Cannot complete reservation'));
+        }
       });
-
   };
-
-//create the transaction
-
-  
 
 
   // START RESERVATION PROCESS
@@ -112,7 +111,8 @@ module.exports = updateReservation = function(req, res){
         .save()
         .then(function(newTransaction){
           transactionID = newTransaction.id;
-          newReservation(user.id, startSlot);
+          complete = false;
+          return newReservation(user.id, startSlot);
         });
       });
     });
