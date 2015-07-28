@@ -205,7 +205,7 @@ Reserve an Outlet .holder {
 .off {
   display: inline-block;
   width: 20px;
-  height: 20px;
+  height: 25px;
   background-color: #ff1900;
   border: 2px solid grey;
 }

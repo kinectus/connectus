@@ -10,6 +10,7 @@ var io = require('socket.io').listen(server);
 var mySocket;
 
 io.on('connection', function(socket){
+  console.log('connected --------------------------------------------------------')
   mySocket = socket;
 })
 

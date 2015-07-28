@@ -138,7 +138,7 @@ module.exports = {
   turnOffOutlet: function(req, res){
     var options = {
       method: 'POST',
-      uri: ServerConstants.POWER_SERVER_
+      uri: ServerConstants.POWER_SERVER_OFF
     }
     return rp(options);
   }
