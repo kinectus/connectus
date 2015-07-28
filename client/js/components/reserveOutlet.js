@@ -10,6 +10,7 @@ var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
 var DateTimePicker = require('react-widgets').DateTimePicker;
 var moment = require('moment');
 var Router = require('react-router'); //need this for redirection
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup; //modal transitioning
 
 // http://jquense.github.io/react-widgets/docs/#/datetime-picker
 
@@ -42,6 +43,11 @@ var Map = React.createClass({
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var DateTime = React.createClass({
+  getInitialState: function(){
+    return {
+      refresh: true
+    };
+  },
   handleSubmit: function(event) {
     event.preventDefault();
     var timeConvert = function(time){
@@ -59,6 +65,8 @@ var DateTime = React.createClass({
     var startTimeString = timeConvert(start.getHours())+":"+timeConvert(start.getMinutes());
     var endTimeString = timeConvert(end.getHours())+":"+timeConvert(end.getMinutes());
 
+    var that = this;
+
     var newReservation = {
       outletID: this.props.outletData.id,
       start: {
@@ -71,6 +79,11 @@ var DateTime = React.createClass({
       }
     }
     outletStore.submitReservation(newReservation).then(function(res){
+      location.reload();
+      return res;
+      //NEED TO CALL THIS.OPENMODAL HERE
+      location.reload();
+      // console.log('submitReservation, response', res)
     });
   },
 
@@ -384,7 +397,26 @@ var Viewer = React.createClass({
     )
   }
 });
-
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+  //SUCCESS MODAL
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+var Modal = React.createClass({
+  render: function(){
+    if(this.props.isOpen){
+      return (
+        <ReactCSSTransitionGroup transitionName={this.props.transitionName}>
+          <div className="modal">
+            <h1>this issupposed to be the modal</h1>
+          </div>
+        </ReactCSSTransitionGroup>
+      );
+    }else{
+     return (<h1>at least modal is returning something</h1>);
+    }
+  }
+});
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
   //RESERVE OUTLET
@@ -395,9 +427,19 @@ var reserveOutlet = React.createClass({
   getInitialState: function(){
    return {
       data: [],
+      isModalOpen: false
     }
   },
   mixins: [Router.Navigation],
+  
+  openModal: function(){
+    this.setState({isModalOpen: true});
+  },
+
+  closeModal: function(){
+    this.setState({isModalOpen: false});
+    location.reload();
+  },
   
   // is onchange necessary?????
   // _onChange: function() {
@@ -412,6 +454,7 @@ var reserveOutlet = React.createClass({
   },
 
   render: function() {
+    var that = this;
     // is user authenticate
     if(!document.cookie){
       this.transitionTo('login');
@@ -423,13 +466,13 @@ var reserveOutlet = React.createClass({
           <Map outletData={this.state.data} />
         </div>
         <div>
-          <OutletInfo outletData = {this.state.data}/>
+          <OutletInfo outletData = {this.state.data} />
         </div>
         <div>
-          <Viewer outletID = {this.props.params.id}/>
+          <Viewer outletID = {this.props.params.id} />
         </div>
         <div>
-          <DateTime outletData = {this.state.data}/>
+          <DateTime outletData = {this.state.data} />
         </div>
       </div>
     )

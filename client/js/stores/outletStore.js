@@ -4,6 +4,7 @@ var assign = require('react/lib/Object.assign');    // allows us to extend objec
 var EventEmitter = require('events').EventEmitter;
 var OutletServices = require('../services/outletServices');
 var timeSlots = require('./data/timeSlots');
+var Microevent = require('microevent');
 
 var CHANGE_EVENT = 'change';
 
@@ -102,7 +103,11 @@ var outletStore = assign({}, EventEmitter.prototype, {
   },
 
   submitReservation: function(newReservation) {
-    return OutletServices.makeReservation(newReservation);
+    return OutletServices.makeReservation(newReservation).then(function(reservation){
+      
+      // outletStore.trigger('change');
+      return reservation;
+    });
   },
 
   // createTransaction: function(){
@@ -121,6 +126,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
 });
 
 ConnectusDispatcher.register(function(payload){
+  Microevent.mixin(outletStore);
   var action = payload.action;
   switch(action){
     case 'CLICK_OUTLET':
