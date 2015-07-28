@@ -78,18 +78,18 @@ var DateTime = React.createClass({
         time: endTimeString
       }
     }
-    // Validate input dates
-    console.log(newReservation.start.date, newReservation.start.time)
-    // if (newReservation.start.date){
 
-    // }
-    outletStore.submitReservation(newReservation).then(function(res){
-      location.reload();
-      return res;
-      //NEED TO CALL THIS.OPENMODAL HERE
-      location.reload();
-      // console.log('submitReservation, response', res)
-    });
+    // Validate input dates
+    if ( moment().diff(moment(start)) < 0 ){
+      outletStore.submitReservation(newReservation).then(function(res){
+        location.reload();
+        return res;
+        //NEED TO CALL THIS.OPENMODAL HERE
+        location.reload();
+        // console.log('submitReservation, response', res)
+        console.log('submitted')
+      });
+    }
   },
 
   render: function() {
