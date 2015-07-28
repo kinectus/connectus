@@ -259,7 +259,7 @@ h1 {
 }
 
 .pad-top {
-  margin-top: 3vh;
+  margin-top: 5vh;
 }
 
 .viewBox {
@@ -272,20 +272,57 @@ h1 {
   display: inline-block;
 }
 
+.splitHour {
+  border-left: 2px solid black;
+}
+
 .on {
   display: inline-block;
-  width: 20px;
-  height: 25px;
+  width: 27px;
+  height: 30px;
   background-color: blue;
-  border: 2px solid grey;
+  border-bottom: 2px solid grey;
+  color: white;
+  text-align: left;
+  margin: 0;
+  padding: 0;
 }
 
 .off {
   display: inline-block;
-  width: 20px;
-  height: 25px;
+  width: 27px;
+  height: 30px;
   background-color: @red;
-  border: 2px solid grey;
+  border-bottom: 2px solid grey;
+  color: white;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+.barView {
+  position: relative;
+  width: 27px;
+  height: 15px;
+  background-color: grey;
+  color: white;
+  z-index: 3;
+}
+
+.barViewText {
+  vertical-align: top;
+  padding: 0;
+  margin: 0;
+  top: -10px;
+}
+
+.barViewBack {
+  position: relative;
+  width: 27px;
+  height: 15px;
+  background-color: grey;
+  color: white;
+  z-index: 2;
 }
 
 .date {
@@ -293,10 +330,12 @@ h1 {
 }
 
 .centerSlot {
-  margin-bottom: 1vh;
-  width: 84px;
-  height: 30px;
-  border: 2px solid black;
+  position: relative;
+  vertical-align: top;
+  width: 85px;
+  height: 47px;
+  line-height: 42px;
+  border: 3px solid white;
   color: white;
   text-align: center;
 }
@@ -311,6 +350,7 @@ h1 {
 
 .toggle {
   display: inline-block;
+  right: -1px;
 }
 .error{
   color: #FF0000;

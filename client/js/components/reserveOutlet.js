@@ -166,12 +166,16 @@ var Availability = React.createClass({
   },
 
   handleResize: function(e) {
-    if (window.innerWidth<627){
+    if (window.innerWidth<469){
+      this.setState({end: 9, middle: 4});
+    } else if (window.innerWidth<674){
       this.setState({end: 13, middle: 6});
-    } else if (window.innerWidth<1010){
+    } else if (window.innerWidth<844){
+      this.setState({end: 17, middle: 8});
+    } else if (window.innerWidth<1031){
       this.setState({end: 25, middle: 12});
     } else {
-      this.setState({end: 41, middle: 20});
+      this.setState({end: 31, middle: 15});
     }
   },
 
@@ -262,7 +266,7 @@ var Availability = React.createClass({
         var blockClass = (centerCount === that.state.middle) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
         centerCount++;
         var begin, end;
-
+        // var currentTimeView = blockClass
         // Specially label center slot to display its information
         if (centerCount === that.state.middle+1){
           date = moment(reservation.date).format('MMMM Do YYYY');
@@ -273,13 +277,47 @@ var Availability = React.createClass({
             }
           }
           return(
+
             <div className={blockClass} key={reservation.id}><p>{begin}-{end}</p></div>
           )
         // Regularly label all slots but center
         } else {
-          return(
-            <div className={blockClass} key={reservation.id}></div>
-          )
+          if ( parseInt(reservation.slot_id, 10) % 2 === 1 ){
+            var splitHour = "timeblock splitHour";
+            var hoverStart = slotProps[reservation.slot_id-1].start;
+            hoverStart = moment('12-25-1995 '+hoverStart).format('MM-DD-YYYY ha');
+            // console.log('hoverStart: ', hoverStart)
+            if (hoverStart[12] === '0'){
+              hoverStart = hoverStart.slice(12);
+              if (hoverStart = '0am'){
+                hoverStart = '10am';
+              }
+            } else {
+              hoverStart = hoverStart.slice(11);
+            }
+            // console.log(hoverStart)
+            // hoverStart = moment(hoverStart).format('h');
+            // console.log('hoverStart: ', hoverStart);
+            // var timeClass = blockClass+' hoverTime';
+              // <div>
+              // <div className="hoverTime"><p>{hoverStart}</p></div>
+              // <div>
+            return(
+              <div className={splitHour}>
+              <div className="barView"><p className="barViewText">{hoverStart}</p></div>
+              <div className={blockClass} key={reservation.id}></div>
+              </div>
+            )
+          } else {
+            return(
+              <div className="timeblock">
+              <div className="barViewBack"></div>
+              <div className={blockClass} key={reservation.id}></div>
+              </div>
+
+            )
+          }
+
         }
       });
 
