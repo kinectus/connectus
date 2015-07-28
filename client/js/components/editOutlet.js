@@ -1,21 +1,18 @@
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var Alert = require('react-bootstrap').Alert;
-
-/* TODO
-Style page
-Change state and voltage to dropdown
-
-*/
+var Link = require('react-router').Link;
+var Router = require('react-router');
 
 var editOutlet = React.createClass({
   getInitialState: function(){
    return {
       data: [],
-      alert: false
+      alert: false,
+      alertType: 'alertOrNot'
     }
   },
-  // mixins: [Router.Navigation],
+  mixins: [Router.Navigation],
 
   componentDidMount: function() {
     var that = this;
@@ -67,14 +64,15 @@ var editOutlet = React.createClass({
       }
     }
     console.log('same? ', same);
-
+    var that =this;
     outletStore.editOutlet(newOutlet).then(function(res){
+      that.setState({alertType: 'updatedAlert'});//confirmation versus update
       console.log('editOutlet submit response: ', res)
     });
     
     // POPUP confirmation: updated
     // redirect to their outlet list
-
+    //alert can be one of two alerts - check the state to see which one it should be
   },
 
   confirm: function(e){
@@ -87,6 +85,11 @@ var editOutlet = React.createClass({
     this.setState({alert: false});
   },
 
+  newEdits: function(e){
+    e.preventDefault();
+    this.setState({alertType: 'alertOrNot', alert: false});
+  },
+
   render: function(){
     // is user authenticated
     if(!document.cookie){
@@ -97,6 +100,28 @@ var editOutlet = React.createClass({
       var outlet = this.state.outlet;
       var hidden = !this.state.alert ? "hidden" : "notHidden";
       var buttonHid = !this.state.alert ? "notHidden btn btn-primary btn-lg btn-block" : "hidden btn btn-primary btn-lg btn-block";
+      var alertOrNot = (<Alert className={hidden} bsStyle="info" onDismiss={this.handleAlertDismiss}>
+        <h4 className="text-center">Update information on {outlet.name}?</h4>
+        <div className="text-center">
+          <button type="submit" className="btn btn-default confirming">Update</button>
+          <button onClick={this.hideMe} className="btn btn-default confirming">Cancel</button>
+        </div>
+      </Alert>);
+      var updatedAlert = (<Alert bsStyle="info" onDismiss={this.handleAlertDismiss}>
+        <div className="text-center">
+          <h4>Your udpate has been submitted</h4>
+          <button className="btn btn-default confirming"><Link to="/manageOutlets"> Go to your outlets </Link></button>
+          <button onClick={this.newEdits} className="btn btn-default confirming">Make More Edits</button>
+        </div>
+      </Alert>);
+      var alert;
+
+      if(this.state.alertType === 'alertOrNot'){
+        alert = {alertOrNot};
+      }else{
+        alert = {updatedAlert};
+      }
+
       return (
         <div className="editOutlet col-md-6 col-md-offset-3">
           <h3>Add an outlet:</h3>
@@ -139,13 +164,7 @@ var editOutlet = React.createClass({
               <label>Your price/kWh charge: </label><br />
               <input type="text" name="charge" ref="charge" className="form-control" defaultValue={outlet.priceEnergy} />/kWh<br />
             </div>
-            <Alert className={hidden} bsStyle="info" onDismiss={this.handleAlertDismiss}>
-              <h4 className="text-center">Update information on {outlet.name}?</h4>
-              <div className="text-center">
-                <button type="submit" className="btn btn-default confirming">Update</button>
-                <button onClick={this.hideMe} className="btn btn-default confirming">Cancel</button>
-              </div>
-            </Alert>
+            {alert}
             <button className={buttonHid} onClick={this.confirm} >Submit</button>
           </form>
         </div>
