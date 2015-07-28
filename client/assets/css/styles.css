@@ -111,7 +111,7 @@ a:focus {
   animation-name: header-animation;
   animation-duration: 1s;
   animation-timing-function: ease;
-  animation-delay: 1.5s;
+  animation-delay: .8s;
   animation-fill-mode: forwards;
 }
 .header-about .banner {
@@ -123,7 +123,25 @@ a:focus {
   animation-name: banner-animation;
   animation-duration: 1s;
   animation-timing-function: ease;
+  animation-delay: .4s;
+  animation-fill-mode: forwards;
+}
+.header-about .banner .charge-anything {
+  opacity: 0;
+  animation-name: header-animation;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-delay: 1.3s;
+  animation-fill-mode: forwards;
+}
+.header-about .banner .anywhere {
+  opacity: 0;
+  color: #f9a92a;
   animation-delay: 1s;
+  animation-name: header-animation;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-delay: 2s;
   animation-fill-mode: forwards;
 }
 .addoutlet {
@@ -148,7 +166,12 @@ a:focus {
   background-color: #FFFFFF;
 }
 .about .howitworks {
-  background-color: #159594;
+  background-color: #f9a92a;
+}
+.about .howitworks .column-headers {
+  color: white;
+  margin-top: 20px;
+  text-align: center;
 }
 .about .energyInfo {
   background-color: #8b1c55;
