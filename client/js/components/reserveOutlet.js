@@ -8,6 +8,7 @@ var ReactAddons = require('react/addons');
 var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
 
 var DateTimePicker = require('react-widgets').DateTimePicker;
+var Alert = require('react-bootstrap').Alert;
 var moment = require('moment');
 var Router = require('react-router'); //need this for redirection
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup; //modal transitioning
@@ -44,10 +45,44 @@ var Map = React.createClass({
 
 var DateTime = React.createClass({
   getInitialState: function(){
-    return {
-      refresh: true
-    };
+   return {
+      message: null,
+      alert: false,
+      success: false,
+      loaded: false
+    }
   },
+
+  componentDidMount: function(){
+    this.setState({loaded: true});
+  },
+
+  show: function(e){
+    if (e){
+      e.preventDefault();
+      this.setState({alert: true});
+    }
+  },
+
+  hideMe: function(e){
+    this.setState({alert: false});
+  },
+
+  success: function(e){
+    if (e){
+      e.preventDefault();
+      this.setState({success: true});
+    }    
+  },
+
+  closeMe: function(e){
+    if (e){
+      e.preventDefault();
+      // this.setState({success: false});
+      location.reload();
+    }
+  },
+
   handleSubmit: function(event) {
     event.preventDefault();
     var timeConvert = function(time){
@@ -78,17 +113,27 @@ var DateTime = React.createClass({
         time: endTimeString
       }
     }
-    outletStore.submitReservation(newReservation).then(function(res){
-      location.reload();
-      return res;
-      //NEED TO CALL THIS.OPENMODAL HERE
-      location.reload();
-      // console.log('submitReservation, response', res)
-    });
+
+    // Validate input dates
+    if ( moment().diff(moment(start)) > 0 ){
+      var message = 'Please choose reservation after '+moment().format('MMMM Do YYYY hh:mma');
+      this.setState({'message': message, 'alert': true});
+    } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) > 0 ) {
+      message = 'Please schedule the end of your reservation after the start';
+      this.setState({'message': message, 'alert': true});
+    } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) < 0 ) {
+      var that = this;
+      outletStore.submitReservation(newReservation).then(function(res){
+        message = 'Reservation complete';
+        that.setState({'message': message, 'success': true});
+      });
+    }
   },
 
   render: function() {
     var that = this;
+    var hidden = !this.state.alert ? "hidden" : "notHidden centering";
+    var successful = !this.state.success ? "hidden" : "notHidden centering";
 
     // Format default date to be closest upcoming time at 30-minute interval
     var firstDate = new Date();
@@ -101,7 +146,13 @@ var DateTime = React.createClass({
     }
 
     return (
-      <div>
+      <div className="holder">
+        <Alert bsStyle='warning' className={hidden} onDismiss={this.hideMe} dismissAfter={2000}>
+            <strong>{this.state.message}</strong>
+        </Alert>
+        <Alert bsStyle='success' className={successful} onDismiss={this.closeMe} dismissAfter={2000}>
+            <strong>{this.state.message}</strong>
+        </Alert>
         <DateTimePicker  ref="startTime" defaultValue={firstDate} />
         <DateTimePicker  ref="endTime" defaultValue={null} />
         <div className="btn btn-default" onClick={that.handleSubmit}>Reserve Outlet</div>
@@ -178,7 +229,7 @@ var Availability = React.createClass({
       this.setState({end: 9, middle: 4});
     } else if (window.innerWidth<674){
       this.setState({end: 13, middle: 6});
-    } else if (window.innerWidth<844){
+    } else if (window.innerWidth<994){
       this.setState({end: 17, middle: 8});
     } else if (window.innerWidth<1031){
       this.setState({end: 25, middle: 12});
@@ -313,16 +364,16 @@ var Availability = React.createClass({
               hoverStart = hoverStart.slice(11);
             }
             return(
-              <div className={splitHour}>
+              <div className={splitHour} key={reservation.id}>
               <div className="barView"><p className="barViewText">{hoverStart}</p></div>
-              <div className={blockClass} key={reservation.id}></div>
+              <div className={blockClass}></div>
               </div>
             )
           } else {
             return(
-              <div className="timeblock">
+              <div className="timeblock" key={reservation.id}>
               <div className="barViewBack"></div>
-              <div className={blockClass} key={reservation.id}></div>
+              <div className={blockClass}></div>
               </div>
 
             )
@@ -385,7 +436,7 @@ var Viewer = React.createClass({
   // Render buttons, pass states to Availability
   render: function(){
     return (
-      <div className="timeblock holder">
+      <div className="timeblock holder centering">
         <div className="centering">
           <Availability move={this.state.move} mouseDown={this.state.mouseDown} forward={this.state.forward} outletID = {this.props.outletID}/>
         </div>
@@ -397,26 +448,7 @@ var Viewer = React.createClass({
     )
   }
 });
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-  //SUCCESS MODAL
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-var Modal = React.createClass({
-  render: function(){
-    if(this.props.isOpen){
-      return (
-        <ReactCSSTransitionGroup transitionName={this.props.transitionName}>
-          <div className="modal">
-            <h1>this issupposed to be the modal</h1>
-          </div>
-        </ReactCSSTransitionGroup>
-      );
-    }else{
-     return (<h1>at least modal is returning something</h1>);
-    }
-  }
-});
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
   //RESERVE OUTLET
@@ -426,20 +458,10 @@ var Modal = React.createClass({
 var reserveOutlet = React.createClass({
   getInitialState: function(){
    return {
-      data: [],
-      isModalOpen: false
+      data: []
     }
   },
   mixins: [Router.Navigation],
-  
-  openModal: function(){
-    this.setState({isModalOpen: true});
-  },
-
-  closeModal: function(){
-    this.setState({isModalOpen: false});
-    location.reload();
-  },
   
   // is onchange necessary?????
   // _onChange: function() {

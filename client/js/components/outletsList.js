@@ -20,18 +20,16 @@ var outletsList = React.createClass({
   componentDidMount: function() {
     var that = this;
     outletStore.getOutlets().then(function(outletData){
-        outletData.map(function(outlet){
-          userStore.getUsernameById(outlet.id).then(function(user){
-            console.log(user.username)
-            outlet['seller'] = user.username;
-            that.setState({data: outletData});
-          })
-        })
+      outletData.map(function(outlet){
+        userStore.getUsernameById(outlet.seller_id).then(function(user){
+          outlet['seller'] = user.fullname;
+          that.setState({data: outletData});
+        });
+      });
     });
   },
 
   render: function() {
-
     // is the user authenticated?
     if(!document.cookie){
       this.transitionTo('login');
