@@ -45,15 +45,11 @@ var Map = React.createClass({
 
 var DateTime = React.createClass({
   getInitialState: function(){
-<<<<<<< HEAD
-    return {
-      refresh: true
-    };
-  },
-=======
    return {
       message: null,
-      alert: false
+      alert: false,
+      success: false,
+      refresh: true
     }
   },
 
@@ -67,7 +63,16 @@ var DateTime = React.createClass({
     this.setState({alert: false});
   },
 
->>>>>>> (Reserve Outlet) Show warning to select valid start and end to reservation
+  success: function(e){
+    e.preventDefault();
+    this.setState({success: true});
+  },
+
+  close: function(e){
+    e.preventDefault();
+    this.setState({success: false});
+  },
+
   handleSubmit: function(event) {
     event.preventDefault();
     var timeConvert = function(time){
@@ -112,7 +117,7 @@ var DateTime = React.createClass({
       var that = this;
       outletStore.submitReservation(newReservation).then(function(res){
         message = 'Reservation complete';
-        that.setState({'message': message});
+        that.setState({'message': message, 'success': true});
         console.log(that.state.message);
         location.reload();
         return res;
@@ -126,6 +131,7 @@ var DateTime = React.createClass({
   render: function() {
     var that = this;
     var hidden = !this.state.alert ? "hidden" : "notHidden centering";
+    var success = !this.state.success ? "hidden" : "notHidden centering";
 
     // Format default date to be closest upcoming time at 30-minute interval
     var firstDate = new Date();
@@ -140,6 +146,9 @@ var DateTime = React.createClass({
     return (
       <div className="holder">
         <Alert bsStyle='warning' className={hidden} onDismiss={this.hideMe} dismissAfter={2000}>
+            <strong>{this.state.message}</strong>
+        </Alert>
+        <Alert bsStyle='success' className={success} onDismiss={this.close} dismissAfter={2000}>
             <strong>{this.state.message}</strong>
         </Alert>
         <DateTimePicker  ref="startTime" defaultValue={firstDate} />
