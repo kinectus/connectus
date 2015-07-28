@@ -50,8 +50,8 @@ db.schema.hasTable('outlets').then(function(exists){
       outlet.integer('transaction_id', 30);
       outlet.decimal('priceEnergy', 5, 2).notNullable();
       outlet.decimal('priceHourly', 5, 2).notNullable();
-      outlet.float('lat').notNullable();
-      outlet.float('long').notNullable();
+      outlet.decimal('lat', 8, 5).notNullable();
+      outlet.decimal('long', 8, 5).notNullable();
       outlet.string('description', 300).notNullable();
       outlet.decimal('priceSuggest', 5, 2).notNullable();
       // outlet.string('photo'); --store the path to a directory, not the photo (worstcase, longblob)
