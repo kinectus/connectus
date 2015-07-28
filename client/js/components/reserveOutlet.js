@@ -264,23 +264,18 @@ var Availability = React.createClass({
           date = moment(reservation.date).format('MMMM Do YYYY');
           for (var j=0; j<slotProps.length; j++){
             if (slotProps[j].id === reservation.slot_id){
+              var endSub = slotProps[j].end === '24:00' ? '00:00' : slotProps[j].end
               begin = moment('12-25-1995 '+slotProps[j].start).format('MM-DD-YYYY h:mma');
-              end = moment('12-25-1995 '+slotProps[j].end).format('MM-DD-YYYY h:mma');
+              end = moment('12-25-1995 '+endSub).format('MM-DD-YYYY h:mma');
               // Format begin time
               if (begin[12] === '0' && end[11]!== '1'){
                 begin = begin.slice(12);
-                // if (begin = '0am'){
-                //   begin = '10am';
-                // }
               } else {
                 begin = begin.slice(11);
               }
               // Format end time
               if (end[12] === '0' && end[11]!== '1'){
                 end = end.slice(12);
-                // if (end = '0am'){
-                //   end = '10am';
-                // }
               } else {
                 end = end.slice(11);
               }
