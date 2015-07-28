@@ -18,6 +18,9 @@ var shell = require('shelljs'),
 
 var app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+
     // watch = require('node-watch'); If necessary, can be used to execute function on file change
 
 // Total wattage since start
@@ -54,7 +57,8 @@ var getWatts = function(string){
   var data = {
     avgWatts: watts,
     kwh: kwh,
-    totalKwh: totalKwh
+    totalKwh: totalKwh,
+    clientData: clientData
   };
   postDataToConnectus(data);
 };
@@ -115,8 +119,12 @@ var execute = function(command){
 };
 // Runs execute every 10s
 
-app.post('/api/on', function(req,res) {
+var clientData;
+
+app.post('/api/on', function(req, res) {
   shell.exec('hacklet on -n 0x2777 -s 0');
+  console.log('in the app.post ON handler with req.body: ', req.body);
+  clientData = req.body;
   setInterval(execute, 10000, 'hacklet read -n 0x2777 -s 0 >> data.txt | cat');
 
 });

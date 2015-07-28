@@ -1,5 +1,6 @@
 var app = require('./config/middleware');
 
+var setRealtimeData= require('./config/db/queries/setRealtimeTransactionData');
 var port = process.env.PORT || 3000;
 // var db = require('./db/config.js');
 
