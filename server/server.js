@@ -14,7 +14,7 @@ io.on('connection', function(socket){
 })
 
 app.post('/realtimeData', function(req, res){
-  console.log('in the realtimeData post', req.body.reservation)
+  console.log('in the realtimeData post', req.body)
   mySocket.emit('energy', req.body)
 })
 

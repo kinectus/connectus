@@ -44,8 +44,8 @@ var buyerReservations = React.createClass({
   },
 
   turnOn: function(transaction) {
-    outletServices.turnOutletOn(transaction);
-
+    outletServices.turnOutletOn(transaction)
+    .then(this.updateData); //streams data from power server
   },
 
   // moved to set current transaction
@@ -132,9 +132,9 @@ var ActiveTransaction = React.createClass({
     };
   },
 
-  componentDidMount: function(){
-    this.updateData();
-  },
+  // componentDidMount: function(){
+  //   this.updateData();
+  // },
 
   updateData: function() {
     var that = this;

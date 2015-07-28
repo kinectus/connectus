@@ -1,4 +1,4 @@
-// Hardware ID and network ID: 0xc528100000584f80 on network 0x2777
+-// Hardware ID and network ID: 0xc528100000584f80 on network 0x2777
 // ^These are always the same
 
 // I, [2015-07-13T20:06:15.137579 #84220]  INFO -- : 45w at 2015-07-13 20:06:01 -0700
@@ -7,28 +7,50 @@
 var shell = require('shelljs'),
     make = require('shelljs/make'),
     fs = require('fs');
+    app = require('./powerServer.js');
+    rp = require('request-promise');
+
+
     // watch = require('node-watch'); If necessary, can be used to execute function on file change
 
 // Total wattage since start
-var total = 0;
+var totalKwh = 0;
 // Total is a test variable to show live data manipulation updates, in the future
 // we'd want to either send updates with socket.io that are handled elsewhere or
 // update some object on this end and send it periodically
 
 // Grab wattage information from string
 // It is used as the callback in the function readLines
+var postDataToConnectus = function(data) {
+  var options = {
+    method: 'POST',
+    uri: 'http://localhost:3000/api/realtimeData',
+    body: energy,
+    json: true
+  };
+  rp(options);
+};
 var getWatts = function(string){
   var start = string.indexOf(': ')+2;
   var end = string.indexOf('w');
   var watts = string.slice(start, end);
   watts = parseInt(watts);
+  kwh = watts/1000/(60*60) * 10;
   if (end > 0){
-    total += watts;
+    totalKwh += watts;
   }
   // console.log('string: ', string, ' total: ', total, ' start: ', start, ' end: ', end, ' watts: ', watts);
   console.log('total: ', total); // logs to server
   cbDone = true;
-}
+  var data = {
+    avgWatts: watts,
+    kwh: kwh,
+    totalKwh: totalKwh
+  };
+  postDataToConnectus(data);
+};
+
+
 
 // If asynchronous issues arise, cbDone could be used to wait to execute a task
 var cbDone = false;
@@ -82,9 +104,16 @@ var execute = function(command){
   input = fs.createReadStream('data.txt', 'utf8');
   readLines(input, getWatts);
 };
-
 // Runs execute every 10s
 setInterval(execute, 10000, 'hacklet read -n 0x2777 -s 0 >> data.txt | cat');
+app.post('/api/on', function(req,res) {
+  shell.exec('hacklet on -n 0x2777 -s 0');
+});
+
+app.post('/api/off', function(req,res) {
+  shell.exec('hacklet off -n 0x2777 -s 0')
+});
+
 
 /*
 Command to turn top socket on or off using ShellJS
