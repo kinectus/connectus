@@ -164,7 +164,7 @@ a:focus {
     animation-name: header-animation;
     animation-duration: 1s;
     animation-timing-function: ease;
-    animation-delay: 1.5s;
+    animation-delay: .8s;
     animation-fill-mode: forwards;
   }
   .banner{
@@ -176,8 +176,26 @@ a:focus {
     animation-name: banner-animation;
     animation-duration: 1s;
     animation-timing-function: ease;
-    animation-delay: 1s;
+    animation-delay: .4s;
     animation-fill-mode: forwards;
+    .charge-anything{
+      opacity: 0;
+      animation-name: header-animation;
+      animation-duration: 1s;
+      animation-timing-function: ease;
+      animation-delay: 1.3s;
+      animation-fill-mode: forwards;
+    }
+    .anywhere {
+      opacity: 0;
+      color: @orangemed;
+      animation-delay: 1s;
+      animation-name: header-animation;
+      animation-duration: 1s;
+      animation-timing-function: ease;
+      animation-delay: 2s;
+      animation-fill-mode: forwards;
+    }
   }
 }
 
@@ -205,7 +223,12 @@ a:focus {
     background-color: #FFFFFF;
   }
   .howitworks{
-    background-color: @turquoise;
+    background-color: @orangemed;
+    .column-headers {
+      color: white;
+      margin-top: 20px;
+      text-align: center;
+    }
   }
   .energyInfo{
     background-color: @maroon;

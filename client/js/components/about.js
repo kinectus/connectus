@@ -14,12 +14,23 @@ var About = React.createClass({
   	  <div className="about">
         <div className="header-about">
           <div className="header-text">
-            <div className="banner"><span>Charge anything anywhere.</span></div>
+            <div className="banner"><span className="charge-anything">Charge anything</span> <span className="anywhere">anywhere.</span></div>
           </div>
         </div>
           <div className="section howitworks">
-		          <h1>How does Connectus work?</h1>
-			        <h2>Diagram of our process</h2>
+            <div className="container">
+  	          <div className='row'>
+                <div className="col-md-4">
+                  <h3><span className="column-headers">Sell your electricity.</span></h3>
+                </div>
+                <div className="col-md-4">
+                  <h3><span className="column-headers">Find power near you.</span></h3>
+                </div>
+                <div className="col-md-4">
+                  <h3><span className="column-headers">Keep it green.</span></h3>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="section energyInfo">
 		          <h1>What energy looks like today</h1>
