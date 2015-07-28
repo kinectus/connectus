@@ -24,12 +24,12 @@ var outletsList = React.createClass({
         userStore.getUsernameById(outlet.seller_id).then(function(user){
           outlet['seller'] = user.fullname;
           that.setState({data: outletData});
+        });
       });
     });
   },
 
   render: function() {
-
     // is the user authenticated?
     if(!document.cookie){
       this.transitionTo('login');

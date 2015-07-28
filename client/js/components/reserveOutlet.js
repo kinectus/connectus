@@ -49,28 +49,38 @@ var DateTime = React.createClass({
       message: null,
       alert: false,
       success: false,
-      refresh: true
+      loaded: false
     }
   },
 
+  componentDidMount: function(){
+    this.setState({loaded: true});
+  },
+
   show: function(e){
-    e.preventDefault();
-    this.setState({alert: true});
+    if (e){
+      e.preventDefault();
+      this.setState({alert: true});
+    }
   },
 
   hideMe: function(e){
-    e.preventDefault();
     this.setState({alert: false});
   },
 
   success: function(e){
-    e.preventDefault();
-    this.setState({success: true});
+    if (e){
+      e.preventDefault();
+      this.setState({success: true});
+    }    
   },
 
-  close: function(e){
-    e.preventDefault();
-    this.setState({success: false});
+  closeMe: function(e){
+    if (e){
+      e.preventDefault();
+      // this.setState({success: false});
+      location.reload();
+    }
   },
 
   handleSubmit: function(event) {
@@ -116,11 +126,6 @@ var DateTime = React.createClass({
       outletStore.submitReservation(newReservation).then(function(res){
         message = 'Reservation complete';
         that.setState({'message': message, 'success': true});
-        location.reload();
-        return res;
-        //NEED TO CALL THIS.OPENMODAL HERE
-        location.reload();
-        // console.log('submitReservation, response', res)
       });
     }
   },
@@ -128,7 +133,7 @@ var DateTime = React.createClass({
   render: function() {
     var that = this;
     var hidden = !this.state.alert ? "hidden" : "notHidden centering";
-    var success = !this.state.success ? "hidden" : "notHidden centering";
+    var successful = !this.state.success ? "hidden" : "notHidden centering";
 
     // Format default date to be closest upcoming time at 30-minute interval
     var firstDate = new Date();
@@ -145,7 +150,7 @@ var DateTime = React.createClass({
         <Alert bsStyle='warning' className={hidden} onDismiss={this.hideMe} dismissAfter={2000}>
             <strong>{this.state.message}</strong>
         </Alert>
-        <Alert bsStyle='success' className={success} onDismiss={this.close} dismissAfter={2000}>
+        <Alert bsStyle='success' className={successful} onDismiss={this.closeMe} dismissAfter={2000}>
             <strong>{this.state.message}</strong>
         </Alert>
         <DateTimePicker  ref="startTime" defaultValue={firstDate} />
@@ -443,26 +448,7 @@ var Viewer = React.createClass({
     )
   }
 });
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-  //SUCCESS MODAL
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-var Modal = React.createClass({
-  render: function(){
-    if(this.props.isOpen){
-      return (
-        <ReactCSSTransitionGroup transitionName={this.props.transitionName}>
-          <div className="modal">
-            <h1>this issupposed to be the modal</h1>
-          </div>
-        </ReactCSSTransitionGroup>
-      );
-    }else{
-     return (<h1>at least modal is returning something</h1>);
-    }
-  }
-});
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
   //RESERVE OUTLET
@@ -472,20 +458,10 @@ var Modal = React.createClass({
 var reserveOutlet = React.createClass({
   getInitialState: function(){
    return {
-      data: [],
-      isModalOpen: false
+      data: []
     }
   },
   mixins: [Router.Navigation],
-  
-  openModal: function(){
-    this.setState({isModalOpen: true});
-  },
-
-  closeModal: function(){
-    this.setState({isModalOpen: false});
-    location.reload();
-  },
   
   // is onchange necessary?????
   // _onChange: function() {
