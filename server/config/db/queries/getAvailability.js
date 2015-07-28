@@ -1,37 +1,19 @@
 var Outlet = require('../../../outlets/outlet.model');
 var Reservation = require('../../../reservations/reservation.model');
+var db = require('../config.js');
 
 module.exports = getAvailability = function(req, res){
   var id = req.body.outletID;
-  // return new Outlet()
-  //   .query({where: {id: id} })
-  //   .fetch()
-  //   .then(function(outlet){
-  //     console.log('outlet found: ', outlet)
-  //   })
-
   return new Reservation()
-    .query({where: {outlet_id: id} })
+    .query(function(qb){
+      qb.where('outlet_id', id)
+      qb.where(db.knex.raw("date >= CURDATE()"))
+    })
     .fetchAll()
     .then(function(reservations){
-      // Object.keys(reservations).forEach(function(key){
-      //   console.log('key: ', key, 'available: ', reservations[key].attributes.available,'date: ', reservations[key].attributes.date, ' slotID: ', reservations[key].attributes.slot_id);
-      // });
-      // console.log(reservations.toString().slice(0,100));
       res.send(201, reservations);
     });
 
-  // .then(function(user){
-  //   return user.outlets()
-  //   .fetch();
-  // })
-  // .then(function(outlets){
-  //   console.log(outlets);
-  //   return outlets;
-  // })
-  // .catch(function(error){
-  //   next(error);
-  // });
   console.log('GET AVAILABILITY req.body: ', data, ' req.params: ', req.params);
   // res.send(201, req.body);
 
