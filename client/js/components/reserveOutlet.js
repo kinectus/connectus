@@ -200,12 +200,12 @@ var Availability = React.createClass({
     if (this.props.mouseDown && this.props.forward && this.props.move && this.hasHappened === false){
       this.hasHappened = true;
       this.goForward();
-      this.interval = setInterval(this.goForward, 10);
+      this.interval = setInterval(this.goForward, 30);
     // Move backward event  
     } else if (this.props.mouseDown && !this.props.forward && this.props.move && this.hasHappened === false) {
       this.hasHappened = true;
       this.goBack();
-      this.interval = setInterval(this.goBack, 10);
+      this.interval = setInterval(this.goBack, 30);
     // Stop event  
     } else if (!this.props.mouseDown && !this.props.move && this.hasHappened === false){
       this.hasHappened = true;
@@ -264,23 +264,23 @@ var Availability = React.createClass({
           date = moment(reservation.date).format('MMMM Do YYYY');
           for (var j=0; j<slotProps.length; j++){
             if (slotProps[j].id === reservation.slot_id){
-              begin = moment('12-25-1995 '+slotProps[j].start).format('MM-DD-YYYY ha');
-              end = moment('12-25-1995 '+slotProps[j].end).format('MM-DD-YYYY ha');
+              begin = moment('12-25-1995 '+slotProps[j].start).format('MM-DD-YYYY h:mma');
+              end = moment('12-25-1995 '+slotProps[j].end).format('MM-DD-YYYY h:mma');
               // Format begin time
-              if (begin[12] === '0'){
+              if (begin[12] === '0' && end[11]!== '1'){
                 begin = begin.slice(12);
-                if (begin = '0am'){
-                  begin = '10am';
-                }
+                // if (begin = '0am'){
+                //   begin = '10am';
+                // }
               } else {
                 begin = begin.slice(11);
               }
               // Format end time
-              if (end[12] === '0'){
+              if (end[12] === '0' && end[11]!== '1'){
                 end = end.slice(12);
-                if (end = '0am'){
-                  end = '10am';
-                }
+                // if (end = '0am'){
+                //   end = '10am';
+                // }
               } else {
                 end = end.slice(11);
               }
