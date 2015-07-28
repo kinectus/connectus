@@ -8,6 +8,7 @@ var ReactAddons = require('react/addons');
 var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
 
 var DateTimePicker = require('react-widgets').DateTimePicker;
+var Alert = require('react-bootstrap').Alert;
 var moment = require('moment');
 var Router = require('react-router'); //need this for redirection
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup; //modal transitioning
@@ -44,10 +45,29 @@ var Map = React.createClass({
 
 var DateTime = React.createClass({
   getInitialState: function(){
+<<<<<<< HEAD
     return {
       refresh: true
     };
   },
+=======
+   return {
+      message: null,
+      alert: false
+    }
+  },
+
+  show: function(e){
+    e.preventDefault();
+    this.setState({alert: true});
+  },
+
+  hideMe: function(e){
+    e.preventDefault();
+    this.setState({alert: false});
+  },
+
+>>>>>>> (Reserve Outlet) Show warning to select valid start and end to reservation
   handleSubmit: function(event) {
     event.preventDefault();
     var timeConvert = function(time){
@@ -80,8 +100,20 @@ var DateTime = React.createClass({
     }
 
     // Validate input dates
-    if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) ){
+    if ( moment().diff(moment(start)) > 0 ){
+      var message = 'Please choose reservation after '+moment().format('MMMM Do YYYY hh:mma');
+      this.setState({'message': message, 'alert': true});
+      console.log(this.state.message);
+    } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) > 0 ) {
+      message = 'Please schedule the end of your reservation after the start';
+      this.setState({'message': message, 'alert': true});
+      console.log(this.state.message);
+    } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) < 0 ) {
+      var that = this;
       outletStore.submitReservation(newReservation).then(function(res){
+        message = 'Reservation complete';
+        that.setState({'message': message});
+        console.log(that.state.message);
         location.reload();
         return res;
         //NEED TO CALL THIS.OPENMODAL HERE
@@ -93,6 +125,7 @@ var DateTime = React.createClass({
 
   render: function() {
     var that = this;
+    var hidden = !this.state.alert ? "hidden" : "notHidden centering";
 
     // Format default date to be closest upcoming time at 30-minute interval
     var firstDate = new Date();
@@ -105,7 +138,10 @@ var DateTime = React.createClass({
     }
 
     return (
-      <div>
+      <div className="holder">
+        <Alert bsStyle='warning' className={hidden} onDismiss={this.hideMe} dismissAfter={2000}>
+            <strong>{this.state.message}</strong>
+        </Alert>
         <DateTimePicker  ref="startTime" defaultValue={firstDate} />
         <DateTimePicker  ref="endTime" defaultValue={null} />
         <div className="btn btn-default" onClick={that.handleSubmit}>Reserve Outlet</div>
