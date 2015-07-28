@@ -302,8 +302,23 @@ Reserve an Outlet .holder {
 }
 .off {
   display: inline-block;
+<<<<<<< HEAD
   width: 27px;
   height: 30px;
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+  width: 27px;
+  height: 30px;
+=======
+  width: 20px;
+  height: 25px;
+>>>>>>> some redirects implemented
+=======
+  width: 27px;
+  height: 30px;
+>>>>>>> updating DB with realtime transaction data.
+>>>>>>> updating DB with realtime transaction data.
   background-color: #ff1900;
   border-bottom: 2px solid grey;
   color: white;
@@ -341,6 +356,10 @@ Reserve an Outlet .holder {
   vertical-align: top;
   width: 85px;
   height: 47px;
+<<<<<<< HEAD
+=======
+  line-height: 42px;
+>>>>>>> updating DB with realtime transaction data.
   border: 3px solid white;
   color: white;
   text-align: center;
