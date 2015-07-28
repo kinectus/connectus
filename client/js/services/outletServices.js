@@ -150,7 +150,7 @@ var outletServices = function(){
   }
 
   outletData.makeReservation = function(newReservation){
-    console.log('IN OUTLETSERVICES, makeReservation: ', newReservation);
+    // console.log('IN OUTLETSERVICES, makeReservation: ', newReservation);
     return request({
       url: OutletListConstants.MAKE_RESERVATION,
       method: 'POST',
@@ -159,7 +159,8 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(newReservation),
       success: function(res) {
-        console.dir(res);
+        console.log('--------------------------------> DIANNA IT SUCCEEDED')
+        console.log(res);
       }
     });
   };
