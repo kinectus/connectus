@@ -78,6 +78,11 @@ var DateTime = React.createClass({
         time: endTimeString
       }
     }
+    // Validate input dates
+    console.log(newReservation.start.date, newReservation.start.time)
+    // if (newReservation.start.date){
+
+    // }
     outletStore.submitReservation(newReservation).then(function(res){
       location.reload();
       return res;
@@ -313,16 +318,16 @@ var Availability = React.createClass({
               hoverStart = hoverStart.slice(11);
             }
             return(
-              <div className={splitHour}>
+              <div className={splitHour} key={reservation.id}>
               <div className="barView"><p className="barViewText">{hoverStart}</p></div>
-              <div className={blockClass} key={reservation.id}></div>
+              <div className={blockClass}></div>
               </div>
             )
           } else {
             return(
-              <div className="timeblock">
+              <div className="timeblock" key={reservation.id}>
               <div className="barViewBack"></div>
-              <div className={blockClass} key={reservation.id}></div>
+              <div className={blockClass}></div>
               </div>
 
             )
