@@ -86,9 +86,6 @@ var myOutlets = React.createClass({
                   </Link>
                 </button>
               </td>
-              <td>
-                <button>Reservations</button>
-              </td>
             </tr>
             </div>
           )
@@ -123,8 +120,7 @@ var myOutlets = React.createClass({
                   <Link to="editOutlet" params={{id: outlet.id }}>
                     Edit
                   </Link>
-                </button><br></br>
-                <button>Reservations</button>
+                </button>
               </td>
             </tr>
           )
