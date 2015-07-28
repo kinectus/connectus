@@ -22,9 +22,8 @@ var myOutlets = React.createClass({
     // CHANGE TO GET OUTLETS BY ID
     outletStore.getSellerOutlets().then(function(outletData){
       outletData.map(function(outlet){
-        userStore.getUsernameById(outlet.id).then(function(user){
-          console.log(user.username)
-          outlet['seller'] = user.username;
+        userStore.getUsernameById(outlet.seller_id).then(function(user){
+          outlet['seller'] = user.fullname;
           that.setState({data: outletData});
         });
       });
@@ -53,15 +52,11 @@ var myOutlets = React.createClass({
             <div>
             <tr key={outlet.id} onClick={that.editOutlet}>
               <td>
-                <h2> 
+                <h3> 
                   <Link to="editOutlet" params={{id: outlet.id }}>
                     { outlet.name } 
                   </Link>
-                </h2>
-              </td>
-              <td>
-                <h5>Seller:</h5> 
-                <p className="description-text">{ outlet.seller }</p>
+                </h3>
               </td>
               <td>
                 <h5>Voltage:</h5> 
@@ -86,9 +81,6 @@ var myOutlets = React.createClass({
                   </Link>
                 </button>
               </td>
-              <td>
-                <button>Reservations</button>
-              </td>
             </tr>
             </div>
           )
@@ -98,14 +90,11 @@ var myOutlets = React.createClass({
           return (
             <tr key={outlet.id} onClick={that.editOutlet}>
               <td>
-                <h2> 
+                <h3> 
                   <Link to="editOutlet" params={{id: outlet.id }}>
                     { outlet.name } 
                   </Link>
-                </h2>
-              </td>
-              <td>
-                { outlet.seller }
+                </h3>
               </td>
               <td>
                 { outlet.voltage }
@@ -123,8 +112,7 @@ var myOutlets = React.createClass({
                   <Link to="editOutlet" params={{id: outlet.id }}>
                     Edit
                   </Link>
-                </button><br></br>
-                <button>Reservations</button>
+                </button>
               </td>
             </tr>
           )
@@ -145,7 +133,6 @@ var myOutlets = React.createClass({
         <table className="table table-hover">
           <thead>
             <tr><th className="single line">Outlet Name</th>
-            <th>Seller</th>
             <th>Voltage</th>
             <th>Price</th>
             <th>Description</th>
@@ -170,6 +157,7 @@ var myOutlets = React.createClass({
 
       return (   
         <div className="myOutlets container">
+          <h1>Your Outlets:</h1><br></br>
           {tableHead}
         </div>
 
