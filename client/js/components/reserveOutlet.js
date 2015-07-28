@@ -48,13 +48,8 @@ var DateTime = React.createClass({
    return {
       message: null,
       alert: false,
-      success: false,
-      loaded: false
+      success: false
     }
-  },
-
-  componentDidMount: function(){
-    this.setState({loaded: true});
   },
 
   show: function(e){
