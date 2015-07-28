@@ -108,17 +108,14 @@ var DateTime = React.createClass({
     if ( moment().diff(moment(start)) > 0 ){
       var message = 'Please choose reservation after '+moment().format('MMMM Do YYYY hh:mma');
       this.setState({'message': message, 'alert': true});
-      console.log(this.state.message);
     } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) > 0 ) {
       message = 'Please schedule the end of your reservation after the start';
       this.setState({'message': message, 'alert': true});
-      console.log(this.state.message);
     } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) < 0 ) {
       var that = this;
       outletStore.submitReservation(newReservation).then(function(res){
         message = 'Reservation complete';
         that.setState({'message': message, 'success': true});
-        console.log(that.state.message);
         location.reload();
         return res;
         //NEED TO CALL THIS.OPENMODAL HERE
@@ -227,7 +224,7 @@ var Availability = React.createClass({
       this.setState({end: 9, middle: 4});
     } else if (window.innerWidth<674){
       this.setState({end: 13, middle: 6});
-    } else if (window.innerWidth<844){
+    } else if (window.innerWidth<994){
       this.setState({end: 17, middle: 8});
     } else if (window.innerWidth<1031){
       this.setState({end: 25, middle: 12});
@@ -434,7 +431,7 @@ var Viewer = React.createClass({
   // Render buttons, pass states to Availability
   render: function(){
     return (
-      <div className="timeblock holder">
+      <div className="timeblock holder centering">
         <div className="centering">
           <Availability move={this.state.move} mouseDown={this.state.mouseDown} forward={this.state.forward} outletID = {this.props.outletID}/>
         </div>
