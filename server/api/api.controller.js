@@ -4,7 +4,7 @@ var Outlets = require('../outlets/outlets.collection');
 var User = require('../users/user.model');
 
 var AuthController = require('../auth/auth.controller');
-
+var ServerConstants = require('../constants/ServerConstants');
 var getOutletsByUser = require('../config/db/queries/getOutletsByUserId');
 var addNewOutlet = require('../config/db/queries/addNewOutlet');
 var updateOutlet = require('../config/db/queries/updateOutlet');
@@ -130,7 +130,7 @@ module.exports = {
       method: 'POST',
       body: info,
       json: true,
-      uri: 'http://localhost:3030/api/on'
+      uri: ServerConstants.POWER_SERVER_ON
     }
     return rp(options);
   },
@@ -138,7 +138,7 @@ module.exports = {
   turnOffOutlet: function(req, res){
     var options = {
       method: 'POST',
-      uri: 'http://localhost:3030/api/off'
+      uri: ServerConstants.POWER_SERVER_OFF
     }
     return rp(options);
   }

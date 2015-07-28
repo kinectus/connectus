@@ -180,15 +180,15 @@ var outletServices = function(){
     });
   };
 
-  outletData.turnOutletOn = function(reservation){
-    console.log('reservation info on the client: ', reservation);
+  outletData.turnOutletOn = function(transaction){
+    console.log('transaction info on the client: ', transaction);
     return request({
       url: OutletListConstants.TURNON_OUTLET,
       method: 'POST',
       crossOrigin: true,
       type: 'json',
       contentType: 'application/json',
-      data: JSON.stringify(reservation),
+      data: JSON.stringify(transaction),
       success: function(res) {
         console.log('---------------------------------> SUCCESS, reservation info sent to server.');
         console.dir(res);
@@ -196,16 +196,16 @@ var outletServices = function(){
     });
   }
 
-  outletData.turnOutletOff = function(reservation){
+  outletData.turnOutletOff = function(transaction){
     return request({
       url: OutletListConstants.TURNOFF_OUTLET,
       method: 'POST',
       crossOrigin: true,
       type: 'json',
       contentType: 'application/json',
-      data: JSON.stringify(reservation),
+      data: JSON.stringify(transaction),
       success: function(res) {
-        console.log('---------------------------------> SUCCESS, reservation info sent to server.');
+        console.log('---------------------------------> SUCCESS, transaction info sent to server.');
         console.dir(res);
       }
     });
