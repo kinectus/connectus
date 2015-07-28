@@ -74,22 +74,57 @@ a:focus {
 .nav .open > a:hover {
   background-color: #4e4e4e;
 }
+@keyframes header-animation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes banner-animation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    background-color: #343434;
+  }
+}
 .header-about {
   height: 500px;
   width: 100%;
-  background: url(http://m.wsj.net/video/20150203/020315lunchenergy/020315lunchenergy_1280x720.jpg) top center no-repeat;
+  background: url(http://dcgazette.com/wp-content/uploads/2015/04/Energy.jpg) bottom center no-repeat;
   background-size: cover;
 }
-.header-about .text {
-  padding-top: 210px;
+.header-about .header-text {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  font-size: 40px;
-  color: #d0d8da;
-}
-.header-about .text p {
+  color: white;
+  display: block;
+  position: absolute;
   text-align: center;
+  font-size: 60px;
+  opacity: 0;
+  top: 100px;
+  animation-name: header-animation;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-delay: 1.5s;
+  animation-fill-mode: forwards;
+}
+.header-about .banner {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 20px;
+  height: 100px;
+  animation-name: banner-animation;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
 }
 .addoutlet {
   margin-bottom: 40px;
