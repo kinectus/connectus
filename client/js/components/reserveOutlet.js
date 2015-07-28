@@ -80,14 +80,13 @@ var DateTime = React.createClass({
     }
 
     // Validate input dates
-    if ( moment().diff(moment(start)) < 0 ){
+    if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) ){
       outletStore.submitReservation(newReservation).then(function(res){
         location.reload();
         return res;
         //NEED TO CALL THIS.OPENMODAL HERE
         location.reload();
         // console.log('submitReservation, response', res)
-        console.log('submitted')
       });
     }
   },
