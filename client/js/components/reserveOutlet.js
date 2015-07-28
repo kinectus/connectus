@@ -58,7 +58,6 @@ var DateTime = React.createClass({
     var endDateString = end.getFullYear() + "-" + endMonth + "-" + end.getDate();
     var startTimeString = timeConvert(start.getHours())+":"+timeConvert(start.getMinutes());
     var endTimeString = timeConvert(end.getHours())+":"+timeConvert(end.getMinutes());
-    console.log(startTimeString, endTimeString);
 
     var newReservation = {
       outletID: this.props.outletData.id,
@@ -71,9 +70,7 @@ var DateTime = React.createClass({
         time: endTimeString
       }
     }
-    console.log(newReservation);
     outletStore.submitReservation(newReservation).then(function(res){
-      console.log('submitReservation, response', res)
     });
   },
 
@@ -84,7 +81,6 @@ var DateTime = React.createClass({
     var firstDate = new Date();
     var remainder1 = (30 - firstDate.getMinutes()) % 30;
     var remainder2 = (60 - firstDate.getMinutes()) % 60;
-    console.log('remainder2', remainder2);
     if (remainder1 > 0){
       firstDate = new Date(firstDate.getTime() + remainder1*60000)
     } else if (remainder2 > 0){
@@ -111,7 +107,6 @@ var OutletInfo = React.createClass({
   render: function() {
     // do something with the photo
     var outletPhoto = <div className="outletPhoto"></div>
-    console.log('outletinfo',this.props);
     return (
       <div className="container">
         <div className="row">
@@ -225,7 +220,6 @@ var Availability = React.createClass({
 
   goForward: function() {
     var that = this;
-    console.log('forward');
     if (this.state.end < this.state.reservations.length-1){
       this.setState({ start: this.state.start+1, end: this.state.end+1 });
     }
@@ -233,14 +227,12 @@ var Availability = React.createClass({
 
   goBack: function() {
     var that = this;
-    console.log('back');
     if (this.state.start > 0){
       this.setState({ start: this.state.start-1, end: this.state.end-1 });
     }
   },
 
   stop: function() {
-    console.log('ENDING INTERVAL');
     clearInterval(this.interval);
   },
 
@@ -272,8 +264,26 @@ var Availability = React.createClass({
           date = moment(reservation.date).format('MMMM Do YYYY');
           for (var j=0; j<slotProps.length; j++){
             if (slotProps[j].id === reservation.slot_id){
-              begin = slotProps[j].start;
-              end = slotProps[j].end;
+              begin = moment('12-25-1995 '+slotProps[j].start).format('MM-DD-YYYY ha');
+              end = moment('12-25-1995 '+slotProps[j].end).format('MM-DD-YYYY ha');
+              // Format begin time
+              if (begin[12] === '0'){
+                begin = begin.slice(12);
+                if (begin = '0am'){
+                  begin = '10am';
+                }
+              } else {
+                begin = begin.slice(11);
+              }
+              // Format end time
+              if (end[12] === '0'){
+                end = end.slice(12);
+                if (end = '0am'){
+                  end = '10am';
+                }
+              } else {
+                end = end.slice(11);
+              }
             }
           }
           return(
@@ -286,7 +296,6 @@ var Availability = React.createClass({
             var splitHour = "timeblock splitHour";
             var hoverStart = slotProps[reservation.slot_id-1].start;
             hoverStart = moment('12-25-1995 '+hoverStart).format('MM-DD-YYYY ha');
-            // console.log('hoverStart: ', hoverStart)
             if (hoverStart[12] === '0'){
               hoverStart = hoverStart.slice(12);
               if (hoverStart = '0am'){
@@ -295,13 +304,6 @@ var Availability = React.createClass({
             } else {
               hoverStart = hoverStart.slice(11);
             }
-            // console.log(hoverStart)
-            // hoverStart = moment(hoverStart).format('h');
-            // console.log('hoverStart: ', hoverStart);
-            // var timeClass = blockClass+' hoverTime';
-              // <div>
-              // <div className="hoverTime"><p>{hoverStart}</p></div>
-              // <div>
             return(
               <div className={splitHour}>
               <div className="barView"><p className="barViewText">{hoverStart}</p></div>
@@ -320,9 +322,6 @@ var Availability = React.createClass({
 
         }
       });
-
-    // } else if (this.state.reservations.length > 0 && this.state.timeSlots.length>0){
-      // console.log('too small!');
 
 
     // Fallback before API call is complete
@@ -357,7 +356,6 @@ var Viewer = React.createClass({
 
   // On forward mouse hold
   mouseDownForward: function(){
-    console.log('DOWN')
     this.setState({mouseDown: true});
     this.setState({forward: true});
     this.setState({move: true});
@@ -365,7 +363,6 @@ var Viewer = React.createClass({
 
   // On forward mouse hold
   mouseDownBack: function(){
-    console.log('DOWN')
     this.setState({mouseDown: true});
     this.setState({forward: false});
     this.setState({move: true});
@@ -373,7 +370,6 @@ var Viewer = React.createClass({
 
   // On forward mouse release
   mouseUp: function(){
-    console.log('UP')
     this.setState({mouseDown: false});
     this.setState({move: false});
   },
@@ -416,8 +412,6 @@ var reserveOutlet = React.createClass({
     var that = this;
     var outletID = this.props.params.id
     outletStore.getOutletById(outletID).then(function(outlet){
-      // setState automatically forces a re-render
-      // console.log('outlet',outlet);
       that.setState({data: outlet});
     });
   },
