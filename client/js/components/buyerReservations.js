@@ -13,17 +13,17 @@ var buyerReservations = React.createClass({
 
   getInitialState: function(){
     return {
-      data: [],
-      realtime: {
-        totalKwh: 0,
-        watts: 0,
-        clientData: {
-          outlet: {
-            priceEnergy: 0,
-            priceHourly: 0
-          }
-        }
-      }
+      data: []
+    //   realtime: {
+    //     totalKwh: 0,
+    //     watts: 0,
+    //     clientData: {
+    //       outlet: {
+    //         priceEnergy: 0,
+    //         priceHourly: 0
+    //       }
+    //     }
+    //   }
     }
   },
 
@@ -64,11 +64,12 @@ var buyerReservations = React.createClass({
     var transactionId = transaction.id+'';
     socket.on(transactionId, function (data) {
       console.log("got energy!", data);
-
-      var totalCost = Math.round( (data.totalKwh * data.clientData.outlet.priceEnergy  +  data.clientData.outlet.priceHourly/(60*60)*10 *1000 )/1000 * 1000) / 1000  ;
-      var avgWatts = Math.round ( data.avgWatts *10)/10;
+      var pricePerKwh = data.totalKwh * data.clientData.outlet.priceEnergy;
+      var hourlyPrice = data.clientData.outlet.priceHourly/(60*60)*10;
+      var totalCost = (pricePerKwh+hourlyPrice).toFixed(3);
+      var avgWatts = (data.avgWatts).toFixed(0);
       var targetClass = '.'+transactionId;
-      $(targetClass).find('.totalKwh').text(data.totalKwh);
+      $(targetClass).find('.totalKwh').text(data.totalKwh.toFixed(3));
       $(targetClass).find('.total').text(totalCost);
       $(targetClass).find('.watts').text(avgWatts);
 
@@ -121,9 +122,11 @@ var buyerReservations = React.createClass({
               <div className="btn" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
             </td>
             <td className={transaction.id}>
-              <p>Total kWh</p><span className="totalKwh"></span>
-              <p>Total $</p><span className="total"></span>
-              <p>Watts</p><span className="watts"></span>
+              <div className="realtimeData">
+                <p><span>Total kWh </span><span className="totalKwh"></span></p>
+                <p><span>Total $ </span><span className="total"></span></p>
+                <p><span>Watts </span><span className="watts"></span></p>
+              </div>
             </td>
           </tr>
         )
