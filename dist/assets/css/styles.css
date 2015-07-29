@@ -302,28 +302,8 @@ Reserve an Outlet .holder {
 }
 .off {
   display: inline-block;
-<<<<<<< HEAD
-<<<<<<< HEAD
   width: 27px;
   height: 30px;
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-  width: 27px;
-  height: 30px;
-=======
-  width: 20px;
-  height: 25px;
->>>>>>> some redirects implemented
-=======
-  width: 27px;
-  height: 30px;
->>>>>>> updating DB with realtime transaction data.
->>>>>>> updating DB with realtime transaction data.
-=======
-  width: 27px;
-  height: 30px;
->>>>>>> added power simulator
   background-color: #ff1900;
   border-bottom: 2px solid grey;
   color: white;

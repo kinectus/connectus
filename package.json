@@ -47,6 +47,7 @@
     "gulp-notify": "^2.2.0",
     "gulp-rtlcss": "^0.1.4",
     "immutable": "^3.7.4",
+    "jquery": "^2.1.4",
     "knex": "^0.8.6",
     "map-stream": "0.0.6",
     "microevent": "^1.0.0",
@@ -112,13 +113,15 @@
     "vinyl-source-stream": "^1.1.0",
     "when": "^3.7.3"
   },
-    "browserify": {
-        "transform": [ "browserify-shim" ]
-    },
-    "browserify-shim": {
-        "./js/vendor/jquery.js": "$",
-        "three": "global:THREE"
-      },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "./js/vendor/jquery.js": "$",
+    "three": "global:THREE"
+  },
   "jest": {
     "scriptPreprocessor": "dist/js/preproccessor.js",
     "testFileExtensions": [
