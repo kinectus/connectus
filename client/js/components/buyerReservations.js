@@ -37,7 +37,7 @@ var buyerReservations = React.createClass({
     console.log(transaction)
     var that =this;
     outletStore.setCurrentTransaction({id: transaction.id, currentStatus: true, paid: false}).then(function(transaction){
-      outletServices.turnOutletOff(transaction);
+      // outletServices.turnOutletOff(transaction); //connects with powerServer
       that.transitionTo('paymentsPage');
       return transaction;
     });
@@ -45,15 +45,11 @@ var buyerReservations = React.createClass({
 
   turnOn: function(transaction) {
     outletServices.turnOutletOn(transaction)
-    // .then(this.updateData); streams data from power server
-
+    // .then(this.updateData); //streams data from power server
     // this.updateData();
   },
 
-  // moved to set current transaction
-  // turnOff: function(id) {
-  //   outletServices.turnOutletOff(id);
-  // },
+  //function to turn off powerServer found in setCurrent Transaction
 
   render: function() {
     // is the user authenticated?
@@ -61,8 +57,6 @@ var buyerReservations = React.createClass({
       this.transitionTo('login');
       return <h1></h1>;
     }
-
-
 
     var that = this;
 
@@ -72,7 +66,7 @@ var buyerReservations = React.createClass({
       var transactionRows = this.state.data.map(function(transaction) {
         return (
           <table className='table-hover transaction-rows'>
-            <tr key={ transaction.id } onClick={ that.reserveOutlet } className='regTransRow'>
+            <tr key={ transaction.id } onClick={ that.reserveOutlet } className={moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? 'expired' + ' regTransRow' : 'regTransRow'}>
               <td className='regTrans'>
                 Start: { transaction.startTime.date} - { transaction.startTime.slot.time }
                 <br />

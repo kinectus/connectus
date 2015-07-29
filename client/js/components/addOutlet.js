@@ -68,14 +68,9 @@ var addOutlet = React.createClass({
       long: this.state.long
     };
 
-    console.log(newOutlet);
-    // if (!text || !author) {
-    //   return;
-    // }
+    
     outletStore.submitOutlet(newOutlet).then(function(res){
       that.transitionTo("outletsList");
-      // that.setState({validated:false, validationMessage: 'Please validate your address'});
-      // console.log('ADDOUTLET submit response: ', res)
     });
     
     React.findDOMNode(this.refs.street).value = '';
@@ -86,11 +81,10 @@ var addOutlet = React.createClass({
     React.findDOMNode(this.refs.description).value = '';
     React.findDOMNode(this.refs.voltage).value = '';
     React.findDOMNode(this.refs.charge).value = '';
-    console.log('submitted!')
     return;
   },
   render: function(){
-    var buttonHtml = (<button className="btn btn-warning btn-lg btn-block">Address Validation Needed</button>);
+    var buttonHtml = (<div className="btn btn-warning btn-lg btn-block">Address Validation Needed</div>);
     // is user authenticated
     if(!document.cookie){
       this.transitionTo('login');

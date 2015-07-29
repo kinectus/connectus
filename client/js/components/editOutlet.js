@@ -22,7 +22,7 @@ var editOutlet = React.createClass({
   componentDidMount: function() {
     var that = this;
     var outletID = this.props.params.id;
-    console.log('OUTLET ID: ', outletID)
+
     outletStore.getOutletById(outletID).then(function(outlet){
       that.setState({outlet: outlet});
 
@@ -96,8 +96,7 @@ var editOutlet = React.createClass({
     };
 
     var same = true;
-    console.log('newOutlet: ', newOutlet);
-    console.log('state outlet: ', this.state.outlet)
+
     for (key in newOutlet){
       if (key === 'charge' && newOutlet[key] !== this.state.outlet.priceEnergy.toString()){
         same = false;
@@ -105,11 +104,10 @@ var editOutlet = React.createClass({
         same = false;
       }
     }
-    console.log('same? ', same);
+
     var that =this;
     outletStore.editOutlet(newOutlet).then(function(res){
-      that.setState({alertType: 'updatedAlert'});//confirmation versus update
-      console.log('editOutlet submit response: ', res)
+      that.setState({alertType: 'updatedAlert'});
     });
   },
 
