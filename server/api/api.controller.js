@@ -28,7 +28,7 @@ var io = require('../server.js');
 
 
 var moment = require('moment');
-
+var intervalIds = {};
 module.exports = {
   
   validateAddress: function(req, res){
@@ -127,7 +127,8 @@ module.exports = {
     // if so...
     res.send(200, 'you turn me on!')
     var info = req.body;
-
+    console.log(req.body);
+    var transactionId = info.id
     if(ServerConstants.SIMULATE_POWER) {
       // simulate an appliance's power use
       var totalKwh = 0;
@@ -150,7 +151,8 @@ module.exports = {
         };
         return rp(options);
       };
-      setInterval(getWatts, 3000);
+      var intervalId = setInterval(getWatts, 3000);
+      intervalIds.transactionId = intervalId;
 
     } else {
       var options = {
@@ -161,16 +163,23 @@ module.exports = {
       }
       return rp(options);
     }
-
-    
   },
 
   turnOffOutlet: function(req, res){
-    var options = {
-      method: 'POST',
-      uri: ServerConstants.POWER_SERVER_OFF
+    console.log('-----------------------------------------------------in turn off', req.body);
+    res.status(200).send('you turn me off :( !');
+    var transactionId = req.body.id;
+    if(ServerConstants.SIMULATE_POWER) {
+      // simulate an appliance's power use
+      var intervalId = intervalIds.transactionId;
+      clearInterval(intervalId);
+    } else {
+      var options = {
+        method: 'POST',
+        uri: ServerConstants.POWER_SERVER_OFF
+      }
+      return rp(options);
     }
-    return rp(options);
   }
 
 };
