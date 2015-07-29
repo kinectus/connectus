@@ -7,6 +7,7 @@ var Link = require('react-router').Link;
 var Router = require('react-router'); //need this for redirection
 var outletServices = require('../services/outletServices.js');
 var moment = require('moment');
+var $ = require('jquery');
 
 var buyerReservations = React.createClass({
 
@@ -75,16 +76,21 @@ var buyerReservations = React.createClass({
     // this.updateData();
     var that = this;
     var socket = io.connect(OutletListConstants.BASE_URL);
-    var transactionId = transaction.id;
-    socket.on("energy", function (data) {
+    var transactionId = transaction.id+'';
+    socket.on(transactionId, function (data) {
       console.log("got energy!", data);
-      console.log('state', that.refs[transactionId]);
-      console.log('ref', that.refs[transactionId]);
+
+      var totalCost = Math.round(data.totalKwh * data.clientData.outlet.priceEnergy * 1000)/1000 + Math.round(data.clientData.outlet.priceHourly/(60*60)*10 *1000 )/1000;
+      var avgWatts = Math.round ( data.avgWatts *10)/10;
+      var targetClass = '.'+transactionId;
+      $(targetClass).find('.totalKwh').text(data.totalKwh);
+      $(targetClass).find('.total').text(totalCost);
+      $(targetClass).find('.watts').text(avgWatts);
       // console.log('that.refs[1]);
       // that.refs.pow.setState({realtime: data})
-      that.refs[transactionId].setState({realtime: data})
+      // that.refs[transactionId].setState({realtime: data})
       // that.setState({realtime: data})
-      console.log(that);
+      // console.log(that);
       // $( that.refs[transactionId] ).
     });
   },
@@ -134,10 +140,10 @@ var buyerReservations = React.createClass({
                 <div className="btn" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
               </td>
             </tr>
-            <tr>
-              <td><h4>Total kWh</h4><p ref={transaction.id}>{that.state.realtime.totalKwh}</p></td>
-              <td><h4>Total $</h4><p>{ Math.round(that.state.realtime.totalKwh * that.state.realtime.clientData.outlet.priceEnergy *1000)/1000 + Math.round(that.state.realtime.clientData.outlet.priceHourly/(60*60)*10 *1000 )/1000}</p></td>
-              <td><h4>Watts</h4><p>{ Math.round ( that.state.realtime.avgWatts *10)/10}</p></td>
+            <tr className={transaction.id}>
+              <td><h4>Total kWh</h4><p className="totalKwh"></p></td>
+              <td><h4>Total $</h4><p className="total"></p></td>
+              <td><h4>Watts</h4><p className="watts"></p></td>
             </tr>
           </table>
         )
