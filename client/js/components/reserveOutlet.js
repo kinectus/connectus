@@ -224,16 +224,16 @@ var Availability = React.createClass({
   },
 
   handleResize: function(e) {
-    if (window.innerWidth<469){
-      this.setState({end: 9, middle: 4});
+    if (window.innerWidth<497){
+      this.setState({end: 7, middle: 3});
     } else if (window.innerWidth<674){
-      this.setState({end: 13, middle: 6});
+      this.setState({end: 11, middle: 5});
     } else if (window.innerWidth<994){
+      this.setState({end: 15, middle: 7});
+    } else if (window.innerWidth<1055){
       this.setState({end: 17, middle: 8});
-    } else if (window.innerWidth<1031){
-      this.setState({end: 25, middle: 12});
     } else {
-      this.setState({end: 31, middle: 15});
+      this.setState({end: 25, middle: 12});
     }
   },
 
