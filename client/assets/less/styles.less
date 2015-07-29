@@ -55,8 +55,12 @@ a:focus {
 }
 
 .topNavBar {
+  position: relative;
   background-color: @dark;
   height: 70px;
+  width: 100vw;
+  margin-bottom: 30px;
+  z-index: 2;
   .logo {
     font-size: 30px;
     float: left;
@@ -316,9 +320,11 @@ h1 {
 }
 
 .reservationMap {
+  position: relative;
   width: 100%;
   height: 300px;
   border: 2px solid black;
+  z-index: 1;
 }
 
 .outletPhoto {
