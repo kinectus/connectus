@@ -45,7 +45,10 @@ var buyerReservations = React.createClass({
 
   turnOn: function(transaction) {
     outletServices.turnOutletOn(transaction)
+<<<<<<< HEAD
     // .then(this.updateData); //streams data from power server
+=======
+>>>>>>> added power simulator
     // this.updateData();
   },
 
@@ -124,20 +127,27 @@ var ActiveTransaction = React.createClass({
 
   getInitialState: function(){
     return {
-      data: []
+      data:  {
+        totalKwh: 0,
+        watts: 0,
+        clientData: {
+          outlet: {
+            priceEnergy: 0,
+            priceHourly: 0
+          }
+        }
+      }
     };
   },
 
   componentDidMount: function(){
+    console.log('init state ',this.state);
     this.updateData();
   },
 
   updateData: function() {
     var that = this;
-
-    // var socket = io.connect(OutletListConstants.BASE_URL);
-    var socket = io.connect('http://localhost:3000');
-
+    var socket = io.connect(OutletListConstants.BASE_URL);
     socket.on("energy", function (data) {
       console.log("got energy!", data);
       that.setState({data: data})
@@ -149,9 +159,9 @@ var ActiveTransaction = React.createClass({
 
     return (
       <tr>
-        <td><h4>Total kWh</h4><p>{ this.state.data.totalKwh }</p></td>
-        <td><h4>Total $</h4><p>{ this.state.data.totalKwh * (.3)}</p></td>
-        <td><h4>Watts</h4><p>{ this.state.data.watts }</p></td>
+        <td><h4>Total kWh</h4><p>{ Math.round(this.state.data.totalKwh*1000)/1000 }</p></td>
+        <td><h4>Total $</h4><p>{ Math.round(this.state.data.totalKwh * this.state.data.clientData.outlet.priceEnergy *1000)/1000 + Math.round(this.state.data.clientData.outlet.priceHourly/(60*60)*10 *1000 )/1000}</p></td>
+        <td><h4>Watts</h4><p>{ Math.round ( this.state.data.avgWatts *10)/10}</p></td>
       </tr>
     )
   }

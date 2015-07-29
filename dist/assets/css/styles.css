@@ -166,6 +166,7 @@ a:focus {
 }
 .about .howitworks {
   background-color: #f9a92a;
+<<<<<<< HEAD
   height: 100%;
   margin-bottom: 30px;
 }
@@ -173,6 +174,12 @@ a:focus {
   color: white;
   margin-top: 40px;
   margin-bottom: 20px;
+=======
+}
+.about .howitworks .column-headers {
+  color: white;
+  margin-top: 20px;
+>>>>>>> added power simulator
   text-align: center;
 }
 .about .energyInfo {
