@@ -12,8 +12,30 @@ var buyerReservations = React.createClass({
 
   getInitialState: function(){
     return {
-      data: []
-    };
+      data: [],
+      realtime: {
+        totalKwh: 0,
+        watts: 0,
+        clientData: {
+          outlet: {
+            priceEnergy: 0,
+            priceHourly: 0
+          }
+        }
+      }
+    }
+    // return {
+      // data:  {
+      //   totalKwh: 0,
+      //   watts: 0,
+      //   clientData: {
+      //     outlet: {
+      //       priceEnergy: 0,
+      //       priceHourly: 0
+      //     }
+      //   }
+      // }
+    // };
   },
 
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
@@ -54,11 +76,26 @@ var buyerReservations = React.createClass({
 =======
 >>>>>>> added power simulator
     // this.updateData();
+    var that = this;
+    var socket = io.connect(OutletListConstants.BASE_URL);
+    var transactionId = transaction.id;
+    socket.on("energy", function (data) {
+      console.log("got energy!", data);
+      console.log('state', that.refs[transactionId]);
+      console.log('ref', that.refs[transactionId]);
+      // console.log('that.refs[1]);
+      // that.refs.pow.setState({realtime: data})
+      that.refs[transactionId].setState({realtime: data})
+      // that.setState({realtime: data})
+      console.log(that);
+      // $( that.refs[transactionId] ).
+    });
   },
 
   //function to turn off powerServer found in setCurrent Transaction
 
   render: function() {
+    var power = '';
     // is the user authenticated?
     if(!document.cookie){
       this.transitionTo('login');
@@ -66,9 +103,8 @@ var buyerReservations = React.createClass({
     }
 
     var that = this;
-
-    console.log('STATE.DATA:  ', this.state.data)
-
+    console.log('STATE:  ', this.state)
+    // Math.round(that.state.realtime.totalKwh*1000)/1000 
     if (this.state.data.length !==0) {
       var transactionRows = this.state.data.map(function(transaction) {
         return (
@@ -101,7 +137,11 @@ var buyerReservations = React.createClass({
                 <div className="btn" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
               </td>
             </tr>
-            <ActiveTransaction />
+            <tr>
+              <td><h4>Total kWh</h4><p ref={transaction.id}>{that.state.realtime.totalKwh}</p></td>
+              <td><h4>Total $</h4><p>{ Math.round(that.state.realtime.totalKwh * that.state.realtime.clientData.outlet.priceEnergy *1000)/1000 + Math.round(that.state.realtime.clientData.outlet.priceHourly/(60*60)*10 *1000 )/1000}</p></td>
+              <td><h4>Watts</h4><p>{ Math.round ( that.state.realtime.avgWatts *10)/10}</p></td>
+            </tr>
           </table>
         )
       });
@@ -127,57 +167,47 @@ var buyerReservations = React.createClass({
 
 });
 
-var ActiveTransaction = React.createClass({
+// var ActiveTransaction = React.createClass({
 
-  getInitialState: function(){
-    return {
-      data:  {
-        totalKwh: 0,
-        watts: 0,
-        clientData: {
-          outlet: {
-            priceEnergy: 0,
-            priceHourly: 0
-          }
-        }
-      }
-    };
-  },
+//   getInitialState: function(){
+//     return {
+//       data:  {
+//         totalKwh: 0,
+//         watts: 0,
+//         clientData: {
+//           outlet: {
+//             priceEnergy: 0,
+//             priceHourly: 0
+//           }
+//         }
+//       }
+//     };
+//   },
 
-  componentDidMount: function(){
-    console.log('init state ',this.state);
-    this.updateData();
-  },
+//   componentDidMount: function(){
+//     this.updateData();
+//   },
 
-  updateData: function() {
-    // var context = this.props.context;
-    // var transactionId = this.props.transactionId;
-    // var socket = io.connect(OutletListConstants.BASE_URL);
-    // socket.on(transactionId, function (data) {
-    //   console.log("got energy!", data);
-    //   context.setState({data: data})
-    // });
+//   updateData: function() {
+//     // var context = this.props.context;
+//     // var transactionId = this.props.transactionId;
+//     // var socket = io.connect(OutletListConstants.BASE_URL);
+//     // socket.on(transactionId, function (data) {
+//     //   console.log("got energy!", data);
+//     //   context.setState({data: data})
+//     // });
 
-    var that = this;
-    var socket = io.connect(OutletListConstants.BASE_URL);
-    socket.on("energy", function (data) {
-      console.log("got energy!", data);
-      that.setState({data: data})
-    });
-  },
+    
+//   },
 
-  // returns power usage data
-  render: function() {
-
-    return (
-      <tr>
-        <td><h4>Total kWh</h4><p>{ Math.round(this.state.data.totalKwh*1000)/1000 }</p></td>
-        <td><h4>Total $</h4><p>{ Math.round(this.state.data.totalKwh * this.state.data.clientData.outlet.priceEnergy *1000)/1000 + Math.round(this.state.data.clientData.outlet.priceHourly/(60*60)*10 *1000 )/1000}</p></td>
-        <td><h4>Watts</h4><p>{ Math.round ( this.state.data.avgWatts *10)/10}</p></td>
-      </tr>
-    )
-  }
-})
+//   // returns power usage data
+//   render: function() {
+//     var transactionId = this.props.transaction.id + '';
+//     return (
+      
+//     )
+//   }
+// })
 
 
 module.exports = buyerReservations;

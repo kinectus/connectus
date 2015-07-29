@@ -154,7 +154,7 @@ module.exports = {
         };
         return rp(options);
       };
-      setInterval(getWatts, 10000);
+      setInterval(getWatts, 3000);
 
     } else {
       var options = {
