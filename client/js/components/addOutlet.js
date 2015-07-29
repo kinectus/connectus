@@ -102,55 +102,57 @@ var addOutlet = React.createClass({
     }
 
     return (
-      <div className="addoutlet col-md-6 col-md-offset-3">
-        <h3>Add an outlet:</h3>
-        <h4>{this.state.validationMessage}</h4>
-        <form className = "outletAddressForm" onSubmit={this.handleAddressSubmit}>
-          <div className="form-group">
-            <label>Street</label><br />
-            <input type="text" name="street" ref="street" className="form-control" placeholder='Enter your street address...' onChange={this.handleChange}/><br />
-          </div>
-          <div className="form-group">
-            <label>City</label><br />
-            <input type="text" name="city" ref="city" className="form-control" placeholder='Enter city...' onChange={this.handleChange}/> <br />
-          </div>
-          <div className="form-group">
-            <label>State</label><br />
-            <input type="text" name="state" ref="state" className="form-control" placeholder='Enter state...' onChange={this.handleChange}/><br />
-          </div>
-          <div className="form-group">
-            <label>Zip Code</label><br />
-            <input type="text" name="zip" ref="zip" className="form-control" placeholder='Enter zip-code...' onChange={this.handleChange}/><br />
-          </div>
-          <div className={this.state.validationButton}>
-          <button type="submit" className="btn btn-primary" value="Submit">Validate Address</button>
-          </div>
-        </form>
-        <form className = "outletInfoForm" onSubmit={this.handleInfoSubmit}>
-          <div className="form-group">
-            <label>Outlet Name</label><br />
-            <input type="text" name="name" ref="name" className="form-control" placeholder='What do you want to call this outlet?' /><br />
-          </div>
-          <div className="form-group">
-            <label>Instructions for user</label><br />
-            <textarea name="description" name="description" ref="description" className="form-control" placeholder="This is a description." /><br />
-          </div>
-          <div className="form-group">
-            <label>Outlet Voltage</label><br />
-            <select className="ui dropdown" className="form-control" ref="voltage">
-              <option value="standard">Standard</option>
-              <option value="high">High</option>
-            </select><br />
-          </div>
-          <div className="form-group">
-            <label>Your hourly rate: $3/hr   Suggested price/kWh: $0.20/kWh</label><br />
-          </div>
-          <div className="form-group">
-            <label>Your price/kWh charge: </label><br />
-            <input type="text" name="charge" ref="charge" className="form-control" placeholder='ex. 10' />/kWh<br />
-          </div>
-          {buttonHtml}
-        </form>
+      <div>
+        <div className="addoutlet col-md-6 col-md-offset-3">
+          <h3>Add an outlet:</h3>
+          <h4>{this.state.validationMessage}</h4>
+          <form className = "outletAddressForm" onSubmit={this.handleAddressSubmit}>
+            <div className="form-group">
+              <label>Street</label><br />
+              <input type="text" name="street" ref="street" className="form-control" placeholder='Enter your street address...' onChange={this.handleChange}/><br />
+            </div>
+            <div className="form-group">
+              <label>City</label><br />
+              <input type="text" name="city" ref="city" className="form-control" placeholder='Enter city...' onChange={this.handleChange}/> <br />
+            </div>
+            <div className="form-group">
+              <label>State</label><br />
+              <input type="text" name="state" ref="state" className="form-control" placeholder='Enter state...' onChange={this.handleChange}/><br />
+            </div>
+            <div className="form-group">
+              <label>Zip Code</label><br />
+              <input type="text" name="zip" ref="zip" className="form-control" placeholder='Enter zip-code...' onChange={this.handleChange}/><br />
+            </div>
+            <div className={this.state.validationButton}>
+            <button type="submit" className="btn btn-primary" value="Submit">Validate Address</button>
+            </div>
+          </form>
+          <form className = "outletInfoForm" onSubmit={this.handleInfoSubmit}>
+            <div className="form-group">
+              <label>Outlet Name</label><br />
+              <input type="text" name="name" ref="name" className="form-control" placeholder='What do you want to call this outlet?' /><br />
+            </div>
+            <div className="form-group">
+              <label>Instructions for user</label><br />
+              <textarea name="description" name="description" ref="description" className="form-control" placeholder="This is a description." /><br />
+            </div>
+            <div className="form-group">
+              <label>Outlet Voltage</label><br />
+              <select className="ui dropdown" className="form-control" ref="voltage">
+                <option value="standard">Standard</option>
+                <option value="high">High</option>
+              </select><br />
+            </div>
+            <div className="form-group">
+              <label>Your hourly rate: $3/hr   Suggested price/kWh: $0.20/kWh</label><br />
+            </div>
+            <div className="form-group">
+              <label>Your price/kWh charge: </label><br />
+              <input type="text" name="charge" ref="charge" className="form-control" placeholder='ex. 10' />/kWh<br />
+            </div>
+            {buttonHtml}
+          </form>
+        </div>
       </div>
     )
   }

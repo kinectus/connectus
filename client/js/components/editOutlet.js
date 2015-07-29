@@ -161,9 +161,9 @@ var editOutlet = React.createClass({
       var alert;
 
       if(this.state.alertType === 'alertOrNot'){
-        alert = {alertOrNot};
+        alert = alertOrNot;
       }else{
-        alert = {updatedAlert};
+        alert = updatedAlert;
       }
 
       return (
