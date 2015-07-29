@@ -224,10 +224,8 @@ a:focus {
     background-color: #FFFFFF;
   }
   .howitworks{
-    background-color: @orangemed;
-<<<<<<< HEAD
     height: 100%;
-    margin-bottom: 30px;
+    padding-bottom: 30px;
     .column-headers {
       h3 {
         color: white;
@@ -235,12 +233,41 @@ a:focus {
         margin-bottom: 20px;
         text-align: center;
       }
-=======
-    .column-headers {
-      color: white;
+    }
+    .banner-item {
+      opacity: 0;
+    }
+    .landscape-banner {
+      background: url("http://localhost:3000/assets/img/landscape.png");
+      background-repeat: no-repeat;
+      background-position: bottom center;
+      background-size: 100%;
+      height: 100px;
+      width: 100%;
+    }
+    .outlet {
+      background: url("http://localhost:3000/assets/img/outlet.png");
+      height: 100px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 20%;
       margin-top: 20px;
-      text-align: center;
->>>>>>> added power simulator
+    }
+    .location {
+      background: url("http://localhost:3000/assets/img/location.png");
+      height: 100px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 60%;
+      margin-top: 20px;
+    }
+    .trees {
+      background: url("http://localhost:3000/assets/img/trees.png");
+      height: 100px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 60%;
+      margin-top: 20px;
     }
   }
   .energyInfo{
@@ -251,6 +278,10 @@ a:focus {
         padding-top: 30px;
         text-align: center;
         color: white;
+      }
+      li {
+        font-size: 16px;
+        margin: 15px;
       }
     }
     .diagram {

@@ -71,10 +71,7 @@ var buyerReservations = React.createClass({
 
   turnOn: function(transaction) {
     outletServices.turnOutletOn(transaction)
-<<<<<<< HEAD
-    // .then(this.updateData); //streams data from power server
-=======
->>>>>>> added power simulator
+
     // this.updateData();
     var that = this;
     var socket = io.connect(OutletListConstants.BASE_URL);
