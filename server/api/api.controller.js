@@ -4,7 +4,7 @@ var Outlets = require('../outlets/outlets.collection');
 var User = require('../users/user.model');
 
 var AuthController = require('../auth/auth.controller');
-var ServerConstants = require('../constants/ServerConstants');
+var ServerConstants = require('../constants/serverConstants');
 var getOutletsByUser = require('../config/db/queries/getOutletsByUserId');
 var addNewOutlet = require('../config/db/queries/addNewOutlet');
 var updateOutlet = require('../config/db/queries/updateOutlet');
@@ -40,11 +40,7 @@ module.exports = {
         country: 'US'
     });
 
-    addressValidator.validate(address, addressValidator.match.streetAddress, function(err, exact, inexact){     
-        geocoder.geocode(req.body.street +", " + req.body.city + ", " + req.body.state, function(err, data){
-          console.log(data.results[0].address_components);
-          console.log(data.results[0].geometry);
-        });
+    addressValidator.validate(address, addressValidator.match.streetAddress, function(err, exact, inexact){
         res.send(200, {exact:exact, err: err, inexact:inexact});
     });
   },
