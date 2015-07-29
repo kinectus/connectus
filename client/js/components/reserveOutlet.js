@@ -353,9 +353,11 @@ var Availability = React.createClass({
         // Regularly label all slots but center
         } else {
           if ( parseInt(reservation.slot_id, 10) % 2 === 1 ){
-            var splitHour = "timeblock splitHour";
+            var indicator = reservation.available ? "indicator barView" : "noIndicator barView";
+            blockClass = blockClass + " splitHour"
             var hoverStart = slotProps[reservation.slot_id-1].start;
             hoverStart = moment('12/25/1995 '+hoverStart).format('MM/DD/YYYY ha');
+
             if (hoverStart[12] === '0'){
               hoverStart = hoverStart.slice(12);
               if (hoverStart = '0am'){
@@ -365,15 +367,17 @@ var Availability = React.createClass({
               hoverStart = hoverStart.slice(11);
             }
             return(
-              <div className={splitHour} key={reservation.id}>
-              <div className="barView"><p className="barViewText">{hoverStart}</p></div>
+              <div className="timeblock" key={reservation.id}>
+              <div className={indicator}><p className="barViewText">{hoverStart}</p></div>
               <div className={blockClass}></div>
               </div>
             )
           } else {
+            indicator = reservation.available ? "indicator barViewBack" : "noIndicator barViewBack";
+
             return(
               <div className="timeblock" key={reservation.id}>
-              <div className="barViewBack"></div>
+              <div className={indicator}></div>
               <div className={blockClass}></div>
               </div>
             )

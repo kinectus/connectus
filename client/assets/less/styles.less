@@ -379,8 +379,9 @@ h1 {
   display: inline-block;
   width: 27px;
   height: 30px;
-  background-color: @turqoise;
-  border-bottom: 2px solid grey;
+  background-color: @blue;
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
   color: white;
   text-align: left;
   margin: 0;
@@ -392,7 +393,8 @@ h1 {
   width: 27px;
   height: 30px;
   background-color: grey;
-  border-bottom: 2px solid grey;
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
   color: white;
   text-align: left;
   margin: 0;
@@ -404,8 +406,21 @@ h1 {
   width: 27px;
   height: 15px;
   background-color: grey;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
   color: white;
   z-index: 3;
+}
+
+.barViewBack {
+  position: relative;
+  width: 27px;
+  height: 15px;
+  background-color: grey;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  color: white;
+  z-index: 2;
 }
 
 .barViewText {
@@ -415,13 +430,9 @@ h1 {
   top: -10px;
 }
 
-.barViewBack {
-  position: relative;
-  width: 27px;
-  height: 15px;
-  background-color: grey;
-  color: white;
-  z-index: 2;
+
+.indicator {
+  background-color: black;
 }
 
 .date {
