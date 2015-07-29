@@ -37,7 +37,7 @@ var buyerReservations = React.createClass({
     console.log(transaction)
     var that =this;
     outletStore.setCurrentTransaction({id: transaction.id, currentStatus: true, paid: false}).then(function(transaction){
-      outletServices.turnOutletOff(transaction);
+      // outletServices.turnOutletOff(transaction);
       that.transitionTo('paymentsPage');
       return transaction;
     });

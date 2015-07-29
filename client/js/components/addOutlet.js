@@ -90,7 +90,7 @@ var addOutlet = React.createClass({
     return;
   },
   render: function(){
-    var buttonHtml = (<button className="btn btn-warning btn-lg btn-block">Address Validation Needed</button>);
+    var buttonHtml = (<div className="btn btn-warning btn-lg btn-block">Address Validation Needed</div>);
     // is user authenticated
     if(!document.cookie){
       this.transitionTo('login');

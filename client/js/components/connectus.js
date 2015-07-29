@@ -11,7 +11,6 @@ var mobile = require('./mobilecheck');
 
 var Connectus = React.createClass({
   logout: function(){
-    console.log('this logout triggered')
     Auth.logout();
   },
 
@@ -81,7 +80,7 @@ var Connectus = React.createClass({
                     <li role="presentation"><Link to="buyerReservations">My Reservations</Link></li>
                     <li role="presentation"><Link to="manageOutlets">Manage Outlets</Link></li>
                     <li role="separator" className="divider"></li>
-                    <li><a className="logout" onClick={this.logout}>Logout</a></li>
+                    <li role="presentation"><a className="logout" onClick={this.logout}>Logout</a></li>
                   </ul>
                 </li>
               </ul>

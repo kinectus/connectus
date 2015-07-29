@@ -22,7 +22,7 @@ var editOutlet = React.createClass({
   componentDidMount: function() {
     var that = this;
     var outletID = this.props.params.id;
-    console.log('OUTLET ID: ', outletID)
+    console.log('OUTLET ID: ', outletID);
     outletStore.getOutletById(outletID).then(function(outlet){
       that.setState({outlet: outlet});
 

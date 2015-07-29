@@ -17,6 +17,8 @@ a:hover,
 a:focus {
   text-decoration: none !important;
   color: inherit;
+  cursor: hand;
+  cursor: pointer;
 }
 * {
   font-family: Karla;
