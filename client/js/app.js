@@ -10,7 +10,7 @@ var AddOutlet = require('./components/addOutlet.js');
 var RouterContainer = require('./services/RouterContainer.js');
 var routes = require('./config/routes');
 
-var router = Router.create({routes});
+var router = Router.create({routes: routes});
 RouterContainer.set(router);
 
 router.run(function(Root){
