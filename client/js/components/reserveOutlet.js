@@ -313,6 +313,7 @@ var Availability = React.createClass({
       // Track center time slot
       var centerCount = centerCount ? centerCount > end-1 ? 0 : centerCount : 0;
       var that = this;
+      
       // Create custom availability viewer using subset
       var outerHTML = subset.map(function(reservation){
         var goOrNoGo = reservation.available ? "on" : "off";
@@ -321,7 +322,6 @@ var Availability = React.createClass({
         var blockClass = (centerCount === that.state.middle) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
         centerCount++;
         var begin, end;
-        // var currentTimeView = blockClass
         // Specially label center slot to display its information
         if (centerCount === that.state.middle+1){
           date = moment(reservation.date).format('MMMM Do YYYY');
