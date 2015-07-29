@@ -326,7 +326,8 @@ a:focus {
   }
   .energyInfo{
     background-color: @purple;
-    height: 814px;
+    min-height: 250px;
+    max-height: 100%;
     .our-stack {
       h2 {
         padding-top: 30px;
@@ -366,11 +367,17 @@ a:focus {
 .footer-banner {
   height: 160px;
   background-color: @dark;
+  width: 100%;
+  .row {
+    background-color: @dark;
+  }
   h3 {
     color: white;
+    margin-left: 20px;
   }
   h4 {
     color: @greylight;
+    margin-left: 30px;
   }
   .octocat {
     background: url('https://i2.wp.com/assets-cdn.github.com/images/gravatars/gravatar-user-420.png?ssl=1gith');

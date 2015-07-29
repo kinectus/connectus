@@ -54,17 +54,15 @@ var Connectus = React.createClass({
     );
 
     var footerHtml = (
-      <div className="footer-banner">
-        <div className="container">
-          <div className='row'>
-            <div className='col-md-4'>
-              <h3>Connect.us Team</h3>
-              <h4>Sean Conner, Valerie Liang,</h4>
-              <h4>Dianna Faulk, Jammie Mountz</h4>
-            </div>
-            <a href="https://github.com/kinectus/connectus"><div className='col-md-4 octocat'></div></a>
-            <div className='col-md-4'></div>
+      <div className="container-fluid footer-banner">
+        <div className='row'>
+          <div className='col-md-4'>
+            <h3>Connect.us Team</h3>
+            <h4>Sean Conner, Valerie Liang,</h4>
+            <h4>Dianna Faulk, Jammie Mountz</h4>
           </div>
+          <a href="https://github.com/kinectus/connectus"><div className='col-md-4 octocat'></div></a>
+          <div className='col-md-4'></div>
         </div>
       </div>
     );
@@ -102,8 +100,6 @@ var Connectus = React.createClass({
           </div> 
       )
 
-        footerHtml = (<div />);
-
       // if NOT mobile, make it this... 
       } else {
 
@@ -121,8 +117,6 @@ var Connectus = React.createClass({
             </ul>
           </div> 
           );
-
-        footerHtml = (<div />);
       } 
     }
 

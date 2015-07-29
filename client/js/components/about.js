@@ -180,38 +180,6 @@ var About = React.createClass({
                 <div className="section energyInfo">
                   <span className="our-stack"><h2>How it works</h2></span>
                   <div className="diagram">
-                    <table>
-                      <tr className="diagram-row">
-                        <td className="diagram-data"><span className="instructions">Hover over items in the tech stack to see what they do!</span></td>
-                        <td className="diagram-data database" data-toggle="popover" title="Database" data-content="MySQL with Bookshelf.js ORM"></td>
-                        <td className="diagram-data"></td>
-                      </tr>
-                      <tr className="diagram-row">
-                        <td className="diagram-data"></td>
-                        <td className="diagram-data"></td>
-                        <td className="diagram-data"></td>
-                      </tr>
-                      <tr className="diagram-row">
-                        <td className="diagram-data"></td>
-                        <td className="diagram-data connectus-server" data-toggle="popover" title="Connect.us Server" data-content="Node.js and Express"></td>
-                        <td className="diagram-data auth" data-toggle="popover" title="Secure Outlet-Server Communication" data-content="The Connect.us Server communicates with a Node.js server running on top of the hardware"></td>
-                      </tr>
-                      <tr className="diagram-row">
-                        <td className="diagram-data"></td>
-                        <td className="diagram-data"></td>
-                        <td className="diagram-data"></td>
-                      </tr>
-                      <tr className="diagram-row">
-                        <td className="diagram-data phone" data-toggle="popover" title="Web application" data-content="React and Flux with Bootstrap"></td>
-                        <td className="diagram-data"></td>
-                        <td className="diagram-data"></td>
-                      </tr>
-                      <tr className="diagram-row">
-                        <td className="diagram-data"></td>
-                        <td className="diagram-data"></td>
-                        <td className="diagram-data"></td>
-                      </tr>
-                    </table>
                   </div>
                 </div>
             </div>
