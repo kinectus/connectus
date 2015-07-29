@@ -130,15 +130,43 @@ module.exports = {
     // query the database for validation - CAN they turn on this outlet??
     // if so...
     res.send(200, 'you turn me on!')
-    console.log('reservation info in they api controller: ', req.body);
     var info = req.body;
-    var options = {
-      method: 'POST',
-      body: info,
-      json: true,
-      uri: ServerConstants.POWER_SERVER_ON
+
+    if(ServerConstants.SIMULATE_POWER) {
+      // simulate an appliance's power use
+      var totalKwh = 0;
+      var getWatts = function() {
+        var watts = Math.random()*1000;
+        var kwh = watts/1000/(60*60) * 10;
+        totalKwh += kwh;
+        // console.log('in turnme on stub -------------------------------------', req.body);
+        var data = {
+          avgWatts: watts,
+          kwh: kwh,
+          totalKwh: totalKwh,
+          clientData: info
+        };
+        var options = {
+          method: 'POST',
+          body: data,
+          json: true,
+          uri: ServerConstants.REALTIME_ENDPOINT
+        };
+        return rp(options);
+      };
+      setInterval(getWatts, 3000);
+
+    } else {
+      var options = {
+        method: 'POST',
+        body: info,
+        json: true,
+        uri: ServerConstants.POWER_SERVER_ON
+      }
+      return rp(options);
     }
-    return rp(options);
+
+    
   },
 
   turnOffOutlet: function(req, res){
