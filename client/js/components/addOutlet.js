@@ -4,9 +4,6 @@ var _=require('underscore');
 var Router = require('react-router'); //need this for redirection
 // var ReactAddons = require('react/addons');
 
-/* TODO
-Style page
-*/
 
 var addOutlet = React.createClass({
   mixins: [Router.Navigation],
@@ -16,13 +13,18 @@ var addOutlet = React.createClass({
       lat:'',
       long: '',
       validated: false,
-      validationMessage: 'Please validate your address'
+      validationMessage: 'Please validate your address',
+      validationButton: ''
     };
   },
 
 
   handleChange: function(){
-    this.setState({validated:false, validationMessage: 'Please validate your address'});
+    this.setState({validated:false, validationMessage: 'Please validate your address', validationButton: ''});
+  },
+
+  moveOn: function(){
+    this.setState({validated:true, validated: true, validationButton: 'hidden', validationMessage: (<div className="success">Address Validated</div>)});
   },
 
   handleAddressSubmit: function(e){
@@ -38,9 +40,13 @@ var addOutlet = React.createClass({
         that.setState({validationMessage: (<div className="error">There is an error with your adddress. Please try again</div>)});
       }else if(result.inexact.length > 0){
         var suggestion = result.inexact[0].streetNumber + " " + result.inexact[0].street + ", " + result.inexact[0].city + ", " + result.inexact[0].stateAbbr + ", " + result.inexact[0].postalCode;
-        that.setState({validationMessage: (<div className="error"> Address not valid. Did you mean: {suggestion} ?</div>), validated: false});
+        React.findDOMNode(that.refs.street).value = result.inexact[0].streetNumber + " " + result.inexact[0].street;
+        React.findDOMNode(that.refs.city).value = result.inexact[0].city;
+        React.findDOMNode(that.refs.state).value = result.inexact[0].stateAbbr;
+        React.findDOMNode(that.refs.zip).value = result.inexact[0].postalCode;
+        that.setState({validationMessage: (<div><div className="error"> Address not valid. Did you mean: {suggestion} ?</div><div className="btn btn-success" onClick={that.moveOn}>Yes</div></div>), validated: false});
       }else if(result.exact.length > 0){
-        that.setState({lat: result.exact[0].location.lat, long: result.exact[0].location.lon, validated: true, validationMessage: (<div className="success">Address Validated</div>)});
+        that.setState({lat: result.exact[0].location.lat, long: result.exact[0].location.lon, validated: true, validationButton: 'hidden', validationMessage: (<div className="success">Address Validated</div>)});
       }else{
         that.setState({validationMessage: (<div className="error">There is an error with your adddress. Please try again</div>)});
       }
@@ -114,9 +120,11 @@ var addOutlet = React.createClass({
           </div>
           <div className="form-group">
             <label>Zip Code</label><br />
-            <input type="text" name="zip" ref="zip" className="form-control" placeholder='Enter zip-code...' /><br />
+            <input type="text" name="zip" ref="zip" className="form-control" placeholder='Enter zip-code...' onChange={this.handleChange}/><br />
           </div>
+          <div className={this.state.validationButton}>
           <button type="submit" className="btn btn-primary" value="Submit">Validate Address</button>
+          </div>
         </form>
         <form className = "outletInfoForm" onSubmit={this.handleInfoSubmit}>
           <div className="form-group">
