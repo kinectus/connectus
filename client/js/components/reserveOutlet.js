@@ -11,6 +11,7 @@ var DateTimePicker = require('react-widgets').DateTimePicker;
 var Alert = require('react-bootstrap').Alert;
 var moment = require('moment');
 var Router = require('react-router'); //need this for redirection
+var Link = require('react-router').Link;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup; //modal transitioning
 
 // http://jquense.github.io/react-widgets/docs/#/datetime-picker
@@ -129,6 +130,7 @@ var DateTime = React.createClass({
     var that = this;
     var hidden = !this.state.alert ? "hidden" : "notHidden centering";
     var successful = !this.state.success ? "hidden" : "notHidden centering";
+    var buttonHide = !this.state.success ? "notHidden centering btn btn-default" : "hidden";
 
     // Format default date to be closest upcoming time at 30-minute interval
     var firstDate = new Date();
@@ -145,12 +147,14 @@ var DateTime = React.createClass({
         <Alert bsStyle='warning' className={hidden} onDismiss={this.hideMe} dismissAfter={2000}>
             <strong>{this.state.message}</strong>
         </Alert>
-        <Alert bsStyle='success' className={successful} onDismiss={this.closeMe} dismissAfter={2000}>
-            <strong>{this.state.message}</strong>
+        <Alert bsStyle='success' className={successful}>
+            <strong>{this.state.message}</strong><br></br>
+            <button onClick={this.closeMe}>Make another reservation at this outlet</button>
+            <button><Link to="/outlets">Return to browsing</Link></button>
         </Alert>
         <DateTimePicker  ref="startTime" defaultValue={firstDate} />
         <DateTimePicker  ref="endTime" defaultValue={null} />
-        <div className="btn btn-default" onClick={that.handleSubmit}>Reserve Outlet</div>
+        <div className={buttonHide} onClick={that.handleSubmit}>Reserve Outlet</div>
       </div>
     )
   }
