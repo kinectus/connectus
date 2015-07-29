@@ -12,8 +12,8 @@ var editOutlet = React.createClass({
       alertType: 'alertOrNot',
       lat:'',
       long: '',
-      validated: false,
-      validationMessage: 'Please validate your address',
+      validated: true,
+      validationMessage: '',
       validationButton: ''
     };
   },
@@ -137,13 +137,13 @@ var editOutlet = React.createClass({
     }
 
     if(this.state.validated){
-      buttonHtml = (<button type="submit" className="btn btn-primary btn-lg btn-block">Submit</button>);
+      var buttonHid = !this.state.alert ? "notHidden btn btn-primary btn-lg btn-block" : "hidden btn btn-primary btn-lg btn-block";
+      buttonHtml = (<button type="submit" onClick={this.confirm} className={buttonHid + "btn btn-primary btn-lg btn-block"}>Submit</button>);
     }
 
     if (this.state.zip){
       var outlet = this.state.outlet;
       var hidden = !this.state.alert ? "hidden" : "notHidden";
-      var buttonHid = !this.state.alert ? "notHidden btn btn-primary btn-lg btn-block" : "hidden btn btn-primary btn-lg btn-block";
       var alertOrNot = (<Alert className={hidden} bsStyle="info" onDismiss={this.handleAlertDismiss}>
         <h4 className="text-center">Update information on {outlet.name}?</h4>
         <div className="text-center">
@@ -215,6 +215,7 @@ var editOutlet = React.createClass({
             <input type="text" name="charge" ref="charge" className="form-control" defaultValue={this.state.outlet.priceEnergy} />/kWh<br />
           </div>
           {buttonHtml}
+          {alert}
         </form>
       </div>
     )
