@@ -250,7 +250,6 @@ var Availability = React.createClass({
     outletStore.getTimeSlotInfo().then(function(slots){
       that.setState({timeSlots: slots, start: 0});
     });
-
   },
 
   componentWillUnmount: function() {
@@ -281,6 +280,7 @@ var Availability = React.createClass({
     this.hasHappened = false;
   },
 
+  // Scroll functionality
   goForward: function() {
     var that = this;
     if (this.state.end < this.state.reservations.length-1){
@@ -349,6 +349,7 @@ var Availability = React.createClass({
 
             <div className={blockClass} key={reservation.id}><p>{begin}-{end}</p></div>
           )
+
         // Regularly label all slots but center
         } else {
           if ( parseInt(reservation.slot_id, 10) % 2 === 1 ){
@@ -375,13 +376,10 @@ var Availability = React.createClass({
               <div className="barViewBack"></div>
               <div className={blockClass}></div>
               </div>
-
             )
           }
-
         }
       });
-
 
     // Fallback before API call is complete
     } else {var outerHTML = <div className="slot"></div> }
@@ -441,12 +439,13 @@ var Viewer = React.createClass({
           <Availability move={this.state.move} mouseDown={this.state.mouseDown} forward={this.state.forward} outletID = {this.props.outletID}/>
         </div>
         <div className="centering pad-top">
-          <button className="toggle glyphicon glyphicon-chevron-left" onMouseDown={this.mouseDownBack} onMouseUp={this.mouseUp}></button>
-          <button className="toggle glyphicon glyphicon-chevron-right" onMouseDown={this.mouseDownForward} onMouseUp={this.mouseUp}></button>
+          <button className="toggle glyphicon glyphicon-chevron-left" onMouseDown={this.mouseDownBack} onMouseUp={this.mouseUp} onMouseLeave={this.mouseUp}></button>
+          <button className="toggle glyphicon glyphicon-chevron-right" onMouseDown={this.mouseDownForward} onMouseUp={this.mouseUp} onMouseLeave={this.mouseUp}></button>
         </div>
       </div>
     )
   }
+
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -461,12 +460,9 @@ var reserveOutlet = React.createClass({
       data: []
     }
   },
+
   mixins: [Router.Navigation],
-  
-  // is onchange necessary?????
-  // _onChange: function() {
-  //   this.setState(this.getInitialState());
-  // },
+
   componentDidMount: function() {
     var that = this;
     var outletID = this.props.params.id
