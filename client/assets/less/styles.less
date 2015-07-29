@@ -217,21 +217,55 @@ a:focus {
 .about {
   width: 100%;
   .section{
-    height: 500px;
   }
   .info{
     background-color: #FFFFFF;
   }
   .howitworks{
     background-color: @orangemed;
+    height: 100%;
+    margin-bottom: 30px;
     .column-headers {
-      color: white;
-      margin-top: 20px;
-      text-align: center;
+      h3 {
+        color: white;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
     }
   }
   .energyInfo{
-    background-color: @maroon;
+    background-color: @purple;
+    height: 910px;
+    .our-stack {
+      h2 {
+        padding-top: 30px;
+        text-align: center;
+        color: white;
+      }
+    }
+    .diagram {
+      background: url('http://jammiemountz.com/wp-content/uploads/2015/07/diagram-for-our-server-01.png');
+      height:100%;
+      background-size: 70%;
+      background-repeat: no-repeat;
+      background-position: top center;
+      table {
+        width: 100%;
+      }
+      .diagram-row {
+        width: 100%;
+        height: 100px;
+      }
+      .diagram-data {
+        width: 30%;
+        .instructions {
+          color: white;
+          font-size: 20px;
+          padding-left: 30px;
+        }
+      }
+    }
   }
 }
 
