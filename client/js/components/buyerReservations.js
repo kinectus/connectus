@@ -25,6 +25,10 @@ var buyerReservations = React.createClass({
   //   });
   // },
 
+// click on
+  // get transactionId, get context (value of this - "on" buton)
+  // turnOn
+    // create socket (use transactionId in the socket)
   componentDidMount: function() {
     var that = this;
     console.log(moment("2015-07-30 00:30", "YYYY-MM-DD HH:mm") > moment());
@@ -146,6 +150,14 @@ var ActiveTransaction = React.createClass({
   },
 
   updateData: function() {
+    // var context = this.props.context;
+    // var transactionId = this.props.transactionId;
+    // var socket = io.connect(OutletListConstants.BASE_URL);
+    // socket.on(transactionId, function (data) {
+    //   console.log("got energy!", data);
+    //   context.setState({data: data})
+    // });
+
     var that = this;
     var socket = io.connect(OutletListConstants.BASE_URL);
     socket.on("energy", function (data) {
