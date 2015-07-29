@@ -219,21 +219,22 @@ var Availability = React.createClass({
    return {
       reservations: [],
       timeSlots: [],
-      scrolling: null
+      scrolling: null,
+      window: null
     }
   },
 
   handleResize: function(e) {
     if (window.innerWidth<497){
-      this.setState({end: 7, middle: 3});
+      this.setState({end: 7, middle: 3, window: 3});
     } else if (window.innerWidth<674){
-      this.setState({end: 11, middle: 5});
+      this.setState({end: 11, middle: 5, window: 5});
     } else if (window.innerWidth<994){
-      this.setState({end: 15, middle: 7});
+      this.setState({end: 15, middle: 7, window: 7});
     } else if (window.innerWidth<1055){
-      this.setState({end: 17, middle: 8});
+      this.setState({end: 17, middle: 8, window: 8});
     } else {
-      this.setState({end: 25, middle: 12});
+      this.setState({end: 25, middle: 12, window: 12});
     }
   },
 
@@ -285,13 +286,22 @@ var Availability = React.createClass({
     var that = this;
     if (this.state.end < this.state.reservations.length-1){
       this.setState({ start: this.state.start+1, end: this.state.end+1 });
+
+    // Move window to end of reservations from center
+    } else if (this.state.end === this.state.reservations.length-1 && this.state.window < this.state.reservations.length-1) {
+      this.setState({ window: window+1 });
     }
   },
 
   goBack: function() {
     var that = this;
+    // Default center window view
     if (this.state.start > 0){
       this.setState({ start: this.state.start-1, end: this.state.end-1 });
+
+    // Move window to beginning of reservations from center
+    } else if (this.state.start === 0 && this.state.window >=0) {
+      this.setState({ window: window-1 });
     }
   },
 
@@ -303,7 +313,7 @@ var Availability = React.createClass({
     var date;
 
     // If reservations API call has completed
-    if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 && this.state.end && this.state.middle){
+    if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 && this.state.end && this.state.middle && this.state.window){
       // Current subset of reservation information
       var start = this.state.start;
       var end = this.state.end;
@@ -311,9 +321,10 @@ var Availability = React.createClass({
       var slotProps = slotProps || this.state.timeSlots;
 
       // Track center time slot
+
       var centerCount = centerCount ? centerCount > end-1 ? 0 : centerCount : 0;
       var that = this;
-      
+
       // Create custom availability viewer using subset
       var outerHTML = subset.map(function(reservation){
         var goOrNoGo = reservation.available ? "on" : "off";
@@ -322,6 +333,7 @@ var Availability = React.createClass({
         var blockClass = (centerCount === that.state.middle) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
         centerCount++;
         var begin, end;
+
         // Specially label center slot to display its information
         if (centerCount === that.state.middle+1){
           date = moment(reservation.date).format('MMMM Do YYYY');
