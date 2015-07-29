@@ -362,3 +362,11 @@ Reserve an Outlet .holder {
 .success {
   color: #007F00;
 }
+.reserveConfirm {
+  width: 60vw;
+  margin: 1vw auto;
+}
+.alertButton {
+  width: 20vw;
+  margin: 0 .5vw;
+}
