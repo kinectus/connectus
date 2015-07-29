@@ -218,23 +218,21 @@ var Availability = React.createClass({
   getInitialState: function(){
    return {
       reservations: [],
-      timeSlots: [],
-      scrolling: null,
-      window: null
+      timeSlots: []
     }
   },
 
   handleResize: function(e) {
     if (window.innerWidth<497){
-      this.setState({end: 7, middle: 3, window: 3});
+      this.setState({end: 7, middle: 3, windowView: 3});
     } else if (window.innerWidth<674){
-      this.setState({end: 11, middle: 5, window: 5});
+      this.setState({end: 11, middle: 5, windowView: 5});
     } else if (window.innerWidth<994){
-      this.setState({end: 15, middle: 7, window: 7});
+      this.setState({end: 15, middle: 7, windowView: 7});
     } else if (window.innerWidth<1055){
-      this.setState({end: 17, middle: 8, window: 8});
+      this.setState({end: 17, middle: 8, windowView: 8});
     } else {
-      this.setState({end: 25, middle: 12, window: 12});
+      this.setState({end: 25, middle: 12, windowView: 12});
     }
   },
 
@@ -287,21 +285,25 @@ var Availability = React.createClass({
     if (this.state.end < this.state.reservations.length-1){
       this.setState({ start: this.state.start+1, end: this.state.end+1 });
 
-    // Move window to end of reservations from center
-    } else if (this.state.end === this.state.reservations.length-1 && this.state.window < this.state.reservations.length-1) {
-      this.setState({ window: window+1 });
+    // Move windowView to end of reservations from center
+    } else if (this.state.end === this.state.reservations.length-1 && this.state.windowView < this.state.reservations.length-1) {
+      console.log(this.state.windowView);
+      this.setState({ windowView: this.state.windowView+1 }, function(){ console.log(this.state.windowView) });
+      console.log(this.state.windowView);
     }
   },
 
   goBack: function() {
     var that = this;
-    // Default center window view
+    // Default center windowView view
     if (this.state.start > 0){
       this.setState({ start: this.state.start-1, end: this.state.end-1 });
 
-    // Move window to beginning of reservations from center
-    } else if (this.state.start === 0 && this.state.window >=0) {
-      this.setState({ window: window-1 });
+    // Move windowView to beginning of reservations from center
+    } else if (this.state.start === 0 && this.state.windowView >0) {
+      console.log(this.state.windowView);
+      this.setState({ windowView: this.state.windowView-1 });
+      console.log(this.state.windowView);
     }
   },
 
@@ -310,10 +312,12 @@ var Availability = React.createClass({
   },
 
   render: function() {
+    console.log('this.state.windowView ', this.state.windowView)
+
     var date;
 
     // If reservations API call has completed
-    if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 && this.state.end && this.state.middle && this.state.window){
+    if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 && this.state.end && this.state.middle && typeof this.state.windowView === 'number'){
       // Current subset of reservation information
       var start = this.state.start;
       var end = this.state.end;
