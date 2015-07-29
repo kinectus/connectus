@@ -5,7 +5,6 @@
 node_modules/
 client/lib
 dist/bower_components
-dist/js
 dist/semantic
 dist/assets
 server/data.txt
