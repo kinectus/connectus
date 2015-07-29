@@ -324,8 +324,9 @@ var Availability = React.createClass({
           for (var j=0; j<slotProps.length; j++){
             if (slotProps[j].id === reservation.slot_id){
               var endSub = slotProps[j].end === '24:00' ? '00:00' : slotProps[j].end
-              begin = moment('12-25-1995 '+slotProps[j].start).format('MM-DD-YYYY h:mma');
-              end = moment('12-25-1995 '+endSub).format('MM-DD-YYYY h:mma');
+              begin = moment('12/25/1995 '+slotProps[j].start).format('MM/DD/YYYY h:mma');
+              end = moment('12/25/1995 '+endSub).format('MM/DD/YYYY h:mma');
+
               // Format begin time
               if (begin[12] === '0' && end[11]!== '1'){
                 begin = begin.slice(12);
@@ -349,7 +350,7 @@ var Availability = React.createClass({
           if ( parseInt(reservation.slot_id, 10) % 2 === 1 ){
             var splitHour = "timeblock splitHour";
             var hoverStart = slotProps[reservation.slot_id-1].start;
-            hoverStart = moment('12-25-1995 '+hoverStart).format('MM-DD-YYYY ha');
+            hoverStart = moment('12/25/1995 '+hoverStart).format('MM/DD/YYYY ha');
             if (hoverStart[12] === '0'){
               hoverStart = hoverStart.slice(12);
               if (hoverStart = '0am'){
