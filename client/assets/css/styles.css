@@ -150,6 +150,21 @@ a:focus {
   animation-delay: 2s;
   animation-fill-mode: forwards;
 }
+.header-about .banner-mobile {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 20px;
+  height: 180px;
+  background-color: #343434;
+}
+.header-about .banner-mobile .charge-anything {
+  opacity: 1;
+}
+.header-about .banner-mobile .anywhere {
+  opacity: 1;
+  color: #f9a92a;
+}
 .addoutlet {
   margin-bottom: 40px;
 }
@@ -178,8 +193,18 @@ a:focus {
   margin-bottom: 20px;
   text-align: center;
 }
+.about .howitworks .column-headers .mobile-points {
+  text-align: center !important;
+}
+.about .howitworks .column-headers .mobile-points p {
+  font-size: 24px;
+  text-align: center !important;
+}
 .about .howitworks .banner-item {
   opacity: 0;
+}
+.about .howitworks .banner-item-mobile {
+  opacity: 1;
 }
 .about .howitworks .landscape-banner {
   background: url("http://localhost:3000/assets/img/landscape.png");
@@ -194,7 +219,15 @@ a:focus {
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 20%;
+  background-size: 15%;
+  margin-top: 20px;
+}
+.about .howitworks .outlet-mobile {
+  background: url("http://localhost:3000/assets/img/outlet.png");
+  height: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 15%;
   margin-top: 20px;
 }
 .about .howitworks .location {
@@ -202,7 +235,15 @@ a:focus {
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 50%;
+  margin-top: 20px;
+}
+.about .howitworks .location-mobile {
+  background: url("http://localhost:3000/assets/img/location.png");
+  height: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40%;
   margin-top: 20px;
 }
 .about .howitworks .trees {
@@ -210,12 +251,20 @@ a:focus {
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 50%;
+  margin-top: 20px;
+}
+.about .howitworks .trees-mobile {
+  background: url("http://localhost:3000/assets/img/trees.png");
+  height: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50%;
   margin-top: 20px;
 }
 .about .energyInfo {
   background-color: #666699;
-  height: 910px;
+  height: 814px;
 }
 .about .energyInfo .our-stack h2 {
   padding-top: 30px;
@@ -228,8 +277,8 @@ a:focus {
 }
 .about .energyInfo .diagram {
   background: url('http://jammiemountz.com/wp-content/uploads/2015/07/diagram-for-our-server-01.png');
-  height: 100%;
-  background-size: 70%;
+  height: 90%;
+  background-size: 50%;
   background-repeat: no-repeat;
   background-position: top center;
 }
@@ -241,12 +290,30 @@ a:focus {
   height: 100px;
 }
 .about .energyInfo .diagram .diagram-data {
-  width: 30%;
+  width: 25%;
 }
 .about .energyInfo .diagram .diagram-data .instructions {
   color: white;
   font-size: 20px;
   padding-left: 30px;
+}
+.footer-banner {
+  height: 160px;
+  background-color: #343434;
+}
+.footer-banner h3 {
+  color: white;
+}
+.footer-banner h4 {
+  color: #d0d8da;
+}
+.footer-banner .octocat {
+  background: url('https://i2.wp.com/assets-cdn.github.com/images/gravatars/gravatar-user-420.png?ssl=1gith');
+  height: 180px;
+  background-size: 20%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-position-y: 30px;
 }
 h1 {
   color: black;
