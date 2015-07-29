@@ -163,15 +163,49 @@ a:focus {
   background-color: #FFFFFF;
 }
 .about .howitworks {
-  background-color: #f9a92a;
   height: 100%;
-  margin-bottom: 30px;
+  padding-bottom: 30px;
 }
 .about .howitworks .column-headers h3 {
   color: white;
   margin-top: 40px;
   margin-bottom: 20px;
   text-align: center;
+}
+.about .howitworks .banner-item {
+  opacity: 0;
+}
+.about .howitworks .landscape-banner {
+  background: url("http://localhost:3000/assets/img/landscape.png");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100%;
+  height: 100px;
+  width: 100%;
+}
+.about .howitworks .outlet {
+  background: url("http://localhost:3000/assets/img/outlet.png");
+  height: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20%;
+  margin-top: 20px;
+}
+.about .howitworks .location {
+  background: url("http://localhost:3000/assets/img/location.png");
+  height: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 60%;
+  margin-top: 20px;
+}
+.about .howitworks .trees {
+  background: url("http://localhost:3000/assets/img/trees.png");
+  height: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 60%;
+  margin-top: 20px;
 }
 .about .energyInfo {
   background-color: #666699;
@@ -181,6 +215,10 @@ a:focus {
   padding-top: 30px;
   text-align: center;
   color: white;
+}
+.about .energyInfo .our-stack li {
+  font-size: 16px;
+  margin: 15px;
 }
 .about .energyInfo .diagram {
   background: url('http://jammiemountz.com/wp-content/uploads/2015/07/diagram-for-our-server-01.png');
