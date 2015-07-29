@@ -1,4 +1,4 @@
-var BASE_URL = window.location.origin+'/';
+var BASE_URL = 'http://econnectus.herokuapp.com/';
 
 var authConstants = {
   BASE_URL: BASE_URL,

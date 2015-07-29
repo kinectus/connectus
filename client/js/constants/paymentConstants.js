@@ -1,4 +1,4 @@
-var BASE_URL = window.location.origin+'/';
+var BASE_URL = 'http://econnectus.herokuapp.com/';
 
 var paymentConstants = {
   BASE_URL: BASE_URL,
