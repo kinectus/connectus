@@ -501,30 +501,18 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
 
   getInitialState: function(){
     return {
-      data: [],
-      realtime: {
-        totalKwh: 0,
-        watts: 0,
-        clientData: {
-          outlet: {
-            priceEnergy: 0,
-            priceHourly: 0
-          }
-        }
-      }
+      data: []
+    //   realtime: {
+    //     totalKwh: 0,
+    //     watts: 0,
+    //     clientData: {
+    //       outlet: {
+    //         priceEnergy: 0,
+    //         priceHourly: 0
+    //       }
+    //     }
+    //   }
     }
-    // return {
-      // data:  {
-      //   totalKwh: 0,
-      //   watts: 0,
-      //   clientData: {
-      //     outlet: {
-      //       priceEnergy: 0,
-      //       priceHourly: 0
-      //     }
-      //   }
-      // }
-    // };
   },
 
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
@@ -536,10 +524,6 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
   //   });
   // },
 
-// click on
-  // get transactionId, get context (value of this - "on" buton)
-  // turnOn
-    // create socket (use transactionId in the socket)
   componentDidMount: function() {
     var that = this;
     console.log(moment("2015-07-30 00:30", "YYYY-MM-DD HH:mm") > moment());
@@ -568,24 +552,22 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
     var transactionId = transaction.id+'';
     socket.on(transactionId, function (data) {
       console.log("got energy!", data);
-
-      var totalCost = Math.round( (data.totalKwh * data.clientData.outlet.priceEnergy  +  data.clientData.outlet.priceHourly/(60*60)*10 *1000 )/1000 * 1000) / 1000  ;
-      var avgWatts = Math.round ( data.avgWatts *10)/10;
+      var pricePerKwh = data.totalKwh * data.clientData.outlet.priceEnergy;
+      var hourlyPrice = data.clientData.outlet.priceHourly/(60*60)*10;
+      var totalCost = (pricePerKwh+hourlyPrice).toFixed(3);
+      var avgWatts = (data.avgWatts).toFixed(0);
       var targetClass = '.'+transactionId;
-      $(targetClass).find('.totalKwh').text(data.totalKwh);
+      $(targetClass).find('.totalKwh').text(data.totalKwh.toFixed(3));
       $(targetClass).find('.total').text(totalCost);
       $(targetClass).find('.watts').text(avgWatts);
-      // console.log('that.refs[1]);
-      // that.refs.pow.setState({realtime: data})
+
       // that.refs[transactionId].setState({realtime: data})
       // that.setState({realtime: data})
-      // console.log(that);
-      // $( that.refs[transactionId] ).
+
     });
   },
 
   //function to turn off powerServer found in setCurrent Transaction
-
   render: function() {
     var power = '';
     // is the user authenticated?
@@ -600,39 +582,39 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
     if (this.state.data.length !==0) {
       var transactionRows = this.state.data.map(function(transaction) {
         return (
-          React.createElement("table", {className: "table-hover transaction-rows"}, 
-            React.createElement("tr", {key:  transaction.id, onClick:  that.reserveOutlet, className: moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? 'expired' + ' regTransRow' : 'regTransRow'}, 
-              React.createElement("td", {className: "regTrans"}, 
-                "Start: ",  transaction.startTime.date, " - ",  transaction.startTime.slot.time, 
-                React.createElement("br", null), 
-                "End: ",  transaction.endTime.date, " - ",  transaction.endTime.slot.time
-              ), 
-              React.createElement("td", {className: "regTrans"}, 
-                 transaction.outlet.name
-              ), 
-              React.createElement("td", {className: "regTrans"}, 
-                "Seller: ",  transaction.seller.fullname
-              ), 
-              React.createElement("td", {className: "regTrans"}, 
-                 transaction.outlet.voltage
-              ), 
-              React.createElement("td", {className: "regTrans"}, 
-                "Price by hour: ",  transaction.outlet.priceHourly, 
-                React.createElement("br", null), 
-                "Price by kWh: ",  transaction.outlet.priceEnergy
-              ), 
-              React.createElement("td", {className: "regTrans"}, 
-               transaction.outlet.description
-              ), 
-              React.createElement("td", {className: "regTrans"}, 
-                React.createElement("div", {className: "btn", onClick: that.turnOn.bind(that, transaction)}, "ON"), 
-                React.createElement("div", {className: "btn", onClick: that.setCurrentTransaction.bind(that, transaction)}, "OFF")
-              )
+          React.createElement("tr", {key:  transaction.id, onClick:  that.reserveOutlet, className: moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? 'expired' + ' regTransRow' : 'regTransRow'}, 
+            React.createElement("td", {className: "regTrans"}, 
+              "Start: ",  transaction.startTime.date, " - ",  transaction.startTime.slot.time, 
+              React.createElement("br", null), 
+              "End: ",  transaction.endTime.date, " - ",  transaction.endTime.slot.time
             ), 
-            React.createElement("tr", {className: transaction.id}, 
-              React.createElement("td", null, React.createElement("h4", null, "Total kWh"), React.createElement("p", {className: "totalKwh"})), 
-              React.createElement("td", null, React.createElement("h4", null, "Total $"), React.createElement("p", {className: "total"})), 
-              React.createElement("td", null, React.createElement("h4", null, "Watts"), React.createElement("p", {className: "watts"}))
+            React.createElement("td", {className: "regTrans"}, 
+               transaction.outlet.name
+            ), 
+            React.createElement("td", {className: "regTrans"}, 
+               transaction.seller.fullname
+            ), 
+            React.createElement("td", {className: "regTrans"}, 
+               transaction.outlet.voltage
+            ), 
+            React.createElement("td", {className: "regTrans"}, 
+              "$",  transaction.outlet.priceHourly, "/hr", 
+              React.createElement("br", null), 
+              "$",  transaction.outlet.priceEnergy, "/kWh"
+            ), 
+            React.createElement("td", {className: "regTrans"}, 
+             transaction.outlet.description
+            ), 
+            React.createElement("td", {className: "regTrans"}, 
+              React.createElement("div", {className: "btn", onClick: that.turnOn.bind(that, transaction)}, "ON"), 
+              React.createElement("div", {className: "btn", onClick: that.setCurrentTransaction.bind(that, transaction)}, "OFF")
+            ), 
+            React.createElement("td", {className: transaction.id}, 
+              React.createElement("div", {className: "realtimeData"}, 
+                React.createElement("p", null, React.createElement("span", null, "Total kWh "), React.createElement("span", {className: "totalKwh"})), 
+                React.createElement("p", null, React.createElement("span", null, "Total $ "), React.createElement("span", {className: "total"})), 
+                React.createElement("p", null, React.createElement("span", null, "Watts "), React.createElement("span", {className: "watts"}))
+              )
             )
           )
         )
@@ -645,8 +627,22 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
 
       return (
         React.createElement("div", {className: "outletsList container"}, 
-          React.createElement("table", {className: "ui selectable celled padded table"}, 
-             transactionRows 
+          React.createElement("table", {className: "ui selectable celled padded table transaction-rows"}, 
+            React.createElement("thead", null, 
+              React.createElement("tr", null, 
+                React.createElement("th", null, "Reservation Info"), 
+                React.createElement("th", {className: ""}, "Outlet Name"), 
+                React.createElement("th", null, "Seller"), 
+                React.createElement("th", null, "Voltage"), 
+                React.createElement("th", null, "Price"), 
+                React.createElement("th", null, "Description"), 
+                React.createElement("th", null, "Controller"), 
+                React.createElement("th", null, "Realtime Data")
+              )
+            ), 
+            React.createElement("tbody", null, 
+               transactionRows 
+            )
           )
         )
       )

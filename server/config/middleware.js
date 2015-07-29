@@ -23,7 +23,7 @@ app.use(function(err, req, res, next){
   }
 });
 
-app.use(express.static(path.join( 'http://econnectus.herokuapp.com/dist')));
+app.use(express.static(path.join( __dirname + '/../../dist')));
 
 var authRouter = new express.Router();
 var apiRouter = new express.Router();
