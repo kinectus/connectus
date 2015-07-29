@@ -7,6 +7,8 @@ var Link = require('react-router').Link;
 var About = React.createClass({
 
   componentDidMount: function() {
+    var stop = true;
+
     $('.phone').popover({
       trigger: 'hover',
       placement: 'right',
@@ -22,6 +24,22 @@ var About = React.createClass({
       trigger: 'hover',
       placement: 'left'
     })
+
+    $(window).scroll(function(){
+      console.log('THEY SEE ME SCROLLIN...')
+      stop = false;
+      if($(this).scrollTop() > 100 && stop === false) {
+        $('.banner-item').fadeIn(2000, 'swing')
+          .animate({
+            opacity: 1,
+            left: '+= 30'
+          }, {
+            duration: '2000',
+            easing: 'swing',
+            queue: false
+        })
+      }
+    })
   },
 
   render: function(){
@@ -34,6 +52,13 @@ var About = React.createClass({
         </div>
           <div className="section howitworks">
             <div className="container">
+              <div className='landscape-banner'>
+                <div className='row'>
+                  <div className='banner-item col-md-4 outlet'></div>
+                  <div className='banner-item col-md-4 location'></div>
+                  <div className='banner-item col-md-4 trees'></div>
+                </div>
+              </div>
   	          <div className='row'>
                 <div className="col-md-4">
                   <span className="column-headers"><h3>Sell your electricity.</h3></span>
