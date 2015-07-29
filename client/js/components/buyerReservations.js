@@ -63,8 +63,9 @@ var buyerReservations = React.createClass({
   setCurrentTransaction: function(transaction){
     console.log(transaction)
     var that =this;
+    //turn off socket and THEN
     outletStore.setCurrentTransaction({id: transaction.id, currentStatus: true, paid: false}).then(function(transaction){
-      // outletServices.turnOutletOff(transaction); //connects with powerServer
+      outletServices.turnOutletOff(transaction); //connects with powerServer
       that.transitionTo('paymentsPage');
       return transaction;
     });
@@ -80,7 +81,7 @@ var buyerReservations = React.createClass({
     socket.on(transactionId, function (data) {
       console.log("got energy!", data);
 
-      var totalCost = Math.round(data.totalKwh * data.clientData.outlet.priceEnergy * 1000)/1000 + Math.round(data.clientData.outlet.priceHourly/(60*60)*10 *1000 )/1000;
+      var totalCost = Math.round( (data.totalKwh * data.clientData.outlet.priceEnergy  +  data.clientData.outlet.priceHourly/(60*60)*10 *1000 )/1000 * 1000) / 1000  ;
       var avgWatts = Math.round ( data.avgWatts *10)/10;
       var targetClass = '.'+transactionId;
       $(targetClass).find('.totalKwh').text(data.totalKwh);
