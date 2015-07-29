@@ -224,16 +224,16 @@ var Availability = React.createClass({
   },
 
   handleResize: function(e) {
-    if (window.innerWidth<469){
-      this.setState({end: 9, middle: 4});
+    if (window.innerWidth<497){
+      this.setState({end: 7, middle: 3});
     } else if (window.innerWidth<674){
-      this.setState({end: 13, middle: 6});
+      this.setState({end: 11, middle: 5});
     } else if (window.innerWidth<994){
+      this.setState({end: 15, middle: 7});
+    } else if (window.innerWidth<1055){
       this.setState({end: 17, middle: 8});
-    } else if (window.innerWidth<1031){
-      this.setState({end: 25, middle: 12});
     } else {
-      this.setState({end: 31, middle: 15});
+      this.setState({end: 25, middle: 12});
     }
   },
 
@@ -250,7 +250,6 @@ var Availability = React.createClass({
     outletStore.getTimeSlotInfo().then(function(slots){
       that.setState({timeSlots: slots, start: 0});
     });
-
   },
 
   componentWillUnmount: function() {
@@ -281,6 +280,7 @@ var Availability = React.createClass({
     this.hasHappened = false;
   },
 
+  // Scroll functionality
   goForward: function() {
     var that = this;
     if (this.state.end < this.state.reservations.length-1){
@@ -349,12 +349,15 @@ var Availability = React.createClass({
 
             <div className={blockClass} key={reservation.id}><p>{begin}-{end}</p></div>
           )
+
         // Regularly label all slots but center
         } else {
           if ( parseInt(reservation.slot_id, 10) % 2 === 1 ){
-            var splitHour = "timeblock splitHour";
+            var indicator = reservation.available ? "indicator barView" : "noIndicator barView";
+            blockClass = blockClass + " splitHour"
             var hoverStart = slotProps[reservation.slot_id-1].start;
             hoverStart = moment('12/25/1995 '+hoverStart).format('MM/DD/YYYY ha');
+
             if (hoverStart[12] === '0'){
               hoverStart = hoverStart.slice(12);
               if (hoverStart = '0am'){
@@ -364,24 +367,23 @@ var Availability = React.createClass({
               hoverStart = hoverStart.slice(11);
             }
             return(
-              <div className={splitHour} key={reservation.id}>
-              <div className="barView"><p className="barViewText">{hoverStart}</p></div>
+              <div className="timeblock" key={reservation.id}>
+              <div className={indicator}><p className="barViewText">{hoverStart}</p></div>
               <div className={blockClass}></div>
               </div>
             )
           } else {
+            indicator = reservation.available ? "indicator barViewBack" : "noIndicator barViewBack";
+
             return(
               <div className="timeblock" key={reservation.id}>
-              <div className="barViewBack"></div>
+              <div className={indicator}></div>
               <div className={blockClass}></div>
               </div>
-
             )
           }
-
         }
       });
-
 
     // Fallback before API call is complete
     } else {var outerHTML = <div className="slot"></div> }
@@ -441,12 +443,13 @@ var Viewer = React.createClass({
           <Availability move={this.state.move} mouseDown={this.state.mouseDown} forward={this.state.forward} outletID = {this.props.outletID}/>
         </div>
         <div className="centering pad-top">
-          <button className="toggle glyphicon glyphicon-chevron-left" onMouseDown={this.mouseDownBack} onMouseUp={this.mouseUp}></button>
-          <button className="toggle glyphicon glyphicon-chevron-right" onMouseDown={this.mouseDownForward} onMouseUp={this.mouseUp}></button>
+          <button className="toggle glyphicon glyphicon-chevron-left" onMouseDown={this.mouseDownBack} onMouseUp={this.mouseUp} onMouseLeave={this.mouseUp}></button>
+          <button className="toggle glyphicon glyphicon-chevron-right" onMouseDown={this.mouseDownForward} onMouseUp={this.mouseUp} onMouseLeave={this.mouseUp}></button>
         </div>
       </div>
     )
   }
+
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -461,12 +464,9 @@ var reserveOutlet = React.createClass({
       data: []
     }
   },
+
   mixins: [Router.Navigation],
-  
-  // is onchange necessary?????
-  // _onChange: function() {
-  //   this.setState(this.getInitialState());
-  // },
+
   componentDidMount: function() {
     var that = this;
     var outletID = this.props.params.id

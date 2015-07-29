@@ -9,17 +9,18 @@ module.exports = addNewOutlet = function(req, res){
   new User({
     username: req.user.id
   }).fetch().then(function(user){
+    // See if outlet exits
     new Outlet({
       name: data.name,
       priceEnergy: data.charge,
-      // priceHourly: data.priceHourly,
       description: data.description,
-      // priceSuggest: data.priceSuggest,
       address: data.address,
       voltage: data.voltage
     }).fetch().then(function(found) {
+      // If exists, return
       if (found) {
         res.send(201, found.attributes);
+      // Otherwise post
       } else {
         var outlet = new Outlet({
           name: data.name,
@@ -35,7 +36,7 @@ module.exports = addNewOutlet = function(req, res){
           thumbs_up: 0,
           thumbs_down: 0
         });
-
+        // Save outlet and create corresponding reservation slots
         outlet.save().then(function(newOutlet){
           console.log('newOutlet before addReservations: ', newOutlet.attributes);
           addReservations(newOutlet.attributes);

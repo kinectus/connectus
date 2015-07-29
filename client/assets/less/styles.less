@@ -345,6 +345,7 @@ h1 {
  Reserve an Outlet
 /////////////////////////
 
+////General
 .holder {
   position: relative;  
 }
@@ -359,6 +360,7 @@ h1 {
   margin-top: 5vh;
 }
 
+////Availability
 .viewBox {
   margin: 0 auto;
   height: 30px;
@@ -375,10 +377,11 @@ h1 {
 
 .on {
   display: inline-block;
-  width: 27px;
-  height: 30px;
-  background-color: blue;
-  border-bottom: 2px solid grey;
+  width: 36px;
+  height: 35px;
+  background-color: @blue;
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
   color: white;
   text-align: left;
   margin: 0;
@@ -387,10 +390,11 @@ h1 {
 
 .off {
   display: inline-block;
-  width: 27px;
-  height: 30px;
-  background-color: @red;
-  border-bottom: 2px solid grey;
+  width: 36px;
+  height: 35px;
+  background-color: grey;
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
   color: white;
   text-align: left;
   margin: 0;
@@ -399,11 +403,24 @@ h1 {
 
 .barView {
   position: relative;
-  width: 27px;
+  width: 36px;
   height: 15px;
   background-color: grey;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
   color: white;
   z-index: 3;
+}
+
+.barViewBack {
+  position: relative;
+  width: 36px;
+  height: 15px;
+  background-color: grey;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  color: white;
+  z-index: 2;
 }
 
 .barViewText {
@@ -413,13 +430,9 @@ h1 {
   top: -10px;
 }
 
-.barViewBack {
-  position: relative;
-  width: 27px;
-  height: 15px;
-  background-color: grey;
-  color: white;
-  z-index: 2;
+
+.indicator {
+  background-color: black;
 }
 
 .date {
@@ -430,7 +443,7 @@ h1 {
   position: relative;
   vertical-align: top;
   width: 85px;
-  height: 47px;
+  height: 51px;
   border: 3px solid white;
   color: white;
   text-align: center;
@@ -444,11 +457,13 @@ h1 {
   border: 2px solid grey;
 }
 
+////Buttons
 .toggle {
   display: inline-block;
   right: -1px;
 }
 
+////Alerts
 .error{
   color: #FF0000;
 }
