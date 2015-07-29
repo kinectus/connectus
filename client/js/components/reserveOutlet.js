@@ -129,7 +129,7 @@ var DateTime = React.createClass({
   render: function() {
     var that = this;
     var hidden = !this.state.alert ? "hidden" : "notHidden centering";
-    var successful = !this.state.success ? "hidden" : "notHidden centering";
+    var successful = !this.state.success ? "hidden" : "notHidden centering reserveConfirm";
     var buttonHide = !this.state.success ? "notHidden centering btn btn-default" : "hidden";
 
     // Format default date to be closest upcoming time at 30-minute interval
@@ -149,8 +149,8 @@ var DateTime = React.createClass({
         </Alert>
         <Alert bsStyle='success' className={successful}>
             <strong>{this.state.message}</strong><br></br>
-            <button onClick={this.closeMe}>Make another reservation at this outlet</button>
-            <button><Link to="/outlets">Return to browsing</Link></button>
+            <button className="alertButton" onClick={this.closeMe}>Add another reservation</button>
+            <button className="alertButton"><Link to="/outlets">Return to browsing</Link></button>
         </Alert>
         <DateTimePicker  ref="startTime" defaultValue={firstDate} />
         <DateTimePicker  ref="endTime" defaultValue={null} />
