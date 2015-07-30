@@ -16,6 +16,10 @@
   "bugs": {
     "url": "https://github.com/Dianna/connectus/issues"
   },
+  "scripts": {
+    "start": "node",
+    "postinstall": "gulp"
+  },
   "homepage": "https://github.com/Dianna/connectus#readme",
   "dependencies": {
     "address-validator": "^0.1.4",
