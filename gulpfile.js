@@ -5,7 +5,6 @@ var source = require('vinyl-source-stream') // converts string to stream for gul
 var less = require('gulp-less');
 var path = require('path');
 // var uglify = require('gulp-uglify')
-var buffer = require('vinyl-buffer')
 var ignore = require('gulp-ignore')
 var babelify = require('babelify');
 var gutil = require('gulp-util');
