@@ -69,7 +69,7 @@ var Connectus = React.createClass({
       console.log('full footer rendering')
       var footerHtml = (
         <div className="container-fluid footer-banner">
-          <div className='row'>
+          <div className='row footer'>
             <div className='col-md-4'>
               <h3>Connect.us Team</h3>
               <h4>Sean Conner, Valerie Liang,</h4>

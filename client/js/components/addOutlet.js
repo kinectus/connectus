@@ -97,6 +97,7 @@ var addOutlet = React.createClass({
 
     return (
       <div>
+        <div className="container">
         <div className="addoutlet col-md-6 col-md-offset-3">
           <h3>Add an outlet:</h3>
           <h4>{this.state.validationMessage}</h4>
@@ -146,6 +147,7 @@ var addOutlet = React.createClass({
             </div>
             {buttonHtml}
           </form>
+        </div>
         </div>
       </div>
     )
