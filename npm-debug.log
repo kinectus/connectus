@@ -129,10 +129,10 @@
 66 verbose installManyTop reading scoped package data from /Users/vliang63/Desktop/HR/connectus/node_modules/yamljs/package.json
 67 info package.json address-validator@0.1.4 No license field.
 68 info package.json braintree@1.27.0 No license field.
-69 info package.json fs@0.0.2 fs is also the name of a node core module.
-70 info package.json fs@0.0.2 No description
-71 info package.json fs@0.0.2 No repository field.
-72 info package.json flux@2.0.3 license should be a valid SPDX license expression
+69 info package.json flux@2.0.3 license should be a valid SPDX license expression
+70 info package.json fs@0.0.2 fs is also the name of a node core module.
+71 info package.json fs@0.0.2 No description
+72 info package.json fs@0.0.2 No repository field.
 73 info package.json geocoder@0.2.2 license should be a valid SPDX license expression
 74 info package.json gulp-concat-css@2.2.0 No license field.
 75 info package.json gulp-copy@0.0.2 No license field.
@@ -143,8 +143,8 @@
 80 info package.json node-watch@0.3.4 No license field.
 81 info package.json passport-facebook@2.0.0 No license field.
 82 info package.json path@0.11.14 path is also the name of a node core module.
-83 info package.json socket.io@1.3.6 No license field.
-84 info package.json underbar@0.1.0 No license field.
+83 info package.json underbar@0.1.0 No license field.
+84 info package.json socket.io@1.3.6 No license field.
 85 info package.json yamljs@0.2.3 No license field.
 86 verbose readDependencies loading dependencies from /Users/vliang63/Desktop/HR/connectus/package.json
 87 verbose targetResolver reading package data from /Users/vliang63/Desktop/HR/connectus/node_modules/address-validator/package.json
@@ -212,64 +212,64 @@
 149 verbose targetResolver reading package data from /Users/vliang63/Desktop/HR/connectus/node_modules/.bin/knex/package.json
 150 verbose targetResolver reading package data from /Users/vliang63/Desktop/HR/connectus/node_modules/.bin/nodemon/package.json
 151 verbose targetResolver reading package data from /Users/vliang63/Desktop/HR/connectus/node_modules/.bin/yaml2json/package.json
-152 verbose already installed skipping chai@^3.1.0 /Users/vliang63/Desktop/HR/connectus
-153 verbose already installed skipping classnames@^2.1.3 /Users/vliang63/Desktop/HR/connectus
-154 verbose already installed skipping cookie-parser@^1.3.5 /Users/vliang63/Desktop/HR/connectus
-155 verbose already installed skipping cors@^2.7.1 /Users/vliang63/Desktop/HR/connectus
-156 verbose already installed skipping del@^1.2.0 /Users/vliang63/Desktop/HR/connectus
-157 verbose already installed skipping express@^4.13.1 /Users/vliang63/Desktop/HR/connectus
-158 verbose already installed skipping express-session@^1.11.3 /Users/vliang63/Desktop/HR/connectus
-159 verbose already installed skipping faker@^3.0.0 /Users/vliang63/Desktop/HR/connectus
-160 verbose already installed skipping flux@^2.0.3 /Users/vliang63/Desktop/HR/connectus
-161 verbose already installed skipping fs@0.0.2 /Users/vliang63/Desktop/HR/connectus
-162 verbose already installed skipping geocoder@^0.2.2 /Users/vliang63/Desktop/HR/connectus
-163 verbose already installed skipping google-map-react@^0.4.0 /Users/vliang63/Desktop/HR/connectus
-164 verbose already installed skipping gulp@^3.9.0 /Users/vliang63/Desktop/HR/connectus
-165 verbose already installed skipping gulp-concat-css@^2.2.0 /Users/vliang63/Desktop/HR/connectus
-166 verbose already installed skipping gulp-copy@0.0.2 /Users/vliang63/Desktop/HR/connectus
-167 verbose already installed skipping gulp-flatten@^0.1.0 /Users/vliang63/Desktop/HR/connectus
-168 verbose already installed skipping gulp-header@^1.2.2 /Users/vliang63/Desktop/HR/connectus
-169 verbose already installed skipping gulp-help@^1.6.0 /Users/vliang63/Desktop/HR/connectus
-170 verbose already installed skipping gulp-less@^3.0.3 /Users/vliang63/Desktop/HR/connectus
-171 verbose already installed skipping gulp-notify@^2.2.0 /Users/vliang63/Desktop/HR/connectus
-172 verbose already installed skipping gulp-rtlcss@^0.1.4 /Users/vliang63/Desktop/HR/connectus
-173 verbose already installed skipping immutable@^3.7.4 /Users/vliang63/Desktop/HR/connectus
-174 verbose already installed skipping jquery@^2.1.4 /Users/vliang63/Desktop/HR/connectus
-175 verbose already installed skipping knex@^0.8.6 /Users/vliang63/Desktop/HR/connectus
-176 verbose already installed skipping map-stream@0.0.6 /Users/vliang63/Desktop/HR/connectus
-177 verbose already installed skipping microevent@^1.0.0 /Users/vliang63/Desktop/HR/connectus
-178 verbose already installed skipping moment@^2.10.3 /Users/vliang63/Desktop/HR/connectus
-179 verbose already installed skipping mysql@^2.7.0 /Users/vliang63/Desktop/HR/connectus
-180 verbose already installed skipping node-watch@^0.3.4 /Users/vliang63/Desktop/HR/connectus
-181 verbose already installed skipping nodemon@^1.3.7 /Users/vliang63/Desktop/HR/connectus
-182 verbose already installed skipping passport@^0.2.2 /Users/vliang63/Desktop/HR/connectus
-183 verbose already installed skipping passport-facebook@^2.0.0 /Users/vliang63/Desktop/HR/connectus
-184 verbose already installed skipping path@^0.11.14 /Users/vliang63/Desktop/HR/connectus
-185 verbose already installed skipping react@^0.13.3 /Users/vliang63/Desktop/HR/connectus
-186 verbose already installed skipping react-async@^2.1.0 /Users/vliang63/Desktop/HR/connectus
-187 verbose already installed skipping react-bootstrap@^0.24.2 /Users/vliang63/Desktop/HR/connectus
-188 verbose already installed skipping react-controllables@^0.3.3 /Users/vliang63/Desktop/HR/connectus
-189 verbose already installed skipping react-mixin@^1.6.0 /Users/vliang63/Desktop/HR/connectus
-190 verbose already installed skipping react-pure-render@^1.0.2 /Users/vliang63/Desktop/HR/connectus
-191 verbose already installed skipping react-router@^0.13.3 /Users/vliang63/Desktop/HR/connectus
-192 verbose already installed skipping react-router-component@^0.26.0 /Users/vliang63/Desktop/HR/connectus
-193 verbose already installed skipping react-tools@^0.13.3 /Users/vliang63/Desktop/HR/connectus
-194 verbose already installed skipping react-widgets@^2.7.2 /Users/vliang63/Desktop/HR/connectus
-195 verbose already installed skipping reactify@^1.1.1 /Users/vliang63/Desktop/HR/connectus
-196 verbose already installed skipping redux@^0.12.0 /Users/vliang63/Desktop/HR/connectus
-197 verbose already installed skipping request-promise@^0.4.2 /Users/vliang63/Desktop/HR/connectus
-198 verbose already installed skipping socket.io@^1.3.6 /Users/vliang63/Desktop/HR/connectus
-199 verbose already installed skipping underbar@^0.1.0 /Users/vliang63/Desktop/HR/connectus
-200 verbose already installed skipping underscore@^1.8.3 /Users/vliang63/Desktop/HR/connectus
-201 verbose already installed skipping vinyl-source-stream@^1.1.0 /Users/vliang63/Desktop/HR/connectus
-202 verbose already installed skipping yamljs@^0.2.3 /Users/vliang63/Desktop/HR/connectus
-203 verbose already installed skipping address-validator@^0.1.4 /Users/vliang63/Desktop/HR/connectus
-204 verbose already installed skipping async-decorators@^0.1.3 /Users/vliang63/Desktop/HR/connectus
-205 verbose already installed skipping bluebird@^2.9.33 /Users/vliang63/Desktop/HR/connectus
-206 verbose already installed skipping body-parser@^1.13.2 /Users/vliang63/Desktop/HR/connectus
-207 verbose already installed skipping bookshelf@^0.8.1 /Users/vliang63/Desktop/HR/connectus
-208 verbose already installed skipping braintree@^1.27.0 /Users/vliang63/Desktop/HR/connectus
-209 verbose already installed skipping browserify@^10.2.6 /Users/vliang63/Desktop/HR/connectus
+152 verbose already installed skipping cookie-parser@^1.3.5 /Users/vliang63/Desktop/HR/connectus
+153 verbose already installed skipping cors@^2.7.1 /Users/vliang63/Desktop/HR/connectus
+154 verbose already installed skipping del@^1.2.0 /Users/vliang63/Desktop/HR/connectus
+155 verbose already installed skipping express@^4.13.1 /Users/vliang63/Desktop/HR/connectus
+156 verbose already installed skipping express-session@^1.11.3 /Users/vliang63/Desktop/HR/connectus
+157 verbose already installed skipping faker@^3.0.0 /Users/vliang63/Desktop/HR/connectus
+158 verbose already installed skipping flux@^2.0.3 /Users/vliang63/Desktop/HR/connectus
+159 verbose already installed skipping fs@0.0.2 /Users/vliang63/Desktop/HR/connectus
+160 verbose already installed skipping geocoder@^0.2.2 /Users/vliang63/Desktop/HR/connectus
+161 verbose already installed skipping google-map-react@^0.4.0 /Users/vliang63/Desktop/HR/connectus
+162 verbose already installed skipping gulp@^3.9.0 /Users/vliang63/Desktop/HR/connectus
+163 verbose already installed skipping gulp-concat-css@^2.2.0 /Users/vliang63/Desktop/HR/connectus
+164 verbose already installed skipping gulp-copy@0.0.2 /Users/vliang63/Desktop/HR/connectus
+165 verbose already installed skipping gulp-flatten@^0.1.0 /Users/vliang63/Desktop/HR/connectus
+166 verbose already installed skipping gulp-header@^1.2.2 /Users/vliang63/Desktop/HR/connectus
+167 verbose already installed skipping gulp-help@^1.6.0 /Users/vliang63/Desktop/HR/connectus
+168 verbose already installed skipping gulp-less@^3.0.3 /Users/vliang63/Desktop/HR/connectus
+169 verbose already installed skipping gulp-notify@^2.2.0 /Users/vliang63/Desktop/HR/connectus
+170 verbose already installed skipping gulp-rtlcss@^0.1.4 /Users/vliang63/Desktop/HR/connectus
+171 verbose already installed skipping immutable@^3.7.4 /Users/vliang63/Desktop/HR/connectus
+172 verbose already installed skipping jquery@^2.1.4 /Users/vliang63/Desktop/HR/connectus
+173 verbose already installed skipping knex@^0.8.6 /Users/vliang63/Desktop/HR/connectus
+174 verbose already installed skipping map-stream@0.0.6 /Users/vliang63/Desktop/HR/connectus
+175 verbose already installed skipping microevent@^1.0.0 /Users/vliang63/Desktop/HR/connectus
+176 verbose already installed skipping moment@^2.10.3 /Users/vliang63/Desktop/HR/connectus
+177 verbose already installed skipping mysql@^2.7.0 /Users/vliang63/Desktop/HR/connectus
+178 verbose already installed skipping node-watch@^0.3.4 /Users/vliang63/Desktop/HR/connectus
+179 verbose already installed skipping nodemon@^1.3.7 /Users/vliang63/Desktop/HR/connectus
+180 verbose already installed skipping passport@^0.2.2 /Users/vliang63/Desktop/HR/connectus
+181 verbose already installed skipping passport-facebook@^2.0.0 /Users/vliang63/Desktop/HR/connectus
+182 verbose already installed skipping path@^0.11.14 /Users/vliang63/Desktop/HR/connectus
+183 verbose already installed skipping react@^0.13.3 /Users/vliang63/Desktop/HR/connectus
+184 verbose already installed skipping react-async@^2.1.0 /Users/vliang63/Desktop/HR/connectus
+185 verbose already installed skipping react-bootstrap@^0.24.2 /Users/vliang63/Desktop/HR/connectus
+186 verbose already installed skipping react-controllables@^0.3.3 /Users/vliang63/Desktop/HR/connectus
+187 verbose already installed skipping react-mixin@^1.6.0 /Users/vliang63/Desktop/HR/connectus
+188 verbose already installed skipping react-pure-render@^1.0.2 /Users/vliang63/Desktop/HR/connectus
+189 verbose already installed skipping react-router@^0.13.3 /Users/vliang63/Desktop/HR/connectus
+190 verbose already installed skipping react-router-component@^0.26.0 /Users/vliang63/Desktop/HR/connectus
+191 verbose already installed skipping react-tools@^0.13.3 /Users/vliang63/Desktop/HR/connectus
+192 verbose already installed skipping react-widgets@^2.7.2 /Users/vliang63/Desktop/HR/connectus
+193 verbose already installed skipping reactify@^1.1.1 /Users/vliang63/Desktop/HR/connectus
+194 verbose already installed skipping redux@^0.12.0 /Users/vliang63/Desktop/HR/connectus
+195 verbose already installed skipping request-promise@^0.4.2 /Users/vliang63/Desktop/HR/connectus
+196 verbose already installed skipping socket.io@^1.3.6 /Users/vliang63/Desktop/HR/connectus
+197 verbose already installed skipping underbar@^0.1.0 /Users/vliang63/Desktop/HR/connectus
+198 verbose already installed skipping underscore@^1.8.3 /Users/vliang63/Desktop/HR/connectus
+199 verbose already installed skipping vinyl-source-stream@^1.1.0 /Users/vliang63/Desktop/HR/connectus
+200 verbose already installed skipping yamljs@^0.2.3 /Users/vliang63/Desktop/HR/connectus
+201 verbose already installed skipping address-validator@^0.1.4 /Users/vliang63/Desktop/HR/connectus
+202 verbose already installed skipping async-decorators@^0.1.3 /Users/vliang63/Desktop/HR/connectus
+203 verbose already installed skipping bluebird@^2.9.33 /Users/vliang63/Desktop/HR/connectus
+204 verbose already installed skipping body-parser@^1.13.2 /Users/vliang63/Desktop/HR/connectus
+205 verbose already installed skipping bookshelf@^0.8.1 /Users/vliang63/Desktop/HR/connectus
+206 verbose already installed skipping braintree@^1.27.0 /Users/vliang63/Desktop/HR/connectus
+207 verbose already installed skipping browserify@^10.2.6 /Users/vliang63/Desktop/HR/connectus
+208 verbose already installed skipping chai@^3.1.0 /Users/vliang63/Desktop/HR/connectus
+209 verbose already installed skipping classnames@^2.1.3 /Users/vliang63/Desktop/HR/connectus
 210 silly install resolved []
 211 info build /Users/vliang63/Desktop/HR/connectus
 212 info linkStuff connectus@1.0.0

@@ -48,24 +48,24 @@ gulp.task('default', ['browserify', 'copy', 'build'], function() {
 //    for deploy - run uglify and point index.html to connectus.min.js    //
 ////////////////////////////////////////////////////////////////////////////
 
-// gulp.task('uglify', function () {
-//     var standalone = browserify('./client/js/app.js', {
-//       standalone: 'app'
-//     })
-//     .transform('reactify') 
-//     .transform(babelify.configure({
-//       plugins: [require('babel-plugin-object-assign')]
-//     }))
-//     .transform(shim);
+gulp.task('uglify', function () {
+    var standalone = browserify('./client/js/app.js', {
+      standalone: 'app'
+    })
+    .transform('reactify') 
+    .transform(babelify.configure({
+      plugins: [require('babel-plugin-object-assign')]
+    }))
+    .transform(shim);
 
-//     return standalone.bundle()
-//       .on('error', function (e) {
-//         gutil.log('Browserify Error', e);
-//       })
-//       .pipe(source('connectus.js'))
-//       .pipe(gulp.dest('dist/js'))
-//       .pipe(rename('connectus.min.js'))
-//       .pipe(streamify(uglify()))
-//       .pipe(gulp.dest('dist/js'));
-//   });
-//  
+    return standalone.bundle()
+      .on('error', function (e) {
+        gutil.log('Browserify Error', e);
+      })
+      .pipe(source('connectus.js'))
+      .pipe(gulp.dest('dist/js'))
+      .pipe(rename('connectus.min.js'))
+      .pipe(streamify(uglify()))
+      .pipe(gulp.dest('dist/js'));
+  });
+ 
