@@ -65,7 +65,7 @@ var About = React.createClass({
       	          <div className='row'>
                     <div className="col-md-4">
                       <span className="column-headers"><h3>Sell your electricity.</h3></span>
-                      <ul>
+                      <ul className="feature-list">
                         <li>Post your outlet&#39;s availability online</li>
                         <li>Earn money when people plug in</li>
                         <li>Join a network of other sellers</li>
@@ -73,7 +73,7 @@ var About = React.createClass({
                     </div>
                   <div className="col-md-4">
                     <span className="column-headers"><h3>Find power near you.</h3></span>
-                      <ul>
+                      <ul className="feature-list">
                         <li>Find outlets in your area</li>
                         <li>Reserve an outlet and plug in</li>
                         <li>See your power usage in real-time</li>
@@ -81,7 +81,7 @@ var About = React.createClass({
                   </div>
                   <div className="col-md-4">
                     <span className="column-headers"><h3>Keep it green.</h3></span>
-                    <ul>
+                    <ul className="feature-list">
                       <li>Supplies electricity to replace diesel generators</li>
                       <li>Supports easy charging of electric cars</li>
                       <li>Facilitates sharing power in developing areas</li>
