@@ -1,6 +1,4 @@
 var BASE_URL = window.location.origin + '/';
-window.location.origin + '/';
-window.location.origin + '/';
 
 var authConstants = {
   BASE_URL: BASE_URL,
