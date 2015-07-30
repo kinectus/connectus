@@ -53,7 +53,34 @@ var Connectus = React.createClass({
       </div>
     );
 
-    var footerHtml = (<div />);
+    if(isMobile){
+      console.log('mobile footer rendering')
+      var footerHtml = (
+        <div className="container-fluid footer-banner">
+            <div className='footer-1'>
+              <h3>Connect.us Team</h3>
+              <h4>Sean Conner, Valerie Liang,</h4>
+              <h4>Dianna Faulk, Jammie Mountz</h4>
+            </div>
+            <a href="https://github.com/kinectus/connectus"><div className='footer-2 octocat'></div></a>
+        </div>
+      );
+    } else {
+      console.log('full footer rendering')
+      var footerHtml = (
+        <div className="container-fluid footer-banner">
+          <div className='row'>
+            <div className='col-md-4'>
+              <h3>Connect.us Team</h3>
+              <h4>Sean Conner, Valerie Liang,</h4>
+              <h4>Dianna Faulk, Jammie Mountz</h4>
+            </div>
+            <a href="https://github.com/kinectus/connectus"><div className='col-md-4 octocat'></div></a>
+            <div className='col-md-4'></div>
+          </div>
+        </div>
+      );
+    }
 
     //reset the html that will be shown if the user is logged in(cookie present)
     // secondary pointing
@@ -88,8 +115,6 @@ var Connectus = React.createClass({
           </div> 
       )
 
-        footerHtml = (<div />);
-
       // if NOT mobile, make it this... 
       } else {
 
@@ -107,8 +132,6 @@ var Connectus = React.createClass({
             </ul>
           </div> 
           );
-
-        footerHtml = (<div />);
       } 
     }
 
