@@ -59,7 +59,6 @@ a:focus {
   background-color: @dark;
   height: 70px;
   width: 100vw;
-  margin-bottom: 30px;
   z-index: 2;
   .logo {
     font-size: 30px;
@@ -173,6 +172,18 @@ a:focus {
     animation-delay: .8s;
     animation-fill-mode: forwards;
   }
+  .header-text-mobile {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    color: white;
+    display: block;
+    text-align: center;
+    position: absolute;
+    text-align: center;
+    font-size: 60px;
+    top: 100px;
+  }
   .banner{
     width: 100%;
     height: 100%;
@@ -203,10 +214,36 @@ a:focus {
       animation-fill-mode: forwards;
     }
   }
+
+  .banner-mobile{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 15px;
+    height: 176px;
+    background-color: @dark;
+    .charge-anything-mobile {
+      opacity: 1;
+      font-size: 80px;
+      line-height: .9;
+    }
+    .anywhere-mobile {
+      opacity: 1;
+      color: @orangemed;
+      font-size: 80px;
+      line-height: .9;
+    }
+  }
+}
+
+.feature-list {
+  list-style-type: none;
+  margin-left: -35px;
 }
 
 .addoutlet {
   margin-bottom: 40px;
+  background-color: @greylight
 }
 
 .container-fluid {
@@ -224,12 +261,13 @@ a:focus {
   width: 100%;
   .section{
   }
-  .info{
+  .info {
     background-color: #FFFFFF;
   }
-  .howitworks{
+  .howitworks {
     height: 100%;
     padding-bottom: 30px;
+    text-align: center !important;
     .column-headers {
       h3 {
         color: white;
@@ -238,8 +276,28 @@ a:focus {
         text-align: center;
       }
     }
+    .column-headers-mobile {
+      h3 {
+        font-size: 40px;
+        color: white;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .mobile-points {
+        text-align: center !important;
+        font-size: 30px !important;
+        .test123 {
+          text-align: center !important;
+          font-size: 30px !important;
+        }
+      }
+    }
     .banner-item {
       opacity: 0;
+    }
+    .banner-item-mobile {
+      opacity: 1;
     }
     .landscape-banner {
       background: url("http://localhost:3000/assets/img/landscape.png");
@@ -254,7 +312,15 @@ a:focus {
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
-      background-size: 20%;
+      background-size: 15%;
+      margin-top: 20px;
+    }
+    .outlet-mobile {
+      background: url("http://localhost:3000/assets/img/outlet.png");
+      height: 100px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 10%;
       margin-top: 20px;
     }
     .location {
@@ -262,7 +328,15 @@ a:focus {
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
-      background-size: 60%;
+      background-size: 50%;
+      margin-top: 20px;
+    }
+    .location-mobile {
+      background: url("http://localhost:3000/assets/img/location.png");
+      height: 100px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 30%;
       margin-top: 20px;
     }
     .trees {
@@ -270,13 +344,22 @@ a:focus {
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
-      background-size: 60%;
+      background-size: 50%;
+      margin-top: 20px;
+    }
+    .trees-mobile {
+      background: url("http://localhost:3000/assets/img/trees.png");
+      height: 100px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 30%;
       margin-top: 20px;
     }
   }
   .energyInfo{
     background-color: @purple;
-    height: 910px;
+    min-height: 250px;
+    max-height: 100%;
     .our-stack {
       h2 {
         padding-top: 30px;
@@ -290,8 +373,8 @@ a:focus {
     }
     .diagram {
       background: url('http://jammiemountz.com/wp-content/uploads/2015/07/diagram-for-our-server-01.png');
-      height:100%;
-      background-size: 70%;
+      height:90%;
+      background-size: 50%;
       background-repeat: no-repeat;
       background-position: top center;
       table {
@@ -301,15 +384,79 @@ a:focus {
         width: 100%;
         height: 100px;
       }
+      .diagram-row40 {
+        width: 100%;
+        height: 40px;
+      }
+      .diagram-row150 {
+        width: 100%;
+        height: 150px;
+      }
+      .diagram-row120 {
+        width: 100%;
+        height: 120px;
+      }
+      .diagram-row220 {
+        width: 100%;
+        height: 220px;
+      }
       .diagram-data {
-        width: 30%;
+        width: auto;
         .instructions {
           color: white;
           font-size: 20px;
           padding-left: 30px;
         }
       }
+      .diagram-data60 {
+        width: 60%;
+      }
+      .diagram-data40 {
+        width: 40%;
+      }
+      .diagram-data30 {
+        width: 30%;
+      }
+      .diagram-data20 {
+        width: 20%;
+      }
+      .diagram-data10 {
+        width: 10%;
+      }
     }
+  }
+}
+
+.footer-banner {
+  height: 160px;
+  background-color: @dark;
+  width: 100%;
+  .footer {
+    background-color: @dark;
+  }
+  h3 {
+    color: white;
+    margin-left: 20px;
+  }
+  h4 {
+    color: @greylight;
+    margin-left: 30px;
+  }
+  .octocat {
+    background: url('https://i2.wp.com/assets-cdn.github.com/images/gravatars/gravatar-user-420.png?ssl=1gith');
+    height: 180px;
+    background-size: 20%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-position-y: 30px;
+  }
+  .footer-1 {
+    float: left;
+  }
+  .footer-2 {
+    float: right;
+    height: 180px;
+    width: 300px
   }
 }
 
@@ -323,6 +470,7 @@ h1 {
   position: relative;
   width: 100%;
   height: 300px;
+  margin-top: 5px;
   border: 2px solid black;
   z-index: 1;
 }
