@@ -58,12 +58,14 @@ var buyerReservations = React.createClass({
     outletServices.turnOutletOn(transaction)
 
     // this.updateData();
-    var that = this;
+    // console.log(this);
     var socket = io.connect(OutletListConstants.BASE_URL);
     var transactionId = transaction.id+'';
+    var targetClass = '.'+transactionId;
+    $(targetClass).find('.turnOn').hide();
 
     socket.on(transactionId, function (data) {
-      console.log("got energy!", data);
+      // console.log("got energy!", data);
 
       // convert and display power data
       var pricePerKwh = data.totalKwh * data.clientData.outlet.priceEnergy;
@@ -74,10 +76,8 @@ var buyerReservations = React.createClass({
       $(targetClass).find('.totalKwh').text(data.totalKwh.toFixed(3));
       $(targetClass).find('.total').text(totalCost);
       $(targetClass).find('.watts').text(avgWatts);
-
       // that.refs[transactionId].setState({realtime: data})
       // that.setState({realtime: data})
-
     });
   },
 
@@ -120,7 +120,7 @@ var buyerReservations = React.createClass({
             <td className='regTrans'>
             { transaction.outlet.description }
             </td>
-            <td className='regTrans'>
+            <td className={transaction.id}>
               <div className="btn turnOn" onClick={that.turnOn.bind(that, transaction)}>ON</div>
               <div className="btn turnOff" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
             </td>

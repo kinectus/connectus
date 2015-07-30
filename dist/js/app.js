@@ -608,18 +608,22 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
     outletServices.turnOutletOn(transaction)
 
     // this.updateData();
+<<<<<<< HEAD
     var that = this;
+=======
+    // console.log(this);
+>>>>>>> hide on button after clicking it
     var socket = io.connect(OutletListConstants.BASE_URL);
     var transactionId = transaction.id+'';
 <<<<<<< HEAD
 =======
     var targetClass = '.'+transactionId;
-    // console.log($(targetClass).find('.turnOn'))
+    $(targetClass).find('.turnOn').hide();
 
     // get realtime power data
 >>>>>>> fixed sockets hanging up with res.send and fixing intervalIds object
     socket.on(transactionId, function (data) {
-      console.log("got energy!", data);
+      // console.log("got energy!", data);
 
       // convert and display power data
       var pricePerKwh = data.totalKwh * data.clientData.outlet.priceEnergy;
@@ -630,10 +634,8 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
       $(targetClass).find('.totalKwh').text(data.totalKwh.toFixed(3));
       $(targetClass).find('.total').text(totalCost);
       $(targetClass).find('.watts').text(avgWatts);
-
       // that.refs[transactionId].setState({realtime: data})
       // that.setState({realtime: data})
-
     });
   },
 
@@ -675,9 +677,15 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
             React.createElement("td", {className: "regTrans"}, 
              transaction.outlet.description
             ), 
+<<<<<<< HEAD
             React.createElement("td", {className: "regTrans"}, 
               React.createElement("div", {className: "btn", onClick: that.turnOn.bind(that, transaction)}, "ON"), 
               React.createElement("div", {className: "btn", onClick: that.setCurrentTransaction.bind(that, transaction)}, "OFF")
+=======
+            React.createElement("td", {className: transaction.id}, 
+              React.createElement("div", {className: "btn turnOn", onClick: that.turnOn.bind(that, transaction)}, "ON"), 
+              React.createElement("div", {className: "btn turnOff", onClick: that.setCurrentTransaction.bind(that, transaction)}, "OFF")
+>>>>>>> hide on button after clicking it
             ), 
             React.createElement("td", {className: transaction.id}, 
               React.createElement("div", {className: "realtimeData"}, 
