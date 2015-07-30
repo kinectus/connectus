@@ -29,22 +29,18 @@ a:focus {
 .topNavBar {
   position: relative;
   background-color: #343434;
-  height: 45px;
+  height: 70px;
   width: 100vw;
   z-index: 2;
 }
 .topNavBar .logo {
-  font-size: 26px;
+  font-size: 30px;
   float: left;
   display: inline;
   color: #f9a92a !important;
   padding-left: 40px;
   padding-top: 10px;
   text-decoration: none !important;
-}
-.topNavBar .logo a {
-  position: absolute;
-  bottom: 3px;
 }
 .topNavBar .mobile {
   margin-left: auto;
@@ -185,10 +181,7 @@ a:focus {
 }
 .feature-list {
   list-style-type: none;
-<<<<<<< HEAD
   margin-left: -35px;
-=======
->>>>>>> desktop facebook change
 }
 .addoutlet {
   margin-bottom: 40px;
@@ -365,6 +358,7 @@ a:focus {
   width: 10%;
 }
 .footer-banner {
+  position: absolute;
   height: 160px;
   background-color: #343434;
   width: 100%;
@@ -533,22 +527,4 @@ Reserve an Outlet .holder {
 .alertButton {
   width: 20vw;
   margin: 0 .5vw;
-}
-.authBox {
-  position: absolute;
-  top: 330px;
-  left: 140px;
-}
-.authBox .btn {
-  color: #FFFFFF;
-  background-color: #3b5998;
-}
-.authBoxMobile {
-  position: absolute;
-  top: 330px;
-  left: 140px;
-}
-.authBoxMobile .btn {
-  color: #FFFFFF;
-  background-color: #3b5998;
 }
