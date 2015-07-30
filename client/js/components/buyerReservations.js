@@ -119,7 +119,7 @@ var buyerReservations = React.createClass({
               <div className="btn turnOff" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
             </td>
             <td className={transaction.id}>
-              <div className="realtimeData">
+              <div className="powerData">
                 <p><span>Total kWh </span><span className="totalKwh"></span></p>
                 <p><span>Total $ </span><span className="total"></span></p>
                 <p><span>Watts </span><span className="watts"></span></p>
