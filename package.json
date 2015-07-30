@@ -17,8 +17,7 @@
     "url": "https://github.com/Dianna/connectus/issues"
   },
   "scripts": {
-    "start": "node app",
-    "postinstall": "gulp default"
+    "postinstall": "gulp"
   },
   "homepage": "https://github.com/Dianna/connectus#readme",
   "dependencies": {
