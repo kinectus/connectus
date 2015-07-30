@@ -96,7 +96,8 @@ var buyerReservations = React.createClass({
     if (this.state.data.length !==0) {
       var transactionRows = this.state.data.map(function(transaction) {
         return (
-          <tr key={ transaction.id } onClick={ that.reserveOutlet } className={moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? 'expired' + ' regTransRow' : 'regTransRow'}>
+          <tr  key={ transaction.id } onClick={ that.reserveOutlet } className={moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? 'expired' + ' regTransRow' : 'regTransRow'}>
+
             <td className='regTrans'>
               Start: { transaction.startTime.date} - { transaction.startTime.slot.time }
               <br />
@@ -120,10 +121,10 @@ var buyerReservations = React.createClass({
             { transaction.outlet.description }
             </td>
             <td className='regTrans'>
-              <div className="btn" onClick={that.turnOn.bind(that, transaction)}>ON</div>
-              <div className="btn" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
+              <div className="btn turnOn" onClick={that.turnOn.bind(that, transaction)}>ON</div>
+              <div className="btn turnOff" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
             </td>
-            <td className='regTrans'>
+            <td className={transaction.id}>
               <div className="realtimeData">
                 <p><span>Total kWh </span><span className="totalKwh"></span></p>
                 <p><span>Total $ </span><span className="total"></span></p>

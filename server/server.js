@@ -20,7 +20,7 @@ app.post('/realtimeData', function(req, res){
   // console.log('in the realtimeData post', req.body)
   var transactionId = req.body.clientData.id+'';
   mySocket.emit(transactionId, req.body);
-  
+  res.status(200).send('you hit realtimeData')
   // add to DB
   setRealtimeData(req.body);
 })

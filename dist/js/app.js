@@ -597,7 +597,6 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
   setCurrentTransaction: function(transaction){
     console.log(transaction)
     var that =this;
-    //turn off socket and THEN
     outletStore.setCurrentTransaction({id: transaction.id, currentStatus: true, paid: false}).then(function(transaction){
       outletServices.turnOutletOff(transaction); //connects with powerServer
       that.transitionTo('paymentsPage');
@@ -612,8 +611,17 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
     var that = this;
     var socket = io.connect(OutletListConstants.BASE_URL);
     var transactionId = transaction.id+'';
+<<<<<<< HEAD
+=======
+    var targetClass = '.'+transactionId;
+    // console.log($(targetClass).find('.turnOn'))
+
+    // get realtime power data
+>>>>>>> fixed sockets hanging up with res.send and fixing intervalIds object
     socket.on(transactionId, function (data) {
       console.log("got energy!", data);
+
+      // convert and display power data
       var pricePerKwh = data.totalKwh * data.clientData.outlet.priceEnergy;
       var hourlyPrice = data.clientData.outlet.priceHourly/(60*60)*10;
       var totalCost = (pricePerKwh+hourlyPrice).toFixed(3);
