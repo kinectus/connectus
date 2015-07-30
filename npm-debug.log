@@ -134,15 +134,15 @@
 71 info package.json fs@0.0.2 No description
 72 info package.json fs@0.0.2 No repository field.
 73 info package.json geocoder@0.2.2 license should be a valid SPDX license expression
-74 info package.json gulp-concat-css@2.2.0 No license field.
-75 info package.json gulp-copy@0.0.2 No license field.
-76 info package.json gulp-notify@2.2.0 No license field.
-77 info package.json jquery@2.1.4 No license field.
+74 info package.json gulp-copy@0.0.2 No license field.
+75 info package.json gulp-concat-css@2.2.0 No license field.
+76 info package.json jquery@2.1.4 No license field.
+77 info package.json gulp-notify@2.2.0 No license field.
 78 info package.json microevent@1.0.0 No repository field.
 79 info package.json microevent@1.0.0 No license field.
 80 info package.json node-watch@0.3.4 No license field.
-81 info package.json passport-facebook@2.0.0 No license field.
-82 info package.json path@0.11.14 path is also the name of a node core module.
+81 info package.json path@0.11.14 path is also the name of a node core module.
+82 info package.json passport-facebook@2.0.0 No license field.
 83 info package.json underbar@0.1.0 No license field.
 84 info package.json socket.io@1.3.6 No license field.
 85 info package.json yamljs@0.2.3 No license field.
