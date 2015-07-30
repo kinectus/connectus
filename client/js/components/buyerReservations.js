@@ -47,7 +47,6 @@ var buyerReservations = React.createClass({
   setCurrentTransaction: function(transaction){
     console.log(transaction)
     var that =this;
-    //turn off socket and THEN
     outletStore.setCurrentTransaction({id: transaction.id, currentStatus: true, paid: false}).then(function(transaction){
       outletServices.turnOutletOff(transaction); //connects with powerServer
       that.transitionTo('paymentsPage');
@@ -62,8 +61,11 @@ var buyerReservations = React.createClass({
     var that = this;
     var socket = io.connect(OutletListConstants.BASE_URL);
     var transactionId = transaction.id+'';
+
     socket.on(transactionId, function (data) {
       console.log("got energy!", data);
+
+      // convert and display power data
       var pricePerKwh = data.totalKwh * data.clientData.outlet.priceEnergy;
       var hourlyPrice = data.clientData.outlet.priceHourly/(60*60)*10;
       var totalCost = (pricePerKwh+hourlyPrice).toFixed(3);
@@ -121,7 +123,7 @@ var buyerReservations = React.createClass({
               <div className="btn" onClick={that.turnOn.bind(that, transaction)}>ON</div>
               <div className="btn" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
             </td>
-            <td className={transaction.id}>
+            <td className='regTrans'>
               <div className="realtimeData">
                 <p><span>Total kWh </span><span className="totalKwh"></span></p>
                 <p><span>Total $ </span><span className="total"></span></p>
