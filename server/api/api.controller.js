@@ -127,7 +127,7 @@ module.exports = {
     // if so...
     res.send(200, 'you turn me on!')
     var info = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     var transactionId = info.id
     if(ServerConstants.SIMULATE_POWER) {
       // simulate an appliance's power use
@@ -151,9 +151,9 @@ module.exports = {
         };
         return rp(options);
       };
-      var intervalId = setInterval(getWatts, 3000);
-      intervalIds.transactionId = intervalId;
-
+      var intervalId = setInterval(getWatts, 2000);
+      intervalIds[transactionId] = intervalId;
+      console.log('turnon intervalid: ', intervalId, 'intervals: ', intervalIds);
     } else {
       var options = {
         method: 'POST',
@@ -171,7 +171,8 @@ module.exports = {
     var transactionId = req.body.id;
     if(ServerConstants.SIMULATE_POWER) {
       // simulate an appliance's power use
-      var intervalId = intervalIds.transactionId;
+      var intervalId = intervalIds[transactionId];
+      console.log('turn off intervalid: '. intervalId, 'intervals: ', intervalIds);
       clearInterval(intervalId);
     } else {
       var options = {

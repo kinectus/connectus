@@ -47,7 +47,6 @@ var buyerReservations = React.createClass({
   setCurrentTransaction: function(transaction){
     console.log(transaction)
     var that =this;
-    //turn off socket and THEN
     outletStore.setCurrentTransaction({id: transaction.id, currentStatus: true, paid: false}).then(function(transaction){
       outletServices.turnOutletOff(transaction); //connects with powerServer
       that.transitionTo('paymentsPage');
@@ -59,11 +58,16 @@ var buyerReservations = React.createClass({
     outletServices.turnOutletOn(transaction)
 
     // this.updateData();
-    var that = this;
+    // console.log(this);
     var socket = io.connect(OutletListConstants.BASE_URL);
     var transactionId = transaction.id+'';
+    var targetClass = '.'+transactionId;
+    $(targetClass).find('.turnOn').hide();
+
     socket.on(transactionId, function (data) {
-      console.log("got energy!", data);
+      // console.log("got energy!", data);
+
+      // convert and display power data
       var pricePerKwh = data.totalKwh * data.clientData.outlet.priceEnergy;
       var hourlyPrice = data.clientData.outlet.priceHourly/(60*60)*10;
       var totalCost = (pricePerKwh+hourlyPrice).toFixed(3);
@@ -72,10 +76,8 @@ var buyerReservations = React.createClass({
       $(targetClass).find('.totalKwh').text(data.totalKwh.toFixed(3));
       $(targetClass).find('.total').text(totalCost);
       $(targetClass).find('.watts').text(avgWatts);
-
       // that.refs[transactionId].setState({realtime: data})
       // that.setState({realtime: data})
-
     });
   },
 
@@ -94,7 +96,8 @@ var buyerReservations = React.createClass({
     if (this.state.data.length !==0) {
       var transactionRows = this.state.data.map(function(transaction) {
         return (
-          <tr key={ transaction.id } onClick={ that.reserveOutlet } className={moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? 'expired' + ' regTransRow' : 'regTransRow'}>
+          <tr  key={ transaction.id } onClick={ that.reserveOutlet } className={moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? 'expired' + ' regTransRow' : 'regTransRow'}>
+
             <td className='regTrans'>
               Start: { transaction.startTime.date} - { transaction.startTime.slot.time }
               <br />
@@ -117,9 +120,9 @@ var buyerReservations = React.createClass({
             <td className='regTrans'>
             { transaction.outlet.description }
             </td>
-            <td className='regTrans'>
-              <div className="btn" onClick={that.turnOn.bind(that, transaction)}>ON</div>
-              <div className="btn" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
+            <td className={transaction.id}>
+              <div className="btn turnOn" onClick={that.turnOn.bind(that, transaction)}>ON</div>
+              <div className="btn turnOff" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
             </td>
             <td className={transaction.id}>
               <div className="realtimeData">
