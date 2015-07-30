@@ -281,39 +281,32 @@ var Availability = React.createClass({
 
   // Scroll functionality
   goForward: function() {
-    var that = this;
-
+    // Move windowView forward if not centered
     if (this.state.windowView < this.state.middle){
-      console.log('in forward condition')
       this.setState({windowView: this.state.windowView+1})
-          
+
+    // Change rendered subset
     } else if (this.state.end < this.state.reservations.length-1){
       this.setState({ start: this.state.start+1, end: this.state.end+1});
 
-    // Move windowView to end of reservations from center
+    // Move windowView forward if reservations end is reached
     } else  if (this.state.end === this.state.reservations.length-1 && this.state.windowView < this.state.end - this.state.start -1) {
-      console.log('this.state.end', this.state.end, 'this.state.reservations.length-1', this.state.reservations.length-1);
       this.setState({ windowView: this.state.windowView+1 }, function(){ console.log(this.state.windowView) });
-      console.log(this.state.windowView );
-
     }
   },
 
   goBack: function() {
-    var that = this;
-    // Default center windowView view
-    if (this.state.start > 0){
+    // Change rendered subset
+    if (this.state.start > 0 && this.state.windowView === this.state.middle){
       this.setState({ start: this.state.start-1, end: this.state.end-1});
 
-    // Move windowView to beginning of reservations from center
+    // Move windowView backward if reservations start is reached
     } else if (this.state.start === 0 && this.state.windowView > 0) {
-      console.log(this.state.windowView);
       this.setState({ windowView: this.state.windowView-1 });
-      console.log(this.state.windowView);
 
-    } else if (this.state.windowView > this.state.end - this.state.middle){
-      console.log('in back condition: ', this.state.end)
-      this.setState({windowView: this.state.windowView+1})
+    // Move windowView backward if not centered
+    } else if (this.state.windowView > this.state.middle){
+      this.setState({windowView: this.state.windowView-1})
     }
   },
 
@@ -322,8 +315,6 @@ var Availability = React.createClass({
   },
 
   render: function() {
-    console.log('this.state.windowView ', this.state.windowView)
-
     var date;
 
     // If reservations API call has completed
