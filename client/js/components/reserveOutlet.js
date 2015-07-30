@@ -218,22 +218,21 @@ var Availability = React.createClass({
   getInitialState: function(){
    return {
       reservations: [],
-      timeSlots: [],
-      scrolling: null
+      timeSlots: []
     }
   },
 
   handleResize: function(e) {
     if (window.innerWidth<497){
-      this.setState({end: 7, middle: 3});
+      this.setState({end: 7, middle: 3, windowView: 3});
     } else if (window.innerWidth<674){
-      this.setState({end: 11, middle: 5});
+      this.setState({end: 11, middle: 5, windowView: 5});
     } else if (window.innerWidth<994){
-      this.setState({end: 15, middle: 7});
+      this.setState({end: 15, middle: 7, windowView: 7});
     } else if (window.innerWidth<1055){
-      this.setState({end: 17, middle: 8});
+      this.setState({end: 17, middle: 8, windowView: 8});
     } else {
-      this.setState({end: 25, middle: 12});
+      this.setState({end: 25, middle: 12, windowView: 12});
     }
   },
 
@@ -282,16 +281,32 @@ var Availability = React.createClass({
 
   // Scroll functionality
   goForward: function() {
-    var that = this;
-    if (this.state.end < this.state.reservations.length-1){
-      this.setState({ start: this.state.start+1, end: this.state.end+1 });
+    // Move windowView forward if not centered
+    if (this.state.windowView < this.state.middle){
+      this.setState({windowView: this.state.windowView+1})
+
+    // Change rendered subset
+    } else if (this.state.end < this.state.reservations.length-1){
+      this.setState({ start: this.state.start+1, end: this.state.end+1});
+
+    // Move windowView forward if reservations end is reached
+    } else  if (this.state.end === this.state.reservations.length-1 && this.state.windowView < this.state.end - this.state.start -1) {
+      this.setState({ windowView: this.state.windowView+1 }, function(){ console.log(this.state.windowView) });
     }
   },
 
   goBack: function() {
-    var that = this;
-    if (this.state.start > 0){
-      this.setState({ start: this.state.start-1, end: this.state.end-1 });
+    // Change rendered subset
+    if (this.state.start > 0 && this.state.windowView === this.state.middle){
+      this.setState({ start: this.state.start-1, end: this.state.end-1});
+
+    // Move windowView backward if reservations start is reached
+    } else if (this.state.start === 0 && this.state.windowView > 0) {
+      this.setState({ windowView: this.state.windowView-1 });
+
+    // Move windowView backward if not centered
+    } else if (this.state.windowView > this.state.middle){
+      this.setState({windowView: this.state.windowView-1})
     }
   },
 
@@ -303,7 +318,7 @@ var Availability = React.createClass({
     var date;
 
     // If reservations API call has completed
-    if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 && this.state.end && this.state.middle){
+    if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 && this.state.end && this.state.middle && typeof this.state.windowView === 'number'){
       // Current subset of reservation information
       var start = this.state.start;
       var end = this.state.end;
@@ -311,19 +326,21 @@ var Availability = React.createClass({
       var slotProps = slotProps || this.state.timeSlots;
 
       // Track center time slot
+
       var centerCount = centerCount ? centerCount > end-1 ? 0 : centerCount : 0;
       var that = this;
+
       // Create custom availability viewer using subset
       var outerHTML = subset.map(function(reservation){
         var goOrNoGo = reservation.available ? "on" : "off";
 
         // Label slot properties based on subset location
-        var blockClass = (centerCount === that.state.middle) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
+        var blockClass = (centerCount === that.state.windowView) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
         centerCount++;
         var begin, end;
-        // var currentTimeView = blockClass
+
         // Specially label center slot to display its information
-        if (centerCount === that.state.middle+1){
+        if (centerCount === that.state.windowView+1){
           date = moment(reservation.date).format('MMMM Do YYYY');
           for (var j=0; j<slotProps.length; j++){
             if (slotProps[j].id === reservation.slot_id){
