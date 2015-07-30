@@ -56,17 +56,13 @@ var buyerReservations = React.createClass({
 
   turnOn: function(transaction) {
     outletServices.turnOutletOn(transaction)
-
-    // this.updateData();
-    // console.log(this);
-    var socket = io.connect(OutletListConstants.BASE_URL);
     var transactionId = transaction.id+'';
     var targetClass = '.'+transactionId;
     $(targetClass).find('.turnOn').hide();
 
+    var socket = io.connect(OutletListConstants.BASE_URL);
     socket.on(transactionId, function (data) {
-      // console.log("got energy!", data);
-
+      console.log("got energy!", data);
       // convert and display power data
       var pricePerKwh = data.totalKwh * data.clientData.outlet.priceEnergy;
       var hourlyPrice = data.clientData.outlet.priceHourly/(60*60)*10;
@@ -76,8 +72,6 @@ var buyerReservations = React.createClass({
       $(targetClass).find('.totalKwh').text(data.totalKwh.toFixed(3));
       $(targetClass).find('.total').text(totalCost);
       $(targetClass).find('.watts').text(avgWatts);
-      // that.refs[transactionId].setState({realtime: data})
-      // that.setState({realtime: data})
     });
   },
 
