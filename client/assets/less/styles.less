@@ -173,12 +173,24 @@ a:focus {
     animation-delay: .8s;
     animation-fill-mode: forwards;
   }
+  .header-text-mobile {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    color: white;
+    display: block;
+    text-align: center;
+    position: absolute;
+    text-align: center;
+    font-size: 60px;
+    top: 100px;
+  }
   .banner{
     width: 100%;
     height: 100%;
     position: absolute;
     top: 20px;
-    height: 100px;
+    height: 180px;
     animation-name: banner-animation;
     animation-duration: 1s;
     animation-timing-function: ease;
@@ -208,15 +220,19 @@ a:focus {
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 20px;
-    height: 180px;
+    top: 15px;
+    height: 176px;
     background-color: @dark;
-    .charge-anything{
+    .charge-anything-mobile {
       opacity: 1;
+      font-size: 80px;
+      line-height: .9;
     }
-    .anywhere {
+    .anywhere-mobile {
       opacity: 1;
       color: @orangemed;
+      font-size: 80px;
+      line-height: .9;
     }
   }
 }
@@ -240,12 +256,13 @@ a:focus {
   width: 100%;
   .section{
   }
-  .info{
+  .info {
     background-color: #FFFFFF;
   }
-  .howitworks{
+  .howitworks {
     height: 100%;
     padding-bottom: 30px;
+    text-align: center !important;
     .column-headers {
       h3 {
         color: white;
@@ -253,11 +270,24 @@ a:focus {
         margin-bottom: 20px;
         text-align: center;
       }
+      ul {
+          list-style-type: none;
+      }
+    }
+    .column-headers-mobile {
+      h3 {
+        font-size: 40px;
+        color: white;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
       .mobile-points {
         text-align: center !important;
-        p {
-          font-size: 24px;
+        font-size: 30px !important;
+        .test123 {
           text-align: center !important;
+          font-size: 30px !important;
         }
       }
     }
@@ -288,7 +318,7 @@ a:focus {
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
-      background-size: 15%;
+      background-size: 10%;
       margin-top: 20px;
     }
     .location {
@@ -304,7 +334,7 @@ a:focus {
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
-      background-size: 40%;
+      background-size: 30%;
       margin-top: 20px;
     }
     .trees {
@@ -320,7 +350,7 @@ a:focus {
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
-      background-size: 50%;
+      background-size: 30%;
       margin-top: 20px;
     }
   }
@@ -386,6 +416,14 @@ a:focus {
     background-repeat: no-repeat;
     background-position: top center;
     background-position-y: 30px;
+  }
+  .footer-1 {
+    float: left;
+  }
+  .footer-2 {
+    float: right;
+    height: 180px;
+    width: 300px
   }
 }
 

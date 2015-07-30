@@ -146,8 +146,8 @@ var About = React.createClass({
           return (
             <div className="about">
               <div className="header-about">
-                <div className="header-text">
-                  <div className="banner-mobile"><span className="charge-anything">Charge anything</span> <span className="anywhere">anywhere.</span></div>
+                <div className="header-text-mobile">
+                  <div className="banner-mobile"><span className="charge-anything-mobile">Charge anything</span> <span className="anywhere-mobile">anywhere.</span></div>
                 </div>
               </div>
                 <div className="section howitworks">
@@ -155,31 +155,26 @@ var About = React.createClass({
                     <div className='row'>
                       <div className="col-md-4">
                         <div className='banner-item-mobile col-md-4 outlet-mobile'></div>
-                        <span className="column-headers"><h3>Sell your electricity.</h3></span>
-                          <span className="mobile-points"><p>Post your outlet&#39;s availability online</p></span>
-                          <span className="mobile-points"><p>Earn money when people plug in</p></span>
-                          <span className="mobile-points"><p>Join a network of other sellers</p></span>
+                        <span className="column-headers-mobile"><h3>Sell your electricity.</h3></span>
+                          <span className="mobile-points"><h2>Post your outlet&#39;s availability online</h2></span>
+                          <span className="mobile-points"><h2>Earn money when people plug in</h2></span>
+                          <span className="mobile-points"><h2>Join a network of other sellers</h2></span>
                       </div>
                       <div className="col-md-4">
                         <div className='banner-item-mobile col-md-4 location-mobile'></div>
-                        <span className="column-headers"><h3>Find power near you.</h3></span>
-                          <span className="mobile-points"><p>Find outlets in your area</p></span>
-                          <span className="mobile-points"><p>Reserve an outlet and plug in</p></span>
-                          <span className="mobile-points"><p>See your power usage in real-time</p></span>
+                        <span className="column-headers-mobile"><h3>Find power near you.</h3></span>
+                          <span className="mobile-points"><h2>Find outlets in your area</h2></span>
+                          <span className="mobile-points"><h2>Reserve an outlet and plug in</h2></span>
+                          <span className="mobile-points"><h2>See your power usage in real-time</h2></span>
                       </div>
                       <div className="col-md-4">
                         <div className='banner-item-mobile col-md-4 trees-mobile'></div>
-                        <span className="column-headers"><h3>Keep it green.</h3></span>
-                          <span className="mobile-points"><p>Supplies electricity to replace diesel generators</p></span>
-                          <span className="mobile-points"><p>Supports easy charging of electric cars</p></span>
-                          <span className="mobile-points"><p>Facilitates sharing power in developing areas</p></span>
+                        <span className="column-headers-mobile"><h3>Keep it green.</h3></span>
+                          <span className="mobile-points"><h2>Supplies electricity to replace diesel generators</h2></span>
+                          <span className="mobile-points"><h2>Supports easy charging of electric cars</h2></span>
+                          <span className="mobile-points"><h2>Facilitates sharing power in developing areas</h2></span>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div className="section energyInfo">
-                  <span className="our-stack"><h2>How it works</h2></span>
-                  <div className="diagram">
                   </div>
                 </div>
             </div>
