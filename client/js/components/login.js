@@ -13,7 +13,7 @@ var Login = React.createClass({
   	  <div className="login centered ui container">
         <h3>Login</h3>
         <a href={AuthConstants.FACEBOOK}>
-          <img src="../../assets/img/connect.png" />
+          <div className="btn">Connect with Facebook</div>
         </a>
         
         <p><Link to="signup">Sign up instead</Link></p>

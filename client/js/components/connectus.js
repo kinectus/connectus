@@ -48,19 +48,28 @@ var Connectus = React.createClass({
       </div>
     )
 
+    // var pageHtml = (
+    //   <div className="topNavBar">
+    //     <span className="logo">
+    //       <Link to="about">Connect.us</Link>
+    //     </span>
+    //     <ul className="nav nav-pills pull-right">
+    //       <li role="presentation">
+    //         <Link to="login">Login</Link>
+    //       </li>
+    //       <li role="presentation">
+    //         <Link to="signup">Sign Up</Link>
+    //       </li>
+    //     </ul>
+    //   </div>
+    // );
+
+    //moving login/signup to splash page
     var pageHtml = (
       <div className="topNavBar">
         <span className="logo">
           <Link to="about">Connect.us</Link>
         </span>
-        <ul className="nav nav-pills pull-right">
-          <li role="presentation">
-            <Link to="login">Login</Link>
-          </li>
-          <li role="presentation">
-            <Link to="signup">Sign Up</Link>
-          </li>
-        </ul>
       </div>
     );
 
