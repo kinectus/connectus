@@ -17,7 +17,7 @@
 @orangelight: #fdc52e;
 @greylight: #d0d8da;
 
-
+@location: 'localhost:3000';
 
 @font-face {
   font-family:'Karla';
@@ -57,17 +57,21 @@ a:focus {
 .topNavBar {
   position: relative;
   background-color: @dark;
-  height: 70px;
+  height: 45px;
   width: 100vw;
   z-index: 2;
   .logo {
-    font-size: 30px;
+    font-size: 26px;
     float: left;
     display: inline;
     color: @orangemed !important;
     padding-left: 40px;
     padding-top: 10px;
     text-decoration: none !important;
+    a{
+      position:absolute;
+      bottom: 3px;
+    }
   }
   .mobile {
     margin-left: auto;
@@ -428,6 +432,7 @@ a:focus {
 }
 
 .footer-banner {
+  position: absolute;
   height: 160px;
   background-color: @dark;
   width: 100%;
@@ -634,4 +639,38 @@ h1 {
 .alertButton{
   width: 20vw;
   margin: 0 .5vw;
+}
+
+.authBox {
+  // background-color:#333;
+  // z-index: 1;
+  position: absolute;
+  top: 330px;
+  left: 140px;
+  // width: 400px;
+  // height: 123px;
+  // opacity: .95;
+  // border-radius: 3%;
+  // color: #FFFFFF;
+  .btn{
+    color:#FFFFFF;
+    background-color: #3b5998;
+  }
+}
+
+.authBoxMobile {
+  // background-color:#333;
+  // z-index: 1;
+  position: absolute;
+  top: 330px;
+  left: 140px;
+  // width: 400px;
+  // height: 123px;
+  // opacity: .95;
+  // border-radius: 3%;
+  // color: #FFFFFF;
+  .btn{
+    color:#FFFFFF;
+    background-color: #3b5998;
+  }
 }

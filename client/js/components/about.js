@@ -4,6 +4,7 @@ var React = require('react');
 var Link = require('react-router').Link;
 var mobileCheck = require('./mobileCheck')
 // var ReactAddons = require('react/addons');
+var AuthConstants = require('../constants/authConstants.js');
 
 var About = React.createClass({
 
@@ -52,7 +53,35 @@ var About = React.createClass({
   },
 
   render: function(){
+    var authHtml = (
+        <div>
+          <div className="col-sm-6 col-sm-offset-3 authBox">
+            <div className="btn btn-lg">
+            <a href={AuthConstants.FACEBOOK}>
+              Connect with Facebook
+            </a>
+            </div>
+          </div>
+        </div>
+      );
 
+    var authHtmlMobile = (
+        <div>
+          <div className="col-sm-6 col-sm-offset-3 authBoxMobile">
+            <div className="btn btn-lg">
+            <a href={AuthConstants.FACEBOOK}>
+              Connect with Facebook
+            </a>
+            </div>
+          </div>
+        </div>
+      );
+    
+
+    if(document.cookie){
+      var authHtml = <h1></h1>;
+    }
+    
     if (!mobileCheck()){
       console.log('rendering FULL')
       return (
@@ -61,6 +90,7 @@ var About = React.createClass({
             <div className="header-text">
               <div className="banner"><span className="charge-anything">Charge anything</span> <span className="anywhere">anywhere.</span></div>
             </div>
+            {authHtml}
           </div>
             <div className="section howitworks">
               <div className="container">
@@ -155,6 +185,7 @@ var About = React.createClass({
                 <div className="header-text-mobile">
                   <div className="banner-mobile"><span className="charge-anything-mobile">Charge anything</span> <span className="anywhere-mobile">anywhere.</span></div>
                 </div>
+                {authHtmlMobile}
               </div>
                 <div className="section howitworks">
                   <div className="container">
