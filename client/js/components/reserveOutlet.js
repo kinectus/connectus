@@ -282,14 +282,20 @@ var Availability = React.createClass({
   // Scroll functionality
   goForward: function() {
     var that = this;
-    if (this.state.end < this.state.reservations.length-1){
-      this.setState({ start: this.state.start+1, end: this.state.end+1 });
+
+    if (this.state.windowView < this.state.middle){
+      console.log('in forward condition')
+      this.setState({windowView: this.state.windowView+1})
+          
+    } else if (this.state.end < this.state.reservations.length-1){
+      this.setState({ start: this.state.start+1, end: this.state.end+1, windowView: this.state.windowView+1 });
 
     // Move windowView to end of reservations from center
-    } else if (this.state.end === this.state.reservations.length-1 && this.state.windowView < this.state.reservations.length-1) {
-      console.log(this.state.windowView);
+    } else  if (this.state.end === this.state.reservations.length-1 && this.state.windowView < this.state.reservations.length-1) {
+      console.log('this.state.end', this.state.end, 'this.state.reservations.length-1', this.state.reservations.length-1);
       this.setState({ windowView: this.state.windowView+1 }, function(){ console.log(this.state.windowView) });
-      console.log(this.state.windowView);
+      console.log(this.state.windowView );
+
     }
   },
 
@@ -297,13 +303,17 @@ var Availability = React.createClass({
     var that = this;
     // Default center windowView view
     if (this.state.start > 0){
-      this.setState({ start: this.state.start-1, end: this.state.end-1 });
+      this.setState({ start: this.state.start-1, end: this.state.end-1, windowView: this.state.windowView-1 });
 
     // Move windowView to beginning of reservations from center
-    } else if (this.state.start === 0 && this.state.windowView >0) {
+    } else if (this.state.start === 0 && this.state.windowView > 0) {
       console.log(this.state.windowView);
       this.setState({ windowView: this.state.windowView-1 });
       console.log(this.state.windowView);
+
+    } else if (this.state.windowView > this.state.reservations.length - this.state.middle){
+      console.log('in back condition')
+      this.setState({windowView: this.state.windowView+1})
     }
   },
 
