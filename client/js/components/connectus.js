@@ -15,14 +15,25 @@ var Connectus = React.createClass({
   },
 
   componentDidMount: function() {
-    var that = this; 
+    this.footerCheck()
 
     // resizing the screen renders mobile or full menu
+    var that = this; 
     var isMobile = mobile();
     window.onresize = function() {
-        console.log(isMobile);
-        that.forceUpdate();
+      that.footerCheck();
+      that.forceUpdate();
     };
+  },
+
+  footerCheck: function() {
+    if ( ( $('body').height() ) < window.innerHeight ) {
+      console.log('body height is less than window inner height')
+      $('.footer-banner').css('top', (window.innerHeight));
+    } else {
+      console.log('body height is greater than window inner height')
+      $('.footer-banner').css('top', ($('body').height()));
+    }
   },
 
   render: function() {
@@ -59,7 +70,7 @@ var Connectus = React.createClass({
         <div className="container-fluid footer-banner">
             <div className='footer-1'>
               <h3>Connect.us Team</h3>
-              <h4>Sean Conner, Valerie Liang,</h4>
+              <h4>Sean Connor, Valerie Liang,</h4>
               <h4>Dianna Faulk, Jammie Mountz</h4>
             </div>
             <a href="https://github.com/kinectus/connectus"><div className='footer-2 octocat'></div></a>
