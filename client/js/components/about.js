@@ -10,20 +10,28 @@ var About = React.createClass({
   componentDidMount: function() {
     var stop = true;
 
-    $('.phone').popover({
-      trigger: 'hover',
-      placement: 'right',
-      html: true,
-      content: $('.phoneInfo').html()
-    })
+    // $('[data-toggle="popover"]').popover({
+    //   trigger: 'hover'
+    // })
 
-    $('[data-toggle="popover"]').popover({
-      trigger: 'hover'
-    })
-
-    $('.auth').popover({
+    $('.left-hover').popover({
       trigger: 'hover',
       placement: 'left'
+    })
+
+    $('.right-hover').popover({
+      trigger: 'hover',
+      placement: 'right'
+    })
+
+    $('.top-hover').popover({
+      trigger: 'hover',
+      placement: 'top'
+    })
+
+    $('.bottom-hover').popover({
+      trigger: 'hover',
+      placement: 'bottom'
     })
 
     $(window).scroll(function(){
@@ -44,6 +52,7 @@ var About = React.createClass({
   },
 
   render: function(){
+
     if (!mobileCheck()){
       console.log('rendering FULL')
       return (
@@ -95,44 +104,41 @@ var About = React.createClass({
   		        <div className="diagram">
                 <table>
                   <tr className="diagram-row">
-                    <td className="diagram-data"></td>
-                    <td className="diagram-data database" data-toggle="popover" title="Database" data-content="MySQL with Bookshelf.js ORM"></td>
-                    <td className="diagram-data"></td>
-                    <td className="diagram-data"></td>
+                    <td className="diagram-data40"></td>
+                    <td className="diagram-data20 database right-hover" data-toggle="popover" title="Database" data-content="MySQL with Bookshelf.js ORM"></td>
+                    <td className="diagram-data40"></td>
                   </tr>
-                  <tr className="diagram-row">
-                    <td className="diagram-data"></td>
-                    <td className="diagram-data"></td>
-                    <td className="diagram-data"></td>
-                    <td className="diagram-data"></td>
+                  <tr className="diagram-row40"></tr>
+                </table>
+                <table>
+                  <tr className="diagram-row150">
+                    <td className="diagram-data40"></td>
+                    <td className="diagram-data20 connectus-server bottom-hover" data-toggle="popover" title="Connect.us Server" data-content="Node.js and Express"></td>
+                    <td className="diagram-data10 auth right-hover" data-toggle="popover" title="Secure Outlet-Server Communication" data-content="The Connect.us Server communicates with a Node.js server running on top of the hardware"></td>
+                    <td className="diagram-data30"></td>
                   </tr>
-                  <tr className="diagram-row">
-                    <td className="diagram-data"></td>
-                    <td className="diagram-data connectus-server" data-toggle="popover" title="Connect.us Server" data-content="Node.js and Express"></td>
-                    <td className="diagram-data auth" data-toggle="popover" title="Secure Outlet-Server Communication" data-content="The Connect.us Server communicates with a Node.js server running on top of the hardware"></td>
-                    <td className="diagram-data"></td>
+                </table>
+                <table>
+                  <tr className="diagram-row120">
+                    <td className="diagram-data20"></td>
+                    <td className="diagram-data20 left-hover" data-toggle="popover" title="Web application" data-content="React and Flux with Bootstrap"></td>
+                    <td className="diagram-data20"></td>
+                    <td className="diagram-data20 power-server right-hover" data-toggle="popover" title="Power Server" data-content="Node.js communicating with the outlet through shell.js bash commands"></td>
+                    <td className="diagram-data20"></td>
                   </tr>
-                  <tr className="diagram-row">
-                    <td className="diagram-data"></td>
-                    <td className="diagram-data phone" data-toggle="popover" title="Web application" data-content="React and Flux with Bootstrap"></td>
-                    <td className="diagram-data"></td>
-                    <td className="diagram-data"></td>
+                </table>
+                <table>
+                  <tr className="diagram-row220">
+                    <td className="diagram-data30"></td>
+                    <td className="diagram-data30 food-truck left-hover" data-toggle="popover" title="Users" data-content="Once outlet is on, users can start charging!"></td>
+                    <td className="diagram-data20 outlet right-hover" data-toggle="popover" title="Smart Outlet" data-content="Can send power data and turn off/on with Ruby app"></td>
+                    <td className="diagram-data20"></td>
                   </tr>
-                  <tr className="diagram-row">
+                </table>
+                <table>
+                  <tr className="diagram-row120">
                     <td className="diagram-data"></td>
                     <td className="diagram-data"></td>
-                    <td className="diagram-data power-server" data-toggle="popover" title="Power Server" data-content="Node.js communicating with the outlet through shell.js bash commands"></td>
-                    <td className="diagram-data"></td>
-                  </tr>
-                  <tr className="diagram-row">
-                    <td className="diagram-data"></td>
-                    <td className="diagram-data"></td>
-                    <td className="diagram-data outlet" data-toggle="popover" title="Smart Outlet" data-content="Can send power data and turn off/on with Ruby app"></td>
-                    <td className="diagram-data"></td>
-                  </tr>
-                  <tr className="diagram-row">
-                    <td className="diagram-data"></td>
-                    <td className="diagram-data food-truck" data-toggle="popover" title="Users" data-content="Once outlet is on, users can start charging!"></td>
                     <td className="diagram-data"></td>
                     <td className="diagram-data"></td>
                   </tr>
