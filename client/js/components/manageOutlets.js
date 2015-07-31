@@ -6,6 +6,7 @@ var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var Link = require('react-router').Link;
 var Router = require('react-router'); //need this for redirection
 var mobile = require('./mobilecheck');
+var FooterCheck = require('./footerCheck');
 
 var myOutlets = React.createClass({
 
@@ -18,6 +19,7 @@ var myOutlets = React.createClass({
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
 
   componentDidMount: function() {
+    FooterCheck.checker();
     var that = this;
     // CHANGE TO GET OUTLETS BY ID
     outletStore.getSellerOutlets().then(function(outletData){

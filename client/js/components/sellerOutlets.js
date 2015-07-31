@@ -4,6 +4,8 @@ var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var ReactAddons = require('react/addons');
 var Link = require('react-router').Link;
 var Router = require('react-router'); //need this for redirection
+
+
 var sellerOutlets = React.createClass({
 
   getInitialState: function(){
@@ -26,6 +28,18 @@ var sellerOutlets = React.createClass({
     outletStore.getSellerOutlets().then(function(outletData){
       that.setState({data: outletData});
     });
+    this.footerCheck();
+  },
+
+  footerCheck: function() {
+    console.log('checking footer');
+    if ( ( $('body').height() ) < window.innerHeight - 160 ) {
+      console.log('body height is less than window inner height')
+      $('.footer-banner').css('top', (window.innerHeight) - 160);
+    } else {
+      console.log('body height is greater than window inner height')
+      $('.footer-banner').css('top', ($('body').height()));
+    }
   },
 
   render: function() {

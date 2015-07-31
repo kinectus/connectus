@@ -3,6 +3,7 @@ var outletStore = require('../stores/outletStore');
 var Alert = require('react-bootstrap').Alert;
 var Link = require('react-router').Link;
 var Router = require('react-router');
+var FooterCheck = require('./footerCheck');
 
 var editOutlet = React.createClass({
   getInitialState: function(){
@@ -19,7 +20,21 @@ var editOutlet = React.createClass({
   },
   mixins: [Router.Navigation],
 
+  componentDidUpdate: function() {
+    console.log('DID update')
+    console.log('window: ', window.innerHeight);
+    console.log('body: ', $('body').height());
+    FooterCheck.checker();
+  },
+
   componentDidMount: function() {
+    console.log('DID mount')
+    console.log('window: ', window.innerHeight);
+    console.log('body: ', $('body').height());
+    FooterCheck.checker();
+  },
+
+  componentWillMount: function() {
     var that = this;
     var outletID = this.props.params.id;
 
@@ -165,56 +180,58 @@ var editOutlet = React.createClass({
       }
 
       return (
-        <div className="editOutlet col-md-6 col-md-offset-3">
-          <h3>Edit outlet:</h3>
-          <h4>{this.state.validationMessage}</h4>
-        <form className = "outletAddressForm" onSubmit={this.handleAddressSubmit}>
-          <div className="form-group">
-            <label>Street</label><br />
-            <input type="text" name="street" ref="street" className="form-control" defaultValue={this.state.street} onChange={this.handleChange}/><br />
-          </div>
-          <div className="form-group">
-            <label>City</label><br />
-            <input type="text" name="city" ref="city" className="form-control" defaultValue={this.state.city} onChange={this.handleChange}/> <br />
-          </div>
-          <div className="form-group">
-            <label>State</label><br />
-            <input type="text" name="state" ref="state" className="form-control" defaultValue={this.state.state} onChange={this.handleChange}/><br />
-          </div>
-          <div className="form-group">
-            <label>Zip Code</label><br />
-            <input type="text" name="zip" ref="zip" className="form-control" defaultValue={this.state.zip} onChange={this.handleChange}/><br />
-          </div>
-          <div className={this.state.validationButton}>
-          <button type="submit" className="btn btn-primary" value="Submit">Validate Address</button>
-          </div>
-        </form>
-        <form className = "outletInfoForm" onSubmit={this.handleInfoSubmit}>
-          <div className="form-group">
-            <label>Outlet Name</label><br />
-            <input type="text" name="name" ref="name" className="form-control" defaultValue={this.state.outlet.name} /><br />
-          </div>
-          <div className="form-group">
-            <label>Instructions for user</label><br />
-            <textarea name="description" name="description" ref="description" className="form-control" defaultValue={this.state.outlet.description} /><br />
-          </div>
-          <div className="form-group">
-            <label>Outlet Voltage</label><br />
-            <select className="ui dropdown" className="form-control" defaultValue={this.state.outlet.voltage} ref="voltage">
-              <option value="standard">Standard</option>
-              <option value="high">High</option>
-            </select><br />
-          </div>
-          <div className="form-group">
-            <label>Your hourly rate: $3/hr   Suggested price/kWh: $0.20/kWh</label><br />
-          </div>
-          <div className="form-group">
-            <label>Your price/kWh charge: </label><br />
-            <input type="text" name="charge" ref="charge" className="form-control" defaultValue={this.state.outlet.priceEnergy} />/kWh<br />
-          </div>
-          {buttonHtml}
-          {alert}
-        </form>
+        <div className="container">
+          <div className="editOutlet col-md-6 col-md-offset-3">
+            <h3>Edit outlet:</h3>
+            <h4>{this.state.validationMessage}</h4>
+          <form className = "outletAddressForm" onSubmit={this.handleAddressSubmit}>
+            <div className="form-group">
+              <label>Street</label><br />
+              <input type="text" name="street" ref="street" className="form-control" defaultValue={this.state.street} onChange={this.handleChange}/><br />
+            </div>
+            <div className="form-group">
+              <label>City</label><br />
+              <input type="text" name="city" ref="city" className="form-control" defaultValue={this.state.city} onChange={this.handleChange}/> <br />
+            </div>
+            <div className="form-group">
+              <label>State</label><br />
+              <input type="text" name="state" ref="state" className="form-control" defaultValue={this.state.state} onChange={this.handleChange}/><br />
+            </div>
+            <div className="form-group">
+              <label>Zip Code</label><br />
+              <input type="text" name="zip" ref="zip" className="form-control" defaultValue={this.state.zip} onChange={this.handleChange}/><br />
+            </div>
+            <div className={this.state.validationButton}>
+            <button type="submit" className="btn btn-primary" value="Submit">Validate Address</button>
+            </div>
+          </form>
+          <form className = "outletInfoForm" onSubmit={this.handleInfoSubmit}>
+            <div className="form-group">
+              <label>Outlet Name</label><br />
+              <input type="text" name="name" ref="name" className="form-control" defaultValue={this.state.outlet.name} /><br />
+            </div>
+            <div className="form-group">
+              <label>Instructions for user</label><br />
+              <textarea name="description" name="description" ref="description" className="form-control" defaultValue={this.state.outlet.description} /><br />
+            </div>
+            <div className="form-group">
+              <label>Outlet Voltage</label><br />
+              <select className="ui dropdown" className="form-control" defaultValue={this.state.outlet.voltage} ref="voltage">
+                <option value="standard">Standard</option>
+                <option value="high">High</option>
+              </select><br />
+            </div>
+            <div className="form-group">
+              <label>Your hourly rate: $3/hr   Suggested price/kWh: $0.20/kWh</label><br />
+            </div>
+            <div className="form-group">
+              <label>Your price/kWh charge: </label><br />
+              <input type="text" name="charge" ref="charge" className="form-control" defaultValue={this.state.outlet.priceEnergy} />/kWh<br />
+            </div>
+            {buttonHtml}
+            {alert}
+          </form>
+        </div>
       </div>
     )
     } else {

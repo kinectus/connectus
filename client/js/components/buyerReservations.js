@@ -8,6 +8,7 @@ var Router = require('react-router'); //need this for redirection
 var outletServices = require('../services/outletServices.js');
 var moment = require('moment');
 var $ = require('jquery');
+var FooterCheck = require('./footerCheck');
 
 var buyerReservations = React.createClass({
 
@@ -38,10 +39,21 @@ var buyerReservations = React.createClass({
 
   componentDidMount: function() {
     var that = this;
+
+    FooterCheck.checker();
+
     console.log(moment("2015-07-30 00:30", "YYYY-MM-DD HH:mm") > moment());
     outletStore.getBuyerReservations().then(function(transactionsData){
       that.setState({data: transactionsData});
     });
+  },
+
+  footerCheck: function() {
+    console.log('checking footer');
+    if ( ( $('body').height() ) < window.innerHeight - 160 ) {
+      console.log('body height is less than window inner height')
+      $('.footer-banner').css('top', (window.innerHeight) - 160);
+    }
   },
 
   setCurrentTransaction: function(transaction){

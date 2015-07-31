@@ -7,6 +7,7 @@ var OutletStore = require('../stores/outletStore');
 var Auth = require('../services/authServices.js');
 var Link = require('react-router').Link;
 var mobile = require('./mobilecheck');
+var FooterCheck = require('./footerCheck')
 
 var Connectus = React.createClass({
   getInitialState: function(){
@@ -17,6 +18,8 @@ var Connectus = React.createClass({
   },
   componentDidMount: function() {
     var that = this;
+
+    FooterCheck.checker();
    
     PaymentStore.getTransactionInfo().then(function(transaction){
       console.log('transaction in payment confirmation', transaction);

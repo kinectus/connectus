@@ -11,10 +11,6 @@ var About = React.createClass({
   componentDidMount: function() {
     var stop = true;
 
-    // $('[data-toggle="popover"]').popover({
-    //   trigger: 'hover'
-    // })
-
     $('.left-hover').popover({
       trigger: 'hover',
       placement: 'left'
