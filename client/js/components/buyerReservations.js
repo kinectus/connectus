@@ -98,11 +98,30 @@ var buyerReservations = React.createClass({
 
     var that = this;
     console.log('STATE:  ', this.state)
-    // Math.round(that.state.realtime.totalKwh*1000)/1000 
     if (this.state.data.length !==0) {
       console.log(this.state.data);
-      var transactionRows = this.state.data.map(function(transaction) {
-      
+    
+    var inFuture = function(transaction) {
+      return moment(transaction.startTime.date + " " + transaction.startTime.slot.time,"YYYY-MM-DD HH:mm") > moment();
+    }
+    var inPast = function(transaction) {
+      return moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment();
+    }
+    var inPresent = function(transaction){
+      return moment(transaction.startTime.date + " " + transaction.startTime.slot.time,"YYYY-MM-DD HH:mm") < moment() && moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") > moment();
+    }
+
+      var sortTransactions = function(transactions) {
+        
+        console.log(transactions);
+        console.log('inpst', transactions.filter(inPast));
+        console.log('inpres', transactions.filter(inPresent));
+        console.log('infut', transactions.filter(inFuture));
+        return [].concat(transactions.filter(inPresent), transactions.filter(inFuture), transactions.filter(inPast));
+      }
+      var sortedTransactions = sortTransactions(this.state.data);
+      console.log(sortedTransactions);
+      var transactionRows = sortedTransactions.map(function(transaction) {
         return (
           <tr key={ transaction.id } className={  moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ?  "oldReservation regTransRow" : "regTransRow"}>
             <td className='regTrans'>
