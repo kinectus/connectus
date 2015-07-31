@@ -19,18 +19,6 @@ module.exports = updateReservation = function(req, res){
   // Store information for reservation update
   var transactionID, buyerID;
 
-  // Determine id step for clearDB
-  console.log('process.env.PORT: ', process.env.PORT);
-  if (process.env.PORT === undefined){
-    var min = 1;
-    var max = 48;
-    var step = 1;
-  } else if (process.env.PORT){
-    var min = 2;
-    var max = 472;
-    var step = 10;
-  }
-
   // START RESERVATION PROCESS
   var startID, endID;
 
@@ -87,7 +75,10 @@ module.exports = updateReservation = function(req, res){
                 }).save().then(function(res){
                   console.log('got a res: ', res.id);
                 })
-              });
+              })
+              .then(function(){
+                res.send(201, 'Posted')
+              })
             });
           });
         });

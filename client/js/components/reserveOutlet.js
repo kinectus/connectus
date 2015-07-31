@@ -89,10 +89,12 @@ var DateTime = React.createClass({
     };
     var start = this.refs.startTime.state.value;
     var end = this.refs.endTime.state.value;
+    var startDate = start.getDate() < 10 ? "0"+start.getDate() : start.getDate();
+    var endDate = end.getDate() < 10 ? "0"+end.getDate() : end.getDate();
     var startMonth = start.getMonth() < 10 ? "0"+(start.getMonth()+1) : start.getMonth() +1;
     var endMonth = end.getMonth() < 10 ? "0"+(end.getMonth()+1) : end.getMonth() + 1;
-    var startDateString = start.getFullYear() + "-" + startMonth + "-" + start.getDate();
-    var endDateString = end.getFullYear() + "-" + endMonth + "-" + end.getDate();
+    var startDateString = start.getFullYear() + "-" + startMonth + "-" + startDate;
+    var endDateString = end.getFullYear() + "-" + endMonth + "-" + endDate;
     var startTimeString = timeConvert(start.getHours())+":"+timeConvert(start.getMinutes());
     var endTimeString = timeConvert(end.getHours())+":"+timeConvert(end.getMinutes());
 
