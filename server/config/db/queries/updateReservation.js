@@ -2,119 +2,161 @@ var db = require('../config');
 var User = require('../../../users/user.model');
 var TimeSlot = require('../../../reservations/timeSlot.model');
 var Reservation = require('../../../reservations/reservation.model');
+// var Reservations = require('../../../reservations/reservations.collection');
 var Transaction = require('../../../transactions/transaction.model');
 var moment = require('moment');
 var transactionID;
 
 module.exports = updateReservation = function(req, res){
   var data = req.body;
-  // Slot tracking
-  var startSlot, endSlot, currentSlot;
-  // Date tracking
-  var startDate = data.start.date;
-  var endDate = data.end.date;
-  var currentDate;
-  var sameDay = (startDate === endDate);
-  var complete = false;
-  var is404 = false;
 
-  // Recursive function updates reservation slots and creates transaction models for each
-  // time slot from beginning to end 
-  var newReservation = function(user, passedSlot){
-    currentSlot = passedSlot;
-    currentDate = currentDate || startDate;
+  // Track reservation update by date and time slot
+  var currentDate = moment( data.start.date, 'YYYY-MM-DD' );
+  var stringDate = currentDate.format('YYYY-MM-DD');
+  var endDate = moment( data.end.date, 'YYYY-MM-DD' );
+  var currentSlot, endSlot;
 
-      // Find reservation
-      new Reservation()
-      .query({where: {outlet_id: data.outletID, slot_id: currentSlot, date: currentDate} })
-      .fetch()
-
-      // Update reservation
-      .then(function(newReservation){
-        if (!newReservation) {
-          is404 = true;
-          complete = true;
-          return;
-        } else if (newReservation.available == false) {
-          is404 = true;
-          complete = true;
-          return;
-        } else {
-          newReservation.set({
-            buyer_id: user,
-            available: false,
-            transaction_id: transactionID
-          }).save();
-        }
-      })
-      // Determine if more reservations need to be updated
-      .then(function(){
-        // Completion check for same day reservations
-        if (sameDay){
-          if (++currentSlot <= endSlot){
-            return newReservation(user, currentSlot);
-          } else {
-            complete = true;
-            return;
-          }
-        // Completion check for multi-day reservations
-        } else {
-          currentSlot = currentSlot < 48 ? ++currentSlot : 1;
-          currentDate = currentSlot === 1 ? moment(currentDate).add(1, 'days').format('YYYY-MM-DD').toString() : currentDate;
-          var difference = moment(currentDate).diff(moment(endDate));
-          console.log('startDate: ', startDate, ', endDate: ', endDate, ', currentDate: ', currentDate, ', difference: ', difference);
-          if ( difference <= 0 ){
-            if ( currentSlot <= endSlot  || difference < 0){
-              return newReservation(user, currentSlot);
-            } else {
-              complete = true;
-              return;
-            }
-          }
-        }
-      }).then(function(){
-        if (complete === true && !is404){
-          return res.send(201, JSON.stringify('Reservation complete'));
-        } else if (complete === true && is404) {
-          return res.send(404, JSON.stringify('Cannot complete reservation'));
-        }
-      });
-  };
-
+  // Store information for reservation update
+  var transactionID, buyerID;
 
   // START RESERVATION PROCESS
-  // Fetch user by request user id
+  var startID, endID;
+
   new User({
     username: req.user.id
   }).fetch()
-  .then(function(user){
-    // Find start timeSlot
-    new TimeSlot({
+  .then(function(user){  
+    buyerID = user.id;
+    // Find start res
+    return new TimeSlot({
       start: data.start.time
-    }).fetch()
-    .then(function(slot){
-      startSlot = slot.id;
-      // Find end timeslot
-      new TimeSlot({
-        end: data.end.time
-      }).fetch()
-      // Start making reservations for user
-      .then(function(slot2){
-        endSlot = slot2.id;
-
-        Transaction.forge({
-              totalEnergy: 0,
-              totalCost: 0,
-              paid: false,
-              current: false
+    })
+    .fetch().then(function(slot){
+      console.log('INFO FOR STARTRES: ')
+      console.log('outlet_id: ', data.outletID, ' date: ', data.start.date, ' slot_id: ', slot.id);
+      return new Reservation({
+        outlet_id: data.outletID,
+        date: data.start.date,
+        slot_id: slot.id
+      })
+      .fetch().then(function(startRes){
+        console.log('STARTRES: ', startRes);
+        startID = startRes.get('id');
+        startID = 'id >= '+startID.toString();
+        // Find end res
+        return new TimeSlot({
+          end: data.end.time
         })
-        .save()
-        .then(function(newTransaction){
-          transactionID = newTransaction.id;
-          complete = false;
-          return newReservation(user.id, startSlot);
+        .fetch().then(function(slot2){
+          console.log('INFO FOR ENDRES: ')
+          console.log('outlet_id: ', data.outletID, ' date: ', data.end.date, ' slot_id: ', slot2.id);
+          return new Reservation({
+            outlet_id: data.outletID,
+            date: data.end.date,
+            slot_id: slot2.id
+          })
+          .fetch().then(function(endRes){
+            console.log('ENDRES: ', endRes);
+            endID = endRes.get('id');
+            endID = 'id <= '+endID.toString();
+            var rangeQuery = startID+' AND '+endID;
+            console.log('rangeQuery ', rangeQuery);
+            new Reservation()
+            .query(function(qb){
+              qb.where('outlet_id', data.outletID)
+              qb.where(db.knex.raw(rangeQuery))
+            })
+            .fetchAll().then(function(reservations){
+              return reservations.mapThen(function(reservation){
+                return reservation.set({
+                  buyer_id: buyerID,
+                  available: false,
+                  transaction_id: transactionID
+                }).save().then(function(res){
+                  console.log('got a res: ', res.id);
+                })
+              })
+              .then(function(){
+                res.send(201, 'Posted')
+              })
+            });
+          });
         });
       });
     });
   });
+
 };
+
+
+
+
+  // new User({
+  //   username: req.user.id
+  // }).fetch()
+  // .then(function(user){
+  //   // Find start timeSlot
+  //   console.log('DATA: ', data);
+  //   new TimeSlot({
+  //     start: data.start.time
+  //   }).fetch()
+  //   .then(function(slot){
+  //     console.log('SLOT: ', slot)
+  //     currentSlot = slot.id;
+  //     // Find end timeslot
+  //     new TimeSlot({
+  //       end: data.end.time
+  //     }).fetch()
+  //     // Create transaction
+  //     .then(function(slot2){
+  //       console.log('SLOT2: ', slot2)
+  //       endSlot = slot2.id;
+
+  //       Transaction.forge({
+  //         totalEnergy: 0,
+  //         totalCost: 0,
+  //         paid: false,
+  //         current: false
+  //       })
+  //       .save()
+  //       // Start making reservations for user
+  //       .then(function(newTransaction){
+  //         transactionID = newTransaction.id;
+
+  //         console.log('DATA: ', data);
+
+          
+
+
+  //         // // var toUpdate = [];
+  //         // while( currentSlot <= endSlot || currentDate.diff(endDate) < 0){
+  //         //   // // toUpdate.push(
+  //         //   //   new Reservation({
+  //         //   //     outlet_id: data.outletID,
+  //         //   //     slot_id: currentSlot,
+  //         //   //     date: stringDate
+  //         //   //   }).fetch()
+  //         //   // // );
+
+  //         //   currentSlot = currentSlot < max ? currentSlot+step : min;
+  //         //   currentDate = currentSlot > min ? currentDate : currentDate.add(1, 'days');
+  //         // }
+
+
+  //         // console.log(toUpdate);
+  //         // toUpdate.mapThen(function(reservation){
+  //         //   return reservation.set({
+  //         //     buyer_id: buyerID,
+  //         //     available: false,
+  //         //     transaction_id: transactionID
+  //         //   })
+  //         //   .save()
+  //         //   .then(function() {
+  //         //     console.log( reservation.get('id') + '-saved' );
+  //         //   });
+  //         // });
+
+  //       });
+      // });
+    // });
+  // });

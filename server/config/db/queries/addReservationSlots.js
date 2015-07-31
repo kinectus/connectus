@@ -16,10 +16,8 @@ module.exports = addReservationSlots = function(newOutlet){
   var addSlots = function(){
     new Slot().fetchAll()
     .then(function(collection){
-      console.log('IN ADDSLOTS');
       collection.map(function(slot){
 
-        console.log('IN MAP, SLOT--------------------------->', slot);
         new Reservation({
           outlet_id: newOutlet.id,
           seller_id: newOutlet.seller_id,
