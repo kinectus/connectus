@@ -36,6 +36,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
     return OutletServices.seeBuyerReservations().then(function(outletData){
       var transactions = {};
       var transactionsData = [];
+      console.log('outletData',outletData);
       for(var i = 0; i < outletData.length; i++){
         var transactionId = outletData[i].transaction_id;
         if(!transactions[transactionId]){
@@ -48,7 +49,8 @@ var outletStore = assign({}, EventEmitter.prototype, {
           transactions[transactionId].seller = outletData[i].seller_info;
           transactions[transactionId].startTime = {slot: {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].start}, date: outletData[i].date};
           transactions[transactionId].endTime = {slot: {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].end}, date: outletData[i].date};
-    
+          transactions[transactionId].totalCost = outletData[i].transaction_info.totalCost;
+          transactions[transactionId].totalEnergy = outletData[i].transaction_info.totalEnergy;
         }else{
           
           if(new Date(outletData[i].date).getDate() === new Date(transactions[transactionId].endTime.date).getDate() && outletData[i].slot_id > transactions[transactionId].endTime.slot.number){

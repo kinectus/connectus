@@ -100,10 +100,11 @@ var buyerReservations = React.createClass({
     console.log('STATE:  ', this.state)
     // Math.round(that.state.realtime.totalKwh*1000)/1000 
     if (this.state.data.length !==0) {
+      console.log(this.state.data);
       var transactionRows = this.state.data.map(function(transaction) {
+      
         return (
-          <tr  key={ transaction.id } onClick={ that.reserveOutlet } className={moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? 'expired' + ' regTransRow' : 'regTransRow'}>
-
+          <tr key={ transaction.id } className={  moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ?  "oldReservation regTransRow" : "regTransRow"}>
             <td className='regTrans'>
               Start: { transaction.startTime.date} - { transaction.startTime.slot.time }
               <br />
@@ -126,20 +127,23 @@ var buyerReservations = React.createClass({
             <td className='regTrans'>
             { transaction.outlet.description }
             </td>
-            <td className={transaction.id}>
-              <div className="btn turnOn" onClick={that.turnOn.bind(that, transaction)}>ON</div>
-              <div className="btn turnOff" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
+            <td className='regTrans'>
+              <div className={moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() || moment(transaction.startTime.date + " " + transaction.startTime.slot.time,"YYYY-MM-DD HH:mm") > moment()? ' hidden' + ' ' : ''}>
+                <div className= "btn turnOn" onClick={that.turnOn.bind(that, transaction)}>ON</div>
+                <div className="btn turnOff" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
+              </div>
             </td>
             <td className={transaction.id}>
               <div className="powerData">
-                <p><span>Total kWh </span><span className="totalKwh"></span></p>
-                <p><span>Total $ </span><span className="total"></span></p>
+                <p><span>Total kWh </span><span className="totalKwh">{ moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? transaction.totalEnergy:''}</span></p>
+                <p><span>Total $ </span><span className="total"></span>{ moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? transaction.totalCost:''}</p>
                 <p><span>Watts </span><span className="watts"></span></p>
               </div>
             </td>
           </tr>
         )
       });
+      console.log(transactionRows);
     }
 
     // for active transactions ------
