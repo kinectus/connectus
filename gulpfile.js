@@ -69,7 +69,11 @@ gulp.task('deploy', ['uglify','copy', 'less'], function() {
   return;
 });
 
-gulp.task('default', ['browserify', 'copy', 'build'], function() {
+gulp.task('deploytest', ['browserify','less','copy' ], function() {
+  return;
+});
+
+gulp.task('default', ['browserify', 'build', 'copy'], function() {
   return gulp.watch(['client/**/*.*'], ['browserify', 'copy']);
 });
 
