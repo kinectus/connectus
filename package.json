@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "node",
-    "postinstall": "gulp"
+    "postinstall": "gulp deploy"
   },
   "homepage": "https://github.com/Dianna/connectus#readme",
   "dependencies": {
