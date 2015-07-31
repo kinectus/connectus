@@ -7,7 +7,6 @@ var outletServices = function(){
   var outletData = {};
 
   outletData.validateAddress = function(data){
-    console.log('calling validate address in services', data);
     return request({
       url: OutletListConstants.VALIDATE_ADDRESS,
       method: 'POST',
@@ -58,7 +57,6 @@ var outletServices = function(){
   };
 
   outletData.calculateOutletRating = function(outlets) {
-    console.log('calculating outlet rating in the store')
     outlets.map(function(outlet){
       if (outlet.thumbs_up + outlet.thumbs_down < 10) {
         outlet.rating = 'no rating availabile';
@@ -69,7 +67,6 @@ var outletServices = function(){
   };
 
   outletData.retrieveOutletByUser = function(){
-    console.log('retrieving outlet by user id');
     return request({
       url: OutletListConstants.OUTLETS_BYUSER,
       method: 'GET',
@@ -83,7 +80,6 @@ var outletServices = function(){
   };
 
   outletData.retrieveOutletReservations = function(outletID){
-    console.log('outletID in retrieve reservations SERVICES', outletID);
     return request({
       url: OutletListConstants.OUTLET_RESERVATIONS,
       method: 'POST',
@@ -150,7 +146,6 @@ var outletServices = function(){
   }
 
   outletData.makeReservation = function(newReservation){
-    // console.log('IN OUTLETSERVICES, makeReservation: ', newReservation);
     return request({
       url: OutletListConstants.MAKE_RESERVATION,
       method: 'POST',
@@ -184,7 +179,6 @@ var outletServices = function(){
   };
 
   outletData.turnOutletOn = function(transaction){
-    console.log('transaction info on the client: ', transaction);
     return request({
       url: OutletListConstants.TURNON_OUTLET,
       method: 'POST',

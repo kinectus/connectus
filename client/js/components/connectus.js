@@ -8,6 +8,7 @@ var ReactAddons = require('react/addons');
 var Auth = require('../services/authServices.js');
 var Link = require('react-router').Link;
 var mobile = require('./mobilecheck');
+var FooterCheck = require('./footerCheck')
 
 var Connectus = React.createClass({
   logout: function(){
@@ -15,25 +16,13 @@ var Connectus = React.createClass({
   },
 
   componentDidMount: function() {
-    this.footerCheck()
-
     // resizing the screen renders mobile or full menu
     var that = this; 
     var isMobile = mobile();
     window.onresize = function() {
-      that.footerCheck();
+      FooterCheck.checker();
       that.forceUpdate();
     };
-  },
-
-  footerCheck: function() {
-    if ( ( $('body').height() ) < window.innerHeight ) {
-      console.log('body height is less than window inner height')
-      $('.footer-banner').css('top', (window.innerHeight));
-    } else {
-      console.log('body height is greater than window inner height')
-      $('.footer-banner').css('top', ($('body').height()));
-    }
   },
 
   render: function() {
@@ -66,7 +55,7 @@ var Connectus = React.createClass({
 
     //moving login/signup to splash page
     var pageHtml = (
-      <div className="topNavBar">
+      <div className="check-footer" className="topNavBar">
         <span className="logo">
           <Link to="about">Connect.us</Link>
         </span>
@@ -74,7 +63,6 @@ var Connectus = React.createClass({
     );
 
     if(isMobile){
-      console.log('mobile footer rendering')
       var footerHtml = (
         <div className="container-fluid footer-banner">
             <div className='footer-1'>
@@ -86,7 +74,6 @@ var Connectus = React.createClass({
         </div>
       );
     } else {
-      console.log('full footer rendering')
       var footerHtml = (
         <div className="container-fluid footer-banner">
           <div className='row footer'>
@@ -122,12 +109,12 @@ var Connectus = React.createClass({
                 <li className="dropdown">
                   <a className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu<span className="caret"></span></a>
                   <ul className="dropdown-menu">
-                    <li role="presentation"><Link to="outletsList">Outlets</Link></li>
-                    <li role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
-                    <li role="presentation"><Link to="buyerReservations">My Reservations</Link></li>
-                    <li role="presentation"><Link to="manageOutlets">Manage Outlets</Link></li>
+                    <li className="check-footer" role="presentation"><Link to="outletsList">Outlets</Link></li>
+                    <li className="check-footer" role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
+                    <li className="check-footer" role="presentation"><Link to="buyerReservations">My Reservations</Link></li>
+                    <li className="check-footer" role="presentation"><Link to="manageOutlets">Manage Outlets</Link></li>
                     <li role="separator" className="divider"></li>
-                    <li role="presentation"><a className="logout" onClick={this.logout}>Logout</a></li>
+                    <li className="check-footer" role="presentation"><a className="logout" onClick={this.logout}>Logout</a></li>
                   </ul>
                 </li>
               </ul>
@@ -144,11 +131,11 @@ var Connectus = React.createClass({
             <Link to="about">Connect.us</Link>
           </span>
             <ul className="nav nav-pills pull-right">
-              <li role="presentation"><Link to="outletsList">Outlets</Link></li>
-              <li role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
-              <li role="presentation"><Link to="buyerReservations">My Reservations</Link></li>
-              <li role="presentation"><Link to="manageOutlets">Manage Outlets</Link></li>
-              <li role="presentation"><a className="logout" onClick={this.logout}>Logout</a></li>
+              <li className="check-footer" role="presentation"><Link to="outletsList">Outlets</Link></li>
+              <li className="check-footer" role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
+              <li className="check-footer" role="presentation"><Link to="buyerReservations">My Reservations</Link></li>
+              <li className="check-footer" role="presentation"><Link to="manageOutlets">Manage Outlets</Link></li>
+              <li className="check-footer" role="presentation"><a className="logout" onClick={this.logout}>Logout</a></li>
             </ul>
           </div> 
           );

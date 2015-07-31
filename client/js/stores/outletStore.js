@@ -1,5 +1,4 @@
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
-// var ConnectusConstants = require('');          // omg what is this even
 var assign = require('react/lib/Object.assign');    // allows us to extend objects similarly to jquery and underscore lib...
 var EventEmitter = require('events').EventEmitter;
 var OutletServices = require('../services/outletServices');
@@ -22,7 +21,6 @@ var outletStore = assign({}, EventEmitter.prototype, {
   },
   getOutlets: function() {
     return OutletServices.retrieve().then(function(outlets){
-      // console.log('outlets in the store: ', outlets)
       OutletServices.calculateOutletRating(outlets);
       return outlets;
     });
@@ -30,7 +28,6 @@ var outletStore = assign({}, EventEmitter.prototype, {
   
   getSellerOutlets: function(){
     return OutletServices.retrieveOutletByUser().then(function(outlets){
-      // console.log('outlets in the seller outlets list', outlets);
       return outlets;
     });
   },
@@ -39,7 +36,6 @@ var outletStore = assign({}, EventEmitter.prototype, {
     return OutletServices.seeBuyerReservations().then(function(outletData){
       var transactions = {};
       var transactionsData = [];
-      console.log(outletData);
       for(var i = 0; i < outletData.length; i++){
         var transactionId = outletData[i].transaction_id;
         if(!transactions[transactionId]){
@@ -116,7 +112,6 @@ var outletStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function() {
     this.emit(CHANGE_EVENT);
-    console.log('i changed')
   },
 
   addChangeListener: function(callback) {

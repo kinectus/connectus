@@ -9,6 +9,7 @@ var Link = require('react-router').Link;
 var mobile = require('./mobilecheck');
 var GoogleMap = require('google-map-react');
 var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
+var FooterCheck = require('./footerCheck')
 // var shouldPureComponentUpdate = require('react-pure-render/function');
 // var MainMapLayout =require('./outletsListMap/main_map_layout.js');
 // var MainMapBlock =require('./outletsListMap/main_map_block.js');
@@ -30,8 +31,11 @@ var outletsListMap = React.createClass({
       outletTable: 'hello'
     }
   },
+  
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
+  
   componentDidMount: function() {
+    FooterCheck.checker();
     var that = this;
     // change function so that it retrieves only outlets near users location
     outletStore.getOutlets().then(function(outletData){

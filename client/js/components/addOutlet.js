@@ -3,10 +3,14 @@ var outletStore = require('../stores/outletStore');
 var _=require('underscore');
 var Router = require('react-router'); //need this for redirection
 // var ReactAddons = require('react/addons');
-
+var FooterCheck = require('./footerCheck');
 
 var addOutlet = React.createClass({
   mixins: [Router.Navigation],
+
+  componentDidMount: function() {
+    FooterCheck.checker();
+  },
 
   getInitialState: function(){
     return {
@@ -17,8 +21,7 @@ var addOutlet = React.createClass({
       validationButton: ''
     };
   },
-
-
+  
   handleChange: function(){
     this.setState({validated:false, validationMessage: 'Please validate your address', validationButton: ''});
   },

@@ -1,12 +1,11 @@
 var mobilecheck = function(){
-  var mobile = false;
-  // if($(window)) {
-  //   if ($(window).width()<800) {
-  //     var mobile = true;
-  //   }
-  // } else {
-  //   mobile = true;
-  // }
+  var mobile1 = false;
+  var mobile2 = false;
+
+  if ($(window).width()<800) {
+    var mobile1 = true;
+  }
+
   if( navigator.userAgent.match(/Android/i)
    || navigator.userAgent.match(/webOS/i)
    || navigator.userAgent.match(/iPhone/i)
@@ -15,10 +14,10 @@ var mobilecheck = function(){
    || navigator.userAgent.match(/BlackBerry/i)
    || navigator.userAgent.match(/Windows Phone/i)
    ){
-      mobile = true;
+      mobile2 = true;
     }
 
-  return mobile;
+  return (mobile1 || mobile2);
 
 
 }
