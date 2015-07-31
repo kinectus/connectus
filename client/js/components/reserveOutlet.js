@@ -344,27 +344,29 @@ var Availability = React.createClass({
           date = moment(reservation.date).format('MMMM Do YYYY');
           for (var j=0; j<slotProps.length; j++){
             if (slotProps[j].id === reservation.slot_id){
-              var endSub = slotProps[j].end === '24:00' ? '00:00' : slotProps[j].end
-              begin = moment('12/25/1995 '+slotProps[j].start).format('MM/DD/YYYY h:mma');
-              end = moment('12/25/1995 '+endSub).format('MM/DD/YYYY h:mma');
+              var endSub = slotProps[j].end === '24:00' ? '00:00' : slotProps[j].end;
+              begin = moment('12/25/1995 '+slotProps[j].start, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY hhmma');
+              end = moment('12/25/1995 '+endSub, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY hhmma');
 
               // Format begin time
-              if (begin[12] === '0' && end[11]!== '1'){
-                begin = begin.slice(12);
+              //  && end[11]!== '1'
+              if (begin[11] === '0'){
+                begin = begin.slice(12,13).concat( ":"+begin.slice(13) );
               } else {
-                begin = begin.slice(11);
+                begin = begin.slice(11,13).concat( ":"+begin.slice(13) );
               }
               // Format end time
-              if (end[12] === '0' && end[11]!== '1'){
-                end = end.slice(12);
+              //  && end[11]!== '1'
+              if (end[11] === '0'){
+                end = end.slice(12,13).concat( ":"+end.slice(13) );
               } else {
-                end = end.slice(11);
+                end = end.slice(11,13).concat( ":"+end.slice(13) );
               }
             }
           }
           return(
 
-            <div className={blockClass} key={reservation.id}><p>{begin}-{end}</p></div>
+            <div className={blockClass} key={reservation.id}>{begin}-{end}</div>
           )
 
         // Regularly label all slots but center
@@ -373,7 +375,7 @@ var Availability = React.createClass({
             var indicator = reservation.available ? "indicator barView" : "noIndicator barView";
             blockClass = blockClass + " splitHour"
             var hoverStart = slotProps[reservation.slot_id-1].start;
-            hoverStart = moment('12/25/1995 '+hoverStart).format('MM/DD/YYYY ha');
+            hoverStart = moment('12/25/1995 '+hoverStart, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY ha');
 
             if (hoverStart[12] === '0'){
               hoverStart = hoverStart.slice(12);
