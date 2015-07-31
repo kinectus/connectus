@@ -68,8 +68,8 @@ db.schema.hasTable('transactions').then(function(exists){
   if(!exists){
     db.schema.createTable('transactions', function(transaction){
       transaction.increments('id').primary();
-      transaction.decimal('totalEnergy', 5, 2).notNullable(); //random precision choice
-      transaction.decimal('totalCost', 6, 2).notNullable(); //random precision choice
+      transaction.decimal('totalEnergy', 23, 8).notNullable(); //random precision choice
+      transaction.decimal('totalCost', 23, 8).notNullable(); //random precision choice
       transaction.string('paid', 5).notNullable();
       transaction.string('current', 5).notNullable();
     }).then(function(table){

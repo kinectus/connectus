@@ -76,9 +76,9 @@ var buyerReservations = React.createClass({
     socket.on(transactionId, function (data) {
       console.log("got energy!", data);
       // convert and display power data
-      var pricePerKwh = data.totalKwh * data.clientData.outlet.priceEnergy;
-      var hourlyPrice = data.clientData.outlet.priceHourly/(60*60)*10;
-      var totalCost = (pricePerKwh+hourlyPrice).toFixed(3);
+      // var pricePerKwh = data.totalKwh * data.clientData.outlet.priceEnergy;
+      // var hourlyPrice = data.clientData.outlet.priceHourly/(60*60)*10;
+      var totalCost = (data.totalCost).toFixed(3);
       var avgWatts = (data.avgWatts).toFixed(0);
       var targetClass = '.'+transactionId;
       $(targetClass).find('.totalKwh').text(data.totalKwh.toFixed(3));

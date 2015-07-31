@@ -1,6 +1,7 @@
 var app = require('./config/middleware');
 
 var setRealtimeData= require('./config/db/queries/setRealtimeTransactionData');
+var getTransactionData= require('./config/db/queries/getTransactionData');
 
 var port = process.env.PORT || 3000;
 // var db = require('./db/config.js');
@@ -17,12 +18,20 @@ io.on('connection', function(socket){
 })
 
 app.post('/realtimeData', function(req, res){
-  // console.log('in the realtimeData post', req.body)
   var transactionId = req.body.clientData.id+'';
-  mySocket.emit(transactionId, req.body);
-  res.status(200).send('you hit realtimeData')
+  res.status(200).send('you hit realtimeData');
   // add to DB
-  setRealtimeData(req.body);
+  setRealtimeData(req.body)
+  .then(function(){
+    getTransactionData(req.body)
+    .then(function(transactionData) {
+      req.body.totalKwh = transactionData.attributes.totalEnergy;
+      req.body.totalCost = transactionData.attributes.totalCost;
+      // emit socket to client
+      mySocket.emit(transactionId, req.body);
+    })
+  })
+  
 })
 
 console.log('Connectus is listening on port ' + port + '...');

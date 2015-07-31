@@ -543,8 +543,13 @@ Reserve an Outlet .holder {
 }
 .authBoxMobile {
   position: absolute;
+<<<<<<< HEAD
   top: 400px;
   left: 60px;
+=======
+  top: 330px;
+  left: 140px;
+>>>>>>> power data is set and pulled from db during streaming
 }
 .authBoxMobile .btn {
   color: #FFFFFF;

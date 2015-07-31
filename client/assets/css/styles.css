@@ -362,7 +362,8 @@ a:focus {
   width: 10%;
 }
 .footer-banner {
-  position: absolute;
+  position: relative;
+  display: block;
   height: 160px;
   background-color: #343434;
   width: 100%;
