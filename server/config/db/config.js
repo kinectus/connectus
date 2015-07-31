@@ -25,7 +25,7 @@ db.schema.hasTable('users').then(function(exists){
   console.log(exists)
   if(!exists){
     db.schema.createTable('users', function(user){
-      user.increments('id').primary();
+      user.increments().primary();
       user.string('username', 50).notNullable();
       user.string('fullname', 50);
       user.string('email', 100);
@@ -42,7 +42,7 @@ db.schema.hasTable('users').then(function(exists){
 db.schema.hasTable('outlets').then(function(exists){
   if(!exists){
     db.schema.createTable('outlets', function(outlet){
-      outlet.increments('id').primary();
+      outlet.increments().primary();
       outlet.string('name', 30).notNullable();
       outlet.integer('seller_id', 30).notNullable();
       outlet.integer('thumbs_up', 30).notNullable();
@@ -81,7 +81,7 @@ db.schema.hasTable('transactions').then(function(exists){
 db.schema.hasTable('timeSlots').then(function(exists){
   if(!exists){
     db.schema.createTable('timeSlots', function(timeSlot){
-      timeSlot.increments('id').primary();
+      timeSlot.increments().primary();
       timeSlot.string('start').notNullable();
       timeSlot.string('end').notNullable();
     }).then(function(table){
@@ -94,7 +94,7 @@ db.schema.hasTable('timeSlots').then(function(exists){
 db.schema.hasTable('reservations').then(function(exists){
   if(!exists){
     db.schema.createTable('reservations', function(reservation){
-      reservation.increments('id').primary();
+      reservation.increments().primary();
       reservation.integer('outlet_id').notNullable();
       reservation.integer('seller_id').notNullable();
       reservation.integer('buyer_id');
