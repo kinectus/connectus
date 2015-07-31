@@ -36,7 +36,6 @@ var About = React.createClass({
     })
 
     $(window).scroll(function(){
-      console.log('THEY SEE ME SCROLLIN...')
       stop = false;
       if($(this).scrollTop() > 100 && stop === false) {
         $('.banner-item').fadeIn(2000, 'swing')
