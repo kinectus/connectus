@@ -29,18 +29,22 @@ a:focus {
 .topNavBar {
   position: relative;
   background-color: #343434;
-  height: 70px;
+  height: 45px;
   width: 100vw;
   z-index: 2;
 }
 .topNavBar .logo {
-  font-size: 30px;
+  font-size: 26px;
   float: left;
   display: inline;
   color: #f9a92a !important;
   padding-left: 40px;
   padding-top: 10px;
   text-decoration: none !important;
+}
+.topNavBar .logo a {
+  position: absolute;
+  bottom: 3px;
 }
 .topNavBar .mobile {
   margin-left: auto;
@@ -60,7 +64,7 @@ a:focus {
   background-color: #414141;
 }
 .topNavBar .nav > li {
-  padding-top: 15px;
+  padding-top: 1px;
 }
 .topNavBar .nav > li a {
   color: white;
@@ -527,4 +531,30 @@ Reserve an Outlet .holder {
 .alertButton {
   width: 20vw;
   margin: 0 .5vw;
+}
+.authBox {
+  position: absolute;
+  top: 330px;
+  left: 140px;
+}
+.authBox .btn {
+  color: #FFFFFF;
+  background-color: #3b5998;
+}
+.authBoxMobile {
+  position: absolute;
+  top: 400px;
+  left: 60px;
+}
+.authBoxMobile .btn {
+  color: #FFFFFF;
+  background-color: #3b5998;
+}
+.outletsListMap .btn {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.outletsList .btn {
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
