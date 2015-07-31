@@ -543,8 +543,8 @@ Reserve an Outlet .holder {
 }
 .authBoxMobile {
   position: absolute;
-  top: 330px;
-  left: 140px;
+  top: 400px;
+  left: 60px;
 }
 .authBoxMobile .btn {
   color: #FFFFFF;
