@@ -3,7 +3,6 @@ var Outlet = require('../../../outlets/outlet.model.js');
 var Promise = require('bluebird');
 var Reservation = require('../../../reservations/reservation.model.js');
 var Transaction = require('../../../transactions/transaction.model.js');
-
 module.exports = setRealtimeData = function(data) {
   // console.log('data in the query for transactions --------------')
   // console.log(data);
@@ -13,7 +12,8 @@ module.exports = setRealtimeData = function(data) {
   var kwh = data.kwh || 0;
   var priceKwh = data.clientData.outlet.priceEnergy;
   var priceHourly = data.clientData.outlet.priceHourly;
-  var totalCost = kwh * priceKwh + priceHourly/(60*60)*10;
+  var totalCost = kwh * priceKwh;
+
 
   // return new Transaction({
   //   id: transactionId

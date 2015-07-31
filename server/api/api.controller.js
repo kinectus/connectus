@@ -16,6 +16,8 @@ var getUserInfo = require('../config/db/queries/getUserInfo');
 var getOutletsByUser = require('../config/db/queries/getOutletsByUserId.js');
 var getBuyerReservations = require('../config/db/queries/getBuyerReservations');
 var turnOnOutlet = require('../config/db/queries/turnOnOutlet');
+var setInitialTransactionCost = require('../config/db/queries/setInitialTransactionCost.js');
+var M = require('moment');
 var rp = require('request-promise');
 
 var addressValidator = require('address-validator');
@@ -123,12 +125,29 @@ module.exports = {
 
   // request hitting server from the client (DOWN)
   turnOnOutlet: function(req, res){
+    var info = req.body;
+    var transactionId = info.id;
+    var hourlyPrice = info.outlet.priceHourly;
     // query the database for validation - CAN they turn on this outlet??
     // if so...
-    res.send(200, 'you turn me on!')
-    var info = req.body;
+    // console.log(data.clientData.startTime.slot, data.clientData.endTime.slot);
+    console.log('starttime',info.startTime.slot.number);
+    console.log('endtime',info.endTime.slot.number);
+    var startDate = M(info.endTime.date);
+    var endDate = M(info.startTime.date);
+    var reservationHours = startDate.diff(endDate,'hours') + (-info.startTime.slot.number + info.endTime.slot.number+1)/2;
+    var initialCost = reservationHours * hourlyPrice;
+    console.log('reshours',reservationHours, info);
+    setInitialTransactionCost(transactionId, initialCost);
+    // do cost math
+    // set cost in db 
+    // console.log('inturnonoutlet', req.body);
+
+
+    res.status(200).send('you turn me on!');
+    
     // console.log(req.body);
-    var transactionId = info.id
+    
     if(ServerConstants.SIMULATE_POWER) {
       // simulate an appliance's power use
       var totalKwh = 0;
@@ -172,7 +191,7 @@ module.exports = {
     if(ServerConstants.SIMULATE_POWER) {
       // simulate an appliance's power use
       var intervalId = intervalIds[transactionId];
-      console.log('turn off intervalid: '. intervalId, 'intervals: ', intervalIds);
+      // console.log('turn off intervalid: '. intervalId, 'intervals: ', intervalIds);
       clearInterval(intervalId);
     } else {
       var options = {
