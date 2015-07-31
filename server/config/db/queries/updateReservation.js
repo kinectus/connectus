@@ -2,6 +2,7 @@ var db = require('../config');
 var User = require('../../../users/user.model');
 var TimeSlot = require('../../../reservations/timeSlot.model');
 var Reservation = require('../../../reservations/reservation.model');
+// var Reservations = require('../../../reservations/reservations.collection');
 var Transaction = require('../../../transactions/transaction.model');
 var moment = require('moment');
 var transactionID;
@@ -9,80 +10,26 @@ var transactionID;
 module.exports = updateReservation = function(req, res){
   var data = req.body;
 
-  // Date and time tracking, completion tracking
-  var currentDate = data.start.date;
-  var endDate = data.end.date;
+  // Track reservation update by date and time slot
+  var currentDate = moment( data.start.date, 'YYYY-MM-DD' );
+  var stringDate = currentDate.format('YYYY-MM-DD');
+  var endDate = moment( data.end.date, 'YYYY-MM-DD' );
   var currentSlot, endSlot;
-  var complete = false;
+
+  // Store information for reservation update
+  var transactionID, buyerID;
+
   // Determine id step for clearDB
-  if (process.env.NODE_ENV === 'development'){
+  console.log('process.env.PORT: ', process.env.PORT);
+  if (process.env.PORT === undefined){
     var min = 1;
     var max = 48;
-    var step = 10;
-  } else {
+    var step = 1;
+  } else if (process.env.PORT){
     var min = 2;
     var max = 472;
     var step = 10;
   }
-
-  // Recursive function updates reservation slots and creates transaction models for each
-  // time slot from beginning to end 
-  var newReservation = function(user, passedSlot){
-    currentDate = currentDate || startDate;
-
-    // Find reservation
-    new Reservation()
-    .query({where: {outlet_id: data.outletID, slot_id: passedSlot, date: currentDate} })
-    .fetch()
-
-    // Update reservation
-    .then(function(newReservation){
-      if (!newReservation) {
-        is404 = true;
-        complete = true;
-        return;
-      } else if (newReservation.available == false) {
-        is404 = true;
-        complete = true;
-        return;
-      } else {
-        newReservation.set({
-          buyer_id: user,
-          available: false,
-          transaction_id: transactionID
-        }).save();
-      }
-    })
-    // Determine if more reservations need to be updated
-    .then(function(){
-      // Update slot and day (if necessary)
-      // Determine if reservations should continue
-
-      currentSlot = currentSlot < max ? currentSlot += step : min;
-      currentDate = currentSlot === min ? moment(currentDate).add(1, 'days').format('YYYY-MM-DD').toString() : currentDate;
-      var difference = moment(currentDate).diff(moment(endDate));
-      // console.log('startDate: ', startDate, ', endDate: ', endDate, ', currentDate: ', currentDate, ', difference: ', difference);
-      console.log('currentSlot: ', currentSlot, 'currentDate', currentDate)
-      if ( difference <= 0 ){
-        if ( currentSlot <= endSlot  || difference < 0){
-          return newReservation(user, currentSlot);
-        } else {
-          complete = true;
-          return;
-        }
-      }
-    })
-    // Send response if complete
-    .then(function(){
-      if (complete === true && !is404){
-        return res.send(201, JSON.stringify('Reservation complete'));
-      } else if (complete === true && is404) {
-        return res.send(404, JSON.stringify('Cannot complete reservation'));
-      }
-    });
-
-  };
-
 
   // START RESERVATION PROCESS
   // Fetch user by request user id
@@ -91,30 +38,72 @@ module.exports = updateReservation = function(req, res){
   }).fetch()
   .then(function(user){
     // Find start timeSlot
+    console.log('DATA: ', data);
     new TimeSlot({
       start: data.start.time
     }).fetch()
     .then(function(slot){
+      console.log('SLOT: ', slot)
       currentSlot = slot.id;
       // Find end timeslot
       new TimeSlot({
         end: data.end.time
       }).fetch()
-      // Start making reservations for user
+      // Create transaction
       .then(function(slot2){
+        console.log('SLOT2: ', slot2)
         endSlot = slot2.id;
 
         Transaction.forge({
-              totalEnergy: 0,
-              totalCost: 0,
-              paid: false,
-              current: false
+          totalEnergy: 0,
+          totalCost: 0,
+          paid: false,
+          current: false
         })
         .save()
+        // Start making reservations for user
         .then(function(newTransaction){
           transactionID = newTransaction.id;
-          complete = false;
-          return newReservation(user.id, currentSlot);
+
+          console.log('DATA: ', data);
+
+          var toUpdate = [];
+          while( currentSlot <= endSlot || currentDate.diff(endDate) < 0){
+            // toUpdate.push(
+              new Reservation({
+                outlet_id: data.outletID,
+                slot_id: currentSlot,
+                date: stringDate
+              }).fetch().then(function(newReservation){
+                newReservation.set({
+                  buyer_id: buyerID,
+                  available: false,
+                  transaction_id: transactionID
+                })
+                .save()
+                .then(function() {
+                  console.log( newReservation.get('id') + '-saved' );
+                });
+              });
+            // );
+
+            currentSlot = currentSlot < max ? currentSlot+step : min;
+            currentDate = currentSlot > min ? currentDate : currentDate.add(1, 'days');
+          }
+
+          // console.log(toUpdate);
+          // toUpdate.mapThen(function(reservation){
+          //   return reservation.set({
+          //     buyer_id: buyerID,
+          //     available: false,
+          //     transaction_id: transactionID
+          //   })
+          //   .save()
+          //   .then(function() {
+          //     console.log( reservation.get('id') + '-saved' );
+          //   });
+          // });
+
         });
       });
     });
