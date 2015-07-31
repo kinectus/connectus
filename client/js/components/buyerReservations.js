@@ -135,8 +135,8 @@ var buyerReservations = React.createClass({
             </td>
             <td className={transaction.id}>
               <div className="powerData">
-                <p><span>Total kWh </span><span className="totalKwh"></span></p>
-                <p><span>Total $ </span><span className="total"></span></p>
+                <p><span>Total kWh </span><span className="totalKwh">{ moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? transaction.totalEnergy:''}</span></p>
+                <p><span>Total $ </span><span className="total"></span>{ moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? transaction.totalCost:''}</p>
                 <p><span>Watts </span><span className="watts"></span></p>
               </div>
             </td>
