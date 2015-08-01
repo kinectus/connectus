@@ -111,7 +111,6 @@ var DateTime = React.createClass({
         time: endTimeString
       }
     }
-
     // Validate input dates
     if ( moment().diff(moment(start)) > 0 ){
       var message = 'Please choose reservation after '+moment().format('MMMM Do YYYY hh:mma');
