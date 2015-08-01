@@ -22,7 +22,7 @@ module.exports = addReservationSlots = function(newOutlet){
           outlet_id: newOutlet.id,
           seller_id: newOutlet.seller_id,
           available: true,
-          slot_id: slot.attributes.id,
+          slot_customID: slot.attributes.customID,
           date: day.format('YYYY-MM-DD')
         })
         .save()
