@@ -39,8 +39,8 @@ module.exports = updateReservation = function(req, res){
         slot_id: slot.id
       })
       .fetch().then(function(startRes){
-        startID = startRes.get('id');
-        startID = 'id >= '+startID.toString();
+        startID = startRes.get('customID');
+        startID = 'customID >= '+startID.toString();
         // Find end res
         return new TimeSlot({
           end: data.end.time
@@ -52,8 +52,8 @@ module.exports = updateReservation = function(req, res){
             slot_id: slot2.id
           })
           .fetch().then(function(endRes){
-            endID = endRes.get('id');
-            endID = 'id <= '+endID.toString();
+            endID = endRes.get('customID');
+            endID = 'customID <= '+endID.toString();
             var rangeQuery = startID+' AND '+endID;
 
             return new Transaction({
