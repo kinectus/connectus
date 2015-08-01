@@ -6,13 +6,11 @@ var authService = function(){
   var authInstance = {};
   //sends request to the back end to end the Express session and clear cookies
   authInstance.logout = function(){
-    console.log('auth logout called');
     return request({
       url: AuthConstants.LOGOUT,
       method: 'GET',
       crossOrigin: true,
       success: function(){
-        document.cookie='';
         document.location ='/';
       }
     })

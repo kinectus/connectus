@@ -32,16 +32,10 @@ var outletsList = React.createClass({
   },
 
   componentDidUpdate: function() {
-    console.log('DID update')
-    console.log('window: ', window.innerHeight);
-    console.log('body: ', $('body').height());
     FooterCheck.checker();
   },
 
   componentDidMount: function() {
-    console.log('DID mount')
-    console.log('window: ', window.innerHeight);
-    console.log('body: ', $('body').height());
     FooterCheck.checker();
   },
 
@@ -53,9 +47,6 @@ var outletsList = React.createClass({
     }
 
     var isMobile = mobile();
-    if (isMobile) {
-      console.log('MOBILE')
-    }
 
     var that = this;
     // outlet data list
@@ -147,9 +138,8 @@ var outletsList = React.createClass({
       </table>
       )
     }
-    // includes search bar, map/list button and possibly filter/sort buttons
     
-    //onClick={this.handleSubmit}
+    // includes search bar, map/list button and possibly filter/sort buttons
     var listMenu = (
       <div>
         <div className="ui button"> map</div> 
@@ -159,22 +149,15 @@ var outletsList = React.createClass({
       </div>
     );
 
-      return (   
-        <div className="outletsList container">
-          <Link to="outletsListMap">
-            <button type='button' className='btn btn-default'>Map Outlets</button>
-          </Link>
-          {tableHead}
-        </div>
-
-    )
-    // });  from the promise closing
-  },
-
-  _onChange: function() {
-    this.setState(this.getInitialState());
+    return (   
+      <div className="outletsList container">
+        <Link to="outletsListMap">
+          <button type='button' className='btn btn-default'>Map Outlets</button>
+        </Link>
+        {tableHead}
+      </div>
+    );
   }
-
 });
 
 module.exports = outletsList;

@@ -1,18 +1,12 @@
 var React = require('react');
 var outletStore = require('../stores/outletStore');
-var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var GoogleMap = require('google-map-react');
-// var GoogleMapsAPI = window.google.maps;
-var outletStore = require('../stores/outletStore');
-var ReactAddons = require('react/addons');
 var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
-
 var DateTimePicker = require('react-widgets').DateTimePicker;
 var Alert = require('react-bootstrap').Alert;
 var moment = require('moment');
 var Router = require('react-router'); //need this for redirection
 var Link = require('react-router').Link;
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup; //modal transitioning
 
 // http://jquense.github.io/react-widgets/docs/#/datetime-picker
 
@@ -292,22 +286,22 @@ var Availability = React.createClass({
 
     // Move windowView forward if reservations end is reached
     } else  if (this.state.end === this.state.reservations.length-1 && this.state.windowView < this.state.end - this.state.start -1) {
-      this.setState({ windowView: this.state.windowView+1 }, function(){ console.log(this.state.windowView) });
+      this.setState({windowView: this.state.windowView + 1});
     }
   },
 
   goBack: function() {
     // Change rendered subset
     if (this.state.start > 0 && this.state.windowView === this.state.middle){
-      this.setState({ start: this.state.start-1, end: this.state.end-1});
+      this.setState({start: this.state.start - 1, end: this.state.end-1});
 
     // Move windowView backward if reservations start is reached
     } else if (this.state.start === 0 && this.state.windowView > 0) {
-      this.setState({ windowView: this.state.windowView-1 });
+      this.setState({windowView: this.state.windowView - 1});
 
     // Move windowView backward if not centered
     } else if (this.state.windowView > this.state.middle){
-      this.setState({windowView: this.state.windowView-1})
+      this.setState({windowView: this.state.windowView- 1 });
     }
   },
 
@@ -497,7 +491,7 @@ var reserveOutlet = React.createClass({
 
   render: function() {
     var that = this;
-    // is user authenticate
+    // is user authenticated
     if(!document.cookie){
       this.transitionTo('login');
       return <h1></h1>;

@@ -1,9 +1,7 @@
 //Page that users first see - explains the mission statement of CONNECTUS
-//Should end up being similar to zipcar's homepage where users can scroll down
 var React = require('react');
 var Link = require('react-router').Link;
 var mobileCheck = require('./mobilecheck');
-// var ReactAddons = require('react/addons');
 var AuthConstants = require('../constants/authConstants.js');
 
 var About = React.createClass({
@@ -14,22 +12,22 @@ var About = React.createClass({
     $('.left-hover').popover({
       trigger: 'hover',
       placement: 'left'
-    })
+    });
 
     $('.right-hover').popover({
       trigger: 'hover',
       placement: 'right'
-    })
+    });
 
     $('.top-hover').popover({
       trigger: 'hover',
       placement: 'top'
-    })
+    });
 
     $('.bottom-hover').popover({
       trigger: 'hover',
       placement: 'bottom'
-    })
+    });
 
     $(window).scroll(function(){
       stop = false;

@@ -2,27 +2,12 @@ var React = require('react');
 var OutletListConstants = require('../constants/OutletListConstants');
 var outletStore = require('../stores/outletStore');
 var userStore = require('../stores/userStore');
-var ReactAddons = require('react/addons');
-var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var Router = require('react-router'); //need this for redirection
 var Link = require('react-router').Link;
 var mobile = require('./mobilecheck');
 var GoogleMap = require('google-map-react');
 var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
-var FooterCheck = require('./footerCheck')
-// var shouldPureComponentUpdate = require('react-pure-render/function');
-// var MainMapLayout =require('./outletsListMap/main_map_layout.js');
-// var MainMapBlock =require('./outletsListMap/main_map_block.js');
-// var IceTable = require('components/controls/fixed_table_examples/ice_table.js');
-var Redux = require('redux');
-var ReduxReact = require('redux/react');
-
-// var Map = React.createClass({
-//   ,
-//   render: function() {
-    
-//   }
-// });
+var FooterCheck = require('./footerCheck');
 
 var outletsListMap = React.createClass({
   getInitialState: function(){
@@ -37,20 +22,21 @@ var outletsListMap = React.createClass({
   componentDidMount: function() {
     FooterCheck.checker();
     var that = this;
-    // change function so that it retrieves only outlets near users location
+    // TODO: change function so that it retrieves only outlets near users location
     outletStore.getOutlets().then(function(outletData){
       outletData.map(function(outlet){
         userStore.getUsernameById(outlet.id).then(function(user){
           console.log(user.username)
           outlet['seller'] = user.username;
           that.setState({outletData: outletData});
-        })
-      })
-    })
+        });
+      });
+    });
   },
+
   outletTableData: <div></div>,
+
   displayOutletData: function(key, childProps) {
-    console.log('clicked-----------', childProps);
     var outlet = childProps.data;
     this.outletTableData = (
       <table className="table table-hover">
@@ -89,6 +75,7 @@ var outletsListMap = React.createClass({
     )
     this.forceUpdate();  
   },
+
   render: function() {
     // is the user authenticated?
     if(!document.cookie){
@@ -102,14 +89,14 @@ var outletsListMap = React.createClass({
         <Marker className ='mapMarker' data={outlet} lat={outlet.lat} lng={outlet.long} />
       )
     });
-    // change this class name and adjust the css jamie
+    // TODO: change this class name and adjust the css jamie
     // {this.props.outletsData.outletTable}
     var map = (
       <div>
         <div className='reservationMap'>
           <GoogleMap onChildClick={that.displayOutletData}
             zoom={10}
-            // eventually use user's gps coordinates
+            // TODO: use user's gps coordinates
             center={[37.78,-122.4]}
           >
             {markers}
@@ -119,7 +106,7 @@ var outletsListMap = React.createClass({
           {this.outletTableData}
         </div>
       </div>
-    )
+    );
    
     return (
       <div onClick={this.displayOutletData} className='container outletsListMap'>
@@ -130,11 +117,7 @@ var outletsListMap = React.createClass({
            {map}
         </div>
       </div>
-    )
-  },
-
-  _onChange: function() {
-    this.setState(this.getInitialState());
+    );
   }
 });
 

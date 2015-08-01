@@ -1,14 +1,10 @@
-//this is the main React component that will be shown at all times
-//Essentially, it is just the navigation bar, which renders conditionally based on whether or not a user is logged in
-
+//Navigation bar and base page - renders conditionally based on whether or not a user is logged in
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
-var outletStore = require('../stores/outletStore');
-var ReactAddons = require('react/addons');
 var Auth = require('../services/authServices.js');
 var Link = require('react-router').Link;
 var mobile = require('./mobilecheck');
-var FooterCheck = require('./footerCheck')
+var FooterCheck = require('./footerCheck');
 
 var Connectus = React.createClass({
   logout: function(){
@@ -26,34 +22,15 @@ var Connectus = React.createClass({
   },
 
   render: function() {
-    //default view is the user NOT logged in
-
-    // check if the screen is mobile-y sized
+    // check if the screen is mobile sized
     var isMobile = mobile();
-
     var routeHandler = (
       <div>
         <RouteHandler />
       </div>
-    )
+    );
 
-    // var pageHtml = (
-    //   <div className="topNavBar">
-    //     <span className="logo">
-    //       <Link to="about">Connect.us</Link>
-    //     </span>
-    //     <ul className="nav nav-pills pull-right">
-    //       <li role="presentation">
-    //         <Link to="login">Login</Link>
-    //       </li>
-    //       <li role="presentation">
-    //         <Link to="signup">Sign Up</Link>
-    //       </li>
-    //     </ul>
-    //   </div>
-    // );
-
-    //moving login/signup to splash page
+    //default view is the user NOT logged in
     var pageHtml = (
       <div className="check-footer" className="topNavBar">
         <span className="logo">
@@ -90,8 +67,6 @@ var Connectus = React.createClass({
     }
 
     //reset the html that will be shown if the user is logged in(cookie present)
-    // secondary pointing
-
     if(document.cookie){
 
       if(isMobile){
@@ -122,7 +97,7 @@ var Connectus = React.createClass({
           </div> 
       )
 
-      // if NOT mobile, make it this... 
+      // non-mobile rendering
       } else {
 
         pageHtml = (

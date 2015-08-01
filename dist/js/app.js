@@ -87,11 +87,7 @@ var MyGreatPlaceWithStick = (function (_Component) {
 exports['default'] = MyGreatPlaceWithStick;
 module.exports = exports['default'];
 
-<<<<<<< HEAD
-},{"./markerStyle.js":2,"react-pure-render/function":225,"react/addons":342}],2:[function(require,module,exports){
-=======
-},{"./markerStyle.js":2,"react-pure-render/function":226,"react/addons":343}],2:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./markerStyle.js":2,"react-pure-render/function":221,"react/addons":337}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -170,13 +166,8 @@ exports.K_CIRCLE_SIZE = K_CIRCLE_SIZE;
 exports.K_STICK_SIZE = K_STICK_SIZE;
 
 },{}],3:[function(require,module,exports){
-// var ConnectusDispatcher = require('./dispatcher/ConnectusDispatcher');
 var React = require('react');
-// var Connectus = require('./components/connectus');
 var Router = require('react-router');
-// var AuthenticatedApp = require('./components/authentication.js');
-var LandingPage = require('./components/landingPage.js');
-var AddOutlet = require('./components/addOutlet.js');
 var RouterContainer = require('./services/RouterContainer.js');
 var routes = require('./config/routes');
 
@@ -187,17 +178,11 @@ router.run(function(Root){
   React.render(React.createElement(Root, null), document.getElementById('main'));
 });
 
-<<<<<<< HEAD
-},{"./components/addOutlet.js":5,"./components/landingPage.js":9,"./config/routes":19,"./services/RouterContainer.js":25,"react":514,"react-router":251}],4:[function(require,module,exports){
-=======
-},{"./components/addOutlet.js":5,"./components/landingPage.js":9,"./config/routes":20,"./services/RouterContainer.js":26,"react":515,"react-router":252}],4:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./config/routes":17,"./services/RouterContainer.js":24,"react":509,"react-router":247}],4:[function(require,module,exports){
 //Page that users first see - explains the mission statement of CONNECTUS
-//Should end up being similar to zipcar's homepage where users can scroll down
 var React = require('react');
 var Link = require('react-router').Link;
 var mobileCheck = require('./mobilecheck');
-// var ReactAddons = require('react/addons');
 var AuthConstants = require('../constants/authConstants.js');
 
 var About = React.createClass({displayName: "About",
@@ -205,29 +190,25 @@ var About = React.createClass({displayName: "About",
   componentDidMount: function() {
     var stop = true;
 
-    // $('[data-toggle="popover"]').popover({
-    //   trigger: 'hover'
-    // })
-
     $('.left-hover').popover({
       trigger: 'hover',
       placement: 'left'
-    })
+    });
 
     $('.right-hover').popover({
       trigger: 'hover',
       placement: 'right'
-    })
+    });
 
     $('.top-hover').popover({
       trigger: 'hover',
       placement: 'top'
-    })
+    });
 
     $('.bottom-hover').popover({
       trigger: 'hover',
       placement: 'bottom'
-    })
+    });
 
     $(window).scroll(function(){
       stop = false;
@@ -416,20 +397,19 @@ var About = React.createClass({displayName: "About",
 
 module.exports = About;
 
-<<<<<<< HEAD
-},{"../constants/authConstants.js":21,"./mobilecheck":11,"react":514,"react-router":251}],5:[function(require,module,exports){
-=======
-},{"../constants/authConstants.js":22,"./mobileCheck":11,"react":515,"react-router":252}],5:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../constants/authConstants.js":19,"./mobilecheck":11,"react":509,"react-router":247}],5:[function(require,module,exports){
 var React = require('react');
 var outletStore = require('../stores/outletStore');
-var _=require('underscore');
+var _ = require('underscore');
 var Router = require('react-router'); //need this for redirection
-// var ReactAddons = require('react/addons');
-
+var FooterCheck = require('./footerCheck');
 
 var addOutlet = React.createClass({displayName: "addOutlet",
   mixins: [Router.Navigation],
+
+  componentDidMount: function() {
+    FooterCheck.checker();
+  },
 
   getInitialState: function(){
     return {
@@ -440,8 +420,7 @@ var addOutlet = React.createClass({displayName: "addOutlet",
       validationButton: ''
     };
   },
-
-
+  
   handleChange: function(){
     this.setState({validated:false, validationMessage: 'Please validate your address', validationButton: ''});
   },
@@ -579,19 +558,7 @@ var addOutlet = React.createClass({displayName: "addOutlet",
 
 module.exports = addOutlet;
 
-
-// <div className="ui submit button" type="POST">Submit</div><br />
-
-// <select className="select" onChange={this.selectLog}>
-//           <option value='AK'>AK</option>
-//           <option value='CA'>CA</option>
-//         </select>
-
-<<<<<<< HEAD
-},{"../stores/outletStore":31,"react":514,"react-router":251,"underscore":539}],6:[function(require,module,exports){
-=======
-},{"../stores/outletStore":32,"react":515,"react-router":252,"underscore":540}],6:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../stores/outletStore":30,"./footerCheck":9,"react":509,"react-router":247,"underscore":511}],6:[function(require,module,exports){
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
@@ -602,40 +569,35 @@ var Router = require('react-router'); //need this for redirection
 var outletServices = require('../services/outletServices.js');
 var moment = require('moment');
 var $ = require('jquery');
+var FooterCheck = require('./footerCheck');
 
 var buyerReservations = React.createClass({displayName: "buyerReservations",
 
   getInitialState: function(){
     return {
       data: []
-    //   realtime: {
-    //     totalKwh: 0,
-    //     watts: 0,
-    //     clientData: {
-    //       outlet: {
-    //         priceEnergy: 0,
-    //         priceHourly: 0
-    //       }
-    //     }
-    //   }
-    }
+    };
   },
 
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
 
-  // reserveOutlet: function(id){
-  //   ConnectusDispatcher.dispatch({
-  //       action: 'CLICK_OUTLET',
-  //       id: id
-  //   });
-  // },
-
   componentDidMount: function() {
     var that = this;
+
+    FooterCheck.checker();
+
     console.log(moment("2015-07-30 00:30", "YYYY-MM-DD HH:mm") > moment());
     outletStore.getBuyerReservations().then(function(transactionsData){
       that.setState({data: transactionsData});
     });
+  },
+
+  footerCheck: function() {
+    console.log('checking footer');
+    if ( ( $('body').height() ) < window.innerHeight - 160 ) {
+      console.log('body height is less than window inner height')
+      $('.footer-banner').css('top', (window.innerHeight) - 160);
+    }
   },
 
   setCurrentTransaction: function(transaction){
@@ -656,10 +618,6 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
 
     var socket = io.connect(OutletListConstants.BASE_URL);
     socket.on(transactionId, function (data) {
-      console.log("got energy!", data);
-      // convert and display power data
-      // var pricePerKwh = data.totalKwh * data.clientData.outlet.priceEnergy;
-      // var hourlyPrice = data.clientData.outlet.priceHourly/(60*60)*10;
       var totalCost = (data.totalCost).toFixed(3);
       var avgWatts = (data.avgWatts).toFixed(0);
       var targetClass = '.'+transactionId;
@@ -680,12 +638,32 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
 
     var that = this;
     console.log('STATE:  ', this.state)
-    // Math.round(that.state.realtime.totalKwh*1000)/1000 
     if (this.state.data.length !==0) {
-      var transactionRows = this.state.data.map(function(transaction) {
-        return (
-          React.createElement("tr", {key:  transaction.id, onClick:  that.reserveOutlet, className: moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? 'expired' + ' regTransRow' : 'regTransRow'}, 
+      console.log(this.state.data);
+    
+    var inFuture = function(transaction) {
+      return moment(transaction.startTime.date + " " + transaction.startTime.slot.time,"YYYY-MM-DD HH:mm") > moment();
+    }
+    var inPast = function(transaction) {
+      return moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment();
+    }
+    var inPresent = function(transaction){
+      return moment(transaction.startTime.date + " " + transaction.startTime.slot.time,"YYYY-MM-DD HH:mm") < moment() && moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") > moment();
+    }
 
+      var sortTransactions = function(transactions) {
+        
+        console.log(transactions);
+        console.log('inpst', transactions.filter(inPast));
+        console.log('inpres', transactions.filter(inPresent));
+        console.log('infut', transactions.filter(inFuture));
+        return [].concat(transactions.filter(inPresent), transactions.filter(inFuture), transactions.filter(inPast));
+      }
+      var sortedTransactions = sortTransactions(this.state.data);
+      console.log(sortedTransactions);
+      var transactionRows = sortedTransactions.map(function(transaction) {
+        return (
+          React.createElement("tr", {key:  transaction.id, className:   moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ?  "oldReservation regTransRow" : "regTransRow"}, 
             React.createElement("td", {className: "regTrans"}, 
               "Start: ",  transaction.startTime.date, " - ",  transaction.startTime.slot.time, 
               React.createElement("br", null), 
@@ -708,25 +686,24 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
             React.createElement("td", {className: "regTrans"}, 
              transaction.outlet.description
             ), 
-            React.createElement("td", {className: transaction.id}, 
-              React.createElement("div", {className: "btn turnOn", onClick: that.turnOn.bind(that, transaction)}, "ON"), 
-              React.createElement("div", {className: "btn turnOff", onClick: that.setCurrentTransaction.bind(that, transaction)}, "OFF")
+            React.createElement("td", {className: "regTrans"}, 
+              React.createElement("div", {className: moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() || moment(transaction.startTime.date + " " + transaction.startTime.slot.time,"YYYY-MM-DD HH:mm") > moment()? ' hidden' + ' ' : ''}, 
+                React.createElement("div", {className: "btn turnOn", onClick: that.turnOn.bind(that, transaction)}, "ON"), 
+                React.createElement("div", {className: "btn turnOff", onClick: that.setCurrentTransaction.bind(that, transaction)}, "OFF")
+              )
             ), 
             React.createElement("td", {className: transaction.id}, 
               React.createElement("div", {className: "powerData"}, 
-                React.createElement("p", null, React.createElement("span", null, "Total kWh "), React.createElement("span", {className: "totalKwh"})), 
-                React.createElement("p", null, React.createElement("span", null, "Total $ "), React.createElement("span", {className: "total"})), 
+                React.createElement("p", null, React.createElement("span", null, "Total kWh "), React.createElement("span", {className: "totalKwh"},  moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? transaction.totalEnergy:'')), 
+                React.createElement("p", null, React.createElement("span", null, "Total $ "), React.createElement("span", {className: "total"}),  moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ? transaction.totalCost:''), 
                 React.createElement("p", null, React.createElement("span", null, "Watts "), React.createElement("span", {className: "watts"}))
               )
             )
           )
         )
       });
+      console.log(transactionRows);
     }
-
-    // for active transactions ------
-    // is there active transactions for this user?
-      // set active transactions html element to that data
 
       return (
         React.createElement("div", {className: "outletsList container"}, 
@@ -749,7 +726,6 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
           )
         )
       )
-    // });  from the promise closing
   },
 
   _onChange: function() {
@@ -758,66 +734,16 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
 
 });
 
-// var ActiveTransaction = React.createClass({
-
-//   getInitialState: function(){
-//     return {
-//       data:  {
-//         totalKwh: 0,
-//         watts: 0,
-//         clientData: {
-//           outlet: {
-//             priceEnergy: 0,
-//             priceHourly: 0
-//           }
-//         }
-//       }
-//     };
-//   },
-
-//   componentDidMount: function(){
-//     this.updateData();
-//   },
-
-//   updateData: function() {
-//     // var context = this.props.context;
-//     // var transactionId = this.props.transactionId;
-//     // var socket = io.connect(OutletListConstants.BASE_URL);
-//     // socket.on(transactionId, function (data) {
-//     //   console.log("got energy!", data);
-//     //   context.setState({data: data})
-//     // });
-
-    
-//   },
-
-//   // returns power usage data
-//   render: function() {
-//     var transactionId = this.props.transaction.id + '';
-//     return (
-      
-//     )
-//   }
-// })
-
-
 module.exports = buyerReservations;
 
-<<<<<<< HEAD
-},{"../constants/OutletListConstants":20,"../dispatcher/ConnectusDispatcher":24,"../services/outletServices.js":27,"../stores/outletStore":31,"jquery":86,"moment":88,"react":514,"react-router":251,"react/addons":342}],7:[function(require,module,exports){
-=======
-},{"../constants/OutletListConstants":21,"../dispatcher/ConnectusDispatcher":25,"../services/outletServices.js":28,"../stores/outletStore":32,"jquery":87,"moment":89,"react":515,"react-router":252,"react/addons":343}],7:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-//this is the main React component that will be shown at all times
-//Essentially, it is just the navigation bar, which renders conditionally based on whether or not a user is logged in
-
+},{"../constants/OutletListConstants":18,"../dispatcher/ConnectusDispatcher":23,"../services/outletServices.js":26,"../stores/outletStore":30,"./footerCheck":9,"jquery":85,"moment":87,"react":509,"react-router":247,"react/addons":337}],7:[function(require,module,exports){
+//Navigation bar and base page - renders conditionally based on whether or not a user is logged in
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
-var outletStore = require('../stores/outletStore');
-var ReactAddons = require('react/addons');
 var Auth = require('../services/authServices.js');
 var Link = require('react-router').Link;
 var mobile = require('./mobilecheck');
+var FooterCheck = require('./footerCheck');
 
 var Connectus = React.createClass({displayName: "Connectus",
   logout: function(){
@@ -825,58 +751,27 @@ var Connectus = React.createClass({displayName: "Connectus",
   },
 
   componentDidMount: function() {
-    this.footerCheck()
-
     // resizing the screen renders mobile or full menu
     var that = this; 
     var isMobile = mobile();
     window.onresize = function() {
-      that.footerCheck();
+      FooterCheck.checker();
       that.forceUpdate();
     };
   },
 
-  footerCheck: function() {
-    if ( ( $('body').height() ) < window.innerHeight ) {
-      console.log('body height is less than window inner height')
-      $('.footer-banner').css('top', (window.innerHeight));
-    } else {
-      console.log('body height is greater than window inner height')
-      $('.footer-banner').css('top', ($('body').height()));
-    }
-  },
-
   render: function() {
-    //default view is the user NOT logged in
-
-    // check if the screen is mobile-y sized
+    // check if the screen is mobile sized
     var isMobile = mobile();
-
     var routeHandler = (
       React.createElement("div", null, 
         React.createElement(RouteHandler, null)
       )
-    )
+    );
 
-    // var pageHtml = (
-    //   <div className="topNavBar">
-    //     <span className="logo">
-    //       <Link to="about">Connect.us</Link>
-    //     </span>
-    //     <ul className="nav nav-pills pull-right">
-    //       <li role="presentation">
-    //         <Link to="login">Login</Link>
-    //       </li>
-    //       <li role="presentation">
-    //         <Link to="signup">Sign Up</Link>
-    //       </li>
-    //     </ul>
-    //   </div>
-    // );
-
-    //moving login/signup to splash page
+    //default view is the user NOT logged in
     var pageHtml = (
-      React.createElement("div", {className: "topNavBar"}, 
+      React.createElement("div", {className: "check-footer", className: "topNavBar"}, 
         React.createElement("span", {className: "logo"}, 
           React.createElement(Link, {to: "about"}, "Connect.us")
         )
@@ -884,7 +779,6 @@ var Connectus = React.createClass({displayName: "Connectus",
     );
 
     if(isMobile){
-      console.log('mobile footer rendering')
       var footerHtml = (
         React.createElement("div", {className: "container-fluid footer-banner"}, 
             React.createElement("div", {className: "footer-1"}, 
@@ -896,7 +790,6 @@ var Connectus = React.createClass({displayName: "Connectus",
         )
       );
     } else {
-      console.log('full footer rendering')
       var footerHtml = (
         React.createElement("div", {className: "container-fluid footer-banner"}, 
           React.createElement("div", {className: "row footer"}, 
@@ -913,8 +806,6 @@ var Connectus = React.createClass({displayName: "Connectus",
     }
 
     //reset the html that will be shown if the user is logged in(cookie present)
-    // secondary pointing
-
     if(document.cookie){
 
       if(isMobile){
@@ -932,12 +823,12 @@ var Connectus = React.createClass({displayName: "Connectus",
                 React.createElement("li", {className: "dropdown"}, 
                   React.createElement("a", {className: "dropdown-toggle", "data-toggle": "dropdown", role: "button", "aria-haspopup": "true", "aria-expanded": "false"}, "Menu", React.createElement("span", {className: "caret"})), 
                   React.createElement("ul", {className: "dropdown-menu"}, 
-                    React.createElement("li", {role: "presentation"}, React.createElement(Link, {to: "outletsList"}, "Outlets")), 
-                    React.createElement("li", {role: "presentation"}, React.createElement(Link, {to: "addOutlet"}, "Add Outlet")), 
-                    React.createElement("li", {role: "presentation"}, React.createElement(Link, {to: "buyerReservations"}, "My Reservations")), 
-                    React.createElement("li", {role: "presentation"}, React.createElement(Link, {to: "manageOutlets"}, "Manage Outlets")), 
+                    React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "outletsList"}, "Outlets")), 
+                    React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "addOutlet"}, "Add Outlet")), 
+                    React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "buyerReservations"}, "My Reservations")), 
+                    React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "manageOutlets"}, "Manage Outlets")), 
                     React.createElement("li", {role: "separator", className: "divider"}), 
-                    React.createElement("li", {role: "presentation"}, React.createElement("a", {className: "logout", onClick: this.logout}, "Logout"))
+                    React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement("a", {className: "logout", onClick: this.logout}, "Logout"))
                   )
                 )
               )
@@ -945,7 +836,7 @@ var Connectus = React.createClass({displayName: "Connectus",
           ) 
       )
 
-      // if NOT mobile, make it this... 
+      // non-mobile rendering
       } else {
 
         pageHtml = (
@@ -954,11 +845,11 @@ var Connectus = React.createClass({displayName: "Connectus",
             React.createElement(Link, {to: "about"}, "Connect.us")
           ), 
             React.createElement("ul", {className: "nav nav-pills pull-right"}, 
-              React.createElement("li", {role: "presentation"}, React.createElement(Link, {to: "outletsList"}, "Outlets")), 
-              React.createElement("li", {role: "presentation"}, React.createElement(Link, {to: "addOutlet"}, "Add Outlet")), 
-              React.createElement("li", {role: "presentation"}, React.createElement(Link, {to: "buyerReservations"}, "My Reservations")), 
-              React.createElement("li", {role: "presentation"}, React.createElement(Link, {to: "manageOutlets"}, "Manage Outlets")), 
-              React.createElement("li", {role: "presentation"}, React.createElement("a", {className: "logout", onClick: this.logout}, "Logout"))
+              React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "outletsList"}, "Outlets")), 
+              React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "addOutlet"}, "Add Outlet")), 
+              React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "buyerReservations"}, "My Reservations")), 
+              React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "manageOutlets"}, "Manage Outlets")), 
+              React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement("a", {className: "logout", onClick: this.logout}, "Logout"))
             )
           ) 
           );
@@ -978,16 +869,13 @@ var Connectus = React.createClass({displayName: "Connectus",
 
 module.exports = Connectus;
 
-<<<<<<< HEAD
-},{"../services/authServices.js":26,"../stores/outletStore":31,"./mobilecheck":11,"react":514,"react-router":251,"react/addons":342}],8:[function(require,module,exports){
-=======
-},{"../services/authServices.js":27,"../stores/outletStore":32,"./mobilecheck":12,"react":515,"react-router":252,"react/addons":343}],8:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../services/authServices.js":25,"./footerCheck":9,"./mobilecheck":11,"react":509,"react-router":247}],8:[function(require,module,exports){
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var Alert = require('react-bootstrap').Alert;
 var Link = require('react-router').Link;
 var Router = require('react-router');
+var FooterCheck = require('./footerCheck');
 
 var editOutlet = React.createClass({displayName: "editOutlet",
   getInitialState: function(){
@@ -1004,7 +892,21 @@ var editOutlet = React.createClass({displayName: "editOutlet",
   },
   mixins: [Router.Navigation],
 
+  componentDidUpdate: function() {
+    console.log('DID update')
+    console.log('window: ', window.innerHeight);
+    console.log('body: ', $('body').height());
+    FooterCheck.checker();
+  },
+
   componentDidMount: function() {
+    console.log('DID mount')
+    console.log('window: ', window.innerHeight);
+    console.log('body: ', $('body').height());
+    FooterCheck.checker();
+  },
+
+  componentWillMount: function() {
     var that = this;
     var outletID = this.props.params.id;
 
@@ -1150,55 +1052,57 @@ var editOutlet = React.createClass({displayName: "editOutlet",
       }
 
       return (
-        React.createElement("div", {className: "editOutlet col-md-6 col-md-offset-3"}, 
-          React.createElement("h3", null, "Edit outlet:"), 
-          React.createElement("h4", null, this.state.validationMessage), 
-        React.createElement("form", {className: "outletAddressForm", onSubmit: this.handleAddressSubmit}, 
-          React.createElement("div", {className: "form-group"}, 
-            React.createElement("label", null, "Street"), React.createElement("br", null), 
-            React.createElement("input", {type: "text", name: "street", ref: "street", className: "form-control", defaultValue: this.state.street, onChange: this.handleChange}), React.createElement("br", null)
+        React.createElement("div", {className: "container"}, 
+          React.createElement("div", {className: "editOutlet col-md-6 col-md-offset-3"}, 
+            React.createElement("h3", null, "Edit outlet:"), 
+            React.createElement("h4", null, this.state.validationMessage), 
+          React.createElement("form", {className: "outletAddressForm", onSubmit: this.handleAddressSubmit}, 
+            React.createElement("div", {className: "form-group"}, 
+              React.createElement("label", null, "Street"), React.createElement("br", null), 
+              React.createElement("input", {type: "text", name: "street", ref: "street", className: "form-control", defaultValue: this.state.street, onChange: this.handleChange}), React.createElement("br", null)
+            ), 
+            React.createElement("div", {className: "form-group"}, 
+              React.createElement("label", null, "City"), React.createElement("br", null), 
+              React.createElement("input", {type: "text", name: "city", ref: "city", className: "form-control", defaultValue: this.state.city, onChange: this.handleChange}), " ", React.createElement("br", null)
+            ), 
+            React.createElement("div", {className: "form-group"}, 
+              React.createElement("label", null, "State"), React.createElement("br", null), 
+              React.createElement("input", {type: "text", name: "state", ref: "state", className: "form-control", defaultValue: this.state.state, onChange: this.handleChange}), React.createElement("br", null)
+            ), 
+            React.createElement("div", {className: "form-group"}, 
+              React.createElement("label", null, "Zip Code"), React.createElement("br", null), 
+              React.createElement("input", {type: "text", name: "zip", ref: "zip", className: "form-control", defaultValue: this.state.zip, onChange: this.handleChange}), React.createElement("br", null)
+            ), 
+            React.createElement("div", {className: this.state.validationButton}, 
+            React.createElement("button", {type: "submit", className: "btn btn-primary", value: "Submit"}, "Validate Address")
+            )
           ), 
-          React.createElement("div", {className: "form-group"}, 
-            React.createElement("label", null, "City"), React.createElement("br", null), 
-            React.createElement("input", {type: "text", name: "city", ref: "city", className: "form-control", defaultValue: this.state.city, onChange: this.handleChange}), " ", React.createElement("br", null)
-          ), 
-          React.createElement("div", {className: "form-group"}, 
-            React.createElement("label", null, "State"), React.createElement("br", null), 
-            React.createElement("input", {type: "text", name: "state", ref: "state", className: "form-control", defaultValue: this.state.state, onChange: this.handleChange}), React.createElement("br", null)
-          ), 
-          React.createElement("div", {className: "form-group"}, 
-            React.createElement("label", null, "Zip Code"), React.createElement("br", null), 
-            React.createElement("input", {type: "text", name: "zip", ref: "zip", className: "form-control", defaultValue: this.state.zip, onChange: this.handleChange}), React.createElement("br", null)
-          ), 
-          React.createElement("div", {className: this.state.validationButton}, 
-          React.createElement("button", {type: "submit", className: "btn btn-primary", value: "Submit"}, "Validate Address")
+          React.createElement("form", {className: "outletInfoForm", onSubmit: this.handleInfoSubmit}, 
+            React.createElement("div", {className: "form-group"}, 
+              React.createElement("label", null, "Outlet Name"), React.createElement("br", null), 
+              React.createElement("input", {type: "text", name: "name", ref: "name", className: "form-control", defaultValue: this.state.outlet.name}), React.createElement("br", null)
+            ), 
+            React.createElement("div", {className: "form-group"}, 
+              React.createElement("label", null, "Instructions for user"), React.createElement("br", null), 
+              React.createElement("textarea", {name: "description", name: "description", ref: "description", className: "form-control", defaultValue: this.state.outlet.description}), React.createElement("br", null)
+            ), 
+            React.createElement("div", {className: "form-group"}, 
+              React.createElement("label", null, "Outlet Voltage"), React.createElement("br", null), 
+              React.createElement("select", {className: "ui dropdown", className: "form-control", defaultValue: this.state.outlet.voltage, ref: "voltage"}, 
+                React.createElement("option", {value: "standard"}, "Standard"), 
+                React.createElement("option", {value: "high"}, "High")
+              ), React.createElement("br", null)
+            ), 
+            React.createElement("div", {className: "form-group"}, 
+              React.createElement("label", null, "Your hourly rate: $3/hr   Suggested price/kWh: $0.20/kWh"), React.createElement("br", null)
+            ), 
+            React.createElement("div", {className: "form-group"}, 
+              React.createElement("label", null, "Your price/kWh charge: "), React.createElement("br", null), 
+              React.createElement("input", {type: "text", name: "charge", ref: "charge", className: "form-control", defaultValue: this.state.outlet.priceEnergy}), "/kWh", React.createElement("br", null)
+            ), 
+            buttonHtml, 
+            alert
           )
-        ), 
-        React.createElement("form", {className: "outletInfoForm", onSubmit: this.handleInfoSubmit}, 
-          React.createElement("div", {className: "form-group"}, 
-            React.createElement("label", null, "Outlet Name"), React.createElement("br", null), 
-            React.createElement("input", {type: "text", name: "name", ref: "name", className: "form-control", defaultValue: this.state.outlet.name}), React.createElement("br", null)
-          ), 
-          React.createElement("div", {className: "form-group"}, 
-            React.createElement("label", null, "Instructions for user"), React.createElement("br", null), 
-            React.createElement("textarea", {name: "description", name: "description", ref: "description", className: "form-control", defaultValue: this.state.outlet.description}), React.createElement("br", null)
-          ), 
-          React.createElement("div", {className: "form-group"}, 
-            React.createElement("label", null, "Outlet Voltage"), React.createElement("br", null), 
-            React.createElement("select", {className: "ui dropdown", className: "form-control", defaultValue: this.state.outlet.voltage, ref: "voltage"}, 
-              React.createElement("option", {value: "standard"}, "Standard"), 
-              React.createElement("option", {value: "high"}, "High")
-            ), React.createElement("br", null)
-          ), 
-          React.createElement("div", {className: "form-group"}, 
-            React.createElement("label", null, "Your hourly rate: $3/hr   Suggested price/kWh: $0.20/kWh"), React.createElement("br", null)
-          ), 
-          React.createElement("div", {className: "form-group"}, 
-            React.createElement("label", null, "Your price/kWh charge: "), React.createElement("br", null), 
-            React.createElement("input", {type: "text", name: "charge", ref: "charge", className: "form-control", defaultValue: this.state.outlet.priceEnergy}), "/kWh", React.createElement("br", null)
-          ), 
-          buttonHtml, 
-          alert
         )
       )
     )
@@ -1212,73 +1116,45 @@ var editOutlet = React.createClass({displayName: "editOutlet",
 
 module.exports = editOutlet;
 
-<<<<<<< HEAD
-},{"../stores/outletStore":31,"react":514,"react-bootstrap":157,"react-router":251}],9:[function(require,module,exports){
-=======
-},{"../stores/outletStore":32,"react":515,"react-bootstrap":158,"react-router":252}],9:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-var React = require('react');
-var ReactAddons = require('react/addons');
-var ReactMixin = require('react-mixin');
-var Outlet = require('../services/outletServices');
-var Router = require('react-router');
-// var Auth = require('../services/AuthService');
+},{"../stores/outletStore":30,"./footerCheck":9,"react":509,"react-bootstrap":156,"react-router":247}],9:[function(require,module,exports){
+var footerCheck = {
 
-var LandingPage = React.createClass({displayName: "LandingPage",
-  mixins: [Router.Navigation],
-  // turnOn: function(){
-  //   Outlet.turnOn();
-  // },
-
-  // turnOff: function(){
-  //   Outlet.turnOff();
-  // },
-
-  render: function(){
-    if(!document.cookie){
-      this.transitionTo('login');
-      return React.createElement("h1", null);
+  checker: function() {
+    if ( ( $('body').height() ) < window.innerHeight - 100) {
+      $('.footer-banner').css('position', 'absolute');
+      $('.footer-banner').css('top', (window.innerHeight) - 160);
+    } else {
+      $('.footer-banner').css('position', 'relative');
+      $('.footer-banner').css('top', 0);
     }
-
-    return (
-      React.createElement("div", {className: "landingPage"}, 
-          React.createElement("h1", null, "LANDING PAGE"), 
-          React.createElement("button", {onClick: this.turnOn}, "On"), 
-          React.createElement("button", {onClick: this.turnOff}, "Off")
-      )
-    );
   }
-});
+}
 
-module.exports = LandingPage;
+module.exports = footerCheck;
 
-<<<<<<< HEAD
-},{"../services/outletServices":27,"react":514,"react-mixin":222,"react-router":251,"react/addons":342}],10:[function(require,module,exports){
-=======
-},{"../services/outletServices":28,"react":515,"react-mixin":223,"react-router":252,"react/addons":343}],10:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],10:[function(require,module,exports){
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var userStore = require('../stores/userStore');
-var ReactAddons = require('react/addons');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var Link = require('react-router').Link;
 var Router = require('react-router'); //need this for redirection
 var mobile = require('./mobilecheck');
+var FooterCheck = require('./footerCheck');
 
 var myOutlets = React.createClass({displayName: "myOutlets",
 
   getInitialState: function(){
     return {
       data: []
-    }
+    };
   },
 
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
 
   componentDidMount: function() {
+    FooterCheck.checker();
     var that = this;
-    // CHANGE TO GET OUTLETS BY ID
     outletStore.getSellerOutlets().then(function(outletData){
       outletData.map(function(outlet){
         userStore.getUsernameById(outlet.seller_id).then(function(user){
@@ -1298,9 +1174,6 @@ var myOutlets = React.createClass({displayName: "myOutlets",
     }
 
     var isMobile = mobile();
-    if (isMobile) {
-      console.log('MOBILE')
-    }
 
     var that = this;
     // Outlet data list
@@ -1402,9 +1275,8 @@ var myOutlets = React.createClass({displayName: "myOutlets",
       )
       )
     }
-    // includes search bar, map/list button and possibly filter/sort buttons
     
-    //onClick={this.handleSubmit}
+    // includes search bar, map/list button and possibly filter/sort buttons  
     var listMenu = (
       React.createElement("div", null, 
         React.createElement("div", {className: "ui button"}, " map"), 
@@ -1414,37 +1286,24 @@ var myOutlets = React.createClass({displayName: "myOutlets",
       )
     );
 
-      return (   
-        React.createElement("div", {className: "myOutlets container"}, 
-          React.createElement("h1", null, "Your Outlets:"), React.createElement("br", null), 
-          tableHead
-        )
-
-    )
-    // });  from the promise closing
-  },
-
-  _onChange: function() {
-    this.setState(this.getInitialState());
+    return (   
+      React.createElement("div", {className: "myOutlets container"}, 
+        React.createElement("h1", null, "Your Outlets:"), React.createElement("br", null), 
+        tableHead
+      )
+    );
   }
 
 });
 
 module.exports = myOutlets;
 
-<<<<<<< HEAD
-},{"../dispatcher/ConnectusDispatcher":24,"../stores/outletStore":31,"../stores/userStore":33,"./mobilecheck":11,"react":514,"react-router":251,"react/addons":342}],11:[function(require,module,exports){
-=======
-},{"../dispatcher/ConnectusDispatcher":25,"../stores/outletStore":32,"../stores/userStore":34,"./mobilecheck":12,"react":515,"react-router":252,"react/addons":343}],11:[function(require,module,exports){
+},{"../dispatcher/ConnectusDispatcher":23,"../stores/outletStore":30,"../stores/userStore":32,"./footerCheck":9,"./mobilecheck":11,"react":509,"react-router":247}],11:[function(require,module,exports){
 var mobilecheck = function(){
-  var mobile = false;
-  // if($(window)) {
-  //   if ($(window).width()<800) {
-  //     var mobile = true;
-  //   }
-  // } else {
-  //   mobile = true;
-  // }
+  
+  var mobile1 = false;
+  var mobile2 = false;
+
   if( navigator.userAgent.match(/Android/i)
    || navigator.userAgent.match(/webOS/i)
    || navigator.userAgent.match(/iPhone/i)
@@ -1453,50 +1312,24 @@ var mobilecheck = function(){
    || navigator.userAgent.match(/BlackBerry/i)
    || navigator.userAgent.match(/Windows Phone/i)
    ){
-      mobile = true;
+      mobile2 = true;
+  }
+  else if($(window)) {
+    if ($(window).width()<800) {
+      var mobile = true;
     }
+  } else {
+    mobile = true;
+  }
 
-  return mobile;
+  return (mobile1 || mobile2);
 
 
-}
+};
 
 module.exports = mobilecheck;
 
 },{}],12:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-var mobilecheck = function(){
-  var mobile = false;
-  // if($(window)) {
-  //   if ($(window).width()<800) {
-  //     var mobile = true;
-  //   }
-  // } else {
-  //   mobile = true;
-  // }
-  if( navigator.userAgent.match(/Android/i)
-   || navigator.userAgent.match(/webOS/i)
-   || navigator.userAgent.match(/iPhone/i)
-   || navigator.userAgent.match(/iPad/i)
-   || navigator.userAgent.match(/iPod/i)
-   || navigator.userAgent.match(/BlackBerry/i)
-   || navigator.userAgent.match(/Windows Phone/i)
-   ){
-      mobile = true;
-    }
-
-  return mobile;
-
-
-}
-
-module.exports = mobilecheck;
-
-<<<<<<< HEAD
-},{}],12:[function(require,module,exports){
-=======
-},{}],13:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var userStore = require('../stores/userStore');
@@ -1505,6 +1338,8 @@ var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var Link = require('react-router').Link;
 var Router = require('react-router'); //need this for redirection
 var mobile = require('./mobilecheck');
+var FooterCheck = require('./footerCheck');
+
 
 var outletsList = React.createClass({displayName: "outletsList",
 
@@ -1516,7 +1351,7 @@ var outletsList = React.createClass({displayName: "outletsList",
 
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
 
-  componentDidMount: function() {
+  componentWillMount: function() {
     var that = this;
     outletStore.getOutlets().then(function(outletData){
       outletData.map(function(outlet){
@@ -1528,6 +1363,14 @@ var outletsList = React.createClass({displayName: "outletsList",
     });
   },
 
+  componentDidUpdate: function() {
+    FooterCheck.checker();
+  },
+
+  componentDidMount: function() {
+    FooterCheck.checker();
+  },
+
   render: function() {
     // is the user authenticated?
     if(!document.cookie){
@@ -1536,9 +1379,6 @@ var outletsList = React.createClass({displayName: "outletsList",
     }
 
     var isMobile = mobile();
-    if (isMobile) {
-      console.log('MOBILE')
-    }
 
     var that = this;
     // outlet data list
@@ -1630,9 +1470,8 @@ var outletsList = React.createClass({displayName: "outletsList",
       )
       )
     }
-    // includes search bar, map/list button and possibly filter/sort buttons
     
-    //onClick={this.handleSubmit}
+    // includes search bar, map/list button and possibly filter/sort buttons
     var listMenu = (
       React.createElement("div", null, 
         React.createElement("div", {className: "ui button"}, " map"), 
@@ -1642,55 +1481,30 @@ var outletsList = React.createClass({displayName: "outletsList",
       )
     );
 
-      return (   
-        React.createElement("div", {className: "outletsList container"}, 
-          React.createElement(Link, {to: "outletsListMap"}, 
-            React.createElement("button", {type: "button", className: "btn btn-default"}, "Map Outlets")
-          ), 
-          tableHead
-        )
-
-    )
-    // });  from the promise closing
-  },
-
-  _onChange: function() {
-    this.setState(this.getInitialState());
+    return (   
+      React.createElement("div", {className: "outletsList container"}, 
+        React.createElement(Link, {to: "outletsListMap"}, 
+          React.createElement("button", {type: "button", className: "btn btn-default"}, "Map Outlets")
+        ), 
+        tableHead
+      )
+    );
   }
-
 });
 
 module.exports = outletsList;
 
-<<<<<<< HEAD
-},{"../dispatcher/ConnectusDispatcher":24,"../stores/outletStore":31,"../stores/userStore":33,"./mobilecheck":11,"react":514,"react-router":251,"react/addons":342}],13:[function(require,module,exports){
-=======
-},{"../dispatcher/ConnectusDispatcher":25,"../stores/outletStore":32,"../stores/userStore":34,"./mobilecheck":12,"react":515,"react-router":252,"react/addons":343}],14:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../dispatcher/ConnectusDispatcher":23,"../stores/outletStore":30,"../stores/userStore":32,"./footerCheck":9,"./mobilecheck":11,"react":509,"react-router":247,"react/addons":337}],13:[function(require,module,exports){
 var React = require('react');
 var OutletListConstants = require('../constants/OutletListConstants');
 var outletStore = require('../stores/outletStore');
 var userStore = require('../stores/userStore');
-var ReactAddons = require('react/addons');
-var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var Router = require('react-router'); //need this for redirection
 var Link = require('react-router').Link;
 var mobile = require('./mobilecheck');
 var GoogleMap = require('google-map-react');
 var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
-// var shouldPureComponentUpdate = require('react-pure-render/function');
-// var MainMapLayout =require('./outletsListMap/main_map_layout.js');
-// var MainMapBlock =require('./outletsListMap/main_map_block.js');
-// var IceTable = require('components/controls/fixed_table_examples/ice_table.js');
-var Redux = require('redux');
-var ReduxReact = require('redux/react');
-
-// var Map = React.createClass({
-//   ,
-//   render: function() {
-    
-//   }
-// });
+var FooterCheck = require('./footerCheck');
 
 var outletsListMap = React.createClass({displayName: "outletsListMap",
   getInitialState: function(){
@@ -1699,23 +1513,27 @@ var outletsListMap = React.createClass({displayName: "outletsListMap",
       outletTable: 'hello'
     }
   },
+  
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
+  
   componentDidMount: function() {
+    FooterCheck.checker();
     var that = this;
-    // change function so that it retrieves only outlets near users location
+    // TODO: change function so that it retrieves only outlets near users location
     outletStore.getOutlets().then(function(outletData){
       outletData.map(function(outlet){
         userStore.getUsernameById(outlet.id).then(function(user){
           console.log(user.username)
           outlet['seller'] = user.username;
           that.setState({outletData: outletData});
-        })
-      })
-    })
+        });
+      });
+    });
   },
+
   outletTableData: React.createElement("div", null),
+
   displayOutletData: function(key, childProps) {
-    console.log('clicked-----------', childProps);
     var outlet = childProps.data;
     this.outletTableData = (
       React.createElement("table", {className: "table table-hover"}, 
@@ -1754,6 +1572,7 @@ var outletsListMap = React.createClass({displayName: "outletsListMap",
     )
     this.forceUpdate();  
   },
+
   render: function() {
     // is the user authenticated?
     if(!document.cookie){
@@ -1767,14 +1586,14 @@ var outletsListMap = React.createClass({displayName: "outletsListMap",
         React.createElement(Marker, {className: "mapMarker", data: outlet, lat: outlet.lat, lng: outlet.long})
       )
     });
-    // change this class name and adjust the css jamie
+    // TODO: change this class name and adjust the css jamie
     // {this.props.outletsData.outletTable}
     var map = (
       React.createElement("div", null, 
         React.createElement("div", {className: "reservationMap"}, 
           React.createElement(GoogleMap, {onChildClick: that.displayOutletData, 
             zoom: 10, 
-            // eventually use user's gps coordinates
+            // TODO: use user's gps coordinates
             center: [37.78,-122.4]
           }, 
             markers
@@ -1784,7 +1603,7 @@ var outletsListMap = React.createClass({displayName: "outletsListMap",
           this.outletTableData
         )
       )
-    )
+    );
    
     return (
       React.createElement("div", {onClick: this.displayOutletData, className: "container outletsListMap"}, 
@@ -1795,21 +1614,13 @@ var outletsListMap = React.createClass({displayName: "outletsListMap",
            map
         )
       )
-    )
-  },
-
-  _onChange: function() {
-    this.setState(this.getInitialState());
+    );
   }
 });
 
 module.exports = outletsListMap;
 
-<<<<<<< HEAD
-},{"../../assets/markers/reserveOutlet/marker.jsx":1,"../constants/OutletListConstants":20,"../dispatcher/ConnectusDispatcher":24,"../stores/outletStore":31,"../stores/userStore":33,"./mobilecheck":11,"google-map-react":44,"react":514,"react-router":251,"react/addons":342,"redux":523,"redux/react":537}],14:[function(require,module,exports){
-=======
-},{"../../assets/markers/reserveOutlet/marker.jsx":1,"../constants/OutletListConstants":21,"../dispatcher/ConnectusDispatcher":25,"../stores/outletStore":32,"../stores/userStore":34,"./mobilecheck":12,"google-map-react":45,"react":515,"react-router":252,"react/addons":343,"redux":524,"redux/react":538}],15:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../../assets/markers/reserveOutlet/marker.jsx":1,"../constants/OutletListConstants":18,"../stores/outletStore":30,"../stores/userStore":32,"./footerCheck":9,"./mobilecheck":11,"google-map-react":43,"react":509,"react-router":247}],14:[function(require,module,exports){
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
 var outletStore = require('../stores/outletStore');
@@ -1819,6 +1630,7 @@ var OutletStore = require('../stores/outletStore');
 var Auth = require('../services/authServices.js');
 var Link = require('react-router').Link;
 var mobile = require('./mobilecheck');
+var FooterCheck = require('./footerCheck')
 
 var Connectus = React.createClass({displayName: "Connectus",
   getInitialState: function(){
@@ -1829,6 +1641,8 @@ var Connectus = React.createClass({displayName: "Connectus",
   },
   componentDidMount: function() {
     var that = this;
+
+    FooterCheck.checker();
    
     PaymentStore.getTransactionInfo().then(function(transaction){
       console.log('transaction in payment confirmation', transaction);
@@ -1858,11 +1672,7 @@ var Connectus = React.createClass({displayName: "Connectus",
 
 module.exports = Connectus;
 
-<<<<<<< HEAD
-},{"../services/authServices.js":26,"../stores/outletStore":31,"../stores/paymentStore":32,"./mobilecheck":11,"react":514,"react-router":251,"react/addons":342}],15:[function(require,module,exports){
-=======
-},{"../services/authServices.js":27,"../stores/outletStore":32,"../stores/paymentStore":33,"./mobilecheck":12,"react":515,"react-router":252,"react/addons":343}],16:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../services/authServices.js":25,"../stores/outletStore":30,"../stores/paymentStore":31,"./footerCheck":9,"./mobilecheck":11,"react":509,"react-router":247,"react/addons":337}],15:[function(require,module,exports){
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
 var ReactAddons = require('react/addons');
@@ -1914,26 +1724,16 @@ var Connectus = React.createClass({displayName: "Connectus",
 
 module.exports = Connectus;
 
-<<<<<<< HEAD
-},{"../services/authServices.js":26,"../stores/paymentStore":32,"./mobilecheck":11,"react":514,"react-router":251,"react/addons":342}],16:[function(require,module,exports){
-=======
-},{"../services/authServices.js":27,"../stores/paymentStore":33,"./mobilecheck":12,"react":515,"react-router":252,"react/addons":343}],17:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../services/authServices.js":25,"../stores/paymentStore":31,"./mobilecheck":11,"react":509,"react-router":247,"react/addons":337}],16:[function(require,module,exports){
 var React = require('react');
 var outletStore = require('../stores/outletStore');
-var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var GoogleMap = require('google-map-react');
-// var GoogleMapsAPI = window.google.maps;
-var outletStore = require('../stores/outletStore');
-var ReactAddons = require('react/addons');
 var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
-
 var DateTimePicker = require('react-widgets').DateTimePicker;
 var Alert = require('react-bootstrap').Alert;
 var moment = require('moment');
 var Router = require('react-router'); //need this for redirection
 var Link = require('react-router').Link;
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup; //modal transitioning
 
 // http://jquense.github.io/react-widgets/docs/#/datetime-picker
 
@@ -2010,10 +1810,12 @@ var DateTime = React.createClass({displayName: "DateTime",
     };
     var start = this.refs.startTime.state.value;
     var end = this.refs.endTime.state.value;
+    var startDate = start.getDate() < 10 ? "0"+start.getDate() : start.getDate();
+    var endDate = end.getDate() < 10 ? "0"+end.getDate() : end.getDate();
     var startMonth = start.getMonth() < 10 ? "0"+(start.getMonth()+1) : start.getMonth() +1;
     var endMonth = end.getMonth() < 10 ? "0"+(end.getMonth()+1) : end.getMonth() + 1;
-    var startDateString = start.getFullYear() + "-" + startMonth + "-" + start.getDate();
-    var endDateString = end.getFullYear() + "-" + endMonth + "-" + end.getDate();
+    var startDateString = start.getFullYear() + "-" + startMonth + "-" + startDate;
+    var endDateString = end.getFullYear() + "-" + endMonth + "-" + endDate;
     var startTimeString = timeConvert(start.getHours())+":"+timeConvert(start.getMinutes());
     var endTimeString = timeConvert(end.getHours())+":"+timeConvert(end.getMinutes());
 
@@ -2212,22 +2014,22 @@ var Availability = React.createClass({displayName: "Availability",
 
     // Move windowView forward if reservations end is reached
     } else  if (this.state.end === this.state.reservations.length-1 && this.state.windowView < this.state.end - this.state.start -1) {
-      this.setState({ windowView: this.state.windowView+1 }, function(){ console.log(this.state.windowView) });
+      this.setState({windowView: this.state.windowView + 1});
     }
   },
 
   goBack: function() {
     // Change rendered subset
     if (this.state.start > 0 && this.state.windowView === this.state.middle){
-      this.setState({ start: this.state.start-1, end: this.state.end-1});
+      this.setState({start: this.state.start - 1, end: this.state.end-1});
 
     // Move windowView backward if reservations start is reached
     } else if (this.state.start === 0 && this.state.windowView > 0) {
-      this.setState({ windowView: this.state.windowView-1 });
+      this.setState({windowView: this.state.windowView - 1});
 
     // Move windowView backward if not centered
     } else if (this.state.windowView > this.state.middle){
-      this.setState({windowView: this.state.windowView-1})
+      this.setState({windowView: this.state.windowView- 1 });
     }
   },
 
@@ -2417,7 +2219,7 @@ var reserveOutlet = React.createClass({displayName: "reserveOutlet",
 
   render: function() {
     var that = this;
-    // is user authenticate
+    // is user authenticated
     if(!document.cookie){
       this.transitionTo('login');
       return React.createElement("h1", null);
@@ -2444,172 +2246,28 @@ var reserveOutlet = React.createClass({displayName: "reserveOutlet",
 
 module.exports = reserveOutlet;
 
-<<<<<<< HEAD
-},{"../../assets/markers/reserveOutlet/marker.jsx":1,"../dispatcher/ConnectusDispatcher":24,"../stores/outletStore":31,"google-map-react":44,"moment":88,"react":514,"react-bootstrap":157,"react-router":251,"react-widgets":293,"react/addons":342}],17:[function(require,module,exports){
-=======
-},{"../../assets/markers/reserveOutlet/marker.jsx":1,"../dispatcher/ConnectusDispatcher":25,"../stores/outletStore":32,"google-map-react":45,"moment":89,"react":515,"react-bootstrap":158,"react-router":252,"react-widgets":294,"react/addons":343}],18:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-
-var React = require('react');
-var outletStore = require('../stores/outletStore');
-var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
-var ReactAddons = require('react/addons');
-var Link = require('react-router').Link;
-var Router = require('react-router'); //need this for redirection
-
-
-var seeReservedOutlet = React.createClass({displayName: "seeReservedOutlet",
-
-  render: function() {
-    return (React.createElement("div", null, "hi"))
-  }
-  
-});
-
-module.exports = seeReservedOutlet;
-
-<<<<<<< HEAD
-},{"../dispatcher/ConnectusDispatcher":24,"../stores/outletStore":31,"react":514,"react-router":251,"react/addons":342}],18:[function(require,module,exports){
-=======
-},{"../dispatcher/ConnectusDispatcher":25,"../stores/outletStore":32,"react":515,"react-router":252,"react/addons":343}],19:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-var React = require('react');
-var outletStore = require('../stores/outletStore');
-var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
-var ReactAddons = require('react/addons');
-var Link = require('react-router').Link;
-var Router = require('react-router'); //need this for redirection
-var sellerOutlets = React.createClass({displayName: "sellerOutlets",
-
-  getInitialState: function(){
-    return {
-      data: []
-    };
-  },
-
-  mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
-
-  // reserveOutlet: function(id){
-  //   ConnectusDispatcher.dispatch({
-  //       action: 'CLICK_OUTLET',
-  //       id: id
-  //   });
-  // },
-
-  componentDidMount: function() {
-    var that = this;
-    outletStore.getSellerOutlets().then(function(outletData){
-      that.setState({data: outletData});
-    });
-  },
-
-  render: function() {
-
-    // is the user authenticated?
-    if(!document.cookie){
-      this.transitionTo('login');
-      return React.createElement("h1", null);
-    }
-
-    var that = this;
-
-    if (this.state.data.length !==0) {
-      var outletHtml = this.state.data.map(function(outlet) {
-        return (
-          React.createElement("tr", {key: outlet.id, onClick: that.reserveOutlet}, 
-            React.createElement("td", null, 
-              React.createElement("h2", {className: "ui center aligned header"}, 
-                React.createElement(Link, {to: "reserveOutlet", params: {id: outlet.id}}, 
-                   outlet.name
-                )
-              )
-            ), 
-            React.createElement("td", null, 
-              "Seller: ",  outlet.seller
-            ), 
-            React.createElement("td", null, 
-              React.createElement("div", {className: "ui star rating", "data-rating":  outlet.rating, "data-max-rating":  outlet.rating},  outlet.rating)
-            ), 
-            React.createElement("td", null, 
-               outlet.voltage
-            ), 
-            React.createElement("td", null, 
-              "Price by hour: ",  outlet.priceHourly, 
-              "Price by kWh: ",  outlet.priceEnergy
-            ), 
-            React.createElement("td", null, 
-             outlet.description
-            ), 
-            React.createElement("td", null, 
-              React.createElement("div", {className: "ui button"}, "Edit"), 
-              React.createElement("div", {className: "ui button"}, "Buyer Reservations")
-            )
-            
-          )
-        )
-      });
-    }
-
-      return (
-        React.createElement("div", {className: "outletsList container"}, 
-          React.createElement("table", {className: "ui selectable celled padded table"}, 
-            React.createElement("thead", null, 
-              React.createElement("tr", null, React.createElement("th", {className: "single line"}, "Outlet Name"), 
-              React.createElement("th", null, "Seller"), 
-              React.createElement("th", null, "Rating"), 
-              React.createElement("th", null, "Voltage"), 
-              React.createElement("th", null, "Price"), 
-              React.createElement("th", null, "Description")
-            )), 
-            React.createElement("tbody", null, 
-               outletHtml 
-            )
-          )
-        )
-      )
-    // });  from the promise closing
-  },
-
-  _onChange: function() {
-    this.setState(this.getInitialState());
-  }
-
-});
-
-module.exports = sellerOutlets;
-
-<<<<<<< HEAD
-},{"../dispatcher/ConnectusDispatcher":24,"../stores/outletStore":31,"react":514,"react-router":251,"react/addons":342}],19:[function(require,module,exports){
-=======
-},{"../dispatcher/ConnectusDispatcher":25,"../stores/outletStore":32,"react":515,"react-router":252,"react/addons":343}],20:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../../assets/markers/reserveOutlet/marker.jsx":1,"../stores/outletStore":30,"google-map-react":43,"moment":87,"react":509,"react-bootstrap":156,"react-router":247,"react-widgets":289}],17:[function(require,module,exports){
 //client-side routing
 var React = require('react');
 var Connectus = require('../components/connectus.js');
-var LandingPage = require('../components/landingPage.js');
 var About = require('../components/about.js');
 var OutletsList = require('../components/outletsList.js');
 var OutletsListMap = require('../components/outletsListMap.js');
-var buyerReservations = require('../components/buyerReservations.js');
+var BuyerReservations = require('../components/buyerReservations.js');
 var ReserveOutlet = require('../components/reserveOutlet.js');
 var AddOutlet = require('../components/addOutlet.js');
 var EditOutlet = require('../components/editOutlet.js');
 var ManageOutlets = require('../components/manageOutlets.js');
-var SellerOutlets = require('../components/sellerOutlets.js');
 var PaymentsPage = require('../components/payments.js');
-var seeReservedOutlet = require('../components/seeReservedOutlet.js');
 var PaymentConfirmation = require('../components/paymentConfirmation.js');
 var Router = require('react-router'); //npm component for routing
 var DefaultRoute = Router.DefaultRoute; 
 var Route = Router.Route;
 
-// <Route name="seeReservedOutlet" path="/seeReservedOutlet/:transId" handler={seeReservedOutlet} />
-
-//connectus - always shown on the home page - holdes a <RouteHandler> that displays the other compnents
+//connectus - always shown on the home page - holdes a <RouteHandler> that displays the other components
 module.exports = (
   React.createElement(Route, {name: "connectus", path: "/", handler: Connectus}, 
     React.createElement(Route, {name: "about", path: "/about", handler: About}), 
-    React.createElement(Route, {name: "landingPage", path: "/landingPage", handler: LandingPage}), 
     React.createElement(Route, {name: "paymentsPage", path: "/paymentsPage", handler: PaymentsPage}), 
     React.createElement(Route, {name: "outletsList", path: "/outlets", handler: OutletsList}), 
     React.createElement(Route, {name: "outletsListMap", path: "/outlets/map", handler: OutletsListMap}), 
@@ -2618,17 +2276,12 @@ module.exports = (
     React.createElement(Route, {name: "editOutlet", path: "/editOutlet/:id", handler: EditOutlet}), 
     React.createElement(Route, {name: "manageOutlets", path: "/manageOutlets", handler: ManageOutlets}), 
     React.createElement(Route, {name: "paymentConfirmation", path: "/paymentConfirmation", handler: PaymentConfirmation}), 
-    React.createElement(Route, {name: "buyerReservations", path: "/buyerReservations", handler: buyerReservations}), 
-    React.createElement(Route, {name: "sellerOutlets", path: "/sellerOutlets", handler: SellerOutlets}), 
+    React.createElement(Route, {name: "buyerReservations", path: "/buyerReservations", handler: BuyerReservations}), 
     React.createElement(DefaultRoute, {handler: About})
   )
 );
 
-<<<<<<< HEAD
-},{"../components/about.js":4,"../components/addOutlet.js":5,"../components/buyerReservations.js":6,"../components/connectus.js":7,"../components/editOutlet.js":8,"../components/landingPage.js":9,"../components/manageOutlets.js":10,"../components/outletsList.js":12,"../components/outletsListMap.js":13,"../components/paymentConfirmation.js":14,"../components/payments.js":15,"../components/reserveOutlet.js":16,"../components/seeReservedOutlet.js":17,"../components/sellerOutlets.js":18,"react":514,"react-router":251}],20:[function(require,module,exports){
-=======
-},{"../components/about.js":4,"../components/addOutlet.js":5,"../components/buyerReservations.js":6,"../components/connectus.js":7,"../components/editOutlet.js":8,"../components/landingPage.js":9,"../components/manageOutlets.js":10,"../components/outletsList.js":13,"../components/outletsListMap.js":14,"../components/paymentConfirmation.js":15,"../components/payments.js":16,"../components/reserveOutlet.js":17,"../components/seeReservedOutlet.js":18,"../components/sellerOutlets.js":19,"react":515,"react-router":252}],21:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../components/about.js":4,"../components/addOutlet.js":5,"../components/buyerReservations.js":6,"../components/connectus.js":7,"../components/editOutlet.js":8,"../components/manageOutlets.js":10,"../components/outletsList.js":12,"../components/outletsListMap.js":13,"../components/paymentConfirmation.js":14,"../components/payments.js":15,"../components/reserveOutlet.js":16,"react":509,"react-router":247}],18:[function(require,module,exports){
 var BASE_URL = window.location.origin + '/';
 
 var loginConstants = {
@@ -2649,11 +2302,7 @@ var loginConstants = {
 
 module.exports = loginConstants;
 
-<<<<<<< HEAD
-},{}],21:[function(require,module,exports){
-=======
-},{}],22:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],19:[function(require,module,exports){
 var BASE_URL = window.location.origin + '/';
 
 var authConstants = {
@@ -2664,11 +2313,28 @@ var authConstants = {
 
 module.exports = authConstants;
 
-<<<<<<< HEAD
-},{}],22:[function(require,module,exports){
-=======
-},{}],23:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],20:[function(require,module,exports){
+var BASE_URL = window.location.origin + '/';
+
+var loginConstants = {
+  BASE_URL: BASE_URL,
+  OUTLET_DATA: BASE_URL + 'api/outlets',
+  ADD_OUTLET: BASE_URL + 'api/addOutlet',
+  EDIT_OUTLET: BASE_URL +  'api/editOutlet',
+  OUTLET_RESERVATIONS: BASE_URL + 'api/outletReservations',
+  TIME_SLOTS: BASE_URL + 'api/seeTimeSlots',
+  MAKE_RESERVATION: BASE_URL + 'api/makeReservation',
+  OUTLETS_BYUSER: BASE_URL + 'api/users/manageMyOutlets',
+  SEEBUYER_RESERVATIONS: BASE_URL + 'api/users/seeBuyerReservations',
+  TURNON_OUTLET: BASE_URL + 'api/on',
+  TRANSACTION_CURRENT: BASE_URL + 'api/setTransaction',
+  TURNOFF_OUTLET: BASE_URL + 'api/off',
+  VALIDATE_ADDRESS: BASE_URL + 'api/validateAddress'
+};
+
+module.exports = loginConstants;
+
+},{}],21:[function(require,module,exports){
 var BASE_URL = window.location.origin + '/';
 
 var paymentConstants = {
@@ -2680,11 +2346,7 @@ var paymentConstants = {
 
 module.exports = paymentConstants;
 
-<<<<<<< HEAD
-},{}],23:[function(require,module,exports){
-=======
-},{}],24:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],22:[function(require,module,exports){
 var BASE_URL = window.location.origin + '/';
 
 var userConstants = {
@@ -2694,11 +2356,7 @@ var userConstants = {
 
 module.exports = userConstants;
 
-<<<<<<< HEAD
-},{}],24:[function(require,module,exports){
-=======
-},{}],25:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],23:[function(require,module,exports){
 var Dispatcher = require('flux').Dispatcher;
 var assign = require('react/lib/Object.assign'); 
 
@@ -2715,10 +2373,14 @@ module.exports = ConnectusDispatcher;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{"flux":37,"react/lib/Object.assign":370}],25:[function(require,module,exports){
 =======
 },{"flux":38,"react/lib/Object.assign":371}],26:[function(require,module,exports){
 >>>>>>> power data is set and pulled from db during streaming
+=======
+},{"flux":36,"react/lib/Object.assign":365}],24:[function(require,module,exports){
+>>>>>>> cleaned code up to stores
 //TEMP CODE - FILE IN PROGRESS
 
 =======
@@ -2737,11 +2399,7 @@ var Router = {
 
 module.exports = Router;
 
-<<<<<<< HEAD
-},{}],26:[function(require,module,exports){
-=======
-},{}],27:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],25:[function(require,module,exports){
 var request = require('reqwest');
 var when = require('when'); //promises
 var AuthConstants = require('../constants/authConstants.js');
@@ -2750,13 +2408,11 @@ var authService = function(){
   var authInstance = {};
   //sends request to the back end to end the Express session and clear cookies
   authInstance.logout = function(){
-    console.log('auth logout called');
     return request({
       url: AuthConstants.LOGOUT,
       method: 'GET',
       crossOrigin: true,
       success: function(){
-        document.cookie='';
         document.location ='/';
       }
     })
@@ -2771,21 +2427,16 @@ var authService = function(){
 
 module.exports = authService();
 
-<<<<<<< HEAD
-},{"../constants/authConstants.js":21,"reqwest":538,"when":557}],27:[function(require,module,exports){
-=======
-},{"../constants/authConstants.js":22,"reqwest":539,"when":558}],28:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../constants/authConstants.js":19,"reqwest":510,"when":529}],26:[function(require,module,exports){
 var request = require('reqwest');
 var when = require('when'); //promises
-var OutletListConstants = require('../constants/OutletListConstants.js');
+var OutletListConstants = require('../constants/outletListConstants.js');
 
 var outletServices = function(){
 
   var outletData = {};
 
   outletData.validateAddress = function(data){
-    console.log('calling validate address in services', data);
     return request({
       url: OutletListConstants.VALIDATE_ADDRESS,
       method: 'POST',
@@ -2794,7 +2445,6 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(data),
       success: function(result){
-        console.log('validatedAddress: coordinates are:', result);
         return result;
       }
       
@@ -2810,7 +2460,6 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(data),
       success: function(result){
-        console.log('settingtransaction was successful', result);
         return result;
       }
     });
@@ -2836,7 +2485,6 @@ var outletServices = function(){
   };
 
   outletData.calculateOutletRating = function(outlets) {
-    console.log('calculating outlet rating in the store')
     outlets.map(function(outlet){
       if (outlet.thumbs_up + outlet.thumbs_down < 10) {
         outlet.rating = 'no rating availabile';
@@ -2847,21 +2495,18 @@ var outletServices = function(){
   };
 
   outletData.retrieveOutletByUser = function(){
-    console.log('retrieving outlet by user id');
     return request({
       url: OutletListConstants.OUTLETS_BYUSER,
       method: 'GET',
       crossOrigin: true,
       type: 'json',
       success: function(outlets){
-        console.log(outlets);
         return outlets;
       }
     });
   };
 
   outletData.retrieveOutletReservations = function(outletID){
-    console.log('outletID in retrieve reservations SERVICES', outletID);
     return request({
       url: OutletListConstants.OUTLET_RESERVATIONS,
       method: 'POST',
@@ -2908,7 +2553,7 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(newOutlet),
       success: function(res) {
-        console.log(res);
+        return res;
       }
     });
   };
@@ -2922,13 +2567,12 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(newOutlet),
       success: function(res) {
-        console.log(res);
+        return res;
       }
     });
   }
 
   outletData.makeReservation = function(newReservation){
-    // console.log('IN OUTLETSERVICES, makeReservation: ', newReservation);
     return request({
       url: OutletListConstants.MAKE_RESERVATION,
       method: 'POST',
@@ -2939,9 +2583,6 @@ var outletServices = function(){
       success: function(res) {
         return res;
       }
-      // error: function(res){
-      //   console.
-      // }
     });
   };
 
@@ -2952,8 +2593,8 @@ var outletServices = function(){
       crossOrigin: true,
       type: 'json',
       contentType: 'application/json',
-      error: function(res) {
-        console.log('error----------------------->', res);
+      error: function(err) {
+        console.log(err);
       },
       success: function(reservations) {
         return reservations;
@@ -2962,7 +2603,6 @@ var outletServices = function(){
   };
 
   outletData.turnOutletOn = function(transaction){
-    console.log('transaction info on the client: ', transaction);
     return request({
       url: OutletListConstants.TURNON_OUTLET,
       method: 'POST',
@@ -2971,11 +2611,10 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(transaction),
       success: function(res) {
-        console.log('---------------------------------> SUCCESS, reservation info sent to server.');
-        console.dir(res);
+        return res;
       }
     });
-  }
+  };
 
   outletData.turnOutletOff = function(transaction){
     return request({
@@ -2986,23 +2625,10 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(transaction),
       success: function(res) {
-        console.log('---------------------------------> SUCCESS, transaction info sent to server.');
-        console.dir(res);
+        return res;
       }
     });
-  }
-
-  // outletData.turnOff = function(){
-  //   return request({
-  //     url: '/turnOff',
-  //     method: 'POST',
-  //     crossOrigin: true,
-  //     type: 'json',
-  //     success: function(res){
-  //       console.log('SUCCESS TURNOFF: ', res)
-  //     }
-  //   });
-  // };
+  };
 
   return outletData;
   
@@ -3010,11 +2636,7 @@ var outletServices = function(){
 
 module.exports = outletServices();
 
-<<<<<<< HEAD
-},{"../constants/OutletListConstants.js":20,"reqwest":538,"when":557}],28:[function(require,module,exports){
-=======
-},{"../constants/OutletListConstants.js":21,"reqwest":539,"when":558}],29:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../constants/outletListConstants.js":20,"reqwest":510,"when":529}],27:[function(require,module,exports){
 var request = require('reqwest');
 var when = require('when'); //promises
 var PaymentConstants = require('../constants/paymentConstants');
@@ -3034,42 +2656,22 @@ var paymentServices = function(){
   };
 
   paymentInstance.getTransactionInfo = function(){
-    console.log('calling get transaction info in services');
     return request({
       url: PaymentConstants.GET_TRANSACTION,
       method: 'GET',
       crossOrigin: true,
       success: function(res){
-        console.log('transaction info response', res);
         return res;
       }
     });
   };
-
-  // paymentInstance.sendPayment = function(cardInfo){
-  //   return request({
-  //     url: PaymentConstants.SEND_PAYMENT,
-  //     method: 'POST',
-  //     crossOrigin: true,
-  //     type: 'json',
-  //     contentType: 'application/json',
-  //     data: JSON.stringify(cardInfo),
-  //     success: function(res){
-  //       console.log('response from payment post', res);
-  //     }
-  //   });
-  // };
 
   return paymentInstance;
 };
 
 module.exports = paymentServices();
 
-<<<<<<< HEAD
-},{"../constants/paymentConstants":22,"reqwest":538,"when":557}],29:[function(require,module,exports){
-=======
-},{"../constants/paymentConstants":23,"reqwest":539,"when":558}],30:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../constants/paymentConstants":21,"reqwest":510,"when":529}],28:[function(require,module,exports){
 var request = require('reqwest');
 var when = require('when'); //promises
 var UserConstants = require('../constants/userConstants.js');
@@ -3100,11 +2702,7 @@ var userServices = function(){
 
 module.exports = userServices();
 
-<<<<<<< HEAD
-},{"../constants/userConstants.js":23,"reqwest":538,"when":557}],30:[function(require,module,exports){
-=======
-},{"../constants/userConstants.js":24,"reqwest":539,"when":558}],31:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../constants/userConstants.js":22,"reqwest":510,"when":529}],29:[function(require,module,exports){
 var timeSlotInfo = { 
   1: { start: '00:00', end: '00:30' },
   2: { start: '00:30', end: '01:00' },
@@ -3157,13 +2755,8 @@ var timeSlotInfo = {
 
 module.exports = timeSlotInfo;
 
-<<<<<<< HEAD
-},{}],31:[function(require,module,exports){
-=======
-},{}],32:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],30:[function(require,module,exports){
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
-// var ConnectusConstants = require('');          // omg what is this even
 var assign = require('react/lib/Object.assign');    // allows us to extend objects similarly to jquery and underscore lib...
 var EventEmitter = require('events').EventEmitter;
 var OutletServices = require('../services/outletServices');
@@ -3186,7 +2779,6 @@ var outletStore = assign({}, EventEmitter.prototype, {
   },
   getOutlets: function() {
     return OutletServices.retrieve().then(function(outlets){
-      // console.log('outlets in the store: ', outlets)
       OutletServices.calculateOutletRating(outlets);
       return outlets;
     });
@@ -3194,7 +2786,6 @@ var outletStore = assign({}, EventEmitter.prototype, {
   
   getSellerOutlets: function(){
     return OutletServices.retrieveOutletByUser().then(function(outlets){
-      // console.log('outlets in the seller outlets list', outlets);
       return outlets;
     });
   },
@@ -3203,7 +2794,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
     return OutletServices.seeBuyerReservations().then(function(outletData){
       var transactions = {};
       var transactionsData = [];
-      console.log(outletData);
+      console.log('outletData',outletData);
       for(var i = 0; i < outletData.length; i++){
         var transactionId = outletData[i].transaction_id;
         if(!transactions[transactionId]){
@@ -3216,7 +2807,8 @@ var outletStore = assign({}, EventEmitter.prototype, {
           transactions[transactionId].seller = outletData[i].seller_info;
           transactions[transactionId].startTime = {slot: {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].start}, date: outletData[i].date};
           transactions[transactionId].endTime = {slot: {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].end}, date: outletData[i].date};
-    
+          transactions[transactionId].totalCost = outletData[i].transaction_info.totalCost;
+          transactions[transactionId].totalEnergy = outletData[i].transaction_info.totalEnergy;
         }else{
           
           if(new Date(outletData[i].date).getDate() === new Date(transactions[transactionId].endTime.date).getDate() && outletData[i].slot_id > transactions[transactionId].endTime.slot.number){
@@ -3274,7 +2866,6 @@ var outletStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function() {
     this.emit(CHANGE_EVENT);
-    console.log('i changed')
   },
 
   addChangeListener: function(callback) {
@@ -3304,11 +2895,7 @@ ConnectusDispatcher.register(function(payload){
 
 module.exports = outletStore;
 
-<<<<<<< HEAD
-},{"../dispatcher/ConnectusDispatcher":24,"../services/outletServices":27,"./data/timeSlots":30,"events":34,"microevent":87,"react/lib/Object.assign":370}],32:[function(require,module,exports){
-=======
-},{"../dispatcher/ConnectusDispatcher":25,"../services/outletServices":28,"./data/timeSlots":31,"events":35,"microevent":88,"react/lib/Object.assign":371}],33:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../dispatcher/ConnectusDispatcher":23,"../services/outletServices":26,"./data/timeSlots":29,"events":33,"microevent":86,"react/lib/Object.assign":365}],31:[function(require,module,exports){
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 // var ConnectusConstants = require('');          // omg what is this even
 var assign = require('react/lib/Object.assign');    // allows us to extend objects similarly to jquery and underscore lib...
@@ -3342,11 +2929,7 @@ var paymentStore = assign({}, EventEmitter.prototype, {
 
 module.exports = paymentStore;
 
-<<<<<<< HEAD
-},{"../dispatcher/ConnectusDispatcher":24,"../services/paymentServices":28,"events":34,"react/lib/Object.assign":370}],33:[function(require,module,exports){
-=======
-},{"../dispatcher/ConnectusDispatcher":25,"../services/paymentServices":29,"events":35,"react/lib/Object.assign":371}],34:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../dispatcher/ConnectusDispatcher":23,"../services/paymentServices":27,"events":33,"react/lib/Object.assign":365}],32:[function(require,module,exports){
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var assign = require('react/lib/Object.assign');    // allows us to extend objects similarly to jquery and underscore lib...
 var EventEmitter = require('events').EventEmitter;
@@ -3366,11 +2949,7 @@ var userStore = assign({}, EventEmitter.prototype, {
 
 module.exports = userStore;
 
-<<<<<<< HEAD
-},{"../dispatcher/ConnectusDispatcher":24,"../services/userServices":29,"events":34,"react/lib/Object.assign":370}],34:[function(require,module,exports){
-=======
-},{"../dispatcher/ConnectusDispatcher":25,"../services/userServices":30,"events":35,"react/lib/Object.assign":371}],35:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../dispatcher/ConnectusDispatcher":23,"../services/userServices":28,"events":33,"react/lib/Object.assign":365}],33:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -3673,11 +3252,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-<<<<<<< HEAD
-},{}],35:[function(require,module,exports){
-=======
-},{}],36:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],34:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -3769,11 +3344,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-<<<<<<< HEAD
-},{}],36:[function(require,module,exports){
-=======
-},{}],37:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],35:[function(require,module,exports){
 /*!
   Copyright (c) 2015 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -3824,11 +3395,7 @@ process.umask = function() { return 0; };
 
 }());
 
-<<<<<<< HEAD
-},{}],37:[function(require,module,exports){
-=======
-},{}],38:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],36:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -3840,11 +3407,7 @@ process.umask = function() { return 0; };
 
 module.exports.Dispatcher = require('./lib/Dispatcher')
 
-<<<<<<< HEAD
-},{"./lib/Dispatcher":38}],38:[function(require,module,exports){
-=======
-},{"./lib/Dispatcher":39}],39:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./lib/Dispatcher":37}],37:[function(require,module,exports){
 /*
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -4096,11 +3659,7 @@ var _prefix = 'ID_';
 
 module.exports = Dispatcher;
 
-<<<<<<< HEAD
-},{"./invariant":39}],39:[function(require,module,exports){
-=======
-},{"./invariant":40}],40:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./invariant":38}],38:[function(require,module,exports){
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -4155,11 +3714,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 
-<<<<<<< HEAD
-},{}],40:[function(require,module,exports){
-=======
-},{}],41:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],39:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4304,7 +3859,7 @@ var GoogleMap = (function (_Component) {
 
         // render in overlay
         var this_ = _this;
-        var overlay = (0, _lodashAssign2['default'])(new maps.OverlayView(), {
+        var overlay = _this.overlay_ = (0, _lodashAssign2['default'])(new maps.OverlayView(), {
           onAdd: function onAdd() {
             var K_MAX_WIDTH = typeof screen !== 'undefined' ? '' + screen.width + 'px' : '2000px';
             var K_MAX_HEIGHT = typeof screen !== 'undefined' ? '' + screen.height + 'px' : '2000px';
@@ -4333,6 +3888,10 @@ var GoogleMap = (function (_Component) {
               // remove prerendered markers
               this_.setState({ overlayCreated: true });
             });
+          },
+
+          onRemove: function onRemove() {
+            _react2['default'].unmountComponentAtNode(this.div);
           },
 
           draw: function draw() {
@@ -4595,6 +4154,11 @@ var GoogleMap = (function (_Component) {
 
     window.removeEventListener('resize', this._onWindowResize);
 
+    if (this.overlay_) {
+      // this triggers overlay_.onRemove(), which will unmount the <GoogleMapMarkers/>
+      this.overlay_.setMap(null);
+    }
+
     if (this.maps_ && this.map_) {
       this.maps_.event.clearInstanceListeners(this.map_);
     }
@@ -4697,11 +4261,7 @@ exports['default'] = GoogleMap;
 module.exports = exports['default'];
 /*maps*/ /*render markers before map load done*/
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./google_map_map.js":41,"./google_map_markers.js":42,"./google_map_markers_prerender.js":43,"./marker_dispatcher.js":45,"./utils/array_helper.js":46,"./utils/detect.js":47,"./utils/geo.js":48,"./utils/loaders/google_map_loader.js":52,"_process":35,"lodash.assign":54,"lodash.isfunction":65,"lodash.isnumber":66,"lodash.isplainobject":67,"lodash.pick":72,"react":514,"react-pure-render/function":225}],41:[function(require,module,exports){
-=======
-},{"./google_map_map.js":42,"./google_map_markers.js":43,"./google_map_markers_prerender.js":44,"./marker_dispatcher.js":46,"./utils/array_helper.js":47,"./utils/detect.js":48,"./utils/geo.js":49,"./utils/loaders/google_map_loader.js":53,"_process":36,"lodash.assign":55,"lodash.isfunction":66,"lodash.isnumber":67,"lodash.isplainobject":68,"lodash.pick":73,"react":515,"react-pure-render/function":226}],42:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./google_map_map.js":40,"./google_map_markers.js":41,"./google_map_markers_prerender.js":42,"./marker_dispatcher.js":44,"./utils/array_helper.js":45,"./utils/detect.js":46,"./utils/geo.js":47,"./utils/loaders/google_map_loader.js":51,"_process":34,"lodash.assign":53,"lodash.isfunction":64,"lodash.isnumber":65,"lodash.isplainobject":66,"lodash.pick":71,"react":509,"react-pure-render/function":221}],40:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4748,11 +4308,7 @@ var GoogleMapMap = (function (_Component) {
 
 exports['default'] = GoogleMapMap;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"react":514}],42:[function(require,module,exports){
-=======
-},{"react":515}],43:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"react":509}],41:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5024,11 +4580,7 @@ var GoogleMapMarkers = (function (_Component) {
 
 exports['default'] = GoogleMapMarkers;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"react":514,"react-pure-render/function":225}],43:[function(require,module,exports){
-=======
-},{"react":515,"react-pure-render/function":226}],44:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"react":509,"react-pure-render/function":221}],42:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5081,11 +4633,7 @@ var GoogleMapMarkersPrerender = (function (_Component) {
 
 exports['default'] = GoogleMapMarkersPrerender;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./google_map_markers.js":42,"react":514}],44:[function(require,module,exports){
-=======
-},{"./google_map_markers.js":43,"react":515}],45:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./google_map_markers.js":41,"react":509}],43:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5098,11 +4646,7 @@ var _google_mapJs2 = _interopRequireDefault(_google_mapJs);
 
 exports['default'] = _google_mapJs2['default'];
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./google_map.js":40}],45:[function(require,module,exports){
-=======
-},{"./google_map.js":41}],46:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./google_map.js":39}],44:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5149,11 +4693,7 @@ var MarkerDispatcher = (function (_EventEmitter) {
 
 exports['default'] = MarkerDispatcher;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"eventemitter3":53}],46:[function(require,module,exports){
-=======
-},{"eventemitter3":54}],47:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"eventemitter3":52}],45:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -5172,11 +4712,7 @@ function isArraysEqualEps(arrayA, arrayB, eps) {
 }
 
 module.exports = exports["default"];
-<<<<<<< HEAD
-},{}],47:[function(require,module,exports){
-=======
-},{}],48:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],46:[function(require,module,exports){
 // code here http://stackoverflow.com/questions/5899783/detect-safari-chrome-ie-firefox-opera-with-user-agent
 'use strict';
 
@@ -5214,11 +4750,7 @@ function detectBrowser() {
 }
 
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{}],48:[function(require,module,exports){
-=======
-},{}],49:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],47:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5348,11 +4880,7 @@ var Geo = (function () {
 
 exports['default'] = Geo;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./lib_geo/lat_lng.js":49,"./lib_geo/transform.js":50,"point-geometry":84}],49:[function(require,module,exports){
-=======
-},{"./lib_geo/lat_lng.js":50,"./lib_geo/transform.js":51,"point-geometry":85}],50:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./lib_geo/lat_lng.js":48,"./lib_geo/transform.js":49,"point-geometry":83}],48:[function(require,module,exports){
 'use strict';
 
 module.exports = LatLng;
@@ -5382,11 +4910,7 @@ LatLng.convert = function (a) {
     }
     return a;
 };
-<<<<<<< HEAD
-},{"./wrap.js":51}],50:[function(require,module,exports){
-=======
-},{"./wrap.js":52}],51:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./wrap.js":50}],49:[function(require,module,exports){
 'use strict';
 
 var LatLng = require('./lat_lng');
@@ -5547,22 +5071,14 @@ Transform.prototype = Object.defineProperties({
 });
 
 module.exports = Transform;
-<<<<<<< HEAD
-},{"./lat_lng":49,"./wrap.js":51,"point-geometry":84}],51:[function(require,module,exports){
-=======
-},{"./lat_lng":50,"./wrap.js":52,"point-geometry":85}],52:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./lat_lng":48,"./wrap.js":50,"point-geometry":83}],50:[function(require,module,exports){
 'use strict';
 
 exports.wrap = function (n, min, max) {
     var d = max - min;
     return n === max ? n : ((n - min) % d + d) % d + min;
 };
-<<<<<<< HEAD
-},{}],52:[function(require,module,exports){
-=======
-},{}],53:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],51:[function(require,module,exports){
 'use strict';
 
 var $script_ = null;
@@ -5610,11 +5126,7 @@ module.exports = function googleMapLoader(apiKey) {
 
   return _loadPromise;
 };
-<<<<<<< HEAD
-},{"scriptjs":85}],53:[function(require,module,exports){
-=======
-},{"scriptjs":86}],54:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"scriptjs":84}],52:[function(require,module,exports){
 'use strict';
 
 //
@@ -5878,11 +5390,7 @@ if ('undefined' !== typeof module) {
   module.exports = EventEmitter;
 }
 
-<<<<<<< HEAD
-},{}],54:[function(require,module,exports){
-=======
-},{}],55:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],53:[function(require,module,exports){
 /**
  * lodash 3.2.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -5964,11 +5472,7 @@ var assign = createAssigner(function(object, source, customizer) {
 
 module.exports = assign;
 
-<<<<<<< HEAD
-},{"lodash._baseassign":55,"lodash._createassigner":57,"lodash.keys":61}],55:[function(require,module,exports){
-=======
-},{"lodash._baseassign":56,"lodash._createassigner":58,"lodash.keys":62}],56:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"lodash._baseassign":54,"lodash._createassigner":56,"lodash.keys":60}],54:[function(require,module,exports){
 /**
  * lodash 3.2.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -5997,11 +5501,7 @@ function baseAssign(object, source) {
 
 module.exports = baseAssign;
 
-<<<<<<< HEAD
-},{"lodash._basecopy":56,"lodash.keys":61}],56:[function(require,module,exports){
-=======
-},{"lodash._basecopy":57,"lodash.keys":62}],57:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"lodash._basecopy":55,"lodash.keys":60}],55:[function(require,module,exports){
 /**
  * lodash 3.0.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6035,11 +5535,7 @@ function baseCopy(source, props, object) {
 
 module.exports = baseCopy;
 
-<<<<<<< HEAD
-},{}],57:[function(require,module,exports){
-=======
-},{}],58:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],56:[function(require,module,exports){
 /**
  * lodash 3.1.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6093,11 +5589,7 @@ function createAssigner(assigner) {
 
 module.exports = createAssigner;
 
-<<<<<<< HEAD
-},{"lodash._bindcallback":58,"lodash._isiterateecall":59,"lodash.restparam":60}],58:[function(require,module,exports){
-=======
-},{"lodash._bindcallback":59,"lodash._isiterateecall":60,"lodash.restparam":61}],59:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"lodash._bindcallback":57,"lodash._isiterateecall":58,"lodash.restparam":59}],57:[function(require,module,exports){
 /**
  * lodash 3.0.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6164,11 +5656,7 @@ function identity(value) {
 
 module.exports = bindCallback;
 
-<<<<<<< HEAD
-},{}],59:[function(require,module,exports){
-=======
-},{}],60:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],58:[function(require,module,exports){
 /**
  * lodash 3.0.9 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6302,11 +5790,7 @@ function isObject(value) {
 
 module.exports = isIterateeCall;
 
-<<<<<<< HEAD
-},{}],60:[function(require,module,exports){
-=======
-},{}],61:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],59:[function(require,module,exports){
 /**
  * lodash 3.6.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6375,11 +5859,7 @@ function restParam(func, start) {
 
 module.exports = restParam;
 
-<<<<<<< HEAD
-},{}],61:[function(require,module,exports){
-=======
-},{}],62:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],60:[function(require,module,exports){
 /**
  * lodash 3.1.2 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6617,11 +6097,7 @@ function keysIn(object) {
 
 module.exports = keys;
 
-<<<<<<< HEAD
-},{"lodash._getnative":62,"lodash.isarguments":63,"lodash.isarray":64}],62:[function(require,module,exports){
-=======
-},{"lodash._getnative":63,"lodash.isarguments":64,"lodash.isarray":65}],63:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"lodash._getnative":61,"lodash.isarguments":62,"lodash.isarray":63}],61:[function(require,module,exports){
 /**
  * lodash 3.9.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6760,11 +6236,7 @@ function isNative(value) {
 
 module.exports = getNative;
 
-<<<<<<< HEAD
-},{}],63:[function(require,module,exports){
-=======
-},{}],64:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],62:[function(require,module,exports){
 /**
  * lodash 3.0.4 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6872,11 +6344,7 @@ function isArguments(value) {
 
 module.exports = isArguments;
 
-<<<<<<< HEAD
-},{}],64:[function(require,module,exports){
-=======
-},{}],65:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],63:[function(require,module,exports){
 /**
  * lodash 3.0.4 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -7058,11 +6526,7 @@ function isNative(value) {
 
 module.exports = isArray;
 
-<<<<<<< HEAD
-},{}],65:[function(require,module,exports){
-=======
-},{}],66:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],64:[function(require,module,exports){
 /**
  * lodash 3.0.6 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -7136,11 +6600,7 @@ function isObject(value) {
 
 module.exports = isFunction;
 
-<<<<<<< HEAD
-},{}],66:[function(require,module,exports){
-=======
-},{}],67:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],65:[function(require,module,exports){
 /**
  * lodash 3.0.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -7201,11 +6661,7 @@ function isNumber(value) {
 
 module.exports = isNumber;
 
-<<<<<<< HEAD
-},{}],67:[function(require,module,exports){
-=======
-},{}],68:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],66:[function(require,module,exports){
 /**
  * lodash 3.2.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -7310,11 +6766,7 @@ function isPlainObject(value) {
 
 module.exports = isPlainObject;
 
-<<<<<<< HEAD
-},{"lodash._basefor":68,"lodash.isarguments":69,"lodash.keysin":70}],68:[function(require,module,exports){
-=======
-},{"lodash._basefor":69,"lodash.isarguments":70,"lodash.keysin":71}],69:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"lodash._basefor":67,"lodash.isarguments":68,"lodash.keysin":69}],67:[function(require,module,exports){
 /**
  * lodash 3.0.2 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -7402,15 +6854,9 @@ function isObject(value) {
 
 module.exports = baseFor;
 
-<<<<<<< HEAD
-},{}],69:[function(require,module,exports){
-arguments[4][63][0].apply(exports,arguments)
-},{"dup":63}],70:[function(require,module,exports){
-=======
-},{}],70:[function(require,module,exports){
-arguments[4][64][0].apply(exports,arguments)
-},{"dup":64}],71:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],68:[function(require,module,exports){
+arguments[4][62][0].apply(exports,arguments)
+},{"dup":62}],69:[function(require,module,exports){
 /**
  * lodash 3.0.8 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -7544,15 +6990,9 @@ function keysIn(object) {
 
 module.exports = keysIn;
 
-<<<<<<< HEAD
-},{"lodash.isarguments":69,"lodash.isarray":71}],71:[function(require,module,exports){
-arguments[4][64][0].apply(exports,arguments)
-},{"dup":64}],72:[function(require,module,exports){
-=======
-},{"lodash.isarguments":70,"lodash.isarray":72}],72:[function(require,module,exports){
-arguments[4][65][0].apply(exports,arguments)
-},{"dup":65}],73:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"lodash.isarguments":68,"lodash.isarray":70}],70:[function(require,module,exports){
+arguments[4][63][0].apply(exports,arguments)
+},{"dup":63}],71:[function(require,module,exports){
 /**
  * lodash 3.1.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -7604,11 +7044,7 @@ var pick = restParam(function(object, props) {
 
 module.exports = pick;
 
-<<<<<<< HEAD
-},{"lodash._baseflatten":73,"lodash._bindcallback":76,"lodash._pickbyarray":77,"lodash._pickbycallback":78,"lodash.restparam":83}],73:[function(require,module,exports){
-=======
-},{"lodash._baseflatten":74,"lodash._bindcallback":77,"lodash._pickbyarray":78,"lodash._pickbycallback":79,"lodash.restparam":84}],74:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"lodash._baseflatten":72,"lodash._bindcallback":75,"lodash._pickbyarray":76,"lodash._pickbycallback":77,"lodash.restparam":82}],72:[function(require,module,exports){
 /**
  * lodash 3.1.4 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -7741,23 +7177,13 @@ function isLength(value) {
 
 module.exports = baseFlatten;
 
-<<<<<<< HEAD
-},{"lodash.isarguments":74,"lodash.isarray":75}],74:[function(require,module,exports){
+},{"lodash.isarguments":73,"lodash.isarray":74}],73:[function(require,module,exports){
+arguments[4][62][0].apply(exports,arguments)
+},{"dup":62}],74:[function(require,module,exports){
 arguments[4][63][0].apply(exports,arguments)
 },{"dup":63}],75:[function(require,module,exports){
-arguments[4][64][0].apply(exports,arguments)
-},{"dup":64}],76:[function(require,module,exports){
-arguments[4][58][0].apply(exports,arguments)
-},{"dup":58}],77:[function(require,module,exports){
-=======
-},{"lodash.isarguments":75,"lodash.isarray":76}],75:[function(require,module,exports){
-arguments[4][64][0].apply(exports,arguments)
-},{"dup":64}],76:[function(require,module,exports){
-arguments[4][65][0].apply(exports,arguments)
-},{"dup":65}],77:[function(require,module,exports){
-arguments[4][59][0].apply(exports,arguments)
-},{"dup":59}],78:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+arguments[4][57][0].apply(exports,arguments)
+},{"dup":57}],76:[function(require,module,exports){
 /**
  * lodash 3.0.2 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -7832,11 +7258,7 @@ function isObject(value) {
 
 module.exports = pickByArray;
 
-<<<<<<< HEAD
-},{}],78:[function(require,module,exports){
-=======
-},{}],79:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],77:[function(require,module,exports){
 /**
  * lodash 3.0.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -7882,31 +7304,17 @@ function pickByCallback(object, predicate) {
 
 module.exports = pickByCallback;
 
-<<<<<<< HEAD
-},{"lodash._basefor":79,"lodash.keysin":80}],79:[function(require,module,exports){
-arguments[4][68][0].apply(exports,arguments)
-},{"dup":68}],80:[function(require,module,exports){
-arguments[4][70][0].apply(exports,arguments)
-},{"dup":70,"lodash.isarguments":81,"lodash.isarray":82}],81:[function(require,module,exports){
+},{"lodash._basefor":78,"lodash.keysin":79}],78:[function(require,module,exports){
+arguments[4][67][0].apply(exports,arguments)
+},{"dup":67}],79:[function(require,module,exports){
+arguments[4][69][0].apply(exports,arguments)
+},{"dup":69,"lodash.isarguments":80,"lodash.isarray":81}],80:[function(require,module,exports){
+arguments[4][62][0].apply(exports,arguments)
+},{"dup":62}],81:[function(require,module,exports){
 arguments[4][63][0].apply(exports,arguments)
 },{"dup":63}],82:[function(require,module,exports){
-arguments[4][64][0].apply(exports,arguments)
-},{"dup":64}],83:[function(require,module,exports){
-arguments[4][60][0].apply(exports,arguments)
-},{"dup":60}],84:[function(require,module,exports){
-=======
-},{"lodash._basefor":80,"lodash.keysin":81}],80:[function(require,module,exports){
-arguments[4][69][0].apply(exports,arguments)
-},{"dup":69}],81:[function(require,module,exports){
-arguments[4][71][0].apply(exports,arguments)
-},{"dup":71,"lodash.isarguments":82,"lodash.isarray":83}],82:[function(require,module,exports){
-arguments[4][64][0].apply(exports,arguments)
-},{"dup":64}],83:[function(require,module,exports){
-arguments[4][65][0].apply(exports,arguments)
-},{"dup":65}],84:[function(require,module,exports){
-arguments[4][61][0].apply(exports,arguments)
-},{"dup":61}],85:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+arguments[4][59][0].apply(exports,arguments)
+},{"dup":59}],83:[function(require,module,exports){
 'use strict';
 
 module.exports = Point;
@@ -8039,11 +7447,7 @@ Point.convert = function (a) {
     return a;
 };
 
-<<<<<<< HEAD
-},{}],85:[function(require,module,exports){
-=======
-},{}],86:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],84:[function(require,module,exports){
 /*!
   * $script.js JS loader & dependency manager
   * https://github.com/ded/script.js
@@ -8164,11 +7568,7 @@ Point.convert = function (a) {
   return $script
 });
 
-<<<<<<< HEAD
-},{}],86:[function(require,module,exports){
-=======
-},{}],87:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],85:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -17380,11 +16780,7 @@ return jQuery;
 
 }));
 
-<<<<<<< HEAD
-},{}],87:[function(require,module,exports){
-=======
-},{}],88:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],86:[function(require,module,exports){
 /**
  * MicroEvent - to make any js object an event emitter (server or browser)
  * 
@@ -17436,13 +16832,9 @@ if( typeof module !== "undefined" && ('exports' in module)){
 	module.exports	= MicroEvent
 }
 
-<<<<<<< HEAD
-},{}],88:[function(require,module,exports){
-=======
-},{}],89:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],87:[function(require,module,exports){
 //! moment.js
-//! version : 2.10.3
+//! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -17537,6 +16929,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
                 flags.overflow < 0 &&
                 !flags.empty &&
                 !flags.invalidMonth &&
+                !flags.invalidWeekday &&
                 !flags.nullInput &&
                 !flags.invalidFormat &&
                 !flags.userInvalidated;
@@ -17617,7 +17010,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
     // Moment prototype object
     function Moment(config) {
         copyConfig(this, config);
-        this._d = new Date(+config._d);
+        this._d = new Date(config._d != null ? config._d.getTime() : NaN);
         // Prevent infinite loop in case updateOffset creates new moment
         // objects.
         if (updateInProgress === false) {
@@ -17631,16 +17024,20 @@ if( typeof module !== "undefined" && ('exports' in module)){
         return obj instanceof Moment || (obj != null && obj._isAMomentObject != null);
     }
 
+    function absFloor (number) {
+        if (number < 0) {
+            return Math.ceil(number);
+        } else {
+            return Math.floor(number);
+        }
+    }
+
     function toInt(argumentForCoercion) {
         var coercedNumber = +argumentForCoercion,
             value = 0;
 
         if (coercedNumber !== 0 && isFinite(coercedNumber)) {
-            if (coercedNumber >= 0) {
-                value = Math.floor(coercedNumber);
-            } else {
-                value = Math.ceil(coercedNumber);
-            }
+            value = absFloor(coercedNumber);
         }
 
         return value;
@@ -17738,9 +17135,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
     function defineLocale (name, values) {
         if (values !== null) {
             values.abbr = name;
-            if (!locales[name]) {
-                locales[name] = new Locale();
-            }
+            locales[name] = locales[name] || new Locale();
             locales[name].set(values);
 
             // backwards compat for now: also set the locale
@@ -17844,16 +17239,14 @@ if( typeof module !== "undefined" && ('exports' in module)){
     }
 
     function zeroFill(number, targetLength, forceSign) {
-        var output = '' + Math.abs(number),
+        var absNumber = '' + Math.abs(number),
+            zerosToFill = targetLength - absNumber.length,
             sign = number >= 0;
-
-        while (output.length < targetLength) {
-            output = '0' + output;
-        }
-        return (sign ? (forceSign ? '+' : '') : '-') + output;
+        return (sign ? (forceSign ? '+' : '') : '-') +
+            Math.pow(10, Math.max(0, zerosToFill)).toString().substr(1) + absNumber;
     }
 
-    var formattingTokens = /(\[[^\[]*\])|(\\)?(Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Q|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|S{1,4}|x|X|zz?|ZZ?|.)/g;
+    var formattingTokens = /(\[[^\[]*\])|(\\)?(Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Q|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g;
 
     var localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g;
 
@@ -17921,10 +17314,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
         }
 
         format = expandFormat(format, m.localeData());
-
-        if (!formatFunctions[format]) {
-            formatFunctions[format] = makeFormatFunction(format);
-        }
+        formatFunctions[format] = formatFunctions[format] || makeFormatFunction(format);
 
         return formatFunctions[format](m);
     }
@@ -17968,8 +17358,15 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
     var regexes = {};
 
+    function isFunction (sth) {
+        // https://github.com/moment/moment/issues/2325
+        return typeof sth === 'function' &&
+            Object.prototype.toString.call(sth) === '[object Function]';
+    }
+
+
     function addRegexToken (token, regex, strictRegex) {
-        regexes[token] = typeof regex === 'function' ? regex : function (isStrict) {
+        regexes[token] = isFunction(regex) ? regex : function (isStrict) {
             return (isStrict && strictRegex) ? strictRegex : regex;
         };
     }
@@ -18177,12 +17574,11 @@ if( typeof module !== "undefined" && ('exports' in module)){
     }
 
     function deprecate(msg, fn) {
-        var firstTime = true,
-            msgWithStack = msg + '\n' + (new Error()).stack;
+        var firstTime = true;
 
         return extend(function () {
             if (firstTime) {
-                warn(msgWithStack);
+                warn(msg + '\n' + (new Error()).stack);
                 firstTime = false;
             }
             return fn.apply(this, arguments);
@@ -18230,14 +17626,14 @@ if( typeof module !== "undefined" && ('exports' in module)){
             getParsingFlags(config).iso = true;
             for (i = 0, l = isoDates.length; i < l; i++) {
                 if (isoDates[i][1].exec(string)) {
-                    // match[5] should be 'T' or undefined
-                    config._f = isoDates[i][0] + (match[6] || ' ');
+                    config._f = isoDates[i][0];
                     break;
                 }
             }
             for (i = 0, l = isoTimes.length; i < l; i++) {
                 if (isoTimes[i][1].exec(string)) {
-                    config._f += isoTimes[i][0];
+                    // match[6] should be 'T' or space
+                    config._f += (match[6] || ' ') + isoTimes[i][0];
                     break;
                 }
             }
@@ -18316,7 +17712,10 @@ if( typeof module !== "undefined" && ('exports' in module)){
     addRegexToken('YYYYY',  match1to6, match6);
     addRegexToken('YYYYYY', match1to6, match6);
 
-    addParseToken(['YYYY', 'YYYYY', 'YYYYYY'], YEAR);
+    addParseToken(['YYYYY', 'YYYYYY'], YEAR);
+    addParseToken('YYYY', function (input, array) {
+        array[YEAR] = input.length === 2 ? utils_hooks__hooks.parseTwoDigitYear(input) : toInt(input);
+    });
     addParseToken('YY', function (input, array) {
         array[YEAR] = utils_hooks__hooks.parseTwoDigitYear(input);
     });
@@ -18443,18 +17842,18 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
     //http://en.wikipedia.org/wiki/ISO_week_date#Calculating_a_date_given_the_year.2C_week_number_and_weekday
     function dayOfYearFromWeeks(year, week, weekday, firstDayOfWeekOfYear, firstDayOfWeek) {
-        var d = createUTCDate(year, 0, 1).getUTCDay();
-        var daysToAdd;
-        var dayOfYear;
+        var week1Jan = 6 + firstDayOfWeek - firstDayOfWeekOfYear, janX = createUTCDate(year, 0, 1 + week1Jan), d = janX.getUTCDay(), dayOfYear;
+        if (d < firstDayOfWeek) {
+            d += 7;
+        }
 
-        d = d === 0 ? 7 : d;
-        weekday = weekday != null ? weekday : firstDayOfWeek;
-        daysToAdd = firstDayOfWeek - d + (d > firstDayOfWeekOfYear ? 7 : 0) - (d < firstDayOfWeek ? 7 : 0);
-        dayOfYear = 7 * (week - 1) + (weekday - firstDayOfWeek) + daysToAdd + 1;
+        weekday = weekday != null ? 1 * weekday : firstDayOfWeek;
+
+        dayOfYear = 1 + week1Jan + 7 * (week - 1) - d + weekday;
 
         return {
-            year      : dayOfYear > 0 ? year      : year - 1,
-            dayOfYear : dayOfYear > 0 ? dayOfYear : daysInYear(year - 1) + dayOfYear
+            year: dayOfYear > 0 ? year : year - 1,
+            dayOfYear: dayOfYear > 0 ?  dayOfYear : daysInYear(year - 1) + dayOfYear
         };
     }
 
@@ -18740,9 +18139,19 @@ if( typeof module !== "undefined" && ('exports' in module)){
     }
 
     function createFromConfig (config) {
+        var res = new Moment(checkOverflow(prepareConfig(config)));
+        if (res._nextDay) {
+            // Adding is smart enough around DST
+            res.add(1, 'd');
+            res._nextDay = undefined;
+        }
+
+        return res;
+    }
+
+    function prepareConfig (config) {
         var input = config._i,
-            format = config._f,
-            res;
+            format = config._f;
 
         config._locale = config._locale || locale_locales__getLocale(config._l);
 
@@ -18766,14 +18175,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
             configFromInput(config);
         }
 
-        res = new Moment(checkOverflow(config));
-        if (res._nextDay) {
-            // Adding is smart enough around DST
-            res.add(1, 'd');
-            res._nextDay = undefined;
-        }
-
-        return res;
+        return config;
     }
 
     function configFromInput(config) {
@@ -18853,7 +18255,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
         }
         res = moments[0];
         for (i = 1; i < moments.length; ++i) {
-            if (moments[i][fn](res)) {
+            if (!moments[i].isValid() || moments[i][fn](res)) {
                 res = moments[i];
             }
         }
@@ -18965,7 +18367,6 @@ if( typeof module !== "undefined" && ('exports' in module)){
         } else {
             return local__createLocal(input).local();
         }
-        return model._isUTC ? local__createLocal(input).zone(model._offset || 0) : local__createLocal(input).local();
     }
 
     function getDateOffset (m) {
@@ -19065,12 +18466,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
     }
 
     function hasAlignedHourOffset (input) {
-        if (!input) {
-            input = 0;
-        }
-        else {
-            input = local__createLocal(input).utcOffset();
-        }
+        input = input ? local__createLocal(input).utcOffset() : 0;
 
         return (this.utcOffset() - input) % 60 === 0;
     }
@@ -19083,12 +18479,24 @@ if( typeof module !== "undefined" && ('exports' in module)){
     }
 
     function isDaylightSavingTimeShifted () {
-        if (this._a) {
-            var other = this._isUTC ? create_utc__createUTC(this._a) : local__createLocal(this._a);
-            return this.isValid() && compareArrays(this._a, other.toArray()) > 0;
+        if (typeof this._isDSTShifted !== 'undefined') {
+            return this._isDSTShifted;
         }
 
-        return false;
+        var c = {};
+
+        copyConfig(c, this);
+        c = prepareConfig(c);
+
+        if (c._a) {
+            var other = c._isUTC ? create_utc__createUTC(c._a) : local__createLocal(c._a);
+            this._isDSTShifted = this.isValid() &&
+                compareArrays(c._a, other.toArray()) > 0;
+        } else {
+            this._isDSTShifted = false;
+        }
+
+        return this._isDSTShifted;
     }
 
     function isLocal () {
@@ -19248,7 +18656,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
     var add_subtract__add      = createAdder(1, 'add');
     var add_subtract__subtract = createAdder(-1, 'subtract');
 
-    function moment_calendar__calendar (time) {
+    function moment_calendar__calendar (time, formats) {
         // We want to compare the start of today, vs this.
         // Getting start-of-today depends on whether we're local/utc/offset or not.
         var now = time || local__createLocal(),
@@ -19260,7 +18668,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
                 diff < 1 ? 'sameDay' :
                 diff < 2 ? 'nextDay' :
                 diff < 7 ? 'nextWeek' : 'sameElse';
-        return this.format(this.localeData().calendar(format, this, local__createLocal(now)));
+        return this.format(formats && formats[format] || this.localeData().calendar(format, this, local__createLocal(now)));
     }
 
     function clone () {
@@ -19304,14 +18712,6 @@ if( typeof module !== "undefined" && ('exports' in module)){
         } else {
             inputMs = +local__createLocal(input);
             return +(this.clone().startOf(units)) <= inputMs && inputMs <= +(this.clone().endOf(units));
-        }
-    }
-
-    function absFloor (number) {
-        if (number < 0) {
-            return Math.ceil(number);
-        } else {
-            return Math.floor(number);
         }
     }
 
@@ -19505,6 +18905,19 @@ if( typeof module !== "undefined" && ('exports' in module)){
         return [m.year(), m.month(), m.date(), m.hour(), m.minute(), m.second(), m.millisecond()];
     }
 
+    function toObject () {
+        var m = this;
+        return {
+            years: m.year(),
+            months: m.month(),
+            date: m.date(),
+            hours: m.hours(),
+            minutes: m.minutes(),
+            seconds: m.seconds(),
+            milliseconds: m.milliseconds()
+        };
+    }
+
     function moment_valid__isValid () {
         return valid__isValid(this);
     }
@@ -19676,18 +19089,20 @@ if( typeof module !== "undefined" && ('exports' in module)){
     // HELPERS
 
     function parseWeekday(input, locale) {
-        if (typeof input === 'string') {
-            if (!isNaN(input)) {
-                input = parseInt(input, 10);
-            }
-            else {
-                input = locale.weekdaysParse(input);
-                if (typeof input !== 'number') {
-                    return null;
-                }
-            }
+        if (typeof input !== 'string') {
+            return input;
         }
-        return input;
+
+        if (!isNaN(input)) {
+            return parseInt(input, 10);
+        }
+
+        input = locale.weekdaysParse(input);
+        if (typeof input === 'number') {
+            return input;
+        }
+
+        return null;
     }
 
     // LOCALES
@@ -19710,9 +19125,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
     function localeWeekdaysParse (weekdayName) {
         var i, mom, regex;
 
-        if (!this._weekdaysParse) {
-            this._weekdaysParse = [];
-        }
+        this._weekdaysParse = this._weekdaysParse || [];
 
         for (i = 0; i < 7; i++) {
             // make the regex if we don't have it already
@@ -19859,12 +19272,26 @@ if( typeof module !== "undefined" && ('exports' in module)){
         return ~~(this.millisecond() / 10);
     });
 
-    function millisecond__milliseconds (token) {
-        addFormatToken(0, [token, 3], 0, 'millisecond');
-    }
+    addFormatToken(0, ['SSS', 3], 0, 'millisecond');
+    addFormatToken(0, ['SSSS', 4], 0, function () {
+        return this.millisecond() * 10;
+    });
+    addFormatToken(0, ['SSSSS', 5], 0, function () {
+        return this.millisecond() * 100;
+    });
+    addFormatToken(0, ['SSSSSS', 6], 0, function () {
+        return this.millisecond() * 1000;
+    });
+    addFormatToken(0, ['SSSSSSS', 7], 0, function () {
+        return this.millisecond() * 10000;
+    });
+    addFormatToken(0, ['SSSSSSSS', 8], 0, function () {
+        return this.millisecond() * 100000;
+    });
+    addFormatToken(0, ['SSSSSSSSS', 9], 0, function () {
+        return this.millisecond() * 1000000;
+    });
 
-    millisecond__milliseconds('SSS');
-    millisecond__milliseconds('SSSS');
 
     // ALIASES
 
@@ -19875,11 +19302,19 @@ if( typeof module !== "undefined" && ('exports' in module)){
     addRegexToken('S',    match1to3, match1);
     addRegexToken('SS',   match1to3, match2);
     addRegexToken('SSS',  match1to3, match3);
-    addRegexToken('SSSS', matchUnsigned);
-    addParseToken(['S', 'SS', 'SSS', 'SSSS'], function (input, array) {
-        array[MILLISECOND] = toInt(('0.' + input) * 1000);
-    });
 
+    var token;
+    for (token = 'SSSS'; token.length <= 9; token += 'S') {
+        addRegexToken(token, matchUnsigned);
+    }
+
+    function parseMs(input, array) {
+        array[MILLISECOND] = toInt(('0.' + input) * 1000);
+    }
+
+    for (token = 'S'; token.length <= 9; token += 'S') {
+        addParseToken(token, parseMs);
+    }
     // MOMENTS
 
     var getSetMillisecond = makeGetSet('Milliseconds', false);
@@ -19926,6 +19361,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
     momentPrototype__proto.startOf      = startOf;
     momentPrototype__proto.subtract     = add_subtract__subtract;
     momentPrototype__proto.toArray      = toArray;
+    momentPrototype__proto.toObject     = toObject;
     momentPrototype__proto.toDate       = toDate;
     momentPrototype__proto.toISOString  = moment_format__toISOString;
     momentPrototype__proto.toJSON       = moment_format__toISOString;
@@ -20025,19 +19461,23 @@ if( typeof module !== "undefined" && ('exports' in module)){
         LT   : 'h:mm A',
         L    : 'MM/DD/YYYY',
         LL   : 'MMMM D, YYYY',
-        LLL  : 'MMMM D, YYYY LT',
-        LLLL : 'dddd, MMMM D, YYYY LT'
+        LLL  : 'MMMM D, YYYY h:mm A',
+        LLLL : 'dddd, MMMM D, YYYY h:mm A'
     };
 
     function longDateFormat (key) {
-        var output = this._longDateFormat[key];
-        if (!output && this._longDateFormat[key.toUpperCase()]) {
-            output = this._longDateFormat[key.toUpperCase()].replace(/MMMM|MM|DD|dddd/g, function (val) {
-                return val.slice(1);
-            });
-            this._longDateFormat[key] = output;
+        var format = this._longDateFormat[key],
+            formatUpper = this._longDateFormat[key.toUpperCase()];
+
+        if (format || !formatUpper) {
+            return format;
         }
-        return output;
+
+        this._longDateFormat[key] = formatUpper.replace(/MMMM|MM|DD|dddd/g, function (val) {
+            return val.slice(1);
+        });
+
+        return this._longDateFormat[key];
     }
 
     var defaultInvalidDate = 'Invalid date';
@@ -20246,12 +19686,29 @@ if( typeof module !== "undefined" && ('exports' in module)){
         return duration_add_subtract__addSubtract(this, input, value, -1);
     }
 
+    function absCeil (number) {
+        if (number < 0) {
+            return Math.floor(number);
+        } else {
+            return Math.ceil(number);
+        }
+    }
+
     function bubble () {
         var milliseconds = this._milliseconds;
         var days         = this._days;
         var months       = this._months;
         var data         = this._data;
-        var seconds, minutes, hours, years = 0;
+        var seconds, minutes, hours, years, monthsFromDays;
+
+        // if we have a mix of positive and negative values, bubble down first
+        // check: https://github.com/moment/moment/issues/2166
+        if (!((milliseconds >= 0 && days >= 0 && months >= 0) ||
+                (milliseconds <= 0 && days <= 0 && months <= 0))) {
+            milliseconds += absCeil(monthsToDays(months) + days) * 864e5;
+            days = 0;
+            months = 0;
+        }
 
         // The following code bubbles up values, see the tests for
         // examples of what that means.
@@ -20268,17 +19725,13 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
         days += absFloor(hours / 24);
 
-        // Accurately convert days to years, assume start from year 0.
-        years = absFloor(daysToYears(days));
-        days -= absFloor(yearsToDays(years));
-
-        // 30 days to a month
-        // TODO (iskren): Use anchor date (like 1st Jan) to compute this.
-        months += absFloor(days / 30);
-        days   %= 30;
+        // convert days to months
+        monthsFromDays = absFloor(daysToMonths(days));
+        months += monthsFromDays;
+        days -= absCeil(monthsToDays(monthsFromDays));
 
         // 12 months -> 1 year
-        years  += absFloor(months / 12);
+        years = absFloor(months / 12);
         months %= 12;
 
         data.days   = days;
@@ -20288,15 +19741,15 @@ if( typeof module !== "undefined" && ('exports' in module)){
         return this;
     }
 
-    function daysToYears (days) {
+    function daysToMonths (days) {
         // 400 years have 146097 days (taking into account leap year rules)
-        return days * 400 / 146097;
+        // 400 years have 12 months === 4800
+        return days * 4800 / 146097;
     }
 
-    function yearsToDays (years) {
-        // years * 365 + absFloor(years / 4) -
-        //     absFloor(years / 100) + absFloor(years / 400);
-        return years * 146097 / 400;
+    function monthsToDays (months) {
+        // the reverse of daysToMonths
+        return months * 146097 / 4800;
     }
 
     function as (units) {
@@ -20308,11 +19761,11 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
         if (units === 'month' || units === 'year') {
             days   = this._days   + milliseconds / 864e5;
-            months = this._months + daysToYears(days) * 12;
+            months = this._months + daysToMonths(days);
             return units === 'month' ? months : months / 12;
         } else {
             // handle milliseconds separately because of floating point math errors (issue #1867)
-            days = this._days + Math.round(yearsToDays(this._months / 12));
+            days = this._days + Math.round(monthsToDays(this._months));
             switch (units) {
                 case 'week'   : return days / 7     + milliseconds / 6048e5;
                 case 'day'    : return days         + milliseconds / 864e5;
@@ -20362,7 +19815,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
         };
     }
 
-    var duration_get__milliseconds = makeGetter('milliseconds');
+    var milliseconds = makeGetter('milliseconds');
     var seconds      = makeGetter('seconds');
     var minutes      = makeGetter('minutes');
     var hours        = makeGetter('hours');
@@ -20440,13 +19893,36 @@ if( typeof module !== "undefined" && ('exports' in module)){
     var iso_string__abs = Math.abs;
 
     function iso_string__toISOString() {
+        // for ISO strings we do not use the normal bubbling rules:
+        //  * milliseconds bubble up until they become hours
+        //  * days do not bubble at all
+        //  * months bubble up until they become years
+        // This is because there is no context-free conversion between hours and days
+        // (think of clock changes)
+        // and also not between days and months (28-31 days per month)
+        var seconds = iso_string__abs(this._milliseconds) / 1000;
+        var days         = iso_string__abs(this._days);
+        var months       = iso_string__abs(this._months);
+        var minutes, hours, years;
+
+        // 3600 seconds -> 60 minutes -> 1 hour
+        minutes           = absFloor(seconds / 60);
+        hours             = absFloor(minutes / 60);
+        seconds %= 60;
+        minutes %= 60;
+
+        // 12 months -> 1 year
+        years  = absFloor(months / 12);
+        months %= 12;
+
+
         // inspired by https://github.com/dordille/moment-isoduration/blob/master/moment.isoduration.js
-        var Y = iso_string__abs(this.years());
-        var M = iso_string__abs(this.months());
-        var D = iso_string__abs(this.days());
-        var h = iso_string__abs(this.hours());
-        var m = iso_string__abs(this.minutes());
-        var s = iso_string__abs(this.seconds() + this.milliseconds() / 1000);
+        var Y = years;
+        var M = months;
+        var D = days;
+        var h = hours;
+        var m = minutes;
+        var s = seconds;
         var total = this.asSeconds();
 
         if (!total) {
@@ -20483,7 +19959,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
     duration_prototype__proto.valueOf        = duration_as__valueOf;
     duration_prototype__proto._bubble        = bubble;
     duration_prototype__proto.get            = duration_get__get;
-    duration_prototype__proto.milliseconds   = duration_get__milliseconds;
+    duration_prototype__proto.milliseconds   = milliseconds;
     duration_prototype__proto.seconds        = seconds;
     duration_prototype__proto.minutes        = minutes;
     duration_prototype__proto.hours          = hours;
@@ -20521,7 +19997,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
     // Side effect imports
 
 
-    utils_hooks__hooks.version = '2.10.3';
+    utils_hooks__hooks.version = '2.10.6';
 
     setHookCallback(local__createLocal);
 
@@ -20552,11 +20028,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
     return _moment;
 
 }));
-<<<<<<< HEAD
-},{}],89:[function(require,module,exports){
-=======
-},{}],90:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],88:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -20587,11 +20059,7 @@ var Accordion = _react2['default'].createClass({
 
 exports['default'] = Accordion;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./PanelGroup":140,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"react":514}],90:[function(require,module,exports){
-=======
-},{"./PanelGroup":141,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"react":515}],91:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./PanelGroup":139,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"react":509}],89:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -20640,11 +20108,7 @@ var Affix = _react2['default'].createClass({
 
 exports['default'] = Affix;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./AffixMixin":91,"./utils/domUtils":168,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],91:[function(require,module,exports){
-=======
-},{"./AffixMixin":92,"./utils/domUtils":169,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],92:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./AffixMixin":90,"./utils/domUtils":167,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],90:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -20789,11 +20253,7 @@ var AffixMixin = {
 
 exports['default'] = AffixMixin;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/EventListener":160,"./utils/domUtils":168,"babel-runtime/helpers/interop-require-default":178,"react":514}],92:[function(require,module,exports){
-=======
-},{"./utils/EventListener":161,"./utils/domUtils":169,"babel-runtime/helpers/interop-require-default":179,"react":515}],93:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/EventListener":159,"./utils/domUtils":167,"babel-runtime/helpers/interop-require-default":177,"react":509}],91:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -20876,11 +20336,7 @@ var Alert = _react2['default'].createClass({
 
 exports['default'] = Alert;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],93:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],94:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],92:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -20928,11 +20384,7 @@ var Badge = _react2['default'].createClass({
 
 exports['default'] = Badge;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/ValidComponentChildren":162,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],94:[function(require,module,exports){
-=======
-},{"./utils/ValidComponentChildren":163,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],95:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/ValidComponentChildren":161,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],93:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -20996,11 +20448,7 @@ var BootstrapMixin = {
 
 exports['default'] = BootstrapMixin;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./styleMaps":158,"./utils/CustomPropTypes":159,"babel-runtime/helpers/interop-require-default":178}],95:[function(require,module,exports){
-=======
-},{"./styleMaps":159,"./utils/CustomPropTypes":160,"babel-runtime/helpers/interop-require-default":179}],96:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./styleMaps":157,"./utils/CustomPropTypes":158,"babel-runtime/helpers/interop-require-default":177}],94:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -21121,11 +20569,7 @@ var Button = _react2['default'].createClass({
 
 exports['default'] = Button;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./ButtonInput":97,"./utils/CustomPropTypes":159,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],96:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./ButtonInput":98,"./utils/CustomPropTypes":160,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],97:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./ButtonInput":96,"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],95:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -21193,11 +20637,7 @@ var ButtonGroup = _react2['default'].createClass({
 
 exports['default'] = ButtonGroup;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./utils/CustomPropTypes":159,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],97:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./utils/CustomPropTypes":160,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],98:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],96:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -21287,11 +20727,7 @@ ButtonInput.propTypes = {
 
 exports['default'] = ButtonInput;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./Button":95,"./FormGroup":112,"./InputBase":116,"./utils/childrenValueInputValidation":163,"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"babel-runtime/helpers/object-without-properties":180,"react":514}],98:[function(require,module,exports){
-=======
-},{"./Button":96,"./FormGroup":113,"./InputBase":117,"./utils/childrenValueInputValidation":164,"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"babel-runtime/helpers/object-without-properties":181,"react":515}],99:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Button":94,"./FormGroup":111,"./InputBase":115,"./utils/childrenValueInputValidation":162,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"react":509}],97:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -21338,11 +20774,7 @@ var ButtonToolbar = _react2['default'].createClass({
 
 exports['default'] = ButtonToolbar;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],99:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],100:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],98:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -21642,11 +21074,7 @@ var Carousel = _react2['default'].createClass({
 
 exports['default'] = Carousel;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./Glyphicon":113,"./utils/ValidComponentChildren":162,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],100:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./Glyphicon":114,"./utils/ValidComponentChildren":163,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],101:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./Glyphicon":112,"./utils/ValidComponentChildren":161,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],99:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -21757,11 +21185,7 @@ var CarouselItem = _react2['default'].createClass({
 
 exports['default'] = CarouselItem;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/TransitionEvents":161,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],101:[function(require,module,exports){
-=======
-},{"./utils/TransitionEvents":162,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],102:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/TransitionEvents":160,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],100:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -21974,11 +21398,7 @@ var Col = _react2['default'].createClass({
 
 exports['default'] = Col;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./styleMaps":158,"./utils/CustomPropTypes":159,"babel-runtime/core-js/object/keys":173,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],102:[function(require,module,exports){
-=======
-},{"./styleMaps":159,"./utils/CustomPropTypes":160,"babel-runtime/core-js/object/keys":174,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],103:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./styleMaps":157,"./utils/CustomPropTypes":158,"babel-runtime/core-js/object/keys":172,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],101:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -22209,11 +21629,7 @@ Collapse.defaultProps = {
 
 exports['default'] = Collapse;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./Transition":155,"./utils/createChainedFunction":164,"./utils/domUtils":168,"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"react":514}],103:[function(require,module,exports){
-=======
-},{"./Transition":156,"./utils/createChainedFunction":165,"./utils/domUtils":169,"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"react":515}],104:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Transition":154,"./utils/createChainedFunction":163,"./utils/domUtils":167,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"react":509}],102:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -22404,11 +21820,7 @@ var CollapsibleMixin = {
 
 exports['default'] = CollapsibleMixin;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/TransitionEvents":161,"./utils/deprecationWarning":167,"babel-runtime/helpers/interop-require-default":178,"react":514}],104:[function(require,module,exports){
-=======
-},{"./utils/TransitionEvents":162,"./utils/deprecationWarning":168,"babel-runtime/helpers/interop-require-default":179,"react":515}],105:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/TransitionEvents":160,"./utils/deprecationWarning":166,"babel-runtime/helpers/interop-require-default":177,"react":509}],103:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -22522,11 +21934,7 @@ var CollapsibleNav = _react2['default'].createClass({
 
 exports['default'] = CollapsibleNav;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./Collapse":102,"./utils/ValidComponentChildren":162,"./utils/createChainedFunction":164,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],105:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./Collapse":103,"./utils/ValidComponentChildren":163,"./utils/createChainedFunction":165,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],106:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./Collapse":101,"./utils/ValidComponentChildren":161,"./utils/createChainedFunction":163,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],104:[function(require,module,exports){
 /* eslint react/prop-types: [2, {ignore: "bsSize"}] */
 /* BootstrapMixin contains `bsSize` type validation */
 
@@ -22684,11 +22092,7 @@ var DropdownButton = _react2['default'].createClass({
 
 exports['default'] = DropdownButton;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./Button":95,"./ButtonGroup":96,"./DropdownMenu":106,"./DropdownStateMixin":107,"./utils/ValidComponentChildren":162,"./utils/createChainedFunction":164,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],106:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./Button":96,"./ButtonGroup":97,"./DropdownMenu":107,"./DropdownStateMixin":108,"./utils/ValidComponentChildren":163,"./utils/createChainedFunction":165,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],107:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./Button":94,"./ButtonGroup":95,"./DropdownMenu":105,"./DropdownStateMixin":106,"./utils/ValidComponentChildren":161,"./utils/createChainedFunction":163,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],105:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -22749,11 +22153,7 @@ var DropdownMenu = _react2['default'].createClass({
 
 exports['default'] = DropdownMenu;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/ValidComponentChildren":162,"./utils/createChainedFunction":164,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],107:[function(require,module,exports){
-=======
-},{"./utils/ValidComponentChildren":163,"./utils/createChainedFunction":165,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],108:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/ValidComponentChildren":161,"./utils/createChainedFunction":163,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],106:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -22853,11 +22253,7 @@ var DropdownStateMixin = {
 
 exports['default'] = DropdownStateMixin;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/EventListener":160,"./utils/domUtils":168,"babel-runtime/helpers/interop-require-default":178,"react":514}],108:[function(require,module,exports){
-=======
-},{"./utils/EventListener":161,"./utils/domUtils":169,"babel-runtime/helpers/interop-require-default":179,"react":515}],109:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/EventListener":159,"./utils/domUtils":167,"babel-runtime/helpers/interop-require-default":177,"react":509}],107:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -22966,11 +22362,7 @@ Fade.defaultProps = {
 
 exports['default'] = Fade;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./Transition":155,"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"react":514}],109:[function(require,module,exports){
-=======
-},{"./Transition":156,"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"react":515}],110:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Transition":154,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"react":509}],108:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -23070,11 +22462,7 @@ exports['default'] = {
   }
 };
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/deprecationWarning":167,"./utils/domUtils":168,"babel-runtime/helpers/interop-require-default":178,"react":514}],110:[function(require,module,exports){
-=======
-},{"./utils/deprecationWarning":168,"./utils/domUtils":169,"babel-runtime/helpers/interop-require-default":179,"react":515}],111:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/deprecationWarning":166,"./utils/domUtils":167,"babel-runtime/helpers/interop-require-default":177,"react":509}],109:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -23138,11 +22526,7 @@ Static.propTypes = {
 
 exports['default'] = Static;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"../InputBase":116,"../utils/childrenValueInputValidation":163,"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],111:[function(require,module,exports){
-=======
-},{"../InputBase":117,"../utils/childrenValueInputValidation":164,"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],112:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../InputBase":115,"../utils/childrenValueInputValidation":162,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],110:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -23154,11 +22538,7 @@ var _Static2 = require('./Static');
 var _Static3 = _interopRequireDefault(_Static2);
 
 exports.Static = _Static3['default'];
-<<<<<<< HEAD
-},{"./Static":110,"babel-runtime/helpers/interop-require-default":178}],112:[function(require,module,exports){
-=======
-},{"./Static":111,"babel-runtime/helpers/interop-require-default":179}],113:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Static":109,"babel-runtime/helpers/interop-require-default":177}],111:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -23227,11 +22607,7 @@ FormGroup.propTypes = {
 
 exports['default'] = FormGroup;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],113:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],114:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],112:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -23286,11 +22662,7 @@ var Glyphicon = _react2['default'].createClass({
 
 exports['default'] = Glyphicon;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./styleMaps":158,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],114:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./styleMaps":159,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],115:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./styleMaps":157,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],113:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -23348,11 +22720,7 @@ var Grid = _react2['default'].createClass({
 
 exports['default'] = Grid;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/CustomPropTypes":159,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],115:[function(require,module,exports){
-=======
-},{"./utils/CustomPropTypes":160,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],116:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],114:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -23408,11 +22776,7 @@ Input.propTypes = {
 
 exports['default'] = Input;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./FormControls":111,"./InputBase":116,"./utils/deprecationWarning":167,"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"babel-runtime/helpers/interop-require-wildcard":179,"react":514}],116:[function(require,module,exports){
-=======
-},{"./FormControls":112,"./InputBase":117,"./utils/deprecationWarning":168,"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"babel-runtime/helpers/interop-require-wildcard":180,"react":515}],117:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./FormControls":110,"./InputBase":115,"./utils/deprecationWarning":166,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/interop-require-wildcard":178,"react":509}],115:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -23656,11 +23020,7 @@ InputBase.propTypes = {
 
 exports['default'] = InputBase;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./FormGroup":112,"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],117:[function(require,module,exports){
-=======
-},{"./FormGroup":113,"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],118:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./FormGroup":111,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],116:[function(require,module,exports){
 // https://www.npmjs.org/package/react-interpolate-component
 // TODO: Drop this in favor of es6 string interpolation
 
@@ -23756,11 +23116,7 @@ var Interpolate = _react2['default'].createClass({
 
 exports['default'] = Interpolate;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/ValidComponentChildren":162,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"react":514}],118:[function(require,module,exports){
-=======
-},{"./utils/ValidComponentChildren":163,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"react":515}],119:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/ValidComponentChildren":161,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"react":509}],117:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -23808,11 +23164,7 @@ var Jumbotron = _react2['default'].createClass({
 
 exports['default'] = Jumbotron;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/CustomPropTypes":159,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],119:[function(require,module,exports){
-=======
-},{"./utils/CustomPropTypes":160,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],120:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],118:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -23858,11 +23210,7 @@ var Label = _react2['default'].createClass({
 
 exports['default'] = Label;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],120:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],121:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],119:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -23958,11 +23306,7 @@ ListGroup.propTypes = {
 
 exports['default'] = ListGroup;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/ValidComponentChildren":162,"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],121:[function(require,module,exports){
-=======
-},{"./utils/ValidComponentChildren":163,"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],122:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/ValidComponentChildren":161,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],120:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -24079,11 +23423,7 @@ var ListGroupItem = _react2['default'].createClass({
 
 exports['default'] = ListGroupItem;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./SafeAnchor":147,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],122:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./SafeAnchor":148,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],123:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./SafeAnchor":146,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],121:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -24170,11 +23510,7 @@ var MenuItem = _react2['default'].createClass({
 
 exports['default'] = MenuItem;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./SafeAnchor":147,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],123:[function(require,module,exports){
-=======
-},{"./SafeAnchor":148,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],124:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./SafeAnchor":146,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],122:[function(require,module,exports){
 /*eslint-disable react/prop-types */
 'use strict';
 
@@ -24664,11 +24000,7 @@ Modal.BACKDROP_TRANSITION_DURATION = 150;
 
 exports['default'] = Modal;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./Fade":108,"./ModalBody":124,"./ModalDialog":125,"./ModalFooter":126,"./ModalHeader":127,"./ModalTitle":128,"./Portal":142,"./utils/EventListener":160,"./utils/createChainedFunction":164,"./utils/domUtils":168,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"babel-runtime/helpers/object-without-properties":180,"classnames":36,"react":514}],124:[function(require,module,exports){
-=======
-},{"./Fade":109,"./ModalBody":125,"./ModalDialog":126,"./ModalFooter":127,"./ModalHeader":128,"./ModalTitle":129,"./Portal":143,"./utils/EventListener":161,"./utils/createChainedFunction":165,"./utils/domUtils":169,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"babel-runtime/helpers/object-without-properties":181,"classnames":37,"react":515}],125:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Fade":107,"./ModalBody":123,"./ModalDialog":124,"./ModalFooter":125,"./ModalHeader":126,"./ModalTitle":127,"./Portal":141,"./utils/EventListener":159,"./utils/createChainedFunction":163,"./utils/domUtils":167,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"classnames":35,"react":509}],123:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -24722,11 +24054,7 @@ ModalBody.defaultProps = {
 
 exports['default'] = ModalBody;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],125:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],126:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],124:[function(require,module,exports){
 /*eslint-disable react/prop-types */
 'use strict';
 
@@ -24808,11 +24136,7 @@ var ModalDialog = _react2['default'].createClass({
 
 exports['default'] = ModalDialog;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],126:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],127:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],125:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -24866,11 +24190,7 @@ ModalFooter.defaultProps = {
 
 exports['default'] = ModalFooter;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],127:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],128:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],126:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -24959,11 +24279,7 @@ ModalHeader.defaultProps = {
 
 exports['default'] = ModalHeader;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],128:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],129:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],127:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -25017,11 +24333,7 @@ ModalTitle.defaultProps = {
 
 exports['default'] = ModalTitle;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],129:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],130:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],128:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -25169,11 +24481,7 @@ var Nav = _react2['default'].createClass({
 
 exports['default'] = Nav;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./Collapse":102,"./utils/ValidComponentChildren":162,"./utils/createChainedFunction":164,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],130:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./Collapse":103,"./utils/ValidComponentChildren":163,"./utils/createChainedFunction":165,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],131:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./Collapse":101,"./utils/ValidComponentChildren":161,"./utils/createChainedFunction":163,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],129:[function(require,module,exports){
 'use strict';
 
 var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
@@ -25273,11 +24581,7 @@ var NavItem = _react2['default'].createClass({
 
 exports['default'] = NavItem;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./SafeAnchor":147,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"babel-runtime/helpers/object-without-properties":180,"classnames":36,"react":514}],131:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./SafeAnchor":148,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"babel-runtime/helpers/object-without-properties":181,"classnames":37,"react":515}],132:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./SafeAnchor":146,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"classnames":35,"react":509}],130:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -25452,11 +24756,7 @@ var Navbar = _react2['default'].createClass({
 
 exports['default'] = Navbar;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./utils/CustomPropTypes":159,"./utils/ValidComponentChildren":162,"./utils/createChainedFunction":164,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],132:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./utils/CustomPropTypes":160,"./utils/ValidComponentChildren":163,"./utils/createChainedFunction":165,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],133:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./utils/CustomPropTypes":158,"./utils/ValidComponentChildren":161,"./utils/createChainedFunction":163,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],131:[function(require,module,exports){
 /* eslint react/prop-types: [2, {ignore: ["container", "containerPadding", "target", "placement", "children"] }] */
 /* These properties are validated in 'Portal' and 'Position' components */
 
@@ -25670,11 +24970,7 @@ Overlay.defaultProps = {
 
 exports['default'] = Overlay;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./Fade":108,"./Portal":142,"./Position":143,"./RootCloseWrapper":145,"./utils/CustomPropTypes":159,"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"babel-runtime/helpers/object-without-properties":180,"classnames":36,"react":514}],133:[function(require,module,exports){
-=======
-},{"./Fade":109,"./Portal":143,"./Position":144,"./RootCloseWrapper":146,"./utils/CustomPropTypes":160,"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"babel-runtime/helpers/object-without-properties":181,"classnames":37,"react":515}],134:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Fade":107,"./Portal":141,"./Position":142,"./RootCloseWrapper":144,"./utils/CustomPropTypes":158,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"classnames":35,"react":509}],132:[function(require,module,exports){
 /*eslint-disable react/prop-types */
 'use strict';
 
@@ -25968,11 +25264,7 @@ OverlayTrigger.withContext = _utilsCreateContextWrapper2['default'](OverlayTrigg
 
 exports['default'] = OverlayTrigger;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./Overlay":132,"./utils/createChainedFunction":164,"./utils/createContextWrapper":165,"babel-runtime/core-js/object/keys":173,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"lodash/object/pick":220,"react":514,"react/lib/warning":513}],134:[function(require,module,exports){
-=======
-},{"./Overlay":133,"./utils/createChainedFunction":165,"./utils/createContextWrapper":166,"babel-runtime/core-js/object/keys":174,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"lodash/object/pick":221,"react":515,"react/lib/warning":514}],135:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Overlay":131,"./utils/createChainedFunction":163,"./utils/createContextWrapper":164,"babel-runtime/core-js/object/keys":172,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"lodash/object/pick":219,"react":509,"react/lib/warning":508}],133:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -26007,11 +25299,7 @@ var PageHeader = _react2['default'].createClass({
 
 exports['default'] = PageHeader;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],135:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],136:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],134:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -26082,11 +25370,7 @@ var PageItem = _react2['default'].createClass({
 
 exports['default'] = PageItem;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./SafeAnchor":147,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],136:[function(require,module,exports){
-=======
-},{"./SafeAnchor":148,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],137:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./SafeAnchor":146,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],135:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -26137,11 +25421,7 @@ var Pager = _react2['default'].createClass({
 
 exports['default'] = Pager;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/ValidComponentChildren":162,"./utils/createChainedFunction":164,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],137:[function(require,module,exports){
-=======
-},{"./utils/ValidComponentChildren":163,"./utils/createChainedFunction":165,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],138:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/ValidComponentChildren":161,"./utils/createChainedFunction":163,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],136:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -26373,11 +25653,7 @@ var Pagination = _react2['default'].createClass({
 
 exports['default'] = Pagination;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./PaginationButton":138,"./SafeAnchor":147,"./utils/CustomPropTypes":159,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],138:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./PaginationButton":139,"./SafeAnchor":148,"./utils/CustomPropTypes":160,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],139:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./PaginationButton":137,"./SafeAnchor":146,"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],137:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -26463,11 +25739,7 @@ var PaginationButton = _react2['default'].createClass({
 
 exports['default'] = PaginationButton;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./utils/CustomPropTypes":159,"./utils/createSelectedEvent":166,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"babel-runtime/helpers/object-without-properties":180,"classnames":36,"react":514}],139:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./utils/CustomPropTypes":160,"./utils/createSelectedEvent":167,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"babel-runtime/helpers/object-without-properties":181,"classnames":37,"react":515}],140:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./utils/CustomPropTypes":158,"./utils/createSelectedEvent":165,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"classnames":35,"react":509}],138:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -26701,11 +25973,7 @@ var Panel = _react2['default'].createClass({
 
 exports['default'] = Panel;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./Collapse":102,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],140:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./Collapse":103,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],141:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./Collapse":101,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],139:[function(require,module,exports){
 /* eslint react/prop-types: [2, {ignore: "bsStyle"}] */
 /* BootstrapMixin contains `bsStyle` type validation */
 
@@ -26814,11 +26082,7 @@ var PanelGroup = _react2['default'].createClass({
 
 exports['default'] = PanelGroup;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./utils/ValidComponentChildren":162,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],141:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./utils/ValidComponentChildren":163,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],142:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./utils/ValidComponentChildren":161,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],140:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -26931,11 +26195,7 @@ var Popover = _react2['default'].createClass({
 
 exports['default'] = Popover;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./utils/CustomPropTypes":159,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],142:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./utils/CustomPropTypes":160,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],143:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],141:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -27041,11 +26301,7 @@ var Portal = _react2['default'].createClass({
 
 exports['default'] = Portal;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/CustomPropTypes":159,"./utils/domUtils":168,"babel-runtime/helpers/interop-require-default":178,"react":514}],143:[function(require,module,exports){
-=======
-},{"./utils/CustomPropTypes":160,"./utils/domUtils":169,"babel-runtime/helpers/interop-require-default":179,"react":515}],144:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/CustomPropTypes":158,"./utils/domUtils":167,"babel-runtime/helpers/interop-require-default":177,"react":509}],142:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -27210,11 +26466,7 @@ Position.defaultProps = {
 
 exports['default'] = Position;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/CustomPropTypes":159,"./utils/domUtils":168,"./utils/overlayPositionUtils":170,"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"babel-runtime/helpers/object-without-properties":180,"classnames":36,"react":514}],144:[function(require,module,exports){
-=======
-},{"./utils/CustomPropTypes":160,"./utils/domUtils":169,"./utils/overlayPositionUtils":171,"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"babel-runtime/helpers/object-without-properties":181,"classnames":37,"react":515}],145:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/CustomPropTypes":158,"./utils/domUtils":167,"./utils/overlayPositionUtils":169,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"classnames":35,"react":509}],143:[function(require,module,exports){
 /* eslint react/prop-types: [2, {ignore: "bsStyle"}] */
 /* BootstrapMixin contains `bsStyle` type validation */
 
@@ -27385,11 +26637,7 @@ function onlyProgressBar(props, propName, componentName) {
 
 exports['default'] = ProgressBar;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./Interpolate":117,"./utils/ValidComponentChildren":162,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],145:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./Interpolate":118,"./utils/ValidComponentChildren":163,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],146:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./Interpolate":116,"./utils/ValidComponentChildren":161,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],144:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -27504,11 +26752,7 @@ RootCloseWrapper.propTypes = {
   onRootClose: _react2['default'].PropTypes.func.isRequired
 };
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/EventListener":160,"./utils/domUtils":168,"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"react":514}],146:[function(require,module,exports){
-=======
-},{"./utils/EventListener":161,"./utils/domUtils":169,"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"react":515}],147:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/EventListener":159,"./utils/domUtils":167,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"react":509}],145:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -27558,11 +26802,7 @@ var Row = _react2['default'].createClass({
 
 exports['default'] = Row;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/CustomPropTypes":159,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],147:[function(require,module,exports){
-=======
-},{"./utils/CustomPropTypes":160,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],148:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],146:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -27623,11 +26863,7 @@ SafeAnchor.propTypes = {
   onClick: _react2['default'].PropTypes.func
 };
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/createChainedFunction":164,"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"react":514}],148:[function(require,module,exports){
-=======
-},{"./utils/createChainedFunction":165,"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"react":515}],149:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/createChainedFunction":163,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"react":509}],147:[function(require,module,exports){
 /* eslint react/prop-types: [2, {ignore: "bsSize"}] */
 /* BootstrapMixin contains `bsSize` type validation */
 
@@ -27779,11 +27015,7 @@ var SplitButton = _react2['default'].createClass({
 
 exports['default'] = SplitButton;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./Button":95,"./ButtonGroup":96,"./DropdownMenu":106,"./DropdownStateMixin":107,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],149:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./Button":96,"./ButtonGroup":97,"./DropdownMenu":107,"./DropdownStateMixin":108,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],150:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./Button":94,"./ButtonGroup":95,"./DropdownMenu":105,"./DropdownStateMixin":106,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],148:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -27937,11 +27169,7 @@ var SubNav = _react2['default'].createClass({
 
 exports['default'] = SubNav;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./SafeAnchor":147,"./utils/ValidComponentChildren":162,"./utils/createChainedFunction":164,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],150:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./SafeAnchor":148,"./utils/ValidComponentChildren":163,"./utils/createChainedFunction":165,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],151:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./SafeAnchor":146,"./utils/ValidComponentChildren":161,"./utils/createChainedFunction":163,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],149:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -28050,11 +27278,7 @@ var TabPane = _react2['default'].createClass({
 
 exports['default'] = TabPane;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/TransitionEvents":161,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],151:[function(require,module,exports){
-=======
-},{"./utils/TransitionEvents":162,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],152:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/TransitionEvents":160,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],150:[function(require,module,exports){
 'use strict';
 
 var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
@@ -28238,11 +27462,7 @@ var TabbedArea = _react2['default'].createClass({
 
 exports['default'] = TabbedArea;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./Nav":129,"./NavItem":130,"./utils/ValidComponentChildren":162,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"babel-runtime/helpers/object-without-properties":180,"react":514}],152:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./Nav":130,"./NavItem":131,"./utils/ValidComponentChildren":163,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"babel-runtime/helpers/object-without-properties":181,"react":515}],153:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./Nav":128,"./NavItem":129,"./utils/ValidComponentChildren":161,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"react":509}],151:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -28294,11 +27514,7 @@ var Table = _react2['default'].createClass({
 
 exports['default'] = Table;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],153:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],154:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],152:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -28374,11 +27590,7 @@ var Thumbnail = _react2['default'].createClass({
 
 exports['default'] = Thumbnail;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./SafeAnchor":147,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],154:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./SafeAnchor":148,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],155:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./SafeAnchor":146,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],153:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -28483,11 +27695,7 @@ var Tooltip = _react2['default'].createClass({
 exports['default'] = Tooltip;
 module.exports = exports['default'];
 // we don't want to expose the `style` property
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"./utils/CustomPropTypes":159,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],155:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"./utils/CustomPropTypes":160,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],156:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],154:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -28802,11 +28010,7 @@ Transition.defaultProps = {
 };
 
 exports['default'] = Transition;
-<<<<<<< HEAD
-},{"./utils/TransitionEvents":161,"babel-runtime/core-js/object/keys":173,"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"babel-runtime/helpers/object-without-properties":180,"classnames":36,"react":514}],156:[function(require,module,exports){
-=======
-},{"./utils/TransitionEvents":162,"babel-runtime/core-js/object/keys":174,"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"babel-runtime/helpers/object-without-properties":181,"classnames":37,"react":515}],157:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils/TransitionEvents":160,"babel-runtime/core-js/object/keys":172,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"classnames":35,"react":509}],155:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -28851,11 +28055,7 @@ var Well = _react2['default'].createClass({
 
 exports['default'] = Well;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./BootstrapMixin":94,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178,"classnames":36,"react":514}],157:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":95,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179,"classnames":37,"react":515}],158:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BootstrapMixin":93,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":509}],156:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -29239,11 +28439,7 @@ var _utils2 = require('./utils');
 var _utils = _interopRequireWildcard(_utils2);
 
 exports.utils = _utils;
-<<<<<<< HEAD
-},{"./Accordion":89,"./Affix":90,"./AffixMixin":91,"./Alert":92,"./Badge":93,"./BootstrapMixin":94,"./Button":95,"./ButtonGroup":96,"./ButtonInput":97,"./ButtonToolbar":98,"./Carousel":99,"./CarouselItem":100,"./Col":101,"./Collapse":102,"./CollapsibleMixin":103,"./CollapsibleNav":104,"./DropdownButton":105,"./DropdownMenu":106,"./DropdownStateMixin":107,"./FadeMixin":109,"./FormControls":111,"./Glyphicon":113,"./Grid":114,"./Input":115,"./Interpolate":117,"./Jumbotron":118,"./Label":119,"./ListGroup":120,"./ListGroupItem":121,"./MenuItem":122,"./Modal":123,"./ModalBody":124,"./ModalFooter":126,"./ModalHeader":127,"./ModalTitle":128,"./Nav":129,"./NavItem":130,"./Navbar":131,"./Overlay":132,"./OverlayTrigger":133,"./PageHeader":134,"./PageItem":135,"./Pager":136,"./Pagination":137,"./Panel":139,"./PanelGroup":140,"./Popover":141,"./Portal":142,"./Position":143,"./ProgressBar":144,"./Row":146,"./SafeAnchor":147,"./SplitButton":148,"./SubNav":149,"./TabPane":150,"./TabbedArea":151,"./Table":152,"./Thumbnail":153,"./Tooltip":154,"./Well":156,"./styleMaps":158,"./utils":169,"babel-runtime/helpers/interop-require-default":178,"babel-runtime/helpers/interop-require-wildcard":179}],158:[function(require,module,exports){
-=======
-},{"./Accordion":90,"./Affix":91,"./AffixMixin":92,"./Alert":93,"./Badge":94,"./BootstrapMixin":95,"./Button":96,"./ButtonGroup":97,"./ButtonInput":98,"./ButtonToolbar":99,"./Carousel":100,"./CarouselItem":101,"./Col":102,"./Collapse":103,"./CollapsibleMixin":104,"./CollapsibleNav":105,"./DropdownButton":106,"./DropdownMenu":107,"./DropdownStateMixin":108,"./FadeMixin":110,"./FormControls":112,"./Glyphicon":114,"./Grid":115,"./Input":116,"./Interpolate":118,"./Jumbotron":119,"./Label":120,"./ListGroup":121,"./ListGroupItem":122,"./MenuItem":123,"./Modal":124,"./ModalBody":125,"./ModalFooter":127,"./ModalHeader":128,"./ModalTitle":129,"./Nav":130,"./NavItem":131,"./Navbar":132,"./Overlay":133,"./OverlayTrigger":134,"./PageHeader":135,"./PageItem":136,"./Pager":137,"./Pagination":138,"./Panel":140,"./PanelGroup":141,"./Popover":142,"./Portal":143,"./Position":144,"./ProgressBar":145,"./Row":147,"./SafeAnchor":148,"./SplitButton":149,"./SubNav":150,"./TabPane":151,"./TabbedArea":152,"./Table":153,"./Thumbnail":154,"./Tooltip":155,"./Well":157,"./styleMaps":159,"./utils":170,"babel-runtime/helpers/interop-require-default":179,"babel-runtime/helpers/interop-require-wildcard":180}],159:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Accordion":88,"./Affix":89,"./AffixMixin":90,"./Alert":91,"./Badge":92,"./BootstrapMixin":93,"./Button":94,"./ButtonGroup":95,"./ButtonInput":96,"./ButtonToolbar":97,"./Carousel":98,"./CarouselItem":99,"./Col":100,"./Collapse":101,"./CollapsibleMixin":102,"./CollapsibleNav":103,"./DropdownButton":104,"./DropdownMenu":105,"./DropdownStateMixin":106,"./FadeMixin":108,"./FormControls":110,"./Glyphicon":112,"./Grid":113,"./Input":114,"./Interpolate":116,"./Jumbotron":117,"./Label":118,"./ListGroup":119,"./ListGroupItem":120,"./MenuItem":121,"./Modal":122,"./ModalBody":123,"./ModalFooter":125,"./ModalHeader":126,"./ModalTitle":127,"./Nav":128,"./NavItem":129,"./Navbar":130,"./Overlay":131,"./OverlayTrigger":132,"./PageHeader":133,"./PageItem":134,"./Pager":135,"./Pagination":136,"./Panel":138,"./PanelGroup":139,"./Popover":140,"./Portal":141,"./Position":142,"./ProgressBar":143,"./Row":145,"./SafeAnchor":146,"./SplitButton":147,"./SubNav":148,"./TabPane":149,"./TabbedArea":150,"./Table":151,"./Thumbnail":152,"./Tooltip":153,"./Well":155,"./styleMaps":157,"./utils":168,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/interop-require-wildcard":178}],157:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -29296,11 +28492,7 @@ var styleMaps = {
 
 exports['default'] = styleMaps;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{}],159:[function(require,module,exports){
-=======
-},{}],160:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],158:[function(require,module,exports){
 'use strict';
 
 var _Object$keys = require('babel-runtime/core-js/object/keys')['default'];
@@ -29490,11 +28682,7 @@ function createElementTypeChecker() {
 
 exports['default'] = CustomPropTypes;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"babel-runtime/core-js/object/keys":173,"babel-runtime/helpers/interop-require-default":178,"react":514}],160:[function(require,module,exports){
-=======
-},{"babel-runtime/core-js/object/keys":174,"babel-runtime/helpers/interop-require-default":179,"react":515}],161:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"babel-runtime/core-js/object/keys":172,"babel-runtime/helpers/interop-require-default":177,"react":509}],159:[function(require,module,exports){
 /**
  * Copyright 2013-2014 Facebook, Inc.
  *
@@ -29553,11 +28741,7 @@ var EventListener = {
 
 exports['default'] = EventListener;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{}],161:[function(require,module,exports){
-=======
-},{}],162:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],160:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -29671,11 +28855,7 @@ var ReactTransitionEvents = {
 
 exports['default'] = ReactTransitionEvents;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{}],162:[function(require,module,exports){
-=======
-},{}],163:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],161:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -29778,11 +28958,7 @@ exports['default'] = {
   hasValidComponent: hasValidComponent
 };
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"babel-runtime/helpers/interop-require-default":178,"react":514}],163:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/interop-require-default":179,"react":515}],164:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"babel-runtime/helpers/interop-require-default":177,"react":509}],162:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -29809,11 +28985,7 @@ function valueValidation(props, propName, componentName) {
 }
 
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./CustomPropTypes":159,"babel-runtime/helpers/interop-require-default":178,"react":514}],164:[function(require,module,exports){
-=======
-},{"./CustomPropTypes":160,"babel-runtime/helpers/interop-require-default":179,"react":515}],165:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./CustomPropTypes":158,"babel-runtime/helpers/interop-require-default":177,"react":509}],163:[function(require,module,exports){
 /**
  * Safe chained function
  *
@@ -29855,11 +29027,7 @@ function createChainedFunction() {
 
 exports['default'] = createChainedFunction;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{}],165:[function(require,module,exports){
-=======
-},{}],166:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],164:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -29947,11 +29115,7 @@ function createContextWrapper(Trigger, propName) {
 }
 
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"babel-runtime/helpers/class-call-check":175,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/inherits":177,"babel-runtime/helpers/interop-require-default":178,"babel-runtime/helpers/object-without-properties":180,"react":514}],166:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":176,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/inherits":178,"babel-runtime/helpers/interop-require-default":179,"babel-runtime/helpers/object-without-properties":181,"react":515}],167:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"react":509}],165:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -29974,11 +29138,7 @@ function createSelectedEvent(eventKey) {
 }
 
 module.exports = exports["default"];
-<<<<<<< HEAD
-},{}],167:[function(require,module,exports){
-=======
-},{}],168:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],166:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -30001,11 +29161,7 @@ function deprecationWarning(oldname, newname, link) {
 }
 
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"babel-runtime/helpers/interop-require-default":178,"react/lib/warning":513}],168:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/interop-require-default":179,"react/lib/warning":514}],169:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"babel-runtime/helpers/interop-require-default":177,"react/lib/warning":508}],167:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -30193,11 +29349,7 @@ exports['default'] = {
   offsetParent: offsetParentFunc
 };
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"babel-runtime/helpers/interop-require-default":178,"react":514}],169:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/interop-require-default":179,"react":515}],170:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"babel-runtime/helpers/interop-require-default":177,"react":509}],168:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -30233,11 +29385,7 @@ var _ValidComponentChildren2 = require('./ValidComponentChildren');
 var _ValidComponentChildren3 = _interopRequireDefault(_ValidComponentChildren2);
 
 exports.ValidComponentChildren = _ValidComponentChildren3['default'];
-<<<<<<< HEAD
-},{"./CustomPropTypes":159,"./ValidComponentChildren":162,"./childrenValueInputValidation":163,"./createChainedFunction":164,"./domUtils":168,"babel-runtime/helpers/interop-require-default":178}],170:[function(require,module,exports){
-=======
-},{"./CustomPropTypes":160,"./ValidComponentChildren":163,"./childrenValueInputValidation":164,"./createChainedFunction":165,"./domUtils":169,"babel-runtime/helpers/interop-require-default":179}],171:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./CustomPropTypes":158,"./ValidComponentChildren":161,"./childrenValueInputValidation":162,"./createChainedFunction":163,"./domUtils":167,"babel-runtime/helpers/interop-require-default":177}],169:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -30362,27 +29510,15 @@ function getLeftDelta(left, overlayWidth, container, padding) {
 }
 exports['default'] = utils;
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./domUtils":168,"babel-runtime/helpers/extends":176,"babel-runtime/helpers/interop-require-default":178}],171:[function(require,module,exports){
+},{"./domUtils":167,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177}],170:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/assign"), __esModule: true };
-},{"core-js/library/fn/object/assign":181}],172:[function(require,module,exports){
+},{"core-js/library/fn/object/assign":180}],171:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/create"), __esModule: true };
-},{"core-js/library/fn/object/create":182}],173:[function(require,module,exports){
+},{"core-js/library/fn/object/create":181}],172:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/keys"), __esModule: true };
-},{"core-js/library/fn/object/keys":183}],174:[function(require,module,exports){
+},{"core-js/library/fn/object/keys":182}],173:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/set-prototype-of"), __esModule: true };
-},{"core-js/library/fn/object/set-prototype-of":184}],175:[function(require,module,exports){
-=======
-},{"./domUtils":169,"babel-runtime/helpers/extends":177,"babel-runtime/helpers/interop-require-default":179}],172:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/object/assign"), __esModule: true };
-},{"core-js/library/fn/object/assign":182}],173:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/object/create"), __esModule: true };
-},{"core-js/library/fn/object/create":183}],174:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/object/keys"), __esModule: true };
-},{"core-js/library/fn/object/keys":184}],175:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/object/set-prototype-of"), __esModule: true };
-},{"core-js/library/fn/object/set-prototype-of":185}],176:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"core-js/library/fn/object/set-prototype-of":183}],174:[function(require,module,exports){
 "use strict";
 
 exports["default"] = function (instance, Constructor) {
@@ -30392,11 +29528,7 @@ exports["default"] = function (instance, Constructor) {
 };
 
 exports.__esModule = true;
-<<<<<<< HEAD
-},{}],176:[function(require,module,exports){
-=======
-},{}],177:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],175:[function(require,module,exports){
 "use strict";
 
 var _Object$assign = require("babel-runtime/core-js/object/assign")["default"];
@@ -30416,11 +29548,7 @@ exports["default"] = _Object$assign || function (target) {
 };
 
 exports.__esModule = true;
-<<<<<<< HEAD
-},{"babel-runtime/core-js/object/assign":171}],177:[function(require,module,exports){
-=======
-},{"babel-runtime/core-js/object/assign":172}],178:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"babel-runtime/core-js/object/assign":170}],176:[function(require,module,exports){
 "use strict";
 
 var _Object$create = require("babel-runtime/core-js/object/create")["default"];
@@ -30444,11 +29572,7 @@ exports["default"] = function (subClass, superClass) {
 };
 
 exports.__esModule = true;
-<<<<<<< HEAD
-},{"babel-runtime/core-js/object/create":172,"babel-runtime/core-js/object/set-prototype-of":174}],178:[function(require,module,exports){
-=======
-},{"babel-runtime/core-js/object/create":173,"babel-runtime/core-js/object/set-prototype-of":175}],179:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"babel-runtime/core-js/object/create":171,"babel-runtime/core-js/object/set-prototype-of":173}],177:[function(require,module,exports){
 "use strict";
 
 exports["default"] = function (obj) {
@@ -30458,11 +29582,7 @@ exports["default"] = function (obj) {
 };
 
 exports.__esModule = true;
-<<<<<<< HEAD
-},{}],179:[function(require,module,exports){
-=======
-},{}],180:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],178:[function(require,module,exports){
 "use strict";
 
 exports["default"] = function (obj) {
@@ -30483,11 +29603,7 @@ exports["default"] = function (obj) {
 };
 
 exports.__esModule = true;
-<<<<<<< HEAD
-},{}],180:[function(require,module,exports){
-=======
-},{}],181:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],179:[function(require,module,exports){
 "use strict";
 
 exports["default"] = function (obj, keys) {
@@ -30503,38 +29619,21 @@ exports["default"] = function (obj, keys) {
 };
 
 exports.__esModule = true;
-<<<<<<< HEAD
-},{}],181:[function(require,module,exports){
+},{}],180:[function(require,module,exports){
 require('../../modules/es6.object.assign');
 module.exports = require('../../modules/$').core.Object.assign;
-},{"../../modules/$":192,"../../modules/es6.object.assign":194}],182:[function(require,module,exports){
-=======
-},{}],182:[function(require,module,exports){
-require('../../modules/es6.object.assign');
-module.exports = require('../../modules/$').core.Object.assign;
-},{"../../modules/$":193,"../../modules/es6.object.assign":195}],183:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../../modules/$":191,"../../modules/es6.object.assign":193}],181:[function(require,module,exports){
 var $ = require('../../modules/$');
 module.exports = function create(P, D){
   return $.create(P, D);
 };
-<<<<<<< HEAD
-},{"../../modules/$":192}],183:[function(require,module,exports){
+},{"../../modules/$":191}],182:[function(require,module,exports){
 require('../../modules/es6.object.statics-accept-primitives');
 module.exports = require('../../modules/$').core.Object.keys;
-},{"../../modules/$":192,"../../modules/es6.object.statics-accept-primitives":196}],184:[function(require,module,exports){
+},{"../../modules/$":191,"../../modules/es6.object.statics-accept-primitives":195}],183:[function(require,module,exports){
 require('../../modules/es6.object.set-prototype-of');
 module.exports = require('../../modules/$').core.Object.setPrototypeOf;
-},{"../../modules/$":192,"../../modules/es6.object.set-prototype-of":195}],185:[function(require,module,exports){
-=======
-},{"../../modules/$":193}],184:[function(require,module,exports){
-require('../../modules/es6.object.statics-accept-primitives');
-module.exports = require('../../modules/$').core.Object.keys;
-},{"../../modules/$":193,"../../modules/es6.object.statics-accept-primitives":197}],185:[function(require,module,exports){
-require('../../modules/es6.object.set-prototype-of');
-module.exports = require('../../modules/$').core.Object.setPrototypeOf;
-},{"../../modules/$":193,"../../modules/es6.object.set-prototype-of":196}],186:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../../modules/$":191,"../../modules/es6.object.set-prototype-of":194}],184:[function(require,module,exports){
 var $ = require('./$');
 function assert(condition, msg1, msg2){
   if(!condition)throw TypeError(msg2 ? msg1 + msg2 : msg1);
@@ -30553,11 +29652,7 @@ assert.inst = function(it, Constructor, name){
   return it;
 };
 module.exports = assert;
-<<<<<<< HEAD
-},{"./$":192}],186:[function(require,module,exports){
-=======
-},{"./$":193}],187:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./$":191}],185:[function(require,module,exports){
 var $        = require('./$')
   , enumKeys = require('./$.enum-keys');
 // 19.1.2.1 Object.assign(target, source, ...)
@@ -30577,11 +29672,7 @@ module.exports = Object.assign || function assign(target, source){
   }
   return T;
 };
-<<<<<<< HEAD
-},{"./$":192,"./$.enum-keys":189}],187:[function(require,module,exports){
-=======
-},{"./$":193,"./$.enum-keys":190}],188:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./$":191,"./$.enum-keys":188}],186:[function(require,module,exports){
 // Optional / simple context binding
 var assertFunction = require('./$.assert').fn;
 module.exports = function(fn, that, length){
@@ -30601,11 +29692,7 @@ module.exports = function(fn, that, length){
       return fn.apply(that, arguments);
     };
 };
-<<<<<<< HEAD
-},{"./$.assert":185}],188:[function(require,module,exports){
-=======
-},{"./$.assert":186}],189:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./$.assert":184}],187:[function(require,module,exports){
 var $          = require('./$')
   , global     = $.g
   , core       = $.core
@@ -30654,11 +29741,7 @@ function $def(type, name, source){
   }
 }
 module.exports = $def;
-<<<<<<< HEAD
-},{"./$":192}],189:[function(require,module,exports){
-=======
-},{"./$":193}],190:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./$":191}],188:[function(require,module,exports){
 var $ = require('./$');
 module.exports = function(it){
   var keys       = $.getKeys(it)
@@ -30669,21 +29752,13 @@ module.exports = function(it){
   });
   return keys;
 };
-<<<<<<< HEAD
-},{"./$":192}],190:[function(require,module,exports){
-=======
-},{"./$":193}],191:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./$":191}],189:[function(require,module,exports){
 module.exports = function($){
   $.FW   = false;
   $.path = $.core;
   return $;
 };
-<<<<<<< HEAD
-},{}],191:[function(require,module,exports){
-=======
-},{}],192:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],190:[function(require,module,exports){
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
 var $ = require('./$')
   , toString = {}.toString
@@ -30704,11 +29779,7 @@ module.exports.get = function getOwnPropertyNames(it){
   if(windowNames && toString.call(it) == '[object Window]')return getWindowNames(it);
   return getNames($.toObject(it));
 };
-<<<<<<< HEAD
-},{"./$":192}],192:[function(require,module,exports){
-=======
-},{"./$":193}],193:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./$":191}],191:[function(require,module,exports){
 'use strict';
 var global = typeof self != 'undefined' ? self : Function('return this')()
   , core   = {}
@@ -30805,11 +29876,7 @@ var $ = module.exports = require('./$.fw')({
 /* eslint-disable no-undef */
 if(typeof __e != 'undefined')__e = core;
 if(typeof __g != 'undefined')__g = global;
-<<<<<<< HEAD
-},{"./$.fw":190}],193:[function(require,module,exports){
-=======
-},{"./$.fw":191}],194:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./$.fw":189}],192:[function(require,module,exports){
 // Works with __proto__ only. Old v8 can't work with null proto objects.
 /* eslint-disable no-proto */
 var $      = require('./$')
@@ -30835,27 +29902,15 @@ module.exports = {
     : undefined),
   check: check
 };
-<<<<<<< HEAD
-},{"./$":192,"./$.assert":185,"./$.ctx":187}],194:[function(require,module,exports){
+},{"./$":191,"./$.assert":184,"./$.ctx":186}],193:[function(require,module,exports){
 // 19.1.3.1 Object.assign(target, source)
 var $def = require('./$.def');
 $def($def.S, 'Object', {assign: require('./$.assign')});
-},{"./$.assign":186,"./$.def":188}],195:[function(require,module,exports){
+},{"./$.assign":185,"./$.def":187}],194:[function(require,module,exports){
 // 19.1.3.19 Object.setPrototypeOf(O, proto)
 var $def = require('./$.def');
 $def($def.S, 'Object', {setPrototypeOf: require('./$.set-proto').set});
-},{"./$.def":188,"./$.set-proto":193}],196:[function(require,module,exports){
-=======
-},{"./$":193,"./$.assert":186,"./$.ctx":188}],195:[function(require,module,exports){
-// 19.1.3.1 Object.assign(target, source)
-var $def = require('./$.def');
-$def($def.S, 'Object', {assign: require('./$.assign')});
-},{"./$.assign":187,"./$.def":189}],196:[function(require,module,exports){
-// 19.1.3.19 Object.setPrototypeOf(O, proto)
-var $def = require('./$.def');
-$def($def.S, 'Object', {setPrototypeOf: require('./$.set-proto').set});
-},{"./$.def":189,"./$.set-proto":194}],197:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./$.def":187,"./$.set-proto":192}],195:[function(require,module,exports){
 var $        = require('./$')
   , $def     = require('./$.def')
   , isObject = $.isObject
@@ -30892,11 +29947,7 @@ $.each.call(('freeze,seal,preventExtensions,isFrozen,isSealed,isExtensible,' +
   }
   $def($def.S + $def.F * forced, 'Object', method);
 });
-<<<<<<< HEAD
-},{"./$":192,"./$.def":188,"./$.get-names":191}],197:[function(require,module,exports){
-=======
-},{"./$":193,"./$.def":189,"./$.get-names":192}],198:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./$":191,"./$.def":187,"./$.get-names":190}],196:[function(require,module,exports){
 /** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT = 'Expected a function';
 
@@ -30956,11 +30007,7 @@ function restParam(func, start) {
 
 module.exports = restParam;
 
-<<<<<<< HEAD
-},{}],198:[function(require,module,exports){
-=======
-},{}],199:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],197:[function(require,module,exports){
 /**
  * Appends the elements of `values` to `array`.
  *
@@ -30982,11 +30029,7 @@ function arrayPush(array, values) {
 
 module.exports = arrayPush;
 
-<<<<<<< HEAD
-},{}],199:[function(require,module,exports){
-=======
-},{}],200:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],198:[function(require,module,exports){
 var arrayPush = require('./arrayPush'),
     isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
@@ -31029,11 +30072,7 @@ function baseFlatten(array, isDeep, isStrict, result) {
 
 module.exports = baseFlatten;
 
-<<<<<<< HEAD
-},{"../lang/isArguments":214,"../lang/isArray":215,"./arrayPush":198,"./isArrayLike":207,"./isObjectLike":210}],200:[function(require,module,exports){
-=======
-},{"../lang/isArguments":215,"../lang/isArray":216,"./arrayPush":199,"./isArrayLike":208,"./isObjectLike":211}],201:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../lang/isArguments":213,"../lang/isArray":214,"./arrayPush":197,"./isArrayLike":206,"./isObjectLike":209}],199:[function(require,module,exports){
 var createBaseFor = require('./createBaseFor');
 
 /**
@@ -31052,11 +30091,7 @@ var baseFor = createBaseFor();
 
 module.exports = baseFor;
 
-<<<<<<< HEAD
-},{"./createBaseFor":204}],201:[function(require,module,exports){
-=======
-},{"./createBaseFor":205}],202:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./createBaseFor":203}],200:[function(require,module,exports){
 var baseFor = require('./baseFor'),
     keysIn = require('../object/keysIn');
 
@@ -31075,11 +30110,7 @@ function baseForIn(object, iteratee) {
 
 module.exports = baseForIn;
 
-<<<<<<< HEAD
-},{"../object/keysIn":219,"./baseFor":200}],202:[function(require,module,exports){
-=======
-},{"../object/keysIn":220,"./baseFor":201}],203:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../object/keysIn":218,"./baseFor":199}],201:[function(require,module,exports){
 /**
  * The base implementation of `_.property` without support for deep paths.
  *
@@ -31095,11 +30126,7 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-<<<<<<< HEAD
-},{}],203:[function(require,module,exports){
-=======
-},{}],204:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],202:[function(require,module,exports){
 var identity = require('../utility/identity');
 
 /**
@@ -31140,11 +30167,7 @@ function bindCallback(func, thisArg, argCount) {
 
 module.exports = bindCallback;
 
-<<<<<<< HEAD
-},{"../utility/identity":221}],204:[function(require,module,exports){
-=======
-},{"../utility/identity":222}],205:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../utility/identity":220}],203:[function(require,module,exports){
 var toObject = require('./toObject');
 
 /**
@@ -31173,11 +30196,7 @@ function createBaseFor(fromRight) {
 
 module.exports = createBaseFor;
 
-<<<<<<< HEAD
-},{"./toObject":213}],205:[function(require,module,exports){
-=======
-},{"./toObject":214}],206:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./toObject":212}],204:[function(require,module,exports){
 var baseProperty = require('./baseProperty');
 
 /**
@@ -31194,11 +30213,7 @@ var getLength = baseProperty('length');
 
 module.exports = getLength;
 
-<<<<<<< HEAD
-},{"./baseProperty":202}],206:[function(require,module,exports){
-=======
-},{"./baseProperty":203}],207:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./baseProperty":201}],205:[function(require,module,exports){
 var isNative = require('../lang/isNative');
 
 /**
@@ -31216,11 +30231,7 @@ function getNative(object, key) {
 
 module.exports = getNative;
 
-<<<<<<< HEAD
-},{"../lang/isNative":217}],207:[function(require,module,exports){
-=======
-},{"../lang/isNative":218}],208:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../lang/isNative":216}],206:[function(require,module,exports){
 var getLength = require('./getLength'),
     isLength = require('./isLength');
 
@@ -31237,11 +30248,7 @@ function isArrayLike(value) {
 
 module.exports = isArrayLike;
 
-<<<<<<< HEAD
-},{"./getLength":205,"./isLength":209}],208:[function(require,module,exports){
-=======
-},{"./getLength":206,"./isLength":210}],209:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./getLength":204,"./isLength":208}],207:[function(require,module,exports){
 /** Used to detect unsigned integer values. */
 var reIsUint = /^\d+$/;
 
@@ -31267,11 +30274,7 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-<<<<<<< HEAD
-},{}],209:[function(require,module,exports){
-=======
-},{}],210:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],208:[function(require,module,exports){
 /**
  * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
  * of an array-like value.
@@ -31293,11 +30296,7 @@ function isLength(value) {
 
 module.exports = isLength;
 
-<<<<<<< HEAD
-},{}],210:[function(require,module,exports){
-=======
-},{}],211:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],209:[function(require,module,exports){
 /**
  * Checks if `value` is object-like.
  *
@@ -31311,11 +30310,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-<<<<<<< HEAD
-},{}],211:[function(require,module,exports){
-=======
-},{}],212:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],210:[function(require,module,exports){
 var toObject = require('./toObject');
 
 /**
@@ -31345,11 +30340,7 @@ function pickByArray(object, props) {
 
 module.exports = pickByArray;
 
-<<<<<<< HEAD
-},{"./toObject":213}],212:[function(require,module,exports){
-=======
-},{"./toObject":214}],213:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./toObject":212}],211:[function(require,module,exports){
 var baseForIn = require('./baseForIn');
 
 /**
@@ -31373,11 +30364,7 @@ function pickByCallback(object, predicate) {
 
 module.exports = pickByCallback;
 
-<<<<<<< HEAD
-},{"./baseForIn":201}],213:[function(require,module,exports){
-=======
-},{"./baseForIn":202}],214:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./baseForIn":200}],212:[function(require,module,exports){
 var isObject = require('../lang/isObject');
 
 /**
@@ -31393,11 +30380,7 @@ function toObject(value) {
 
 module.exports = toObject;
 
-<<<<<<< HEAD
-},{"../lang/isObject":218}],214:[function(require,module,exports){
-=======
-},{"../lang/isObject":219}],215:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../lang/isObject":217}],213:[function(require,module,exports){
 var isArrayLike = require('../internal/isArrayLike'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -31433,11 +30416,7 @@ function isArguments(value) {
 
 module.exports = isArguments;
 
-<<<<<<< HEAD
-},{"../internal/isArrayLike":207,"../internal/isObjectLike":210}],215:[function(require,module,exports){
-=======
-},{"../internal/isArrayLike":208,"../internal/isObjectLike":211}],216:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../internal/isArrayLike":206,"../internal/isObjectLike":209}],214:[function(require,module,exports){
 var getNative = require('../internal/getNative'),
     isLength = require('../internal/isLength'),
     isObjectLike = require('../internal/isObjectLike');
@@ -31479,11 +30458,7 @@ var isArray = nativeIsArray || function(value) {
 
 module.exports = isArray;
 
-<<<<<<< HEAD
-},{"../internal/getNative":206,"../internal/isLength":209,"../internal/isObjectLike":210}],216:[function(require,module,exports){
-=======
-},{"../internal/getNative":207,"../internal/isLength":210,"../internal/isObjectLike":211}],217:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../internal/getNative":205,"../internal/isLength":208,"../internal/isObjectLike":209}],215:[function(require,module,exports){
 var isObject = require('./isObject');
 
 /** `Object#toString` result references. */
@@ -31523,11 +30498,7 @@ function isFunction(value) {
 
 module.exports = isFunction;
 
-<<<<<<< HEAD
-},{"./isObject":218}],217:[function(require,module,exports){
-=======
-},{"./isObject":219}],218:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./isObject":217}],216:[function(require,module,exports){
 var isFunction = require('./isFunction'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -31577,11 +30548,7 @@ function isNative(value) {
 
 module.exports = isNative;
 
-<<<<<<< HEAD
-},{"../internal/isObjectLike":210,"./isFunction":216}],218:[function(require,module,exports){
-=======
-},{"../internal/isObjectLike":211,"./isFunction":217}],219:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../internal/isObjectLike":209,"./isFunction":215}],217:[function(require,module,exports){
 /**
  * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
  * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
@@ -31611,11 +30578,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-<<<<<<< HEAD
-},{}],219:[function(require,module,exports){
-=======
-},{}],220:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],218:[function(require,module,exports){
 var isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
     isIndex = require('../internal/isIndex'),
@@ -31681,11 +30644,7 @@ function keysIn(object) {
 
 module.exports = keysIn;
 
-<<<<<<< HEAD
-},{"../internal/isIndex":208,"../internal/isLength":209,"../lang/isArguments":214,"../lang/isArray":215,"../lang/isObject":218}],220:[function(require,module,exports){
-=======
-},{"../internal/isIndex":209,"../internal/isLength":210,"../lang/isArguments":215,"../lang/isArray":216,"../lang/isObject":219}],221:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../internal/isIndex":207,"../internal/isLength":208,"../lang/isArguments":213,"../lang/isArray":214,"../lang/isObject":217}],219:[function(require,module,exports){
 var baseFlatten = require('../internal/baseFlatten'),
     bindCallback = require('../internal/bindCallback'),
     pickByArray = require('../internal/pickByArray'),
@@ -31729,11 +30688,7 @@ var pick = restParam(function(object, props) {
 
 module.exports = pick;
 
-<<<<<<< HEAD
-},{"../function/restParam":197,"../internal/baseFlatten":199,"../internal/bindCallback":203,"../internal/pickByArray":211,"../internal/pickByCallback":212}],221:[function(require,module,exports){
-=======
-},{"../function/restParam":198,"../internal/baseFlatten":200,"../internal/bindCallback":204,"../internal/pickByArray":212,"../internal/pickByCallback":213}],222:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../function/restParam":196,"../internal/baseFlatten":198,"../internal/bindCallback":202,"../internal/pickByArray":210,"../internal/pickByCallback":211}],220:[function(require,module,exports){
 /**
  * This method returns the first argument provided to it.
  *
@@ -31755,369 +30710,7 @@ function identity(value) {
 
 module.exports = identity;
 
-<<<<<<< HEAD
-},{}],222:[function(require,module,exports){
-=======
-},{}],223:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-var mixin = require('smart-mixin');
-var assign = require('object-assign');
-
-var mixinProto = mixin({
-  // lifecycle stuff is as you'd expect
-  componentDidMount: mixin.MANY,
-  componentWillMount: mixin.MANY,
-  componentWillReceiveProps: mixin.MANY,
-  shouldComponentUpdate: mixin.ONCE,
-  componentWillUpdate: mixin.MANY,
-  componentDidUpdate: mixin.MANY,
-  componentWillUnmount: mixin.MANY,
-  getChildContext: mixin.MANY_MERGED
-});
-
-function setDefaultProps(reactMixin) {
-  var getDefaultProps = reactMixin.getDefaultProps;
-
-  if(getDefaultProps) {
-    reactMixin.defaultProps = getDefaultProps();
-
-    delete reactMixin.getDefaultProps;
-  }
-}
-
-function setInitialState(reactMixin) {
-  var getInitialState = reactMixin.getInitialState;
-  var componentWillMount = reactMixin.componentWillMount;
-
-  function applyInitialState(instance){
-      var state = instance.state || {};
-      assign(state, getInitialState.call(instance));
-      instance.state = state;
-  }
-
-  if(getInitialState) {
-    if(!componentWillMount) {
-      reactMixin.componentWillMount = function() {
-          applyInitialState(this);
-      };
-    }
-    else {
-      reactMixin.componentWillMount = function() {
-        applyInitialState(this);
-        componentWillMount.call(this);
-      };
-    }
-
-    delete reactMixin.getInitialState;
-  }
-}
-
-function mixinClass(reactClass, reactMixin) {
-  setDefaultProps(reactMixin);
-  setInitialState(reactMixin);
-
-  var prototypeMethods = {};
-  var staticProps = {};
-
-  Object.keys(reactMixin).forEach(function(key) {
-    if (key === 'mixins') {
-      return; // Handled below to ensure proper order regardless of property iteration order
-    }
-    else if(typeof reactMixin[key] === 'function') {
-      prototypeMethods[key] = reactMixin[key];
-    }
-    else {
-      staticProps[key] = reactMixin[key];
-    }
-  });
-
-  mixinProto(reactClass.prototype, prototypeMethods);
-
-  var mergePropTypes = function(left, right, key){
-    if (!left) return right;
-    if (!right) return left;
-
-    var result = {};
-    Object.keys(left).forEach(function(leftKey){
-      if (!right[leftKey]) {
-        result[leftKey] = left[leftKey];
-      }
-    });
-
-    Object.keys(right).forEach(function(rightKey){
-      if (left[rightKey]) {
-        result[rightKey] = function checkBothContextTypes(){
-            return right[rightKey].apply(this, arguments) && left[rightKey].apply(this, arguments);
-        };
-      } else {
-        result[rightKey] = right[rightKey];
-      }
-    });
-
-    return result;
-  };
-
-  mixin({
-    childContextTypes: mergePropTypes,
-    contextTypes: mergePropTypes,
-    propTypes: mixin.MANY_MERGED_LOOSE,
-    defaultProps: mixin.MANY_MERGED_LOOSE
-  })(reactClass, staticProps);
-
-  // If more mixins are defined, they need to run. This emulate's react's behavior.
-  // See behavior in code at:
-  // https://github.com/facebook/react/blob/41aa3496aa632634f650edbe10d617799922d265/src/isomorphic/classic/class/ReactClass.js#L468
-  // Note the .reverse(). In React, a fresh constructor is created, then all mixins are mixed in recursively,
-  // then the actual spec is mixed in last.
-  //
-  // With ES6 classes, the properties are already there, so smart-mixin mixes functions (a, b) -> b()a(), which is
-  // the opposite of how React does it. If we reverse this array, we basically do the whole logic in reverse,
-  // which makes the result the same. See the test for more.
-  // See also:
-  // https://github.com/facebook/react/blob/41aa3496aa632634f650edbe10d617799922d265/src/isomorphic/classic/class/ReactClass.js#L853
-  if (reactMixin.mixins) {
-    reactMixin.mixins.reverse().forEach(mixinClass.bind(null, reactClass));
-  }
-
-  return reactClass;
-}
-
-module.exports = (function () {
-  var reactMixin = mixinProto;
-
-  reactMixin.onClass = function(reactClass, mixin) {
-    return mixinClass(reactClass, mixin);
-  };
-
-  reactMixin.decorate = function(mixin) {
-    return function(reactClass) {
-      return reactMixin.onClass(reactClass, mixin);
-    };
-  };
-
-  return reactMixin;
-})();
-
-<<<<<<< HEAD
-},{"object-assign":223,"smart-mixin":224}],223:[function(require,module,exports){
-=======
-},{"object-assign":224,"smart-mixin":225}],224:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-function ToObject(val) {
-	if (val == null) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-module.exports = Object.assign || function (target, source) {
-	var from;
-	var keys;
-	var to = ToObject(target);
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = arguments[s];
-		keys = Object.keys(Object(from));
-
-		for (var i = 0; i < keys.length; i++) {
-			to[keys[i]] = from[keys[i]];
-		}
-	}
-
-	return to;
-};
-
-<<<<<<< HEAD
-},{}],224:[function(require,module,exports){
-=======
-},{}],225:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-var objToStr = function(x){ return Object.prototype.toString.call(x); };
-
-var thrower = function(error){
-    throw error;
-};
-
-var mixins = module.exports = function makeMixinFunction(rules, _opts){
-    var opts = _opts || {};
-    if (!opts.unknownFunction) {
-        opts.unknownFunction = mixins.ONCE;
-    }
-
-    if (!opts.nonFunctionProperty) {
-        opts.nonFunctionProperty = function(left, right, key){
-            if (left !== undefined && right !== undefined) {
-                var getTypeName = function(obj){
-                    if (obj && obj.constructor && obj.constructor.name) {
-                        return obj.constructor.name;
-                    }
-                    else {
-                        return objToStr(obj).slice(8, -1);
-                    }
-                };
-                throw new TypeError('Cannot mixin key ' + key + ' because it is provided by multiple sources, '
-                        + 'and the types are ' + getTypeName(left) + ' and ' + getTypeName(right));
-            }
-            return left === undefined ? right : left;
-        };
-    }
-
-    function setNonEnumerable(target, key, value){
-        if (key in target){
-            target[key] = value;
-        }
-        else {
-            Object.defineProperty(target, key, {
-                value: value,
-                writable: true,
-                configurable: true
-            });
-        }
-    }
-
-    return function applyMixin(source, mixin){
-        Object.keys(mixin).forEach(function(key){
-            var left = source[key], right = mixin[key], rule = rules[key];
-
-            // this is just a weird case where the key was defined, but there's no value
-            // behave like the key wasn't defined
-            if (left === undefined && right === undefined) return;
-
-            var wrapIfFunction = function(thing){
-                return typeof thing !== "function" ? thing
-                : function(){
-                    return thing.call(this, arguments);
-                };
-            };
-
-            // do we have a rule for this key?
-            if (rule) {
-                // may throw here
-                var fn = rule(left, right, key);
-                setNonEnumerable(source, key, wrapIfFunction(fn));
-                return;
-            }
-
-            var leftIsFn = typeof left === "function";
-            var rightIsFn = typeof right === "function";
-
-            // check to see if they're some combination of functions or undefined
-            // we already know there's no rule, so use the unknown function behavior
-            if (leftIsFn && right === undefined
-             || rightIsFn && left === undefined
-             || leftIsFn && rightIsFn) {
-                // may throw, the default is ONCE so if both are functions
-                // the default is to throw
-                setNonEnumerable(source, key, wrapIfFunction(opts.unknownFunction(left, right, key)));
-                return;
-            }
-
-            // we have no rule for them, one may be a function but one or both aren't
-            // our default is MANY_MERGED_LOOSE which will merge objects, concat arrays
-            // and throw if there's a type mismatch or both are primitives (how do you merge 3, and "foo"?)
-            source[key] = opts.nonFunctionProperty(left, right, key);
-        });
-    };
-};
-
-mixins._mergeObjects = function(obj1, obj2) {
-    var assertObject = function(obj, obj2){
-        var type = objToStr(obj);
-        if (type !== '[object Object]') {
-            var displayType = obj.constructor ? obj.constructor.name : 'Unknown';
-            var displayType2 = obj2.constructor ? obj2.constructor.name : 'Unknown';
-            thrower('cannot merge returned value of type ' + displayType + ' with an ' + displayType2);
-        }
-    };
-
-    if (Array.isArray(obj1) && Array.isArray(obj2)) {
-        return obj1.concat(obj2);
-    }
-
-    assertObject(obj1, obj2);
-    assertObject(obj2, obj1);
-
-    var result = {};
-    Object.keys(obj1).forEach(function(k){
-        if (Object.prototype.hasOwnProperty.call(obj2, k)) {
-            thrower('cannot merge returns because both have the ' + JSON.stringify(k) + ' key');
-        }
-        result[k] = obj1[k];
-    });
-
-    Object.keys(obj2).forEach(function(k){
-        // we can skip the conflict check because all conflicts would already be found
-        result[k] = obj2[k];
-    });
-    return result;
-
-}
-
-// define our built-in mixin types
-mixins.ONCE = function(left, right, key){
-    if (left && right) {
-        throw new TypeError('Cannot mixin ' + key + ' because it has a unique constraint.');
-    }
-
-    var fn = left || right;
-
-    return function(args){
-        return fn.apply(this, args);
-    };
-};
-
-mixins.MANY = function(left, right, key){
-    return function(args){
-        if (right) right.apply(this, args);
-        return left ? left.apply(this, args) : undefined;
-    };
-};
-
-mixins.MANY_MERGED_LOOSE = function(left, right, key) {
-    if(left && right) {
-        return mixins._mergeObjects(left, right);
-    }
-
-    return left || right;
-}
-
-mixins.MANY_MERGED = function(left, right, key){
-    return function(args){
-        var res1 = right && right.apply(this, args);
-        var res2 = left && left.apply(this, args);
-        if (res1 && res2) {
-            return mixins._mergeObjects(res1, res2)
-        }
-        return res2 || res1;
-    };
-};
-
-
-mixins.REDUCE_LEFT = function(_left, _right, key){
-    var left = _left || function(){ return x };
-    var right = _right || function(x){ return x };
-    return function(args){
-        return right.call(this, left.apply(this, args));
-    };
-};
-
-mixins.REDUCE_RIGHT = function(_left, _right, key){
-    var left = _left || function(){ return x };
-    var right = _right || function(x){ return x };
-    return function(args){
-        return left.call(this, right.apply(this, args));
-    };
-};
-
-
-<<<<<<< HEAD
-},{}],225:[function(require,module,exports){
-=======
-},{}],226:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],221:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -32134,11 +30727,7 @@ function shouldPureComponentUpdate(nextProps, nextState) {
 }
 
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./shallowEqual":226}],226:[function(require,module,exports){
-=======
-},{"./shallowEqual":227}],227:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./shallowEqual":222}],222:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -32172,11 +30761,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = exports['default'];
-<<<<<<< HEAD
-},{}],227:[function(require,module,exports){
-=======
-},{}],228:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],223:[function(require,module,exports){
 /**
  * Represents a cancellation caused by navigating away
  * before the previous transition has fully resolved.
@@ -32186,11 +30771,7 @@ module.exports = exports['default'];
 function Cancellation() {}
 
 module.exports = Cancellation;
-<<<<<<< HEAD
-},{}],228:[function(require,module,exports){
-=======
-},{}],229:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],224:[function(require,module,exports){
 'use strict';
 
 var invariant = require('react/lib/invariant');
@@ -32221,11 +30802,7 @@ var History = {
 };
 
 module.exports = History;
-<<<<<<< HEAD
-},{"react/lib/ExecutionEnvironment":363,"react/lib/invariant":492}],229:[function(require,module,exports){
-=======
-},{"react/lib/ExecutionEnvironment":364,"react/lib/invariant":493}],230:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"react/lib/ExecutionEnvironment":358,"react/lib/invariant":487}],225:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -32301,11 +30878,7 @@ var Match = (function () {
 })();
 
 module.exports = Match;
-<<<<<<< HEAD
-},{"./PathUtils":231}],230:[function(require,module,exports){
-=======
-},{"./PathUtils":232}],231:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./PathUtils":227}],226:[function(require,module,exports){
 'use strict';
 
 var PropTypes = require('./PropTypes');
@@ -32376,11 +30949,7 @@ var Navigation = {
 };
 
 module.exports = Navigation;
-<<<<<<< HEAD
-},{"./PropTypes":232}],231:[function(require,module,exports){
-=======
-},{"./PropTypes":233}],232:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./PropTypes":228}],227:[function(require,module,exports){
 'use strict';
 
 var invariant = require('react/lib/invariant');
@@ -32534,11 +31103,7 @@ var PathUtils = {
 };
 
 module.exports = PathUtils;
-<<<<<<< HEAD
-},{"object-assign":260,"qs":261,"react/lib/invariant":492}],232:[function(require,module,exports){
-=======
-},{"object-assign":261,"qs":262,"react/lib/invariant":493}],233:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"object-assign":256,"qs":257,"react/lib/invariant":487}],228:[function(require,module,exports){
 'use strict';
 
 var assign = require('react/lib/Object.assign');
@@ -32570,11 +31135,7 @@ var PropTypes = assign({}, ReactPropTypes, {
 });
 
 module.exports = PropTypes;
-<<<<<<< HEAD
-},{"./Route":234,"react":514,"react/lib/Object.assign":370}],233:[function(require,module,exports){
-=======
-},{"./Route":235,"react":515,"react/lib/Object.assign":371}],234:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Route":230,"react":509,"react/lib/Object.assign":365}],229:[function(require,module,exports){
 /**
  * Encapsulates a redirect to the given route.
  */
@@ -32587,11 +31148,7 @@ function Redirect(to, params, query) {
 }
 
 module.exports = Redirect;
-<<<<<<< HEAD
-},{}],234:[function(require,module,exports){
-=======
-},{}],235:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],230:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -32792,11 +31349,7 @@ var Route = (function () {
 })();
 
 module.exports = Route;
-<<<<<<< HEAD
-},{"./PathUtils":231,"react/lib/Object.assign":370,"react/lib/invariant":492,"react/lib/warning":513}],235:[function(require,module,exports){
-=======
-},{"./PathUtils":232,"react/lib/Object.assign":371,"react/lib/invariant":493,"react/lib/warning":514}],236:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./PathUtils":227,"react/lib/Object.assign":365,"react/lib/invariant":487,"react/lib/warning":508}],231:[function(require,module,exports){
 'use strict';
 
 var invariant = require('react/lib/invariant');
@@ -32872,11 +31425,7 @@ var ScrollHistory = {
 };
 
 module.exports = ScrollHistory;
-<<<<<<< HEAD
-},{"./getWindowScrollPosition":250,"react/lib/ExecutionEnvironment":363,"react/lib/invariant":492}],236:[function(require,module,exports){
-=======
-},{"./getWindowScrollPosition":251,"react/lib/ExecutionEnvironment":364,"react/lib/invariant":493}],237:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./getWindowScrollPosition":246,"react/lib/ExecutionEnvironment":358,"react/lib/invariant":487}],232:[function(require,module,exports){
 'use strict';
 
 var PropTypes = require('./PropTypes');
@@ -32951,11 +31500,7 @@ var State = {
 };
 
 module.exports = State;
-<<<<<<< HEAD
-},{"./PropTypes":232}],237:[function(require,module,exports){
-=======
-},{"./PropTypes":233}],238:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./PropTypes":228}],233:[function(require,module,exports){
 /* jshint -W058 */
 
 'use strict';
@@ -33031,11 +31576,7 @@ Transition.to = function (transition, routes, params, query, callback) {
 };
 
 module.exports = Transition;
-<<<<<<< HEAD
-},{"./Cancellation":227,"./Redirect":233}],238:[function(require,module,exports){
-=======
-},{"./Cancellation":228,"./Redirect":234}],239:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Cancellation":223,"./Redirect":229}],234:[function(require,module,exports){
 /**
  * Actions that modify the URL.
  */
@@ -33061,11 +31602,7 @@ var LocationActions = {
 };
 
 module.exports = LocationActions;
-<<<<<<< HEAD
-},{}],239:[function(require,module,exports){
-=======
-},{}],240:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],235:[function(require,module,exports){
 'use strict';
 
 var LocationActions = require('../actions/LocationActions');
@@ -33095,11 +31632,7 @@ var ImitateBrowserBehavior = {
 };
 
 module.exports = ImitateBrowserBehavior;
-<<<<<<< HEAD
-},{"../actions/LocationActions":238}],240:[function(require,module,exports){
-=======
-},{"../actions/LocationActions":239}],241:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../actions/LocationActions":234}],236:[function(require,module,exports){
 /**
  * A scroll behavior that always scrolls to the top of the page
  * after a transition.
@@ -33115,11 +31648,7 @@ var ScrollToTopBehavior = {
 };
 
 module.exports = ScrollToTopBehavior;
-<<<<<<< HEAD
-},{}],241:[function(require,module,exports){
-=======
-},{}],242:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],237:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -33158,11 +31687,7 @@ var ContextWrapper = (function (_React$Component) {
 })(React.Component);
 
 module.exports = ContextWrapper;
-<<<<<<< HEAD
-},{"react":514}],242:[function(require,module,exports){
-=======
-},{"react":515}],243:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"react":509}],238:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -33210,11 +31735,7 @@ DefaultRoute.defaultProps = {
 };
 
 module.exports = DefaultRoute;
-<<<<<<< HEAD
-},{"../PropTypes":232,"./Route":246,"./RouteHandler":247}],243:[function(require,module,exports){
-=======
-},{"../PropTypes":233,"./Route":247,"./RouteHandler":248}],244:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../PropTypes":228,"./Route":242,"./RouteHandler":243}],239:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -33350,11 +31871,7 @@ Link.defaultProps = {
 };
 
 module.exports = Link;
-<<<<<<< HEAD
-},{"../PropTypes":232,"react":514,"react/lib/Object.assign":370}],244:[function(require,module,exports){
-=======
-},{"../PropTypes":233,"react":515,"react/lib/Object.assign":371}],245:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../PropTypes":228,"react":509,"react/lib/Object.assign":365}],240:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -33403,11 +31920,7 @@ NotFoundRoute.defaultProps = {
 };
 
 module.exports = NotFoundRoute;
-<<<<<<< HEAD
-},{"../PropTypes":232,"./Route":246,"./RouteHandler":247}],245:[function(require,module,exports){
-=======
-},{"../PropTypes":233,"./Route":247,"./RouteHandler":248}],246:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../PropTypes":228,"./Route":242,"./RouteHandler":243}],241:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -33451,11 +31964,7 @@ Redirect.propTypes = {
 Redirect.defaultProps = {};
 
 module.exports = Redirect;
-<<<<<<< HEAD
-},{"../PropTypes":232,"./Route":246}],246:[function(require,module,exports){
-=======
-},{"../PropTypes":233,"./Route":247}],247:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../PropTypes":228,"./Route":242}],242:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -33547,11 +32056,7 @@ Route.defaultProps = {
 };
 
 module.exports = Route;
-<<<<<<< HEAD
-},{"../PropTypes":232,"./RouteHandler":247,"react":514,"react/lib/invariant":492}],247:[function(require,module,exports){
-=======
-},{"../PropTypes":233,"./RouteHandler":248,"react":515,"react/lib/invariant":493}],248:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../PropTypes":228,"./RouteHandler":243,"react":509,"react/lib/invariant":487}],243:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -33660,11 +32165,7 @@ RouteHandler.childContextTypes = {
 };
 
 module.exports = RouteHandler;
-<<<<<<< HEAD
-},{"../PropTypes":232,"./ContextWrapper":241,"react":514,"react/lib/Object.assign":370}],248:[function(require,module,exports){
-=======
-},{"../PropTypes":233,"./ContextWrapper":242,"react":515,"react/lib/Object.assign":371}],249:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../PropTypes":228,"./ContextWrapper":237,"react":509,"react/lib/Object.assign":365}],244:[function(require,module,exports){
 (function (process){
 /* jshint -W058 */
 'use strict';
@@ -34181,11 +32682,7 @@ function createRouter(options) {
 
 module.exports = createRouter;
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./Cancellation":227,"./History":228,"./Match":229,"./PathUtils":231,"./PropTypes":232,"./Redirect":233,"./Route":234,"./ScrollHistory":235,"./Transition":237,"./actions/LocationActions":238,"./behaviors/ImitateBrowserBehavior":239,"./createRoutesFromReactChildren":249,"./isReactChildren":252,"./locations/HashLocation":253,"./locations/HistoryLocation":254,"./locations/RefreshLocation":255,"./locations/StaticLocation":256,"./supportsHistory":259,"_process":35,"react":514,"react/lib/ExecutionEnvironment":363,"react/lib/invariant":492,"react/lib/warning":513}],249:[function(require,module,exports){
-=======
-},{"./Cancellation":228,"./History":229,"./Match":230,"./PathUtils":232,"./PropTypes":233,"./Redirect":234,"./Route":235,"./ScrollHistory":236,"./Transition":238,"./actions/LocationActions":239,"./behaviors/ImitateBrowserBehavior":240,"./createRoutesFromReactChildren":250,"./isReactChildren":253,"./locations/HashLocation":254,"./locations/HistoryLocation":255,"./locations/RefreshLocation":256,"./locations/StaticLocation":257,"./supportsHistory":260,"_process":36,"react":515,"react/lib/ExecutionEnvironment":364,"react/lib/invariant":493,"react/lib/warning":514}],250:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Cancellation":223,"./History":224,"./Match":225,"./PathUtils":227,"./PropTypes":228,"./Redirect":229,"./Route":230,"./ScrollHistory":231,"./Transition":233,"./actions/LocationActions":234,"./behaviors/ImitateBrowserBehavior":235,"./createRoutesFromReactChildren":245,"./isReactChildren":248,"./locations/HashLocation":249,"./locations/HistoryLocation":250,"./locations/RefreshLocation":251,"./locations/StaticLocation":252,"./supportsHistory":255,"_process":34,"react":509,"react/lib/ExecutionEnvironment":358,"react/lib/invariant":487,"react/lib/warning":508}],245:[function(require,module,exports){
 /* jshint -W084 */
 'use strict';
 
@@ -34267,11 +32764,7 @@ function createRoutesFromReactChildren(children) {
 }
 
 module.exports = createRoutesFromReactChildren;
-<<<<<<< HEAD
-},{"./Route":234,"./components/DefaultRoute":242,"./components/NotFoundRoute":244,"./components/Redirect":245,"react":514,"react/lib/Object.assign":370,"react/lib/warning":513}],250:[function(require,module,exports){
-=======
-},{"./Route":235,"./components/DefaultRoute":243,"./components/NotFoundRoute":245,"./components/Redirect":246,"react":515,"react/lib/Object.assign":371,"react/lib/warning":514}],251:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Route":230,"./components/DefaultRoute":238,"./components/NotFoundRoute":240,"./components/Redirect":241,"react":509,"react/lib/Object.assign":365,"react/lib/warning":508}],246:[function(require,module,exports){
 'use strict';
 
 var invariant = require('react/lib/invariant');
@@ -34290,11 +32783,7 @@ function getWindowScrollPosition() {
 }
 
 module.exports = getWindowScrollPosition;
-<<<<<<< HEAD
-},{"react/lib/ExecutionEnvironment":363,"react/lib/invariant":492}],251:[function(require,module,exports){
-=======
-},{"react/lib/ExecutionEnvironment":364,"react/lib/invariant":493}],252:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"react/lib/ExecutionEnvironment":358,"react/lib/invariant":487}],247:[function(require,module,exports){
 'use strict';
 
 exports.DefaultRoute = require('./components/DefaultRoute');
@@ -34326,11 +32815,7 @@ exports.createRoutesFromReactChildren = require('./createRoutesFromReactChildren
 
 exports.create = require('./createRouter');
 exports.run = require('./runRouter');
-<<<<<<< HEAD
-},{"./History":228,"./Navigation":230,"./Route":234,"./State":236,"./behaviors/ImitateBrowserBehavior":239,"./behaviors/ScrollToTopBehavior":240,"./components/DefaultRoute":242,"./components/Link":243,"./components/NotFoundRoute":244,"./components/Redirect":245,"./components/Route":246,"./components/RouteHandler":247,"./createRouter":248,"./createRoutesFromReactChildren":249,"./locations/HashLocation":253,"./locations/HistoryLocation":254,"./locations/RefreshLocation":255,"./locations/StaticLocation":256,"./locations/TestLocation":257,"./runRouter":258}],252:[function(require,module,exports){
-=======
-},{"./History":229,"./Navigation":231,"./Route":235,"./State":237,"./behaviors/ImitateBrowserBehavior":240,"./behaviors/ScrollToTopBehavior":241,"./components/DefaultRoute":243,"./components/Link":244,"./components/NotFoundRoute":245,"./components/Redirect":246,"./components/Route":247,"./components/RouteHandler":248,"./createRouter":249,"./createRoutesFromReactChildren":250,"./locations/HashLocation":254,"./locations/HistoryLocation":255,"./locations/RefreshLocation":256,"./locations/StaticLocation":257,"./locations/TestLocation":258,"./runRouter":259}],253:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./History":224,"./Navigation":226,"./Route":230,"./State":232,"./behaviors/ImitateBrowserBehavior":235,"./behaviors/ScrollToTopBehavior":236,"./components/DefaultRoute":238,"./components/Link":239,"./components/NotFoundRoute":240,"./components/Redirect":241,"./components/Route":242,"./components/RouteHandler":243,"./createRouter":244,"./createRoutesFromReactChildren":245,"./locations/HashLocation":249,"./locations/HistoryLocation":250,"./locations/RefreshLocation":251,"./locations/StaticLocation":252,"./locations/TestLocation":253,"./runRouter":254}],248:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -34344,11 +32829,7 @@ function isReactChildren(object) {
 }
 
 module.exports = isReactChildren;
-<<<<<<< HEAD
-},{"react":514}],253:[function(require,module,exports){
-=======
-},{"react":515}],254:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"react":509}],249:[function(require,module,exports){
 'use strict';
 
 var LocationActions = require('../actions/LocationActions');
@@ -34460,11 +32941,7 @@ var HashLocation = {
 };
 
 module.exports = HashLocation;
-<<<<<<< HEAD
-},{"../History":228,"../actions/LocationActions":238}],254:[function(require,module,exports){
-=======
-},{"../History":229,"../actions/LocationActions":239}],255:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../History":224,"../actions/LocationActions":234}],250:[function(require,module,exports){
 'use strict';
 
 var LocationActions = require('../actions/LocationActions');
@@ -34551,11 +33028,7 @@ var HistoryLocation = {
 };
 
 module.exports = HistoryLocation;
-<<<<<<< HEAD
-},{"../History":228,"../actions/LocationActions":238}],255:[function(require,module,exports){
-=======
-},{"../History":229,"../actions/LocationActions":239}],256:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../History":224,"../actions/LocationActions":234}],251:[function(require,module,exports){
 'use strict';
 
 var HistoryLocation = require('./HistoryLocation');
@@ -34587,11 +33060,7 @@ var RefreshLocation = {
 };
 
 module.exports = RefreshLocation;
-<<<<<<< HEAD
-},{"../History":228,"./HistoryLocation":254}],256:[function(require,module,exports){
-=======
-},{"../History":229,"./HistoryLocation":255}],257:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../History":224,"./HistoryLocation":250}],252:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -34641,11 +33110,7 @@ StaticLocation.prototype.replace = throwCannotModify;
 StaticLocation.prototype.pop = throwCannotModify;
 
 module.exports = StaticLocation;
-<<<<<<< HEAD
-},{"react/lib/invariant":492}],257:[function(require,module,exports){
-=======
-},{"react/lib/invariant":493}],258:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"react/lib/invariant":487}],253:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -34740,11 +33205,7 @@ var TestLocation = (function () {
 })();
 
 module.exports = TestLocation;
-<<<<<<< HEAD
-},{"../History":228,"../actions/LocationActions":238,"react/lib/invariant":492}],258:[function(require,module,exports){
-=======
-},{"../History":229,"../actions/LocationActions":239,"react/lib/invariant":493}],259:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../History":224,"../actions/LocationActions":234,"react/lib/invariant":487}],254:[function(require,module,exports){
 'use strict';
 
 var createRouter = require('./createRouter');
@@ -34795,11 +33256,7 @@ function runRouter(routes, location, callback) {
 }
 
 module.exports = runRouter;
-<<<<<<< HEAD
-},{"./createRouter":248}],259:[function(require,module,exports){
-=======
-},{"./createRouter":249}],260:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./createRouter":244}],255:[function(require,module,exports){
 'use strict';
 
 function supportsHistory() {
@@ -34816,21 +33273,38 @@ function supportsHistory() {
 }
 
 module.exports = supportsHistory;
-<<<<<<< HEAD
-},{}],260:[function(require,module,exports){
-arguments[4][223][0].apply(exports,arguments)
-},{"dup":223}],261:[function(require,module,exports){
+},{}],256:[function(require,module,exports){
+'use strict';
+
+function ToObject(val) {
+	if (val == null) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var from;
+	var keys;
+	var to = ToObject(target);
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = arguments[s];
+		keys = Object.keys(Object(from));
+
+		for (var i = 0; i < keys.length; i++) {
+			to[keys[i]] = from[keys[i]];
+		}
+	}
+
+	return to;
+};
+
+},{}],257:[function(require,module,exports){
 module.exports = require('./lib/');
 
-},{"./lib/":262}],262:[function(require,module,exports){
-=======
-},{}],261:[function(require,module,exports){
-arguments[4][224][0].apply(exports,arguments)
-},{"dup":224}],262:[function(require,module,exports){
-module.exports = require('./lib/');
-
-},{"./lib/":263}],263:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./lib/":258}],258:[function(require,module,exports){
 // Load modules
 
 var Stringify = require('./stringify');
@@ -34847,11 +33321,7 @@ module.exports = {
     parse: Parse
 };
 
-<<<<<<< HEAD
-},{"./parse":263,"./stringify":264}],263:[function(require,module,exports){
-=======
-},{"./parse":264,"./stringify":265}],264:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./parse":259,"./stringify":260}],259:[function(require,module,exports){
 // Load modules
 
 var Utils = require('./utils');
@@ -35014,11 +33484,7 @@ module.exports = function (str, options) {
     return Utils.compact(obj);
 };
 
-<<<<<<< HEAD
-},{"./utils":265}],264:[function(require,module,exports){
-=======
-},{"./utils":266}],265:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils":261}],260:[function(require,module,exports){
 // Load modules
 
 var Utils = require('./utils');
@@ -35117,11 +33583,7 @@ module.exports = function (obj, options) {
     return keys.join(delimiter);
 };
 
-<<<<<<< HEAD
-},{"./utils":265}],265:[function(require,module,exports){
-=======
-},{"./utils":266}],266:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./utils":261}],261:[function(require,module,exports){
 // Load modules
 
 
@@ -35255,11 +33717,7 @@ exports.isBuffer = function (obj) {
         obj.constructor.isBuffer(obj));
 };
 
-<<<<<<< HEAD
-},{}],266:[function(require,module,exports){
-=======
-},{}],267:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],262:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -35632,11 +34090,7 @@ function msgs(msgs) {
 module.exports = createUncontrolledWidget(Calendar, { value: 'onChange' });
 
 module.exports.BaseCalendar = Calendar;
-<<<<<<< HEAD
-},{"./Century":267,"./Decade":272,"./Footer":274,"./Header":275,"./Month":278,"./SlideTransition":287,"./Year":290,"./mixins/PureRenderMixin":298,"./mixins/RtlParentContextMixin":300,"./mixins/TimeoutMixin":301,"./mixins/WidgetMixin":302,"./util/_":303,"./util/babelHelpers.js":304,"./util/compat":306,"./util/configuration":307,"./util/constants":308,"./util/dates":309,"./util/propTypes":314,"classnames":317,"react":514,"uncontrollable":340}],267:[function(require,module,exports){
-=======
-},{"./Century":268,"./Decade":273,"./Footer":275,"./Header":276,"./Month":279,"./SlideTransition":288,"./Year":291,"./mixins/PureRenderMixin":299,"./mixins/RtlParentContextMixin":301,"./mixins/TimeoutMixin":302,"./mixins/WidgetMixin":303,"./util/_":304,"./util/babelHelpers.js":305,"./util/compat":307,"./util/configuration":308,"./util/constants":309,"./util/dates":310,"./util/propTypes":315,"classnames":318,"react":515,"uncontrollable":341}],268:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Century":263,"./Decade":268,"./Footer":270,"./Header":271,"./Month":274,"./SlideTransition":283,"./Year":286,"./mixins/PureRenderMixin":294,"./mixins/RtlParentContextMixin":296,"./mixins/TimeoutMixin":297,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"./util/constants":304,"./util/dates":305,"./util/propTypes":310,"classnames":35,"react":509,"uncontrollable":335}],263:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -35754,11 +34208,7 @@ function getCenturyDecades(_date) {
     return date = dates.add(date, 10, 'year');
   });
 }
-<<<<<<< HEAD
-},{"./WidgetButton":289,"./mixins/PureRenderMixin":298,"./mixins/RtlChildContextMixin":299,"./mixins/WidgetMixin":302,"./util/_":303,"./util/babelHelpers.js":304,"./util/configuration":307,"./util/constants":308,"./util/dates":309,"./util/propTypes":314,"classnames":317,"react":514}],268:[function(require,module,exports){
-=======
-},{"./WidgetButton":290,"./mixins/PureRenderMixin":299,"./mixins/RtlChildContextMixin":300,"./mixins/WidgetMixin":303,"./util/_":304,"./util/babelHelpers.js":305,"./util/configuration":308,"./util/constants":309,"./util/dates":310,"./util/propTypes":315,"classnames":318,"react":515}],269:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./WidgetButton":285,"./mixins/PureRenderMixin":294,"./mixins/RtlChildContextMixin":295,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/configuration":303,"./util/constants":304,"./util/dates":305,"./util/propTypes":310,"classnames":35,"react":509}],264:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -36129,11 +34579,7 @@ function getFilter(suggest, word, ctx) {
 module.exports = createUncontrolledWidget(ComboBox, { open: 'onToggle', value: 'onChange' });
 
 module.exports.BaseComboBox = ComboBox;
-<<<<<<< HEAD
-},{"./ComboboxInput":269,"./List":276,"./ListGroupable":277,"./Popup":284,"./WidgetButton":289,"./mixins/DataFilterMixin":294,"./mixins/DataHelpersMixin":295,"./mixins/PopupScrollToMixin":297,"./mixins/RtlParentContextMixin":300,"./mixins/TimeoutMixin":301,"./mixins/WidgetMixin":302,"./util/_":303,"./util/babelHelpers.js":304,"./util/compat":306,"./util/filter":312,"./util/propTypes":314,"./util/validateListInterface":316,"classnames":317,"react":514,"uncontrollable":340}],269:[function(require,module,exports){
-=======
-},{"./ComboboxInput":270,"./List":277,"./ListGroupable":278,"./Popup":285,"./WidgetButton":290,"./mixins/DataFilterMixin":295,"./mixins/DataHelpersMixin":296,"./mixins/PopupScrollToMixin":298,"./mixins/RtlParentContextMixin":301,"./mixins/TimeoutMixin":302,"./mixins/WidgetMixin":303,"./util/_":304,"./util/babelHelpers.js":305,"./util/compat":307,"./util/filter":313,"./util/propTypes":315,"./util/validateListInterface":317,"classnames":318,"react":515,"uncontrollable":341}],270:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ComboboxInput":265,"./List":272,"./ListGroupable":273,"./Popup":280,"./WidgetButton":285,"./mixins/DataFilterMixin":290,"./mixins/DataHelpersMixin":291,"./mixins/PopupScrollToMixin":293,"./mixins/RtlParentContextMixin":296,"./mixins/TimeoutMixin":297,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/filter":308,"./util/propTypes":310,"./util/validateListInterface":312,"classnames":35,"react":509,"uncontrollable":335}],265:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -36213,11 +34659,7 @@ module.exports = React.createClass({
     compat.findDOMNode(this).focus();
   }
 });
-<<<<<<< HEAD
-},{"./util/babelHelpers.js":304,"./util/caret":305,"./util/compat":306,"react":514}],270:[function(require,module,exports){
-=======
-},{"./util/babelHelpers.js":305,"./util/caret":306,"./util/compat":307,"react":515}],271:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./util/babelHelpers.js":300,"./util/caret":301,"./util/compat":302,"react":509}],266:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -36289,11 +34731,14 @@ module.exports = React.createClass({
   },
 
   _blur: function _blur(e) {
-    var val = e.target.value;
+    var val = e.target.value,
+        date;
 
     if (this._needsFlush) {
       this._needsFlush = false;
-      this.props.onChange(this.props.parse(val), val);
+      date = this.props.parse(val);
+
+      this.props.onChange(date, formatDate(date, this.props.format, this.props.culture));
     }
   },
 
@@ -36321,11 +34766,7 @@ function chain(a, b, thisArg) {
     b && b.apply(thisArg, arguments);
   };
 }
-<<<<<<< HEAD
-},{"./util/babelHelpers.js":304,"./util/compat":306,"./util/configuration":307,"./util/dates":309,"./util/propTypes":314,"classnames":317,"react":514}],271:[function(require,module,exports){
-=======
-},{"./util/babelHelpers.js":305,"./util/compat":307,"./util/configuration":308,"./util/dates":310,"./util/propTypes":315,"classnames":318,"react":515}],272:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"./util/dates":305,"./util/propTypes":310,"classnames":35,"react":509}],267:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -36724,11 +35165,7 @@ function dateOrNull(dt) {
 }
 // #75: need to aggressively reclaim focus from the calendar otherwise
 // disabled header/footer buttons will drop focus completely from the widget
-<<<<<<< HEAD
-},{"./Calendar":266,"./DateInput":270,"./Popup":284,"./TimeList":288,"./WidgetButton":289,"./mixins/PopupScrollToMixin":297,"./mixins/PureRenderMixin":298,"./mixins/RtlParentContextMixin":300,"./mixins/TimeoutMixin":301,"./mixins/WidgetMixin":302,"./util/_":303,"./util/babelHelpers.js":304,"./util/compat":306,"./util/configuration":307,"./util/constants":308,"./util/dates":309,"./util/propTypes":314,"classnames":317,"react":514,"react/lib/getActiveElement":478,"react/lib/invariant":492,"uncontrollable":340}],272:[function(require,module,exports){
-=======
-},{"./Calendar":267,"./DateInput":271,"./Popup":285,"./TimeList":289,"./WidgetButton":290,"./mixins/PopupScrollToMixin":298,"./mixins/PureRenderMixin":299,"./mixins/RtlParentContextMixin":301,"./mixins/TimeoutMixin":302,"./mixins/WidgetMixin":303,"./util/_":304,"./util/babelHelpers.js":305,"./util/compat":307,"./util/configuration":308,"./util/constants":309,"./util/dates":310,"./util/propTypes":315,"classnames":318,"react":515,"react/lib/getActiveElement":479,"react/lib/invariant":493,"uncontrollable":341}],273:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Calendar":262,"./DateInput":266,"./Popup":280,"./TimeList":284,"./WidgetButton":285,"./mixins/PopupScrollToMixin":293,"./mixins/PureRenderMixin":294,"./mixins/RtlParentContextMixin":296,"./mixins/TimeoutMixin":297,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"./util/constants":304,"./util/dates":305,"./util/propTypes":310,"classnames":35,"react":509,"react/lib/getActiveElement":473,"react/lib/invariant":487,"uncontrollable":335}],268:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -36838,11 +35275,7 @@ function getDecadeYears(_date) {
 }
 
 //require('./mixins/DateFocusMixin')('decade', 'year')
-<<<<<<< HEAD
-},{"./WidgetButton":289,"./mixins/PureRenderMixin":298,"./mixins/RtlChildContextMixin":299,"./mixins/WidgetMixin":302,"./util/_":303,"./util/babelHelpers.js":304,"./util/configuration":307,"./util/dates":309,"./util/propTypes":314,"classnames":317,"react":514}],273:[function(require,module,exports){
-=======
-},{"./WidgetButton":290,"./mixins/PureRenderMixin":299,"./mixins/RtlChildContextMixin":300,"./mixins/WidgetMixin":303,"./util/_":304,"./util/babelHelpers.js":305,"./util/configuration":308,"./util/dates":310,"./util/propTypes":315,"classnames":318,"react":515}],274:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./WidgetButton":285,"./mixins/PureRenderMixin":294,"./mixins/RtlChildContextMixin":295,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/configuration":303,"./util/dates":305,"./util/propTypes":310,"classnames":35,"react":509}],269:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -36981,7 +35414,7 @@ var DropdownList = React.createClass({
         'aria-activedescendent': this.props.open ? optID : undefined,
         'aria-disabled': this.props.disabled,
         'aria-readonly': this.props.readOnly,
-        tabIndex: props.tabIndex || '-1',
+        tabIndex: props.tabIndex || '0',
         className: cx(className, 'rw-dropdownlist', 'rw-widget', (_cx = {}, _cx['rw-state-disabled'] = this.props.disabled, _cx['rw-state-readonly'] = this.props.readOnly, _cx['rw-state-focus'] = this.state.focused, _cx['rw-rtl'] = this.isRtl(), _cx['rw-open' + (dropUp ? '-up' : '')] = this.props.open, _cx)) }),
       React.createElement(
         'span',
@@ -37187,11 +35620,7 @@ function msgs(msgs) {
 module.exports = createUncontrolledWidget(DropdownList, { open: 'onToggle', value: 'onChange', searchTerm: 'onSearch' });
 
 module.exports.BaseDropdownList = DropdownList;
-<<<<<<< HEAD
-},{"./List":276,"./ListGroupable":277,"./Popup":284,"./mixins/DataFilterMixin":294,"./mixins/DataHelpersMixin":295,"./mixins/PopupScrollToMixin":297,"./mixins/PureRenderMixin":298,"./mixins/RtlParentContextMixin":300,"./mixins/TimeoutMixin":301,"./mixins/WidgetMixin":302,"./util/_":303,"./util/babelHelpers.js":304,"./util/compat":306,"./util/propTypes":314,"./util/validateListInterface":316,"classnames":317,"dom-helpers/query/contains":321,"react":514,"react/lib/getActiveElement":478,"uncontrollable":340}],274:[function(require,module,exports){
-=======
-},{"./List":277,"./ListGroupable":278,"./Popup":285,"./mixins/DataFilterMixin":295,"./mixins/DataHelpersMixin":296,"./mixins/PopupScrollToMixin":298,"./mixins/PureRenderMixin":299,"./mixins/RtlParentContextMixin":301,"./mixins/TimeoutMixin":302,"./mixins/WidgetMixin":303,"./util/_":304,"./util/babelHelpers.js":305,"./util/compat":307,"./util/propTypes":315,"./util/validateListInterface":317,"classnames":318,"dom-helpers/query/contains":322,"react":515,"react/lib/getActiveElement":479,"uncontrollable":341}],275:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./List":272,"./ListGroupable":273,"./Popup":280,"./mixins/DataFilterMixin":290,"./mixins/DataHelpersMixin":291,"./mixins/PopupScrollToMixin":293,"./mixins/PureRenderMixin":294,"./mixins/RtlParentContextMixin":296,"./mixins/TimeoutMixin":297,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/propTypes":310,"./util/validateListInterface":312,"classnames":35,"dom-helpers/query/contains":316,"react":509,"react/lib/getActiveElement":473,"uncontrollable":335}],270:[function(require,module,exports){
 'use strict';
 
 var React = require('react'),
@@ -37229,11 +35658,7 @@ module.exports = React.createClass({
   }
 
 });
-<<<<<<< HEAD
-},{"./WidgetButton":289,"./util/configuration":307,"./util/dates":309,"react":514}],275:[function(require,module,exports){
-=======
-},{"./WidgetButton":290,"./util/configuration":308,"./util/dates":310,"react":515}],276:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./WidgetButton":285,"./util/configuration":303,"./util/dates":305,"react":509}],271:[function(require,module,exports){
 'use strict';
 var React = require('react'),
     Btn = require('./WidgetButton');
@@ -37317,11 +35742,7 @@ module.exports = React.createClass({
     );
   }
 });
-<<<<<<< HEAD
-},{"./WidgetButton":289,"./mixins/PureRenderMixin":298,"./mixins/RtlChildContextMixin":299,"react":514}],276:[function(require,module,exports){
-=======
-},{"./WidgetButton":290,"./mixins/PureRenderMixin":299,"./mixins/RtlChildContextMixin":300,"react":515}],277:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./WidgetButton":285,"./mixins/PureRenderMixin":294,"./mixins/RtlChildContextMixin":295,"react":509}],272:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -37440,11 +35861,7 @@ module.exports = React.createClass({
   }
 
 });
-<<<<<<< HEAD
-},{"./mixins/DataHelpersMixin":295,"./mixins/ListMovementMixin":296,"./mixins/WidgetMixin":302,"./util/_":303,"./util/babelHelpers.js":304,"./util/compat":306,"./util/propTypes":314,"classnames":317,"react":514}],277:[function(require,module,exports){
-=======
-},{"./mixins/DataHelpersMixin":296,"./mixins/ListMovementMixin":297,"./mixins/WidgetMixin":303,"./util/_":304,"./util/babelHelpers.js":305,"./util/compat":307,"./util/propTypes":315,"classnames":318,"react":515}],278:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./mixins/DataHelpersMixin":291,"./mixins/ListMovementMixin":292,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/propTypes":310,"classnames":35,"react":509}],273:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -37658,11 +36075,7 @@ module.exports = React.createClass({
   }
 
 });
-<<<<<<< HEAD
-},{"./mixins/DataHelpersMixin":295,"./mixins/ListMovementMixin":296,"./mixins/WidgetMixin":302,"./util/_":303,"./util/babelHelpers.js":304,"./util/compat":306,"./util/propTypes":314,"classnames":317,"react":514,"react/lib/warning":513}],278:[function(require,module,exports){
-=======
-},{"./mixins/DataHelpersMixin":296,"./mixins/ListMovementMixin":297,"./mixins/WidgetMixin":303,"./util/_":304,"./util/babelHelpers.js":305,"./util/compat":307,"./util/propTypes":315,"classnames":318,"react":515,"react/lib/warning":514}],279:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./mixins/DataHelpersMixin":291,"./mixins/ListMovementMixin":292,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/propTypes":310,"classnames":35,"react":509,"react/lib/warning":508}],274:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -37786,11 +36199,7 @@ module.exports = React.createClass({
 
 });
 //value is chosen
-<<<<<<< HEAD
-},{"./WidgetButton":289,"./mixins/RtlChildContextMixin":299,"./mixins/WidgetMixin":302,"./util/_":303,"./util/babelHelpers.js":304,"./util/configuration":307,"./util/dates":309,"./util/propTypes":314,"classnames":317,"react":514}],279:[function(require,module,exports){
-=======
-},{"./WidgetButton":290,"./mixins/RtlChildContextMixin":300,"./mixins/WidgetMixin":303,"./util/_":304,"./util/babelHelpers.js":305,"./util/configuration":308,"./util/dates":310,"./util/propTypes":315,"classnames":318,"react":515}],280:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./WidgetButton":285,"./mixins/RtlChildContextMixin":295,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/configuration":303,"./util/dates":305,"./util/propTypes":310,"classnames":35,"react":509}],275:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -38199,11 +36608,7 @@ module.exports = createUncontrolledWidget(Multiselect, { open: 'onToggle', value
 // }
 
 module.exports.BaseMultiselect = Multiselect;
-<<<<<<< HEAD
-},{"./List":276,"./ListGroupable":277,"./MultiselectInput":280,"./MultiselectTagList":281,"./Popup":284,"./mixins/DataFilterMixin":294,"./mixins/DataHelpersMixin":295,"./mixins/PopupScrollToMixin":297,"./mixins/RtlParentContextMixin":300,"./mixins/TimeoutMixin":301,"./mixins/WidgetMixin":302,"./util/_":303,"./util/babelHelpers.js":304,"./util/compat":306,"./util/dom/support":311,"./util/propTypes":314,"./util/validateListInterface":316,"classnames":317,"react":514,"uncontrollable":340}],280:[function(require,module,exports){
-=======
-},{"./List":277,"./ListGroupable":278,"./MultiselectInput":281,"./MultiselectTagList":282,"./Popup":285,"./mixins/DataFilterMixin":295,"./mixins/DataHelpersMixin":296,"./mixins/PopupScrollToMixin":298,"./mixins/RtlParentContextMixin":301,"./mixins/TimeoutMixin":302,"./mixins/WidgetMixin":303,"./util/_":304,"./util/babelHelpers.js":305,"./util/compat":307,"./util/dom/support":312,"./util/propTypes":315,"./util/validateListInterface":317,"classnames":318,"react":515,"uncontrollable":341}],281:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./List":272,"./ListGroupable":273,"./MultiselectInput":276,"./MultiselectTagList":277,"./Popup":280,"./mixins/DataFilterMixin":290,"./mixins/DataHelpersMixin":291,"./mixins/PopupScrollToMixin":293,"./mixins/RtlParentContextMixin":296,"./mixins/TimeoutMixin":297,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/dom/support":307,"./util/propTypes":310,"./util/validateListInterface":312,"classnames":35,"react":509,"uncontrollable":335}],276:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -38248,11 +36653,7 @@ module.exports = React.createClass({
   }
 
 });
-<<<<<<< HEAD
-},{"./util/babelHelpers.js":304,"./util/compat":306,"react":514}],281:[function(require,module,exports){
-=======
-},{"./util/babelHelpers.js":305,"./util/compat":307,"react":515}],282:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./util/babelHelpers.js":300,"./util/compat":302,"react":509}],277:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -38403,11 +36804,7 @@ module.exports = React.createClass({
     if (nextIdx >= 0) this.setState({ focused: nextIdx });
   }
 });
-<<<<<<< HEAD
-},{"./WidgetButton":289,"./mixins/DataHelpersMixin":295,"./mixins/PureRenderMixin":298,"./util/_":303,"./util/babelHelpers.js":304,"./util/propTypes":314,"classnames":317,"react":514}],282:[function(require,module,exports){
-=======
-},{"./WidgetButton":290,"./mixins/DataHelpersMixin":296,"./mixins/PureRenderMixin":299,"./util/_":304,"./util/babelHelpers.js":305,"./util/propTypes":315,"classnames":318,"react":515}],283:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./WidgetButton":285,"./mixins/DataHelpersMixin":291,"./mixins/PureRenderMixin":294,"./util/_":299,"./util/babelHelpers.js":300,"./util/propTypes":310,"classnames":35,"react":509}],278:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -38536,11 +36933,7 @@ module.exports = React.createClass({
 function formatNumber(number, format, culture) {
   return localizers.number.format(number, format, culture);
 }
-<<<<<<< HEAD
-},{"./util/babelHelpers.js":304,"./util/configuration":307,"./util/propTypes":314,"react":514}],283:[function(require,module,exports){
-=======
-},{"./util/babelHelpers.js":305,"./util/configuration":308,"./util/propTypes":315,"react":515}],284:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./util/babelHelpers.js":300,"./util/configuration":303,"./util/propTypes":310,"react":509}],279:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -38813,11 +37206,7 @@ function round(value, precision) {
 module.exports = createUncontrolledWidget(NumberPicker, { value: 'onChange' });
 
 module.exports.BaseNumberPicker = NumberPicker;
-<<<<<<< HEAD
-},{"./NumberInput":282,"./WidgetButton":289,"./mixins/PureRenderMixin":298,"./mixins/RtlParentContextMixin":300,"./mixins/TimeoutMixin":301,"./mixins/WidgetMixin":302,"./util/_":303,"./util/babelHelpers.js":304,"./util/compat":306,"./util/configuration":307,"./util/constants":308,"./util/propTypes":314,"./util/repeater":315,"classnames":317,"react":514,"uncontrollable":340}],284:[function(require,module,exports){
-=======
-},{"./NumberInput":283,"./WidgetButton":290,"./mixins/PureRenderMixin":299,"./mixins/RtlParentContextMixin":301,"./mixins/TimeoutMixin":302,"./mixins/WidgetMixin":303,"./util/_":304,"./util/babelHelpers.js":305,"./util/compat":307,"./util/configuration":308,"./util/constants":309,"./util/propTypes":315,"./util/repeater":316,"classnames":318,"react":515,"uncontrollable":341}],285:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./NumberInput":278,"./WidgetButton":285,"./mixins/PureRenderMixin":294,"./mixins/RtlParentContextMixin":296,"./mixins/TimeoutMixin":297,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"./util/constants":304,"./util/propTypes":310,"./util/repeater":311,"classnames":35,"react":509,"uncontrollable":335}],280:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -39026,11 +37415,7 @@ function childKey(children) {
   });
   for (var key in nextChildMapping) return key;
 }
-<<<<<<< HEAD
-},{"./util/babelHelpers.js":304,"./util/compat":306,"./util/configuration":307,"classnames":317,"dom-helpers/query/height":322,"dom-helpers/style":329,"react":514}],285:[function(require,module,exports){
-=======
-},{"./util/babelHelpers.js":305,"./util/compat":307,"./util/configuration":308,"classnames":318,"dom-helpers/query/height":323,"dom-helpers/style":330,"react":515}],286:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"classnames":35,"dom-helpers/query/height":317,"dom-helpers/style":324,"react":509}],281:[function(require,module,exports){
 /**
  * A streamlined version of TransitionGroup built for managing at most two active children
  * also provides additional hooks for animation start/end
@@ -39219,11 +37604,7 @@ function key(child) {
   return child && child.key;
 }
 // This entered again before it fully left. Add it again.
-<<<<<<< HEAD
-},{"./util/_":303,"./util/compat":306,"dom-helpers/query/height":322,"dom-helpers/query/width":327,"dom-helpers/style":329,"react":514}],286:[function(require,module,exports){
-=======
-},{"./util/_":304,"./util/compat":307,"dom-helpers/query/height":323,"dom-helpers/query/width":328,"dom-helpers/style":330,"react":515}],287:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./util/_":299,"./util/compat":302,"dom-helpers/query/height":317,"dom-helpers/query/width":322,"dom-helpers/style":324,"react":509}],282:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -39562,11 +37943,7 @@ function getListItem(parent) {
 module.exports = createUncontrolledWidget(SelectList, { value: 'onChange' });
 
 module.exports.BaseSelectList = SelectList;
-<<<<<<< HEAD
-},{"./List":276,"./ListGroupable":277,"./mixins/DataHelpersMixin":295,"./mixins/RtlParentContextMixin":300,"./mixins/TimeoutMixin":301,"./mixins/WidgetMixin":302,"./util/_":303,"./util/babelHelpers.js":304,"./util/compat":306,"./util/propTypes":314,"./util/validateListInterface":316,"classnames":317,"dom-helpers/util/scrollTo":338,"react":514,"uncontrollable":340}],287:[function(require,module,exports){
-=======
-},{"./List":277,"./ListGroupable":278,"./mixins/DataHelpersMixin":296,"./mixins/RtlParentContextMixin":301,"./mixins/TimeoutMixin":302,"./mixins/WidgetMixin":303,"./util/_":304,"./util/babelHelpers.js":305,"./util/compat":307,"./util/propTypes":315,"./util/validateListInterface":317,"classnames":318,"dom-helpers/util/scrollTo":339,"react":515,"uncontrollable":341}],288:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./List":272,"./ListGroupable":273,"./mixins/DataHelpersMixin":291,"./mixins/RtlParentContextMixin":296,"./mixins/TimeoutMixin":297,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/propTypes":310,"./util/validateListInterface":312,"classnames":35,"dom-helpers/util/scrollTo":333,"react":509,"uncontrollable":335}],283:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -39689,11 +38066,7 @@ module.exports = React.createClass({
     return this.isMounted() && this.refs.container.isTransitioning();
   }
 });
-<<<<<<< HEAD
-},{"./ReplaceTransitionGroup":285,"./util/babelHelpers.js":304,"./util/compat":306,"./util/configuration":307,"dom-helpers/query/width":327,"dom-helpers/style":329,"react":514}],288:[function(require,module,exports){
-=======
-},{"./ReplaceTransitionGroup":286,"./util/babelHelpers.js":305,"./util/compat":307,"./util/configuration":308,"dom-helpers/query/width":328,"dom-helpers/style":330,"react":515}],289:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReplaceTransitionGroup":281,"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"dom-helpers/query/width":322,"dom-helpers/style":324,"react":509}],284:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -39889,11 +38262,7 @@ module.exports = React.createClass({
   }
 
 });
-<<<<<<< HEAD
-},{"./List":276,"./mixins/TimeoutMixin":301,"./util/_":303,"./util/babelHelpers.js":304,"./util/compat":306,"./util/configuration":307,"./util/dates":309,"./util/propTypes":314,"react":514}],289:[function(require,module,exports){
-=======
-},{"./List":277,"./mixins/TimeoutMixin":302,"./util/_":304,"./util/babelHelpers.js":305,"./util/compat":307,"./util/configuration":308,"./util/dates":310,"./util/propTypes":315,"react":515}],290:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./List":272,"./mixins/TimeoutMixin":297,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"./util/dates":305,"./util/propTypes":310,"react":509}],285:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -39916,11 +38285,7 @@ module.exports = React.createClass({
     );
   }
 });
-<<<<<<< HEAD
-},{"./util/babelHelpers.js":304,"classnames":317,"react":514}],290:[function(require,module,exports){
-=======
-},{"./util/babelHelpers.js":305,"classnames":318,"react":515}],291:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./util/babelHelpers.js":300,"classnames":35,"react":509}],286:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -40015,11 +38380,7 @@ module.exports = React.createClass({
   }
 
 });
-<<<<<<< HEAD
-},{"./WidgetButton":289,"./mixins/RtlChildContextMixin":299,"./mixins/WidgetMixin":302,"./util/_":303,"./util/babelHelpers.js":304,"./util/compat":306,"./util/configuration":307,"./util/constants":308,"./util/dates":309,"./util/propTypes":314,"classnames":317,"react":514}],291:[function(require,module,exports){
-=======
-},{"./WidgetButton":290,"./mixins/RtlChildContextMixin":300,"./mixins/WidgetMixin":303,"./util/_":304,"./util/babelHelpers.js":305,"./util/compat":307,"./util/configuration":308,"./util/constants":309,"./util/dates":310,"./util/propTypes":315,"classnames":318,"react":515}],292:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./WidgetButton":285,"./mixins/RtlChildContextMixin":295,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"./util/constants":304,"./util/dates":305,"./util/propTypes":310,"classnames":35,"react":509}],287:[function(require,module,exports){
 'use strict';
 
 var warning = require('react/lib/warning');
@@ -40062,11 +38423,7 @@ function depreciateMethod(fn) {
     return fn.apply(this, arguments);
   };
 }
-<<<<<<< HEAD
-},{"./globalize-localizers":292,"./util/configuration":307,"./util/localizers":313,"react/lib/warning":513}],292:[function(require,module,exports){
-=======
-},{"./globalize-localizers":293,"./util/configuration":308,"./util/localizers":314,"react/lib/warning":514}],293:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./globalize-localizers":288,"./util/configuration":303,"./util/localizers":309,"react/lib/warning":508}],288:[function(require,module,exports){
 'use strict';
 
 var _require = require('./util/localizers');
@@ -40186,11 +38543,7 @@ function globalizeNumberLocalizer(globalize) {
 module.exports = {
   globalizeNumberLocalizer: globalizeNumberLocalizer, globalizeDateLocalizer: globalizeDateLocalizer
 };
-<<<<<<< HEAD
-},{"./util/localizers":313,"date-arithmetic":318}],293:[function(require,module,exports){
-=======
-},{"./util/localizers":314,"date-arithmetic":319}],294:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./util/localizers":309,"date-arithmetic":313}],289:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -40221,11 +38574,7 @@ module.exports = {
   }
 };
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./Calendar":266,"./Combobox":268,"./DateTimePicker":271,"./DropdownList":273,"./Multiselect":279,"./NumberPicker":283,"./ReplaceTransitionGroup":285,"./SelectList":286,"./SlideTransition":287,"./configure":291,"_process":35}],294:[function(require,module,exports){
-=======
-},{"./Calendar":267,"./Combobox":269,"./DateTimePicker":272,"./DropdownList":274,"./Multiselect":280,"./NumberPicker":284,"./ReplaceTransitionGroup":286,"./SelectList":287,"./SlideTransition":288,"./configure":292,"_process":36}],295:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Calendar":262,"./Combobox":264,"./DateTimePicker":267,"./DropdownList":269,"./Multiselect":275,"./NumberPicker":279,"./ReplaceTransitionGroup":281,"./SelectList":282,"./SlideTransition":283,"./configure":287,"_process":34}],290:[function(require,module,exports){
 'use strict';
 var React = require('react'),
     filters = require('../util/filter'),
@@ -40290,11 +38639,7 @@ function getFilter(matcher, searchTerm, ctx) {
     return matcher(val, searchTerm);
   };
 }
-<<<<<<< HEAD
-},{"../util/filter":312,"../util/propTypes":314,"./DataHelpersMixin":295,"react":514}],295:[function(require,module,exports){
-=======
-},{"../util/filter":313,"../util/propTypes":315,"./DataHelpersMixin":296,"react":515}],296:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../util/filter":308,"../util/propTypes":310,"./DataHelpersMixin":291,"react":509}],291:[function(require,module,exports){
 'use strict';
 var React = require('react');
 var propTypes = require('../util/propTypes');
@@ -40367,11 +38712,7 @@ module.exports = {
     return item;
   }
 };
-<<<<<<< HEAD
-},{"../util/_":303,"../util/propTypes":314,"react":514}],296:[function(require,module,exports){
-=======
-},{"../util/_":304,"../util/propTypes":315,"react":515}],297:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../util/_":299,"../util/propTypes":310,"react":509}],292:[function(require,module,exports){
 'use strict';
 var React = require('react'),
     filter = require('../util/filter'),
@@ -40442,11 +38783,7 @@ function findPrevInstance(ctx, data, word, startIndex) {
     if (foundStart && matches(itemText, word)) return data[idx];
   }
 }
-<<<<<<< HEAD
-},{"../util/filter":312,"./DataHelpersMixin":295,"react":514}],297:[function(require,module,exports){
-=======
-},{"../util/filter":313,"./DataHelpersMixin":296,"react":515}],298:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../util/filter":308,"./DataHelpersMixin":291,"react":509}],293:[function(require,module,exports){
 'use strict';
 var scrollTo = require('dom-helpers/util/scrollTo');
 
@@ -40474,11 +38811,7 @@ module.exports = {
     }
   }
 };
-<<<<<<< HEAD
-},{"dom-helpers/util/scrollTo":338}],298:[function(require,module,exports){
-=======
-},{"dom-helpers/util/scrollTo":339}],299:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"dom-helpers/util/scrollTo":333}],294:[function(require,module,exports){
 'use strict';
 var _ = require('../util/_');
 
@@ -40489,11 +38822,7 @@ module.exports = {
     return !_.isShallowEqual(this.props, nextProps) || !_.isShallowEqual(this.state, nextState);
   }
 };
-<<<<<<< HEAD
-},{"../util/_":303}],299:[function(require,module,exports){
-=======
-},{"../util/_":304}],300:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../util/_":299}],295:[function(require,module,exports){
 'use strict';
 var React = require('react');
 
@@ -40508,11 +38837,7 @@ module.exports = {
   }
 
 };
-<<<<<<< HEAD
-},{"react":514}],300:[function(require,module,exports){
-=======
-},{"react":515}],301:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"react":509}],296:[function(require,module,exports){
 'use strict';
 var React = require('react');
 
@@ -40541,11 +38866,7 @@ module.exports = {
   }
 
 };
-<<<<<<< HEAD
-},{"react":514}],301:[function(require,module,exports){
-=======
-},{"react":515}],302:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"react":509}],297:[function(require,module,exports){
 'use strict';
 
 var _require = require('../util/_');
@@ -40572,11 +38893,7 @@ module.exports = {
   }
 
 };
-<<<<<<< HEAD
-},{"../util/_":303}],302:[function(require,module,exports){
-=======
-},{"../util/_":304}],303:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../util/_":299}],298:[function(require,module,exports){
 'use strict';
 var React = require('react'),
     _ = require('../util/_'); //uniqueID
@@ -40612,11 +38929,7 @@ module.exports = {
     return function () {};
   }
 };
-<<<<<<< HEAD
-},{"../util/_":303,"react":514}],303:[function(require,module,exports){
-=======
-},{"../util/_":304,"react":515}],304:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../util/_":299,"react":509}],299:[function(require,module,exports){
 'use strict';
 var idCount = 0;
 
@@ -40747,11 +39060,7 @@ function shallowEqual(objA, objB) {
 
   return true;
 }
-<<<<<<< HEAD
-},{}],304:[function(require,module,exports){
-=======
-},{}],305:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],300:[function(require,module,exports){
 (function (root, factory) {
   if (typeof define === "function" && define.amd) {
     define(["exports"], factory);
@@ -40795,11 +39104,7 @@ function shallowEqual(objA, objB) {
     }
   };
 })
-<<<<<<< HEAD
-},{}],305:[function(require,module,exports){
-=======
-},{}],306:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],301:[function(require,module,exports){
 /*eslint-disable no-empty */
 'use strict';
 
@@ -40850,11 +39155,7 @@ function set(el, start, end) {
   } catch (e) {}
 }
 /* not focused or not visible */ /* not focused or not visible */
-<<<<<<< HEAD
-},{}],306:[function(require,module,exports){
-=======
-},{}],307:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],302:[function(require,module,exports){
 'use strict';
 var React = require('react'),
     _ = require('./_');
@@ -40890,11 +39191,7 @@ module.exports = {
     return child;
   }
 };
-<<<<<<< HEAD
-},{"./_":303,"react":514}],307:[function(require,module,exports){
-=======
-},{"./_":304,"react":515}],308:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./_":299,"react":509}],303:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -40927,11 +39224,7 @@ module.exports = {
   }
 };
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"../globalize-localizers":292,"./dom/animate":310,"_process":35,"globalize":339}],308:[function(require,module,exports){
-=======
-},{"../globalize-localizers":293,"./dom/animate":311,"_process":36,"globalize":340}],309:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../globalize-localizers":288,"./dom/animate":306,"_process":34,"globalize":334}],304:[function(require,module,exports){
 'use strict';
 
 var _calendarViewHierarchy, _calendarViewUnits;
@@ -40963,11 +39256,7 @@ module.exports = {
 
   calendarViewUnits: (_calendarViewUnits = {}, _calendarViewUnits[views.MONTH] = 'day', _calendarViewUnits[views.YEAR] = views.MONTH, _calendarViewUnits[views.DECADE] = views.YEAR, _calendarViewUnits[views.CENTURY] = views.DECADE, _calendarViewUnits)
 };
-<<<<<<< HEAD
-},{}],309:[function(require,module,exports){
-=======
-},{}],310:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],305:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./babelHelpers.js');
@@ -41068,11 +39357,7 @@ var dates = module.exports = babelHelpers._extends(dateMath, {
     return this.add(this.startOf(new Date(), 'day'), 1, 'day');
   }
 });
-<<<<<<< HEAD
-},{"./babelHelpers.js":304,"./configuration":307,"./constants":308,"date-arithmetic":318}],310:[function(require,module,exports){
-=======
-},{"./babelHelpers.js":305,"./configuration":308,"./constants":309,"date-arithmetic":319}],311:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./babelHelpers.js":300,"./configuration":303,"./constants":304,"date-arithmetic":313}],306:[function(require,module,exports){
 'use strict';
 var hyphenate = require('dom-helpers/util/hyphenate'),
     css = require('dom-helpers/style'),
@@ -41153,21 +39438,13 @@ function animate(node, properties, duration, easing, callback) {
     callback && callback.call(this);
   }
 }
-<<<<<<< HEAD
-},{"dom-helpers/events/off":319,"dom-helpers/events/on":320,"dom-helpers/style":329,"dom-helpers/transition/properties":331,"dom-helpers/util/hyphenate":334}],311:[function(require,module,exports){
-=======
-},{"dom-helpers/events/off":320,"dom-helpers/events/on":321,"dom-helpers/style":330,"dom-helpers/transition/properties":332,"dom-helpers/util/hyphenate":335}],312:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"dom-helpers/events/off":314,"dom-helpers/events/on":315,"dom-helpers/style":324,"dom-helpers/transition/properties":326,"dom-helpers/util/hyphenate":329}],307:[function(require,module,exports){
 'use strict';
 
 module.exports = {
   ios: typeof navigator !== 'undefined' && navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/)
 };
-<<<<<<< HEAD
-},{}],312:[function(require,module,exports){
-=======
-},{}],313:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],308:[function(require,module,exports){
 'use strict';
 var common = {
   eq: function eq(a, b) {
@@ -41206,11 +39483,7 @@ var common = {
 };
 
 module.exports = common;
-<<<<<<< HEAD
-},{}],313:[function(require,module,exports){
-=======
-},{}],314:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],309:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -41312,11 +39585,7 @@ module.exports = {
   NumberLocalizer: NumberLocalizer, DateLocalizer: DateLocalizer
 };
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./_":303,"./babelHelpers.js":304,"_process":35,"react":514,"react/lib/invariant":492}],314:[function(require,module,exports){
-=======
-},{"./_":304,"./babelHelpers.js":305,"_process":36,"react":515,"react/lib/invariant":493}],315:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./_":299,"./babelHelpers.js":300,"_process":34,"react":509,"react/lib/invariant":487}],310:[function(require,module,exports){
 'use strict';
 var React = require('react'),
     localizers = require('./configuration').locale,
@@ -41381,11 +39650,7 @@ function createChainableTypeChecker(validate) {
 
   return chainedCheckType;
 }
-<<<<<<< HEAD
-},{"./configuration":307,"./filter":312,"react":514}],315:[function(require,module,exports){
-=======
-},{"./configuration":308,"./filter":313,"react":515}],316:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./configuration":303,"./filter":308,"react":509}],311:[function(require,module,exports){
 // my tests in ie11/chrome/FF indicate that keyDown repeats
 // at about 35ms+/- 5ms after an initial 500ms delay. callback fires on the leading edge
 "use strict";
@@ -41407,11 +39672,7 @@ function Repeater(callback) {
 
 module.exports = Repeater;
 //fire after everything in case the user cancels on the first call
-<<<<<<< HEAD
-},{}],316:[function(require,module,exports){
-=======
-},{}],317:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],312:[function(require,module,exports){
 (function (process){
 'use strict';
 var METHODS = ['next', 'prev', 'first', 'last'];
@@ -41435,60 +39696,7 @@ function assert(condition, msg) {
   }
 }
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"_process":35}],317:[function(require,module,exports){
-=======
-},{"_process":36}],318:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-/*!
-  Copyright (c) 2015 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
-*/
-
-function classNames() {
-	var classes = '';
-	var arg;
-
-	for (var i = 0; i < arguments.length; i++) {
-		arg = arguments[i];
-		if (!arg) {
-			continue;
-		}
-
-		if ('string' === typeof arg || 'number' === typeof arg) {
-			classes += ' ' + arg;
-		} else if (Object.prototype.toString.call(arg) === '[object Array]') {
-			classes += ' ' + classNames.apply(null, arg);
-		} else if ('object' === typeof arg) {
-			for (var key in arg) {
-				if (!arg.hasOwnProperty(key) || !arg[key]) {
-					continue;
-				}
-				classes += ' ' + key;
-			}
-		}
-	}
-	return classes.substr(1);
-}
-
-// safely export classNames for node / browserify
-if (typeof module !== 'undefined' && module.exports) {
-	module.exports = classNames;
-}
-
-// safely export classNames for RequireJS
-if (typeof define !== 'undefined' && define.amd) {
-	define('classnames', [], function() {
-		return classNames;
-	});
-}
-
-<<<<<<< HEAD
-},{}],318:[function(require,module,exports){
-=======
-},{}],319:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"_process":34}],313:[function(require,module,exports){
 var MILI    = 'milliseconds'
   , SECONDS = 'seconds'
   , MINUTES = 'minutes'
@@ -41658,11 +39866,7 @@ function createComparer(operator) {
   };
 }
 
-<<<<<<< HEAD
-},{}],319:[function(require,module,exports){
-=======
-},{}],320:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],314:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 var off = function off() {};
@@ -41680,11 +39884,7 @@ if (canUseDOM) {
 }
 
 module.exports = off;
-<<<<<<< HEAD
-},{"../util/inDOM":336}],320:[function(require,module,exports){
-=======
-},{"../util/inDOM":337}],321:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../util/inDOM":331}],315:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 var on = function on() {};
@@ -41701,11 +39901,7 @@ if (canUseDOM) {
 }
 
 module.exports = on;
-<<<<<<< HEAD
-},{"../util/inDOM":336}],321:[function(require,module,exports){
-=======
-},{"../util/inDOM":337}],322:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../util/inDOM":331}],316:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 
@@ -41726,11 +39922,7 @@ var contains = (function () {
 })();
 
 module.exports = contains;
-<<<<<<< HEAD
-},{"../util/inDOM":336}],322:[function(require,module,exports){
-=======
-},{"../util/inDOM":337}],323:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../util/inDOM":331}],317:[function(require,module,exports){
 'use strict';
 
 var offset = require('./offset'),
@@ -41740,21 +39932,13 @@ module.exports = function height(node, client) {
   var win = getWindow(node);
   return win ? win.innerHeight : client ? node.clientHeight : offset(node).height;
 };
-<<<<<<< HEAD
-},{"./isWindow":323,"./offset":324}],323:[function(require,module,exports){
-=======
-},{"./isWindow":324,"./offset":325}],324:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./isWindow":318,"./offset":319}],318:[function(require,module,exports){
 'use strict';
 
 module.exports = function getWindow(node) {
   return node === node.window ? node : node.nodeType === 9 ? node.defaultView || node.parentWindow : false;
 };
-<<<<<<< HEAD
-},{}],324:[function(require,module,exports){
-=======
-},{}],325:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],319:[function(require,module,exports){
 'use strict';
 var contains = require('./contains'),
     getWindow = require('./isWindow');
@@ -41779,11 +39963,7 @@ module.exports = function offset(node) {
     height: box.height || node.offsetHeight
   };
 };
-<<<<<<< HEAD
-},{"./contains":321,"./isWindow":323}],325:[function(require,module,exports){
-=======
-},{"./contains":322,"./isWindow":324}],326:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./contains":316,"./isWindow":318}],320:[function(require,module,exports){
 'use strict';
 
 var css = require('../style'),
@@ -41808,11 +39988,7 @@ module.exports = function scrollPrarent(node) {
 
   return document;
 };
-<<<<<<< HEAD
-},{"../style":329,"./height":322}],326:[function(require,module,exports){
-=======
-},{"../style":330,"./height":323}],327:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../style":324,"./height":317}],321:[function(require,module,exports){
 'use strict';
 var getWindow = require('./isWindow');
 
@@ -41823,11 +39999,7 @@ module.exports = function scrollTop(node, val) {
 
   if (win) win.scrollTo('pageXOffset' in win ? win.pageXOffset : win.document.documentElement.scrollLeft, val);else node.scrollTop = val;
 };
-<<<<<<< HEAD
-},{"./isWindow":323}],327:[function(require,module,exports){
-=======
-},{"./isWindow":324}],328:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./isWindow":318}],322:[function(require,module,exports){
 'use strict';
 
 var offset = require('./offset'),
@@ -41837,11 +40009,7 @@ module.exports = function width(node, client) {
   var win = getWindow(node);
   return win ? win.innerWidth : client ? node.clientWidth : offset(node).width;
 };
-<<<<<<< HEAD
-},{"./isWindow":323,"./offset":324}],328:[function(require,module,exports){
-=======
-},{"./isWindow":324,"./offset":325}],329:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./isWindow":318,"./offset":319}],323:[function(require,module,exports){
 "use strict";
 
 module.exports = function _getComputedStyle(node) {
@@ -41860,11 +40028,7 @@ module.exports = function _getComputedStyle(node) {
     }
   };
 };
-<<<<<<< HEAD
-},{}],329:[function(require,module,exports){
-=======
-},{}],330:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],324:[function(require,module,exports){
 'use strict';
 
 var camelize = require('../util/camelizeStyle'),
@@ -41888,21 +40052,13 @@ module.exports = function style(node, property, value) {
 
   node.style.cssText += ';' + css;
 };
-<<<<<<< HEAD
-},{"../util/camelizeStyle":333,"../util/hyphenateStyle":335,"./getComputedStyle":328,"./removeStyle":330}],330:[function(require,module,exports){
-=======
-},{"../util/camelizeStyle":334,"../util/hyphenateStyle":336,"./getComputedStyle":329,"./removeStyle":331}],331:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../util/camelizeStyle":328,"../util/hyphenateStyle":330,"./getComputedStyle":323,"./removeStyle":325}],325:[function(require,module,exports){
 'use strict';
 
 module.exports = function removeStyle(node, key) {
   return 'removeProperty' in node.style ? node.style.removeProperty(key) : node.style.removeAttribute(key);
 };
-<<<<<<< HEAD
-},{}],331:[function(require,module,exports){
-=======
-},{}],332:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],326:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 
@@ -41958,25 +40114,17 @@ function getTransitionProperties() {
 
   return { end: endEvent, prefix: prefix };
 }
-<<<<<<< HEAD
-},{"../util/inDOM":336}],332:[function(require,module,exports){
-=======
-},{"../util/inDOM":337}],333:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../util/inDOM":331}],327:[function(require,module,exports){
 "use strict";
 
 var rHyphen = /-(.)/g;
 
 module.exports = function camelize(string) {
-  return string.replace(rHyphen, function (_, char) {
-    return char.toUpperCase();
+  return string.replace(rHyphen, function (_, chr) {
+    return chr.toUpperCase();
   });
 };
-<<<<<<< HEAD
-},{}],333:[function(require,module,exports){
-=======
-},{}],334:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],328:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -41990,11 +40138,7 @@ var msPattern = /^-ms-/;
 module.exports = function camelizeStyleName(string) {
   return camelize(string.replace(msPattern, 'ms-'));
 };
-<<<<<<< HEAD
-},{"./camelize":332}],334:[function(require,module,exports){
-=======
-},{"./camelize":333}],335:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./camelize":327}],329:[function(require,module,exports){
 'use strict';
 
 var rUpper = /([A-Z])/g;
@@ -42002,11 +40146,7 @@ var rUpper = /([A-Z])/g;
 module.exports = function hyphenate(string) {
   return string.replace(rUpper, '-$1').toLowerCase();
 };
-<<<<<<< HEAD
-},{}],335:[function(require,module,exports){
-=======
-},{}],336:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],330:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42021,17 +40161,10 @@ var msPattern = /^ms-/;
 module.exports = function hyphenateStyleName(string) {
   return hyphenate(string).replace(msPattern, "-ms-");
 };
-<<<<<<< HEAD
-},{"./hyphenate":334}],336:[function(require,module,exports){
+},{"./hyphenate":329}],331:[function(require,module,exports){
 'use strict';
 module.exports = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-},{}],337:[function(require,module,exports){
-=======
-},{"./hyphenate":335}],337:[function(require,module,exports){
-'use strict';
-module.exports = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-},{}],338:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],332:[function(require,module,exports){
 'use strict';
 
 var canUseDOM = require('./inDOM');
@@ -42078,11 +40211,7 @@ compatRaf.cancel = function (id) {
 };
 
 module.exports = compatRaf;
-<<<<<<< HEAD
-},{"./inDOM":336}],338:[function(require,module,exports){
-=======
-},{"./inDOM":337}],339:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./inDOM":331}],333:[function(require,module,exports){
 'use strict';
 var getOffset = require('../query/offset'),
     height = require('../query/height'),
@@ -42134,11 +40263,7 @@ module.exports = function scrollTo(selected, scrollParent) {
         return raf.cancel(id);
     };
 };
-<<<<<<< HEAD
-},{"../query/height":322,"../query/isWindow":323,"../query/offset":324,"../query/scrollParent":325,"../query/scrollTop":326,"./requestAnimationFrame":337}],339:[function(require,module,exports){
-=======
-},{"../query/height":323,"../query/isWindow":324,"../query/offset":325,"../query/scrollParent":326,"../query/scrollTop":327,"./requestAnimationFrame":338}],340:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../query/height":317,"../query/isWindow":318,"../query/offset":319,"../query/scrollParent":320,"../query/scrollTop":321,"./requestAnimationFrame":332}],334:[function(require,module,exports){
 /*!
  * Globalize
  *
@@ -43726,11 +41851,7 @@ Globalize.culture = function( cultureSelector ) {
 
 }( this ));
 
-<<<<<<< HEAD
-},{}],340:[function(require,module,exports){
-=======
-},{}],341:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],335:[function(require,module,exports){
 (function (process){
 "use strict";
 var babelHelpers = require("./util/babelHelpers.js");
@@ -43899,11 +42020,7 @@ function has(o, k) {
 }
 //return !controlled
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./util/babelHelpers.js":341,"_process":35,"react":514,"react/lib/invariant":492}],341:[function(require,module,exports){
-=======
-},{"./util/babelHelpers.js":342,"_process":36,"react":515,"react/lib/invariant":493}],342:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./util/babelHelpers.js":336,"_process":34,"react":509,"react/lib/invariant":487}],336:[function(require,module,exports){
 (function (root, factory) {
   if (typeof define === "function" && define.amd) {
     define(["exports"], factory);
@@ -43941,17 +42058,10 @@ function has(o, k) {
     return target;
   };
 })
-<<<<<<< HEAD
-},{}],342:[function(require,module,exports){
+},{}],337:[function(require,module,exports){
 module.exports = require('./lib/ReactWithAddons');
 
-},{"./lib/ReactWithAddons":442}],343:[function(require,module,exports){
-=======
-},{}],343:[function(require,module,exports){
-module.exports = require('./lib/ReactWithAddons');
-
-},{"./lib/ReactWithAddons":443}],344:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./lib/ReactWithAddons":437}],338:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43978,11 +42088,7 @@ var AutoFocusMixin = {
 
 module.exports = AutoFocusMixin;
 
-<<<<<<< HEAD
-},{"./focusNode":476}],344:[function(require,module,exports){
-=======
-},{"./focusNode":477}],345:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./focusNode":471}],339:[function(require,module,exports){
 /**
  * Copyright 2013-2015 Facebook, Inc.
  * All rights reserved.
@@ -44477,11 +42583,7 @@ var BeforeInputEventPlugin = {
 
 module.exports = BeforeInputEventPlugin;
 
-<<<<<<< HEAD
-},{"./EventConstants":357,"./EventPropagators":362,"./ExecutionEnvironment":363,"./FallbackCompositionState":364,"./SyntheticCompositionEvent":448,"./SyntheticInputEvent":452,"./keyOf":499}],345:[function(require,module,exports){
-=======
-},{"./EventConstants":358,"./EventPropagators":363,"./ExecutionEnvironment":364,"./FallbackCompositionState":365,"./SyntheticCompositionEvent":449,"./SyntheticInputEvent":453,"./keyOf":500}],346:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventConstants":352,"./EventPropagators":357,"./ExecutionEnvironment":358,"./FallbackCompositionState":359,"./SyntheticCompositionEvent":443,"./SyntheticInputEvent":447,"./keyOf":494}],340:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -44593,11 +42695,7 @@ var CSSCore = {
 module.exports = CSSCore;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./invariant":492,"_process":35}],346:[function(require,module,exports){
-=======
-},{"./invariant":493,"_process":36}],347:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./invariant":487,"_process":34}],341:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44722,11 +42820,7 @@ var CSSProperty = {
 
 module.exports = CSSProperty;
 
-<<<<<<< HEAD
-},{}],347:[function(require,module,exports){
-=======
-},{}],348:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],342:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -44908,11 +43002,7 @@ var CSSPropertyOperations = {
 module.exports = CSSPropertyOperations;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./CSSProperty":346,"./ExecutionEnvironment":363,"./camelizeStyleName":463,"./dangerousStyleValue":470,"./hyphenateStyleName":490,"./memoizeStringOnly":501,"./warning":513,"_process":35}],348:[function(require,module,exports){
-=======
-},{"./CSSProperty":347,"./ExecutionEnvironment":364,"./camelizeStyleName":464,"./dangerousStyleValue":471,"./hyphenateStyleName":491,"./memoizeStringOnly":502,"./warning":514,"_process":36}],349:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./CSSProperty":341,"./ExecutionEnvironment":358,"./camelizeStyleName":458,"./dangerousStyleValue":465,"./hyphenateStyleName":485,"./memoizeStringOnly":496,"./warning":508,"_process":34}],343:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -45012,11 +43102,7 @@ PooledClass.addPoolingTo(CallbackQueue);
 module.exports = CallbackQueue;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./Object.assign":370,"./PooledClass":371,"./invariant":492,"_process":35}],349:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./PooledClass":372,"./invariant":493,"_process":36}],350:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./PooledClass":366,"./invariant":487,"_process":34}],344:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45398,11 +43484,7 @@ var ChangeEventPlugin = {
 
 module.exports = ChangeEventPlugin;
 
-<<<<<<< HEAD
-},{"./EventConstants":357,"./EventPluginHub":359,"./EventPropagators":362,"./ExecutionEnvironment":363,"./ReactUpdates":441,"./SyntheticEvent":450,"./isEventSupported":493,"./isTextInputElement":495,"./keyOf":499}],350:[function(require,module,exports){
-=======
-},{"./EventConstants":358,"./EventPluginHub":360,"./EventPropagators":363,"./ExecutionEnvironment":364,"./ReactUpdates":442,"./SyntheticEvent":451,"./isEventSupported":494,"./isTextInputElement":496,"./keyOf":500}],351:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventConstants":352,"./EventPluginHub":354,"./EventPropagators":357,"./ExecutionEnvironment":358,"./ReactUpdates":436,"./SyntheticEvent":445,"./isEventSupported":488,"./isTextInputElement":490,"./keyOf":494}],345:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45427,11 +43509,7 @@ var ClientReactRootIndex = {
 
 module.exports = ClientReactRootIndex;
 
-<<<<<<< HEAD
-},{}],351:[function(require,module,exports){
-=======
-},{}],352:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],346:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -45569,11 +43647,7 @@ var DOMChildrenOperations = {
 module.exports = DOMChildrenOperations;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./Danger":354,"./ReactMultiChildUpdateTypes":420,"./invariant":492,"./setTextContent":507,"_process":35}],352:[function(require,module,exports){
-=======
-},{"./Danger":355,"./ReactMultiChildUpdateTypes":421,"./invariant":493,"./setTextContent":508,"_process":36}],353:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Danger":349,"./ReactMultiChildUpdateTypes":415,"./invariant":487,"./setTextContent":502,"_process":34}],347:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -45872,11 +43946,7 @@ var DOMProperty = {
 module.exports = DOMProperty;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./invariant":492,"_process":35}],353:[function(require,module,exports){
-=======
-},{"./invariant":493,"_process":36}],354:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./invariant":487,"_process":34}],348:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -46068,11 +44138,7 @@ var DOMPropertyOperations = {
 module.exports = DOMPropertyOperations;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./DOMProperty":352,"./quoteAttributeValueForBrowser":505,"./warning":513,"_process":35}],354:[function(require,module,exports){
-=======
-},{"./DOMProperty":353,"./quoteAttributeValueForBrowser":506,"./warning":514,"_process":36}],355:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./DOMProperty":347,"./quoteAttributeValueForBrowser":500,"./warning":508,"_process":34}],349:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -46259,11 +44325,7 @@ var Danger = {
 module.exports = Danger;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ExecutionEnvironment":363,"./createNodesFromMarkup":468,"./emptyFunction":471,"./getMarkupWrap":484,"./invariant":492,"_process":35}],355:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":364,"./createNodesFromMarkup":469,"./emptyFunction":472,"./getMarkupWrap":485,"./invariant":493,"_process":36}],356:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ExecutionEnvironment":358,"./createNodesFromMarkup":463,"./emptyFunction":466,"./getMarkupWrap":479,"./invariant":487,"_process":34}],350:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46302,11 +44364,7 @@ var DefaultEventPluginOrder = [
 
 module.exports = DefaultEventPluginOrder;
 
-<<<<<<< HEAD
-},{"./keyOf":499}],356:[function(require,module,exports){
-=======
-},{"./keyOf":500}],357:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./keyOf":494}],351:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46446,11 +44504,7 @@ var EnterLeaveEventPlugin = {
 
 module.exports = EnterLeaveEventPlugin;
 
-<<<<<<< HEAD
-},{"./EventConstants":357,"./EventPropagators":362,"./ReactMount":418,"./SyntheticMouseEvent":454,"./keyOf":499}],357:[function(require,module,exports){
-=======
-},{"./EventConstants":358,"./EventPropagators":363,"./ReactMount":419,"./SyntheticMouseEvent":455,"./keyOf":500}],358:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventConstants":352,"./EventPropagators":357,"./ReactMount":413,"./SyntheticMouseEvent":449,"./keyOf":494}],352:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46522,11 +44576,7 @@ var EventConstants = {
 
 module.exports = EventConstants;
 
-<<<<<<< HEAD
-},{"./keyMirror":498}],358:[function(require,module,exports){
-=======
-},{"./keyMirror":499}],359:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./keyMirror":493}],353:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -46616,11 +44666,7 @@ var EventListener = {
 module.exports = EventListener;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./emptyFunction":471,"_process":35}],359:[function(require,module,exports){
-=======
-},{"./emptyFunction":472,"_process":36}],360:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./emptyFunction":466,"_process":34}],354:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -46898,11 +44944,7 @@ var EventPluginHub = {
 module.exports = EventPluginHub;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./EventPluginRegistry":360,"./EventPluginUtils":361,"./accumulateInto":460,"./forEachAccumulated":477,"./invariant":492,"_process":35}],360:[function(require,module,exports){
-=======
-},{"./EventPluginRegistry":361,"./EventPluginUtils":362,"./accumulateInto":461,"./forEachAccumulated":478,"./invariant":493,"_process":36}],361:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventPluginRegistry":355,"./EventPluginUtils":356,"./accumulateInto":455,"./forEachAccumulated":472,"./invariant":487,"_process":34}],355:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -47182,11 +45224,7 @@ var EventPluginRegistry = {
 module.exports = EventPluginRegistry;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./invariant":492,"_process":35}],361:[function(require,module,exports){
-=======
-},{"./invariant":493,"_process":36}],362:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./invariant":487,"_process":34}],356:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -47407,11 +45445,7 @@ var EventPluginUtils = {
 module.exports = EventPluginUtils;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./EventConstants":357,"./invariant":492,"_process":35}],362:[function(require,module,exports){
-=======
-},{"./EventConstants":358,"./invariant":493,"_process":36}],363:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventConstants":352,"./invariant":487,"_process":34}],357:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -47553,11 +45587,7 @@ var EventPropagators = {
 module.exports = EventPropagators;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./EventConstants":357,"./EventPluginHub":359,"./accumulateInto":460,"./forEachAccumulated":477,"_process":35}],363:[function(require,module,exports){
-=======
-},{"./EventConstants":358,"./EventPluginHub":360,"./accumulateInto":461,"./forEachAccumulated":478,"_process":36}],364:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventConstants":352,"./EventPluginHub":354,"./accumulateInto":455,"./forEachAccumulated":472,"_process":34}],358:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47601,11 +45631,7 @@ var ExecutionEnvironment = {
 
 module.exports = ExecutionEnvironment;
 
-<<<<<<< HEAD
-},{}],364:[function(require,module,exports){
-=======
-},{}],365:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],359:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47696,11 +45722,7 @@ PooledClass.addPoolingTo(FallbackCompositionState);
 
 module.exports = FallbackCompositionState;
 
-<<<<<<< HEAD
-},{"./Object.assign":370,"./PooledClass":371,"./getTextContentAccessor":487}],365:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./PooledClass":372,"./getTextContentAccessor":488}],366:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./PooledClass":366,"./getTextContentAccessor":482}],360:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47911,11 +45933,7 @@ var HTMLDOMPropertyConfig = {
 
 module.exports = HTMLDOMPropertyConfig;
 
-<<<<<<< HEAD
-},{"./DOMProperty":352,"./ExecutionEnvironment":363}],366:[function(require,module,exports){
-=======
-},{"./DOMProperty":353,"./ExecutionEnvironment":364}],367:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./DOMProperty":347,"./ExecutionEnvironment":358}],361:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47956,11 +45974,7 @@ var LinkedStateMixin = {
 
 module.exports = LinkedStateMixin;
 
-<<<<<<< HEAD
-},{"./ReactLink":416,"./ReactStateSetters":435}],367:[function(require,module,exports){
-=======
-},{"./ReactLink":417,"./ReactStateSetters":436}],368:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactLink":411,"./ReactStateSetters":430}],362:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -48116,11 +46130,7 @@ var LinkedValueUtils = {
 module.exports = LinkedValueUtils;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactPropTypes":427,"./invariant":492,"_process":35}],368:[function(require,module,exports){
-=======
-},{"./ReactPropTypes":428,"./invariant":493,"_process":36}],369:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactPropTypes":422,"./invariant":487,"_process":34}],363:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -48177,11 +46187,7 @@ var LocalEventTrapMixin = {
 module.exports = LocalEventTrapMixin;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactBrowserEventEmitter":374,"./accumulateInto":460,"./forEachAccumulated":477,"./invariant":492,"_process":35}],369:[function(require,module,exports){
-=======
-},{"./ReactBrowserEventEmitter":375,"./accumulateInto":461,"./forEachAccumulated":478,"./invariant":493,"_process":36}],370:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactBrowserEventEmitter":369,"./accumulateInto":455,"./forEachAccumulated":472,"./invariant":487,"_process":34}],364:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48239,11 +46245,7 @@ var MobileSafariClickEventPlugin = {
 
 module.exports = MobileSafariClickEventPlugin;
 
-<<<<<<< HEAD
-},{"./EventConstants":357,"./emptyFunction":471}],370:[function(require,module,exports){
-=======
-},{"./EventConstants":358,"./emptyFunction":472}],371:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventConstants":352,"./emptyFunction":466}],365:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -48292,11 +46294,7 @@ function assign(target, sources) {
 
 module.exports = assign;
 
-<<<<<<< HEAD
-},{}],371:[function(require,module,exports){
-=======
-},{}],372:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],366:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -48412,11 +46410,7 @@ var PooledClass = {
 module.exports = PooledClass;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./invariant":492,"_process":35}],372:[function(require,module,exports){
-=======
-},{"./invariant":493,"_process":36}],373:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./invariant":487,"_process":34}],367:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -48568,11 +46562,7 @@ React.version = '0.13.3';
 module.exports = React;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./EventPluginUtils":361,"./ExecutionEnvironment":363,"./Object.assign":370,"./ReactChildren":378,"./ReactClass":379,"./ReactComponent":380,"./ReactContext":385,"./ReactCurrentOwner":386,"./ReactDOM":387,"./ReactDOMTextComponent":398,"./ReactDefaultInjection":401,"./ReactElement":404,"./ReactElementValidator":405,"./ReactInstanceHandles":413,"./ReactMount":418,"./ReactPerf":423,"./ReactPropTypes":427,"./ReactReconciler":430,"./ReactServerRendering":433,"./findDOMNode":474,"./onlyChild":502,"_process":35}],373:[function(require,module,exports){
-=======
-},{"./EventPluginUtils":362,"./ExecutionEnvironment":364,"./Object.assign":371,"./ReactChildren":379,"./ReactClass":380,"./ReactComponent":381,"./ReactContext":386,"./ReactCurrentOwner":387,"./ReactDOM":388,"./ReactDOMTextComponent":399,"./ReactDefaultInjection":402,"./ReactElement":405,"./ReactElementValidator":406,"./ReactInstanceHandles":414,"./ReactMount":419,"./ReactPerf":424,"./ReactPropTypes":428,"./ReactReconciler":431,"./ReactServerRendering":434,"./findDOMNode":475,"./onlyChild":503,"_process":36}],374:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventPluginUtils":356,"./ExecutionEnvironment":358,"./Object.assign":365,"./ReactChildren":373,"./ReactClass":374,"./ReactComponent":375,"./ReactContext":380,"./ReactCurrentOwner":381,"./ReactDOM":382,"./ReactDOMTextComponent":393,"./ReactDefaultInjection":396,"./ReactElement":399,"./ReactElementValidator":400,"./ReactInstanceHandles":408,"./ReactMount":413,"./ReactPerf":418,"./ReactPropTypes":422,"./ReactReconciler":425,"./ReactServerRendering":428,"./findDOMNode":469,"./onlyChild":497,"_process":34}],368:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48603,11 +46593,7 @@ var ReactBrowserComponentMixin = {
 
 module.exports = ReactBrowserComponentMixin;
 
-<<<<<<< HEAD
-},{"./findDOMNode":474}],374:[function(require,module,exports){
-=======
-},{"./findDOMNode":475}],375:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./findDOMNode":469}],369:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48960,11 +46946,7 @@ var ReactBrowserEventEmitter = assign({}, ReactEventEmitterMixin, {
 
 module.exports = ReactBrowserEventEmitter;
 
-<<<<<<< HEAD
-},{"./EventConstants":357,"./EventPluginHub":359,"./EventPluginRegistry":360,"./Object.assign":370,"./ReactEventEmitterMixin":408,"./ViewportMetrics":459,"./isEventSupported":493}],375:[function(require,module,exports){
-=======
-},{"./EventConstants":358,"./EventPluginHub":360,"./EventPluginRegistry":361,"./Object.assign":371,"./ReactEventEmitterMixin":409,"./ViewportMetrics":460,"./isEventSupported":494}],376:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventConstants":352,"./EventPluginHub":354,"./EventPluginRegistry":355,"./Object.assign":365,"./ReactEventEmitterMixin":403,"./ViewportMetrics":454,"./isEventSupported":488}],370:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -49034,11 +47016,7 @@ var ReactCSSTransitionGroup = React.createClass({
 
 module.exports = ReactCSSTransitionGroup;
 
-<<<<<<< HEAD
-},{"./Object.assign":370,"./React":372,"./ReactCSSTransitionGroupChild":376,"./ReactTransitionGroup":439}],376:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./React":373,"./ReactCSSTransitionGroupChild":377,"./ReactTransitionGroup":440}],377:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./React":367,"./ReactCSSTransitionGroupChild":371,"./ReactTransitionGroup":434}],371:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -49186,11 +47164,7 @@ var ReactCSSTransitionGroupChild = React.createClass({
 module.exports = ReactCSSTransitionGroupChild;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./CSSCore":345,"./React":372,"./ReactTransitionEvents":438,"./onlyChild":502,"./warning":513,"_process":35}],377:[function(require,module,exports){
-=======
-},{"./CSSCore":346,"./React":373,"./ReactTransitionEvents":439,"./onlyChild":503,"./warning":514,"_process":36}],378:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./CSSCore":340,"./React":367,"./ReactTransitionEvents":433,"./onlyChild":497,"./warning":508,"_process":34}],372:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -49317,11 +47291,7 @@ var ReactChildReconciler = {
 
 module.exports = ReactChildReconciler;
 
-<<<<<<< HEAD
-},{"./ReactReconciler":430,"./flattenChildren":475,"./instantiateReactComponent":491,"./shouldUpdateReactComponent":509}],378:[function(require,module,exports){
-=======
-},{"./ReactReconciler":431,"./flattenChildren":476,"./instantiateReactComponent":492,"./shouldUpdateReactComponent":510}],379:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactReconciler":425,"./flattenChildren":470,"./instantiateReactComponent":486,"./shouldUpdateReactComponent":504}],373:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -49474,11 +47444,7 @@ var ReactChildren = {
 module.exports = ReactChildren;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./PooledClass":371,"./ReactFragment":410,"./traverseAllChildren":511,"./warning":513,"_process":35}],379:[function(require,module,exports){
-=======
-},{"./PooledClass":372,"./ReactFragment":411,"./traverseAllChildren":512,"./warning":514,"_process":36}],380:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./PooledClass":366,"./ReactFragment":405,"./traverseAllChildren":506,"./warning":508,"_process":34}],374:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -50424,11 +48390,7 @@ var ReactClass = {
 module.exports = ReactClass;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./Object.assign":370,"./ReactComponent":380,"./ReactCurrentOwner":386,"./ReactElement":404,"./ReactErrorUtils":407,"./ReactInstanceMap":414,"./ReactLifeCycle":415,"./ReactPropTypeLocationNames":425,"./ReactPropTypeLocations":426,"./ReactUpdateQueue":440,"./invariant":492,"./keyMirror":498,"./keyOf":499,"./warning":513,"_process":35}],380:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./ReactComponent":381,"./ReactCurrentOwner":387,"./ReactElement":405,"./ReactErrorUtils":408,"./ReactInstanceMap":415,"./ReactLifeCycle":416,"./ReactPropTypeLocationNames":426,"./ReactPropTypeLocations":427,"./ReactUpdateQueue":441,"./invariant":493,"./keyMirror":499,"./keyOf":500,"./warning":514,"_process":36}],381:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./ReactComponent":375,"./ReactCurrentOwner":381,"./ReactElement":399,"./ReactErrorUtils":402,"./ReactInstanceMap":409,"./ReactLifeCycle":410,"./ReactPropTypeLocationNames":420,"./ReactPropTypeLocations":421,"./ReactUpdateQueue":435,"./invariant":487,"./keyMirror":493,"./keyOf":494,"./warning":508,"_process":34}],375:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -50582,11 +48544,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = ReactComponent;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactUpdateQueue":440,"./invariant":492,"./warning":513,"_process":35}],381:[function(require,module,exports){
-=======
-},{"./ReactUpdateQueue":441,"./invariant":493,"./warning":514,"_process":36}],382:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactUpdateQueue":435,"./invariant":487,"./warning":508,"_process":34}],376:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50633,11 +48591,7 @@ var ReactComponentBrowserEnvironment = {
 
 module.exports = ReactComponentBrowserEnvironment;
 
-<<<<<<< HEAD
-},{"./ReactDOMIDOperations":391,"./ReactMount":418}],382:[function(require,module,exports){
-=======
-},{"./ReactDOMIDOperations":392,"./ReactMount":419}],383:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactDOMIDOperations":386,"./ReactMount":413}],377:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -50698,11 +48652,7 @@ var ReactComponentEnvironment = {
 module.exports = ReactComponentEnvironment;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./invariant":492,"_process":35}],383:[function(require,module,exports){
-=======
-},{"./invariant":493,"_process":36}],384:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./invariant":487,"_process":34}],378:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50751,11 +48701,7 @@ var ReactComponentWithPureRenderMixin = {
 
 module.exports = ReactComponentWithPureRenderMixin;
 
-<<<<<<< HEAD
-},{"./shallowEqual":508}],384:[function(require,module,exports){
-=======
-},{"./shallowEqual":509}],385:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./shallowEqual":503}],379:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -51668,11 +49614,7 @@ var ReactCompositeComponent = {
 module.exports = ReactCompositeComponent;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./Object.assign":370,"./ReactComponentEnvironment":382,"./ReactContext":385,"./ReactCurrentOwner":386,"./ReactElement":404,"./ReactElementValidator":405,"./ReactInstanceMap":414,"./ReactLifeCycle":415,"./ReactNativeComponent":421,"./ReactPerf":423,"./ReactPropTypeLocationNames":425,"./ReactPropTypeLocations":426,"./ReactReconciler":430,"./ReactUpdates":441,"./emptyObject":472,"./invariant":492,"./shouldUpdateReactComponent":509,"./warning":513,"_process":35}],385:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./ReactComponentEnvironment":383,"./ReactContext":386,"./ReactCurrentOwner":387,"./ReactElement":405,"./ReactElementValidator":406,"./ReactInstanceMap":415,"./ReactLifeCycle":416,"./ReactNativeComponent":422,"./ReactPerf":424,"./ReactPropTypeLocationNames":426,"./ReactPropTypeLocations":427,"./ReactReconciler":431,"./ReactUpdates":442,"./emptyObject":473,"./invariant":493,"./shouldUpdateReactComponent":510,"./warning":514,"_process":36}],386:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./ReactComponentEnvironment":377,"./ReactContext":380,"./ReactCurrentOwner":381,"./ReactElement":399,"./ReactElementValidator":400,"./ReactInstanceMap":409,"./ReactLifeCycle":410,"./ReactNativeComponent":416,"./ReactPerf":418,"./ReactPropTypeLocationNames":420,"./ReactPropTypeLocations":421,"./ReactReconciler":425,"./ReactUpdates":436,"./emptyObject":467,"./invariant":487,"./shouldUpdateReactComponent":504,"./warning":508,"_process":34}],380:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -51750,11 +49692,7 @@ var ReactContext = {
 module.exports = ReactContext;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./Object.assign":370,"./emptyObject":472,"./warning":513,"_process":35}],386:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./emptyObject":473,"./warning":514,"_process":36}],387:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./emptyObject":467,"./warning":508,"_process":34}],381:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51788,11 +49726,7 @@ var ReactCurrentOwner = {
 
 module.exports = ReactCurrentOwner;
 
-<<<<<<< HEAD
-},{}],387:[function(require,module,exports){
-=======
-},{}],388:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],382:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -51971,11 +49905,7 @@ var ReactDOM = mapObject({
 module.exports = ReactDOM;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactElement":404,"./ReactElementValidator":405,"./mapObject":500,"_process":35}],388:[function(require,module,exports){
-=======
-},{"./ReactElement":405,"./ReactElementValidator":406,"./mapObject":501,"_process":36}],389:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactElement":399,"./ReactElementValidator":400,"./mapObject":495,"_process":34}],383:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -52039,11 +49969,7 @@ var ReactDOMButton = ReactClass.createClass({
 
 module.exports = ReactDOMButton;
 
-<<<<<<< HEAD
-},{"./AutoFocusMixin":343,"./ReactBrowserComponentMixin":373,"./ReactClass":379,"./ReactElement":404,"./keyMirror":498}],389:[function(require,module,exports){
-=======
-},{"./AutoFocusMixin":344,"./ReactBrowserComponentMixin":374,"./ReactClass":380,"./ReactElement":405,"./keyMirror":499}],390:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./AutoFocusMixin":338,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399,"./keyMirror":493}],384:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -52553,11 +50479,7 @@ ReactDOMComponent.injection = {
 module.exports = ReactDOMComponent;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./CSSPropertyOperations":347,"./DOMProperty":352,"./DOMPropertyOperations":353,"./Object.assign":370,"./ReactBrowserEventEmitter":374,"./ReactComponentBrowserEnvironment":381,"./ReactMount":418,"./ReactMultiChild":419,"./ReactPerf":423,"./escapeTextContentForBrowser":473,"./invariant":492,"./isEventSupported":493,"./keyOf":499,"./warning":513,"_process":35}],390:[function(require,module,exports){
-=======
-},{"./CSSPropertyOperations":348,"./DOMProperty":353,"./DOMPropertyOperations":354,"./Object.assign":371,"./ReactBrowserEventEmitter":375,"./ReactComponentBrowserEnvironment":382,"./ReactMount":419,"./ReactMultiChild":420,"./ReactPerf":424,"./escapeTextContentForBrowser":474,"./invariant":493,"./isEventSupported":494,"./keyOf":500,"./warning":514,"_process":36}],391:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./CSSPropertyOperations":342,"./DOMProperty":347,"./DOMPropertyOperations":348,"./Object.assign":365,"./ReactBrowserEventEmitter":369,"./ReactComponentBrowserEnvironment":376,"./ReactMount":413,"./ReactMultiChild":414,"./ReactPerf":418,"./escapeTextContentForBrowser":468,"./invariant":487,"./isEventSupported":488,"./keyOf":494,"./warning":508,"_process":34}],385:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -52606,11 +50528,7 @@ var ReactDOMForm = ReactClass.createClass({
 
 module.exports = ReactDOMForm;
 
-<<<<<<< HEAD
-},{"./EventConstants":357,"./LocalEventTrapMixin":368,"./ReactBrowserComponentMixin":373,"./ReactClass":379,"./ReactElement":404}],391:[function(require,module,exports){
-=======
-},{"./EventConstants":358,"./LocalEventTrapMixin":369,"./ReactBrowserComponentMixin":374,"./ReactClass":380,"./ReactElement":405}],392:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventConstants":352,"./LocalEventTrapMixin":363,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399}],386:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -52778,11 +50696,7 @@ ReactPerf.measureMethods(ReactDOMIDOperations, 'ReactDOMIDOperations', {
 module.exports = ReactDOMIDOperations;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./CSSPropertyOperations":347,"./DOMChildrenOperations":351,"./DOMPropertyOperations":353,"./ReactMount":418,"./ReactPerf":423,"./invariant":492,"./setInnerHTML":506,"_process":35}],392:[function(require,module,exports){
-=======
-},{"./CSSPropertyOperations":348,"./DOMChildrenOperations":352,"./DOMPropertyOperations":354,"./ReactMount":419,"./ReactPerf":424,"./invariant":493,"./setInnerHTML":507,"_process":36}],393:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./CSSPropertyOperations":342,"./DOMChildrenOperations":346,"./DOMPropertyOperations":348,"./ReactMount":413,"./ReactPerf":418,"./invariant":487,"./setInnerHTML":501,"_process":34}],387:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -52827,11 +50741,7 @@ var ReactDOMIframe = ReactClass.createClass({
 
 module.exports = ReactDOMIframe;
 
-<<<<<<< HEAD
-},{"./EventConstants":357,"./LocalEventTrapMixin":368,"./ReactBrowserComponentMixin":373,"./ReactClass":379,"./ReactElement":404}],393:[function(require,module,exports){
-=======
-},{"./EventConstants":358,"./LocalEventTrapMixin":369,"./ReactBrowserComponentMixin":374,"./ReactClass":380,"./ReactElement":405}],394:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventConstants":352,"./LocalEventTrapMixin":363,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399}],388:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -52877,11 +50787,7 @@ var ReactDOMImg = ReactClass.createClass({
 
 module.exports = ReactDOMImg;
 
-<<<<<<< HEAD
-},{"./EventConstants":357,"./LocalEventTrapMixin":368,"./ReactBrowserComponentMixin":373,"./ReactClass":379,"./ReactElement":404}],394:[function(require,module,exports){
-=======
-},{"./EventConstants":358,"./LocalEventTrapMixin":369,"./ReactBrowserComponentMixin":374,"./ReactClass":380,"./ReactElement":405}],395:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventConstants":352,"./LocalEventTrapMixin":363,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399}],389:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -53058,11 +50964,7 @@ var ReactDOMInput = ReactClass.createClass({
 module.exports = ReactDOMInput;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./AutoFocusMixin":343,"./DOMPropertyOperations":353,"./LinkedValueUtils":367,"./Object.assign":370,"./ReactBrowserComponentMixin":373,"./ReactClass":379,"./ReactElement":404,"./ReactMount":418,"./ReactUpdates":441,"./invariant":492,"_process":35}],395:[function(require,module,exports){
-=======
-},{"./AutoFocusMixin":344,"./DOMPropertyOperations":354,"./LinkedValueUtils":368,"./Object.assign":371,"./ReactBrowserComponentMixin":374,"./ReactClass":380,"./ReactElement":405,"./ReactMount":419,"./ReactUpdates":442,"./invariant":493,"_process":36}],396:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./AutoFocusMixin":338,"./DOMPropertyOperations":348,"./LinkedValueUtils":362,"./Object.assign":365,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399,"./ReactMount":413,"./ReactUpdates":436,"./invariant":487,"_process":34}],390:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -53114,11 +51016,7 @@ var ReactDOMOption = ReactClass.createClass({
 module.exports = ReactDOMOption;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactBrowserComponentMixin":373,"./ReactClass":379,"./ReactElement":404,"./warning":513,"_process":35}],396:[function(require,module,exports){
-=======
-},{"./ReactBrowserComponentMixin":374,"./ReactClass":380,"./ReactElement":405,"./warning":514,"_process":36}],397:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399,"./warning":508,"_process":34}],391:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -53296,11 +51194,7 @@ var ReactDOMSelect = ReactClass.createClass({
 
 module.exports = ReactDOMSelect;
 
-<<<<<<< HEAD
-},{"./AutoFocusMixin":343,"./LinkedValueUtils":367,"./Object.assign":370,"./ReactBrowserComponentMixin":373,"./ReactClass":379,"./ReactElement":404,"./ReactUpdates":441}],397:[function(require,module,exports){
-=======
-},{"./AutoFocusMixin":344,"./LinkedValueUtils":368,"./Object.assign":371,"./ReactBrowserComponentMixin":374,"./ReactClass":380,"./ReactElement":405,"./ReactUpdates":442}],398:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./AutoFocusMixin":338,"./LinkedValueUtils":362,"./Object.assign":365,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399,"./ReactUpdates":436}],392:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -53513,11 +51407,7 @@ var ReactDOMSelection = {
 
 module.exports = ReactDOMSelection;
 
-<<<<<<< HEAD
-},{"./ExecutionEnvironment":363,"./getNodeForCharacterOffset":485,"./getTextContentAccessor":487}],398:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":364,"./getNodeForCharacterOffset":486,"./getTextContentAccessor":488}],399:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ExecutionEnvironment":358,"./getNodeForCharacterOffset":480,"./getTextContentAccessor":482}],393:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -53634,11 +51524,7 @@ assign(ReactDOMTextComponent.prototype, {
 
 module.exports = ReactDOMTextComponent;
 
-<<<<<<< HEAD
-},{"./DOMPropertyOperations":353,"./Object.assign":370,"./ReactComponentBrowserEnvironment":381,"./ReactDOMComponent":389,"./escapeTextContentForBrowser":473}],399:[function(require,module,exports){
-=======
-},{"./DOMPropertyOperations":354,"./Object.assign":371,"./ReactComponentBrowserEnvironment":382,"./ReactDOMComponent":390,"./escapeTextContentForBrowser":474}],400:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./DOMPropertyOperations":348,"./Object.assign":365,"./ReactComponentBrowserEnvironment":376,"./ReactDOMComponent":384,"./escapeTextContentForBrowser":468}],394:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -53778,11 +51664,7 @@ var ReactDOMTextarea = ReactClass.createClass({
 module.exports = ReactDOMTextarea;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./AutoFocusMixin":343,"./DOMPropertyOperations":353,"./LinkedValueUtils":367,"./Object.assign":370,"./ReactBrowserComponentMixin":373,"./ReactClass":379,"./ReactElement":404,"./ReactUpdates":441,"./invariant":492,"./warning":513,"_process":35}],400:[function(require,module,exports){
-=======
-},{"./AutoFocusMixin":344,"./DOMPropertyOperations":354,"./LinkedValueUtils":368,"./Object.assign":371,"./ReactBrowserComponentMixin":374,"./ReactClass":380,"./ReactElement":405,"./ReactUpdates":442,"./invariant":493,"./warning":514,"_process":36}],401:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./AutoFocusMixin":338,"./DOMPropertyOperations":348,"./LinkedValueUtils":362,"./Object.assign":365,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399,"./ReactUpdates":436,"./invariant":487,"./warning":508,"_process":34}],395:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -53855,11 +51737,7 @@ var ReactDefaultBatchingStrategy = {
 
 module.exports = ReactDefaultBatchingStrategy;
 
-<<<<<<< HEAD
-},{"./Object.assign":370,"./ReactUpdates":441,"./Transaction":458,"./emptyFunction":471}],401:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./ReactUpdates":442,"./Transaction":459,"./emptyFunction":472}],402:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./ReactUpdates":436,"./Transaction":453,"./emptyFunction":466}],396:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -54018,11 +51896,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./BeforeInputEventPlugin":344,"./ChangeEventPlugin":349,"./ClientReactRootIndex":350,"./DefaultEventPluginOrder":355,"./EnterLeaveEventPlugin":356,"./ExecutionEnvironment":363,"./HTMLDOMPropertyConfig":365,"./MobileSafariClickEventPlugin":369,"./ReactBrowserComponentMixin":373,"./ReactClass":379,"./ReactComponentBrowserEnvironment":381,"./ReactDOMButton":388,"./ReactDOMComponent":389,"./ReactDOMForm":390,"./ReactDOMIDOperations":391,"./ReactDOMIframe":392,"./ReactDOMImg":393,"./ReactDOMInput":394,"./ReactDOMOption":395,"./ReactDOMSelect":396,"./ReactDOMTextComponent":398,"./ReactDOMTextarea":399,"./ReactDefaultBatchingStrategy":400,"./ReactDefaultPerf":402,"./ReactElement":404,"./ReactEventListener":409,"./ReactInjection":411,"./ReactInstanceHandles":413,"./ReactMount":418,"./ReactReconcileTransaction":429,"./SVGDOMPropertyConfig":443,"./SelectEventPlugin":444,"./ServerReactRootIndex":445,"./SimpleEventPlugin":446,"./createFullPageComponent":467,"_process":35}],402:[function(require,module,exports){
-=======
-},{"./BeforeInputEventPlugin":345,"./ChangeEventPlugin":350,"./ClientReactRootIndex":351,"./DefaultEventPluginOrder":356,"./EnterLeaveEventPlugin":357,"./ExecutionEnvironment":364,"./HTMLDOMPropertyConfig":366,"./MobileSafariClickEventPlugin":370,"./ReactBrowserComponentMixin":374,"./ReactClass":380,"./ReactComponentBrowserEnvironment":382,"./ReactDOMButton":389,"./ReactDOMComponent":390,"./ReactDOMForm":391,"./ReactDOMIDOperations":392,"./ReactDOMIframe":393,"./ReactDOMImg":394,"./ReactDOMInput":395,"./ReactDOMOption":396,"./ReactDOMSelect":397,"./ReactDOMTextComponent":399,"./ReactDOMTextarea":400,"./ReactDefaultBatchingStrategy":401,"./ReactDefaultPerf":403,"./ReactElement":405,"./ReactEventListener":410,"./ReactInjection":412,"./ReactInstanceHandles":414,"./ReactMount":419,"./ReactReconcileTransaction":430,"./SVGDOMPropertyConfig":444,"./SelectEventPlugin":445,"./ServerReactRootIndex":446,"./SimpleEventPlugin":447,"./createFullPageComponent":468,"_process":36}],403:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./BeforeInputEventPlugin":339,"./ChangeEventPlugin":344,"./ClientReactRootIndex":345,"./DefaultEventPluginOrder":350,"./EnterLeaveEventPlugin":351,"./ExecutionEnvironment":358,"./HTMLDOMPropertyConfig":360,"./MobileSafariClickEventPlugin":364,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactComponentBrowserEnvironment":376,"./ReactDOMButton":383,"./ReactDOMComponent":384,"./ReactDOMForm":385,"./ReactDOMIDOperations":386,"./ReactDOMIframe":387,"./ReactDOMImg":388,"./ReactDOMInput":389,"./ReactDOMOption":390,"./ReactDOMSelect":391,"./ReactDOMTextComponent":393,"./ReactDOMTextarea":394,"./ReactDefaultBatchingStrategy":395,"./ReactDefaultPerf":397,"./ReactElement":399,"./ReactEventListener":404,"./ReactInjection":406,"./ReactInstanceHandles":408,"./ReactMount":413,"./ReactReconcileTransaction":424,"./SVGDOMPropertyConfig":438,"./SelectEventPlugin":439,"./ServerReactRootIndex":440,"./SimpleEventPlugin":441,"./createFullPageComponent":462,"_process":34}],397:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -54288,11 +52162,7 @@ var ReactDefaultPerf = {
 
 module.exports = ReactDefaultPerf;
 
-<<<<<<< HEAD
-},{"./DOMProperty":352,"./ReactDefaultPerfAnalysis":403,"./ReactMount":418,"./ReactPerf":423,"./performanceNow":504}],403:[function(require,module,exports){
-=======
-},{"./DOMProperty":353,"./ReactDefaultPerfAnalysis":404,"./ReactMount":419,"./ReactPerf":424,"./performanceNow":505}],404:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./DOMProperty":347,"./ReactDefaultPerfAnalysis":398,"./ReactMount":413,"./ReactPerf":418,"./performanceNow":499}],398:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -54498,11 +52368,7 @@ var ReactDefaultPerfAnalysis = {
 
 module.exports = ReactDefaultPerfAnalysis;
 
-<<<<<<< HEAD
-},{"./Object.assign":370}],404:[function(require,module,exports){
-=======
-},{"./Object.assign":371}],405:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365}],399:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -54810,11 +52676,7 @@ ReactElement.isValidElement = function(object) {
 module.exports = ReactElement;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./Object.assign":370,"./ReactContext":385,"./ReactCurrentOwner":386,"./warning":513,"_process":35}],405:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./ReactContext":386,"./ReactCurrentOwner":387,"./warning":514,"_process":36}],406:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./ReactContext":380,"./ReactCurrentOwner":381,"./warning":508,"_process":34}],400:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -55279,11 +53141,7 @@ var ReactElementValidator = {
 module.exports = ReactElementValidator;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactCurrentOwner":386,"./ReactElement":404,"./ReactFragment":410,"./ReactNativeComponent":421,"./ReactPropTypeLocationNames":425,"./ReactPropTypeLocations":426,"./getIteratorFn":483,"./invariant":492,"./warning":513,"_process":35}],406:[function(require,module,exports){
-=======
-},{"./ReactCurrentOwner":387,"./ReactElement":405,"./ReactFragment":411,"./ReactNativeComponent":422,"./ReactPropTypeLocationNames":426,"./ReactPropTypeLocations":427,"./getIteratorFn":484,"./invariant":493,"./warning":514,"_process":36}],407:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactCurrentOwner":381,"./ReactElement":399,"./ReactFragment":405,"./ReactNativeComponent":416,"./ReactPropTypeLocationNames":420,"./ReactPropTypeLocations":421,"./getIteratorFn":478,"./invariant":487,"./warning":508,"_process":34}],401:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -55378,11 +53236,7 @@ var ReactEmptyComponent = {
 module.exports = ReactEmptyComponent;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactElement":404,"./ReactInstanceMap":414,"./invariant":492,"_process":35}],407:[function(require,module,exports){
-=======
-},{"./ReactElement":405,"./ReactInstanceMap":415,"./invariant":493,"_process":36}],408:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactElement":399,"./ReactInstanceMap":409,"./invariant":487,"_process":34}],402:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -55414,11 +53268,7 @@ var ReactErrorUtils = {
 
 module.exports = ReactErrorUtils;
 
-<<<<<<< HEAD
-},{}],408:[function(require,module,exports){
-=======
-},{}],409:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],403:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -55468,11 +53318,7 @@ var ReactEventEmitterMixin = {
 
 module.exports = ReactEventEmitterMixin;
 
-<<<<<<< HEAD
-},{"./EventPluginHub":359}],409:[function(require,module,exports){
-=======
-},{"./EventPluginHub":360}],410:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventPluginHub":354}],404:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -55655,11 +53501,7 @@ var ReactEventListener = {
 
 module.exports = ReactEventListener;
 
-<<<<<<< HEAD
-},{"./EventListener":358,"./ExecutionEnvironment":363,"./Object.assign":370,"./PooledClass":371,"./ReactInstanceHandles":413,"./ReactMount":418,"./ReactUpdates":441,"./getEventTarget":482,"./getUnboundedScrollPosition":488}],410:[function(require,module,exports){
-=======
-},{"./EventListener":359,"./ExecutionEnvironment":364,"./Object.assign":371,"./PooledClass":372,"./ReactInstanceHandles":414,"./ReactMount":419,"./ReactUpdates":442,"./getEventTarget":483,"./getUnboundedScrollPosition":489}],411:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventListener":353,"./ExecutionEnvironment":358,"./Object.assign":365,"./PooledClass":366,"./ReactInstanceHandles":408,"./ReactMount":413,"./ReactUpdates":436,"./getEventTarget":477,"./getUnboundedScrollPosition":483}],405:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -55844,11 +53686,7 @@ var ReactFragment = {
 module.exports = ReactFragment;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactElement":404,"./warning":513,"_process":35}],411:[function(require,module,exports){
-=======
-},{"./ReactElement":405,"./warning":514,"_process":36}],412:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactElement":399,"./warning":508,"_process":34}],406:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -55890,11 +53728,7 @@ var ReactInjection = {
 
 module.exports = ReactInjection;
 
-<<<<<<< HEAD
-},{"./DOMProperty":352,"./EventPluginHub":359,"./ReactBrowserEventEmitter":374,"./ReactClass":379,"./ReactComponentEnvironment":382,"./ReactDOMComponent":389,"./ReactEmptyComponent":406,"./ReactNativeComponent":421,"./ReactPerf":423,"./ReactRootIndex":432,"./ReactUpdates":441}],412:[function(require,module,exports){
-=======
-},{"./DOMProperty":353,"./EventPluginHub":360,"./ReactBrowserEventEmitter":375,"./ReactClass":380,"./ReactComponentEnvironment":383,"./ReactDOMComponent":390,"./ReactEmptyComponent":407,"./ReactNativeComponent":422,"./ReactPerf":424,"./ReactRootIndex":433,"./ReactUpdates":442}],413:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./DOMProperty":347,"./EventPluginHub":354,"./ReactBrowserEventEmitter":369,"./ReactClass":374,"./ReactComponentEnvironment":377,"./ReactDOMComponent":384,"./ReactEmptyComponent":401,"./ReactNativeComponent":416,"./ReactPerf":418,"./ReactRootIndex":427,"./ReactUpdates":436}],407:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -56029,11 +53863,7 @@ var ReactInputSelection = {
 
 module.exports = ReactInputSelection;
 
-<<<<<<< HEAD
-},{"./ReactDOMSelection":397,"./containsNode":465,"./focusNode":476,"./getActiveElement":478}],413:[function(require,module,exports){
-=======
-},{"./ReactDOMSelection":398,"./containsNode":466,"./focusNode":477,"./getActiveElement":479}],414:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactDOMSelection":392,"./containsNode":460,"./focusNode":471,"./getActiveElement":473}],408:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -56369,11 +54199,7 @@ var ReactInstanceHandles = {
 module.exports = ReactInstanceHandles;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactRootIndex":432,"./invariant":492,"_process":35}],414:[function(require,module,exports){
-=======
-},{"./ReactRootIndex":433,"./invariant":493,"_process":36}],415:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactRootIndex":427,"./invariant":487,"_process":34}],409:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -56422,11 +54248,7 @@ var ReactInstanceMap = {
 
 module.exports = ReactInstanceMap;
 
-<<<<<<< HEAD
-},{}],415:[function(require,module,exports){
-=======
-},{}],416:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],410:[function(require,module,exports){
 /**
  * Copyright 2015, Facebook, Inc.
  * All rights reserved.
@@ -56463,11 +54285,7 @@ var ReactLifeCycle = {
 
 module.exports = ReactLifeCycle;
 
-<<<<<<< HEAD
-},{}],416:[function(require,module,exports){
-=======
-},{}],417:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],411:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -56540,11 +54358,7 @@ ReactLink.PropTypes = {
 
 module.exports = ReactLink;
 
-<<<<<<< HEAD
-},{"./React":372}],417:[function(require,module,exports){
-=======
-},{"./React":373}],418:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./React":367}],412:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -56592,11 +54406,7 @@ var ReactMarkupChecksum = {
 
 module.exports = ReactMarkupChecksum;
 
-<<<<<<< HEAD
-},{"./adler32":461}],418:[function(require,module,exports){
-=======
-},{"./adler32":462}],419:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./adler32":456}],413:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -57487,11 +55297,7 @@ ReactPerf.measureMethods(ReactMount, 'ReactMount', {
 module.exports = ReactMount;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./DOMProperty":352,"./ReactBrowserEventEmitter":374,"./ReactCurrentOwner":386,"./ReactElement":404,"./ReactElementValidator":405,"./ReactEmptyComponent":406,"./ReactInstanceHandles":413,"./ReactInstanceMap":414,"./ReactMarkupChecksum":417,"./ReactPerf":423,"./ReactReconciler":430,"./ReactUpdateQueue":440,"./ReactUpdates":441,"./containsNode":465,"./emptyObject":472,"./getReactRootElementInContainer":486,"./instantiateReactComponent":491,"./invariant":492,"./setInnerHTML":506,"./shouldUpdateReactComponent":509,"./warning":513,"_process":35}],419:[function(require,module,exports){
-=======
-},{"./DOMProperty":353,"./ReactBrowserEventEmitter":375,"./ReactCurrentOwner":387,"./ReactElement":405,"./ReactElementValidator":406,"./ReactEmptyComponent":407,"./ReactInstanceHandles":414,"./ReactInstanceMap":415,"./ReactMarkupChecksum":418,"./ReactPerf":424,"./ReactReconciler":431,"./ReactUpdateQueue":441,"./ReactUpdates":442,"./containsNode":466,"./emptyObject":473,"./getReactRootElementInContainer":487,"./instantiateReactComponent":492,"./invariant":493,"./setInnerHTML":507,"./shouldUpdateReactComponent":510,"./warning":514,"_process":36}],420:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./DOMProperty":347,"./ReactBrowserEventEmitter":369,"./ReactCurrentOwner":381,"./ReactElement":399,"./ReactElementValidator":400,"./ReactEmptyComponent":401,"./ReactInstanceHandles":408,"./ReactInstanceMap":409,"./ReactMarkupChecksum":412,"./ReactPerf":418,"./ReactReconciler":425,"./ReactUpdateQueue":435,"./ReactUpdates":436,"./containsNode":460,"./emptyObject":467,"./getReactRootElementInContainer":481,"./instantiateReactComponent":486,"./invariant":487,"./setInnerHTML":501,"./shouldUpdateReactComponent":504,"./warning":508,"_process":34}],414:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -57921,11 +55727,7 @@ var ReactMultiChild = {
 
 module.exports = ReactMultiChild;
 
-<<<<<<< HEAD
-},{"./ReactChildReconciler":377,"./ReactComponentEnvironment":382,"./ReactMultiChildUpdateTypes":420,"./ReactReconciler":430}],420:[function(require,module,exports){
-=======
-},{"./ReactChildReconciler":378,"./ReactComponentEnvironment":383,"./ReactMultiChildUpdateTypes":421,"./ReactReconciler":431}],421:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactChildReconciler":372,"./ReactComponentEnvironment":377,"./ReactMultiChildUpdateTypes":415,"./ReactReconciler":425}],415:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -57958,11 +55760,7 @@ var ReactMultiChildUpdateTypes = keyMirror({
 
 module.exports = ReactMultiChildUpdateTypes;
 
-<<<<<<< HEAD
-},{"./keyMirror":498}],421:[function(require,module,exports){
-=======
-},{"./keyMirror":499}],422:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./keyMirror":493}],416:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -58069,11 +55867,7 @@ var ReactNativeComponent = {
 module.exports = ReactNativeComponent;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./Object.assign":370,"./invariant":492,"_process":35}],422:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./invariant":493,"_process":36}],423:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./invariant":487,"_process":34}],417:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -58185,11 +55979,7 @@ var ReactOwner = {
 module.exports = ReactOwner;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./invariant":492,"_process":35}],423:[function(require,module,exports){
-=======
-},{"./invariant":493,"_process":36}],424:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./invariant":487,"_process":34}],418:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -58293,11 +56083,7 @@ function _noMeasure(objName, fnName, func) {
 module.exports = ReactPerf;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"_process":35}],424:[function(require,module,exports){
-=======
-},{"_process":36}],425:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"_process":34}],419:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -58407,11 +56193,7 @@ var ReactPropTransferer = {
 
 module.exports = ReactPropTransferer;
 
-<<<<<<< HEAD
-},{"./Object.assign":370,"./emptyFunction":471,"./joinClasses":497}],425:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./emptyFunction":472,"./joinClasses":498}],426:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./emptyFunction":466,"./joinClasses":492}],420:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -58439,11 +56221,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = ReactPropTypeLocationNames;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"_process":35}],426:[function(require,module,exports){
-=======
-},{"_process":36}],427:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"_process":34}],421:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -58467,11 +56245,7 @@ var ReactPropTypeLocations = keyMirror({
 
 module.exports = ReactPropTypeLocations;
 
-<<<<<<< HEAD
-},{"./keyMirror":498}],427:[function(require,module,exports){
-=======
-},{"./keyMirror":499}],428:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./keyMirror":493}],422:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -58820,11 +56594,7 @@ function getPreciseType(propValue) {
 
 module.exports = ReactPropTypes;
 
-<<<<<<< HEAD
-},{"./ReactElement":404,"./ReactFragment":410,"./ReactPropTypeLocationNames":425,"./emptyFunction":471}],428:[function(require,module,exports){
-=======
-},{"./ReactElement":405,"./ReactFragment":411,"./ReactPropTypeLocationNames":426,"./emptyFunction":472}],429:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactElement":399,"./ReactFragment":405,"./ReactPropTypeLocationNames":420,"./emptyFunction":466}],423:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -58880,11 +56650,7 @@ PooledClass.addPoolingTo(ReactPutListenerQueue);
 
 module.exports = ReactPutListenerQueue;
 
-<<<<<<< HEAD
-},{"./Object.assign":370,"./PooledClass":371,"./ReactBrowserEventEmitter":374}],429:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./PooledClass":372,"./ReactBrowserEventEmitter":375}],430:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./PooledClass":366,"./ReactBrowserEventEmitter":369}],424:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -59060,11 +56826,7 @@ PooledClass.addPoolingTo(ReactReconcileTransaction);
 
 module.exports = ReactReconcileTransaction;
 
-<<<<<<< HEAD
-},{"./CallbackQueue":348,"./Object.assign":370,"./PooledClass":371,"./ReactBrowserEventEmitter":374,"./ReactInputSelection":412,"./ReactPutListenerQueue":428,"./Transaction":458}],430:[function(require,module,exports){
-=======
-},{"./CallbackQueue":349,"./Object.assign":371,"./PooledClass":372,"./ReactBrowserEventEmitter":375,"./ReactInputSelection":413,"./ReactPutListenerQueue":429,"./Transaction":459}],431:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./CallbackQueue":343,"./Object.assign":365,"./PooledClass":366,"./ReactBrowserEventEmitter":369,"./ReactInputSelection":407,"./ReactPutListenerQueue":423,"./Transaction":453}],425:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -59188,11 +56950,7 @@ var ReactReconciler = {
 module.exports = ReactReconciler;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactElementValidator":405,"./ReactRef":431,"_process":35}],431:[function(require,module,exports){
-=======
-},{"./ReactElementValidator":406,"./ReactRef":432,"_process":36}],432:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactElementValidator":400,"./ReactRef":426,"_process":34}],426:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -59263,11 +57021,7 @@ ReactRef.detachRefs = function(instance, element) {
 
 module.exports = ReactRef;
 
-<<<<<<< HEAD
-},{"./ReactOwner":422}],432:[function(require,module,exports){
-=======
-},{"./ReactOwner":423}],433:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactOwner":417}],427:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -59298,11 +57052,7 @@ var ReactRootIndex = {
 
 module.exports = ReactRootIndex;
 
-<<<<<<< HEAD
-},{}],433:[function(require,module,exports){
-=======
-},{}],434:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],428:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -59384,11 +57134,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactElement":404,"./ReactInstanceHandles":413,"./ReactMarkupChecksum":417,"./ReactServerRenderingTransaction":434,"./emptyObject":472,"./instantiateReactComponent":491,"./invariant":492,"_process":35}],434:[function(require,module,exports){
-=======
-},{"./ReactElement":405,"./ReactInstanceHandles":414,"./ReactMarkupChecksum":418,"./ReactServerRenderingTransaction":435,"./emptyObject":473,"./instantiateReactComponent":492,"./invariant":493,"_process":36}],435:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactElement":399,"./ReactInstanceHandles":408,"./ReactMarkupChecksum":412,"./ReactServerRenderingTransaction":429,"./emptyObject":467,"./instantiateReactComponent":486,"./invariant":487,"_process":34}],429:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -59501,11 +57247,7 @@ PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 
 module.exports = ReactServerRenderingTransaction;
 
-<<<<<<< HEAD
-},{"./CallbackQueue":348,"./Object.assign":370,"./PooledClass":371,"./ReactPutListenerQueue":428,"./Transaction":458,"./emptyFunction":471}],435:[function(require,module,exports){
-=======
-},{"./CallbackQueue":349,"./Object.assign":371,"./PooledClass":372,"./ReactPutListenerQueue":429,"./Transaction":459,"./emptyFunction":472}],436:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./CallbackQueue":343,"./Object.assign":365,"./PooledClass":366,"./ReactPutListenerQueue":423,"./Transaction":453,"./emptyFunction":466}],430:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -59611,11 +57353,7 @@ ReactStateSetters.Mixin = {
 
 module.exports = ReactStateSetters;
 
-<<<<<<< HEAD
-},{}],436:[function(require,module,exports){
-=======
-},{}],437:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],431:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60129,11 +57867,7 @@ for (eventType in topLevelTypes) {
 
 module.exports = ReactTestUtils;
 
-<<<<<<< HEAD
-},{"./EventConstants":357,"./EventPluginHub":359,"./EventPropagators":362,"./Object.assign":370,"./React":372,"./ReactBrowserEventEmitter":374,"./ReactCompositeComponent":384,"./ReactElement":404,"./ReactEmptyComponent":406,"./ReactInstanceHandles":413,"./ReactInstanceMap":414,"./ReactMount":418,"./ReactUpdates":441,"./SyntheticEvent":450,"./emptyObject":472}],437:[function(require,module,exports){
-=======
-},{"./EventConstants":358,"./EventPluginHub":360,"./EventPropagators":363,"./Object.assign":371,"./React":373,"./ReactBrowserEventEmitter":375,"./ReactCompositeComponent":385,"./ReactElement":405,"./ReactEmptyComponent":407,"./ReactInstanceHandles":414,"./ReactInstanceMap":415,"./ReactMount":419,"./ReactUpdates":442,"./SyntheticEvent":451,"./emptyObject":473}],438:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventConstants":352,"./EventPluginHub":354,"./EventPropagators":357,"./Object.assign":365,"./React":367,"./ReactBrowserEventEmitter":369,"./ReactCompositeComponent":379,"./ReactElement":399,"./ReactEmptyComponent":401,"./ReactInstanceHandles":408,"./ReactInstanceMap":409,"./ReactMount":413,"./ReactUpdates":436,"./SyntheticEvent":445,"./emptyObject":467}],432:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60238,11 +57972,7 @@ var ReactTransitionChildMapping = {
 
 module.exports = ReactTransitionChildMapping;
 
-<<<<<<< HEAD
-},{"./ReactChildren":378,"./ReactFragment":410}],438:[function(require,module,exports){
-=======
-},{"./ReactChildren":379,"./ReactFragment":411}],439:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactChildren":373,"./ReactFragment":405}],433:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60353,11 +58083,7 @@ var ReactTransitionEvents = {
 
 module.exports = ReactTransitionEvents;
 
-<<<<<<< HEAD
-},{"./ExecutionEnvironment":363}],439:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":364}],440:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ExecutionEnvironment":358}],434:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60587,11 +58313,7 @@ var ReactTransitionGroup = React.createClass({
 
 module.exports = ReactTransitionGroup;
 
-<<<<<<< HEAD
-},{"./Object.assign":370,"./React":372,"./ReactTransitionChildMapping":437,"./cloneWithProps":464,"./emptyFunction":471}],440:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./React":373,"./ReactTransitionChildMapping":438,"./cloneWithProps":465,"./emptyFunction":472}],441:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./React":367,"./ReactTransitionChildMapping":432,"./cloneWithProps":459,"./emptyFunction":466}],435:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -60890,11 +58612,7 @@ var ReactUpdateQueue = {
 module.exports = ReactUpdateQueue;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./Object.assign":370,"./ReactCurrentOwner":386,"./ReactElement":404,"./ReactInstanceMap":414,"./ReactLifeCycle":415,"./ReactUpdates":441,"./invariant":492,"./warning":513,"_process":35}],441:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./ReactCurrentOwner":387,"./ReactElement":405,"./ReactInstanceMap":415,"./ReactLifeCycle":416,"./ReactUpdates":442,"./invariant":493,"./warning":514,"_process":36}],442:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./ReactCurrentOwner":381,"./ReactElement":399,"./ReactInstanceMap":409,"./ReactLifeCycle":410,"./ReactUpdates":436,"./invariant":487,"./warning":508,"_process":34}],436:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -61176,11 +58894,7 @@ var ReactUpdates = {
 module.exports = ReactUpdates;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./CallbackQueue":348,"./Object.assign":370,"./PooledClass":371,"./ReactCurrentOwner":386,"./ReactPerf":423,"./ReactReconciler":430,"./Transaction":458,"./invariant":492,"./warning":513,"_process":35}],442:[function(require,module,exports){
-=======
-},{"./CallbackQueue":349,"./Object.assign":371,"./PooledClass":372,"./ReactCurrentOwner":387,"./ReactPerf":424,"./ReactReconciler":431,"./Transaction":459,"./invariant":493,"./warning":514,"_process":36}],443:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./CallbackQueue":343,"./Object.assign":365,"./PooledClass":366,"./ReactCurrentOwner":381,"./ReactPerf":418,"./ReactReconciler":425,"./Transaction":453,"./invariant":487,"./warning":508,"_process":34}],437:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -61236,11 +58950,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = React;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./LinkedStateMixin":366,"./React":372,"./ReactCSSTransitionGroup":375,"./ReactComponentWithPureRenderMixin":383,"./ReactDefaultPerf":402,"./ReactFragment":410,"./ReactTestUtils":436,"./ReactTransitionGroup":439,"./ReactUpdates":441,"./cloneWithProps":464,"./cx":469,"./update":512,"_process":35}],443:[function(require,module,exports){
-=======
-},{"./LinkedStateMixin":367,"./React":373,"./ReactCSSTransitionGroup":376,"./ReactComponentWithPureRenderMixin":384,"./ReactDefaultPerf":403,"./ReactFragment":411,"./ReactTestUtils":437,"./ReactTransitionGroup":440,"./ReactUpdates":442,"./cloneWithProps":465,"./cx":470,"./update":513,"_process":36}],444:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./LinkedStateMixin":361,"./React":367,"./ReactCSSTransitionGroup":370,"./ReactComponentWithPureRenderMixin":378,"./ReactDefaultPerf":397,"./ReactFragment":405,"./ReactTestUtils":431,"./ReactTransitionGroup":434,"./ReactUpdates":436,"./cloneWithProps":459,"./cx":464,"./update":507,"_process":34}],438:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61334,11 +59044,7 @@ var SVGDOMPropertyConfig = {
 
 module.exports = SVGDOMPropertyConfig;
 
-<<<<<<< HEAD
-},{"./DOMProperty":352}],444:[function(require,module,exports){
-=======
-},{"./DOMProperty":353}],445:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./DOMProperty":347}],439:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61533,11 +59239,7 @@ var SelectEventPlugin = {
 
 module.exports = SelectEventPlugin;
 
-<<<<<<< HEAD
-},{"./EventConstants":357,"./EventPropagators":362,"./ReactInputSelection":412,"./SyntheticEvent":450,"./getActiveElement":478,"./isTextInputElement":495,"./keyOf":499,"./shallowEqual":508}],445:[function(require,module,exports){
-=======
-},{"./EventConstants":358,"./EventPropagators":363,"./ReactInputSelection":413,"./SyntheticEvent":451,"./getActiveElement":479,"./isTextInputElement":496,"./keyOf":500,"./shallowEqual":509}],446:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventConstants":352,"./EventPropagators":357,"./ReactInputSelection":407,"./SyntheticEvent":445,"./getActiveElement":473,"./isTextInputElement":490,"./keyOf":494,"./shallowEqual":503}],440:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61568,11 +59270,7 @@ var ServerReactRootIndex = {
 
 module.exports = ServerReactRootIndex;
 
-<<<<<<< HEAD
-},{}],446:[function(require,module,exports){
-=======
-},{}],447:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],441:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -62000,11 +59698,7 @@ var SimpleEventPlugin = {
 module.exports = SimpleEventPlugin;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./EventConstants":357,"./EventPluginUtils":361,"./EventPropagators":362,"./SyntheticClipboardEvent":447,"./SyntheticDragEvent":449,"./SyntheticEvent":450,"./SyntheticFocusEvent":451,"./SyntheticKeyboardEvent":453,"./SyntheticMouseEvent":454,"./SyntheticTouchEvent":455,"./SyntheticUIEvent":456,"./SyntheticWheelEvent":457,"./getEventCharCode":479,"./invariant":492,"./keyOf":499,"./warning":513,"_process":35}],447:[function(require,module,exports){
-=======
-},{"./EventConstants":358,"./EventPluginUtils":362,"./EventPropagators":363,"./SyntheticClipboardEvent":448,"./SyntheticDragEvent":450,"./SyntheticEvent":451,"./SyntheticFocusEvent":452,"./SyntheticKeyboardEvent":454,"./SyntheticMouseEvent":455,"./SyntheticTouchEvent":456,"./SyntheticUIEvent":457,"./SyntheticWheelEvent":458,"./getEventCharCode":480,"./invariant":493,"./keyOf":500,"./warning":514,"_process":36}],448:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./EventConstants":352,"./EventPluginUtils":356,"./EventPropagators":357,"./SyntheticClipboardEvent":442,"./SyntheticDragEvent":444,"./SyntheticEvent":445,"./SyntheticFocusEvent":446,"./SyntheticKeyboardEvent":448,"./SyntheticMouseEvent":449,"./SyntheticTouchEvent":450,"./SyntheticUIEvent":451,"./SyntheticWheelEvent":452,"./getEventCharCode":474,"./invariant":487,"./keyOf":494,"./warning":508,"_process":34}],442:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62049,11 +59743,7 @@ SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 
 module.exports = SyntheticClipboardEvent;
 
-<<<<<<< HEAD
-},{"./SyntheticEvent":450}],448:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":451}],449:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./SyntheticEvent":445}],443:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62098,11 +59788,7 @@ SyntheticEvent.augmentClass(
 
 module.exports = SyntheticCompositionEvent;
 
-<<<<<<< HEAD
-},{"./SyntheticEvent":450}],449:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":451}],450:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./SyntheticEvent":445}],444:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62141,11 +59827,7 @@ SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 module.exports = SyntheticDragEvent;
 
-<<<<<<< HEAD
-},{"./SyntheticMouseEvent":454}],450:[function(require,module,exports){
-=======
-},{"./SyntheticMouseEvent":455}],451:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./SyntheticMouseEvent":449}],445:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62311,11 +59993,7 @@ PooledClass.addPoolingTo(SyntheticEvent, PooledClass.threeArgumentPooler);
 
 module.exports = SyntheticEvent;
 
-<<<<<<< HEAD
-},{"./Object.assign":370,"./PooledClass":371,"./emptyFunction":471,"./getEventTarget":482}],451:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./PooledClass":372,"./emptyFunction":472,"./getEventTarget":483}],452:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./PooledClass":366,"./emptyFunction":466,"./getEventTarget":477}],446:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62354,11 +60032,7 @@ SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 
 module.exports = SyntheticFocusEvent;
 
-<<<<<<< HEAD
-},{"./SyntheticUIEvent":456}],452:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":457}],453:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./SyntheticUIEvent":451}],447:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62404,11 +60078,7 @@ SyntheticEvent.augmentClass(
 
 module.exports = SyntheticInputEvent;
 
-<<<<<<< HEAD
-},{"./SyntheticEvent":450}],453:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":451}],454:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./SyntheticEvent":445}],448:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62495,11 +60165,7 @@ SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 module.exports = SyntheticKeyboardEvent;
 
-<<<<<<< HEAD
-},{"./SyntheticUIEvent":456,"./getEventCharCode":479,"./getEventKey":480,"./getEventModifierState":481}],454:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":457,"./getEventCharCode":480,"./getEventKey":481,"./getEventModifierState":482}],455:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./SyntheticUIEvent":451,"./getEventCharCode":474,"./getEventKey":475,"./getEventModifierState":476}],449:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62580,11 +60246,7 @@ SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 
 module.exports = SyntheticMouseEvent;
 
-<<<<<<< HEAD
-},{"./SyntheticUIEvent":456,"./ViewportMetrics":459,"./getEventModifierState":481}],455:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":457,"./ViewportMetrics":460,"./getEventModifierState":482}],456:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./SyntheticUIEvent":451,"./ViewportMetrics":454,"./getEventModifierState":476}],450:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62632,11 +60294,7 @@ SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 module.exports = SyntheticTouchEvent;
 
-<<<<<<< HEAD
-},{"./SyntheticUIEvent":456,"./getEventModifierState":481}],456:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":457,"./getEventModifierState":482}],457:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./SyntheticUIEvent":451,"./getEventModifierState":476}],451:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62698,11 +60356,7 @@ SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 
 module.exports = SyntheticUIEvent;
 
-<<<<<<< HEAD
-},{"./SyntheticEvent":450,"./getEventTarget":482}],457:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":451,"./getEventTarget":483}],458:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./SyntheticEvent":445,"./getEventTarget":477}],452:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62763,11 +60417,7 @@ SyntheticMouseEvent.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 module.exports = SyntheticWheelEvent;
 
-<<<<<<< HEAD
-},{"./SyntheticMouseEvent":454}],458:[function(require,module,exports){
-=======
-},{"./SyntheticMouseEvent":455}],459:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./SyntheticMouseEvent":449}],453:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -63008,11 +60658,7 @@ var Transaction = {
 module.exports = Transaction;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./invariant":492,"_process":35}],459:[function(require,module,exports){
-=======
-},{"./invariant":493,"_process":36}],460:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./invariant":487,"_process":34}],454:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -63041,11 +60687,7 @@ var ViewportMetrics = {
 
 module.exports = ViewportMetrics;
 
-<<<<<<< HEAD
-},{}],460:[function(require,module,exports){
-=======
-},{}],461:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],455:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -63111,11 +60753,7 @@ function accumulateInto(current, next) {
 module.exports = accumulateInto;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./invariant":492,"_process":35}],461:[function(require,module,exports){
-=======
-},{"./invariant":493,"_process":36}],462:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./invariant":487,"_process":34}],456:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -63149,11 +60787,7 @@ function adler32(data) {
 
 module.exports = adler32;
 
-<<<<<<< HEAD
-},{}],462:[function(require,module,exports){
-=======
-},{}],463:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],457:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -63185,11 +60819,7 @@ function camelize(string) {
 
 module.exports = camelize;
 
-<<<<<<< HEAD
-},{}],463:[function(require,module,exports){
-=======
-},{}],464:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],458:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -63231,11 +60861,7 @@ function camelizeStyleName(string) {
 
 module.exports = camelizeStyleName;
 
-<<<<<<< HEAD
-},{"./camelize":462}],464:[function(require,module,exports){
-=======
-},{"./camelize":463}],465:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./camelize":457}],459:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -63294,11 +60920,7 @@ function cloneWithProps(child, props) {
 module.exports = cloneWithProps;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactElement":404,"./ReactPropTransferer":424,"./keyOf":499,"./warning":513,"_process":35}],465:[function(require,module,exports){
-=======
-},{"./ReactElement":405,"./ReactPropTransferer":425,"./keyOf":500,"./warning":514,"_process":36}],466:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactElement":399,"./ReactPropTransferer":419,"./keyOf":494,"./warning":508,"_process":34}],460:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -63342,11 +60964,7 @@ function containsNode(outerNode, innerNode) {
 
 module.exports = containsNode;
 
-<<<<<<< HEAD
-},{"./isTextNode":496}],466:[function(require,module,exports){
-=======
-},{"./isTextNode":497}],467:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./isTextNode":491}],461:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -63432,11 +61050,7 @@ function createArrayFromMixed(obj) {
 
 module.exports = createArrayFromMixed;
 
-<<<<<<< HEAD
-},{"./toArray":510}],467:[function(require,module,exports){
-=======
-},{"./toArray":511}],468:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./toArray":505}],462:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -63498,11 +61112,7 @@ function createFullPageComponent(tag) {
 module.exports = createFullPageComponent;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactClass":379,"./ReactElement":404,"./invariant":492,"_process":35}],468:[function(require,module,exports){
-=======
-},{"./ReactClass":380,"./ReactElement":405,"./invariant":493,"_process":36}],469:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactClass":374,"./ReactElement":399,"./invariant":487,"_process":34}],463:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -63592,11 +61202,7 @@ function createNodesFromMarkup(markup, handleScript) {
 module.exports = createNodesFromMarkup;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ExecutionEnvironment":363,"./createArrayFromMixed":466,"./getMarkupWrap":484,"./invariant":492,"_process":35}],469:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":364,"./createArrayFromMixed":467,"./getMarkupWrap":485,"./invariant":493,"_process":36}],470:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ExecutionEnvironment":358,"./createArrayFromMixed":461,"./getMarkupWrap":479,"./invariant":487,"_process":34}],464:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -63652,11 +61258,7 @@ function cx(classNames) {
 module.exports = cx;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./warning":513,"_process":35}],470:[function(require,module,exports){
-=======
-},{"./warning":514,"_process":36}],471:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./warning":508,"_process":34}],465:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -63714,11 +61316,7 @@ function dangerousStyleValue(name, value) {
 
 module.exports = dangerousStyleValue;
 
-<<<<<<< HEAD
-},{"./CSSProperty":346}],471:[function(require,module,exports){
-=======
-},{"./CSSProperty":347}],472:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./CSSProperty":341}],466:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -63752,11 +61350,7 @@ emptyFunction.thatReturnsArgument = function(arg) { return arg; };
 
 module.exports = emptyFunction;
 
-<<<<<<< HEAD
-},{}],472:[function(require,module,exports){
-=======
-},{}],473:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],467:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -63780,11 +61374,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = emptyObject;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"_process":35}],473:[function(require,module,exports){
-=======
-},{"_process":36}],474:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"_process":34}],468:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -63824,11 +61414,7 @@ function escapeTextContentForBrowser(text) {
 
 module.exports = escapeTextContentForBrowser;
 
-<<<<<<< HEAD
-},{}],474:[function(require,module,exports){
-=======
-},{}],475:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],469:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -63901,11 +61487,7 @@ function findDOMNode(componentOrElement) {
 module.exports = findDOMNode;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactCurrentOwner":386,"./ReactInstanceMap":414,"./ReactMount":418,"./invariant":492,"./isNode":494,"./warning":513,"_process":35}],475:[function(require,module,exports){
-=======
-},{"./ReactCurrentOwner":387,"./ReactInstanceMap":415,"./ReactMount":419,"./invariant":493,"./isNode":495,"./warning":514,"_process":36}],476:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactCurrentOwner":381,"./ReactInstanceMap":409,"./ReactMount":413,"./invariant":487,"./isNode":489,"./warning":508,"_process":34}],470:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -63963,11 +61545,7 @@ function flattenChildren(children) {
 module.exports = flattenChildren;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./traverseAllChildren":511,"./warning":513,"_process":35}],476:[function(require,module,exports){
-=======
-},{"./traverseAllChildren":512,"./warning":514,"_process":36}],477:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./traverseAllChildren":506,"./warning":508,"_process":34}],471:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -63996,11 +61574,7 @@ function focusNode(node) {
 
 module.exports = focusNode;
 
-<<<<<<< HEAD
-},{}],477:[function(require,module,exports){
-=======
-},{}],478:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],472:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -64031,11 +61605,7 @@ var forEachAccumulated = function(arr, cb, scope) {
 
 module.exports = forEachAccumulated;
 
-<<<<<<< HEAD
-},{}],478:[function(require,module,exports){
-=======
-},{}],479:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],473:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -64064,11 +61634,7 @@ function getActiveElement() /*?DOMElement*/ {
 
 module.exports = getActiveElement;
 
-<<<<<<< HEAD
-},{}],479:[function(require,module,exports){
-=======
-},{}],480:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],474:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -64120,11 +61686,7 @@ function getEventCharCode(nativeEvent) {
 
 module.exports = getEventCharCode;
 
-<<<<<<< HEAD
-},{}],480:[function(require,module,exports){
-=======
-},{}],481:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],475:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -64229,11 +61791,7 @@ function getEventKey(nativeEvent) {
 
 module.exports = getEventKey;
 
-<<<<<<< HEAD
-},{"./getEventCharCode":479}],481:[function(require,module,exports){
-=======
-},{"./getEventCharCode":480}],482:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./getEventCharCode":474}],476:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -64280,11 +61838,7 @@ function getEventModifierState(nativeEvent) {
 
 module.exports = getEventModifierState;
 
-<<<<<<< HEAD
-},{}],482:[function(require,module,exports){
-=======
-},{}],483:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],477:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -64315,11 +61869,7 @@ function getEventTarget(nativeEvent) {
 
 module.exports = getEventTarget;
 
-<<<<<<< HEAD
-},{}],483:[function(require,module,exports){
-=======
-},{}],484:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],478:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -64363,11 +61913,7 @@ function getIteratorFn(maybeIterable) {
 
 module.exports = getIteratorFn;
 
-<<<<<<< HEAD
-},{}],484:[function(require,module,exports){
-=======
-},{}],485:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],479:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -64486,11 +62032,7 @@ function getMarkupWrap(nodeName) {
 module.exports = getMarkupWrap;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ExecutionEnvironment":363,"./invariant":492,"_process":35}],485:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":364,"./invariant":493,"_process":36}],486:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ExecutionEnvironment":358,"./invariant":487,"_process":34}],480:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -64565,11 +62107,7 @@ function getNodeForCharacterOffset(root, offset) {
 
 module.exports = getNodeForCharacterOffset;
 
-<<<<<<< HEAD
-},{}],486:[function(require,module,exports){
-=======
-},{}],487:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],481:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -64604,11 +62142,7 @@ function getReactRootElementInContainer(container) {
 
 module.exports = getReactRootElementInContainer;
 
-<<<<<<< HEAD
-},{}],487:[function(require,module,exports){
-=======
-},{}],488:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],482:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -64645,11 +62179,7 @@ function getTextContentAccessor() {
 
 module.exports = getTextContentAccessor;
 
-<<<<<<< HEAD
-},{"./ExecutionEnvironment":363}],488:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":364}],489:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ExecutionEnvironment":358}],483:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -64689,11 +62219,7 @@ function getUnboundedScrollPosition(scrollable) {
 
 module.exports = getUnboundedScrollPosition;
 
-<<<<<<< HEAD
-},{}],489:[function(require,module,exports){
-=======
-},{}],490:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],484:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -64726,11 +62252,7 @@ function hyphenate(string) {
 
 module.exports = hyphenate;
 
-<<<<<<< HEAD
-},{}],490:[function(require,module,exports){
-=======
-},{}],491:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],485:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -64771,11 +62293,7 @@ function hyphenateStyleName(string) {
 
 module.exports = hyphenateStyleName;
 
-<<<<<<< HEAD
-},{"./hyphenate":489}],491:[function(require,module,exports){
-=======
-},{"./hyphenate":490}],492:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./hyphenate":484}],486:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -64913,11 +62431,7 @@ function instantiateReactComponent(node, parentCompositeType) {
 module.exports = instantiateReactComponent;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./Object.assign":370,"./ReactCompositeComponent":384,"./ReactEmptyComponent":406,"./ReactNativeComponent":421,"./invariant":492,"./warning":513,"_process":35}],492:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./ReactCompositeComponent":385,"./ReactEmptyComponent":407,"./ReactNativeComponent":422,"./invariant":493,"./warning":514,"_process":36}],493:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./ReactCompositeComponent":379,"./ReactEmptyComponent":401,"./ReactNativeComponent":416,"./invariant":487,"./warning":508,"_process":34}],487:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -64974,11 +62488,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"_process":35}],493:[function(require,module,exports){
-=======
-},{"_process":36}],494:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"_process":34}],488:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -65043,11 +62553,7 @@ function isEventSupported(eventNameSuffix, capture) {
 
 module.exports = isEventSupported;
 
-<<<<<<< HEAD
-},{"./ExecutionEnvironment":363}],494:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":364}],495:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ExecutionEnvironment":358}],489:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -65074,11 +62580,7 @@ function isNode(object) {
 
 module.exports = isNode;
 
-<<<<<<< HEAD
-},{}],495:[function(require,module,exports){
-=======
-},{}],496:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],490:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -65121,11 +62623,7 @@ function isTextInputElement(elem) {
 
 module.exports = isTextInputElement;
 
-<<<<<<< HEAD
-},{}],496:[function(require,module,exports){
-=======
-},{}],497:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],491:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -65150,11 +62648,7 @@ function isTextNode(object) {
 
 module.exports = isTextNode;
 
-<<<<<<< HEAD
-},{"./isNode":494}],497:[function(require,module,exports){
-=======
-},{"./isNode":495}],498:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./isNode":489}],492:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -65195,11 +62689,7 @@ function joinClasses(className/*, ... */) {
 
 module.exports = joinClasses;
 
-<<<<<<< HEAD
-},{}],498:[function(require,module,exports){
-=======
-},{}],499:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],493:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -65254,11 +62744,7 @@ var keyMirror = function(obj) {
 module.exports = keyMirror;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./invariant":492,"_process":35}],499:[function(require,module,exports){
-=======
-},{"./invariant":493,"_process":36}],500:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./invariant":487,"_process":34}],494:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -65294,11 +62780,7 @@ var keyOf = function(oneKeyObj) {
 
 module.exports = keyOf;
 
-<<<<<<< HEAD
-},{}],500:[function(require,module,exports){
-=======
-},{}],501:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],495:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -65351,11 +62833,7 @@ function mapObject(object, callback, context) {
 
 module.exports = mapObject;
 
-<<<<<<< HEAD
-},{}],501:[function(require,module,exports){
-=======
-},{}],502:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],496:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -65388,11 +62866,7 @@ function memoizeStringOnly(callback) {
 
 module.exports = memoizeStringOnly;
 
-<<<<<<< HEAD
-},{}],502:[function(require,module,exports){
-=======
-},{}],503:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],497:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -65432,11 +62906,7 @@ function onlyChild(children) {
 module.exports = onlyChild;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactElement":404,"./invariant":492,"_process":35}],503:[function(require,module,exports){
-=======
-},{"./ReactElement":405,"./invariant":493,"_process":36}],504:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactElement":399,"./invariant":487,"_process":34}],498:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -65464,11 +62934,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = performance || {};
 
-<<<<<<< HEAD
-},{"./ExecutionEnvironment":363}],504:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":364}],505:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ExecutionEnvironment":358}],499:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -65496,11 +62962,7 @@ var performanceNow = performance.now.bind(performance);
 
 module.exports = performanceNow;
 
-<<<<<<< HEAD
-},{"./performance":503}],505:[function(require,module,exports){
-=======
-},{"./performance":504}],506:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./performance":498}],500:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -65528,11 +62990,7 @@ function quoteAttributeValueForBrowser(value) {
 
 module.exports = quoteAttributeValueForBrowser;
 
-<<<<<<< HEAD
-},{"./escapeTextContentForBrowser":473}],506:[function(require,module,exports){
-=======
-},{"./escapeTextContentForBrowser":474}],507:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./escapeTextContentForBrowser":468}],501:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -65621,11 +63079,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = setInnerHTML;
 
-<<<<<<< HEAD
-},{"./ExecutionEnvironment":363}],507:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":364}],508:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ExecutionEnvironment":358}],502:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -65667,11 +63121,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = setTextContent;
 
-<<<<<<< HEAD
-},{"./ExecutionEnvironment":363,"./escapeTextContentForBrowser":473,"./setInnerHTML":506}],508:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":364,"./escapeTextContentForBrowser":474,"./setInnerHTML":507}],509:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ExecutionEnvironment":358,"./escapeTextContentForBrowser":468,"./setInnerHTML":501}],503:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -65715,11 +63165,7 @@ function shallowEqual(objA, objB) {
 
 module.exports = shallowEqual;
 
-<<<<<<< HEAD
-},{}],509:[function(require,module,exports){
-=======
-},{}],510:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],504:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -65823,11 +63269,7 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 module.exports = shouldUpdateReactComponent;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./warning":513,"_process":35}],510:[function(require,module,exports){
-=======
-},{"./warning":514,"_process":36}],511:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./warning":508,"_process":34}],505:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -65899,11 +63341,7 @@ function toArray(obj) {
 module.exports = toArray;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./invariant":492,"_process":35}],511:[function(require,module,exports){
-=======
-},{"./invariant":493,"_process":36}],512:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./invariant":487,"_process":34}],506:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -66156,11 +63594,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 module.exports = traverseAllChildren;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./ReactElement":404,"./ReactFragment":410,"./ReactInstanceHandles":413,"./getIteratorFn":483,"./invariant":492,"./warning":513,"_process":35}],512:[function(require,module,exports){
-=======
-},{"./ReactElement":405,"./ReactFragment":411,"./ReactInstanceHandles":414,"./getIteratorFn":484,"./invariant":493,"./warning":514,"_process":36}],513:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./ReactElement":399,"./ReactFragment":405,"./ReactInstanceHandles":408,"./getIteratorFn":478,"./invariant":487,"./warning":508,"_process":34}],507:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -66331,11 +63765,7 @@ function update(value, spec) {
 module.exports = update;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./Object.assign":370,"./invariant":492,"./keyOf":499,"_process":35}],513:[function(require,module,exports){
-=======
-},{"./Object.assign":371,"./invariant":493,"./keyOf":500,"_process":36}],514:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Object.assign":365,"./invariant":487,"./keyOf":494,"_process":34}],508:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -66398,982 +63828,10 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = warning;
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"./emptyFunction":471,"_process":35}],514:[function(require,module,exports){
+},{"./emptyFunction":466,"_process":34}],509:[function(require,module,exports){
 module.exports = require('./lib/React');
 
-},{"./lib/React":372}],515:[function(require,module,exports){
-=======
-},{"./emptyFunction":472,"_process":36}],515:[function(require,module,exports){
-module.exports = require('./lib/React');
-
-},{"./lib/React":373}],516:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-var _createDispatcher = require('./createDispatcher');
-
-var _createDispatcher2 = _interopRequireDefault(_createDispatcher);
-
-var _utilsComposeStores = require('./utils/composeStores');
-
-var _utilsComposeStores2 = _interopRequireDefault(_utilsComposeStores);
-
-var _middlewareThunk = require('./middleware/thunk');
-
-var _middlewareThunk2 = _interopRequireDefault(_middlewareThunk);
-
-var Redux = (function () {
-  function Redux(dispatcher, initialState) {
-    _classCallCheck(this, Redux);
-
-    var finalDispatcher = dispatcher;
-    if (typeof dispatcher === 'object') {
-      // A shortcut notation to use the default dispatcher
-      finalDispatcher = (0, _createDispatcher2['default'])((0, _utilsComposeStores2['default'])(dispatcher), function (getState) {
-        return [(0, _middlewareThunk2['default'])(getState)];
-      });
-    }
-
-    this.state = initialState;
-    this.listeners = [];
-    this.replaceDispatcher(finalDispatcher);
-  }
-
-  Redux.prototype.getDispatcher = function getDispatcher() {
-    return this.dispatcher;
-  };
-
-  Redux.prototype.replaceDispatcher = function replaceDispatcher(nextDispatcher) {
-    this.dispatcher = nextDispatcher;
-    this.dispatchFn = nextDispatcher(this.state, this.setState.bind(this));
-  };
-
-  Redux.prototype.dispatch = function dispatch(action) {
-    return this.dispatchFn(action);
-  };
-
-  Redux.prototype.getState = function getState() {
-    return this.state;
-  };
-
-  Redux.prototype.setState = function setState(nextState) {
-    this.state = nextState;
-    this.listeners.forEach(function (listener) {
-      return listener();
-    });
-    return nextState;
-  };
-
-  Redux.prototype.subscribe = function subscribe(listener) {
-    var listeners = this.listeners;
-
-    listeners.push(listener);
-
-    return function unsubscribe() {
-      var index = listeners.indexOf(listener);
-      listeners.splice(index, 1);
-    };
-  };
-
-  return Redux;
-})();
-
-exports['default'] = Redux;
-module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./createDispatcher":521,"./middleware/thunk":524,"./utils/composeStores":528}],516:[function(require,module,exports){
-=======
-},{"./createDispatcher":522,"./middleware/thunk":525,"./utils/composeStores":529}],517:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-exports['default'] = createAll;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _createProvider = require('./createProvider');
-
-var _createProvider2 = _interopRequireDefault(_createProvider);
-
-var _createProvideDecorator = require('./createProvideDecorator');
-
-var _createProvideDecorator2 = _interopRequireDefault(_createProvideDecorator);
-
-var _createConnector = require('./createConnector');
-
-var _createConnector2 = _interopRequireDefault(_createConnector);
-
-var _createConnectDecorator = require('./createConnectDecorator');
-
-var _createConnectDecorator2 = _interopRequireDefault(_createConnectDecorator);
-
-function createAll(React) {
-  // Wrapper components
-  var Provider = (0, _createProvider2['default'])(React);
-  var Connector = (0, _createConnector2['default'])(React);
-
-  // Higher-order components (decorators)
-  var provide = (0, _createProvideDecorator2['default'])(React, Provider);
-  var connect = (0, _createConnectDecorator2['default'])(React, Connector);
-
-  return { Provider: Provider, Connector: Connector, provide: provide, connect: connect };
-}
-
-module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./createConnectDecorator":517,"./createConnector":518,"./createProvideDecorator":519,"./createProvider":520}],517:[function(require,module,exports){
-=======
-},{"./createConnectDecorator":518,"./createConnector":519,"./createProvideDecorator":520,"./createProvider":521}],518:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-exports['default'] = createConnectDecorator;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
-
-var _utilsGetDisplayName = require('../utils/getDisplayName');
-
-var _utilsGetDisplayName2 = _interopRequireDefault(_utilsGetDisplayName);
-
-var _utilsShallowEqualScalar = require('../utils/shallowEqualScalar');
-
-var _utilsShallowEqualScalar2 = _interopRequireDefault(_utilsShallowEqualScalar);
-
-function createConnectDecorator(React, Connector) {
-  var Component = React.Component;
-
-  return function connect(select) {
-    return function (DecoratedComponent) {
-      return (function (_Component) {
-        function ConnectorDecorator() {
-          _classCallCheck(this, ConnectorDecorator);
-
-          if (_Component != null) {
-            _Component.apply(this, arguments);
-          }
-        }
-
-        _inherits(ConnectorDecorator, _Component);
-
-        ConnectorDecorator.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps) {
-          return !(0, _utilsShallowEqualScalar2['default'])(this.props, nextProps);
-        };
-
-        ConnectorDecorator.prototype.render = function render() {
-          var _this = this;
-
-          return React.createElement(
-            Connector,
-            { select: function (state) {
-                return select(state, _this.props);
-              } },
-            function (stuff) {
-              return React.createElement(DecoratedComponent, _extends({}, stuff, _this.props));
-            }
-          );
-        };
-
-        _createClass(ConnectorDecorator, null, [{
-          key: 'displayName',
-          value: 'Connector(' + (0, _utilsGetDisplayName2['default'])(DecoratedComponent) + ')',
-          enumerable: true
-        }, {
-          key: 'DecoratedComponent',
-          value: DecoratedComponent,
-          enumerable: true
-        }]);
-
-        return ConnectorDecorator;
-      })(Component);
-    };
-  };
-}
-
-module.exports = exports['default'];
-<<<<<<< HEAD
-},{"../utils/getDisplayName":529,"../utils/shallowEqualScalar":535}],518:[function(require,module,exports){
-=======
-},{"../utils/getDisplayName":530,"../utils/shallowEqualScalar":536}],519:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-exports['default'] = createConnector;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
-
-var _utilsIdentity = require('../utils/identity');
-
-var _utilsIdentity2 = _interopRequireDefault(_utilsIdentity);
-
-var _utilsShallowEqual = require('../utils/shallowEqual');
-
-var _utilsShallowEqual2 = _interopRequireDefault(_utilsShallowEqual);
-
-var _utilsIsPlainObject = require('../utils/isPlainObject');
-
-var _utilsIsPlainObject2 = _interopRequireDefault(_utilsIsPlainObject);
-
-var _invariant = require('invariant');
-
-var _invariant2 = _interopRequireDefault(_invariant);
-
-function createConnector(React) {
-  var Component = React.Component;
-  var PropTypes = React.PropTypes;
-
-  return (function (_Component) {
-    function Connector(props, context) {
-      _classCallCheck(this, Connector);
-
-      _Component.call(this, props, context);
-
-      this.unsubscribe = context.redux.subscribe(this.handleChange.bind(this));
-      this.state = this.selectState(props, context);
-    }
-
-    _inherits(Connector, _Component);
-
-    Connector.prototype.shouldComponentUpdate = function shouldComponentUpdate(nextProps, nextState) {
-      return !this.isSliceEqual(this.state.slice, nextState.slice) || !(0, _utilsShallowEqual2['default'])(this.props, nextProps);
-    };
-
-    Connector.prototype.isSliceEqual = function isSliceEqual(slice, nextSlice) {
-      var isRefEqual = slice === nextSlice;
-      if (isRefEqual) {
-        return true;
-      } else if (typeof slice !== 'object' || typeof nextSlice !== 'object') {
-        return isRefEqual;
-      }
-      return (0, _utilsShallowEqual2['default'])(slice, nextSlice);
-    };
-
-    Connector.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-      if (nextProps.select !== this.props.select) {
-        // Force the state slice recalculation
-        this.handleChange(nextProps);
-      }
-    };
-
-    Connector.prototype.componentWillUnmount = function componentWillUnmount() {
-      this.unsubscribe();
-    };
-
-    Connector.prototype.handleChange = function handleChange() {
-      var props = arguments[0] === undefined ? this.props : arguments[0];
-
-      var nextState = this.selectState(props, this.context);
-      this.setState(nextState);
-    };
-
-    Connector.prototype.selectState = function selectState(props, context) {
-      var state = context.redux.getState();
-      var slice = props.select(state);
-
-      (0, _invariant2['default'])((0, _utilsIsPlainObject2['default'])(slice), 'The return value of `select` prop must be an object. Instead received %s.', slice);
-
-      return { slice: slice };
-    };
-
-    Connector.prototype.render = function render() {
-      var children = this.props.children;
-      var slice = this.state.slice;
-      var dispatch = this.context.redux.dispatch;
-
-      return children(_extends({ dispatch: dispatch }, slice));
-    };
-
-    _createClass(Connector, null, [{
-      key: 'contextTypes',
-      value: {
-        redux: PropTypes.object.isRequired
-      },
-      enumerable: true
-    }, {
-      key: 'propTypes',
-      value: {
-        children: PropTypes.func.isRequired,
-        select: PropTypes.func.isRequired
-      },
-      enumerable: true
-    }, {
-      key: 'defaultProps',
-      value: {
-        select: _utilsIdentity2['default']
-      },
-      enumerable: true
-    }]);
-
-    return Connector;
-  })(Component);
-}
-
-module.exports = exports['default'];
-<<<<<<< HEAD
-},{"../utils/identity":530,"../utils/isPlainObject":531,"../utils/shallowEqual":534,"invariant":536}],519:[function(require,module,exports){
-=======
-},{"../utils/identity":531,"../utils/isPlainObject":532,"../utils/shallowEqual":535,"invariant":537}],520:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-exports['default'] = createProvideDecorator;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
-
-var _utilsGetDisplayName = require('../utils/getDisplayName');
-
-var _utilsGetDisplayName2 = _interopRequireDefault(_utilsGetDisplayName);
-
-function createProvideDecorator(React, Provider) {
-  var Component = React.Component;
-
-  return function provide(redux) {
-    return function (DecoratedComponent) {
-      return (function (_Component) {
-        function ProviderDecorator() {
-          _classCallCheck(this, ProviderDecorator);
-
-          if (_Component != null) {
-            _Component.apply(this, arguments);
-          }
-        }
-
-        _inherits(ProviderDecorator, _Component);
-
-        ProviderDecorator.prototype.render = function render() {
-          var _this = this;
-
-          return React.createElement(
-            Provider,
-            { redux: redux },
-            function () {
-              return React.createElement(DecoratedComponent, _this.props);
-            }
-          );
-        };
-
-        _createClass(ProviderDecorator, null, [{
-          key: 'displayName',
-          value: 'Provider(' + (0, _utilsGetDisplayName2['default'])(DecoratedComponent) + ')',
-          enumerable: true
-        }, {
-          key: 'DecoratedComponent',
-          value: DecoratedComponent,
-          enumerable: true
-        }]);
-
-        return ProviderDecorator;
-      })(Component);
-    };
-  };
-}
-
-module.exports = exports['default'];
-<<<<<<< HEAD
-},{"../utils/getDisplayName":529}],520:[function(require,module,exports){
-=======
-},{"../utils/getDisplayName":530}],521:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-"use strict";
-
-exports.__esModule = true;
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-exports["default"] = createProvider;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
-
-function createProvider(React) {
-  var Component = React.Component;
-  var PropTypes = React.PropTypes;
-
-  var reduxShape = PropTypes.shape({
-    subscribe: PropTypes.func.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    getState: PropTypes.func.isRequired
-  });
-
-  return (function (_Component) {
-    function Provider(props, context) {
-      _classCallCheck(this, Provider);
-
-      _Component.call(this, props, context);
-      this.state = { redux: props.redux };
-    }
-
-    _inherits(Provider, _Component);
-
-    Provider.prototype.getChildContext = function getChildContext() {
-      return { redux: this.state.redux };
-    };
-
-    Provider.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-      var redux = this.state.redux;
-      var nextRedux = nextProps.redux;
-
-      if (redux !== nextRedux) {
-        var nextDispatcher = nextRedux.getDispatcher();
-        redux.replaceDispatcher(nextDispatcher);
-      }
-    };
-
-    Provider.prototype.render = function render() {
-      var children = this.props.children;
-
-      return children();
-    };
-
-    _createClass(Provider, null, [{
-      key: "propTypes",
-      value: {
-        redux: reduxShape.isRequired,
-        children: PropTypes.func.isRequired
-      },
-      enumerable: true
-    }, {
-      key: "childContextTypes",
-      value: {
-        redux: reduxShape.isRequired
-      },
-      enumerable: true
-    }]);
-
-    return Provider;
-  })(Component);
-}
-
-module.exports = exports["default"];
-<<<<<<< HEAD
-},{}],521:[function(require,module,exports){
-=======
-},{}],522:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-exports['default'] = createDispatcher;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _utilsComposeMiddleware = require('./utils/composeMiddleware');
-
-var _utilsComposeMiddleware2 = _interopRequireDefault(_utilsComposeMiddleware);
-
-var INIT_ACTION = {
-  type: '@@INIT'
-};
-
-function createDispatcher(store) {
-  var middlewares = arguments[1] === undefined ? [] : arguments[1];
-
-  return function dispatcher(initialState, setState) {
-    var state = setState(store(initialState, INIT_ACTION));
-
-    function dispatch(action) {
-      state = setState(store(state, action));
-      return action;
-    }
-
-    function getState() {
-      return state;
-    }
-
-    var finalMiddlewares = typeof middlewares === 'function' ? middlewares(getState) : middlewares;
-
-    return _utilsComposeMiddleware2['default'].apply(undefined, finalMiddlewares.concat([dispatch]));
-  };
-}
-
-module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./utils/composeMiddleware":527}],522:[function(require,module,exports){
-=======
-},{"./utils/composeMiddleware":528}],523:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-var _bind = Function.prototype.bind;
-exports['default'] = createRedux;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _Redux = require('./Redux');
-
-var _Redux2 = _interopRequireDefault(_Redux);
-
-function createRedux() {
-  for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-
-  var redux = new (_bind.apply(_Redux2['default'], [null].concat(args)))();
-
-  return {
-    subscribe: redux.subscribe.bind(redux),
-    dispatch: redux.dispatch.bind(redux),
-    getState: redux.getState.bind(redux),
-    getDispatcher: redux.getDispatcher.bind(redux),
-    replaceDispatcher: redux.replaceDispatcher.bind(redux)
-  };
-}
-
-module.exports = exports['default'];
-<<<<<<< HEAD
-},{"./Redux":515}],523:[function(require,module,exports){
-=======
-},{"./Redux":516}],524:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-// Core
-'use strict';
-
-exports.__esModule = true;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _createRedux = require('./createRedux');
-
-var _createRedux2 = _interopRequireDefault(_createRedux);
-
-var _createDispatcher = require('./createDispatcher');
-
-var _createDispatcher2 = _interopRequireDefault(_createDispatcher);
-
-// Utilities
-
-var _utilsComposeMiddleware = require('./utils/composeMiddleware');
-
-var _utilsComposeMiddleware2 = _interopRequireDefault(_utilsComposeMiddleware);
-
-var _utilsComposeStores = require('./utils/composeStores');
-
-var _utilsComposeStores2 = _interopRequireDefault(_utilsComposeStores);
-
-var _utilsBindActionCreators = require('./utils/bindActionCreators');
-
-var _utilsBindActionCreators2 = _interopRequireDefault(_utilsBindActionCreators);
-
-exports.createRedux = _createRedux2['default'];
-exports.createDispatcher = _createDispatcher2['default'];
-exports.composeMiddleware = _utilsComposeMiddleware2['default'];
-exports.composeStores = _utilsComposeStores2['default'];
-exports.bindActionCreators = _utilsBindActionCreators2['default'];
-<<<<<<< HEAD
-},{"./createDispatcher":521,"./createRedux":522,"./utils/bindActionCreators":526,"./utils/composeMiddleware":527,"./utils/composeStores":528}],524:[function(require,module,exports){
-=======
-},{"./createDispatcher":522,"./createRedux":523,"./utils/bindActionCreators":527,"./utils/composeMiddleware":528,"./utils/composeStores":529}],525:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-exports['default'] = thunkMiddleware;
-
-function thunkMiddleware(getState) {
-  return function (next) {
-    var recurse = function recurse(action) {
-      return typeof action === 'function' ? action(recurse, getState) : next(action);
-    };
-
-    return recurse;
-  };
-}
-
-module.exports = exports['default'];
-<<<<<<< HEAD
-},{}],525:[function(require,module,exports){
-=======
-},{}],526:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _componentsCreateAll = require('./components/createAll');
-
-var _componentsCreateAll2 = _interopRequireDefault(_componentsCreateAll);
-
-var _createAll = (0, _componentsCreateAll2['default'])(_react2['default']);
-
-var Provider = _createAll.Provider;
-var Connector = _createAll.Connector;
-var provide = _createAll.provide;
-var connect = _createAll.connect;
-exports.Provider = Provider;
-exports.Connector = Connector;
-exports.provide = provide;
-exports.connect = connect;
-<<<<<<< HEAD
-},{"./components/createAll":516,"react":514}],526:[function(require,module,exports){
-=======
-},{"./components/createAll":517,"react":515}],527:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-exports['default'] = bindActionCreators;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _utilsMapValues = require('../utils/mapValues');
-
-var _utilsMapValues2 = _interopRequireDefault(_utilsMapValues);
-
-function bindActionCreators(actionCreators, dispatch) {
-  return (0, _utilsMapValues2['default'])(actionCreators, function (actionCreator) {
-    return function () {
-      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-
-      return dispatch(actionCreator.apply(undefined, args));
-    };
-  });
-}
-
-module.exports = exports['default'];
-<<<<<<< HEAD
-},{"../utils/mapValues":532}],527:[function(require,module,exports){
-=======
-},{"../utils/mapValues":533}],528:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-"use strict";
-
-exports.__esModule = true;
-exports["default"] = composeMiddleware;
-
-function composeMiddleware() {
-  for (var _len = arguments.length, middlewares = Array(_len), _key = 0; _key < _len; _key++) {
-    middlewares[_key] = arguments[_key];
-  }
-
-  return middlewares.reduceRight(function (composed, m) {
-    return m(composed);
-  });
-}
-
-module.exports = exports["default"];
-<<<<<<< HEAD
-},{}],528:[function(require,module,exports){
-=======
-},{}],529:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-exports['default'] = composeStores;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _utilsMapValues = require('../utils/mapValues');
-
-var _utilsMapValues2 = _interopRequireDefault(_utilsMapValues);
-
-var _utilsPick = require('../utils/pick');
-
-var _utilsPick2 = _interopRequireDefault(_utilsPick);
-
-function composeStores(stores) {
-  var finalStores = (0, _utilsPick2['default'])(stores, function (val) {
-    return typeof val === 'function';
-  });
-  return function Composition(atom, action) {
-    if (atom === undefined) atom = {};
-
-    return (0, _utilsMapValues2['default'])(finalStores, function (store, key) {
-      return store(atom[key], action);
-    });
-  };
-}
-
-module.exports = exports['default'];
-<<<<<<< HEAD
-},{"../utils/mapValues":532,"../utils/pick":533}],529:[function(require,module,exports){
-=======
-},{"../utils/mapValues":533,"../utils/pick":534}],530:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-exports['default'] = getDisplayName;
-
-function getDisplayName(Component) {
-  return Component.displayName || Component.name || 'Component';
-}
-
-module.exports = exports['default'];
-<<<<<<< HEAD
-},{}],530:[function(require,module,exports){
-=======
-},{}],531:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-"use strict";
-
-exports.__esModule = true;
-exports["default"] = identity;
-
-function identity(value) {
-  return value;
-}
-
-module.exports = exports["default"];
-<<<<<<< HEAD
-},{}],531:[function(require,module,exports){
-=======
-},{}],532:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-exports['default'] = isPlainObject;
-
-function isPlainObject(obj) {
-  return obj ? typeof obj === 'object' && Object.getPrototypeOf(obj) === Object.prototype : false;
-}
-
-module.exports = exports['default'];
-<<<<<<< HEAD
-},{}],532:[function(require,module,exports){
-=======
-},{}],533:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-"use strict";
-
-exports.__esModule = true;
-exports["default"] = mapValues;
-
-function mapValues(obj, fn) {
-  return Object.keys(obj).reduce(function (result, key) {
-    result[key] = fn(obj[key], key);
-    return result;
-  }, {});
-}
-
-module.exports = exports["default"];
-<<<<<<< HEAD
-},{}],533:[function(require,module,exports){
-=======
-},{}],534:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-"use strict";
-
-exports.__esModule = true;
-exports["default"] = pick;
-
-function pick(obj, fn) {
-  return Object.keys(obj).reduce(function (result, key) {
-    if (fn(obj[key])) {
-      result[key] = obj[key];
-    }
-    return result;
-  }, {});
-}
-
-module.exports = exports["default"];
-<<<<<<< HEAD
-},{}],534:[function(require,module,exports){
-=======
-},{}],535:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-"use strict";
-
-exports.__esModule = true;
-exports["default"] = shallowEqual;
-
-function shallowEqual(objA, objB) {
-  if (objA === objB) {
-    return true;
-  }
-
-  var keysA = Object.keys(objA);
-  var keysB = Object.keys(objB);
-
-  if (keysA.length !== keysB.length) {
-    return false;
-  }
-
-  // Test for A's keys different from B.
-  var hasOwn = Object.prototype.hasOwnProperty;
-  for (var i = 0; i < keysA.length; i++) {
-    if (!hasOwn.call(objB, keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-module.exports = exports["default"];
-<<<<<<< HEAD
-},{}],535:[function(require,module,exports){
-=======
-},{}],536:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-exports['default'] = shallowEqualScalar;
-
-function shallowEqualScalar(objA, objB) {
-  if (objA === objB) {
-    return true;
-  }
-
-  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
-    return false;
-  }
-
-  var keysA = Object.keys(objA);
-  var keysB = Object.keys(objB);
-
-  if (keysA.length !== keysB.length) {
-    return false;
-  }
-
-  // Test for A's keys different from B.
-  var hasOwn = Object.prototype.hasOwnProperty;
-  for (var i = 0; i < keysA.length; i++) {
-    if (!hasOwn.call(objB, keysA[i])) {
-      return false;
-    }
-
-    var valA = objA[keysA[i]];
-    var valB = objB[keysA[i]];
-
-    if (valA !== valB || typeof valA === 'object' || typeof valB === 'object') {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-module.exports = exports['default'];
-<<<<<<< HEAD
-},{}],536:[function(require,module,exports){
-=======
-},{}],537:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule invariant
- */
-
-'use strict';
-
-/**
- * Use invariant() to assert state which your program assumes to be true.
- *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
- *
- * The invariant message will be stripped in production, but the invariant
- * will remain to ensure logic does not differ in production.
- */
-
-var invariant = function(condition, format, a, b, c, d, e, f) {
-  if (process.env.NODE_ENV !== 'production') {
-    if (format === undefined) {
-      throw new Error('invariant requires an error message argument');
-    }
-  }
-
-  if (!condition) {
-    var error;
-    if (format === undefined) {
-      error = new Error(
-        'Minified exception occurred; use the non-minified dev environment ' +
-        'for the full error message and additional helpful warnings.'
-      );
-    } else {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      error = new Error(
-        'Invariant Violation: ' +
-        format.replace(/%s/g, function() { return args[argIndex++]; })
-      );
-    }
-
-    error.framesToPop = 1; // we don't care about invariant's own frame
-    throw error;
-  }
-};
-
-module.exports = invariant;
-
-}).call(this,require('_process'))
-<<<<<<< HEAD
-},{"_process":35}],537:[function(require,module,exports){
-=======
-},{"_process":36}],538:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
-'use strict';
-
-exports.__esModule = true;
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
-
-function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-
-var _libReact = require('./lib/react');
-
-_defaults(exports, _interopRequireWildcard(_libReact));
-<<<<<<< HEAD
-},{"./lib/react":525}],538:[function(require,module,exports){
-=======
-},{"./lib/react":526}],539:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./lib/React":367}],510:[function(require,module,exports){
 /*!
   * Reqwest! A general purpose XHR connection manager
   * license MIT (c) Dustin Diaz 2014
@@ -67990,11 +64448,7 @@ _defaults(exports, _interopRequireWildcard(_libReact));
   return reqwest
 });
 
-<<<<<<< HEAD
-},{}],539:[function(require,module,exports){
-=======
-},{}],540:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],511:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -69544,11 +65998,7 @@ _defaults(exports, _interopRequireWildcard(_libReact));
   }
 }.call(this));
 
-<<<<<<< HEAD
-},{}],540:[function(require,module,exports){
-=======
-},{}],541:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],512:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -69567,11 +66017,7 @@ define(function (require) {
 });
 })(typeof define === 'function' && define.amd ? define : function (factory) { module.exports = factory(require); });
 
-<<<<<<< HEAD
-},{"./Scheduler":541,"./env":553,"./makePromise":555}],541:[function(require,module,exports){
-=======
-},{"./Scheduler":542,"./env":554,"./makePromise":556}],542:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"./Scheduler":513,"./env":525,"./makePromise":527}],513:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -69653,11 +66099,7 @@ define(function() {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
-<<<<<<< HEAD
-},{}],542:[function(require,module,exports){
-=======
-},{}],543:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],514:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -69685,11 +66127,7 @@ define(function() {
 	return TimeoutError;
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
-<<<<<<< HEAD
-},{}],543:[function(require,module,exports){
-=======
-},{}],544:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],515:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -69746,11 +66184,7 @@ define(function() {
 
 
 
-<<<<<<< HEAD
-},{}],544:[function(require,module,exports){
-=======
-},{}],545:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],516:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -70041,11 +66475,7 @@ define(function(require) {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(require); }));
 
-<<<<<<< HEAD
-},{"../apply":543,"../state":556}],545:[function(require,module,exports){
-=======
-},{"../apply":544,"../state":557}],546:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../apply":515,"../state":528}],517:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -70207,11 +66637,7 @@ define(function() {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
-<<<<<<< HEAD
-},{}],546:[function(require,module,exports){
-=======
-},{}],547:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],518:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -70240,11 +66666,7 @@ define(function() {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
-<<<<<<< HEAD
-},{}],547:[function(require,module,exports){
-=======
-},{}],548:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],519:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -70266,11 +66688,7 @@ define(function(require) {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(require); }));
 
-<<<<<<< HEAD
-},{"../state":556}],548:[function(require,module,exports){
-=======
-},{"../state":557}],549:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../state":528}],520:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -70337,11 +66755,7 @@ define(function() {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
-<<<<<<< HEAD
-},{}],549:[function(require,module,exports){
-=======
-},{}],550:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],521:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -70367,11 +66781,7 @@ define(function() {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
-<<<<<<< HEAD
-},{}],550:[function(require,module,exports){
-=======
-},{}],551:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],522:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -70451,11 +66861,7 @@ define(function(require) {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(require); }));
 
-<<<<<<< HEAD
-},{"../TimeoutError":542,"../env":553}],551:[function(require,module,exports){
-=======
-},{"../TimeoutError":543,"../env":554}],552:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../TimeoutError":514,"../env":525}],523:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -70543,11 +66949,7 @@ define(function(require) {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(require); }));
 
-<<<<<<< HEAD
-},{"../env":553,"../format":554}],552:[function(require,module,exports){
-=======
-},{"../env":554,"../format":555}],553:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"../env":525,"../format":526}],524:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -70587,11 +66989,7 @@ define(function() {
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
 
-<<<<<<< HEAD
-},{}],553:[function(require,module,exports){
-=======
-},{}],554:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],525:[function(require,module,exports){
 (function (process){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
@@ -70668,11 +67066,7 @@ define(function(require) {
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(require); }));
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"_process":35}],554:[function(require,module,exports){
-=======
-},{"_process":36}],555:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"_process":34}],526:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -70730,11 +67124,7 @@ define(function() {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
-<<<<<<< HEAD
-},{}],555:[function(require,module,exports){
-=======
-},{}],556:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],527:[function(require,module,exports){
 (function (process){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
@@ -71665,11 +68055,7 @@ define(function() {
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
 }).call(this,require('_process'))
-<<<<<<< HEAD
-},{"_process":35}],556:[function(require,module,exports){
-=======
-},{"_process":36}],557:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{"_process":34}],528:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -71706,11 +68092,7 @@ define(function() {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
-<<<<<<< HEAD
-},{}],557:[function(require,module,exports){
-=======
-},{}],558:[function(require,module,exports){
->>>>>>> power data is set and pulled from db during streaming
+},{}],529:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 
 /**
@@ -71940,8 +68322,4 @@ define(function (require) {
 });
 })(typeof define === 'function' && define.amd ? define : function (factory) { module.exports = factory(require); });
 
-<<<<<<< HEAD
-},{"./lib/Promise":540,"./lib/TimeoutError":542,"./lib/apply":543,"./lib/decorators/array":544,"./lib/decorators/flow":545,"./lib/decorators/fold":546,"./lib/decorators/inspect":547,"./lib/decorators/iterate":548,"./lib/decorators/progress":549,"./lib/decorators/timed":550,"./lib/decorators/unhandledRejection":551,"./lib/decorators/with":552}]},{},[3]);
-=======
-},{"./lib/Promise":541,"./lib/TimeoutError":543,"./lib/apply":544,"./lib/decorators/array":545,"./lib/decorators/flow":546,"./lib/decorators/fold":547,"./lib/decorators/inspect":548,"./lib/decorators/iterate":549,"./lib/decorators/progress":550,"./lib/decorators/timed":551,"./lib/decorators/unhandledRejection":552,"./lib/decorators/with":553}]},{},[3]);
->>>>>>> power data is set and pulled from db during streaming
+},{"./lib/Promise":512,"./lib/TimeoutError":514,"./lib/apply":515,"./lib/decorators/array":516,"./lib/decorators/flow":517,"./lib/decorators/fold":518,"./lib/decorators/inspect":519,"./lib/decorators/iterate":520,"./lib/decorators/progress":521,"./lib/decorators/timed":522,"./lib/decorators/unhandledRejection":523,"./lib/decorators/with":524}]},{},[3]);

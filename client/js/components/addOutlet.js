@@ -1,8 +1,7 @@
 var React = require('react');
 var outletStore = require('../stores/outletStore');
-var _=require('underscore');
+var _ = require('underscore');
 var Router = require('react-router'); //need this for redirection
-// var ReactAddons = require('react/addons');
 var FooterCheck = require('./footerCheck');
 
 var addOutlet = React.createClass({
@@ -158,11 +157,3 @@ var addOutlet = React.createClass({
 });
 
 module.exports = addOutlet;
-
-
-// <div className="ui submit button" type="POST">Submit</div><br />
-
-// <select className="select" onChange={this.selectLog}>
-//           <option value='AK'>AK</option>
-//           <option value='CA'>CA</option>
-//         </select>
