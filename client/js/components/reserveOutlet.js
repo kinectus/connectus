@@ -323,14 +323,12 @@ var Availability = React.createClass({
               end = moment('12/25/1995 '+endSub, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY hhmma');
 
               // Format begin time
-              //  && end[11]!== '1'
               if (begin[11] === '0'){
                 begin = begin.slice(12,13).concat( ":"+begin.slice(13) );
               } else {
                 begin = begin.slice(11,13).concat( ":"+begin.slice(13) );
               }
               // Format end time
-              //  && end[11]!== '1'
               if (end[11] === '0'){
                 end = end.slice(12,13).concat( ":"+end.slice(13) );
               } else {
@@ -349,8 +347,9 @@ var Availability = React.createClass({
             var indicator = reservation.available ? "indicator barView" : "noIndicator barView";
             blockClass = blockClass + " splitHour"
             var hoverStart = slotProps[reservation.slot_id-1].start;
+            console.log('---------------------------------------------------hoverStart(SLOT.START): ', hoverStart)
             hoverStart = moment('12/25/1995 '+hoverStart, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY ha');
-
+            console.log('---------------------------------------------------hoverStart(POST 1ST FORMAT): ', hoverStart)
             if (hoverStart[12] === '0'){
               hoverStart = hoverStart.slice(12);
               if (hoverStart = '0am'){
@@ -359,6 +358,7 @@ var Availability = React.createClass({
             } else {
               hoverStart = hoverStart.slice(11);
             }
+            console.log('---------------------------------------------------hoverStart(FINAL FORMAT): ', hoverStart)
             return(
               <div className="timeblock" key={reservation.id}>
               <div className={indicator}><p className="barViewText">{hoverStart}</p></div>
