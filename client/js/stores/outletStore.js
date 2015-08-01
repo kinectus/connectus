@@ -102,22 +102,8 @@ var outletStore = assign({}, EventEmitter.prototype, {
 
   submitReservation: function(newReservation) {
     return OutletServices.makeReservation(newReservation).then(function(reservation){
-      
-      // outletStore.trigger('change');
       return reservation;
     });
-  },
-
-  // createTransaction: function(){
-  //   return OutletServices.makeTransaction();
-  // },
-
-  emitChange: function() {
-    this.emit(CHANGE_EVENT);
-  },
-
-  addChangeListener: function(callback) {
-    this.on(CHANGE_EVENT, callback);
   }
 
 });
