@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/test.js;",
-    "test-front": "jest THIS DOESNT WORK"
+    "start": "node",
+    "postinstall": "bower cache clean && bower install && gulp deploytest"
   },
   "repository": {
     "type": "git",
@@ -20,10 +20,6 @@
     "node": "^0.12.4",
     "npm": "^2.10.1"
   },
-  "scripts": {
-    "start": "node",
-    "postinstall": "gulp deploytest"
-  },
   "homepage": "https://github.com/Dianna/connectus#readme",
   "dependencies": {
     "address-validator": "^0.1.4",
@@ -31,6 +27,7 @@
     "bluebird": "^2.9.33",
     "body-parser": "^1.13.2",
     "bookshelf": "^0.8.1",
+    "bower": "^1.4.1",
     "braintree": "^1.27.0",
     "browserify": "^10.2.6",
     "chai": "^3.1.0",

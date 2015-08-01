@@ -290,24 +290,26 @@ var Availability = React.createClass({
 
   render: function() {
     var date;
-
     // If reservations API call has completed
     if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 && this.state.end && this.state.middle && typeof this.state.windowView === 'number'){
+      // Create custom availability viewer using subset
+      if (window.location.origin === 'http://localhost:3000'){
+        var idSubtractor = 1;
+      } else if (window.location.origin === 'https://econnectus.herokuapp.com') {
+        var idSubtractor = 10;
+      }
       // Current subset of reservation information
       var start = this.state.start;
       var end = this.state.end;
       var subset = subset || this.state.reservations.slice(this.state.start, this.state.end);
       var slotProps = slotProps || this.state.timeSlots;
-
       // Track center time slot
-
       var centerCount = centerCount ? centerCount > end-1 ? 0 : centerCount : 0;
       var that = this;
+      var slotCount = 0;
 
-      // Create custom availability viewer using subset
       var outerHTML = subset.map(function(reservation){
         var goOrNoGo = reservation.available ? "on" : "off";
-
         // Label slot properties based on subset location
         var blockClass = (centerCount === that.state.windowView) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
         centerCount++;
@@ -316,41 +318,49 @@ var Availability = React.createClass({
         // Specially label center slot to display its information
         if (centerCount === that.state.windowView+1){
           date = moment(reservation.date).format('MMMM Do YYYY');
+          // Find corresponding slotProp to reservation slot_id
           for (var j=0; j<slotProps.length; j++){
+            // When match is found, create unique time labling
             if (slotProps[j].id === reservation.slot_id){
               var endSub = slotProps[j].end === '24:00' ? '00:00' : slotProps[j].end;
-              begin = moment('12/25/1995 '+slotProps[j].start, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY hhmma');
-              end = moment('12/25/1995 '+endSub, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY hhmma');
-
+              begin = moment('12/25/1995 ' + slotProps[j].start, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY hhmma');
+              end = moment('12/25/1995 ' + endSub, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY hhmma');
               // Format begin time
-              //  && end[11]!== '1'
               if (begin[11] === '0'){
-                begin = begin.slice(12,13).concat( ":"+begin.slice(13) );
+                begin = begin.slice(12,13).concat( ":" + begin.slice(13) );
               } else {
-                begin = begin.slice(11,13).concat( ":"+begin.slice(13) );
+                begin = begin.slice(11,13).concat( ":" + begin.slice(13) );
               }
               // Format end time
-              //  && end[11]!== '1'
               if (end[11] === '0'){
-                end = end.slice(12,13).concat( ":"+end.slice(13) );
+                end = end.slice(12,13).concat( ":" + end.slice(13) );
               } else {
-                end = end.slice(11,13).concat( ":"+end.slice(13) );
+                end = end.slice(11,13).concat( ":" + end.slice(13) );
               }
             }
           }
+          slotCount++;
           return(
-
             <div className={blockClass} key={reservation.id}>{begin}-{end}</div>
           )
 
         // Regularly label all slots but center
         } else {
-          if ( parseInt(reservation.slot_id, 10) % 2 === 1 ){
-            var indicator = reservation.available ? "indicator barView" : "noIndicator barView";
-            blockClass = blockClass + " splitHour"
-            var hoverStart = slotProps[reservation.slot_id-1].start;
-            hoverStart = moment('12/25/1995 '+hoverStart, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY ha');
 
+          // Determine if reservation is on the hour
+          var hoverStart;
+          for (var j=0; j<slotProps.length; j++){
+            if (slotProps[j].id === reservation.slot_id) {
+              hoverStart = slotProps[j].start
+            }
+          }
+
+          // If on the hour
+          if ( hoverStart.slice(3) === '00'){
+            var indicator = reservation.available ? "indicator barView" : "noIndicator barView";
+            blockClass = blockClass + " splitHour";
+
+            hoverStart = moment('12/25/1995 '+ hoverStart, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY ha');
             if (hoverStart[12] === '0'){
               hoverStart = hoverStart.slice(12);
               if (hoverStart = '0am'){
@@ -359,15 +369,17 @@ var Availability = React.createClass({
             } else {
               hoverStart = hoverStart.slice(11);
             }
+            slotCount++;
             return(
               <div className="timeblock" key={reservation.id}>
               <div className={indicator}><p className="barViewText">{hoverStart}</p></div>
               <div className={blockClass}></div>
               </div>
             )
+          // If starts on half hour
           } else {
             indicator = reservation.available ? "indicator barViewBack" : "noIndicator barViewBack";
-
+            slotCount++;
             return(
               <div className="timeblock" key={reservation.id}>
               <div className={indicator}></div>
@@ -377,14 +389,14 @@ var Availability = React.createClass({
           }
         }
       });
-
     // Fallback before API call is complete
-    } else {var outerHTML = <div className="slot"></div> }
-
+    } else {
+      var outerHTML = <div><p className="date">Retrieving outlet information...</p></div> 
+    }
     // Render availability viewer
     return (
       <div className = "holder">
-        <p className="date">{date}</p>
+        <p className = "date">{date}</p>
         <div className = "viewBox centering">{outerHTML}</div>
       </div>
     )
