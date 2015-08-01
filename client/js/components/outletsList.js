@@ -87,22 +87,29 @@ var outletsList = React.createClass({
                 </h2>
               </td>
               <td>
-                <h5>Seller:</h5> 
-                <p className="description-text">{ outlet.seller }</p>
+                <Link to="reserveOutlet" params={{id: outlet.id }}>
+                  <h5>Seller:</h5> 
+                  <p className="description-text">{ outlet.seller }</p>
+                </Link>
               </td>
               <td>
-                <h5>Voltage:</h5> 
-                <p className="description-text">{ outlet.voltage }</p>
+                <Link to="reserveOutlet" params={{id: outlet.id }}>
+                  <h5>Voltage:</h5> 
+                  <p className="description-text">{ outlet.voltage }</p>
+                </Link>
               </td>
               <td>
-                <h5>Pricing: </h5>
-                <p className="description-text">${ outlet.priceEnergy }/kWh</p>
-                <p className="description-text">${ outlet.priceHourly }/hr</p>
+                <Link to="reserveOutlet" params={{id: outlet.id }}>
+                  <h5>Pricing: </h5>
+                  <p className="description-text">${ outlet.priceEnergy }/kWh</p>
+                  <p className="description-text">${ outlet.priceHourly }/hr</p>
+                </Link>
               </td>
               <td>
-                <h5>Description:</h5> 
-                <p className="description-text">{ outlet.description }</p>
-                <p className="rating">{ outlet.rating }</p>
+                <Link to="reserveOutlet" params={{id: outlet.id }}>
+                  <h5>Description:</h5> 
+                  <p className="description-text">{ outlet.description }</p>
+                </Link>
               </td>
             </tr>
           )
@@ -119,18 +126,25 @@ var outletsList = React.createClass({
                 </h2>
               </td>
               <td className="centered">
-                { outlet.seller }
+                <Link to="reserveOutlet" params={{id: outlet.id }}>
+                  { outlet.seller }
+                </Link>
               </td>
               <td className="centered">
-                { outlet.voltage }
+                <Link to="reserveOutlet" params={{id: outlet.id }}>
+                  { outlet.voltage }
+                </Link>
               </td>
               <td className="centered">
-                <p>${ outlet.priceHourly }/hr</p>
-                <p>${ outlet.priceEnergy }/kWh</p>
+                <Link to="reserveOutlet" params={{id: outlet.id }}>
+                  <p>${ outlet.priceHourly }/hr</p>
+                  <p>${ outlet.priceEnergy }/kWh</p>
+                </Link>
               </td>
               <td className="centered">
-              <p>{ outlet.description }</p>
-              <p className="rating">{ outlet.rating }</p>
+                <Link to="reserveOutlet" params={{id: outlet.id }}>
+                  <p>{ outlet.description }</p>
+                </Link>
               </td>
             </tr>
           )

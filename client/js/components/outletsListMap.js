@@ -72,20 +72,21 @@ var outletsListMap = React.createClass({
                 <a href={OutletListConstants.BASE_URL+'#/outlets/'+outlet.id}>{ outlet.name}</a>
               </td>
               <td>
-                { outlet.seller }
+                <a href={OutletListConstants.BASE_URL+'#/outlets/'+outlet.id}>{ outlet.seller }</a>
               </td>
               <td>
-                { outlet.voltage }
+                <a href={OutletListConstants.BASE_URL+'#/outlets/'+outlet.id}>{ outlet.voltage }</a>
               </td>
               <td>
-                Price by hour: { outlet.priceHourly }
-                Price by kWh: { outlet.priceEnergy }
+                <a href={OutletListConstants.BASE_URL+'#/outlets/'+outlet.id}>
+                  Price by hour: { outlet.priceHourly }
+                  Price by kWh: { outlet.priceEnergy }
+                </a>
               </td>
               <td>
-                { outlet.description }
-              </td>
-              <td>
-  
+                <a href={OutletListConstants.BASE_URL+'#/outlets/'+outlet.id}>
+                  { outlet.description }
+                </a>
               </td>
           </tr>
         </tbody>
