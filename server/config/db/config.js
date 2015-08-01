@@ -82,6 +82,7 @@ db.schema.hasTable('timeSlots').then(function(exists){
   if(!exists){
     db.schema.createTable('timeSlots', function(timeSlot){
       timeSlot.increments('id').primary();
+      timeSlot.integer('customID').notNullable;
       timeSlot.string('start').notNullable();
       timeSlot.string('end').notNullable();
     }).then(function(table){
@@ -99,7 +100,7 @@ db.schema.hasTable('reservations').then(function(exists){
       reservation.integer('seller_id').notNullable();
       reservation.integer('buyer_id');
       reservation.integer('available',1).notNullable();
-      reservation.integer('slot_id').notNullable();
+      reservation.integer('slot_customID').notNullable();
       reservation.string('date').notNullable();
       reservation.integer('transaction_id');
     }).then(function(table){
