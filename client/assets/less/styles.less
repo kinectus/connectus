@@ -305,7 +305,7 @@ a:focus {
       opacity: 1;
     }
     .landscape-banner {
-      background: url("http://@{location}/assets/img/landscape.png");
+      background: url("../img/landscape.png");
       background-repeat: no-repeat;
       background-position: bottom center;
       background-size: 100%;
@@ -313,7 +313,7 @@ a:focus {
       width: 100%;
     }
     .outlet {
-      background: url("http://@{location}/assets/img/outlet.png");
+      background: url("../img/outlet.png");
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
@@ -321,7 +321,7 @@ a:focus {
       margin-top: 20px;
     }
     .outlet-mobile {
-      background: url("http://@{location}/assets/img/outlet.png");
+      background: url("../img/outlet.png");
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
@@ -329,7 +329,7 @@ a:focus {
       margin-top: 20px;
     }
     .location {
-      background: url("http://@{location}/assets/img/location.png");
+      background: url("../img/location.png");
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
@@ -337,7 +337,7 @@ a:focus {
       margin-top: 20px;
     }
     .location-mobile {
-      background: url("http://@{location}/assets/img/location.png");
+      background: url("../img/location.png");
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
@@ -345,7 +345,7 @@ a:focus {
       margin-top: 20px;
     }
     .trees {
-      background: url("http://@{location}/assets/img/trees.png");
+      background: url("../img/trees.png");
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
@@ -353,7 +353,7 @@ a:focus {
       margin-top: 20px;
     }
     .trees-mobile {
-      background: url("http://@{location}/assets/img/trees.png");
+      background: url("../img/trees.png");
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
@@ -660,17 +660,32 @@ span.light {
 .authBox {
   // background-color:#333;
   // z-index: 1;
-  position: absolute;
-  top: 330px;
-  left: 140px;
+  margin-top: 240px;
   // width: 400px;
   // height: 123px;
   // opacity: .95;
   // border-radius: 3%;
   // color: #FFFFFF;
   .btn{
+    margin-left: 28%;
     color:#FFFFFF;
     background-color: #3b5998;
+    padding-left: 58px;
+    height: 39px;
+    .outlet {
+      width: 44px;
+      height: 29px;
+      background: url('../img/plug-08.png');
+      background-size: 100%;
+      background-repeat: no-repeat;
+      position: relative;
+      top: 4px;
+      left: -59px
+    }
+    a {
+      position: relative;
+      top: -32px;
+    }
   }
 }
 
@@ -735,7 +750,7 @@ span.light {
     display: inline-block;
     margin-right: -1px;
     margin-bottom: -9px;
-    background: url('http://localhost:3000/assets/img/map_icon-07.png');
+    background: url('../img/map_icon-07.png');
     background-repeat: no-repeat;
     background-size: 74%;
   }
@@ -747,7 +762,7 @@ span.light {
     display: inline-block;
     margin-left: -35px;
     margin-bottom: -30px;
-    background: url('http://localhost:3000/assets/img/logo-05.png');
+    background: url('../img/logo-05.png');
     background-repeat: no-repeat;
     background-size: 74%;
   }
@@ -778,6 +793,9 @@ span.light {
   width: 100px;
 }
 
+.container.payment-confirmation{
+  margin-top: 80px;
+}
 
 
 

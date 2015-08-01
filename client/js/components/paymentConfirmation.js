@@ -35,13 +35,18 @@ var Connectus = React.createClass({
  },
 
   render: function() {
+
+    var amount = Math.round(this.state.amount * 100) / 100;
     
     return(
-    <div><h1>Your payment of ${this.state.amount} has been successfully received.</h1><br />
-    <h3>Please retain this confirmation for your records: #{this.state.confirmation}</h3>
-    <btn class="btn"><Link to="outletsList">
-      Make Another Reservation
-    </Link></btn>
+    <div className="container payment-confirmation">
+      <h1>Your payment of ${amount} has been successfully received.</h1>
+      <h4 className="light">Please retain this confirmation for your records: #{this.state.confirmation}</h4>
+      <button className="btn btn-default">
+        <Link to="outletsList">
+          Make Another Reservation
+        </Link>
+      </button>
     </div>
     );
   }

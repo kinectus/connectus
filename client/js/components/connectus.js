@@ -81,9 +81,10 @@ var Connectus = React.createClass({
         pageHtml = (
           <div className="topNavBar">
             <div className="mobile">
-              <span className="logo">
-                <Link to="about">Connect.us</Link>
-              </span>
+              <div className="logo-image"></div>
+                <span className="logo">
+                  <Link to="about">Connect.us</Link>
+                </span>
             </div>
             <div className="mobile">
               <ul className="nav navbar-nav">
@@ -108,9 +109,10 @@ var Connectus = React.createClass({
 
         pageHtml = (
           <div className="topNavBar">
-          <span className="logo">
-            <Link to="about">Connect.us</Link>
-          </span>
+          <div className="logo-image"></div>
+            <span className="logo">
+              <Link to="about">Connect.us</Link>
+            </span>
             <ul className="nav nav-pills pull-right">
               <li className="check-footer" role="presentation"><Link to="outletsList">Outlets</Link></li>
               <li className="check-footer" role="presentation"><Link to="addOutlet">Add Outlet</Link></li>

@@ -50,9 +50,10 @@ var About = React.createClass({
         <div>
           <div className="col-sm-6 col-sm-offset-3 authBox">
             <div className="btn btn-lg">
-            <a href={AuthConstants.FACEBOOK}>
-              Connect with Facebook
-            </a>
+              <div className="outlet"></div>
+              <a href={AuthConstants.FACEBOOK}>
+                Plug in with Facebook
+              </a>
             </div>
           </div>
         </div>
@@ -63,7 +64,7 @@ var About = React.createClass({
           <div className="col-sm-6 col-sm-offset-3 authBoxMobile">
             <div className="btn btn-lg">
             <a href={AuthConstants.FACEBOOK}>
-              Connect with Facebook
+              Plug in with Facebook
             </a>
             </div>
           </div>
