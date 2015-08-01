@@ -15,27 +15,10 @@ var buyerReservations = React.createClass({
   getInitialState: function(){
     return {
       data: []
-    //   realtime: {
-    //     totalKwh: 0,
-    //     watts: 0,
-    //     clientData: {
-    //       outlet: {
-    //         priceEnergy: 0,
-    //         priceHourly: 0
-    //       }
-    //     }
-    //   }
-    }
+    };
   },
 
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
-
-  // reserveOutlet: function(id){
-  //   ConnectusDispatcher.dispatch({
-  //       action: 'CLICK_OUTLET',
-  //       id: id
-  //   });
-  // },
 
   componentDidMount: function() {
     var that = this;
@@ -74,10 +57,6 @@ var buyerReservations = React.createClass({
 
     var socket = io.connect(OutletListConstants.BASE_URL);
     socket.on(transactionId, function (data) {
-      console.log("got energy!", data);
-      // convert and display power data
-      // var pricePerKwh = data.totalKwh * data.clientData.outlet.priceEnergy;
-      // var hourlyPrice = data.clientData.outlet.priceHourly/(60*60)*10;
       var totalCost = (data.totalCost).toFixed(3);
       var avgWatts = (data.avgWatts).toFixed(0);
       var targetClass = '.'+transactionId;
@@ -165,10 +144,6 @@ var buyerReservations = React.createClass({
       console.log(transactionRows);
     }
 
-    // for active transactions ------
-    // is there active transactions for this user?
-      // set active transactions html element to that data
-
       return (
         <div className="outletsList container">
           <table className="ui selectable celled padded table transaction-rows">
@@ -190,7 +165,6 @@ var buyerReservations = React.createClass({
           </table>
         </div>
       )
-    // });  from the promise closing
   },
 
   _onChange: function() {
@@ -198,48 +172,5 @@ var buyerReservations = React.createClass({
   }
 
 });
-
-// var ActiveTransaction = React.createClass({
-
-//   getInitialState: function(){
-//     return {
-//       data:  {
-//         totalKwh: 0,
-//         watts: 0,
-//         clientData: {
-//           outlet: {
-//             priceEnergy: 0,
-//             priceHourly: 0
-//           }
-//         }
-//       }
-//     };
-//   },
-
-//   componentDidMount: function(){
-//     this.updateData();
-//   },
-
-//   updateData: function() {
-//     // var context = this.props.context;
-//     // var transactionId = this.props.transactionId;
-//     // var socket = io.connect(OutletListConstants.BASE_URL);
-//     // socket.on(transactionId, function (data) {
-//     //   console.log("got energy!", data);
-//     //   context.setState({data: data})
-//     // });
-
-    
-//   },
-
-//   // returns power usage data
-//   render: function() {
-//     var transactionId = this.props.transaction.id + '';
-//     return (
-      
-//     )
-//   }
-// })
-
 
 module.exports = buyerReservations;

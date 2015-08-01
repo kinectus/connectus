@@ -1,7 +1,6 @@
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var userStore = require('../stores/userStore');
-var ReactAddons = require('react/addons');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var Link = require('react-router').Link;
 var Router = require('react-router'); //need this for redirection
@@ -13,7 +12,7 @@ var myOutlets = React.createClass({
   getInitialState: function(){
     return {
       data: []
-    }
+    };
   },
 
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
@@ -21,7 +20,6 @@ var myOutlets = React.createClass({
   componentDidMount: function() {
     FooterCheck.checker();
     var that = this;
-    // CHANGE TO GET OUTLETS BY ID
     outletStore.getSellerOutlets().then(function(outletData){
       outletData.map(function(outlet){
         userStore.getUsernameById(outlet.seller_id).then(function(user){
@@ -41,9 +39,6 @@ var myOutlets = React.createClass({
     }
 
     var isMobile = mobile();
-    if (isMobile) {
-      console.log('MOBILE')
-    }
 
     var that = this;
     // Outlet data list
@@ -145,9 +140,8 @@ var myOutlets = React.createClass({
       </table>
       )
     }
-    // includes search bar, map/list button and possibly filter/sort buttons
     
-    //onClick={this.handleSubmit}
+    // includes search bar, map/list button and possibly filter/sort buttons  
     var listMenu = (
       <div>
         <div className="ui button"> map</div> 
@@ -157,18 +151,12 @@ var myOutlets = React.createClass({
       </div>
     );
 
-      return (   
-        <div className="myOutlets container">
-          <h1>Your Outlets:</h1><br></br>
-          {tableHead}
-        </div>
-
-    )
-    // });  from the promise closing
-  },
-
-  _onChange: function() {
-    this.setState(this.getInitialState());
+    return (   
+      <div className="myOutlets container">
+        <h1>Your Outlets:</h1><br></br>
+        {tableHead}
+      </div>
+    );
   }
 
 });

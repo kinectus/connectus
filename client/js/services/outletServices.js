@@ -1,6 +1,6 @@
 var request = require('reqwest');
 var when = require('when'); //promises
-var OutletListConstants = require('../constants/OutletListConstants.js');
+var OutletListConstants = require('../constants/outletListConstants.js');
 
 var outletServices = function(){
 
@@ -15,7 +15,6 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(data),
       success: function(result){
-        console.log('validatedAddress: coordinates are:', result);
         return result;
       }
       
@@ -31,7 +30,6 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(data),
       success: function(result){
-        console.log('settingtransaction was successful', result);
         return result;
       }
     });
@@ -73,7 +71,6 @@ var outletServices = function(){
       crossOrigin: true,
       type: 'json',
       success: function(outlets){
-        console.log(outlets);
         return outlets;
       }
     });
@@ -126,7 +123,7 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(newOutlet),
       success: function(res) {
-        console.log(res);
+        return res;
       }
     });
   };
@@ -140,7 +137,7 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(newOutlet),
       success: function(res) {
-        console.log(res);
+        return res;
       }
     });
   }
@@ -170,8 +167,8 @@ var outletServices = function(){
       crossOrigin: true,
       type: 'json',
       contentType: 'application/json',
-      error: function(res) {
-        console.log('error----------------------->', res);
+      error: function(err) {
+        console.log(err);
       },
       success: function(reservations) {
         return reservations;
@@ -188,11 +185,10 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(transaction),
       success: function(res) {
-        console.log('---------------------------------> SUCCESS, reservation info sent to server.');
-        console.dir(res);
+        return res;
       }
     });
-  }
+  };
 
   outletData.turnOutletOff = function(transaction){
     return request({
@@ -203,23 +199,10 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(transaction),
       success: function(res) {
-        console.log('---------------------------------> SUCCESS, transaction info sent to server.');
-        console.dir(res);
+        return res;
       }
     });
-  }
-
-  // outletData.turnOff = function(){
-  //   return request({
-  //     url: '/turnOff',
-  //     method: 'POST',
-  //     crossOrigin: true,
-  //     type: 'json',
-  //     success: function(res){
-  //       console.log('SUCCESS TURNOFF: ', res)
-  //     }
-  //   });
-  // };
+  };
 
   return outletData;
   

@@ -8,8 +8,6 @@ var userServices = function(){
 
   userData.retrieveUserById = function(id){
 
-    // console.log('in the userservices with id: ', id)
-
     return request({
       url: UserConstants.USER_DATA + '/' + id,
       method: 'GET',
@@ -18,8 +16,8 @@ var userServices = function(){
       success: function(user) {
         return user;
       },
-      error: function() {
-        console.log('error in user services')
+      error: function(err) {
+        console.log(err);
       }
     });
   };
