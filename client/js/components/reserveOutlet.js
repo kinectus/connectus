@@ -106,19 +106,19 @@ var DateTime = React.createClass({
       }
     }
     // Validate input dates
-    if ( moment().diff(moment(start)) > 0 ){
-      var message = 'Please choose reservation after '+moment().format('MMMM Do YYYY hh:mma');
-      this.setState({'message': message, 'alert': true});
-    } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) > 0 ) {
-      message = 'Please schedule the end of your reservation after the start';
-      this.setState({'message': message, 'alert': true});
-    } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) < 0 ) {
+    // if ( moment().diff(moment(start)) > 0 ){
+    //   var message = 'Please choose reservation after '+moment().format('MMMM Do YYYY hh:mma');
+    //   this.setState({'message': message, 'alert': true});
+    // } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) > 0 ) {
+    //   message = 'Please schedule the end of your reservation after the start';
+    //   this.setState({'message': message, 'alert': true});
+    // } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) < 0 ) {
       var that = this;
       outletStore.submitReservation(newReservation).then(function(res){
         message = 'Reservation complete';
         that.setState({'message': message, 'success': true});
       });
-    }
+    // }
   },
 
   render: function() {
@@ -166,34 +166,13 @@ var OutletInfo = React.createClass({
     // do something with the photo
     var outletPhoto = <div className="outletPhoto"></div>
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-4 col-xs-12">
-            <h2 className="ui center aligned header"> 
-                { this.props.outletData.name }
-            </h2>
-          </div>
-          <div className="col-md-7 col-sm-8 col-xs-12">
-            <h4>{ this.props.outletData.description }</h4>
-          </div>
-        </div>
-        <div className="row">
-        </div>
-        <div className="row">
-          <div className="col-sm-4 col-xs-6">
-            <h4>Seller:</h4>
-          </div>
-          <div className="col-sm-4 col-xs-6">
-            <h4>Voltage: { this.props.outletData.voltage }</h4> 
-          </div>
-          <div className="col-sm-4 col-xs-6">
-            <h4>Price by hour: { this.props.outletData.priceHourly }</h4>
-          </div>
-          <div className="col-sm-8"></div>
-          <div className="col-sm-4 col-xs-6">
-            <h4>Price by kWh: { this.props.outletData.priceEnergy }</h4>
-          </div>
-        </div>      
+      <div>
+        <h2>{ this.props.outletData.name }</h2>
+        <h4 className="light">{ this.props.outletData.description }</h4>
+        <h4>Seller:</h4>
+        <h4>Voltage: <span className="light">{ this.props.outletData.voltage }</span></h4> 
+        <h4>Price by hour: <span className="light">{ this.props.outletData.priceHourly }</span></h4>
+        <h4>Price by kWh: <span className="light">{ this.props.outletData.priceEnergy }</span></h4>
       </div>
     )
   }
@@ -457,8 +436,8 @@ var Viewer = React.createClass({
           <Availability move={this.state.move} mouseDown={this.state.mouseDown} forward={this.state.forward} outletID = {this.props.outletID}/>
         </div>
         <div className="centering pad-top">
-          <button className="toggle glyphicon glyphicon-chevron-left" onMouseDown={this.mouseDownBack} onMouseUp={this.mouseUp} onMouseLeave={this.mouseUp}></button>
-          <button className="toggle glyphicon glyphicon-chevron-right" onMouseDown={this.mouseDownForward} onMouseUp={this.mouseUp} onMouseLeave={this.mouseUp}></button>
+          <button className="btn btn-default toggle glyphicon glyphicon-chevron-left" onMouseDown={this.mouseDownBack} onMouseUp={this.mouseUp} onMouseLeave={this.mouseUp}></button>
+          <button className="btn btn-default toggle glyphicon glyphicon-chevron-right" onMouseDown={this.mouseDownForward} onMouseUp={this.mouseUp} onMouseLeave={this.mouseUp}></button>
         </div>
       </div>
     )
@@ -502,13 +481,16 @@ var reserveOutlet = React.createClass({
           <Map outletData={this.state.data} />
         </div>
         <div>
-          <OutletInfo outletData = {this.state.data} />
-        </div>
-        <div>
           <Viewer outletID = {this.props.params.id} />
         </div>
-        <div>
-          <DateTime outletData = {this.state.data} />
+        <div className="row">
+          <div className="outlet-data col-md-8">
+            <OutletInfo outletData = {this.state.data} />
+          </div>
+          <div className="date-time col-md-4">
+            <h3>Reserve this outlet:</h3>
+            <DateTime outletData = {this.state.data} />
+          </div>
         </div>
       </div>
     )

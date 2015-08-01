@@ -49,6 +49,7 @@ var outletsList = React.createClass({
     var isMobile = mobile();
 
     var that = this;
+
     // outlet data list
     if (this.state.data.length !==0) {
       if(isMobile) {
@@ -94,17 +95,17 @@ var outletsList = React.createClass({
                   </Link>
                 </h2>
               </td>
-              <td>
+              <td className="centered">
                 { outlet.seller }
               </td>
-              <td>
+              <td className="centered">
                 { outlet.voltage }
               </td>
-              <td>
+              <td className="centered">
                 <p>${ outlet.priceHourly }/hr</p>
                 <p>${ outlet.priceEnergy }/kWh</p>
               </td>
-              <td>
+              <td className="centered">
               <p>{ outlet.description }</p>
               <p className="rating">{ outlet.rating }</p>
               </td>
@@ -117,7 +118,7 @@ var outletsList = React.createClass({
     if(isMobile) {
       var tableHead = (
         <table className="table table-hover">
-        <tbody>
+        <tbody> 
           { outletHtml }
         </tbody>
       </table>
@@ -126,11 +127,11 @@ var outletsList = React.createClass({
       var tableHead = (
         <table className="table table-hover">
           <thead>
-            <tr><th className="single line">Outlet Name</th>
-            <th>Seller</th>
-            <th>Voltage</th>
-            <th>Price</th>
-            <th>Description</th>
+            <tr><th className="single line"><h4>Outlet Name</h4></th>
+            <th><h4>Seller</h4></th>
+            <th><h4>Voltage</h4></th>
+            <th><h4>Price</h4></th>
+            <th><h4>Description</h4></th>
           </tr></thead>
         <tbody>
           { outletHtml }
@@ -152,7 +153,7 @@ var outletsList = React.createClass({
     return (   
       <div className="outletsList container">
         <Link to="outletsListMap">
-          <button type='button' className='btn btn-default'>Map Outlets</button>
+          <button type='button' className='map-outlets btn btn-default btn-lg'><div className="map-icon"></div>Map of outlets</button>
         </Link>
         {tableHead}
       </div>

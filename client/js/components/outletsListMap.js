@@ -111,7 +111,7 @@ var outletsListMap = React.createClass({
     return (
       <div onClick={this.displayOutletData} className='container outletsListMap'>
          <Link to="outletsList">
-          <button type='button' className='btn btn-default'>List Outlets</button>
+          <button type='button' className='map-outlets btn btn-default btn-lg'><div className="map-icon"></div>List of outlets</button>
         </Link>
         <div>
            {map}

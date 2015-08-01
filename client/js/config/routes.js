@@ -15,7 +15,7 @@ var Router = require('react-router'); //npm component for routing
 var DefaultRoute = Router.DefaultRoute; 
 var Route = Router.Route;
 
-//connectus - always shown on the home page - holdes a <RouteHandler> that displays the other components
+//connectus - always shown on the home page - holdes a <RouteHandler> that displays the other compnents
 module.exports = (
   <Route name="connectus" path="/" handler={Connectus} > 
     <Route name="about" path="/about" handler={About} />

@@ -11,3 +11,4 @@ dist/js
 server/data.txt
 client/assets/css
 bower_components/
+ngrok

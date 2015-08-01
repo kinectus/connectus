@@ -1,5 +1,5 @@
 var outletExamples = [
-  { name: 'Hack Reactor Outlet',
+  { name: 'Sea World',
     priceHourly: '2.00',
     priceEnergy: '.30',
     description: 'on the corner guarded by a purple dragon',

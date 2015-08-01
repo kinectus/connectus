@@ -125,6 +125,7 @@ module.exports = {
 
   // request hitting server from the client (DOWN)
   turnOnOutlet: function(req, res){
+    var outletName = req.body.outlet.name;
     var info = req.body;
     var transactionId = info.id;
     var hourlyPrice = info.outlet.priceHourly;
@@ -148,7 +149,7 @@ module.exports = {
     
     // console.log(req.body);
     
-    if(ServerConstants.SIMULATE_POWER) {
+    if( outletName !== ServerConstants.SPECIAL_OUTLET ) {
       // simulate an appliance's power use
       var totalKwh = 0;
       var getWatts = function() {
@@ -174,6 +175,7 @@ module.exports = {
       intervalIds[transactionId] = intervalId;
       console.log('turnon intervalid: ', intervalId, 'intervals: ', intervalIds);
     } else {
+      console.log(ServerConstants.SPECIAL_OUTLET)
       var options = {
         method: 'POST',
         body: info,
@@ -188,12 +190,14 @@ module.exports = {
     console.log('-----------------------------------------------------in turn off', req.body);
     res.status(200).send('you turn me off :( !');
     var transactionId = req.body.id;
-    if(ServerConstants.SIMULATE_POWER) {
+    var outletName = req.body.outlet.name;
+    if( outletName !== ServerConstants.SPECIAL_OUTLET ) {
       // simulate an appliance's power use
       var intervalId = intervalIds[transactionId];
       // console.log('turn off intervalid: '. intervalId, 'intervals: ', intervalIds);
       clearInterval(intervalId);
     } else {
+      console.log(ServerConstants.SPECIAL_OUTLET)
       var options = {
         method: 'POST',
         uri: ServerConstants.POWER_SERVER_OFF

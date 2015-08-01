@@ -1,6 +1,6 @@
 // Semantic dependency - no longer in use
 // @import "../../dist/semantic/src/semantic.less";
-// @import '../../node_modules/react-widgets/lib/less/react-widgets.less';
+@import './widget_less/react-widgets.less';
 
 @turquoise: #159594;
 @blue: #1A8CAB;
@@ -16,6 +16,7 @@
 @greymed: #b2c0c4;
 @orangelight: #fdc52e;
 @greylight: #d0d8da;
+@greymedium: #6B6B6B;
 
 @location: 'localhost:3000';
 
@@ -65,7 +66,7 @@ a:focus {
     float: left;
     display: inline;
     color: @orangemed !important;
-    padding-left: 40px;
+    padding-left: 58px;
     padding-top: 10px;
     text-decoration: none !important;
     a{
@@ -450,11 +451,11 @@ a:focus {
   }
   .octocat {
     background: url('https://i2.wp.com/assets-cdn.github.com/images/gravatars/gravatar-user-420.png?ssl=1gith');
-    height: 180px;
+    height: 115px;
     background-size: 20%;
     background-repeat: no-repeat;
     background-position: top center;
-    background-position-y: 30px;
+    background-position-y: 17px;
   }
   .footer-1 {
     float: left;
@@ -470,6 +471,19 @@ h1 {
   color: black;
   font-size: 30px;
   margin: 0px;
+}
+
+h4.light {
+  color: @greymedium;
+}
+
+h4.center {
+  text-align: center;
+  margin: 0px;
+}
+
+span.light {
+  color: @greymedium;
 }
 
 .reservationMap {
@@ -506,9 +520,8 @@ h1 {
 /////////////////////////
 
 ////General
-.holder {
-  position: relative;  
-}
+
+
 
 .centering {
   position: relative;
@@ -524,11 +537,13 @@ h1 {
 .viewBox {
   margin: 0 auto;
   height: 30px;
-  width: 90vw;
+  width: 100%;
 }
 
 .timeblock {
   display: inline-block;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .splitHour {
@@ -565,9 +580,9 @@ h1 {
   position: relative;
   width: 36px;
   height: 15px;
-  background-color: grey;
-  border-top: 2px solid black;
-  border-left: 2px solid black;
+  background-color: @dark;
+  border-top: 2px solid @dark;
+  border-left: 2px solid @dark;
   color: white;
   z-index: 3;
 }
@@ -577,17 +592,16 @@ h1 {
   width: 36px;
   height: 15px;
   background-color: grey;
-  border-top: 2px solid black;
-  border-left: 2px solid black;
+  border-top: 2px solid @dark;
+  border-left: 2px solid @dark;
   color: white;
   z-index: 2;
 }
 
 .barViewText {
   vertical-align: top;
-  padding: 0;
+  padding: 1px 0px 0px 0px;
   margin: 0;
-  top: -10px;
 }
 
 
@@ -621,6 +635,7 @@ h1 {
 .toggle {
   display: inline-block;
   right: -1px;
+  width: 80px
 }
 
 ////Alerts
@@ -699,6 +714,70 @@ h1 {
 .hidden {
   display: none;
 }
+
+.date-time.col-md-4 {
+  margin-top: 30px;
+}
+
+.outlet-data.col-md-8 {
+  margin-bottom: 30px;
+}
+
+.holder {
+  width: 100%;
+}
+
+.map-outlets {
+  width: 250px;
+  .map-icon {
+    width: 31px;
+    height: 31px;
+    display: inline-block;
+    margin-right: -1px;
+    margin-bottom: -9px;
+    background: url('http://localhost:3000/assets/img/map_icon-07.png');
+    background-repeat: no-repeat;
+    background-size: 74%;
+  }
+}
+
+.logo-image {
+    width: 31px;
+    height: 31px;
+    display: inline-block;
+    margin-left: -35px;
+    margin-bottom: -30px;
+    background: url('http://localhost:3000/assets/img/logo-05.png');
+    background-repeat: no-repeat;
+    background-size: 74%;
+  }
+
+.tbody>tr {
+  background-color: @greylight;
+  transition: background-color .2s ease-in-out;
+  -moz-transition: background-color .2s ease-in-out;
+  -webkit-transition: background-color .2s ease-in-out;
+  td.centered {
+    vertical-align: middle;
+  }
+}
+
+.table-hover>tbody>tr:hover {
+  background-color: lighten(@greylight, 7%);
+  transition: background-color .2s ease-in-out;
+  -moz-transition: background-color .2s ease-in-out;
+  -webkit-transition: background-color .2s ease-in-out;
+}
+
+.table>thead>tr>th {
+  font-size: 18px;
+  border-bottom: 3px solid #A9A9A9;
+}
+
+.reservation-button {
+  width: 100px;
+}
+
 
 
 
