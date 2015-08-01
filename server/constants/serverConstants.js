@@ -1,6 +1,6 @@
 
 var BASE_URL = process.env.PORT===undefined? 'http://localhost:3000/' : 'https://econnectus.herokuapp.com/';
-var POWER_SERVER_BASE_URL = 'http://69622a64.ngrok.com/'; //set this manually
+var POWER_SERVER_BASE_URL = 'https://4ed668a.ngrok.com/'; //set this manually
 var authConstants = {
   BASE_URL: BASE_URL,
   FACEBOOK: BASE_URL + 'auth/facebook',
