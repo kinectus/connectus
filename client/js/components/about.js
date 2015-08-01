@@ -99,9 +99,9 @@ var About = React.createClass({
                     <div className="col-md-4">
                       <span className="column-headers"><h3>Sell your electricity.</h3></span>
                       <ul className="feature-list">
+                        <li>Use our smart outlet to become a seller</li>
                         <li>Post your outlet&#39;s availability online</li>
                         <li>Earn money when people plug in</li>
-                        <li>Join a network of other sellers</li>
                       </ul>
                     </div>
                   <div className="col-md-4">
@@ -116,7 +116,7 @@ var About = React.createClass({
                     <span className="column-headers"><h3>Keep it green.</h3></span>
                     <ul className="feature-list">
                       <li>Supplies electricity to replace diesel generators</li>
-                      <li>Supports easy charging of electric cars</li>
+                      <li>Supports easy charging of electric vehicles</li>
                       <li>Facilitates sharing power in developing areas</li>
                     </ul>
                   </div>
@@ -137,7 +137,7 @@ var About = React.createClass({
                 <table>
                   <tr className="diagram-row150">
                     <td className="diagram-data40"></td>
-                    <td className="diagram-data20 connectus-server bottom-hover" data-toggle="popover" title="Connect.us Server" data-content="Node.js and Express"></td>
+                    <td className="diagram-data20 connectus-server bottom-hover" data-toggle="popover" title="Connect.us Server" data-content="Node.js and Express. Sockets.io for streaming real-time power information."></td>
                     <td className="diagram-data10 auth right-hover" data-toggle="popover" title="Secure Outlet-Server Communication" data-content="The Connect.us Server communicates with a Node.js server running on top of the hardware"></td>
                     <td className="diagram-data30"></td>
                   </tr>
@@ -147,7 +147,7 @@ var About = React.createClass({
                     <td className="diagram-data20"></td>
                     <td className="diagram-data20 left-hover" data-toggle="popover" title="Web application" data-content="React and Flux with Bootstrap"></td>
                     <td className="diagram-data20"></td>
-                    <td className="diagram-data20 power-server right-hover" data-toggle="popover" title="Power Server" data-content="Node.js communicating with the outlet through shell.js bash commands"></td>
+                    <td className="diagram-data20 power-server right-hover" data-toggle="popover" title="Power Server" data-content="Node.js communicates with the smart outlet through shell.js bash commands"></td>
                     <td className="diagram-data20"></td>
                   </tr>
                 </table>
@@ -155,7 +155,7 @@ var About = React.createClass({
                   <tr className="diagram-row220">
                     <td className="diagram-data30"></td>
                     <td className="diagram-data30 food-truck left-hover" data-toggle="popover" title="Users" data-content="Once outlet is on, users can start charging!"></td>
-                    <td className="diagram-data20 outlet right-hover" data-toggle="popover" title="Smart Outlet" data-content="Can send power data and turn off/on with Ruby app"></td>
+                    <td className="diagram-data20 outlet right-hover" data-toggle="popover" title="Smart Outlet" data-content="Can send real-time power data and be turned off/on with Ruby app"></td>
                     <td className="diagram-data20"></td>
                   </tr>
                 </table>
@@ -187,9 +187,9 @@ var About = React.createClass({
                       <div className="col-md-4">
                         <div className='banner-item-mobile col-md-4 outlet-mobile'></div>
                         <span className="column-headers-mobile"><h3>Sell your electricity.</h3></span>
+                          <span className="mobile-points"><h2>Use our smart outlet to become a seller</h2></span>
                           <span className="mobile-points"><h2>Post your outlet&#39;s availability online</h2></span>
                           <span className="mobile-points"><h2>Earn money when people plug in</h2></span>
-                          <span className="mobile-points"><h2>Join a network of other sellers</h2></span>
                       </div>
                       <div className="col-md-4">
                         <div className='banner-item-mobile col-md-4 location-mobile'></div>
@@ -202,7 +202,7 @@ var About = React.createClass({
                         <div className='banner-item-mobile col-md-4 trees-mobile'></div>
                         <span className="column-headers-mobile"><h3>Keep it green.</h3></span>
                           <span className="mobile-points"><h2>Supplies electricity to replace diesel generators</h2></span>
-                          <span className="mobile-points"><h2>Supports easy charging of electric cars</h2></span>
+                          <span className="mobile-points"><h2>Supports easy charging of electric vehicles</h2></span>
                           <span className="mobile-points"><h2>Facilitates sharing power in developing areas</h2></span>
                       </div>
                     </div>
