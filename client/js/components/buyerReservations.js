@@ -40,10 +40,10 @@ var buyerReservations = React.createClass({
   },
 
   setCurrentTransaction: function(transaction){
-    console.log(transaction)
+    console.log('TRANSACTION-------------------------', transaction)
     var that =this;
+    outletServices.turnOutletOff(transaction); //connects with powerServer
     outletStore.setCurrentTransaction({id: transaction.id, currentStatus: true, paid: false}).then(function(transaction){
-      outletServices.turnOutletOff(transaction); //connects with powerServer
       that.transitionTo('paymentsPage');
       return transaction;
     });
@@ -125,7 +125,7 @@ var buyerReservations = React.createClass({
             <td className='regTrans'>
             { transaction.outlet.description }
             </td>
-            <td className='regTrans'>
+            <td className={ transaction.id }>
               <div className={moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() || moment(transaction.startTime.date + " " + transaction.startTime.slot.time,"YYYY-MM-DD HH:mm") > moment()? ' hidden' + ' ' : ''}>
                 <div className="btn btn-success reservation-button turnOn" onClick={that.turnOn.bind(that, transaction)}>ON</div>
                 <div className="btn btn-default reservation-button turnOff" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
