@@ -47,17 +47,17 @@ var outletStore = assign({}, EventEmitter.prototype, {
           transactions[transactionId].seller_id = outletData[i].seller_id;
           transactions[transactionId].outlet = outletData[i].outlet_info;
           transactions[transactionId].seller = outletData[i].seller_info;
-          transactions[transactionId].startTime = {slot: {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].start}, date: outletData[i].date};
-          transactions[transactionId].endTime = {slot: {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].end}, date: outletData[i].date};
+          transactions[transactionId].startTime = {slot: {number: outletData[i].slot_customID, time: timeSlots[outletData[i].slot_customID].start}, date: outletData[i].date};
+          transactions[transactionId].endTime = {slot: {number: outletData[i].slot_customID, time: timeSlots[outletData[i].slot_customID].end}, date: outletData[i].date};
           transactions[transactionId].totalCost = outletData[i].transaction_info.totalCost;
           transactions[transactionId].totalEnergy = outletData[i].transaction_info.totalEnergy;
         }else{
           
-          if(new Date(outletData[i].date).getDate() === new Date(transactions[transactionId].endTime.date).getDate() && outletData[i].slot_id > transactions[transactionId].endTime.slot.number){
-            transactions[transactionId].endTime.slot = {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].end};
+          if(new Date(outletData[i].date).getDate() === new Date(transactions[transactionId].endTime.date).getDate() && outletData[i].slot_customID > transactions[transactionId].endTime.slot.number){
+            transactions[transactionId].endTime.slot = {number: outletData[i].slot_customID, time: timeSlots[outletData[i].slot_customID].end};
           }
           else if(new Date(outletData[i].date).getDate() > new Date(transactions[transactionId].endTime.date).getDate()){
-            transactions[transactionId].endTime = {slot: {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].end}, date: outletData[i].date};
+            transactions[transactionId].endTime = {slot: {number: outletData[i].slot_customID, time: timeSlots[outletData[i].slot_customID].end}, date: outletData[i].date};
           }
         }
       }
