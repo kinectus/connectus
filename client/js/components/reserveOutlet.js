@@ -304,12 +304,6 @@ var Availability = React.createClass({
     var date;
     // If reservations API call has completed
     if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 && this.state.end && this.state.middle && typeof this.state.windowView === 'number'){
-      // Create custom availability viewer using subset
-      if (window.location.origin === 'http://localhost:3000'){
-        var idSubtractor = 1;
-      } else if (window.location.origin === 'https://econnectus.herokuapp.com') {
-        var idSubtractor = 10;
-      }
       // Current subset of reservation information
       var start = this.state.start;
       var end = this.state.end;
