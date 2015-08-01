@@ -1,12 +1,9 @@
 var request = require('reqwest');
-var when = require('when'); //promises
 var OutletListConstants = require('../constants/OutletListConstants.js');
 
 var outletServices = function(){
 
   var outletData = {};
-
-  outletData.errorMessage = "";
 
   outletData.validateAddress = function(data){
     return request({
