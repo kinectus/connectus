@@ -1,1 +1,0 @@
-// query the database for if an outlet is associated with an active reservation

@@ -4,9 +4,7 @@ var Promise = require('bluebird');
 var Reservation = require('../../../outlets/outlet.model.js');
 
 
-module.exports = findCurrentTransaction = function(user, next){
-  //given the user id, query transactions where the 
-  console.log('finding current reservations');
+module.exports = findCurrentTransaction = function(user){
   return User.forge({
     username: user
   })
@@ -14,7 +12,6 @@ module.exports = findCurrentTransaction = function(user, next){
   .then(function(user){
     console.log('user', user);
     return user.reservations().fetch({withRelated: ['transaction_current']});
-    // return user.reservations().fetch();
   })
   .then(function(reservations){
     for(var key in reservations._byId){
