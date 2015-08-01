@@ -36,11 +36,11 @@ module.exports = updateReservation = function(req, res){
       return new Reservation({
         outlet_id: data.outletID,
         date: data.start.date,
-        slot_id: slot.id
+        slot_customID: slot.attributes.customID
       })
       .fetch().then(function(startRes){
-        startID = startRes.get('id');
-        startID = 'id >= '+startID.toString();
+        startID = startRes.get('slot_customID');
+        startID = 'slot_customID >= '+startID.toString();
         // Find end res
         return new TimeSlot({
           end: data.end.time
@@ -49,11 +49,11 @@ module.exports = updateReservation = function(req, res){
           return new Reservation({
             outlet_id: data.outletID,
             date: data.end.date,
-            slot_id: slot2.id
+            slot_customID: slot2.attributes.customID
           })
           .fetch().then(function(endRes){
-            endID = endRes.get('id');
-            endID = 'id <= '+endID.toString();
+            endID = endRes.get('slot_customID');
+            endID = 'slot_customID <= '+endID.toString();
             var rangeQuery = startID+' AND '+endID;
 
             return new Transaction({
@@ -70,21 +70,14 @@ module.exports = updateReservation = function(req, res){
                 qb.where(db.knex.raw(rangeQuery))
               })
               .fetchAll().then(function(reservations){
-                console.log(reservations);
                 for (var i = 0; i < reservations.models.length; i++){
-                  console.log(reservations.models[i]);
-                  console.log('get the avail',reservations.models[i].get('available'));
-                  console.log('get the avail2',reservations.models[i].attributes.available);
                   if(reservations.models[i].attributes.available === 0){
-                    console.log('resetting valid reservations');
                     validReservations = false;
                   }
                 }
                 if(!validReservations){
-                  console.log('this reservation is not valid');
                   res.send(202, {error: true, errorMessage:'One or more of your reservation slots are not avilable'});
                 }else{
-                  console.log('mapping through to save reservations');
                   return reservations.mapThen(function(reservation){
                     return reservation.set({
                       buyer_id: buyerID,

@@ -304,12 +304,6 @@ var Availability = React.createClass({
     var date;
     // If reservations API call has completed
     if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 && this.state.end && this.state.middle && typeof this.state.windowView === 'number'){
-      // Create custom availability viewer using subset
-      if (window.location.origin === 'http://localhost:3000'){
-        var idSubtractor = 1;
-      } else if (window.location.origin === 'https://econnectus.herokuapp.com') {
-        var idSubtractor = 10;
-      }
       // Current subset of reservation information
       var start = this.state.start;
       var end = this.state.end;
@@ -333,7 +327,8 @@ var Availability = React.createClass({
           // Find corresponding slotProp to reservation slot_id
           for (var j=0; j<slotProps.length; j++){
             // When match is found, create unique time labling
-            if (slotProps[j].id === reservation.slot_id){
+
+            if (slotProps[j].customID === reservation.slot_customID){
               var endSub = slotProps[j].end === '24:00' ? '00:00' : slotProps[j].end;
               begin = moment('12/25/1995 ' + slotProps[j].start, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY hhmma');
               end = moment('12/25/1995 ' + endSub, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY hhmma');
@@ -362,14 +357,14 @@ var Availability = React.createClass({
           // Determine if reservation is on the hour
           var hoverStart;
           for (var j=0; j<slotProps.length; j++){
-            if (slotProps[j].id === reservation.slot_id) {
+            if (slotProps[j].customID === reservation.slot_customID) {
               hoverStart = slotProps[j].start
             }
           }
 
+          var indicator = reservation.available ? "indicator barView" : "noIndicator barView";
           // If on the hour
           if ( hoverStart.slice(3) === '00'){
-            var indicator = reservation.available ? "indicator barView" : "noIndicator barView";
             blockClass = blockClass + " splitHour";
 
             hoverStart = moment('12/25/1995 '+ hoverStart, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY ha');
@@ -390,7 +385,6 @@ var Availability = React.createClass({
             )
           // If starts on half hour
           } else {
-            indicator = reservation.available ? "indicator barViewBack" : "noIndicator barViewBack";
             slotCount++;
             return(
               <div className="timeblock" key={reservation.id}>
