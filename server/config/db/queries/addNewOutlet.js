@@ -9,7 +9,7 @@ module.exports = addNewOutlet = function(req, res){
   new User({
     username: req.user.id
   }).fetch().then(function(user){
-    // See if outlet exits
+    // See if outlet exists
     new Outlet({
       name: data.name,
       priceEnergy: data.charge,
@@ -26,11 +26,9 @@ module.exports = addNewOutlet = function(req, res){
           name: data.name,
           priceEnergy: data.charge,
           seller_id: user.id,
-          // priceHourly: data.priceHourly,
           lat: data.lat,
           long: data.long,
           description: data.description,
-          // priceSuggest: data.priceSuggest,
           address: data.address,
           voltage: data.voltage,
           thumbs_up: 0,
