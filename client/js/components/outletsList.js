@@ -165,11 +165,11 @@ var outletsList = React.createClass({
       var tableHead = (
         <table className="table table-hover">
           <thead>
-            <tr><th className="single line" onClick={that.sort.bind(that, 'name')}><h4>Outlet Name</h4></th>
-            <th onClick={that.sort.bind(that, 'seller')}><h4>Seller</h4></th>
-            <th onClick={that.sort.bind(that, 'voltage')}><h4>Voltage</h4></th>
-            <th onClick={that.sort.bind(that, 'priceEnergy')}><h4>Price</h4></th>
-            <th onClick={that.sort.bind(that, 'description')}><h4>Description</h4></th>
+            <tr><th className="single line" onClick={that.sort.bind(that, 'name')}><div className="arrows"></div><h4>Outlet Name</h4></th>
+            <th onClick={that.sort.bind(that, 'seller')}><div className="arrows"></div><h4>Seller</h4></th>
+            <th onClick={that.sort.bind(that, 'voltage')}><div className="arrows"></div><h4>Voltage</h4></th>
+            <th onClick={that.sort.bind(that, 'priceEnergy')}><div className="arrows"></div><h4>Price</h4></th>
+            <th onClick={that.sort.bind(that, 'description')}><div className="arrows"></div><h4>Description</h4></th>
           </tr></thead>
         <tbody>
           { outletHtml }
