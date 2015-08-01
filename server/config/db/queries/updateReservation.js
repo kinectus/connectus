@@ -82,7 +82,7 @@ module.exports = updateReservation = function(req, res){
                 }
                 if(!validReservations){
                   console.log('this reservation is not valid');
-                  res.send(400, JSON.stringify('One or more of your reservation slots are not avilable'));
+                  res.send(202, {error: true, errorMessage:'One or more of your reservation slots are not avilable'});
                 }else{
                   console.log('mapping through to save reservations');
                   return reservations.mapThen(function(reservation){

@@ -6,6 +6,8 @@ var outletServices = function(){
 
   var outletData = {};
 
+  outletData.errorMessage = "";
+
   outletData.validateAddress = function(data){
     return request({
       url: OutletListConstants.VALIDATE_ADDRESS,
@@ -149,14 +151,7 @@ var outletServices = function(){
       crossOrigin: true,
       type: 'json',
       contentType: 'application/json',
-      data: JSON.stringify(newReservation),
-      success: function(res) {
-        console.log('SUCCESS, ', res);
-        return res;
-      },
-      error: function(res){
-        console.log('ERROR, ', res)
-      }
+      data: JSON.stringify(newReservation)
     });
   };
 
