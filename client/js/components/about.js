@@ -87,7 +87,7 @@ var About = React.createClass({
             {authHtml}
           </div>
             <div className="section howitworks">
-              <div className="container">
+              <div className="container-fluid">
                 <div className='landscape-banner'>
                   <div className='row'>
                     <div className='banner-item col-md-4 outlet'></div>

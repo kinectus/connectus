@@ -151,8 +151,8 @@ var DateTime = React.createClass({
         </Alert>
         <Alert bsStyle='success' className={successful}>
             <strong>{this.state.message}</strong><br></br>
-            <button className="alertButton" onClick={this.closeMe}>Add another reservation</button>
-            <button className="alertButton"><Link to="/outlets">Return to browsing</Link></button>
+            <button className="alertButton btn btn-default" onClick={this.closeMe}>Add another reservation</button>
+            <button className="alertButton btn btn-default"><Link to="/outlets">Return to browsing</Link></button>
         </Alert>
         <Alert bsStyle='warning' className={erroring}>
             <strong>{this.state.message}</strong><br></br>
