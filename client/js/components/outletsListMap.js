@@ -10,16 +10,33 @@ var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
 var FooterCheck = require('./footerCheck');
 
 var outletsListMap = React.createClass({
+  getLocation: function() {
+    if ("geolocation" in navigator) {
+      that = this;
+      navigator.geolocation.getCurrentPosition(function(position) {
+        that.setState({
+          userLocation: {
+            lat: position.coords.latitude,
+            long: position.coords.longitude
+          }
+        });
+        console.log(that.state.userLocation);
+      });
+    } 
+  },
+
   getInitialState: function(){
     return {
       outletData: [],
-      outletTable: 'hello'
-    }
+      outletTable: 'hello',
+      userLocation: {}
+    };
   },
   
   mixins: [Router.Navigation], //makes the router navigation information available for use (need this for redirection)
   
   componentDidMount: function() {
+    this.getLocation();
     FooterCheck.checker();
     var that = this;
     // TODO: change function so that it retrieves only outlets near users location
@@ -90,14 +107,12 @@ var outletsListMap = React.createClass({
       )
     });
     // TODO: change this class name and adjust the css jamie
-    // {this.props.outletsData.outletTable}
     var map = (
       <div>
         <div className='reservationMap'>
           <GoogleMap onChildClick={that.displayOutletData}
-            zoom={10}
-            // TODO: use user's gps coordinates
-            center={[37.78,-122.4]}
+            zoom={12}
+            center={[this.state.userLocation.lat,this.state.userLocation.long]}
           >
             {markers}
           </GoogleMap>

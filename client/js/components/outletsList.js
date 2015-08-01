@@ -7,13 +7,16 @@ var Link = require('react-router').Link;
 var Router = require('react-router'); //need this for redirection
 var mobile = require('./mobilecheck');
 var FooterCheck = require('./footerCheck');
+var _ = require('underscore');
 
 
 var outletsList = React.createClass({
 
   getInitialState: function(){
     return {
-      data: []
+      data: [],
+      count: 0,
+      sortBy: {}
     }
   },
 
@@ -37,6 +40,26 @@ var outletsList = React.createClass({
 
   componentDidMount: function() {
     FooterCheck.checker();
+  },
+
+  sort: function(by) {
+    // store the state of the sort
+    if(this.state.sortBy[by]) {
+      this.state.sortBy[by]++;
+    } else {
+      this.state.sortBy[by] = 1;
+    }
+
+    var outlets = this.state.data;
+    if(this.state.sortBy[by] % 2 !== 0) {
+      // sort ascending
+      this.state.data = _.sortBy(outlets, by);
+    } else {
+      // sort descending
+      this.state.data.reverse();
+    }
+    
+    this.forceUpdate();
   },
 
   render: function() {
@@ -73,8 +96,8 @@ var outletsList = React.createClass({
               </td>
               <td>
                 <h5>Pricing: </h5>
-                <p className="description-text">${ outlet.priceHourly }/hr</p>
                 <p className="description-text">${ outlet.priceEnergy }/kWh</p>
+                <p className="description-text">${ outlet.priceHourly }/hr</p>
               </td>
               <td>
                 <h5>Description:</h5> 
@@ -124,14 +147,15 @@ var outletsList = React.createClass({
       </table>
       )
     } else {
+
       var tableHead = (
         <table className="table table-hover">
           <thead>
-            <tr><th className="single line"><h4>Outlet Name</h4></th>
-            <th><h4>Seller</h4></th>
-            <th><h4>Voltage</h4></th>
-            <th><h4>Price</h4></th>
-            <th><h4>Description</h4></th>
+            <tr><th className="single line" onClick={that.sort.bind(that, 'name')}><h4>Outlet Name</h4></th>
+            <th onClick={that.sort.bind(that, 'seller')}><h4>Seller</h4></th>
+            <th onClick={that.sort.bind(that, 'voltage')}><h4>Voltage</h4></th>
+            <th onClick={that.sort.bind(that, 'priceEnergy')}><h4>Price</h4></th>
+            <th onClick={that.sort.bind(that, 'description')}><h4>Description</h4></th>
           </tr></thead>
         <tbody>
           { outletHtml }

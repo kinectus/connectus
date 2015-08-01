@@ -964,7 +964,7 @@ a:focus {
   opacity: 1;
 }
 .about .howitworks .landscape-banner {
-  background: url("http://localhost:3000/assets/img/landscape.png");
+  background: url("../img/landscape.png");
   background-repeat: no-repeat;
   background-position: bottom center;
   background-size: 100%;
@@ -972,7 +972,7 @@ a:focus {
   width: 100%;
 }
 .about .howitworks .outlet {
-  background: url("http://localhost:3000/assets/img/outlet.png");
+  background: url("../img/outlet.png");
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
@@ -980,7 +980,7 @@ a:focus {
   margin-top: 20px;
 }
 .about .howitworks .outlet-mobile {
-  background: url("http://localhost:3000/assets/img/outlet.png");
+  background: url("../img/outlet.png");
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
@@ -988,7 +988,7 @@ a:focus {
   margin-top: 20px;
 }
 .about .howitworks .location {
-  background: url("http://localhost:3000/assets/img/location.png");
+  background: url("../img/location.png");
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
@@ -996,7 +996,7 @@ a:focus {
   margin-top: 20px;
 }
 .about .howitworks .location-mobile {
-  background: url("http://localhost:3000/assets/img/location.png");
+  background: url("../img/location.png");
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
@@ -1004,7 +1004,7 @@ a:focus {
   margin-top: 20px;
 }
 .about .howitworks .trees {
-  background: url("http://localhost:3000/assets/img/trees.png");
+  background: url("../img/trees.png");
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
@@ -1012,7 +1012,7 @@ a:focus {
   margin-top: 20px;
 }
 .about .howitworks .trees-mobile {
-  background: url("http://localhost:3000/assets/img/trees.png");
+  background: url("../img/trees.png");
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
@@ -1268,13 +1268,28 @@ Reserve an Outlet .centering {
   margin: 0 .5vw;
 }
 .authBox {
-  position: absolute;
-  top: 330px;
-  left: 140px;
+  margin-top: 240px;
 }
 .authBox .btn {
+  margin-left: 28%;
   color: #FFFFFF;
   background-color: #3b5998;
+  padding-left: 58px;
+  height: 39px;
+}
+.authBox .btn .outlet {
+  width: 44px;
+  height: 29px;
+  background: url('../img/plug-08.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  top: 4px;
+  left: -59px;
+}
+.authBox .btn a {
+  position: relative;
+  top: -32px;
 }
 .authBoxMobile {
   position: absolute;
@@ -1317,7 +1332,7 @@ Reserve an Outlet .centering {
   display: inline-block;
   margin-right: -1px;
   margin-bottom: -9px;
-  background: url('http://localhost:3000/assets/img/map_icon-07.png');
+  background: url('../img/map_icon-07.png');
   background-repeat: no-repeat;
   background-size: 74%;
 }
@@ -1327,7 +1342,7 @@ Reserve an Outlet .centering {
   display: inline-block;
   margin-left: -35px;
   margin-bottom: -30px;
-  background: url('http://localhost:3000/assets/img/logo-05.png');
+  background: url('../img/logo-05.png');
   background-repeat: no-repeat;
   background-size: 74%;
 }
@@ -1352,4 +1367,7 @@ Reserve an Outlet .centering {
 }
 .reservation-button {
   width: 100px;
+}
+.container.payment-confirmation {
+  margin-top: 80px;
 }

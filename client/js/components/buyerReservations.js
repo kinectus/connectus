@@ -91,11 +91,6 @@ var buyerReservations = React.createClass({
     }
 
       var sortTransactions = function(transactions) {
-        
-        console.log(transactions);
-        console.log('inpst', transactions.filter(inPast));
-        console.log('inpres', transactions.filter(inPresent));
-        console.log('infut', transactions.filter(inFuture));
         return [].concat(transactions.filter(inPresent), transactions.filter(inFuture), transactions.filter(inPast));
       }
       var sortedTransactions = sortTransactions(this.state.data);
@@ -141,7 +136,6 @@ var buyerReservations = React.createClass({
           </tr>
         )
       });
-      console.log(transactionRows);
     }
 
       return (
