@@ -559,3 +559,9 @@ Reserve an Outlet .holder {
   margin-top: 10px;
   margin-bottom: 15px;
 }
+.oldReservation {
+  opacity: .3;
+}
+.hidden {
+  display: none;
+}

@@ -362,7 +362,8 @@ a:focus {
   width: 10%;
 }
 .footer-banner {
-  position: absolute;
+  position: relative;
+  display: block;
   height: 160px;
   background-color: #343434;
   width: 100%;
@@ -543,13 +544,8 @@ Reserve an Outlet .holder {
 }
 .authBoxMobile {
   position: absolute;
-<<<<<<< HEAD
   top: 400px;
   left: 60px;
-=======
-  top: 330px;
-  left: 140px;
->>>>>>> power data is set and pulled from db during streaming
 }
 .authBoxMobile .btn {
   color: #FFFFFF;
@@ -562,4 +558,10 @@ Reserve an Outlet .holder {
 .outletsList .btn {
   margin-top: 10px;
   margin-bottom: 15px;
+}
+.oldReservation {
+  opacity: .3;
+}
+.hidden {
+  display: none;
 }

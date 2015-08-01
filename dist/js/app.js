@@ -2714,12 +2714,16 @@ var ConnectusDispatcher = assign(new Dispatcher(), {
 module.exports = ConnectusDispatcher;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 },{"flux":37,"react/lib/Object.assign":370}],25:[function(require,module,exports){
 =======
 },{"flux":38,"react/lib/Object.assign":371}],26:[function(require,module,exports){
 >>>>>>> power data is set and pulled from db during streaming
 //TEMP CODE - FILE IN PROGRESS
 
+=======
+},{"flux":36,"react/lib/Object.assign":365}],24:[function(require,module,exports){
+>>>>>>> cleaning code
 var _router = null;
 
 var Router = {
@@ -3076,8 +3080,6 @@ var userServices = function(){
 
   userData.retrieveUserById = function(id){
 
-    // console.log('in the userservices with id: ', id)
-
     return request({
       url: UserConstants.USER_DATA + '/' + id,
       method: 'GET',
@@ -3086,8 +3088,8 @@ var userServices = function(){
       success: function(user) {
         return user;
       },
-      error: function() {
-        console.log('error in user services')
+      error: function(err) {
+        console.log(err);
       }
     });
   };
@@ -3266,15 +3268,9 @@ var outletStore = assign({}, EventEmitter.prototype, {
 
   submitReservation: function(newReservation) {
     return OutletServices.makeReservation(newReservation).then(function(reservation){
-      
-      // outletStore.trigger('change');
       return reservation;
     });
   },
-
-  // createTransaction: function(){
-  //   return OutletServices.makeTransaction();
-  // },
 
   emitChange: function() {
     this.emit(CHANGE_EVENT);

@@ -1,5 +1,3 @@
-//TEMP CODE - FILE IN PROGRESS
-
 var _router = null;
 
 var Router = {

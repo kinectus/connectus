@@ -2,7 +2,6 @@ var mobilecheck = function(){
   
   var mobile1 = false;
   var mobile2 = false;
-  var mobile = false;
 
   if( navigator.userAgent.match(/Android/i)
    || navigator.userAgent.match(/webOS/i)
@@ -13,7 +12,7 @@ var mobilecheck = function(){
    || navigator.userAgent.match(/Windows Phone/i)
    ){
       mobile2 = true;
-    }
+  }
   else if($(window)) {
     if ($(window).width()<800) {
       var mobile = true;
@@ -25,6 +24,6 @@ var mobilecheck = function(){
   return (mobile1 || mobile2);
 
 
-}
+};
 
 module.exports = mobilecheck;
