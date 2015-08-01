@@ -154,11 +154,12 @@ var outletServices = function(){
       contentType: 'application/json',
       data: JSON.stringify(newReservation),
       success: function(res) {
+        console.log('SUCCESS, ', res);
         return res;
+      },
+      error: function(res){
+        console.log('ERROR, ', res)
       }
-      // error: function(res){
-      //   console.
-      // }
     });
   };
 
