@@ -12,8 +12,6 @@ var paymentStore = assign({}, EventEmitter.prototype, {
     });
   },
   getTransactionInfo: function(){
-    console.log('calling paymentstore');
-
     function pad (num, size){
       num = num + "";
       while(num.length < size){

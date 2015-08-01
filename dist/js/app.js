@@ -2862,14 +2862,6 @@ var outletStore = assign({}, EventEmitter.prototype, {
     return OutletServices.makeReservation(newReservation).then(function(reservation){
       return reservation;
     });
-  },
-
-  emitChange: function() {
-    this.emit(CHANGE_EVENT);
-  },
-
-  addChangeListener: function(callback) {
-    this.on(CHANGE_EVENT, callback);
   }
 
 });
