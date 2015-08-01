@@ -33,6 +33,7 @@ var Connectus = React.createClass({
     //default view is the user NOT logged in
     var pageHtml = (
       <div className="check-footer" className="topNavBar">
+        <div className="logo-image"></div>
         <span className="logo">
           <Link to="about">Connect.us</Link>
         </span>
@@ -59,7 +60,12 @@ var Connectus = React.createClass({
               <h4>Sean Conner, Valerie Liang,</h4>
               <h4>Dianna Faulk, Jammie Mountz</h4>
             </div>
-            <a href="https://github.com/kinectus/connectus"><div className='col-md-4 octocat'></div></a>
+            <div className="col-md-4">
+              <a href="https://github.com/kinectus/connectus">
+                <div className='octocat'></div>
+                <h4 className="light center">Find Connect.us on Github</h4>
+              </a>
+            </div>
             <div className='col-md-4'></div>
           </div>
         </div>

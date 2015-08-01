@@ -29,7 +29,7 @@ gulp.task('copy', function(){
 });
 
 gulp.task('less', function () {
-  return gulp.src('./client/assets/less/**.less')
+  return gulp.src('./client/assets/less/styles.less')
     .pipe(less({
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))

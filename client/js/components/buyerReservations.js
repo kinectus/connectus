@@ -127,8 +127,8 @@ var buyerReservations = React.createClass({
             </td>
             <td className='regTrans'>
               <div className={moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() || moment(transaction.startTime.date + " " + transaction.startTime.slot.time,"YYYY-MM-DD HH:mm") > moment()? ' hidden' + ' ' : ''}>
-                <div className= "btn turnOn" onClick={that.turnOn.bind(that, transaction)}>ON</div>
-                <div className="btn turnOff" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
+                <div className="btn btn-success reservation-button turnOn" onClick={that.turnOn.bind(that, transaction)}>ON</div>
+                <div className="btn btn-default reservation-button turnOff" onClick={that.setCurrentTransaction.bind(that, transaction)}>OFF</div>
               </div>
             </td>
             <td className={transaction.id}>
@@ -146,7 +146,7 @@ var buyerReservations = React.createClass({
 
       return (
         <div className="outletsList container">
-          <table className="ui selectable celled padded table transaction-rows">
+          <table className="table table-hover">
             <thead>
               <tr>
                 <th>Reservation Info</th>
