@@ -15,6 +15,7 @@ module.exports = updateReservation = function(req, res){
   var stringDate = currentDate.format('YYYY-MM-DD');
   var endDate = moment( data.end.date, 'YYYY-MM-DD' );
   var currentSlot, endSlot;
+  var validReservations = true;
 
   // Store information for reservation update
   var transactionID, buyerID;
@@ -69,16 +70,32 @@ module.exports = updateReservation = function(req, res){
                 qb.where(db.knex.raw(rangeQuery))
               })
               .fetchAll().then(function(reservations){
-                return reservations.mapThen(function(reservation){
-                  return reservation.set({
-                    buyer_id: buyerID,
-                    available: false,
-                    transaction_id: transactionID
-                  }).save()
-                })
-                .then(function(){
-                  res.send(201, JSON.stringify('Posted'));
-                })
+                console.log(reservations);
+                for (var i = 0; i < reservations.models.length; i++){
+                  console.log(reservations.models[i]);
+                  console.log('get the avail',reservations.models[i].get('available'));
+                  console.log('get the avail2',reservations.models[i].attributes.available);
+                  if(reservations.models[i].attributes.available === 0){
+                    console.log('resetting valid reservations');
+                    validReservations = false;
+                  }
+                }
+                if(!validReservations){
+                  console.log('this reservation is not valid');
+                  res.send(202, {error: true, errorMessage:'One or more of your reservation slots are not avilable'});
+                }else{
+                  console.log('mapping through to save reservations');
+                  return reservations.mapThen(function(reservation){
+                    return reservation.set({
+                      buyer_id: buyerID,
+                      available: false,
+                      transaction_id: transactionID
+                    }).save();
+                  })
+                  .then(function(){
+                    res.send(201, JSON.stringify('Posted'));
+                  });
+                }
               });
             });
           });

@@ -1209,17 +1209,6 @@ Reserve an Outlet .centering {
   border-top: 2px solid #343434;
   border-left: 2px solid #343434;
   color: white;
-  z-index: 3;
-}
-.barViewBack {
-  position: relative;
-  width: 36px;
-  height: 15px;
-  background-color: grey;
-  border-top: 2px solid #343434;
-  border-left: 2px solid #343434;
-  color: white;
-  z-index: 2;
 }
 .barViewText {
   vertical-align: top;

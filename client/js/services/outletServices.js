@@ -1,5 +1,4 @@
 var request = require('reqwest');
-var when = require('when'); //promises
 var OutletListConstants = require('../constants/OutletListConstants.js');
 
 var outletServices = function(){
@@ -149,14 +148,7 @@ var outletServices = function(){
       crossOrigin: true,
       type: 'json',
       contentType: 'application/json',
-      data: JSON.stringify(newReservation),
-      success: function(res) {
-        console.log('SUCCESS, ', res);
-        return res;
-      },
-      error: function(res){
-        console.log('ERROR, ', res)
-      }
+      data: JSON.stringify(newReservation)
     });
   };
 

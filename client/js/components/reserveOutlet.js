@@ -7,7 +7,6 @@ var Alert = require('react-bootstrap').Alert;
 var moment = require('moment');
 var Router = require('react-router'); //need this for redirection
 var Link = require('react-router').Link;
-
 // http://jquense.github.io/react-widgets/docs/#/datetime-picker
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -43,7 +42,8 @@ var DateTime = React.createClass({
    return {
       message: null,
       alert: false,
-      success: false
+      success: false,
+      error: false
     }
   },
 
@@ -68,8 +68,8 @@ var DateTime = React.createClass({
   closeMe: function(e){
     if (e){
       e.preventDefault();
-      // this.setState({success: false});
-      location.reload();
+      this.setState({success: false, error: false});
+      // location.reload();
     }
   },
 
@@ -106,19 +106,24 @@ var DateTime = React.createClass({
       }
     }
     // Validate input dates
-    // if ( moment().diff(moment(start)) > 0 ){
-    //   var message = 'Please choose reservation after '+moment().format('MMMM Do YYYY hh:mma');
-    //   this.setState({'message': message, 'alert': true});
-    // } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) > 0 ) {
-    //   message = 'Please schedule the end of your reservation after the start';
-    //   this.setState({'message': message, 'alert': true});
-    // } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) < 0 ) {
+    if ( moment().diff(moment(start)) > 0 ){
+      var message = 'Please choose reservation after '+moment().format('MMMM Do YYYY hh:mma');
+      this.setState({'message': message, 'alert': true});
+    } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) > 0 ) {
+      message = 'Please schedule the end of your reservation after the start';
+      this.setState({'message': message, 'alert': true});
+    } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) < 0 ) {
       var that = this;
       outletStore.submitReservation(newReservation).then(function(res){
-        message = 'Reservation complete';
-        that.setState({'message': message, 'success': true});
+        if(res.errorMessage){
+          message = 'One or more of your selected time slots are not available';
+          that.setState({message: message, error: true});
+        }else{
+          message = 'Reservation complete';
+          that.setState({message: message, success: true});
+        }
       });
-    // }
+    }
   },
 
   render: function() {
@@ -126,6 +131,7 @@ var DateTime = React.createClass({
     var hidden = !this.state.alert ? "hidden" : "notHidden centering";
     var successful = !this.state.success ? "hidden" : "notHidden centering reserveConfirm";
     var buttonHide = !this.state.success ? "notHidden centering btn btn-default" : "hidden";
+    var erroring = !this.state.error ? "hidden" : "notHidden centering reserveConfirm";
 
     // Format default date to be closest upcoming time at 30-minute interval
     var firstDate = new Date();
@@ -146,6 +152,11 @@ var DateTime = React.createClass({
             <strong>{this.state.message}</strong><br></br>
             <button className="alertButton" onClick={this.closeMe}>Add another reservation</button>
             <button className="alertButton"><Link to="/outlets">Return to browsing</Link></button>
+        </Alert>
+        <Alert bsStyle='warning' className={erroring}>
+            <strong>{this.state.message}</strong><br></br>
+            <button className="alertButton" onClick={this.closeMe}>Try again</button>
+            <button className="alertButton"><Link to="/outlets">Choose another outlet</Link></button>
         </Alert>
         <DateTimePicker  ref="startTime" defaultValue={firstDate} />
         <DateTimePicker  ref="endTime" defaultValue={null} />
