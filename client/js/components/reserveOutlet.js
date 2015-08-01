@@ -360,11 +360,7 @@ var Availability = React.createClass({
             var indicator = reservation.available ? "indicator barView" : "noIndicator barView";
             blockClass = blockClass + " splitHour";
 
-            console.log('HOVERSTART: ', hoverStart);
-
-
             hoverStart = moment('12/25/1995 '+ hoverStart, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY ha');
-            console.log('slotCount', slotCount);
             if (hoverStart[12] === '0'){
               hoverStart = hoverStart.slice(12);
               if (hoverStart = '0am'){
@@ -380,6 +376,7 @@ var Availability = React.createClass({
               <div className={blockClass}></div>
               </div>
             )
+          // If starts on half hour
           } else {
             indicator = reservation.available ? "indicator barViewBack" : "noIndicator barViewBack";
             slotCount++;
