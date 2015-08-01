@@ -31,15 +31,18 @@ var Connectus = React.createClass({
 
   render: function() {
     var that = this;
+    var amount = Math.round(this.state.totalCost * 100) / 100;
+    var energy = Math.round(this.state.totalEnergy * 100) / 100;
     return(
-    <div className="paymentStats">
-    <h3>You are being billed ${this.state.totalCost} for {this.state.totalEnergy} kWh of energy usage.</h3><br />
-    <h3>Please submit your payment below.</h3>
-    
-    <form id="checkout" method="post" action="/payment/checkout">
-      <div id="payment-form"></div>
-      <input type="submit" value="Confirm Payment"/>
-    </form>
+    <div className="container">
+      <div className="paymentStats">
+        <h3>You are being billed ${ amount } for { energy } kWh of energy usage.</h3>
+        <h4 className="light">Please submit your payment below.</h4>
+        <form id="checkout" method="post" action="/payment/checkout">
+          <div id="payment-form"></div>
+          <button input="submit" value="Confirm Payment" className="btn btn-default">Confirm Payment</button>
+        </form>
+      </div>
     </div>
     
     );
