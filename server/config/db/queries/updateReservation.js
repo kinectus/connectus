@@ -61,7 +61,7 @@ module.exports = updateReservation = function(req, res){
               paid: 0,
               current: 0
             }).save().then(function(newTransaction){
-              transactionID = newTransaction.id;
+              transactionID = newTransaction.get('id');
               // Query for collection of all reservations between start and end reservation, inclusive
               new Reservation()
               .query(function(qb){
