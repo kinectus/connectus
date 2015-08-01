@@ -313,7 +313,6 @@ var Availability = React.createClass({
       var centerCount = centerCount ? centerCount > end-1 ? 0 : centerCount : 0;
       var that = this;
       var slotCount = 0;
-      console.log('SUBSET: ', subset)
 
       var outerHTML = subset.map(function(reservation){
         var goOrNoGo = reservation.available ? "on" : "off";
@@ -328,15 +327,11 @@ var Availability = React.createClass({
           // Find corresponding slotProp to reservation slot_id
           for (var j=0; j<slotProps.length; j++){
             // When match is found, create unique time labling
-              console.log('SLOTPROPS[J].CUSTOMID: ',  slotProps[j].customID);
 
             if (slotProps[j].customID === reservation.slot_customID){
-              console.log('SLOTPROPS[J].CUSTOMID: ',  slotProps[j].customID);
               var endSub = slotProps[j].end === '24:00' ? '00:00' : slotProps[j].end;
               begin = moment('12/25/1995 ' + slotProps[j].start, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY hhmma');
               end = moment('12/25/1995 ' + endSub, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY hhmma');
-              console.log('BEGIN: ', begin);
-              console.log('END: ',  end);
               // Format begin time
               if (begin[11] === '0'){
                 begin = begin.slice(12,13).concat( ":" + begin.slice(13) );
