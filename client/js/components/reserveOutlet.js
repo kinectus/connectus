@@ -177,7 +177,6 @@ var OutletInfo = React.createClass({
   render: function() {
     // do something with the photo
     var outletPhoto = <div className="outletPhoto"></div>
-    console.log(this.props);
     return (
       <div>
         <h2>{ this.props.outletData.name }</h2>
@@ -493,7 +492,6 @@ var reserveOutlet = React.createClass({
           outlet['seller'] = user.fullname;
           that.setState({data: outlet});
         });
-      console.log('outlet yaaa', outlet);
     });
   },
 

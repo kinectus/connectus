@@ -55,6 +55,7 @@ var outletsListMap = React.createClass({
 
   displayOutletData: function(key, childProps) {
     var outlet = childProps.data;
+    console.log('outlettttt', outlet);
     this.outletTableData = (
       <table className="table table-hover">
           <thead>
