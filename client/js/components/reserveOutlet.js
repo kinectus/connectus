@@ -290,6 +290,13 @@ var Availability = React.createClass({
 
   render: function() {
     var date;
+    console.log('window.location.origin', window.location.origin);
+
+    if (window.location.origin === 'http://localhost:3000'){
+      var idSubtractor = 1;
+    } else {
+      var idSubtractor = 10;
+    }
 
     // If reservations API call has completed
     if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 && this.state.end && this.state.middle && typeof this.state.windowView === 'number'){
@@ -298,16 +305,14 @@ var Availability = React.createClass({
       var end = this.state.end;
       var subset = subset || this.state.reservations.slice(this.state.start, this.state.end);
       var slotProps = slotProps || this.state.timeSlots;
-
       // Track center time slot
-
       var centerCount = centerCount ? centerCount > end-1 ? 0 : centerCount : 0;
       var that = this;
+      var slotCount = 0;
 
       // Create custom availability viewer using subset
       var outerHTML = subset.map(function(reservation){
         var goOrNoGo = reservation.available ? "on" : "off";
-
         // Label slot properties based on subset location
         var blockClass = (centerCount === that.state.windowView) ? "centerSlot ".concat(goOrNoGo) : "sideSlot ".concat(goOrNoGo);
         centerCount++;
@@ -343,13 +348,12 @@ var Availability = React.createClass({
 
         // Regularly label all slots but center
         } else {
-          if ( parseInt(reservation.slot_id, 10) % 2 === 1 ){
+          if ( slotCount % 2 === 0 ){
             var indicator = reservation.available ? "indicator barView" : "noIndicator barView";
             blockClass = blockClass + " splitHour"
-            var hoverStart = slotProps[reservation.slot_id-1].start;
-            console.log('---------------------------------------------------hoverStart(SLOT.START): ', hoverStart)
+            var hoverStart = slotProps[reservation.slot_id - idSubtractor].start;
             hoverStart = moment('12/25/1995 '+hoverStart, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY ha');
-            console.log('---------------------------------------------------hoverStart(POST 1ST FORMAT): ', hoverStart)
+
             if (hoverStart[12] === '0'){
               hoverStart = hoverStart.slice(12);
               if (hoverStart = '0am'){
@@ -358,7 +362,7 @@ var Availability = React.createClass({
             } else {
               hoverStart = hoverStart.slice(11);
             }
-            console.log('---------------------------------------------------hoverStart(FINAL FORMAT): ', hoverStart)
+            slotCount++;
             return(
               <div className="timeblock" key={reservation.id}>
               <div className={indicator}><p className="barViewText">{hoverStart}</p></div>
@@ -367,7 +371,7 @@ var Availability = React.createClass({
             )
           } else {
             indicator = reservation.available ? "indicator barViewBack" : "noIndicator barViewBack";
-
+            slotCount++;
             return(
               <div className="timeblock" key={reservation.id}>
               <div className={indicator}></div>
