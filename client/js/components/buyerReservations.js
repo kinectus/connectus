@@ -25,22 +25,18 @@ var buyerReservations = React.createClass({
 
     FooterCheck.checker();
 
-    console.log(moment("2015-07-30 00:30", "YYYY-MM-DD HH:mm") > moment());
     outletStore.getBuyerReservations().then(function(transactionsData){
       that.setState({data: transactionsData});
     });
   },
 
   footerCheck: function() {
-    console.log('checking footer');
     if ( ( $('body').height() ) < window.innerHeight - 160 ) {
-      console.log('body height is less than window inner height')
       $('.footer-banner').css('top', (window.innerHeight) - 160);
     }
   },
 
   setCurrentTransaction: function(transaction){
-    console.log('TRANSACTION-------------------------', transaction)
     var that =this;
     outletServices.turnOutletOff(transaction); //connects with powerServer
     outletStore.setCurrentTransaction({id: transaction.id, currentStatus: true, paid: false}).then(function(transaction){
@@ -76,9 +72,7 @@ var buyerReservations = React.createClass({
     }
 
     var that = this;
-    console.log('STATE:  ', this.state)
     if (this.state.data.length !==0) {
-      console.log(this.state.data);
     
     var inFuture = function(transaction) {
       return moment(transaction.startTime.date + " " + transaction.startTime.slot.time,"YYYY-MM-DD HH:mm") > moment();
@@ -94,7 +88,6 @@ var buyerReservations = React.createClass({
         return [].concat(transactions.filter(inPresent), transactions.filter(inFuture), transactions.filter(inPast));
       }
       var sortedTransactions = sortTransactions(this.state.data);
-      console.log(sortedTransactions);
       var transactionRows = sortedTransactions.map(function(transaction) {
         return (
           <tr key={ transaction.id } className={  moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ?  "oldReservation regTransRow" : "regTransRow"}>
