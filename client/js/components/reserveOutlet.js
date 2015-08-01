@@ -1,5 +1,6 @@
 var React = require('react');
 var outletStore = require('../stores/outletStore');
+var userStore = require('../stores/userStore');
 var GoogleMap = require('google-map-react');
 var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
 var DateTimePicker = require('react-widgets').DateTimePicker;
@@ -180,10 +181,10 @@ var OutletInfo = React.createClass({
       <div>
         <h2>{ this.props.outletData.name }</h2>
         <h4 className="light">{ this.props.outletData.description }</h4>
-        <h4>Seller:</h4>
+        <h4>Seller: <span className="light">{ this.props.outletData.seller }</span></h4>
         <h4>Voltage: <span className="light">{ this.props.outletData.voltage }</span></h4> 
-        <h4>Price by hour: <span className="light">{ this.props.outletData.priceHourly }</span></h4>
-        <h4>Price by kWh: <span className="light">{ this.props.outletData.priceEnergy }</span></h4>
+        <h4>$<span className="light">{ this.props.outletData.priceHourly }</span>/hour</h4>
+        <h4>$<span className="light">{ this.props.outletData.priceEnergy }</span>/kWh</h4>
       </div>
     )
   }
@@ -487,7 +488,10 @@ var reserveOutlet = React.createClass({
     var that = this;
     var outletID = this.props.params.id
     outletStore.getOutletById(outletID).then(function(outlet){
-      that.setState({data: outlet});
+      userStore.getUsernameById(outlet.seller_id).then(function(user){
+          outlet['seller'] = user.fullname;
+          that.setState({data: outlet});
+        });
     });
   },
 
