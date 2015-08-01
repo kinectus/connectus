@@ -1,7 +1,5 @@
 var path = require('path');
 var Promise = require('bluebird');
-var outletExamples = require('./outletDataExamples');
-var userExamples = require('./userDataExamples');
 var timeSlotInfo = require('./timeSlotInfo');
 
 // Initialize database
@@ -20,7 +18,6 @@ var db = require('knex')({
 
 var Bookshelf = require('bookshelf')(db);
 
-// Add users table to db, store authentication
 db.schema.hasTable('users').then(function(exists){
   console.log(exists)
   if(!exists){
@@ -31,10 +28,8 @@ db.schema.hasTable('users').then(function(exists){
       user.string('email', 100);
       user.string('profileUrl', 500);
       user.string('profileImage', 500);
-      // user.timestamps();
     }).then(function(table){
       console.log('Created users table', table);
-      insertInfoInTable('users', null, userExamples, 'username');
     }); 
   }
 });
@@ -54,12 +49,10 @@ db.schema.hasTable('outlets').then(function(exists){
       outlet.decimal('long', 8, 5).notNullable();
       outlet.string('description', 300).notNullable();
       outlet.decimal('priceSuggest', 5, 2).notNullable();
-      // outlet.string('photo'); --store the path to a directory, not the photo (worstcase, longblob)
       outlet.string('address', 100).notNullable();
       outlet.string('voltage', 8).notNullable();
     }).then(function(table){
       console.log('Created outlets table', table);
-      insertInfoInTable('outlets', null, outletExamples, 'name');
     }); 
   }
 });
@@ -111,7 +104,6 @@ db.schema.hasTable('reservations').then(function(exists){
 
 var tableDataContainsInfo = function(tableData, field, value) {
   for (var i = 0; i < tableData.length; i++) {
-    //check for value in field
     if (tableData[i][field] === value) {
       return true;
     }

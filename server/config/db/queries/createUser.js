@@ -10,7 +10,7 @@ module.exports = createUser = function (user, next){
     if(userExists) {
       console.log('User already Exists! Logging in');
     }else{
-      console.log('creating user');
+      console.log('Creating user');
       User.forge({
         username: user.id,
         fullname: user.displayName,

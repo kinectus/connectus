@@ -1,10 +1,6 @@
-var db = require('../config/db/config');
-var Outlet = require('../outlets/outlet.model');
 var Outlets = require('../outlets/outlets.collection');
-var User = require('../users/user.model');
-
-var AuthController = require('../auth/auth.controller');
 var ServerConstants = require('../constants/serverConstants');
+
 var getOutletsByUser = require('../config/db/queries/getOutletsByUserId');
 var addNewOutlet = require('../config/db/queries/addNewOutlet');
 var updateOutlet = require('../config/db/queries/updateOutlet');
@@ -15,22 +11,18 @@ var getTimeSlotInfo = require('../config/db/queries/getTimeSlotInfo');
 var getUserInfo = require('../config/db/queries/getUserInfo');
 var getOutletsByUser = require('../config/db/queries/getOutletsByUserId.js');
 var getBuyerReservations = require('../config/db/queries/getBuyerReservations');
-var turnOnOutlet = require('../config/db/queries/turnOnOutlet');
+var setCurrentTransaction = require('../config/db/queries/setCurrentTransaction');
 var setInitialTransactionCost = require('../config/db/queries/setInitialTransactionCost.js');
-var M = require('moment');
-var rp = require('request-promise');
 
+var io = require('../server.js');
+var rp = require('request-promise');
 var addressValidator = require('address-validator');
 var Address = addressValidator.Address;
-var _ = require('underscore');
-var geocoder = require('geocoder');
 
-// socket.io
-var io = require('../server.js');
-
-
-var moment = require('moment');
 var intervalIds = {};
+
+
+
 module.exports = {
   
   validateAddress: function(req, res){
@@ -73,7 +65,6 @@ module.exports = {
   },
 
   getSellerOutlets: function(req, res){
-    console.log('got to getSellerOutlets')
     getOutletsByUser(req.user)
     .then(function(outlets){
       res.send(200, outlets.models);
@@ -87,7 +78,7 @@ module.exports = {
   seeTimeSlots: function(req, res){
     getTimeSlotInfo(req, res)
     .then(function(slots){
-      res.send(200, slots.models)
+      res.send(200, slots.models);
     });
   },
 
@@ -101,15 +92,11 @@ module.exports = {
 
   makeReservation: function(req, res) {
     updateReservation(req, res);
-    // res.send('reservation completed');
-    // user passport adds facebook user profile to req so it can be accessed anywhere in express
-    // console.log('request from user', req.user.id);
   },
 
   getUserInfo: function(req, res){
     getUserInfo(req, res)
       .then(function(user){
-        console.log('GET USER INFO, USER: ', user);
         res.send(200, user);
       });
   },
@@ -131,23 +118,14 @@ module.exports = {
     var hourlyPrice = info.outlet.priceHourly;
     // query the database for validation - CAN they turn on this outlet??
     // if so...
-    // console.log(data.clientData.startTime.slot, data.clientData.endTime.slot);
-    console.log('starttime',info.startTime.slot.number);
-    console.log('endtime',info.endTime.slot.number);
     var startDate = M(info.endTime.date);
     var endDate = M(info.startTime.date);
     var reservationHours = startDate.diff(endDate,'hours') + (-info.startTime.slot.number + info.endTime.slot.number+1)/2;
     var initialCost = reservationHours * hourlyPrice;
-    console.log('reshours',reservationHours, info);
     setInitialTransactionCost(transactionId, initialCost);
-    // do cost math
-    // set cost in db 
-    // console.log('inturnonoutlet', req.body);
 
 
-    res.status(200).send('you turn me on!');
-    
-    // console.log(req.body);
+    res.status(200).send(JSON.stringify('Outlet turned on'));
     
     if( outletName !== ServerConstants.SPECIAL_OUTLET ) {
       // simulate an appliance's power use
@@ -156,7 +134,6 @@ module.exports = {
         var watts = Math.random()*1000;
         var kwh = watts/1000/(60*60) * 10;
         totalKwh += kwh;
-        // console.log('in turnme on stub -------------------------------------', req.body);
         var data = {
           avgWatts: watts,
           kwh: kwh,
@@ -173,9 +150,7 @@ module.exports = {
       };
       var intervalId = setInterval(getWatts, 2000);
       intervalIds[transactionId] = intervalId;
-      console.log('turnon intervalid: ', intervalId, 'intervals: ', intervalIds);
     } else {
-      console.log(ServerConstants.SPECIAL_OUTLET)
       var options = {
         method: 'POST',
         body: info,
@@ -187,21 +162,18 @@ module.exports = {
   },
 
   turnOffOutlet: function(req, res){
-    console.log('-----------------------------------------------------in turn off', req.body);
-    res.status(200).send('you turn me off :( !');
+    res.status(200).send(JSON.stringify('Outlet turned off'));
     var transactionId = req.body.id;
     var outletName = req.body.outlet.name;
     if( outletName !== ServerConstants.SPECIAL_OUTLET ) {
       // simulate an appliance's power use
       var intervalId = intervalIds[transactionId];
-      // console.log('turn off intervalid: '. intervalId, 'intervals: ', intervalIds);
       clearInterval(intervalId);
     } else {
-      console.log(ServerConstants.SPECIAL_OUTLET)
       var options = {
         method: 'POST',
         uri: ServerConstants.POWER_SERVER_OFF
-      }
+      };
       return rp(options);
     }
   }

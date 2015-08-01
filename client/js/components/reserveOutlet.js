@@ -70,7 +70,6 @@ var DateTime = React.createClass({
     if (e){
       e.preventDefault();
       this.setState({success: false, error: false});
-      // location.reload();
     }
   },
 

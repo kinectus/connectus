@@ -1089,28 +1089,29 @@ a:focus {
 .footer-banner {
   position: relative;
   display: block;
-  height: 160px;
+  height: 100px;
   background-color: #343434;
   width: 100%;
 }
 .footer-banner .footer {
   background-color: #343434;
 }
-.footer-banner h3 {
+.footer-banner h4 {
   color: white;
   margin-left: 20px;
 }
-.footer-banner h4 {
+.footer-banner h5 {
   color: #d0d8da;
   margin-left: 30px;
 }
 .footer-banner .octocat {
-  background: url('https://i2.wp.com/assets-cdn.github.com/images/gravatars/gravatar-user-420.png?ssl=1gith');
+  background: url('../img/octocat.png');
   height: 115px;
-  background-size: 20%;
+  background-size: 15%;
   background-repeat: no-repeat;
   background-position: top center;
   background-position-y: 17px;
+  height: 80px;
 }
 .footer-banner .footer-1 {
   float: left;
@@ -1249,12 +1250,12 @@ Reserve an Outlet .centering {
   color: #007F00;
 }
 .reserveConfirm {
-  width: 60vw;
   margin: 1vw auto;
 }
 .alertButton {
   width: 20vw;
   margin: 0 .5vw;
+  margin-bottom: 10px;
 }
 .authBox {
   margin-top: 240px;
@@ -1311,6 +1312,7 @@ Reserve an Outlet .centering {
 }
 .holder {
   width: 100%;
+  margin-bottom: 20px;
 }
 .map-outlets {
   width: 250px;
@@ -1359,4 +1361,17 @@ Reserve an Outlet .centering {
 }
 .container.payment-confirmation {
   margin-top: 80px;
+}
+.table.table-hover h4 {
+  padding-left: 23px;
+}
+.arrows {
+  height: 20px;
+  width: 13px;
+  background-color: black;
+  position: relative;
+  top: 29px;
+  background: url('../img/arrows-09.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
