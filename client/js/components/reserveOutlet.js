@@ -203,7 +203,7 @@ var Availability = React.createClass({
       this.setState({end: 11, middle: 5, windowView: 5});
     } else if (window.innerWidth<994){
       this.setState({end: 15, middle: 7, windowView: 7});
-    } else if (window.innerWidth<1055){
+    } else if (window.innerWidth<1202){
       this.setState({end: 17, middle: 8, windowView: 8});
     } else {
       this.setState({end: 25, middle: 12, windowView: 12});
