@@ -39,8 +39,6 @@ module.exports = updateReservation = function(req, res){
         slot_customID: slot.attributes.customID
       })
       .fetch().then(function(startRes){
-        startID = startRes.get('slot_customID');
-        startID = 'slot_customID >= '+startID.toString();
         // Find end res
         return new TimeSlot({
           end: data.end.time
@@ -52,9 +50,7 @@ module.exports = updateReservation = function(req, res){
             slot_customID: slot2.attributes.customID
           })
           .fetch().then(function(endRes){
-            endID = endRes.get('slot_customID');
-            endID = 'slot_customID <= '+endID.toString();
-            var rangeQuery = startID+' AND '+endID;
+            var dateQuery = "date between DATE_SUB('"+data.start.date+"', interval 1 day) AND DATE_ADD('"+data.end.date+"', INTERVAL 1 DAY)";
 
             return new Transaction({
               totalEnergy: 0,
@@ -67,17 +63,33 @@ module.exports = updateReservation = function(req, res){
               new Reservation()
               .query(function(qb){
                 qb.where('outlet_id', data.outletID)
-                qb.where(db.knex.raw(rangeQuery))
+                qb.where(db.knex.raw(dateQuery))
               })
               .fetchAll().then(function(reservations){
-                for (var i = 0; i < reservations.models.length; i++){
+                for (var i = 0; i<reservations.length; i++){
+                  if ( !reservations.models[i] ){
+                    continue;
+                  }
+                  // if reservation date is start date, if slot is < start time, ignore
+                  if ( moment(reservations.models[i].attributes.date).diff( moment(data.start.date) ) < 0 || moment(reservations.models[i].attributes.date).diff( moment(data.start.date) ) === 0 && reservations.models[i].attributes.slot_customID < slot.attributes.customID){
+                    reservations.models = reservations.models.slice(0,i).concat( reservations.models.slice(i+1) );
+                    i--;
+                    continue;
+                  }
+                  if ( moment(reservations.models[i].attributes.date).diff( moment(data.end.date) ) > 0 || moment(reservations.models[i].attributes.date).diff( moment(data.end.date) ) === 0 && reservations.models[i].attributes.slot_customID > slot2.attributes.customID){
+                    reservations.models = reservations.models.slice(0,i).concat( reservations.models.slice(i+1) );
+                    i--;
+                    continue;
+                  }
+                  // if reservation date is end date, if slot is > end time, ignore
                   if(reservations.models[i].attributes.available === 0){
                     validReservations = false;
                   }
                 }
+
                 if(!validReservations){
                   res.send(202, {error: true, errorMessage:'One or more of your reservation slots are not avilable'});
-                }else{
+                } else {
                   return reservations.mapThen(function(reservation){
                     return reservation.set({
                       buyer_id: buyerID,
