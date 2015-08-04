@@ -70,6 +70,7 @@ var DateTime = React.createClass({
     if (e){
       e.preventDefault();
       this.setState({success: false, error: false});
+      location.reload();
     }
   },
 
@@ -142,7 +143,6 @@ var DateTime = React.createClass({
     } else if (remainder2 > 0){
       firstDate = new Date(firstDate.getTime() + remainder2*60000)
     }
-
     return (
       <div className="holder">
         <Alert bsStyle='warning' className={hidden} onDismiss={this.hideMe} dismissAfter={2000}>
