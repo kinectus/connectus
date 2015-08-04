@@ -123,7 +123,7 @@ var DateTime = React.createClass({
           that.setState({message: message, success: true});
         }
       });
-    // }
+    }
   },
 
   render: function() {

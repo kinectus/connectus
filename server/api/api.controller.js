@@ -35,6 +35,7 @@ module.exports = {
     });
 
     addressValidator.validate(address, addressValidator.match.streetAddress, function(err, exact, inexact){
+        console.log(err, exact, inexact);
         res.send(200, {exact:exact, err: err, inexact:inexact});
     });
   },
