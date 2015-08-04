@@ -3,6 +3,7 @@ var React = require('react');
 var Link = require('react-router').Link;
 var mobileCheck = require('./mobilecheck');
 var AuthConstants = require('../constants/authConstants.js');
+var FooterCheck = require('./footerCheck');
 
 var About = React.createClass({
 
@@ -43,6 +44,9 @@ var About = React.createClass({
         })
       }
     })
+
+    FooterCheck.checker();
+
   },
 
   render: function(){
