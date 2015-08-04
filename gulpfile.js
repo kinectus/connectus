@@ -65,7 +65,7 @@ gulp.task('build', ['less'], function() {
   return gulp.watch('client/**/*.less', ['less']);
 });
 
-gulp.task('deploy', ['uglify','copy', 'less'], function() {
+gulp.task('deploy', ['uglify','less', 'copy'], function() {
   return;
 });
 

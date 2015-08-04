@@ -12,7 +12,7 @@ var FooterCheck = require('./footerCheck');
 var outletsListMap = React.createClass({
   getLocation: function() {
     if ("geolocation" in navigator) {
-      that = this;
+      var that = this;
       navigator.geolocation.getCurrentPosition(function(position) {
         that.setState({
           userLocation: {
@@ -98,7 +98,7 @@ var outletsListMap = React.createClass({
   render: function() {
     // is the user authenticated?
     if(!document.cookie){
-      this.transitionTo('login');
+      this.transitionTo('about');
       return <h1></h1>;
     }
     var that = this;
