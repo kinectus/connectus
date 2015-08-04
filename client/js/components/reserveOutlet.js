@@ -492,7 +492,7 @@ var reserveOutlet = React.createClass({
     var that = this;
     // is user authenticated
     if(!document.cookie){
-      this.transitionTo('login');
+      this.transitionTo('about');
       return <h1></h1>;
     }
     return (

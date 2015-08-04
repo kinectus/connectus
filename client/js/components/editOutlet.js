@@ -145,7 +145,7 @@ var editOutlet = React.createClass({
     // is user authenticated
     var buttonHtml = (<button className="btn btn-warning btn-lg btn-block">Address Validation Needed</button>);
     if(!document.cookie){
-      this.transitionTo('login');
+      this.transitionTo('about');
       return <h1></h1>;
     }
 

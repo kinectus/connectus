@@ -98,7 +98,7 @@ var outletsListMap = React.createClass({
   render: function() {
     // is the user authenticated?
     if(!document.cookie){
-      this.transitionTo('login');
+      this.transitionTo('about');
       return <h1></h1>;
     }
     var that = this;
