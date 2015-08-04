@@ -8,6 +8,8 @@ var Alert = require('react-bootstrap').Alert;
 var moment = require('moment');
 var Router = require('react-router'); //need this for redirection
 var Link = require('react-router').Link;
+var FooterCheck = require('./footerCheck');
+
 // http://jquense.github.io/react-widgets/docs/#/datetime-picker
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -487,6 +489,7 @@ var reserveOutlet = React.createClass({
           that.setState({data: outlet});
         });
     });
+    FooterCheck.checker();
   },
 
   render: function() {
