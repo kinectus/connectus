@@ -106,13 +106,13 @@ var DateTime = React.createClass({
       }
     }
     // Validate input dates
-    // if ( moment().diff(moment(start)) > 0 ){
-    //   var message = 'Please choose reservation after '+moment().format('MMMM Do YYYY hh:mma');
-    //   this.setState({'message': message, 'alert': true});
-    // } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) > 0 ) {
-    //   message = 'Please schedule the end of your reservation after the start';
-    //   this.setState({'message': message, 'alert': true});
-    // } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) < 0 ) {
+    if (moment().diff(moment(start)) > 0 ){
+      var message = 'Please choose reservation after '+moment().format('MMMM Do YYYY hh:mma');
+      this.setState({'message': message, 'alert': true});
+    } else if (moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) > 0 ) {
+      message = 'Please schedule the end of your reservation after the start';
+      this.setState({'message': message, 'alert': true});
+    } else if (moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) < 0 ) {
       var that = this;
       outletStore.submitReservation(newReservation).then(function(res){
         if(res.errorMessage){
