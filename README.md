@@ -5,10 +5,13 @@ Connectus is a peer to peer energy sales platform integrated with registered sma
 
 Users can register their meters for energy sales and/or make a reservation at an existing meter. During their reservation time, a user can turn the outlet on/off and monitor their energy usage. Connectus uses the [Modlet TE1010](http://shop.thinkecoinc.com/products/home-starter-kit#.VbZw6xNVikp) smart meter from ThinkEco, Inc. as a prototype for monitoring and controling energy use. Coming this week, [econnectus.co](http://www.econnectus.co/) will host the app and demo hardware features.
 
+![alt text](http://jammiemountz.com/wp-content/uploads/2015/08/Screen-Shot-2015-08-04-at-5.16.10-PM.jpg "Landing Page")
+
 ## Tech Stack
 - Front End
   - React with Flux -- Utilizes unidirectional data flow for a modular, scalable app
   - GoogleMaps API -- Shows outlets by user input location
+  ![alt text](http://jammiemountz.com/wp-content/uploads/2015/08/Screen-Shot-2015-08-04-at-5.19.44-PM.jpg "Map View of Outlets")
   - Bootstrap and Less -- Increases speed of styling and development
 - Back End
   - MySql with Bookshelf.js -- Allows a complex relationship structure for user and meter information and their corresponding reservations and transactions
