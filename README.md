@@ -23,6 +23,7 @@ Users can register their meters for energy sales and/or make a reservation at an
   - Flux utilizes [unidirectional data flow](https://facebook.github.io/flux/docs/overview.html) using Actions, Dispatchers, Stores and Views for efficient DOM manipulation
   - There are two servers -- the server and the powerServer. The server interfaces with the database and the powerServer maintains communication with hardware.
   - Connectus can run without a hardware connection, the only impact is a user cannot turn an outlet on/off or see live data updates
+  ![Live Data](http://jammiemountz.com/wp-content/uploads/2015/08/Screen-Shot-2015-08-04-at-5.26.19-PM.jpg)
   - Database structure and relationships ![Schema and relationships](./client/assets/img/database.png)
 
 ## Development
