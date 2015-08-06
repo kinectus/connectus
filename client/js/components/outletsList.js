@@ -54,7 +54,7 @@ var outletsList = React.createClass({
     if(this.state.sortBy[by] % 2 !== 0) {
       // sort ascending
       this.state.data = _.sortBy(outlets, function(outlet) {
-        return outlet[by].toUpperCase();
+        return by==='priceEnergy'? outlet[by] : outlet[by].toUpperCase();
       });
     } else {
       // sort descending
