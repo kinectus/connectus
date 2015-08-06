@@ -415,7 +415,7 @@ var addOutlet = React.createClass({displayName: "addOutlet",
 
   componentDidMount: function() {
     FooterCheck.checker();
-    // outletStore.generateNewOutlets(newOutlets);
+    outletStore.generateNewOutlets(newOutlets);
   },
 
   getInitialState: function(){
