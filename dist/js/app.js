@@ -87,7 +87,7 @@ var MyGreatPlaceWithStick = (function (_Component) {
 exports['default'] = MyGreatPlaceWithStick;
 module.exports = exports['default'];
 
-},{"./markerStyle.js":2,"react-pure-render/function":220,"react/addons":337}],2:[function(require,module,exports){
+},{"./markerStyle.js":2,"react-pure-render/function":221,"react/addons":338}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -179,12 +179,13 @@ router.run(function(Root){
   React.render(React.createElement(Root, null), document.getElementById('main'));
 });
 
-},{"./config/routes":17,"./services/RouterContainer.js":23,"react":509,"react-router":246}],4:[function(require,module,exports){
+},{"./config/routes":17,"./services/RouterContainer.js":23,"react":510,"react-router":247}],4:[function(require,module,exports){
 //Page that users first see - explains the mission statement of CONNECTUS
 var React = require('react');
 var Link = require('react-router').Link;
 var mobileCheck = require('./mobilecheck');
 var AuthConstants = require('../constants/authConstants.js');
+var FooterCheck = require('./footerCheck');
 
 var About = React.createClass({displayName: "About",
 
@@ -225,6 +226,9 @@ var About = React.createClass({displayName: "About",
         })
       }
     })
+
+    FooterCheck.checker();
+
   },
 
   render: function(){
@@ -269,7 +273,7 @@ var About = React.createClass({displayName: "About",
             authHtml
           ), 
             React.createElement("div", {className: "section howitworks"}, 
-              React.createElement("div", {className: "container"}, 
+              React.createElement("div", {className: "container-fluid"}, 
                 React.createElement("div", {className: "landscape-banner"}, 
                   React.createElement("div", {className: "row"}, 
                     React.createElement("div", {className: "banner-item col-md-4 outlet"}), 
@@ -281,9 +285,9 @@ var About = React.createClass({displayName: "About",
                     React.createElement("div", {className: "col-md-4"}, 
                       React.createElement("span", {className: "column-headers"}, React.createElement("h3", null, "Sell your electricity.")), 
                       React.createElement("ul", {className: "feature-list"}, 
+                        React.createElement("li", null, "Use our smart outlet to become a seller"), 
                         React.createElement("li", null, "Post your outlet's availability online"), 
-                        React.createElement("li", null, "Earn money when people plug in"), 
-                        React.createElement("li", null, "Join a network of other sellers")
+                        React.createElement("li", null, "Earn money when people plug in")
                       )
                     ), 
                   React.createElement("div", {className: "col-md-4"}, 
@@ -298,7 +302,7 @@ var About = React.createClass({displayName: "About",
                     React.createElement("span", {className: "column-headers"}, React.createElement("h3", null, "Keep it green.")), 
                     React.createElement("ul", {className: "feature-list"}, 
                       React.createElement("li", null, "Supplies electricity to replace diesel generators"), 
-                      React.createElement("li", null, "Supports easy charging of electric cars"), 
+                      React.createElement("li", null, "Supports easy charging of electric vehicles"), 
                       React.createElement("li", null, "Facilitates sharing power in developing areas")
                     )
                   )
@@ -319,7 +323,7 @@ var About = React.createClass({displayName: "About",
                 React.createElement("table", null, 
                   React.createElement("tr", {className: "diagram-row150"}, 
                     React.createElement("td", {className: "diagram-data40"}), 
-                    React.createElement("td", {className: "diagram-data20 connectus-server bottom-hover", "data-toggle": "popover", title: "Connect.us Server", "data-content": "Node.js and Express"}), 
+                    React.createElement("td", {className: "diagram-data20 connectus-server bottom-hover", "data-toggle": "popover", title: "Connect.us Server", "data-content": "Node.js and Express. Sockets.io for streaming real-time power information."}), 
                     React.createElement("td", {className: "diagram-data10 auth right-hover", "data-toggle": "popover", title: "Secure Outlet-Server Communication", "data-content": "The Connect.us Server communicates with a Node.js server running on top of the hardware"}), 
                     React.createElement("td", {className: "diagram-data30"})
                   )
@@ -329,7 +333,7 @@ var About = React.createClass({displayName: "About",
                     React.createElement("td", {className: "diagram-data20"}), 
                     React.createElement("td", {className: "diagram-data20 left-hover", "data-toggle": "popover", title: "Web application", "data-content": "React and Flux with Bootstrap"}), 
                     React.createElement("td", {className: "diagram-data20"}), 
-                    React.createElement("td", {className: "diagram-data20 power-server right-hover", "data-toggle": "popover", title: "Power Server", "data-content": "Node.js communicating with the outlet through shell.js bash commands"}), 
+                    React.createElement("td", {className: "diagram-data20 power-server right-hover", "data-toggle": "popover", title: "Power Server", "data-content": "Node.js communicates with the smart outlet through shell.js bash commands"}), 
                     React.createElement("td", {className: "diagram-data20"})
                   )
                 ), 
@@ -337,7 +341,7 @@ var About = React.createClass({displayName: "About",
                   React.createElement("tr", {className: "diagram-row220"}, 
                     React.createElement("td", {className: "diagram-data30"}), 
                     React.createElement("td", {className: "diagram-data30 food-truck left-hover", "data-toggle": "popover", title: "Users", "data-content": "Once outlet is on, users can start charging!"}), 
-                    React.createElement("td", {className: "diagram-data20 outlet right-hover", "data-toggle": "popover", title: "Smart Outlet", "data-content": "Can send power data and turn off/on with Ruby app"}), 
+                    React.createElement("td", {className: "diagram-data20 outlet right-hover", "data-toggle": "popover", title: "Smart Outlet", "data-content": "Can send real-time power data and be turned off/on with Ruby app"}), 
                     React.createElement("td", {className: "diagram-data20"})
                   )
                 ), 
@@ -369,9 +373,9 @@ var About = React.createClass({displayName: "About",
                       React.createElement("div", {className: "col-md-4"}, 
                         React.createElement("div", {className: "banner-item-mobile col-md-4 outlet-mobile"}), 
                         React.createElement("span", {className: "column-headers-mobile"}, React.createElement("h3", null, "Sell your electricity.")), 
+                          React.createElement("span", {className: "mobile-points"}, React.createElement("h2", null, "Use our smart outlet to become a seller")), 
                           React.createElement("span", {className: "mobile-points"}, React.createElement("h2", null, "Post your outlet's availability online")), 
-                          React.createElement("span", {className: "mobile-points"}, React.createElement("h2", null, "Earn money when people plug in")), 
-                          React.createElement("span", {className: "mobile-points"}, React.createElement("h2", null, "Join a network of other sellers"))
+                          React.createElement("span", {className: "mobile-points"}, React.createElement("h2", null, "Earn money when people plug in"))
                       ), 
                       React.createElement("div", {className: "col-md-4"}, 
                         React.createElement("div", {className: "banner-item-mobile col-md-4 location-mobile"}), 
@@ -384,7 +388,7 @@ var About = React.createClass({displayName: "About",
                         React.createElement("div", {className: "banner-item-mobile col-md-4 trees-mobile"}), 
                         React.createElement("span", {className: "column-headers-mobile"}, React.createElement("h3", null, "Keep it green.")), 
                           React.createElement("span", {className: "mobile-points"}, React.createElement("h2", null, "Supplies electricity to replace diesel generators")), 
-                          React.createElement("span", {className: "mobile-points"}, React.createElement("h2", null, "Supports easy charging of electric cars")), 
+                          React.createElement("span", {className: "mobile-points"}, React.createElement("h2", null, "Supports easy charging of electric vehicles")), 
                           React.createElement("span", {className: "mobile-points"}, React.createElement("h2", null, "Facilitates sharing power in developing areas"))
                       )
                     )
@@ -399,18 +403,19 @@ var About = React.createClass({displayName: "About",
 
 module.exports = About;
 
-},{"../constants/authConstants.js":19,"./mobilecheck":11,"react":509,"react-router":246}],5:[function(require,module,exports){
+},{"../constants/authConstants.js":19,"./footerCheck":9,"./mobilecheck":11,"react":510,"react-router":247}],5:[function(require,module,exports){
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var _ = require('underscore');
 var Router = require('react-router'); //need this for redirection
 var FooterCheck = require('./footerCheck');
-
+var newOutlets = require('../stores/data/newOutlets');
 var addOutlet = React.createClass({displayName: "addOutlet",
   mixins: [Router.Navigation],
 
   componentDidMount: function() {
     FooterCheck.checker();
+    outletStore.generateNewOutlets(newOutlets);
   },
 
   getInitialState: function(){
@@ -491,7 +496,7 @@ var addOutlet = React.createClass({displayName: "addOutlet",
     var buttonHtml = (React.createElement("div", {className: "btn btn-warning btn-lg btn-block"}, "Address Validation Needed"));
     // is user authenticated
     if(!document.cookie){
-      this.transitionTo('login');
+      this.transitionTo('about');
       return React.createElement("h1", null);
     }
     
@@ -560,7 +565,7 @@ var addOutlet = React.createClass({displayName: "addOutlet",
 
 module.exports = addOutlet;
 
-},{"../stores/outletStore":29,"./footerCheck":9,"react":509,"react-router":246,"underscore":511}],6:[function(require,module,exports){
+},{"../stores/data/newOutlets":28,"../stores/outletStore":30,"./footerCheck":9,"react":510,"react-router":247,"underscore":512}],6:[function(require,module,exports){
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
@@ -588,22 +593,18 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
 
     FooterCheck.checker();
 
-    console.log(moment("2015-07-30 00:30", "YYYY-MM-DD HH:mm") > moment());
     outletStore.getBuyerReservations().then(function(transactionsData){
       that.setState({data: transactionsData});
     });
   },
 
   footerCheck: function() {
-    console.log('checking footer');
     if ( ( $('body').height() ) < window.innerHeight - 160 ) {
-      console.log('body height is less than window inner height')
       $('.footer-banner').css('top', (window.innerHeight) - 160);
     }
   },
 
   setCurrentTransaction: function(transaction){
-    console.log('TRANSACTION-------------------------', transaction)
     var that =this;
     outletServices.turnOutletOff(transaction); //connects with powerServer
     outletStore.setCurrentTransaction({id: transaction.id, currentStatus: true, paid: false}).then(function(transaction){
@@ -634,14 +635,12 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
     var power = '';
     // is the user authenticated?
     if(!document.cookie){
-      this.transitionTo('login');
+      this.transitionTo('about');
       return React.createElement("h1", null);
     }
 
     var that = this;
-    console.log('STATE:  ', this.state)
     if (this.state.data.length !==0) {
-      console.log(this.state.data);
     
     var inFuture = function(transaction) {
       return moment(transaction.startTime.date + " " + transaction.startTime.slot.time,"YYYY-MM-DD HH:mm") > moment();
@@ -657,7 +656,6 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
         return [].concat(transactions.filter(inPresent), transactions.filter(inFuture), transactions.filter(inPast));
       }
       var sortedTransactions = sortTransactions(this.state.data);
-      console.log(sortedTransactions);
       var transactionRows = sortedTransactions.map(function(transaction) {
         return (
           React.createElement("tr", {key:  transaction.id, className:   moment(transaction.endTime.date + " " + transaction.endTime.slot.time,"YYYY-MM-DD HH:mm") < moment() ?  "oldReservation regTransRow" : "regTransRow"}, 
@@ -732,7 +730,7 @@ var buyerReservations = React.createClass({displayName: "buyerReservations",
 
 module.exports = buyerReservations;
 
-},{"../constants/OutletListConstants":18,"../dispatcher/ConnectusDispatcher":22,"../services/outletServices.js":25,"../stores/outletStore":29,"./footerCheck":9,"jquery":84,"moment":86,"react":509,"react-router":246,"react/addons":337}],7:[function(require,module,exports){
+},{"../constants/OutletListConstants":18,"../dispatcher/ConnectusDispatcher":22,"../services/outletServices.js":25,"../stores/outletStore":30,"./footerCheck":9,"jquery":85,"moment":87,"react":510,"react-router":247,"react/addons":338}],7:[function(require,module,exports){
 //Navigation bar and base page - renders conditionally based on whether or not a user is logged in
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
@@ -791,9 +789,9 @@ var Connectus = React.createClass({displayName: "Connectus",
         React.createElement("div", {className: "container-fluid footer-banner"}, 
           React.createElement("div", {className: "row footer"}, 
             React.createElement("div", {className: "col-md-4"}, 
-              React.createElement("h3", null, "Connect.us Team"), 
-              React.createElement("h4", null, "Sean Conner, Valerie Liang,"), 
-              React.createElement("h4", null, "Dianna Faulk, Jammie Mountz")
+              React.createElement("h4", null, "Connect.us Team"), 
+              React.createElement("h5", null, "Sean Conner, Valerie Liang,"), 
+              React.createElement("h5", null, "Dianna Faulk, Jammie Mountz")
             ), 
             React.createElement("div", {className: "col-md-4"}, 
               React.createElement("a", {href: "https://github.com/kinectus/connectus"}, 
@@ -841,21 +839,42 @@ var Connectus = React.createClass({displayName: "Connectus",
 
       // non-mobile rendering
       } else {
-
+        // <div className="logo-image"></div>
+        //             <span className="logo">
+        //               <Link to="about">Connect.us</Link>
+        //             </span>
+        //             <ul className="nav nav-pills pull-right">
+        //               <li className="check-footer" role="presentation"><Link to="outletsList">Outlets</Link></li>
+        //               <li className="check-footer" role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
+        //               <li className="check-footer" role="presentation"><Link to="buyerReservations">My Reservations</Link></li>
+        //               <li className="check-footer" role="presentation"><Link to="manageOutlets">Manage Outlets</Link></li>
+        //               <li className="check-footer" role="presentation"><a className="logout" onClick={this.logout}>Logout</a></li>
+        //             </ul>
         pageHtml = (
-          React.createElement("div", {className: "topNavBar"}, 
-          React.createElement("div", {className: "logo-image"}), 
-            React.createElement("span", {className: "logo"}, 
-              React.createElement(Link, {to: "about"}, "Connect.us")
-            ), 
-            React.createElement("ul", {className: "nav nav-pills pull-right"}, 
-              React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "outletsList"}, "Outlets")), 
-              React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "addOutlet"}, "Add Outlet")), 
-              React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "buyerReservations"}, "My Reservations")), 
-              React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "manageOutlets"}, "Manage Outlets")), 
-              React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement("a", {className: "logout", onClick: this.logout}, "Logout"))
+          React.createElement("div", {className: "navbar navbar-inverse topNavBar", role: "navigation"}, 
+            React.createElement("div", {className: "container"}, 
+              React.createElement("div", {className: "navbar-header"}, 
+                React.createElement("button", {type: "button", className: "navbar-toggle", "data-toggle": "collapse", "data-target": ".navbar-collapse"}, 
+                  React.createElement("span", {className: "icon-bar"}), 
+                  React.createElement("span", {className: "icon-bar"}), 
+                  React.createElement("span", {className: "icon-bar"})
+                ), 
+                React.createElement("div", {className: "logo-image"}), 
+                React.createElement("span", {className: "logo"}, 
+                    React.createElement(Link, {to: "about"}, "Connect.us")
+                )
+              ), 
+              React.createElement("div", {className: "navbar-collapse collapse"}, 
+                React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
+                  React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "outletsList"}, "Outlets")), 
+                  React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "addOutlet"}, "Add Outlet")), 
+                  React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "buyerReservations"}, "My Reservations")), 
+                  React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement(Link, {to: "manageOutlets"}, "Manage Outlets")), 
+                  React.createElement("li", {className: "check-footer", role: "presentation"}, React.createElement("a", {className: "logout", onClick: this.logout}, "Logout"))
+                )
+              )
             )
-          ) 
+          )
           );
       } 
     }
@@ -873,7 +892,7 @@ var Connectus = React.createClass({displayName: "Connectus",
 
 module.exports = Connectus;
 
-},{"../services/authServices.js":24,"./footerCheck":9,"./mobilecheck":11,"react":509,"react-router":246}],8:[function(require,module,exports){
+},{"../services/authServices.js":24,"./footerCheck":9,"./mobilecheck":11,"react":510,"react-router":247}],8:[function(require,module,exports){
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var Alert = require('react-bootstrap').Alert;
@@ -1021,7 +1040,7 @@ var editOutlet = React.createClass({displayName: "editOutlet",
     // is user authenticated
     var buttonHtml = (React.createElement("button", {className: "btn btn-warning btn-lg btn-block"}, "Address Validation Needed"));
     if(!document.cookie){
-      this.transitionTo('login');
+      this.transitionTo('about');
       return React.createElement("h1", null);
     }
 
@@ -1120,13 +1139,13 @@ var editOutlet = React.createClass({displayName: "editOutlet",
 
 module.exports = editOutlet;
 
-},{"../stores/outletStore":29,"./footerCheck":9,"react":509,"react-bootstrap":155,"react-router":246}],9:[function(require,module,exports){
+},{"../stores/outletStore":30,"./footerCheck":9,"react":510,"react-bootstrap":156,"react-router":247}],9:[function(require,module,exports){
 var footerCheck = {
 
   checker: function() {
     if ( ( $('body').height() ) < window.innerHeight - 100) {
       $('.footer-banner').css('position', 'absolute');
-      $('.footer-banner').css('top', (window.innerHeight) - 160);
+      $('.footer-banner').css('top', (window.innerHeight) - 100);
     } else {
       $('.footer-banner').css('position', 'relative');
       $('.footer-banner').css('top', 0);
@@ -1173,7 +1192,7 @@ var myOutlets = React.createClass({displayName: "myOutlets",
 
     // is the user authenticated?
     if(!document.cookie){
-      this.transitionTo('login');
+      this.transitionTo('about');
       return React.createElement("h1", null);
     }
 
@@ -1302,7 +1321,7 @@ var myOutlets = React.createClass({displayName: "myOutlets",
 
 module.exports = myOutlets;
 
-},{"../dispatcher/ConnectusDispatcher":22,"../stores/outletStore":29,"../stores/userStore":31,"./footerCheck":9,"./mobilecheck":11,"react":509,"react-router":246}],11:[function(require,module,exports){
+},{"../dispatcher/ConnectusDispatcher":22,"../stores/outletStore":30,"../stores/userStore":32,"./footerCheck":9,"./mobilecheck":11,"react":510,"react-router":247}],11:[function(require,module,exports){
 var mobilecheck = function(){
   
   var mobile1 = false;
@@ -1423,22 +1442,29 @@ var outletsList = React.createClass({displayName: "outletsList",
                 )
               ), 
               React.createElement("td", null, 
-                React.createElement("h5", null, "Seller:"), 
-                React.createElement("p", {className: "description-text"},  outlet.seller)
+                React.createElement(Link, {to: "reserveOutlet", params: {id: outlet.id}}, 
+                  React.createElement("h5", null, "Seller:"), 
+                  React.createElement("p", {className: "description-text"},  outlet.seller)
+                )
               ), 
               React.createElement("td", null, 
-                React.createElement("h5", null, "Voltage:"), 
-                React.createElement("p", {className: "description-text"},  outlet.voltage)
+                React.createElement(Link, {to: "reserveOutlet", params: {id: outlet.id}}, 
+                  React.createElement("h5", null, "Voltage:"), 
+                  React.createElement("p", {className: "description-text"},  outlet.voltage)
+                )
               ), 
               React.createElement("td", null, 
-                React.createElement("h5", null, "Pricing: "), 
-                React.createElement("p", {className: "description-text"}, "$",  outlet.priceEnergy, "/kWh"), 
-                React.createElement("p", {className: "description-text"}, "$",  outlet.priceHourly, "/hr")
+                React.createElement(Link, {to: "reserveOutlet", params: {id: outlet.id}}, 
+                  React.createElement("h5", null, "Pricing: "), 
+                  React.createElement("p", {className: "description-text"}, "$",  outlet.priceEnergy, "/kWh"), 
+                  React.createElement("p", {className: "description-text"}, "$",  outlet.priceHourly, "/hr")
+                )
               ), 
               React.createElement("td", null, 
-                React.createElement("h5", null, "Description:"), 
-                React.createElement("p", {className: "description-text"},  outlet.description), 
-                React.createElement("p", {className: "rating"},  outlet.rating)
+                React.createElement(Link, {to: "reserveOutlet", params: {id: outlet.id}}, 
+                  React.createElement("h5", null, "Description:"), 
+                  React.createElement("p", {className: "description-text"},  outlet.description)
+                )
               )
             )
           )
@@ -1455,18 +1481,25 @@ var outletsList = React.createClass({displayName: "outletsList",
                 )
               ), 
               React.createElement("td", {className: "centered"}, 
-                 outlet.seller
+                React.createElement(Link, {to: "reserveOutlet", params: {id: outlet.id}}, 
+                   outlet.seller
+                )
               ), 
               React.createElement("td", {className: "centered"}, 
-                 outlet.voltage
+                React.createElement(Link, {to: "reserveOutlet", params: {id: outlet.id}}, 
+                   outlet.voltage
+                )
               ), 
               React.createElement("td", {className: "centered"}, 
-                React.createElement("p", null, "$",  outlet.priceHourly, "/hr"), 
-                React.createElement("p", null, "$",  outlet.priceEnergy, "/kWh")
+                React.createElement(Link, {to: "reserveOutlet", params: {id: outlet.id}}, 
+                  React.createElement("p", null, "$",  outlet.priceHourly, "/hr"), 
+                  React.createElement("p", null, "$",  outlet.priceEnergy, "/kWh")
+                )
               ), 
               React.createElement("td", {className: "centered"}, 
-              React.createElement("p", null,  outlet.description), 
-              React.createElement("p", {className: "rating"},  outlet.rating)
+                React.createElement(Link, {to: "reserveOutlet", params: {id: outlet.id}}, 
+                  React.createElement("p", null,  outlet.description)
+                )
               )
             )
           )
@@ -1487,11 +1520,11 @@ var outletsList = React.createClass({displayName: "outletsList",
       var tableHead = (
         React.createElement("table", {className: "table table-hover"}, 
           React.createElement("thead", null, 
-            React.createElement("tr", null, React.createElement("th", {className: "single line", onClick: that.sort.bind(that, 'name')}, React.createElement("h4", null, "Outlet Name")), 
-            React.createElement("th", {onClick: that.sort.bind(that, 'seller')}, React.createElement("h4", null, "Seller")), 
-            React.createElement("th", {onClick: that.sort.bind(that, 'voltage')}, React.createElement("h4", null, "Voltage")), 
-            React.createElement("th", {onClick: that.sort.bind(that, 'priceEnergy')}, React.createElement("h4", null, "Price")), 
-            React.createElement("th", {onClick: that.sort.bind(that, 'description')}, React.createElement("h4", null, "Description"))
+            React.createElement("tr", null, React.createElement("th", {className: "single line", onClick: that.sort.bind(that, 'name')}, React.createElement("div", {className: "arrows"}), React.createElement("h4", null, "Outlet Name")), 
+            React.createElement("th", {onClick: that.sort.bind(that, 'seller')}, React.createElement("div", {className: "arrows"}), React.createElement("h4", null, "Seller")), 
+            React.createElement("th", {onClick: that.sort.bind(that, 'voltage')}, React.createElement("div", {className: "arrows"}), React.createElement("h4", null, "Voltage")), 
+            React.createElement("th", {onClick: that.sort.bind(that, 'priceEnergy')}, React.createElement("div", {className: "arrows"}), React.createElement("h4", null, "Price")), 
+            React.createElement("th", {onClick: that.sort.bind(that, 'description')}, React.createElement("div", {className: "arrows"}), React.createElement("h4", null, "Description"))
           )), 
         React.createElement("tbody", null, 
            outletHtml 
@@ -1523,7 +1556,7 @@ var outletsList = React.createClass({displayName: "outletsList",
 
 module.exports = outletsList;
 
-},{"../dispatcher/ConnectusDispatcher":22,"../stores/outletStore":29,"../stores/userStore":31,"./footerCheck":9,"./mobilecheck":11,"react":509,"react-router":246,"react/addons":337,"underscore":511}],13:[function(require,module,exports){
+},{"../dispatcher/ConnectusDispatcher":22,"../stores/outletStore":30,"../stores/userStore":32,"./footerCheck":9,"./mobilecheck":11,"react":510,"react-router":247,"react/addons":338,"underscore":512}],13:[function(require,module,exports){
 var React = require('react');
 var OutletListConstants = require('../constants/OutletListConstants');
 var outletStore = require('../stores/outletStore');
@@ -1538,7 +1571,7 @@ var FooterCheck = require('./footerCheck');
 var outletsListMap = React.createClass({displayName: "outletsListMap",
   getLocation: function() {
     if ("geolocation" in navigator) {
-      that = this;
+      var that = this;
       navigator.geolocation.getCurrentPosition(function(position) {
         that.setState({
           userLocation: {
@@ -1581,6 +1614,7 @@ var outletsListMap = React.createClass({displayName: "outletsListMap",
 
   displayOutletData: function(key, childProps) {
     var outlet = childProps.data;
+    console.log('outlettttt', outlet);
     this.outletTableData = (
       React.createElement("table", {className: "table table-hover"}, 
           React.createElement("thead", null, 
@@ -1597,20 +1631,21 @@ var outletsListMap = React.createClass({displayName: "outletsListMap",
                 React.createElement("a", {href: OutletListConstants.BASE_URL+'#/outlets/'+outlet.id},  outlet.name)
               ), 
               React.createElement("td", null, 
-                 outlet.seller
+                React.createElement("a", {href: OutletListConstants.BASE_URL+'#/outlets/'+outlet.id},  outlet.seller)
               ), 
               React.createElement("td", null, 
-                 outlet.voltage
+                React.createElement("a", {href: OutletListConstants.BASE_URL+'#/outlets/'+outlet.id},  outlet.voltage)
               ), 
               React.createElement("td", null, 
-                "Price by hour: ",  outlet.priceHourly, 
-                "Price by kWh: ",  outlet.priceEnergy
+                React.createElement("a", {href: OutletListConstants.BASE_URL+'#/outlets/'+outlet.id}, 
+                  "Price by hour: ",  outlet.priceHourly, 
+                  "Price by kWh: ",  outlet.priceEnergy
+                )
               ), 
               React.createElement("td", null, 
-                 outlet.description
-              ), 
-              React.createElement("td", null
-  
+                React.createElement("a", {href: OutletListConstants.BASE_URL+'#/outlets/'+outlet.id}, 
+                   outlet.description
+                )
               )
           )
         )
@@ -1622,7 +1657,7 @@ var outletsListMap = React.createClass({displayName: "outletsListMap",
   render: function() {
     // is the user authenticated?
     if(!document.cookie){
-      this.transitionTo('login');
+      this.transitionTo('about');
       return React.createElement("h1", null);
     }
     var that = this;
@@ -1664,7 +1699,7 @@ var outletsListMap = React.createClass({displayName: "outletsListMap",
 
 module.exports = outletsListMap;
 
-},{"../../assets/markers/reserveOutlet/marker.jsx":1,"../constants/OutletListConstants":18,"../stores/outletStore":29,"../stores/userStore":31,"./footerCheck":9,"./mobilecheck":11,"google-map-react":42,"react":509,"react-router":246}],14:[function(require,module,exports){
+},{"../../assets/markers/reserveOutlet/marker.jsx":1,"../constants/OutletListConstants":18,"../stores/outletStore":30,"../stores/userStore":32,"./footerCheck":9,"./mobilecheck":11,"google-map-react":43,"react":510,"react-router":247}],14:[function(require,module,exports){
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
 var outletStore = require('../stores/outletStore');
@@ -1721,7 +1756,7 @@ var Connectus = React.createClass({displayName: "Connectus",
 
 module.exports = Connectus;
 
-},{"../services/authServices.js":24,"../stores/outletStore":29,"../stores/paymentStore":30,"./footerCheck":9,"./mobilecheck":11,"react":509,"react-router":246,"react/addons":337}],15:[function(require,module,exports){
+},{"../services/authServices.js":24,"../stores/outletStore":30,"../stores/paymentStore":31,"./footerCheck":9,"./mobilecheck":11,"react":510,"react-router":247,"react/addons":338}],15:[function(require,module,exports){
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
 var ReactAddons = require('react/addons');
@@ -1776,7 +1811,7 @@ var Connectus = React.createClass({displayName: "Connectus",
 
 module.exports = Connectus;
 
-},{"../services/authServices.js":24,"../stores/paymentStore":30,"./mobilecheck":11,"react":509,"react-router":246,"react/addons":337}],16:[function(require,module,exports){
+},{"../services/authServices.js":24,"../stores/paymentStore":31,"./mobilecheck":11,"react":510,"react-router":247,"react/addons":338}],16:[function(require,module,exports){
 var React = require('react');
 var outletStore = require('../stores/outletStore');
 var userStore = require('../stores/userStore');
@@ -1787,7 +1822,6 @@ var Alert = require('react-bootstrap').Alert;
 var moment = require('moment');
 var Router = require('react-router'); //need this for redirection
 var Link = require('react-router').Link;
-
 // http://jquense.github.io/react-widgets/docs/#/datetime-picker
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1823,7 +1857,8 @@ var DateTime = React.createClass({displayName: "DateTime",
    return {
       message: null,
       alert: false,
-      success: false
+      success: false,
+      error: false
     }
   },
 
@@ -1848,7 +1883,7 @@ var DateTime = React.createClass({displayName: "DateTime",
   closeMe: function(e){
     if (e){
       e.preventDefault();
-      // this.setState({success: false});
+      this.setState({success: false, error: false});
       location.reload();
     }
   },
@@ -1886,19 +1921,24 @@ var DateTime = React.createClass({displayName: "DateTime",
       }
     }
     // Validate input dates
-    // if ( moment().diff(moment(start)) > 0 ){
-    //   var message = 'Please choose reservation after '+moment().format('MMMM Do YYYY hh:mma');
-    //   this.setState({'message': message, 'alert': true});
-    // } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) > 0 ) {
-    //   message = 'Please schedule the end of your reservation after the start';
-    //   this.setState({'message': message, 'alert': true});
-    // } else if ( moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) < 0 ) {
+    if (moment().diff(moment(start)) > 0 ){
+      var message = 'Please choose reservation after '+moment().format('MMMM Do YYYY hh:mma');
+      this.setState({'message': message, 'alert': true});
+    } else if (moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) > 0 ) {
+      message = 'Please schedule the end of your reservation after the start';
+      this.setState({'message': message, 'alert': true});
+    } else if (moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) < 0 ) {
       var that = this;
       outletStore.submitReservation(newReservation).then(function(res){
-        message = 'Reservation complete';
-        that.setState({'message': message, 'success': true});
+        if(res.errorMessage){
+          message = 'One or more of your selected time slots are not available';
+          that.setState({message: message, error: true});
+        }else{
+          message = 'Reservation complete';
+          that.setState({message: message, success: true});
+        }
       });
-    // }
+    }
   },
 
   render: function() {
@@ -1906,6 +1946,7 @@ var DateTime = React.createClass({displayName: "DateTime",
     var hidden = !this.state.alert ? "hidden" : "notHidden centering";
     var successful = !this.state.success ? "hidden" : "notHidden centering reserveConfirm";
     var buttonHide = !this.state.success ? "notHidden centering btn btn-default" : "hidden";
+    var erroring = !this.state.error ? "hidden" : "notHidden centering reserveConfirm";
 
     // Format default date to be closest upcoming time at 30-minute interval
     var firstDate = new Date();
@@ -1916,7 +1957,6 @@ var DateTime = React.createClass({displayName: "DateTime",
     } else if (remainder2 > 0){
       firstDate = new Date(firstDate.getTime() + remainder2*60000)
     }
-
     return (
       React.createElement("div", {className: "holder"}, 
         React.createElement(Alert, {bsStyle: "warning", className: hidden, onDismiss: this.hideMe, dismissAfter: 2000}, 
@@ -1924,8 +1964,13 @@ var DateTime = React.createClass({displayName: "DateTime",
         ), 
         React.createElement(Alert, {bsStyle: "success", className: successful}, 
             React.createElement("strong", null, this.state.message), React.createElement("br", null), 
-            React.createElement("button", {className: "alertButton", onClick: this.closeMe}, "Add another reservation"), 
-            React.createElement("button", {className: "alertButton"}, React.createElement(Link, {to: "/outlets"}, "Return to browsing"))
+            React.createElement("button", {className: "alertButton btn btn-default", onClick: this.closeMe}, "Add another reservation"), 
+            React.createElement("button", {className: "alertButton btn btn-default"}, React.createElement(Link, {to: "/outlets"}, "Return to browsing"))
+        ), 
+        React.createElement(Alert, {bsStyle: "warning", className: erroring}, 
+            React.createElement("strong", null, this.state.message), React.createElement("br", null), 
+            React.createElement("button", {className: "alertButton", onClick: this.closeMe}, "Try again"), 
+            React.createElement("button", {className: "alertButton"}, React.createElement(Link, {to: "/outlets"}, "Choose another outlet"))
         ), 
         React.createElement(DateTimePicker, {ref: "startTime", defaultValue: firstDate}), 
         React.createElement(DateTimePicker, {ref: "endTime", defaultValue: null}), 
@@ -1945,7 +1990,6 @@ var OutletInfo = React.createClass({displayName: "OutletInfo",
   render: function() {
     // do something with the photo
     var outletPhoto = React.createElement("div", {className: "outletPhoto"})
-    console.log(this.props);
     return (
       React.createElement("div", null, 
         React.createElement("h2", null,  this.props.outletData.name), 
@@ -2073,12 +2117,6 @@ var Availability = React.createClass({displayName: "Availability",
     var date;
     // If reservations API call has completed
     if (this.state.reservations.length > 0 && this.state.timeSlots.length>0 && this.state.end && this.state.middle && typeof this.state.windowView === 'number'){
-      // Create custom availability viewer using subset
-      if (window.location.origin === 'http://localhost:3000'){
-        var idSubtractor = 1;
-      } else if (window.location.origin === 'https://econnectus.herokuapp.com') {
-        var idSubtractor = 10;
-      }
       // Current subset of reservation information
       var start = this.state.start;
       var end = this.state.end;
@@ -2102,7 +2140,8 @@ var Availability = React.createClass({displayName: "Availability",
           // Find corresponding slotProp to reservation slot_id
           for (var j=0; j<slotProps.length; j++){
             // When match is found, create unique time labling
-            if (slotProps[j].id === reservation.slot_id){
+
+            if (slotProps[j].customID === reservation.slot_customID){
               var endSub = slotProps[j].end === '24:00' ? '00:00' : slotProps[j].end;
               begin = moment('12/25/1995 ' + slotProps[j].start, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY hhmma');
               end = moment('12/25/1995 ' + endSub, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY hhmma');
@@ -2131,14 +2170,14 @@ var Availability = React.createClass({displayName: "Availability",
           // Determine if reservation is on the hour
           var hoverStart;
           for (var j=0; j<slotProps.length; j++){
-            if (slotProps[j].id === reservation.slot_id) {
+            if (slotProps[j].customID === reservation.slot_customID) {
               hoverStart = slotProps[j].start
             }
           }
 
+          var indicator = reservation.available ? "indicator barView" : "noIndicator barView";
           // If on the hour
           if ( hoverStart.slice(3) === '00'){
-            var indicator = reservation.available ? "indicator barView" : "noIndicator barView";
             blockClass = blockClass + " splitHour";
 
             hoverStart = moment('12/25/1995 '+ hoverStart, 'MM/DD/YYYY HH:mm').format('MM/DD/YYYY ha');
@@ -2159,7 +2198,6 @@ var Availability = React.createClass({displayName: "Availability",
             )
           // If starts on half hour
           } else {
-            indicator = reservation.available ? "indicator barViewBack" : "noIndicator barViewBack";
             slotCount++;
             return(
               React.createElement("div", {className: "timeblock", key: reservation.id}, 
@@ -2261,7 +2299,6 @@ var reserveOutlet = React.createClass({displayName: "reserveOutlet",
           outlet['seller'] = user.fullname;
           that.setState({data: outlet});
         });
-      console.log('outlet yaaa', outlet);
     });
   },
 
@@ -2269,7 +2306,7 @@ var reserveOutlet = React.createClass({displayName: "reserveOutlet",
     var that = this;
     // is user authenticated
     if(!document.cookie){
-      this.transitionTo('login');
+      this.transitionTo('about');
       return React.createElement("h1", null);
     }
     return (
@@ -2297,7 +2334,7 @@ var reserveOutlet = React.createClass({displayName: "reserveOutlet",
 
 module.exports = reserveOutlet;
 
-},{"../../assets/markers/reserveOutlet/marker.jsx":1,"../stores/outletStore":29,"../stores/userStore":31,"google-map-react":42,"moment":86,"react":509,"react-bootstrap":155,"react-router":246,"react-widgets":288}],17:[function(require,module,exports){
+},{"../../assets/markers/reserveOutlet/marker.jsx":1,"../stores/outletStore":30,"../stores/userStore":32,"google-map-react":43,"moment":87,"react":510,"react-bootstrap":156,"react-router":247,"react-widgets":289}],17:[function(require,module,exports){
 //client-side routing
 var React = require('react');
 var Connectus = require('../components/connectus.js');
@@ -2332,7 +2369,7 @@ module.exports = (
   )
 );
 
-},{"../components/about.js":4,"../components/addOutlet.js":5,"../components/buyerReservations.js":6,"../components/connectus.js":7,"../components/editOutlet.js":8,"../components/manageOutlets.js":10,"../components/outletsList.js":12,"../components/outletsListMap.js":13,"../components/paymentConfirmation.js":14,"../components/payments.js":15,"../components/reserveOutlet.js":16,"react":509,"react-router":246}],18:[function(require,module,exports){
+},{"../components/about.js":4,"../components/addOutlet.js":5,"../components/buyerReservations.js":6,"../components/connectus.js":7,"../components/editOutlet.js":8,"../components/manageOutlets.js":10,"../components/outletsList.js":12,"../components/outletsListMap.js":13,"../components/paymentConfirmation.js":14,"../components/payments.js":15,"../components/reserveOutlet.js":16,"react":510,"react-router":247}],18:[function(require,module,exports){
 var BASE_URL = window.location.origin + '/';
 
 var loginConstants = {
@@ -2401,7 +2438,7 @@ var ConnectusDispatcher = assign(new Dispatcher(), {
 
 module.exports = ConnectusDispatcher;
 
-},{"flux":35,"react/lib/Object.assign":365}],23:[function(require,module,exports){
+},{"flux":36,"react/lib/Object.assign":366}],23:[function(require,module,exports){
 var _router = null;
 
 var Router = {
@@ -2443,9 +2480,8 @@ var authService = function(){
 
 module.exports = authService();
 
-},{"../constants/authConstants.js":19,"reqwest":510,"when":529}],25:[function(require,module,exports){
+},{"../constants/authConstants.js":19,"reqwest":511,"when":530}],25:[function(require,module,exports){
 var request = require('reqwest');
-var when = require('when'); //promises
 var OutletListConstants = require('../constants/OutletListConstants.js');
 
 var outletServices = function(){
@@ -2595,14 +2631,7 @@ var outletServices = function(){
       crossOrigin: true,
       type: 'json',
       contentType: 'application/json',
-      data: JSON.stringify(newReservation),
-      success: function(res) {
-        console.log('SUCCESS, ', res);
-        return res;
-      },
-      error: function(res){
-        console.log('ERROR, ', res)
-      }
+      data: JSON.stringify(newReservation)
     });
   };
 
@@ -2656,7 +2685,7 @@ var outletServices = function(){
 
 module.exports = outletServices();
 
-},{"../constants/OutletListConstants.js":18,"reqwest":510,"when":529}],26:[function(require,module,exports){
+},{"../constants/OutletListConstants.js":18,"reqwest":511}],26:[function(require,module,exports){
 var request = require('reqwest');
 var when = require('when'); //promises
 var PaymentConstants = require('../constants/paymentConstants');
@@ -2691,7 +2720,7 @@ var paymentServices = function(){
 
 module.exports = paymentServices();
 
-},{"../constants/paymentConstants":20,"reqwest":510,"when":529}],27:[function(require,module,exports){
+},{"../constants/paymentConstants":20,"reqwest":511,"when":530}],27:[function(require,module,exports){
 var request = require('reqwest');
 var when = require('when'); //promises
 var UserConstants = require('../constants/userConstants.js');
@@ -2722,7 +2751,2744 @@ var userServices = function(){
 
 module.exports = userServices();
 
-},{"../constants/userConstants.js":21,"reqwest":510,"when":529}],28:[function(require,module,exports){
+},{"../constants/userConstants.js":21,"reqwest":511,"when":530}],28:[function(require,module,exports){
+var scootGarages = [
+  {
+    "access_mask": 2147352575,
+    "address_description": "2500 24th St., SF General Hospital Parking Garage. Weekday entrance on 24th St. and nights and weekends on 23rd St.",
+    "capacity": 4,
+    "created_at": "2014-06-26T14:19:34-07:00",
+    "gathering_threshold": 7,
+    "geojson": null,
+    "hours": "24/7. See instructions for different entrances. ",
+    "id": 36,
+    "image_urls": [],
+    "instructions": "Scoots are parked behind the parking attendant booth on 23rd St. entrance (north-east corner of the garage). If entering from 24th St (6AM to 6PM weekdays), go around the monthly parking gate and drive up the ramps to the 3rd level toward the 23rd St. entrance.  If entering from 23rd, the scoots are on your left after you pass the entrance gate.",
+    "latitude": "37.753737",
+    "long_instructions": "Scoots are parked behind the parking attendant booth on 23rd St. entrance (north-east corner of the garage). If entering from 24th St (6AM to 6PM weekdays), go around the monthly parking gate and drive up the ramps to the 3rd level toward the 23rd St. entrance.  If entering from 23rd, the scoots are on your left after you pass the entrance gate.",
+    "longitude": "-122.40492",
+    "name": "23rd&Utah",
+    "orientation_text": "the garage entrance near the corner of 23rd and San Bruno  Look for your Scoot Coach wearing the red Scoot jacket! ",
+    "radius": "200.0",
+    "short_name": "",
+    "spots_taken": 3,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T19:59:48-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "376 Castro St., RC Gas Station on the NW corner of Market St.",
+    "capacity": 4,
+    "created_at": "2014-01-28T13:23:19-08:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "24x7",
+    "id": 19,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1432240765/Castro_Market4.jpg"
+    ],
+    "instructions": "Scoots are parked on the south side of the gas station and face Market St. ",
+    "latitude": "37.762924",
+    "long_instructions": "<body style=\"font-family: Helvetica\"> \r\n<strong>Open 24/7.<p>Address: 376 Castro St, RC Gas Station.</strong><p> Back in and plug in on the south side of the gas station, facing Market St. \r\n<p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p> \r\n</p> </body>",
+    "longitude": "-122.435514",
+    "name": "Castro&Market",
+    "orientation_text": "the RC Gas station on the corner of Market and Castro St (http://goo.gl/maps/teoJJ).",
+    "radius": "100.0",
+    "short_name": "",
+    "spots_taken": 4,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T19:52:59-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.436393499374,37.7624115657257],[-122.435106039047,37.7624794197406],[-122.435202598572,37.7635565938892],[-122.436393499374,37.7624115657257]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 2,
+    "public_scoots": 2,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 1107298305,
+    "address_description": "Richmond Outside Lands Temporary Parking! ",
+    "capacity": 50,
+    "created_at": "2014-07-08T16:56:40-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48455524444579,37.77220734485087],[-122.4848985671997,37.776515380561385],[-122.49691486358643,37.77597264972548],[-122.4965286254883,37.77176635065476],[-122.48455524444579,37.77220734485087]]]}}]",
+    "hours": "24/7",
+    "id": 39,
+    "image_urls": [],
+    "instructions": "Park anywhere there's a legal space between 26th Ave and 36th Ave, and anywhere along Fulton, Cabrillo, or Balboa. ",
+    "latitude": "37.77402",
+    "long_instructions": "Richmond Outside Lands Temporary Parking! Park anywhere there's a legal space between 26th Ave and 36th Ave, and anywhere along Fulton, Cabrillo, or Balboa. \r\n\r\nBe a good neighbor and parking nicely! Leave 2 feet between your scoot and any driveway, vehicle, or painted curb.",
+    "longitude": "-122.4905",
+    "name": "Richmond Outside Lands Temp. Parking!",
+    "orientation_text": "",
+    "radius": "1.0",
+    "short_name": "",
+    "spots_taken": 1,
+    "status": "coming_soon",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:24:56-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.483975887299,37.7715628139848],[-122.484555244446,37.7771429081236],[-122.496893405914,37.7765493011063],[-122.496528625488,37.7708673928019],[-122.483975887299,37.7715628139848]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 1073610751,
+    "address_description": "360 Grove St., Performing Arts Garage.",
+    "capacity": 6,
+    "created_at": "2013-06-06T10:40:00-07:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "Not 24/7, see info",
+    "id": 12,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1427843503/GROVE_GOUGH_1.jpg"
+    ],
+    "instructions": "Enter through the Grove St. entrance. Drive around the gate. Scoots are parked at the Scoot signs on your left, immediately after entering the garage. Exit around the gate the same way you entered. On weekends, enter at Gough.",
+    "latitude": "37.777962",
+    "long_instructions": "OPEN: 6am-Midnight, 7 days a week, address is 360 Grove St.<p> Enter through the Grove St. entrance. Ride around the gate, DO NOT pull a ticket. Scoots are parked at the scoot signs on your left, immediately after entering the garage.<p>Exit around the gate, the same way you came in. <p>ON WEEKENDS: enter at Gough, a parking attendant will raise the gate for you.",
+    "longitude": "-122.423059",
+    "name": "Grove&Gough",
+    "orientation_text": "the scoots inside the garage.  You'll see them parked on the ground floor to the far West side of the garage (http://goo.gl/maps/6msZ0).",
+    "radius": "200.0",
+    "short_name": "",
+    "spots_taken": 3,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:31:54-07:00",
+    "is_open": true,
+    "is_24x7": false,
+    "formatted_hours": {
+      "6am - 11:59pm": "Sat - Sun"
+    },
+    "num_available_scooters": 3,
+    "public_scoots": 3,
+    "closing_at": 1438844340,
+    "closing_at_english": "11:59pm",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147483647,
+    "address_description": "756 Natoma St., between 9th and 8th.",
+    "capacity": 0,
+    "created_at": "2012-11-13T12:28:43-08:00",
+    "gathering_threshold": 12,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 5,
+    "image_urls": [],
+    "instructions": "Scoot HQ! The scoots are parked against the door of our shop. Do not block the sidewalk, park as close to the garage door as possible. Plug into the outlet outside the door (only available on weekdays when this location is open). If you park on the street, please let someone know. ",
+    "latitude": "37.77603",
+    "long_instructions": "Scoot HQ! The scoots are parked against the door of our shop. Do not block the sidewalk, park as close to the garage door as possible. Plug into the outlet outside the door (only available on weekdays when this location is open). If you park on the street, please let someone know. ",
+    "longitude": "-122.413138",
+    "name": "Natoma&9th",
+    "orientation_text": "756 Natoma St (http://goo.gl/maps/0LSrs).",
+    "radius": "100.0",
+    "short_name": "",
+    "spots_taken": 2,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T19:55:33-07:00",
+    "is_open": false,
+    "is_24x7": false,
+    "formatted_hours": {
+      "10am - 7pm": "Mon - Fri"
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "opening_at": 1438880400,
+    "opening_at_english": "10am tomorrow",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 4,
+    "created_at": "2014-10-24T17:14:58-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41108417510988,37.7617012152705],[-122.41097420454025,37.761493409966974],[-122.4101936817169,37.761529457867624],[-122.41015076637267,37.761739383528074],[-122.41108417510988,37.7617012152705]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4110895395279,37.761709697107214],[-122.41100102663042,37.76195142904494],[-122.41024732589722,37.761981115368805],[-122.41016417741776,37.76176906993703],[-122.4110895395279,37.761709697107214]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41120487451555,37.76297135948696],[-122.41111636161803,37.76276143732298],[-122.41032242774963,37.76280596631665],[-122.41028487682343,37.763026490461556],[-122.41120487451555,37.76297135948696]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4102446436882,37.763020129197365],[-122.40996837615967,37.7629543961019],[-122.40968137979507,37.76058796575955],[-122.41000056266785,37.76050526655588],[-122.4102446436882,37.763020129197365]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41016685962677,37.76174574490244],[-122.41043239831923,37.76166516745359],[-122.41034924983977,37.76055615838445],[-122.41005152463913,37.76050526655588],[-122.41016685962677,37.76174574490244]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41025537252426,37.763030731304035],[-122.41012662649155,37.762835652297525],[-122.40940779447556,37.76286957911823],[-122.40931391716003,37.76308798265396],[-122.41025537252426,37.763030731304035]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41121292114258,37.76298832286813],[-122.41117000579834,37.76322793021161],[-122.41037338972092,37.76326821809579],[-122.41029024124146,37.76305193551288],[-122.41121292114258,37.76298832286813]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41024732589722,37.76306041719471],[-122.41018831729887,37.763276699752815],[-122.40942656993865,37.76330850595803],[-122.40931123495103,37.7631070664274],[-122.41024732589722,37.76306041719471]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.42518991231918,37.80508686248938],[-122.4248170852661,37.804935338466066],[-122.42451667785645,37.80343491597197],[-122.42484927177428,37.80322298943413],[-122.42518991231918,37.80508686248938]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.42482244968414,37.8032251087025],[-122.4246346950531,37.80350273233566],[-122.42358326911926,37.80362141082228],[-122.42332041263579,37.80343067744717],[-122.42482244968414,37.8032251087025]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.42500752210616,37.80414698468492],[-122.42480635643004,37.803918106204456],[-122.42366909980774,37.80406221496002],[-122.42349475622177,37.80433983544653],[-122.42500752210616,37.80414698468492]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.42366909980774,37.805274412773024],[-122.42399096488953,37.805028584055684],[-122.42370128631592,37.80355359456757],[-122.42329627275467,37.80343491597197],[-122.42366909980774,37.805274412773024]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.42538571357728,37.80477427762491],[-122.42568612098694,37.8046725548074],[-122.42562174797057,37.80425718518177],[-122.42526769638062,37.80418936951085],[-122.42538571357728,37.80477427762491]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4251765012741,37.80508686248938],[-122.42492437362671,37.8048081851996],[-122.42384076118468,37.80494381534272],[-122.42367178201675,37.805276531982564],[-122.4251765012741,37.80508686248938]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4251925945282,37.805102756599695],[-122.4251013994217,37.805346465862726],[-122.42422163486481,37.805454545365414],[-122.42404997348784,37.80524686304371],[-122.4251925945282,37.805102756599695]]]}}]",
+    "hours": "24/7",
+    "id": 57,
+    "image_urls": [],
+    "instructions": "Street parking on Van Ness or Polk between North Point and Francisco or on North Point, Bay, or Francisco between Van Ness and Polk.",
+    "latitude": "37.805203",
+    "long_instructions": "<strong>Street parking on Van Ness or Polk between North Point and Francisco or on North Point, Bay, or Francisco between Van Ness and Polk. </strong><p> You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning or other parking restrictions in the next 48 hours. <strong>Never park in metered parking stalls. Never park where the curb is colored</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up wholes spaces that could fit a car (sharing is OK!).</li> </ul><p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>",
+    "longitude": "-122.423776",
+    "name": "Russian Hill",
+    "orientation_text": "on the corner Van Ness and Francisco!",
+    "radius": "1.0",
+    "short_name": "",
+    "spots_taken": 4,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:23:46-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.424945831299,37.8029008599319],[-122.425203323364,37.8040961228617],[-122.425653934479,37.8040283070428],[-122.42592215538,37.8054439493427],[-122.423497438431,37.8057575909706],[-122.422918081284,37.8031382186487],[-122.424945831299,37.8029008599319]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 3,
+    "public_scoots": 3,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 4,
+    "created_at": "2015-01-15T00:06:58-08:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44299441576004,37.78387577405278],[-122.4428442120552,37.78367863020865],[-122.44140923023222,37.783873654229296],[-122.44136363267897,37.78409835518026],[-122.44299441576004,37.78387577405278]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44299709796906,37.78389697228427],[-122.44293004274368,37.78411743353142],[-122.44149237871169,37.78430821677221],[-122.44137704372407,37.784111074081565],[-122.44299709796906,37.78389697228427]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44300246238708,37.783907571397734],[-122.44274228811263,37.78401992190706],[-122.44292467832565,37.7848042508934],[-122.44317144155502,37.784812730080205],[-122.44300246238708,37.783907571397734]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44317144155502,37.78480849048692],[-122.44302123785017,37.78461558873535],[-122.44158893823624,37.7848063706902],[-122.44155138731003,37.7850162302717],[-122.44317144155502,37.78480849048692]]]}}]",
+    "hours": "24/7",
+    "id": 76,
+    "image_urls": [],
+    "instructions": "Street parking on Post between Baker and Broderick, on the east side of Baker between Sutter and Post, or on the south side of Sutter between Baker and Broderick. Do not park in the Residential Parking Permit areas.",
+    "latitude": "37.784009",
+    "long_instructions": "<p><strong>Street parking on Post between Baker and Broderick, on the east side of Baker between Sutter and Post, or on the south side of Sutter between Baker and Broderick.  Do not park in the Residential Parking Permit areas.<P> You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning, construction, or other parking restrictions in the next 48 hours. <strong>NEVER park in metered stalls</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Never park where the curb is colored (even faded).</li><li style=\"font-size:0.9em;\">Park 2 feet from driveways or other vehicles. </li><li style=\"font-size:0.9em;\">Don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p></p>",
+    "longitude": "-122.442189",
+    "name": "Mt. Zion",
+    "orientation_text": "",
+    "radius": "200.0",
+    "short_name": "",
+    "spots_taken": 3,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:30:00-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.443463802338,37.7850204698531],[-122.441478967667,37.7852663651561],[-122.441189289093,37.7837231466065],[-122.443152666092,37.7834857255081],[-122.443463802338,37.7850204698531]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 2,
+    "public_scoots": 2,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147287039,
+    "address_description": "",
+    "capacity": 2,
+    "created_at": "2014-12-05T12:25:51-08:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47068017721176,37.780498818146654],[-122.47040927410124,37.780445820119965],[-122.47031271457672,37.77887282138742],[-122.47055947780609,37.77880498241423],[-122.47068017721176,37.780498818146654]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47070431709288,37.78050093806693],[-122.47097522020339,37.780424620898664],[-122.47093498706816,37.77994975674782],[-122.4706694483757,37.779953996619824],[-122.47070431709288,37.78050093806693]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47065871953963,37.77981408071586],[-122.47093498706816,37.779803481015385],[-122.47088134288788,37.77885374168249],[-122.47058361768721,37.7788113423206],[-122.47065871953963,37.77981408071586]]]}}]",
+    "hours": "24/7",
+    "id": 69,
+    "image_urls": [],
+    "instructions": "Street parking on 12th Ave. only between Geary and Anza. ",
+    "latitude": "37.7797393",
+    "long_instructions": "<body style=\"font-family: Helvetica\"> <p><strong>Scoot Stop! 24/7 street parking on 12th Ave. between Geary and Anza only.</strong>Never park right next to the fire station.<p>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning, construction, or other parking restrictions in the next 48 hours. <strong>NEVER park in metered stalls</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Never park where the curb is colored (even faded).</li><li style=\"font-size:0.9em;\">Park 2 feet from driveways or other vehicles. </li><li style=\"font-size:0.9em;\">Don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p></p> </body>",
+    "longitude": "-122.4706449",
+    "name": "12thAve@Anza",
+    "orientation_text": "",
+    "radius": "100.0",
+    "short_name": "",
+    "spots_taken": 1,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T18:58:45-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.471326589584,37.7806281331723],[-122.470071315765,37.7806620518301],[-122.469953298569,37.7788134622893],[-122.471187114716,37.7787710629043],[-122.471326589584,37.7806281331723]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 1,
+    "public_scoots": 1,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147418111,
+    "address_description": "3820 Scott Street between Jefferson and Marina/Cervantes.",
+    "capacity": 6,
+    "created_at": "2015-05-11T14:54:46-07:00",
+    "gathering_threshold": 12,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 97,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1433555371/Scott_Marina1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1433555372/Scott_Marina2.jpg",
+      " \r\nhttp://res.cloudinary.com/scoot-networks/image/upload/v1433621391/Scott_Marina3.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1433555372/Scott_Marina4.jpg",
+      " \r\nhttp://res.cloudinary.com/scoot-networks/image/upload/v1433555363/Scott_Marina5.jpg"
+    ],
+    "instructions": "Drive into the garage and park in the far right corner. Back in and plug into one of the designated spots.",
+    "latitude": "37.804907",
+    "long_instructions": "Drive into the garage and park in the far right corner. Back in and plug into one of the designated spots.",
+    "longitude": "-122.441988",
+    "name": "Scott&Marina",
+    "orientation_text": "the entrance to the garage at 3820 Scott Street between Jefferson and Marina/Cervantes. Look for your coach in the red Scoot jacket! ",
+    "radius": "250.0",
+    "short_name": "",
+    "spots_taken": 6,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T18:46:25-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 4,
+    "public_scoots": 4,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "540 De Haro St., in front of Moto Shop in the designated Scoot parking area. ",
+    "capacity": 10,
+    "created_at": "2014-10-01T21:35:07-07:00",
+    "gathering_threshold": 12,
+    "geojson": null,
+    "hours": "24x7",
+    "id": 52,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1427751218/Deharo_Mariposa_1.jpg"
+    ],
+    "instructions": "Outdoor parking in marked area in front of Moto Shop.",
+    "latitude": "37.762962",
+    "long_instructions": "<strong>24x7 outdoor parking.</strong> Park in front of Moto Shop (540 De Haro St.) in the designated Scoot parking area. <p> <strong> Please back in and plug in. </strong> Park only within the lines marked for scoot parking. ",
+    "longitude": "-122.401703",
+    "name": "DeHaro&Mariposa (Moto Shop)",
+    "orientation_text": "the scoots in front of Moto Shop (540 De Haro St.)",
+    "radius": "100.0",
+    "short_name": "",
+    "spots_taken": 3,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:31:58-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 1,
+    "public_scoots": 1,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "Laurel Heights",
+    "capacity": 8,
+    "created_at": "2014-09-12T17:55:33-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45294272899628,37.785751793999],[-122.45319485664368,37.78566276362028],[-122.45307683944702,37.78413015242947],[-122.45280861854552,37.78409623536314],[-122.45294272899628,37.785751793999]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45290786027908,37.785747554459576],[-122.45263427495956,37.785747554459576],[-122.45250016450882,37.78414711095678],[-122.45278984308243,37.78409411554598],[-122.45290786027908,37.785747554459576]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45276302099228,37.78409411554598],[-122.45268255472183,37.78431245639417],[-122.45192080736159,37.784354852600615],[-122.45112419128417,37.78449052029769],[-122.45103299617766,37.78428065922341],[-122.45188057422637,37.78412379298071],[-122.45276302099228,37.78409411554598]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45276302099228,37.7840559588267],[-122.45265305042265,37.783839737045284],[-122.45183229446411,37.78386517493474],[-122.45037317276001,37.784172548740464],[-122.45019078254698,37.78441844686463],[-122.45101690292358,37.78427429978763],[-122.45188862085341,37.78409411554598],[-122.45276302099228,37.7840559588267]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45324850082396,37.78567336248052],[-122.45311975479126,37.78601252520537],[-122.4502658843994,37.78636016538299],[-122.44998693466185,37.786050680914514],[-122.45324850082396,37.78567336248052]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44999766349794,37.78612275275582],[-122.44980990886688,37.786398320912674],[-122.44930565357207,37.78628809377323],[-122.44898915290831,37.78491024065857],[-122.44933247566223,37.784698260976256],[-122.44934320449828,37.784867844770716],[-122.44956314563751,37.78597436947654],[-122.4497240781784,37.78607187852221],[-122.44999766349794,37.78612275275582]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44712233543396,37.786326249340114],[-122.44820594787598,37.78530028168537],[-122.44901061058044,37.78502894901505],[-122.44925737380981,37.78473641736392],[-122.44904279708862,37.785050146915786],[-122.44930028915404,37.7847152193732],[-122.44801282882689,37.78506286565333],[-122.44742274284364,37.7856818415676],[-122.4467146396637,37.78638560240497],[-122.44712233543396,37.786326249340114]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44926810264586,37.78463890655626],[-122.44897842407225,37.78446932223645],[-122.44667172431946,37.78504590733613],[-122.44652152061461,37.78530028168537],[-122.44926810264586,37.78463890655626]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4466609954834,37.78628809377323],[-122.44649469852449,37.78555889470956],[-122.44683802127838,37.78549954098075],[-122.44692921638487,37.785965890423014],[-122.4466609954834,37.78628809377323]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44669318199156,37.78625841720761],[-122.44742810726166,37.78555041560838],[-122.44760513305664,37.78530028168537],[-122.44761586189269,37.78512645930813],[-122.44736909866332,37.78520701119231],[-122.44738519191742,37.785329958635764],[-122.4466609954834,37.78608883660399],[-122.44669318199156,37.78625841720761]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4464625120163,37.78538931250077],[-122.4466985464096,37.78552921785112],[-122.4475085735321,37.785359635574224],[-122.44762659072876,37.78513069888317],[-122.4464625120163,37.78538931250077]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44748175144196,37.7846897817763],[-122.44699358940125,37.78467282337351],[-122.44661271572112,37.78292184734256],[-122.44690775871277,37.78272682081038],[-122.44713842868806,37.78257419099146],[-122.44707942008972,37.78299392223508],[-122.44748175144196,37.7846897817763]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44759976863861,37.78465586496683],[-122.44796991348265,37.78446084301024],[-122.44781970977782,37.783740105227224],[-122.44736909866332,37.78361291547709],[-122.44759976863861,37.78465586496683]]]}}]",
+    "hours": "24/7",
+    "id": 48,
+    "image_urls": [],
+    "instructions": "Street parking on Heather, Mayfair, Laurel, Euclid, or on Masonic (between Presidio and Geary) on the side of the streets marked in green on the app map.",
+    "latitude": "37.78485",
+    "long_instructions": "<strong>Street parking on Heather, Mayfair, Laurel, Euclid, or on Masonic (between Presidio and Geary) on the side of the streets marked in green on the app map. </strong><p>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning or other parking restrictions in the next 48 hours. <strong>Avoid </strong>metered parking.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up spaces that could fit a car.</li> </ul><p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>\t",
+    "longitude": "-122.4489",
+    "name": "Laurel Heights",
+    "orientation_text": "the corner of Heather Ave. and Mayfair near Laurel Village Shopping Center",
+    "radius": "375.0",
+    "short_name": "",
+    "spots_taken": 7,
+    "status": "available",
+    "street_cleaning_threshold": 46,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:21:16-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.451059818268,37.7846897817763],[-122.450973987579,37.7844184468646],[-122.450008392334,37.7846134689331],[-122.450244426727,37.7840623182813],[-122.451853752136,37.7837061879819],[-122.453227043152,37.7836213948006],[-122.453484535217,37.7859277346701],[-122.449268102646,37.7864958293989],[-122.448935508728,37.7850374281761],[-122.446521520615,37.7869176581074],[-122.446196973324,37.7853384377623],[-122.446829974651,37.7846410263578],[-122.446403503418,37.7825445129345],[-122.447723150253,37.7826038690365],[-122.448098659515,37.7845286767926],[-122.449525594711,37.7842149450271],[-122.449922561646,37.785978609003],[-122.452476024628,37.7856224879375],[-122.452325820923,37.7844354053258],[-122.451059818268,37.7846897817763]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 5,
+    "public_scoots": 5,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "Enter on Moulton St between Webster and Fillmore. 2055 Lombard St., Lombard St. Garage. ",
+    "capacity": 6,
+    "created_at": "2013-06-06T10:43:05-07:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "Not 24/7, see info",
+    "id": 14,
+    "image_urls": [],
+    "instructions": "Drive up the ramp of the Moulton St. entrance of the garage (to Level 2) and go around the gate. Do NOT pull a ticket! Follow traffic to the right. Scoots are parked in northeast corner of the garage. When leaving, exit by driving around the gate.",
+    "latitude": "37.799715",
+    "long_instructions": "<body style=\"font-family: Helvetica\">\r\n<p><strong>Open</strong> 7am daily. Closes at midnight Sun & Mon; 1am Tue & Wed; 2:30am Thu, Fri & Sat.<p>Address: 2055 Lombard St., Lombard St. Garage. <strong>Enter through the Moulton St. entrance between Webster and Fillmore.</strong><p> Ride up the ramp (to Level 2) and around the gate. <strong>Do NOT</strong> pull a ticket! <p>Follow traffic to the right. Scoots are parked in northeast corner of the garage. When leaving, exit by driving around the gate.\r\n</body>",
+    "longitude": "-122.435161",
+    "name": "Lombard&Fillmore",
+    "orientation_text": "the garage entrance on the corner of Lombard and Fillmore, underneath the sign for the Chelsea Motor Inn (http://goo.gl/maps/LMDXI).",
+    "radius": "100.0",
+    "short_name": "",
+    "spots_taken": 6,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T18:56:32-07:00",
+    "is_open": true,
+    "is_24x7": false,
+    "formatted_hours": {
+      "7am - 11:59pm": "Sat - Sun",
+      "7am - 2:30am": "Thu"
+    },
+    "num_available_scooters": 4,
+    "public_scoots": 4,
+    "closing_at": 1438844340,
+    "closing_at_english": "11:59pm",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 8,
+    "created_at": "2014-10-28T18:44:44-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4161696434021,37.747550036986084],[-122.41824030876158,37.74675258748099],[-122.4181866645813,37.747015577097216],[-122.4161696434021,37.74780454033844],[-122.4139380455017,37.74745247713561],[-122.41392463445663,37.74723614831276],[-122.4161696434021,37.747550036986084]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41614818572997,37.747507619675595],[-122.41824030876158,37.74669320259962],[-122.41795063018799,37.74659988340403],[-122.41614818572997,37.74727856577886],[-122.4136832356453,37.74695831330876],[-122.41359740495682,37.747153434183964],[-122.41614818572997,37.747507619675595]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4136510491371,37.74808237216553],[-122.41332918405531,37.74800602153836],[-122.41318166255951,37.746803488769984],[-122.41354912519455,37.74678227990384],[-122.4136510491371,37.74808237216553]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41358667612076,37.74715555506022],[-122.4138280749321,37.74667199370185],[-122.41367787122726,37.74519796041745],[-122.41338551044464,37.74516614642578],[-122.41358667612076,37.74715555506022]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41487950086594,37.747371884118664],[-122.41513967514037,37.74747792754378],[-122.41522014141081,37.7480738887664],[-122.41494119167326,37.74817568949177],[-122.41488218307495,37.74733370844841],[-122.41487950086594,37.747371884118664]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41485267877579,37.747371884118664],[-122.41456836462021,37.74742066411309],[-122.41464346647263,37.74809085556369],[-122.41493046283722,37.74817993118559],[-122.41485267877579,37.747371884118664]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41356521844862,37.747189489071985],[-122.41347402334213,37.747393092815855],[-122.41059333086012,37.747564883039004],[-122.41049945354462,37.74736976324859],[-122.41356521844862,37.747189489071985]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41356790065764,37.747164038564634],[-122.41343915462494,37.74695831330876],[-122.41064965724945,37.747164038564634],[-122.41049945354462,37.7473421919324],[-122.41356790065764,37.747164038564634]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41353303194045,37.746771675468466],[-122.41340696811675,37.74656807001499],[-122.41074621677397,37.746741983041396],[-122.41064697504044,37.74693074183926],[-122.41353303194045,37.746771675468466]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41352766752242,37.746771675468466],[-122.41344183683395,37.746964675954096],[-122.41056382656097,37.74717464294375],[-122.41066038608551,37.74693286272189],[-122.41352766752242,37.746771675468466]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4114838242531,37.74822658980193],[-122.41120487451555,37.74815660186642],[-122.41112172603609,37.74732946670606],[-122.4114140868187,37.74731674147754],[-122.4114838242531,37.74822658980193]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41050481796263,37.747371884118664],[-122.41058260202408,37.748224468956366],[-122.4108561873436,37.748182052032426],[-122.41075962781908,37.747348554544736],[-122.41050481796263,37.747371884118664]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41054773330687,37.748228710647425],[-122.4102285504341,37.74820538134362],[-122.41016954183578,37.747469444075364],[-122.41047531366347,37.74737400498865],[-122.41054773330687,37.748228710647425]]]}}]",
+    "hours": "24/7",
+    "id": 60,
+    "image_urls": [],
+    "instructions": "Street parking on Folsom between Cesar Chavez and Stillman, on Precita between Alabama and Coso, and Harrison or Alabama between Cesar Chavez and Precita.",
+    "latitude": "37.7468027",
+    "long_instructions": "<body style=\"font-family: Helvetica\"> <p><strong>Street parking on Folsom between Cesar Chavez and Stillman, on Precita between Alabama and Coso, and Harrison or Alabama between Cesar Chavez and Precita.</strong> Do not park in perpendicular parking spaces. <p>Please be careful driving or parking on hills, and try to find the flattest area to park. Do not park in perpendicular parking spaces.<p>You can end your ride here as long as you <strong>read ALL street signs</strong>. Don't park where there will be street cleaning or other restrictions in the next 48 hours. <strong>Never park in metered parking stalls. Never park where curbs are colored.</strong><p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up wholes spaces that could fit a car (sharing is OK!).</li> </ul><p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>\r\n</P></body>",
+    "longitude": "-122.4135453",
+    "name": "Precita Park",
+    "orientation_text": "Precita and Folsom",
+    "radius": "333.0",
+    "short_name": "",
+    "spots_taken": 7,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T17:25:15-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.416180372238,37.7470664782053],[-122.418122291565,37.7464302118378],[-122.418465614319,37.7469561924269],[-122.416191101074,37.7478130237685],[-122.415289878845,37.7476772887717],[-122.415311336517,37.7481523601712],[-122.414603233337,37.7481778103387],[-122.414538860321,37.7476348715341],[-122.413820028305,37.7475670039035],[-122.413873672485,37.7481862937259],[-122.413133382797,37.7481778103387],[-122.413090467453,37.747583970817],[-122.411556243896,37.747583970817],[-122.411652803421,37.7482371940288],[-122.410011291504,37.7482796109211],[-122.409936189651,37.7474143015069],[-122.410805225372,37.746599883404],[-122.413369417191,37.7464811133485],[-122.413219213486,37.7451576626924],[-122.413841485977,37.745123727749],[-122.414045333862,37.746854390024],[-122.416180372238,37.7470664782053]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 5,
+    "public_scoots": 5,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "4540 California Street between 7th Ave. and 8th Ave. (Garage #7 with Scoot Sign)",
+    "capacity": 5,
+    "created_at": "2015-05-11T15:21:23-07:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "24/7`",
+    "id": 99,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1432234358/California_7thAve1.jpg",
+      "\r\nhttp://res.cloudinary.com/scoot-networks/image/upload/v1432234358/California_7thAve2.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1432234358/California_7thAve3.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1432234358/California_7thAve4.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1432234358/California_7thAve5.jpg\r\n"
+    ],
+    "instructions": "Park in Garage #7. Keypad is on your left-hand side. Back in and plug in your scoot in one of the marked spots. Be sure to close garage door when you're done by pressing \"enter\" again.",
+    "latitude": "37.784891",
+    "long_instructions": "Park in Garage #7. Keypad is on your left-hand side. Back in and plug in your scoot in one of the marked spots. Be sure to close garage door when you're done by pressing \"enter\" again.",
+    "longitude": "-122.466314",
+    "name": "California&7thAve",
+    "orientation_text": "4540 California Street between 7th Ave. and 8th Ave. Look for your coach in the red Scoot jacket! ",
+    "radius": "50.0",
+    "short_name": "",
+    "spots_taken": 4,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T18:56:18-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 4,
+    "public_scoots": 4,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "444 Stockton St., Sutter-Stockton Parking Garage.",
+    "capacity": 10,
+    "created_at": "2014-04-29T15:07:59-07:00",
+    "gathering_threshold": 12,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 29,
+    "image_urls": [],
+    "instructions": "From Bush St., between Stockton and Grant, turn right where it says \"Enter\". Go around the barrier without taking a ticket and proceed to the ramp going downstairs. Scoots will be toward the Bush exit on your right. From Stockton,  turn right  after Sutter, then go toward the Bush St. exit.  Scoots are parked in the NE corner of the 2nd level, next to motorcycle parking. Follow the flow of traffic when entering and exiting. ",
+    "latitude": "37.790226",
+    "long_instructions": "From Bush St., between Stockton and Grant, turn right where it says \"Enter\". Go around the barrier without taking a ticket and proceed to the ramp going downstairs. Scoots will be toward the Bush exit on your right. From Stockton,  turn right  after Sutter, then go toward the Bush St. exit.  Scoots are parked in the NE corner of the 2nd level, next to motorcycle parking. Follow the flow of traffic when entering and exiting. ",
+    "longitude": "-122.406267",
+    "name": "Stockton&Bush",
+    "orientation_text": "",
+    "radius": "100.0",
+    "short_name": "",
+    "spots_taken": 2,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:16:51-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 2,
+    "public_scoots": 2,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "765 Pennsylvania St. right near the 22nd St. Caltrain Station.",
+    "capacity": 10,
+    "created_at": "2014-08-26T11:32:28-07:00",
+    "gathering_threshold": 7,
+    "geojson": null,
+    "hours": "Open 24/7",
+    "id": 46,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1427746863/Pennsylvania_22nd_1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1427747128/Pennsyvlania_22nd_2.jpg"
+    ],
+    "instructions": "Go behind the blue building toward the fence. Scoots are parked behind the building along the eastern wall. Back in and plug in within on of the 10 red marked parking spaces.",
+    "latitude": "37.75643",
+    "long_instructions": "<body style=\"font-family: Helvetica\">\r\n<p>\r\n<strong>NEW Powered parking at 765 Pennsylvania (behind Dogpatch Biofuels). 24/7 powered parking near 22nd Street Caltrain. </strong> Do not park on 22nd Street anymore. <p>\r\n\r\nGo behind the blue building toward the fence for Caltrain. Scoots are parked behind the building along the eastern wall. Back in and plug in within on of the 10 red marked parking spaces.\r\n\r\n<p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>\r\n</body>",
+    "longitude": "-122.392803",
+    "name": "Pennsylvania&22nd",
+    "orientation_text": "765 Pennsylvania (behind Dogpatch Biofuels) near 22nd Street Caltrain.",
+    "radius": "125.0",
+    "short_name": "",
+    "spots_taken": 4,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:22:03-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 4,
+    "public_scoots": 4,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 43845,
+    "address_description": "",
+    "capacity": 0,
+    "created_at": "2015-05-19T16:28:46-07:00",
+    "gathering_threshold": 12,
+    "geojson": null,
+    "hours": "",
+    "id": 16,
+    "image_urls": [],
+    "instructions": "This location is only for tracking M1 Video Orientations ",
+    "latitude": "-37.767679",
+    "long_instructions": "This location is only for tracking M1 Video Orientations ",
+    "longitude": "-122.511013",
+    "name": "Video Orientations for M1 Riders ",
+    "orientation_text": "the intersection of you and the world wide web! You don't need to go anywhere: <a href=\"http://scoot.vidcaster.com/scooter101/\"> watch these videos and take our quiz!</a>Then call the Video Orientations Hotline when you're finished so we can get you rolling ASAP!",
+    "radius": "0.0",
+    "short_name": "",
+    "spots_taken": 0,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-05-19T16:43:12-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "725 Sacramento St. garage (look for Scoot sign outside) between Kearny and Grant. This is parking for 650 California.",
+    "capacity": 5,
+    "created_at": "2014-04-29T15:10:32-07:00",
+    "gathering_threshold": 12,
+    "geojson": null,
+    "hours": "24/7. See instructions for AFTER HOURS below. ",
+    "id": 30,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1432242578/Sacramento_Kearny1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1433530041/Sacramento_Kearny1a.jpg",
+      "  http://res.cloudinary.com/scoot-networks/image/upload/v1433530028/Sacramento_Kearny2a.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1433530024/Sacramento_Kearny3.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1433530023/Sacramento_Kearny4.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1433530022/Sacramento_Kearny5.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1433530021/Sacramento_Kearny6.jpg"
+    ],
+    "instructions": "Enter on the left as you drive up Sacramento. Scoots are parked to your left as you drive toward the garage parking. Back in and plug into the marked spaces only. You can also enter through the 650 California lobby, and take the elevator to the parking garage. ",
+    "latitude": "37.793415",
+    "long_instructions": "<strong>Entrance gate is open</strong> Mon-Fri 6AM-7PM.<p>Address: 725 Sacramento St. garage entrance (look for Scoot sign outside). Enter through the loading and parking entrance, on your left between Kearny and Grant. Scoots are parked to your left as you drive toward the garage parking. Please back in and plug in your scoot in the marked spaces only.\r\n\r\n<p><strong>After hours</strong>, buzz the intercom at the Sacramento Street entrance to the left of the gate and ask nicely for security to raise the barrier. To exit, buzz the intercom to the right of the gate.<p>You may also enter the garage on foot through the 650 California lobby. Take the elevator to the parking garage. ",
+    "longitude": "-122.405108",
+    "name": "Sacramento&Kearny",
+    "orientation_text": "",
+    "radius": "80.0",
+    "short_name": "",
+    "spots_taken": 1,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T18:54:12-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 1,
+    "public_scoots": 1,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "Bay Club SF Tennis (645 5th St) parking lot near Caltrain.",
+    "capacity": 14,
+    "created_at": "2015-03-23T16:18:36-07:00",
+    "gathering_threshold": 12,
+    "geojson": null,
+    "hours": "Weekdays, 5:30AM to 12AM; Weekends, 7AM to 10PM",
+    "id": 91,
+    "image_urls": [],
+    "instructions": "Scoots are parked to the right as you enter the garage. Back in and plug in. Park in unpowered spots if no plugs are available. Exit by driving with traffic around (don't go against traffic). Don't pull a ticket. Drive around the gate to exit.",
+    "latitude": "37.776215",
+    "long_instructions": "Bay Club SF Tennis (645 5th St) parking garage near Caltrain. Open: Weekdays, 5:30AM to 12AM; Weekends, 7AM to 10PM. Please park in the designated scoot parking area to your right as you enter the garage. Back in and plug in if you can. Park in unpowered spots if no plugs available. Exit by driving with traffic around (don't go against traffic). Don't pull a ticket. Drive around the gate to exit.",
+    "longitude": "-122.398149",
+    "name": "5th&Brannan",
+    "orientation_text": "the Bay Club SF Tennis garage entrance at 5th and Brannon (645 5th St). Look for your coach in the red Scoot jacket!",
+    "radius": "70.0",
+    "short_name": "",
+    "spots_taken": 3,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T19:45:49-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.398853302002,37.7761252931758],[-122.398005723953,37.7755316779875],[-122.395956516266,37.7770835476364],[-122.396782636642,37.7777365103744],[-122.398853302002,37.7761252931758]]]}}]",
+    "is_24x7": false,
+    "formatted_hours": {
+      "7am - 10pm": "Sat - Sun",
+      "5:30am - 11:59pm": "Mon - Fri"
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 1438844340,
+    "closing_at_english": "11:59pm",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 8,
+    "created_at": "2015-02-13T17:02:54-08:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45230436325073,37.77121934458387],[-122.45255380868912,37.77111757556606],[-122.45236605405806,37.77028645667794],[-122.45208978652953,37.77032462050497],[-122.45230436325073,37.77121934458387]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45224535465239,37.77122146477024],[-122.45196908712386,37.771206623464316],[-122.4517598748207,37.77035642367915],[-122.4520656466484,37.770330981140894],[-122.45224535465239,37.77122146477024]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45373398065566,37.770112598994345],[-122.45369642972945,37.770326740716996],[-122.4471840262413,37.77113029670095],[-122.4471464753151,37.77094159964231],[-122.45373398065566,37.770112598994345]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45372325181961,37.77009139680987],[-122.45208173990248,37.770297057742965],[-122.45216757059096,37.770087156372256],[-122.45360255241394,37.76991329822008],[-122.45372325181961,37.77009139680987]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45205760002136,37.770303418381275],[-122.45190471410751,37.77012320008434],[-122.44885236024857,37.77050483831101],[-122.44880139827728,37.770721099098445],[-122.45205760002136,37.770303418381275]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44876652956009,37.770721099098445],[-122.44861900806426,37.77052816058322],[-122.44709283113478,37.77071473849609],[-122.44714379310608,37.77091827750048],[-122.44876652956009,37.770721099098445]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44880676269531,37.770746541502476],[-122.4490749835968,37.77078470509204],[-122.44926005601882,37.77156705433785],[-122.44898915290831,37.771664582389825],[-122.44880676269531,37.770746541502476]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4487692117691,37.77075290210209],[-122.44851440191269,37.770844070636706],[-122.44868338108063,37.77164550082455],[-122.44896501302719,37.77167518325727],[-122.4487692117691,37.77075290210209]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45063602924346,37.77144408400196],[-122.450914978981,37.771352916207164],[-122.45073795318604,37.77049635748291],[-122.45043218135832,37.770530280789416],[-122.45063602924346,37.77144408400196]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4506065249443,37.771448324361785],[-122.45032489299774,37.771431362921064],[-122.4501049518585,37.77057056469566],[-122.4504080414772,37.770530280789416],[-122.4506065249443,37.771448324361785]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44736909866332,37.77180875405714],[-122.44765877723692,37.771698505160366],[-122.4475407600403,37.7710285275606],[-122.44721889495851,37.77098612371078],[-122.44736909866332,37.77180875405714]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4472725391388,37.77182571541128],[-122.44698286056519,37.77178331201861],[-122.44685411453246,37.77112181594461],[-122.44710087776184,37.77099460448269],[-122.4472725391388,37.77182571541128]]]}}]",
+    "hours": "24/7",
+    "id": 80,
+    "image_urls": [],
+    "instructions": "Street parking on Page between Stanyan and Ashbury, or on Shrader, Cole, Clayton, or Ashbury between Page and Oak.",
+    "latitude": "37.770631",
+    "long_instructions": "<p><strong>Street parking on Page between Stanyan and Ashbury, or on Shrader, Cole, Clayton, or Ashbury between Page and Oak.</strong> Pay attention to the green zones in the map. <P>\r\nYou can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning, construction, or other parking restrictions in the next 48 hours. <strong>NEVER park in metered stalls</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Never park where the curb is colored (even faded).</li><li style=\"font-size:0.9em;\">Park 2 feet from driveways or other vehicles. </li><li style=\"font-size:0.9em;\">Don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p></p>",
+    "longitude": "-122.450446",
+    "name": "Upper Haight",
+    "orientation_text": "",
+    "radius": "290.0",
+    "short_name": "",
+    "spots_taken": 8,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:28:15-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.453795671463,37.770409428939],[-122.453699111938,37.7698072869511],[-122.450759410858,37.7701719650786],[-122.450662851334,37.7697818442239],[-122.449847459793,37.7698751341807],[-122.449933290482,37.7702822162515],[-122.447454929352,37.7705960071515],[-122.447390556335,37.7702228502558],[-122.446532249451,37.7703331013527],[-122.446864843369,37.7719274834544],[-122.45396733284,37.7710115660236],[-122.453795671463,37.770409428939]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 6,
+    "public_scoots": 6,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "Golden Gateway Garage. On your left around 250 Clay St. between Front and Davis. ",
+    "capacity": 15,
+    "created_at": "2015-02-25T18:55:50-08:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "Weekdays, 4AM-10PM; Weekends Closed at 10PM",
+    "id": 87,
+    "image_urls": [],
+    "instructions": "Go around the gate on Clay and down the ramp in front of you. The scoots are immediately on your right at the bottom. When picking up or exiting after a ride, take the elevator/stairs to or from the 1st level below. Only use pedestrian pathways when entering or exiting on foot.  To leave the parking area, circle around to the other side and go up the appropriate ramp opposite where scoots park. When exiting, please drive around the exit gate on Lane 4 when it's your turn and do not pass cars trying to exit. Be careful merging with traffic as you exit.",
+    "latitude": "37.795342",
+    "long_instructions": "<body style=\"font-family: Helvetica\">\r\n\r\n<strong>Golden Gateway Garage. About 250 Clay Street between Front and Davis. </strong><p><strong>Open only</strong> Mon-Fri 4AM-10PM, Sat 7AM-10PM, & Sun 9AM-10PM.<p><strong>Do not pull a ticket! </strong>Go around the gate on Clay and down the ramp in front of you. The scoots are immediately on your right at the bottom. When picking up or exiting after a ride, take the elevator/stairs to or from the 1st level below. Only use pedestrian pathways when entering or exiting on foot. <p> To leave the parking area, circle around to the other side and go up the appropriate ramp opposite where scoots park. When exiting, please drive around the exit gate when it's your turn and do not pass cars trying to exit. Be careful merging with traffic as you exit.</p>\r\n\r\n\r\n</body>",
+    "longitude": "-122.398735",
+    "name": "Clay&Front (near Embarcadero)",
+    "orientation_text": "",
+    "radius": "200.0",
+    "short_name": "",
+    "spots_taken": 2,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T19:52:59-07:00",
+    "is_open": true,
+    "is_24x7": false,
+    "formatted_hours": {
+      "9am - 10pm": "Sun",
+      "4am - 10pm": "Mon - Fri",
+      "7am - 10pm": "Sat"
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 1438837200,
+    "closing_at_english": "10pm",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "2 Mission Rock St., Venue Garage. ",
+    "capacity": 8,
+    "created_at": "2014-02-28T11:26:26-08:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 23,
+    "image_urls": [],
+    "instructions": "Scoots are parked in the garage on Mission Rock St. between 3rd & 4th St. To open garage door, use the keypad to the left of the door. Scoots are parked immediately to your right at the top of the ramp. To exit, hit black \"Open\" button to the right of the door.",
+    "latitude": "37.773084",
+    "long_instructions": "<p style=\"font-family: Helvetica;\"><strong>Open 24/7.</strong><p>Address: 2 Mission Rock St., Venue Garage. Scoots live in the garage on Mission Rock St. between 3rd & 4th St. To open garage door, use the keypad (code: <strong>LOG IN</strong>) to the left of the door. Scoots are parked in stall 55, immediately to your right.<p> To exit, hit black \"Open\" button to the right of the door.</p>",
+    "longitude": "-122.390665",
+    "name": "MissionRock&4th",
+    "orientation_text": "the corner of 4th Street and Mission Rock St.  Look for the scoot coach in the red scoot jacket.  ",
+    "radius": "175.0",
+    "short_name": "",
+    "spots_taken": 2,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:25:27-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.391450405121,37.7723599960752],[-122.391450405121,37.7734455068035],[-122.389776706696,37.7734455068035],[-122.389776706696,37.7723599960752],[-122.391450405121,37.7723599960752]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "833 Mission St, 5th & Mission Parking Garage. Entrance for Scoots is on Minna St. almost at 4th St. corner. ",
+    "capacity": 12,
+    "created_at": "2012-10-30T13:53:28-07:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 1,
+    "image_urls": [],
+    "instructions": "Entrance for Scoots is on Minna St. almost at 4th St. Go through the scoot-sized opening to the right of the 'Monthly Parking' sign. Look for the small Scoot sign! No ticket or cards needed. The scoot are parked to the right after you enter. Only back in and plug into one of the 12 numbered stalls.",
+    "latitude": "37.783622",
+    "long_instructions": "<strong>Open 24/7</strong>.<p>Address: 833 Mission St, 5th & Mission Parking Garage. Entrance for Scoots is on Minna St. almost near 4th St. <p>Enter just to the right of the last entrance gate on Minna, closest to 4th St. side and on your left. Go through the scoot-sized opening to the right of the 'Monthly Parking' sign. Look for the small Scoot sign marking the entrance<p>No ticket or cards needed. The scoot are parked to the right after you enter. <b>Please only back in and plug in to one of the 12 numbered stalls.</b>\r\n",
+    "longitude": "-122.404401",
+    "name": "Minna&5th",
+    "orientation_text": "5th and Minna at the fire hydrant, just east of 5th and Mission (http://goo.gl/maps/OHgKS).",
+    "radius": "150.0",
+    "short_name": "",
+    "spots_taken": 3,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:20:19-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 1,
+    "public_scoots": 1,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "Approximately 121 Bluxome St. near the corner of 5th, behind 410 Townsend. Near Caltrain.",
+    "capacity": 4,
+    "created_at": "2014-11-14T02:37:09-08:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "Weekdays Only! 7AM to 7PM",
+    "id": 64,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1420585113/bluxome_5th_1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1420585107/bluxome_5th_2.jpg"
+    ],
+    "instructions": "Enter the first garage door where you see the public parking signs closest to 5th Street. Drive down and turn left to find the scoots parked along the wall. Park nicely in the four stalls marked with red tape. Back in and plug in to the outlets along the wall. ",
+    "latitude": "37.7753711",
+    "long_instructions": "<strong>Weekday parking near Caltrain! LIMITED HOURS after 7AM and before 7PM on Mondays through Fridays. </strong> Location is the public parking behind 410 Townsend on Bluxome (about 125 Bluxome) near the corner of 5th Street. <strong>Do not attempt to park here after or before the listed hours</strong> because the gray garage door will be closed.<p>\r\n\r\nEnter the gray garage door where you see the public parking signs. Pull down and turn left to find the scoots parked along the wall. Please park nicely in the four stalls marked with red tape. Back in and plug in to the outlets along the wall. \r\n\r\nWhen exiting, please be careful of pedestrians along Bluxome.",
+    "longitude": "-122.3986099",
+    "name": "Bluxome&5th",
+    "orientation_text": "125 Bluxome Street (between 5th and 6th). Look for your coach in the red Scoot jacket.",
+    "radius": "50.0",
+    "short_name": "",
+    "spots_taken": 0,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T18:58:52-07:00",
+    "is_open": false,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.398499250412,37.7758454466094],[-122.399196624756,37.7753366319567],[-122.398617267609,37.7749210973927],[-122.397962808609,37.7754044741128],[-122.398499250412,37.7758454466094]]]}}]",
+    "is_24x7": false,
+    "formatted_hours": {
+      "7am - 7pm": "Mon - Fri"
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "opening_at": 1438869600,
+    "opening_at_english": " 7am tomorrow",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "1301 Leavenworth (Garage entrance is on Clay near Leavenworth).",
+    "capacity": 9,
+    "created_at": "2015-05-11T14:51:50-07:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 96,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1433622112/Clay_Hyde1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1433622111/Clay_Hyde2.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1433622109/Clay_Hyde3.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1433622127/Clay_Hyde4.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1433622111/Clay_Hyde5.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1433622111/Clay_Hyde6.jpg"
+    ],
+    "instructions": "Garage door is the last one on your left as you drive up Clay from Hyde toward Leavenworth. Look for the last garage before the corner. Back in and plug in your scoot into one of the designated spots.",
+    "latitude": "37.793017",
+    "long_instructions": "Garage door is the last one on your left as you drive up Clay from Hyde toward Leavenworth. Look for the last garage before the corner. Back in and plug in your scoot into one of the designated spots.",
+    "longitude": "-122.416574",
+    "name": "Clay&Hyde",
+    "orientation_text": "",
+    "radius": "100.0",
+    "short_name": "",
+    "spots_taken": 9,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:26:29-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 5,
+    "public_scoots": 5,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 6,
+    "created_at": "2014-11-19T13:35:02-08:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43639886379242,37.78476609454075],[-122.43668049573898,37.78479365190854],[-122.43684411048889,37.7855482958329],[-122.43658661842346,37.78564792521341],[-122.43639886379242,37.78476609454075]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43636399507523,37.78477457373192],[-122.4361065030098,37.78487208436062],[-122.43625670671462,37.785630967030464],[-122.43654638528824,37.78566276362028],[-122.43636399507523,37.78477457373192]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43635594844818,37.784755495550385],[-122.43629693984984,37.78496959486064],[-122.43488878011702,37.785143417606825],[-122.43475198745728,37.78495051672945],[-122.43635594844818,37.784755495550385]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43475198745728,37.78494203755847],[-122.43500947952269,37.7850162302717],[-122.43519723415375,37.78576875215421],[-122.43494510650635,37.78586414170478],[-122.43475198745728,37.78494203755847]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43472516536711,37.78496535527636],[-122.43448644876479,37.785075584388686],[-122.43464201688765,37.78585354287191],[-122.43491828441618,37.785868381237506],[-122.43472516536711,37.78496535527636]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43654638528824,37.78564792521341],[-122.43639886379242,37.785478343208894],[-122.43497729301453,37.78566064384806],[-122.43493974208832,37.78587898006826],[-122.43654638528824,37.78564792521341]]]}}]",
+    "hours": "24/7",
+    "id": 66,
+    "image_urls": [],
+    "instructions": "Street parking on Pierce Street or Steiner between Post and Sutter, or on Post Street or Sutter between Pierce and Steiner. Please do not park in metered spots or where you see Residential Parking Permit restrictions.",
+    "latitude": "37.784773",
+    "long_instructions": "<body style=\"font-family: Helvetica\"> <strong>Street parking on Pierce Street or Steiner between Post and Sutter, or on Post Street or Sutter between Pierce and Steiner. Please do not park in metered spots or where you see Residential Parking Permit restrictions. <p> You can end your ride here as long as you <strong>read ALL street signs</strong>. Don't park where there will be street cleaning or other restrictions in the next 48 hours. <strong>NEVER PARK IN METERED STALLS (especially on Post!). Never park where the curb is colored.</strong><p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"><li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Never park where the curb is colored (even faded).</li><li style=\"font-size:0.9em;\">Park 2 feet from driveways or other vehicles. </li><li style=\"font-size:0.9em;\">Don't take up spaces that could fit a car (sharing is OK!).</li> </ul><p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a></p> </body>",
+    "longitude": "-122.436346",
+    "name": "Lower Pacific Heights",
+    "orientation_text": "",
+    "radius": "185.0",
+    "short_name": "",
+    "spots_taken": 5,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:13:51-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.437402009964,37.7857581533077],[-122.434194087982,37.7861481898595],[-122.433947324753,37.7848763239502],[-122.437144517899,37.7844693222364],[-122.437402009964,37.7857581533077]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 4,
+    "public_scoots": 4,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 5,
+    "created_at": "2014-07-22T15:17:14-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41884112358093,37.74514705802422],[-122.41910934448242,37.745187355755085],[-122.42090642452239,37.74237918768724],[-122.42071598768234,37.74220526440901],[-122.41884112358093,37.74514705802422]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41880625486372,37.745130090552045],[-122.41863459348679,37.74496041561622],[-122.42039412260056,37.74214587587896],[-122.42068380117416,37.742196780336215],[-122.41880625486372,37.745130090552045]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.42145359516144,37.74308972366404],[-122.42147237062453,37.74287550308776],[-122.41971284151077,37.74216284403529],[-122.41951435804367,37.74231343625206],[-122.42145359516144,37.74308972366404]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.42144286632538,37.74311093358834],[-122.42122828960417,37.743242434983436],[-122.41948753595351,37.7425382634985],[-122.41950899362564,37.74232828335543],[-122.42144286632538,37.74311093358834]]]}}]",
+    "hours": "24/7",
+    "id": 41,
+    "image_urls": [],
+    "instructions": "Street parking on Coleridge St. between Heyman and Fair Ave., or Virginia St. between Mission and Prospect.",
+    "latitude": "37.743998",
+    "long_instructions": "<body style=\"font-family: Helvetica\"> <p>\r\nStreet parking on Coleridge St. between Heyman and Fair Ave., or Virginia St. between Mission and Prospect. Keep in mind that Coleridge north of Virginia is a one-way street - please ride with traffic!<p>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning or other parking restrictions in the next 48 hours. <strong>Avoid </strong>metered parking.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.</p></body>\r\n",
+    "longitude": "-122.419564",
+    "name": "Coleridge+Virginia",
+    "orientation_text": "",
+    "radius": "222.0",
+    "short_name": "",
+    "spots_taken": 1,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T08:49:41-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.421598434448,37.7427567270555],[-122.421147823334,37.7434524125332],[-122.420622110367,37.7432657658517],[-122.418884038925,37.7458618092568],[-122.418057918549,37.7455563971118],[-122.41974234581,37.7428924710768],[-122.419184446335,37.7426888549515],[-122.419828176498,37.7418659007383],[-122.420729398727,37.741662281789],[-122.421222925186,37.7418149960535],[-122.421598434448,37.7427567270555]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 1107298305,
+    "address_description": "Sunset Outside Lands Temporary Parking!",
+    "capacity": 50,
+    "created_at": "2014-08-08T15:08:40-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.49622821807861,37.76487971546801],[-122.4956703186035,37.760435290234426],[-122.48378276824951,37.760944207425936],[-122.4840831756592,37.7654903789825],[-122.49622821807861,37.76487971546801]]]}}]",
+    "hours": "24/7",
+    "id": 44,
+    "image_urls": [],
+    "instructions": "Park anywhere there's a legal space between 26th Ave and 36th Ave, and anywhere along Lincoln, Irving, and Judah.",
+    "latitude": "37.76284",
+    "long_instructions": "Sunset Outside Lands Temporary Parking! Park anywhere there's a legal space between 26th Ave and 36th Ave, and anywhere along Lincoln, Irving, and Judah.",
+    "longitude": "-122.48985",
+    "name": "Sunset Outside Lands Temp. Parking!",
+    "orientation_text": "",
+    "radius": "1.0",
+    "short_name": "",
+    "spots_taken": 0,
+    "status": "coming_soon",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T12:21:23-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.496185302734,37.7651511220969],[-122.495756149292,37.7599263695416],[-122.48348236084,37.7605370739528],[-122.483997344971,37.7657617833705],[-122.496185302734,37.7651511220969]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 1073545215,
+    "address_description": "1660 McAllister (north side of street between Divisadero and Broderick), above a church.",
+    "capacity": 3,
+    "created_at": "2014-11-05T04:19:31-08:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "24/7, except Sundays between 7AM and 7PM",
+    "id": 61,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1429582454/McAllister_Divisadero_1.jpg",
+      "\r\nhttp://res.cloudinary.com/scoot-networks/image/upload/v1429584163/McAllister_Divisadero_2.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1429584241/McAllister_Divisadero_4.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1429584453/McAllister_Divisadero_3.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1427407807/McAllister_Divisidero1.jpg"
+    ],
+    "instructions": "The entrance is the large garage door to the left of the building.  Drive up the ramp and circle to your right around the parking lot to the southwest corner where the Scoot sign is. Back in and plug into the three marked spaces within the red lines. Don't block the pathway to the doors or people's cars. When leaving, be mindful of traffic and pedestrians on McAllister. ",
+    "latitude": "37.777954",
+    "long_instructions": "<p style=\"font-family: Helvetica;\"><strong>Open 24/7 except Sundays between 7AM and 7PM.</strong><p>Address: 1660 McAllister (north side of street between Divisadero and Broderick). The entrance is the large garage door on McAllister.<p>To enter, use the the keypad (code:<strong> LOG IN TO SEE</strong>) to the right of the garage door. Be sure to close the door when exiting and use the same code again.<p>Drive up the ramp and circle to your right around the parking lot to the southwest corner where the Scoot sign is. Please park within the three marked spaces within the red lines. Don't block the pathway to the doors or people's cars.<p>When leaving, be mindful of traffic and pedestrians on McAllister. <p><strong>Do NOT park on Sundays when church is in session downstairs</strong>.</p>",
+    "longitude": "-122.439369",
+    "name": "McAllister&Divisadero",
+    "orientation_text": "",
+    "radius": "66.6",
+    "short_name": "",
+    "spots_taken": 1,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:19:26-07:00",
+    "is_open": true,
+    "is_24x7": false,
+    "formatted_hours": {
+      "7pm - 11:59pm": "Sun"
+    },
+    "num_available_scooters": 1,
+    "public_scoots": 1,
+    "closing_at": 1439103540,
+    "closing_at_english": "11:59pm Saturday",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 10,
+    "created_at": "2014-06-13T13:18:57-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4484071135521,37.768891343257636],[-122.4483534693718,37.769103368269896],[-122.4453118443489,37.76945320821106],[-122.445150911808,37.769294190261164],[-122.4484071135521,37.768891343257636]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.448388338089,37.768865900215296],[-122.44825154542922,37.76866871634047],[-122.4451670050621,37.76908004554831],[-122.44514554738998,37.76927722832633],[-122.448388338089,37.768865900215296]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44692385196684,37.76982212853787],[-122.44718134403229,37.76971823736764],[-122.44619429111481,37.76460406709103],[-122.44698286056519,37.76345905514373],[-122.4469345808029,37.762958636948525],[-122.44588851928712,37.76456165955726],[-122.44692385196684,37.76982212853787]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44689702987672,37.76982848921702],[-122.44659662246704,37.769805166724154],[-122.44550228118896,37.764544696536916],[-122.44654297828674,37.76298408202321],[-122.44690775871277,37.762907746772925],[-122.44674682617188,37.76331486719744],[-122.44659125804901,37.763556593889184],[-122.4458348751068,37.764570141065946],[-122.44689702987672,37.76982848921702]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44720011949539,37.76712303097821],[-122.44713842868806,37.76734354225116],[-122.44486927986144,37.767661586198294],[-122.44475930929183,37.767428354104126],[-122.44720011949539,37.76712303097821]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4472014605999,37.76710818884966],[-122.44705259799956,37.76689615811691],[-122.44486927986144,37.76718664006672],[-122.44476199150087,37.76739866996665],[-122.4472014605999,37.76710818884966]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44594551622866,37.76918764804342],[-122.44618892669678,37.76901007733938],[-122.44553446769714,37.765753301998416],[-122.44515627622603,37.765382241019175],[-122.44497388601303,37.76549249933314],[-122.44526356458664,37.765776625769206],[-122.44594551622866,37.76918764804342]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4459260702133,37.76917757688055],[-122.4456524848938,37.76904400132774],[-122.44501680135727,37.765838115675116],[-122.44481295347214,37.76563668303413],[-122.4449524283409,37.765522184235735],[-122.4452421069145,37.765802069874404],[-122.4459260702133,37.76917757688055]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44454741477965,37.7662791452261],[-122.44482636451721,37.76629186719335],[-122.4454379081726,37.76925178541676],[-122.4454915523529,37.7693302343598],[-122.44556665420534,37.76965675068796],[-122.44529575109482,37.76981152740475],[-122.44519114494322,37.76937263915918],[-122.44514286518097,37.769300550985726],[-122.44454741477965,37.7662791452261]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44451522827147,37.766499659015324],[-122.44428992271423,37.76678802220911],[-122.44482636451721,37.76932175339697],[-122.44490951299666,37.769415043934266],[-122.44497925043106,37.769769122857035],[-122.44526088237762,37.769815767858184],[-122.4451643228531,37.769391721310974],[-122.44511067867278,37.769300550985726],[-122.44451522827147,37.766499659015324]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44595825672148,37.76522957539006],[-122.44586706161499,37.76544373125302],[-122.44533061981201,37.76550522143572],[-122.44444012641908,37.76603318676243],[-122.44418933987617,37.76596321567075],[-122.44527161121367,37.76533771357658],[-122.44595825672148,37.76522957539006]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44597166776659,37.76519989037001],[-122.44581073522569,37.76501965963543],[-122.44519650936125,37.76507902980826],[-122.44413435459137,37.76572785787643],[-122.44417190551758,37.76592292925457],[-122.44528770446779,37.7652868250379],[-122.44597166776659,37.76519989037001]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44460105895998,37.76641060544883],[-122.44483172893523,37.76628762653784],[-122.44447767734526,37.76581267158231],[-122.44419336318968,37.765978058029056],[-122.44460105895998,37.76641060544883]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44453132152557,37.76642332739345],[-122.44414508342741,37.76642332739345],[-122.44398951530455,37.76624097931122],[-122.44416117668152,37.76601198340829],[-122.44453132152557,37.76632155177509],[-122.44453132152557,37.76642332739345]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44719743728638,37.76708698580376],[-122.44686752557755,37.76707214366799],[-122.44627743959425,37.763999757438896],[-122.44652152061461,37.76373470778812],[-122.44719743728638,37.76708698580376]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44721889495851,37.76710182793653],[-122.44748443365097,37.7669979329445],[-122.4468044936657,37.76370926297167],[-122.44654297828674,37.76371880477887],[-122.44721889495851,37.76710182793653]]]}}]",
+    "hours": "Hours: Mon - Sat 24 hours",
+    "id": 34,
+    "image_urls": [],
+    "instructions": "Street parking on Waller between Clayton and Masonic, on Frederick between Downey and Masonic, on Piedmont between Ashbury and Masonic, on Downey between Frederick and Ashbury, on Ashbury between Haight and Clayton, on Delmar between Waller and Piedmont, or on Masonic between Haight and Piedmont.",
+    "latitude": "37.76727",
+    "long_instructions": "Street parking on Waller between Clayton and Masonic, on Frederick between Downey and Masonic, on Piedmont between Ashbury and Masonic, on Downey between Frederick and Ashbury, on Ashbury between Haight and Clayton, on Delmar between Waller and Piedmont, or on Masonic between Haight and Piedmont.<p> You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning or other parking restrictions in the next 48 hours. <strong>Avoid </strong>metered parking.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>",
+    "longitude": "-122.446378",
+    "name": "Ashbury Heights",
+    "orientation_text": "the Farmer's Market on Waller and Stanyan.  Look for a Scoot coach wearing a red Scoot jacket! ",
+    "radius": "280.0",
+    "short_name": "",
+    "spots_taken": 8,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:27:17-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.448570728302,37.769272987842],[-122.447218894959,37.7694256451243],[-122.447304725647,37.7697648824009],[-122.446542978287,37.7698581723792],[-122.44647860527,37.7695274164707],[-122.445641756058,37.769629187677],[-122.44571685791,37.7699684240199],[-122.444912195206,37.7700701946193],[-122.443710565567,37.7669322033844],[-122.443292140961,37.7660416681024],[-122.445223331451,37.7648712339948],[-122.445394992828,37.7648627525206],[-122.445566654205,37.7641503052176],[-122.446956038475,37.7624073248477],[-122.447111606598,37.7632512547788],[-122.446929216385,37.7636498916993],[-122.447583675385,37.7670679030572],[-122.447234988213,37.7671145497623],[-122.447304725647,37.7675343687836],[-122.446875572205,37.7675767746128],[-122.447036504745,37.7686114693106],[-122.448420524597,37.7684418482211],[-122.448570728302,37.769272987842]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 7,
+    "public_scoots": 7,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 20,
+    "created_at": "2014-06-13T14:09:03-07:00",
+    "gathering_threshold": 6,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43986427783966,37.77662986233821],[-122.44012176990508,37.776534460869854],[-122.43976235389708,37.77481085313673],[-122.4394941329956,37.77479389246737],[-122.43986427783966,37.77662986233821]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43982672691345,37.77662774230692],[-122.4395477771759,37.77661714214955],[-122.43920713663101,37.774872335530496],[-122.43945926427841,37.774800252718826],[-122.43982672691345,37.77662774230692]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44627475738525,37.77491261707112],[-122.44615674018858,37.77515006570667],[-122.43856072425842,37.776133773358225],[-122.43846416473387,37.7758942078298],[-122.44627475738525,37.77491261707112]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44625329971315,37.77483629413345],[-122.44606018066406,37.774615805204256],[-122.43846416473387,37.77563344092971],[-122.4384695291519,37.7758581669309],[-122.44625329971315,37.77483629413345]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43864119052887,37.776532340835814],[-122.43856072425842,37.776778264377675],[-122.44312450289725,37.77622387523663],[-122.44287371635437,37.775947209119785],[-122.43864119052887,37.776532340835814]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44148701429366,37.77645177949765],[-122.44137704372407,37.7767316237688],[-122.44004666805266,37.776896985794735],[-122.43986427783966,37.77665318267843],[-122.44148701429366,37.77645177949765]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44146823883057,37.7764093787581],[-122.44102835655212,37.776400898607285],[-122.44051337242126,37.773873770323895],[-122.44092106819151,37.773678719919246],[-122.44146823883057,37.7764093787581]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44312584400177,37.77622387523663],[-122.44285225868225,37.776180414344296],[-122.44233727455138,37.77361511641518],[-122.44254112243651,37.77346246778218],[-122.44312584400177,37.77622387523663]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44261622428893,37.77345398729334],[-122.4428629875183,37.77354727261719],[-122.44339406490327,37.77610833280797],[-122.44313925504683,37.77622175519369],[-122.44261622428893,37.77345398729334]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43834078311919,37.77495077851042],[-122.4385178089142,37.77524334889055],[-122.44428992271423,37.774480119382524],[-122.44439721107481,37.774191786184545],[-122.43834078311919,37.77495077851042]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44417190551758,37.77325893578127],[-122.44436502456665,37.77409850167386],[-122.44402170181273,37.77403913874216],[-122.44390368461607,37.77342006532819],[-122.44417190551758,37.77325893578127]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44445085525513,37.77406458000443],[-122.44479417800902,37.773928893171075],[-122.44468688964844,37.773309818834],[-122.44427919387819,37.77325045526904],[-122.44445085525513,37.77406458000443]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44609236717226,37.77392041273572],[-122.44584023952483,37.77362359688556],[-122.43836760520935,37.774615805204256],[-122.43833541870117,37.77489565642512],[-122.44609236717226,37.77392041273572]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44609773159027,37.77397129533325],[-122.44597971439362,37.77424266859531],[-122.44459569454192,37.774424996946316],[-122.44445621967316,37.77417482537318],[-122.44609773159027,37.77397129533325]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43981599807739,37.77666378283064],[-122.43975698947905,37.77692666611924],[-122.43876993656158,37.77706658748839],[-122.43857145309448,37.77683338505931],[-122.43981599807739,37.77666378283064]]]}}]",
+    "hours": "24/7",
+    "id": 35,
+    "image_urls": [],
+    "instructions": "Street parking on Broderick between Fulton and Hayes, on Baker or Lyon between Fulton and Fell, on Central between Hayes and Fell, and on Fulton or Grove or on Hayes between Masonic and Divisadero.",
+    "latitude": "37.775745",
+    "long_instructions": "<body style=\"font-family: Helvetica\"> <p><strong>Street parking on Broderick between Fulton and Hayes, on Baker or Lyon between Fulton and Fell, on Central between Hayes and Fell, and on Fulton or Grove or on Hayes between Masonic and Divisadero. </strong><p>No parking on Grove within 48 hours of the  Sunday Farmers' Market. <P>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning, construction, or other parking restrictions in the next 48 hours. <strong>NEVER park in metered stalls</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Never park where the curb is colored (even faded).</li><li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p></p> </body>",
+    "longitude": "-122.44145",
+    "name": "NOPA",
+    "orientation_text": "",
+    "radius": "140.0",
+    "short_name": "",
+    "spots_taken": 11,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:29:11-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.438313961029,37.7772616289551],[-122.437809705734,37.7745140408613],[-122.440438270569,37.774166344966],[-122.440341711044,37.7737508038244],[-122.443571090698,37.7733013383277],[-122.444761991501,37.7731571695707],[-122.444890737534,37.7736151164152],[-122.4460709095,37.7734963897279],[-122.446467876434,37.7753281516829],[-122.443549633026,37.7756843223483],[-122.443721294403,37.776566261373],[-122.438313961029,37.7772616289551]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 4,
+    "public_scoots": 4,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 30,
+    "created_at": "2014-10-28T18:09:44-07:00",
+    "gathering_threshold": 6,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41347134113312,37.75733506071372],[-122.41374492645264,37.7572672019798],[-122.4134686589241,37.75422409789913],[-122.41318166255951,37.7541795637394],[-122.41347134113312,37.75733506071372]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41344183683395,37.75733930188253],[-122.41315484046936,37.757299010769074],[-122.41284906864165,37.75425590799681],[-122.41315752267838,37.75417532238946],[-122.41344183683395,37.75733930188253]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41650223731995,37.75560888482291],[-122.41631984710695,37.755854877951215],[-122.41233944892883,37.756054216610444],[-122.41223484277725,37.75582943042415],[-122.41650223731995,37.75560888482291]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41654515266418,37.755532541961614],[-122.41624474525452,37.75534592574676],[-122.41228580474852,37.755583437211214],[-122.41223484277725,37.755806103516676],[-122.41654515266418,37.755532541961614]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41638422012329,37.754005668192356],[-122.41624474525452,37.75423470126655],[-122.4103546142578,37.75459097352827],[-122.41025269031525,37.754361941556965],[-122.41638422012329,37.754005668192356]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41636276245117,37.753929323676736],[-122.41620182991028,37.75371725516446],[-122.41032242774963,37.75412442617119],[-122.41025000810623,37.75433225217544],[-122.41636276245117,37.753929323676736]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41220533847807,37.75584215418878],[-122.41212755441664,37.756064819715554],[-122.41051286458968,37.75615600635692],[-122.41041898727417,37.75596939171473],[-122.41220533847807,37.75584215418878]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41220802068709,37.75581458602932],[-122.41208732128142,37.755591919749435],[-122.41045385599136,37.75569583076342],[-122.41041630506516,37.75592909985517],[-122.41220802068709,37.75581458602932]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41111904382704,37.75431528680922],[-122.41085350513458,37.75439587226411],[-122.41100102663042,37.755820947913186],[-122.41126924753188,37.75588456672175],[-122.41111904382704,37.75431528680922]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41179227828978,37.76035895235373],[-122.4120283126831,37.76018931233673],[-122.41131216287611,37.75297288987537],[-122.41100907325745,37.752892302870585],[-122.41179227828978,37.76035895235373]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41167426109313,37.76036743434435],[-122.41139531135558,37.76024868638691],[-122.41097152233124,37.75599271857073],[-122.41127192974089,37.75590577297909],[-122.41167426109313,37.76036743434435]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4111109972,37.75428135606511],[-122.41082936525343,37.75423258059319],[-122.41067379713057,37.752989855549394],[-122.41097420454025,37.752898665005745],[-122.4111109972,37.75428135606511]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41074085235596,37.75911208915013],[-122.41096615791321,37.75895092842677],[-122.41068720817566,37.75601604541941],[-122.41038948297499,37.75596302984361],[-122.41074085235596,37.75911208915013]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4106228351593,37.75912057128375],[-122.41037607192993,37.75900182132472],[-122.41005957126616,37.756030889773804],[-122.41037607192993,37.755967271091066],[-122.4106228351593,37.75912057128375]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41250574588776,37.759069678467505],[-122.41241991519928,37.75927749058006],[-122.40993350744247,37.75939836062193],[-122.40979135036467,37.75920751309717],[-122.41250574588776,37.759069678467505]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4124950170517,37.759010303470966],[-122.41236090660094,37.75880673169246],[-122.40988790988922,37.75897213380517],[-122.40979135036467,37.759184187254824],[-122.4124950170517,37.759010303470966]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4123340845108,37.757453813348334],[-122.41222679615021,37.7577167649323],[-122.40982890129088,37.757852481513176],[-122.40966260433196,37.7576277007908],[-122.4123340845108,37.757453813348334]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41233944892883,37.757411401715004],[-122.4121570587158,37.75717389611903],[-122.4097430706024,37.75733930188253],[-122.40965187549591,37.75757680694751],[-122.41233944892883,37.757411401715004]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4126425385475,37.76035471135804],[-122.41251915693282,37.76049678458106],[-122.40916103124619,37.76068126731418],[-122.40908056497574,37.760554037892305],[-122.4126425385475,37.76035471135804]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41264522075652,37.76031018088867],[-122.41252988576888,37.76016598680397],[-122.40912616252899,37.76038863931668],[-122.40908056497574,37.76052647148872],[-122.41264522075652,37.76031018088867]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41006493568419,37.760507387049444],[-122.41015344858168,37.7617436244444],[-122.41044580936432,37.76161639684979],[-122.4103546142578,37.7606176526306],[-122.41006493568419,37.760507387049444]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4100112915039,37.760511628036376],[-122.4097591638565,37.76063461655157],[-122.40995228290556,37.76292046932009],[-122.41023659706117,37.76302224961882],[-122.4100112915039,37.760511628036376]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41288661956786,37.76289926507359],[-122.4127471446991,37.76307738055545],[-122.40948557853699,37.76329366306396],[-122.40933537483214,37.763119788940315],[-122.41288661956786,37.76289926507359]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41288125514983,37.76286109741452],[-122.41269886493683,37.76268722227399],[-122.40942120552062,37.76286957911823],[-122.40934073925017,37.76306465803526],[-122.41288125514983,37.76286109741452]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4127471446991,37.761622758234715],[-122.41260766983031,37.76179663587755],[-122.41026341915129,37.761936585878544],[-122.41016149520874,37.761773310851616],[-122.4127471446991,37.761622758234715]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41273641586304,37.761576108065874],[-122.41256475448607,37.76142343458032],[-122.41020441055298,37.76158034899154],[-122.41016685962677,37.76174574490244],[-122.41273641586304,37.761576108065874]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41482853889467,37.760528591981675],[-122.41467833518982,37.760791532636134],[-122.41291880607605,37.76089331586439],[-122.4127686023712,37.76066430340392],[-122.41482853889467,37.760528591981675]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41482853889467,37.76044377221633],[-122.41461396217345,37.760223240371246],[-122.41283297538757,37.76035895235373],[-122.41272568702696,37.76057948379419],[-122.41482853889467,37.76044377221633]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41371810436249,37.760532832967385],[-122.4135035276413,37.76046073617717],[-122.41347670555115,37.76018931233673],[-122.4127846956253,37.760240204382676],[-122.41266667842865,37.76007480510534],[-122.41366982460022,37.76001967193069],[-122.41371810436249,37.760532832967385]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41379857063293,37.760511628036376],[-122.41400778293608,37.76043104924312],[-122.4139380455017,37.75977369265093],[-122.41272032260893,37.7598712362563],[-122.41265594959259,37.76004935902985],[-122.41372346878052,37.759964538714975],[-122.41379857063293,37.760511628036376]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41125583648682,37.76279324374976],[-122.41164207458495,37.76266601796059],[-122.4115777015686,37.76198747672233],[-122.41115927696227,37.761885694999734],[-122.41125583648682,37.76279324374976]]]}}]",
+    "hours": "24/7",
+    "id": 58,
+    "image_urls": [],
+    "instructions": "Street parking on Mariposa between Harrison and York, on 18th between Florida and Harrison, on 19th between Folsom and York, on Mistral between Treat and Harrison, on 20th and 21st between Harrison and Bryant, on 22nd St. or 23rd between Van Ness and Florida, on Bryant between Mariposa and 19th, on Treat between on 21st and 23rd or 19th and Mistral, on Alabama between 19th and 24th, or on Florida between 20th and 23rd.",
+    "latitude": "37.75714",
+    "long_instructions": "<strong>Street parking on Mariposa between Harrison and York, on 18th between Florida and Harrison, on 19th between Folsom and York, on Mistral between Treat and Harrison, on 20th and 21st between Harrison and Bryant, on 22nd St. or 23rd between Van Ness and Florida, on Bryant between Mariposa and 19th, on Treat between on 21st and 23rd or 19th and Mistral, on Alabama between 19th and 24th, or on Florida between 20th and 23rd. </strong><p>You can end your ride here as long as you <strong>read ALL street signs</strong>. Don't park where there will be street cleaning or other restrictions in the next 48 hours. <strong>Never park in metered parking stalls. Never park where the curb is colored</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up wholes spaces that could fit a car (sharing is OK!).</li> </ul><p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>",
+    "longitude": "-122.41164",
+    "name": "Mission",
+    "orientation_text": "23rd and Treat.",
+    "radius": "350.0",
+    "short_name": "",
+    "spots_taken": 15,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:30:13-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.410461902618,37.7527671807682],[-122.410547733307,37.7537851171545],[-122.410182952881,37.7538020826423],[-122.410343885422,37.7559651504674],[-122.409496307373,37.7560414928823],[-122.409796714783,37.7602317223775],[-122.409045696259,37.7602826143942],[-122.409346103668,37.7636244468536],[-122.413026094437,37.7634208877735],[-122.412811517715,37.7609866170339],[-122.414957284927,37.760884833934],[-122.414892911911,37.7601638663006],[-122.414249181747,37.7601977943468],[-122.414174079895,37.7595192304663],[-122.413122653961,37.7595870871344],[-122.41296172142,37.7578652049299],[-122.414056062698,37.7577973466822],[-122.41397023201,37.7567879478993],[-122.417178153992,37.7566013348511],[-122.416813373566,37.7533949098617],[-122.411727905273,37.7537172551645],[-122.411599159241,37.7527162835813],[-122.410461902618,37.7527671807682]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 7,
+    "public_scoots": 7,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "1001 Brannan St., at Fitness SF SOMA. Park on the Division St. side of building between 9th and Brannan.",
+    "capacity": 2,
+    "created_at": "2015-01-22T13:58:15-08:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 77,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1432241171/division_9th2.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1432241308/Division_9th3.jpg"
+    ],
+    "instructions": "Unpowered parking (for now) at Fitness SF SOMA on Division between 9th and Brannan. Use one of two marked motorcycle parking spots along the wall on Division.  Do not park in other spaces. ",
+    "latitude": "37.769389",
+    "long_instructions": "<body style=\"font-family: Helvetica\"> \r\n<p><strong>24/7 Unpowered Parking (for now) at Fitness SF SOMA on Division between 9th and Brannan. </strong><p> Use one of two marked parking spots along the wall and where the motorcycle parking is on Division.  Do not park in other spaces. <p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p></p>\r\n</body>",
+    "longitude": "-122.406842",
+    "name": "Division&9th",
+    "orientation_text": "",
+    "radius": "100.0",
+    "short_name": "",
+    "spots_taken": 1,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T18:58:30-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 1,
+    "public_scoots": 1,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "2975 Van Ness is the building, but garages are on Francisco.",
+    "capacity": 5,
+    "created_at": "2015-05-11T14:56:51-07:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 98,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1435194408/Francisco_VanNess1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1435194412/Francisco_VanNess2.jpg"
+    ],
+    "instructions": "Park inside garage #12 on Francisco Street near the south corner of Van Ness. Back in and plug in. ",
+    "latitude": "37.803079",
+    "long_instructions": "Park inside garage #12 on Francisco Street near the south corner of Van Ness. Back in and plug in. Close garage when you leave.",
+    "longitude": "-122.425449",
+    "name": "Francisco&VanNess",
+    "orientation_text": "",
+    "radius": "40.0",
+    "short_name": "",
+    "spots_taken": 5,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T19:37:52-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.424967288971,37.8026974089961],[-122.42510676384,37.8034518700687],[-122.42627620697,37.8033077601222],[-122.426083087921,37.8025448204264],[-122.424967288971,37.8026974089961]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 2,
+    "public_scoots": 2,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 1073610751,
+    "address_description": "75 Howard St., parking garage entrance.",
+    "capacity": 3,
+    "created_at": "2014-04-01T12:45:10-07:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "Not 24/7 See info. ",
+    "id": 26,
+    "image_urls": [],
+    "instructions": "Enter through the car entrance on Howard St., between Steuart and Spear. The scoots are parked to the right of the entrance, before the ticket booth and barrier arm. Follow the flow of traffic when entering and exiting.",
+    "latitude": "37.791638",
+    "long_instructions": "OPEN: Mon - Fri: 5am - 11pm, Sat: 7am - 6pm, Sun: 9:30am - 6pm<p>Address is 75 Howard St. Enter through the car entrance on Howard St., between Steuart St. and Spear St. The scoots are parked to the right of the entrance, before the ticket booth and barrier arm. No gate code, ticket or cards needed.<p>Follow the flow of traffic when entering and exiting.",
+    "longitude": "-122.391761",
+    "name": "Howard&Spear",
+    "orientation_text": "the entrance to the garage on 75 Howard between Steuart and Spear St. (https://goo.gl/maps/9baiP)",
+    "radius": "200.0",
+    "short_name": "",
+    "spots_taken": 1,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T17:35:25-07:00",
+    "is_open": true,
+    "is_24x7": false,
+    "formatted_hours": {
+      "9:30am - 6pm": "Sun",
+      "5am - 10pm": "Mon - Fri",
+      "7am - 6pm": "Sat"
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 1438837200,
+    "closing_at_english": "10pm",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 8,
+    "created_at": "2014-10-24T15:51:29-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44243115186691,37.77249780593753],[-122.44267255067825,37.77239603867936],[-122.44228631258011,37.77068293547606],[-122.4420315027237,37.77065537284761],[-122.44243115186691,37.77249780593753]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44240969419478,37.772495685787774],[-122.44212806224822,37.77247872458732],[-122.44173914194108,37.77075078190228],[-122.44198590517044,37.77065961325265],[-122.44240969419478,37.772495685787774]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4454888701439,37.77117270046811],[-122.44546204805374,37.771352916207164],[-122.44069576263428,37.77198684808158],[-122.4405723810196,37.77179603303899],[-122.4454888701439,37.77117270046811]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44549423456192,37.77113665726758],[-122.44538426399231,37.770960681389234],[-122.44058579206467,37.7715734148669],[-122.44056433439253,37.77175999014229],[-122.44549423456192,37.77113665726758]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44334042072295,37.77048575644643],[-122.44338870048522,37.77068081527421],[-122.4405214190483,37.771056090049946],[-122.44038999080658,37.770856791818645],[-122.44334042072295,37.77048575644643]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44368642568588,37.770443352285376],[-122.44396805763245,37.770481516031445],[-122.44437843561172,37.7721967440597],[-122.44406193494795,37.77229003096981],[-122.44368642568588,37.770443352285376]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44381248950958,37.771397440027975],[-122.44364351034164,37.770439111867915],[-122.44341552257538,37.77056208387512],[-122.44377762079239,37.7722794301905],[-122.44404584169388,37.77229003096981],[-122.44381248950958,37.771397440027975]]]}}]",
+    "hours": "24/7",
+    "id": 56,
+    "image_urls": [],
+    "instructions": "Street parking on Page Street between Masonic and Baker, on Haight Street between Central and Baker, or on Lyon or Central between Oak and Haight.",
+    "latitude": "37.7715782",
+    "long_instructions": "<body style=\"font-family: Helvetica\"> <p>\r\n<strong>\r\nStreet parking on Page Street between Masonic and Baker, on Haight Street between Central and Baker, or on Lyon or Central between Oak and Haight. \r\n</strong><p>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning or other parking restrictions in the next 48 hours. <strong>Never park in metered parking stalls. Never park where the curb is colored</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up wholes spaces that could fit a car (sharing is OK!).</li> </ul><p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.</p></body>",
+    "longitude": "-122.442181",
+    "name": "Central Haight",
+    "orientation_text": "",
+    "radius": "200.0",
+    "short_name": "",
+    "spots_taken": 6,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:05:38-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.444686889648,37.7721819029495],[-122.44460105896,37.7716476209987],[-122.445673942566,37.7715119297298],[-122.445513010025,37.7707741040969],[-122.444483041763,37.7709013159382],[-122.444257736206,37.7700786754963],[-122.4402987957,37.7706044879681],[-122.440620660782,37.7722243061136],[-122.441790103912,37.7720801352565],[-122.441886663437,37.7725550499587],[-122.444686889648,37.7721819029495]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 3,
+    "public_scoots": 3,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "255 3rd Street between Folsom and Howard. Moscone Center Garage.",
+    "capacity": 8,
+    "created_at": "2014-12-09T13:43:43-08:00",
+    "gathering_threshold": 7,
+    "geojson": null,
+    "hours": "NOT 24/7 See info",
+    "id": 72,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1431489794/3rd_Folsom_entrance.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1422901734/3rd_folsom_awi7vh.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1431491974/3rd_Folsom_gate.jpg"
+    ],
+    "instructions": "Park on the right-hand side of the garage just after you enter. Back in and plug into the red marked parking stalls along the south wall. ",
+    "latitude": "37.784608",
+    "long_instructions": "<body style=\"font-family: Helvetica\">\r\n<p><strong>Moscone Center Parking Garage. 255 3rd Street between Folsom and Howard. </strong><p><strong>Open only</strong> Mon-Thu 6AM-Midnight, Fri 6AM-2:30AM, Sat 8AM-2:30AM, & Sun 9AM-9PM.<p>Park on the right-hand side of the garage just after you enter. Park in one of the eight red marked parking stalls along the south wall.<strong>Do not pull a ticket. </strong>Only use pedestrian pathways when entering or exiting on foot. <p>\r\n\r\nWhen exiting, please circle around the entrance gate, then around the exit gate. Be careful merging with traffic and do not pass cars trying to exit the gate.</p>\r\n</body>",
+    "longitude": "-122.39941",
+    "name": "3rd&Folsom",
+    "orientation_text": "the entrance to the Moscone Center Parking Garage at 255 3rd Street between Folsom and Howard.  Look for your coach in the red Scoot jacket! ",
+    "radius": "100.0",
+    "short_name": "",
+    "spots_taken": 2,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:12:52-07:00",
+    "is_open": true,
+    "is_24x7": false,
+    "formatted_hours": {
+      "12am - 2:30am": "Sun",
+      "9am - 9pm": "Sun",
+      "6am - 11:59pm": "Mon - Thu",
+      "6am - 2:30am": "Fri",
+      "8am - 11:59pm": "Sat"
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 1438844340,
+    "closing_at_english": "11:59pm",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147287039,
+    "address_description": "",
+    "capacity": 5,
+    "created_at": "2015-06-06T20:03:31-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44094654917716,37.76053601370651],[-122.4410444498062,37.76075124340295],[-122.4432425200939,37.76060811042334],[-122.44440391659735,37.75986911574449],[-122.4443730711937,37.75978005419432],[-122.44337931275368,37.76039606105559],[-122.44094654917716,37.76053601370651]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44160771369933,37.76047557963972],[-122.4416935443878,37.76025080688783],[-122.44330286979674,37.76012993823887],[-122.44444414973258,37.75945137373587],[-122.44475528597832,37.75952241124899],[-122.44336724281311,37.7603801573285],[-122.44160771369933,37.76047557963972]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44344502687454,37.76031018088867],[-122.44315266609192,37.76032714488016],[-122.44282811880113,37.75978641573718],[-122.44299173355103,37.75958708713444],[-122.44344502687454,37.76031018088867]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4430266022682,37.75958072557443],[-122.44312047958374,37.759760969562485],[-122.44347453117372,37.759693113053835],[-122.44407266378401,37.75926900846445],[-122.44379639625551,37.75915025874371],[-122.44330018758772,37.75950438681183],[-122.4430266022682,37.75958072557443]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44376689195633,37.759135415015216],[-122.44349330663681,37.759116330217054],[-122.44312584400177,37.759279611108845],[-122.44305074214935,37.759519230466275],[-122.44328677654266,37.75946197635408],[-122.44376689195633,37.759135415015216]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4447914958,37.75947045844758],[-122.4445554614067,37.75964540140889],[-122.44360327720642,37.759313539560594],[-122.44328409433365,37.75912905341638],[-122.4423936009407,37.75913753554805],[-122.442264854908,37.758921240886814],[-122.44339674711227,37.75890003549384],[-122.44379103183745,37.759154499808446],[-122.4447914958,37.75947045844758]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44298368692397,37.75956588193232],[-122.44272351264954,37.75942804797042],[-122.44269937276839,37.75898061595485],[-122.44299441576004,37.75889791495419],[-122.44302928447725,37.75948742263165],[-122.44298368692397,37.75956588193232]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44478881359099,37.75943653006778],[-122.44476735591888,37.7592202362808],[-122.44408339262009,37.75902302668852],[-122.44381785392761,37.75913329448234],[-122.44478881359099,37.75943653006778]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44378834962843,37.75911420968364],[-122.44385004043579,37.75889791495419],[-122.44351476430894,37.758698583957305],[-122.44235873222351,37.75872615104207],[-122.44225949048995,37.758893673874745],[-122.4434208869934,37.7588661068524],[-122.44378834962843,37.75911420968364]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44091838598251,37.76056888133613],[-122.4408835172653,37.760763966321065],[-122.44049191474916,37.761031147096],[-122.44030147790909,37.76105235187808],[-122.44091838598251,37.76056888133613]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4408942461014,37.760549796907824],[-122.44062602519989,37.760624014101424],[-122.44015663862227,37.760976014634174],[-122.44025856256485,37.76103750853125],[-122.4408942461014,37.760549796907824]]]}}]",
+    "hours": "24/7",
+    "id": 103,
+    "image_urls": [],
+    "instructions": "Street parking on 18th between Hattie and Market, on Storrie between 18th and Market, on 19th between Market and Yukon, on Caselli between Danvers and 19th, or Danvers between 18th and Caselli.",
+    "latitude": "37.760441",
+    "long_instructions": "<strong>Street parking on 18th between Hattie and Market, on Storrie between 18th and Market, on 19th between Market and Yukon, on Caselli between Danvers and 19th, or Danvers between 18th and Caselli. </strong><p>You can end your ride here as long as you <strong>read ALL street signs</strong>. Don't park where there will be street cleaning or other restrictions in the next 48 hours.  <strong>Never park in metered parking stalls. Never parked where the curb is colored</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up wholes spaces that could fit a car (sharing is OK!).</li> </ul><p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>",
+    "longitude": "-122.442432",
+    "name": "Upper Market",
+    "orientation_text": "",
+    "radius": "300.0",
+    "short_name": "",
+    "spots_taken": 5,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T18:19:37-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.442798614502,37.7595955692136],[-122.442820072174,37.7601129742021],[-122.441672086716,37.7601808303257],[-122.440942525864,37.7604660374141],[-122.440942525864,37.7604668325997],[-122.440942525864,37.7604672301924],[-122.440942525864,37.7604674289888],[-122.440942525864,37.760467528387],[-122.440942525864,37.7604675780861],[-122.440942525864,37.7604676029356],[-122.440942525864,37.7604676153604],[-122.440942525864,37.7604676215728],[-122.440942525864,37.7604676277851],[-122.440942525864,37.7604684229706],[-122.440942525864,37.7604688205634],[-122.440942525864,37.7604690193597],[-122.440942525864,37.7604691187579],[-122.440942525864,37.760469168457],[-122.440942525864,37.7604691933065],[-122.440942525864,37.7604692057313],[-122.440942525864,37.7604692119437],[-122.440942525864,37.7604692181561],[-122.440070807934,37.7610905204705],[-122.440459728241,37.7610375085313],[-122.440977394581,37.760884833934],[-122.442964911461,37.7607788097228],[-122.444633245468,37.759705836154],[-122.444799542427,37.7594132042977],[-122.444756627083,37.7592138746892],[-122.443410158157,37.7586370881158],[-122.442181706429,37.7586667757698],[-122.442203164101,37.7589127587303],[-122.442246079445,37.7591205712838],[-122.442766427994,37.7591205712838],[-122.442798614502,37.7595955692136]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 5,
+    "public_scoots": 5,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "1680 Fillmore St., Japan Center Garage Annex. ",
+    "capacity": 6,
+    "created_at": "2014-03-12T16:31:17-07:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "Not 24/7 See info",
+    "id": 24,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1429584786/Fillmore_Post_1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1429584796/Fillmore_Post_2.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1429584804/Fillmore_Post_3.jpg"
+    ],
+    "instructions": "Enter through the Fillmore St. entrance, between Geary and Post. Ride down the ramp and around the barrier arm. On your left is a cashier booth, scoots are parked past it to your left. When leaving, exit with cars and ride around the gate.",
+    "latitude": "37.784869",
+    "long_instructions": "OPEN: 6:30am to 1:30am daily <p>Address is 1680 Fillmore St. Enter through the Fillmore St. entrance, between Geary St. and Post St. <p> Ride down the ramp and around the barrier arm. DO NOT pull a ticket. <p> On your left is the exotic cashier booth; scoots are parked past it on the left. Back in and plug in. When leaving, exit with cars and ride around the gate.",
+    "longitude": "-122.432832",
+    "name": "Fillmore&Post",
+    "orientation_text": "the garage entrance on Fillmore between Post and Geary. Look for your coach in the red scoot jacket!  (https://goo.gl/maps/iDhtg)",
+    "radius": "75.0",
+    "short_name": "",
+    "spots_taken": 6,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:19:52-07:00",
+    "is_open": true,
+    "is_24x7": false,
+    "formatted_hours": {
+      "12am - 1:30am": "Sun",
+      "6:30am - 1:30am": "Sun - Fri",
+      "6:30am - 11:59pm": "Sat"
+    },
+    "num_available_scooters": 4,
+    "public_scoots": 4,
+    "closing_at": 1438849800,
+    "closing_at_english": " 1:30am tomorrow",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 6,
+    "created_at": "2014-06-13T13:15:34-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4322199821472,37.772877311769385],[-122.43214488029479,37.77294515618211],[-122.43071794509888,37.773106286412876],[-122.43066430091858,37.773051162952406],[-122.4322199821472,37.772877311769385]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4322199821472,37.77280098673065],[-122.43208050727844,37.77278402560022],[-122.43071794509888,37.77293667563393],[-122.43066161870958,37.7730257213414],[-122.4322521686554,37.77281582771656],[-122.4322199821472,37.77280098673065]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43253111839294,37.77368084003511],[-122.43249088525772,37.77373384291187],[-122.43213951587676,37.77196988676439],[-122.43220925331116,37.77201229005006],[-122.43253111839294,37.77368084003511]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43243724107742,37.77370416130555],[-122.43210196495055,37.77196776659949],[-122.43204832077026,37.77202925135751],[-122.4323782324791,37.773678719919246],[-122.43243724107742,37.77370416130555]]]}}]",
+    "hours": "24/7",
+    "id": 33,
+    "image_urls": [],
+    "instructions": "Street parking on Page St. between Steiner and Fillmore, or on Steiner between Haight and Oak.",
+    "latitude": "37.772979",
+    "long_instructions": "Street parking on Page St. between Steiner and Fillmore, or on Steiner between Haight and Oak.",
+    "longitude": "-122.431123",
+    "name": "Page+Steiner",
+    "orientation_text": "",
+    "radius": "250.0",
+    "short_name": "",
+    "spots_taken": 6,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:08:09-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.433024644852,37.7737423233686],[-122.429140806198,37.7742426685953],[-122.428743839264,37.7722921511255],[-122.43264913559,37.7717917926991],[-122.433024644852,37.7737423233686]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 4,
+    "public_scoots": 4,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 6,
+    "created_at": "2015-01-13T15:13:48-08:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45786190032959,37.766077713786316],[-122.45805501937868,37.7662473402984],[-122.45808452367781,37.766499659015324],[-122.4582079052925,37.766696848673796],[-122.45800673961638,37.766762578443114],[-122.4578967690468,37.76652722319275],[-122.45786190032959,37.766077713786316]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45761513710023,37.7659907800481],[-122.45744884014128,37.76616252709099],[-122.45678097009659,37.76613708310981],[-122.45483636856079,37.76635335667086],[-122.45464324951172,37.766185850732725],[-122.45663881301878,37.76593989195879],[-122.45761513710023,37.7659907800481]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45780289173125,37.76598017836571],[-122.45774120092392,37.765850837718226],[-122.45751857757567,37.76579146816497],[-122.4571430683136,37.765848717377885],[-122.45780289173125,37.76598017836571]]]}}]",
+    "hours": "24/7",
+    "id": 74,
+    "image_urls": [],
+    "instructions": "Street parking on Arguello north of Frederick or Frederick between Arguello and Willard. ",
+    "latitude": "37.765971",
+    "long_instructions": "<body style=\"font-family: Helvetica\">\r\n<p><strong>Scoot Stop! 24/7 street parking on Arguello north of Frederick or Frederick between Arguello and Willard. Pay attention to the green zones in the map! <P></strong> \r\nYou can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning, construction, or other parking restrictions in the next 48 hours. <strong>NEVER park in metered stalls</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Never park where the curb is colored (even faded).</li><li style=\"font-size:0.9em;\">Park 2 feet from driveways or other vehicles. </li><li style=\"font-size:0.9em;\">Don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p></p>\r\n</body>",
+    "longitude": "-122.457268",
+    "name": "Arguello+Frederick",
+    "orientation_text": "",
+    "radius": "250.0",
+    "short_name": "",
+    "spots_taken": 1,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:08:16-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.458280324936,37.7662112946971],[-122.45832324028,37.7669237221465],[-122.457722425461,37.7669322033844],[-122.457679510117,37.7663130704672],[-122.454718351364,37.7666947283577],[-122.454578876495,37.7660331867624],[-122.457926273346,37.7655836743532],[-122.457958459854,37.7659907800481],[-122.458280324936,37.7662112946971]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 1,
+    "public_scoots": 1,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "Approximately 351 Townsend St. near the 4th Street Caltrain Station. Use either of the two lots on Townsend, but don't park anywhere else.",
+    "capacity": 2,
+    "created_at": "2012-11-13T12:13:42-08:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 3,
+    "image_urls": [],
+    "instructions": "Park at the metered motorcycle parking on Townsend between 4th and 5th St. There is no garage. Back in, but you can't plug in. There are two lots: one in the middle of the block and one closer to 5th Street.",
+    "latitude": "37.776114",
+    "long_instructions": "<strong>Open 24/7.</strong><p>The scoots are parked at metered motorcycle parking on Townsend between 4th and 5th.<p>There is <strong>no garage</strong>. You <strong>do not</strong> need to plug the scoots in here.<p> When you end a ride at Caltrain, fill in the meter information in the popup within the app. Scroll to select the meter number (meter # are on the back of meter payment box) and the parking spot you're in (look on the ground behind your scoot). Please back in your scoot.",
+    "longitude": "-122.396138",
+    "name": "Caltrain",
+    "orientation_text": "125 Bluxome Street (between 5th and 6th).",
+    "radius": "110.0",
+    "short_name": "",
+    "spots_taken": 1,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:23:19-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.397898435593,37.7752942305776],[-122.397222518921,37.774759971117],[-122.394690513611,37.7767782643777],[-122.395334243774,37.7773294693446],[-122.397898435593,37.7752942305776]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 1073610751,
+    "address_description": "645 Judah St., Emerald Auto & Brake lot.",
+    "capacity": 8,
+    "created_at": "2014-10-02T17:13:51-07:00",
+    "gathering_threshold": 12,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 53,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1429582170/Judah_12thAve_1.jpg"
+    ],
+    "instructions": "Powered outdoor parking. Please back in and plug in along the eastern side of the lot against the wall. Park within the marked stalls only. Be careful about MUNI tracks! Exit by turning right on to Judah when you leave.",
+    "latitude": "37.761873",
+    "long_instructions": "<Strong>24/7 outdoor parking</strong>. Park the scoots at 645 Judah St. (Emerald Auto & Brake on the corner of 12th Ave). <p><strong>Please Back in and plug in </strong> along the eastern side of the lot against the wall. Please park within the marked stalls only. <p><b>Please be careful about MUNI tracks!</b> Exit by turning right on to Judah when you leave.",
+    "longitude": "-122.469146",
+    "name": "Judah&12thAve",
+    "orientation_text": "the scoots at 645 Judah St. Look for your coach in the red Scoot jacket! ",
+    "radius": "50.0",
+    "short_name": "",
+    "spots_taken": 2,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T18:07:05-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.469545602798,37.7622758575092],[-122.46869802475,37.7623267481196],[-122.468676567078,37.7614361573828],[-122.469524145126,37.7614191936457],[-122.469545602798,37.7622758575092]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 1,
+    "public_scoots": 1,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 1073610751,
+    "address_description": "Approximately 1275 Fell St., Falletti Plaza Garage entrance before Broderick.",
+    "capacity": 6,
+    "created_at": "2015-02-19T11:34:00-08:00",
+    "gathering_threshold": 12,
+    "geojson": null,
+    "hours": "Open 7AM to 11PM daily",
+    "id": 83,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1429585324/FELL_BRODERICK_1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1429585327/FELL_BRODERICK_2.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1429585313/FELL_BRODERICK_3.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1429585333/FELL_BRODERICK_4.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1429585329/FELL_BRODERICK_5.jpg"
+    ],
+    "instructions": "Enter from Fell St. into the Falletti Plaza parking lot. Turn left in the first lane of parking. Find the scoots parked in the nearest stall to the left. Back in and plug into the designated stalls. Be careful entering from Fell and exiting on Oak. Be mindful of pedestrians if you exit or enter from Broderick. Scoots are parked toward the Fell entrance.",
+    "latitude": "37.773816",
+    "long_instructions": "<p><strong>Approximate address 1275 Fell Street entrance.</strong><p> Enter from Fell Street into the Falletti Plaza parking lot. Turn left in the first lane of parking. Find the scoots parked in the nearest stall on your lefthand side. Please back in and plug in your scoot within the designated stall.<p>Be careful entering from Fell and exiting on Oak. Please be mindful of pedestrians if you exit or enter from Broderick. Scoots are parked toward the Fell entrance.<p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p></p>",
+    "longitude": "-122.438746",
+    "name": "Fell&Broderick",
+    "orientation_text": "the scoot parking area of the Falletti Plaza parking lot.  Look for your coach in the red Scoot jacket! ",
+    "radius": "65.0",
+    "short_name": "",
+    "spots_taken": 3,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:10:59-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.439429759979,37.7742596293911],[-122.439215183258,37.773309818834],[-122.438035011292,37.7734455068035],[-122.438249588013,37.7744461978882],[-122.439429759979,37.7742596293911]]]}}]",
+    "is_24x7": false,
+    "formatted_hours": {
+      "7am - 11pm": "Sat - Sun"
+    },
+    "num_available_scooters": 1,
+    "public_scoots": 1,
+    "closing_at": 1438840800,
+    "closing_at_english": "11pm",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "3400 Mission Street, 7-11 and 76 Gas Station.",
+    "capacity": 2,
+    "created_at": "2014-11-05T04:25:49-08:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 62,
+    "image_urls": [],
+    "instructions": "Powered outdoor parking. Scoots are parked on the Mission St side of the lot. Back in and plug into the outlet on the pole in the corner of the lot. Park only within the 3 designated spaces marked with red tape. Don't park on the sidewalk or block the adjacent cars. ",
+    "latitude": "37.742119",
+    "long_instructions": "Powered outdoor parking. Scoots are parked on the Mission St side of the lot. Back in and plug into the outlet on the pole in the corner of the lot. Park only within the 3 designated spaces marked with red tape. Don't park on the sidewalk or block the adjacent cars. ",
+    "longitude": "-122.422501",
+    "name": "Mission&30th",
+    "orientation_text": "",
+    "radius": "50.0",
+    "short_name": "",
+    "spots_taken": 2,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T19:51:49-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 2,
+    "public_scoots": 2,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 20,
+    "created_at": "2014-10-24T15:07:49-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4684029817581,37.77887282138742],[-122.46824741363524,37.778660824389476],[-122.46102422475813,37.7790148590359],[-122.46095180511473,37.77921837519091],[-122.4684029817581,37.77887282138742]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46841371059418,37.77891098078249],[-122.46828496456145,37.779169616163145],[-122.46106445789336,37.77946216984727],[-122.46094912290572,37.77923745480169],[-122.46841371059418,37.77891098078249]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46215879917143,37.7810160768918],[-122.46242433786392,37.780937640347695],[-122.46214002370834,37.77742062977],[-122.46188789606094,37.77733582937791],[-122.46215879917143,37.7810160768918]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46212124824523,37.78101819679725],[-122.46185302734375,37.78097367877019],[-122.46155530214308,37.777422749778545],[-122.46186912059783,37.7773379493889],[-122.46212124824523,37.78101819679725]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4631941318512,37.78092068108397],[-122.46288836002348,37.78085920372038],[-122.46241092681885,37.77401369747112],[-122.46262550354004,37.7737932060887],[-122.4631941318512,37.78092068108397]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4632316827774,37.78092280099216],[-122.46354013681412,37.78084436434907],[-122.4630117416382,37.77393737360547],[-122.46272206306456,37.77376776473303],[-122.4632316827774,37.78092280099216]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46373593807222,37.77363631758929],[-122.46425628662108,37.78084012452813],[-122.46394515037537,37.780780767009816],[-122.46340870857237,37.77376776473303],[-122.46373593807222,37.77363631758929]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46381103992461,37.77362783712037],[-122.46415972709656,37.77370416130555],[-122.46461033821105,37.780768047535375],[-122.46429920196532,37.78084436434907],[-122.46381103992461,37.77362783712037]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46532917022705,37.780772287360406],[-122.46503949165344,37.78071292978759],[-122.46453523635863,37.77373384291187],[-122.46477127075194,37.77356423357254],[-122.46532917022705,37.780772287360406]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46537208557129,37.78076380771009],[-122.46565103530884,37.78069597047231],[-122.46518969535828,37.773657518757325],[-122.46492147445679,37.77350487021185],[-122.46537208557129,37.78076380771009]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46643155813216,37.780768047535375],[-122.46670246124266,37.78067477132274],[-122.46616065502167,37.77347518851363],[-122.46591389179231,37.773415825081464],[-122.46643155813216,37.780768047535375]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46639400720595,37.780768047535375],[-122.46612846851349,37.78071292978759],[-122.46564030647278,37.77350487021185],[-122.46586829423903,37.773403104339785],[-122.46639400720595,37.780768047535375]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46748700737953,37.78073624883975],[-122.46770024299622,37.78068749081321],[-122.46718525886536,37.773390383595924],[-122.46696934103964,37.77335540153902],[-122.46748700737953,37.78073624883975]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46744811534882,37.78073836875321],[-122.46723890304564,37.78071292978759],[-122.46673464775085,37.773394623844126],[-122.46694386005402,37.773356461601615],[-122.46744811534882,37.78073836875321]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46814280748367,37.77518186680531],[-122.46805161237717,37.7753832734457],[-122.4629071354866,37.775588919659754],[-122.46282935142517,37.77541507444401],[-122.46814280748367,37.77518186680531]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4681481719017,37.77514582555916],[-122.46801674365997,37.774959258827565],[-122.46288567781447,37.77520942774639],[-122.46282935142517,37.77538963364644],[-122.4681481719017,37.77514582555916]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4650850892067,37.777183188427074],[-122.46516555547714,37.77734006939984],[-122.46820181608199,37.77719590851834],[-122.46828496456145,37.777036907220094],[-122.4650850892067,37.777183188427074]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46509313583373,37.7771556282218],[-122.46513605117796,37.77699026677441],[-122.46819376945494,37.77684610521078],[-122.46828228235243,37.777011466980646],[-122.46509313583373,37.7771556282218]]]}}]",
+    "hours": "24/7",
+    "id": 55,
+    "image_urls": [],
+    "instructions": "Street parking on 4th Ave. between Geary and Balboa, on 5th Ave. through 9th Ave. between Geary and Fulton, on Anza between 3rd Ave. and 10th Ave, on Balboa between 7th Ave. and 10th Ave., or on Cabrillo between 5th Ave. and 10th Ave. ",
+    "latitude": "37.77744",
+    "long_instructions": "<strong>Street parking on 4th Ave. between Geary and Balboa, on 5th Ave. through 9th Ave. between Geary and Fulton, on Anza between 3rd Ave. and 10th Ave, on Balboa between 7th Ave. and 10th Ave., or on Cabrillo between 5th Ave. and 10th Ave. </strong><p>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning or other parking restrictions in the next 48 hours. <strong>Never park in metered parking stalls. Never parked where the curb is colored</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up wholes spaces that could fit a car (sharing is OK!).</li> </ul><p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>",
+    "longitude": "-122.46494",
+    "name": "Inner Richmond",
+    "orientation_text": "the corner of 4th Ave and Anza.",
+    "radius": "230.0",
+    "short_name": "",
+    "spots_taken": 10,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:27:14-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.461091279984,37.7811029929651],[-122.460812330246,37.7773803495959],[-122.462464570999,37.7773040292058],[-122.462153434753,37.7737592842792],[-122.465908527374,37.7733607018518],[-122.468000650406,37.7733182993394],[-122.468580007553,37.7807722873604],[-122.461091279984,37.7811029929651]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 9,
+    "public_scoots": 9,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "433 Kearny St., St. Mary's Square Garage.",
+    "capacity": 8,
+    "created_at": "2012-12-10T17:08:14-08:00",
+    "gathering_threshold": 8,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 9,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1432242387/Kearny_Pine1.jpg"
+    ],
+    "instructions": "Enter through the Pine St. car entrance. The scoots are parked directly on the right. Do NOT take a ticket. When exiting, ride around the gate. You can also enter the garage from California St. Do not enter on Kearny.",
+    "latitude": "37.791758",
+    "long_instructions": "<strong>Open 24/7.</strong><p>Address: 433 Kearny St., St. Mary's Square Garage.<p>Enter through the Pine St. car entrance. <p>The scoots are parked directly on the right. <strong>Do NOT</strong> take a ticket. When exiting, ride around the gate.<p>You can also enter the garage from California St.. <strong>Do NOT enter on Kearny!</strong>",
+    "longitude": "-122.404929",
+    "name": "Pine&Kearny",
+    "orientation_text": "the Pine Street entrance just up the hill from the intersection of Kearny and Pine (http://goo.gl/maps/z59TO).",
+    "radius": "100.0",
+    "short_name": "",
+    "spots_taken": 2,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T18:28:49-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 1,
+    "public_scoots": 1,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": " 2004 Fell St. at Cole St, under a small apartment building.",
+    "capacity": 9,
+    "created_at": "2013-04-30T15:01:57-07:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 11,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1432772210/Fell_Cole1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1432772211/Fell_Cole2.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1432772209/Fell_Cole3.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1432772209/Fell_Cole4.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1432241077/Fell_Cole5.jpg"
+    ],
+    "instructions": "Scoots are parked inside the brown garage door on Fell near Cole below a small apartment building. When leaving, be mindful of fast traffic on Fell. If exiting on Cole, walk your scoot to the road, NEVER drive on the sidewalk. Back in and plug into the designated red lines.",
+    "latitude": "37.772561",
+    "long_instructions": "<body style=\"font-family: Helvetica\">\r\n<p><strong>OPEN: 24/7, address is 2004 Fell St. </strong>The entrance is the brown garage door on Fell.<p>Use the the keypad <strong>(code SEE LOCATION INSTRUCTIONS AT THE BOTTOM OF YOUR APP SCREEN) </STRONG>located to the left of the garage door. To close the garage, use the same code.<p>When leaving, be mindful of fast traffic on Fell St. If exiting on Cole St, be sure to walk your scoot to the road, DO NOT drive on the sidewalk.<p>Park WITHIN the designated red lines. Be considerate of cars that share this garage.</p>\r\n</body>",
+    "longitude": "-122.450967",
+    "name": "Fell&Cole",
+    "orientation_text": "the corner of Cole and Fell (http://goo.gl/maps/467pz).",
+    "radius": "75.0",
+    "short_name": "",
+    "spots_taken": 6,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:26:38-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.451199293137,37.7722497480003],[-122.451285123825,37.7725889723207],[-122.450813055038,37.7726483364168],[-122.450748682022,37.7723260736081],[-122.451199293137,37.7722497480003]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 5,
+    "public_scoots": 5,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "470 14th Street near Guerrero. On your left mid-block as you head east.",
+    "capacity": 9,
+    "created_at": "2015-05-11T14:49:31-07:00",
+    "gathering_threshold": 9,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 95,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1431745876/14th_Guerrero1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1431745876/14th_Guerrero2.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1431745876/14th_Guerrero3.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1431745876/14th_Guerrero4.jpg"
+    ],
+    "instructions": "Enter the code into the pad on your left to enter the garage. Back in and plug your scoot into one of the marked stalls immediately on your left as you pull in. Always close the garage before you leave.",
+    "latitude": "37.768121",
+    "long_instructions": "Enter the code into the pad on your left to enter the garage. Back in and plug your scoot into one of the marked stalls immediately on your left as you pull in. Always close the garage before you leave.",
+    "longitude": "-122.423728",
+    "name": "14th&Guerrero",
+    "orientation_text": "the entrance to the garage at 470 14th Street near Guerrero.  Look for your coach in the red Scoot jacket! ",
+    "radius": "150.0",
+    "short_name": "",
+    "spots_taken": 5,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:31:43-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.424141168594,37.7678651336066],[-122.424194812775,37.7684333671564],[-122.422660589218,37.7685139372317],[-122.422038316727,37.7689803938368],[-122.42219388485,37.7691754566356],[-122.422231435776,37.7695274164707],[-122.421298027039,37.7695952639571],[-122.421137094498,37.7684545698163],[-122.421705722809,37.7684291266237],[-122.422022223473,37.768942229316],[-122.422639131546,37.76848425353],[-122.422623038292,37.7679584259815],[-122.424141168594,37.7678651336066]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 2,
+    "public_scoots": 2,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 10,
+    "created_at": "2015-03-07T16:06:42-08:00",
+    "gathering_threshold": 30,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48445868492126,37.77821986868627],[-122.48436212539674,37.77843186694882],[-122.4739471077919,37.77885586164994],[-122.47386127710342,37.7786650643354],[-122.48445868492126,37.77821986868627]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4844479560852,37.77812658925817],[-122.48431921005248,37.7779569899964],[-122.47398465871811,37.77842974696921],[-122.47385323047638,37.778639624656236],[-122.4844479560852,37.77812658925817]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4782520532608,37.77974412266455],[-122.47795701026918,37.7796826443224],[-122.47739911079407,37.77307236428822],[-122.47774243354796,37.77293667563393],[-122.4782520532608,37.77974412266455]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47828960418701,37.77974200272257],[-122.47854709625243,37.77966356482649],[-122.47820377349854,37.773004519992206],[-122.4778228998184,37.77293667563393],[-122.47828960418701,37.77974200272257]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47614115476607,37.77987979882493],[-122.47641474008559,37.77980136107509],[-122.47600436210632,37.773157169570666],[-122.47569322586058,37.773106286412876],[-122.47614115476607,37.77987979882493]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47611433267593,37.77988191876297],[-122.47583270072937,37.77981408071586],[-122.47525334358214,37.77319957217544],[-122.47556447982788,37.773106286412876],[-122.47611433267593,37.77988191876297]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47721672058105,37.77982256047513],[-122.4774768948555,37.77973564289627],[-122.47713088989258,37.773080844820825],[-122.4767553806305,37.77299603945082],[-122.47721672058105,37.77982256047513]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47717916965483,37.77982892029398],[-122.47688949108124,37.779756842315166],[-122.47629404067992,37.773123247469364],[-122.47665882110594,37.773004519992206],[-122.47717916965483,37.77982892029398]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47928738594057,37.779686884209696],[-122.47894942760468,37.77962752576527],[-122.4785041809082,37.77298755890846],[-122.47880458831789,37.77288579232439],[-122.47928738594057,37.779686884209696]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47936785221101,37.77969960387016],[-122.47968435287474,37.77959360663275],[-122.47919619083403,37.772962117275576],[-122.47887969017027,37.772881552047004],[-122.47936785221101,37.77969960387016]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47499585151672,37.778567545517774],[-122.47538208961487,37.77845730669946],[-122.4749207496643,37.77321653321054],[-122.47458279132843,37.77313172799615],[-122.47499585151672,37.778567545517774]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47491002082825,37.77857602542007],[-122.47454524040222,37.77848274644134],[-122.47419118881226,37.77322501372663],[-122.47452378273009,37.77313172799615],[-122.47491002082825,37.77857602542007]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47386932373047,37.77860570507042],[-122.4742019176483,37.778465786614376],[-122.47384786605836,37.77319957217544],[-122.47347235679625,37.773157169570666],[-122.47386932373047,37.77860570507042]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47379422187804,37.7786099450195],[-122.47345089912415,37.7785166660836],[-122.47307538986205,37.77322501372663],[-122.47340798377991,37.773157169570666],[-122.47379422187804,37.7786099450195]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48434066772461,37.77634577760317],[-122.48422265052795,37.77654930110633],[-122.47390151023865,37.77705810741294],[-122.47375130653381,37.77682066490566],[-122.48434066772461,37.77634577760317]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48430848121642,37.77624401564146],[-122.484233379364,37.776082892248986],[-122.47383177280426,37.776532340835814],[-122.47375130653381,37.77676978426915],[-122.48430848121642,37.77624401564146]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47361183166504,37.774948658430965],[-122.47371912002562,37.77514582555916],[-122.4841046333313,37.774709089062235],[-122.4842119216919,37.77446315863732],[-122.47361183166504,37.774948658430965]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47361183166504,37.774891416263],[-122.47367620468138,37.77467516767297],[-122.48404026031496,37.77420026658876],[-122.4842119216919,37.77438683523565],[-122.47361183166504,37.774891416263]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4803602695465,37.779669924659004],[-122.48004913330077,37.77954272790481],[-122.47956633567809,37.77293667563393],[-122.47986674308777,37.77282642841898],[-122.4803602695465,37.779669924659004]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48044610023497,37.77964448532568],[-122.48077869415285,37.7795172885277],[-122.48029589653017,37.77292819508478],[-122.47997403144838,37.77283490897981],[-122.48044610023497,37.77964448532568]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48151898384094,37.77958512684719],[-122.48178720474245,37.77944097034384],[-122.48135805130005,37.772894272878396],[-122.4810469150543,37.77281794785716],[-122.48151898384094,37.77958512684719]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48144388198853,37.77958512684719],[-122.48110055923463,37.77944945014594],[-122.48067140579224,37.77293667563393],[-122.48092889785765,37.77281794785716],[-122.48144388198853,37.77958512684719]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48258113861083,37.779576647060665],[-122.48287081718443,37.77938161170192],[-122.48245239257812,37.77282642841898],[-122.48213052749634,37.77275858389728],[-122.48258113861083,37.779576647060665]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4824845790863,37.77956816727315],[-122.48218417167662,37.779415530931715],[-122.48167991638184,37.77286035065646],[-122.48198032379149,37.77278402560022],[-122.4824845790863,37.77956816727315]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4836003780365,37.779559687484685],[-122.48328924179077,37.779415530931715],[-122.48279571533203,37.772843389539645],[-122.4830639362335,37.772733142185615],[-122.4836003780365,37.779559687484685]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48368620872498,37.77956816727315],[-122.48398661613463,37.77940705112572],[-122.48352527618408,37.77280098673065],[-122.48319268226622,37.772724661613104],[-122.48368620872498,37.77956816727315]]]}}]",
+    "hours": "24/7",
+    "id": 89,
+    "image_urls": [],
+    "instructions": "Street parking on 17th Ave. through 24th Ave. between Geary and Fulton, on 16th Ave. between Anza and Fulton, or on Anza, Balboa, or Cabrillo between 25th Ave. and 15th Ave.",
+    "latitude": "37.77634",
+    "long_instructions": "<p><strong>Street parking on 17th Ave. through 24th Ave. between Geary and Fulton, on 16th Ave. between Anza and Fulton, or on Anza, Balboa, or Cabrillo between 25th Ave. and 15th Ave. </strong> Pay attention to the green zones in the map. <P> You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning, construction, or other parking restrictions in the next 48 hours. <strong>NEVER park in metered stalls</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Never park where the curb is colored (even faded).</li><li style=\"font-size:0.9em;\">Park 2 feet from driveways or other vehicles. </li><li style=\"font-size:0.9em;\">Don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p></p>",
+    "longitude": "-122.47904",
+    "name": "S. Richmond",
+    "orientation_text": "",
+    "radius": "225.0",
+    "short_name": "",
+    "spots_taken": 10,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:24:31-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.484855651855,37.7798056009556],[-122.4755859375,37.7802126283511],[-122.475462555885,37.7789491401578],[-122.473279237747,37.7790339386992],[-122.472828626633,37.7731147669416],[-122.484383583069,37.7725804917317],[-122.484855651855,37.7798056009556]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 8,
+    "public_scoots": 8,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": " 735 Vallejo St., North Beach Garage.",
+    "capacity": 5,
+    "created_at": "2013-06-06T10:41:49-07:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 13,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1432242494/Vallejo_Stockton4.jpg"
+    ],
+    "instructions": "Enter through car entrance on Vallejo. Do not go around the gate or take a ticket. Instead, ride toward bike parking and follow the Scoot signs to the designated Scoot parking area. Exit the same way you came in. Back in and plug in.\r\n",
+    "latitude": "37.798434",
+    "long_instructions": "OPEN: 24/7, address is 735 Vallejo St.<p>Enter through car entrance on Vallejo. DO NOT go around the gate. DO NOT take a ticket. <p>Instead, ride toward bike parking and follow the scoot signs to the designated scoot parking area.<p>Exit the same way you came in.",
+    "longitude": "-122.409468",
+    "name": "Vallejo&Stockton",
+    "orientation_text": "the garage entrance on Vallejo St. (http://goo.gl/maps/wuSn6).",
+    "radius": "200.0",
+    "short_name": "",
+    "spots_taken": 2,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:03:24-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 1,
+    "public_scoots": 1,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "1399 Bush St., Polk-Bush Garage.",
+    "capacity": 7,
+    "created_at": "2012-12-07T13:05:38-08:00",
+    "gathering_threshold": 12,
+    "geojson": null,
+    "hours": "Not 24/7, closed Sundays",
+    "id": 8,
+    "image_urls": [],
+    "instructions": "Enter through the car entrance on Bush St. The scoots are parked at the top of the ramp.  Do not take a ticket. Ride around the gate. Back in and plug in within the lines.",
+    "latitude": "37.788628",
+    "long_instructions": "OPEN: Mon - Thurs: 7am - 10pm, Fri: 7am - 2:30am, Sat: 8am - 2:30am. The garage is CLOSED on Sunday. <p>Address is 1399 Bush St.<p>Enter through the car entrance on Bush St. The scoots are parked at the top of the ramp. DO NOT take a ticket, instead when entering and exiting ride around the gate.",
+    "longitude": "-122.420008",
+    "name": "Polk&Bush",
+    "orientation_text": "the parklet outside Quetzal Internet Cafe on the corner of Polk and Fern (http://goo.gl/maps/OBEkq).",
+    "radius": "200.0",
+    "short_name": "",
+    "spots_taken": 7,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:31:11-07:00",
+    "is_open": true,
+    "is_24x7": false,
+    "formatted_hours": {
+      "12am - 2:30am": "Sun",
+      "9am - 10pm": "Sun",
+      "7am - 10pm": "Mon - Thu",
+      "7am - 2:30am": "Fri",
+      "8am - 11:59pm": "Sat"
+    },
+    "num_available_scooters": 2,
+    "public_scoots": 2,
+    "closing_at": 1438837200,
+    "closing_at_english": "10pm",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 6,
+    "created_at": "2014-12-09T12:21:53-08:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.437946498394,37.77592812865977],[-122.43781238794327,37.77573520373188],[-122.4363961815834,37.775892087777414],[-122.43633985519408,37.77611893303832],[-122.437946498394,37.77592812865977]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43652760982513,37.77704750731727],[-122.43681728839873,37.77694574632153],[-122.43658393621446,37.77586240703758],[-122.4363023042679,37.775904808090836],[-122.43652760982513,37.77704750731727]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43649274110793,37.77705386737486],[-122.43618965148926,37.777026307121396],[-122.43580877780913,37.77530907106308],[-122.43613868951796,37.775207307674364],[-122.43649274110793,37.77705386737486]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43795454502107,37.77595992942371],[-122.43790894746779,37.77618253438841],[-122.43651151657104,37.77635213772112],[-122.43633449077605,37.77614437358491],[-122.43795454502107,37.77595992942371]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43772387504578,37.7749910600083],[-122.4376219511032,37.774785412131216],[-122.43615478277206,37.774959258827565],[-122.436144053936,37.77518610695075],[-122.43772387504578,37.7749910600083]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43773460388184,37.775008020632406],[-122.4377292394638,37.775232748534684],[-122.43628084659576,37.77541931457609],[-122.43613868951796,37.77520306753013],[-122.43773460388184,37.775008020632406]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43626475334167,37.77573520373188],[-122.43652760982513,37.77569492263944],[-122.43620842695235,37.774323232340755],[-122.43597239255904,37.774293550971066],[-122.43626475334167,37.77573520373188]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43611454963684,37.7751797467325],[-122.43584096431732,37.7751670262943],[-122.43565857410432,37.7743953156175],[-122.43594288825989,37.774293550971066],[-122.43611454963684,37.7751797467325]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43652760982513,37.77704538729796],[-122.43663489818573,37.77676978426915],[-122.43790894746779,37.77662562227558],[-122.43811547756196,37.776865185433856],[-122.43652760982513,37.77704538729796]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43812084197998,37.776886385675965],[-122.43806451559065,37.777176828380625],[-122.43670195341109,37.77734854944292],[-122.43653833866118,37.77708354763636],[-122.43812084197998,37.776886385675965]]]}}]",
+    "hours": "24/7",
+    "id": 71,
+    "image_urls": [],
+    "instructions": "Street parking on Scott between Fell and Fulton and on Hayes, Grove, or Fulton between Divisadero and Scott.",
+    "latitude": "37.7752138",
+    "long_instructions": "<body style=\"font-family: Helvetica\"> <p><strong>Street parking on Scott between Fell and Fulton and on Hayes, Grove, or Fulton between Divisadero and Scott.</strong><p>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning, construction, or other parking restrictions in the next 48 hours. <strong>NEVER park in metered stalls</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Never park where the curb is colored (even faded).</li><li style=\"font-size:0.9em;\">Park 2 feet from driveways or other vehicles. </li><li style=\"font-size:0.9em;\">Don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p></p> </body>",
+    "longitude": "-122.436121",
+    "name": "W. Alamo Square",
+    "orientation_text": "",
+    "radius": "210.0",
+    "short_name": "",
+    "spots_taken": 3,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:31:58-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.435427904129,37.7743783548528],[-122.436136007309,37.7775499501806],[-122.438195943832,37.7772785890583],[-122.437638044357,37.7745310015949],[-122.436693906784,37.7746412462681],[-122.43659734726,37.774234188196],[-122.435427904129,37.7743783548528]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147483647,
+    "address_description": "42 Hoff St., SFMTA 16th & Hoff Parking Garage.",
+    "capacity": 7,
+    "created_at": "2012-12-30T15:55:59-08:00",
+    "gathering_threshold": 7,
+    "geojson": null,
+    "hours": "Not 24/7 See info.",
+    "id": 10,
+    "image_urls": [],
+    "instructions": "Enter through the car entrance on Hoff St. The scoots are parked behind the attendant booth. Follow the flow of traffic when entering and exiting.",
+    "latitude": "37.764729",
+    "long_instructions": "OPEN: Mon - Thurs: 8am - midnight, Fri: 8am - 2:30am, Sat: 10 am-2:30am, Sun: 11am - 11pm<p>Address is 42 Hoff St. Enter through the car entrance on Hoff St. The scoots are parked next to the attendant booth on the right. No gate or cards needed.<p>Follow the flow of traffic when entering and exiting.",
+    "longitude": "-122.42069",
+    "name": "16th&Mission",
+    "orientation_text": "the Scoots inside the garage, entrance on Hoff.  https://goo.gl/maps/XKHXE",
+    "radius": "200.0",
+    "short_name": "",
+    "spots_taken": 5,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:19:50-07:00",
+    "is_open": true,
+    "is_24x7": false,
+    "formatted_hours": {
+      "12am - 2:30am": "Sun",
+      "11am - 11pm": "Sun",
+      "8am - 11:59pm": "Mon - Thu",
+      "8am - 2:30am": "Fri",
+      "10am - 11:59pm": "Sat"
+    },
+    "num_available_scooters": 2,
+    "public_scoots": 2,
+    "closing_at": 1438844340,
+    "closing_at_english": "11:59pm",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "Noe Valley",
+    "capacity": 10,
+    "created_at": "2014-07-22T15:21:06-07:00",
+    "gathering_threshold": 6,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.42859363555907,37.75159653661086],[-122.42887258529663,37.75147777457463],[-122.42871165275574,37.750128963787525],[-122.4284380674362,37.750067460822784],[-122.42859363555907,37.75159653661086]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.42852121591567,37.751626227090135],[-122.4282395839691,37.75151170660443],[-122.42810010910034,37.750162896435846],[-122.42838442325592,37.750067460822784],[-122.42852121591567,37.751626227090135]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.42740005254747,37.75090516922488],[-122.42752611637115,37.75109179664043],[-122.43608772754668,37.75059553633806],[-122.43618965148926,37.750387699838],[-122.42740005254747,37.75090516922488]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.42738932371138,37.75085851229744],[-122.42747247219084,37.750667642742506],[-122.43607699871063,37.750133205369416],[-122.43619501590729,37.75032831787363],[-122.42738932371138,37.75085851229744]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.42971479892731,37.751524431111605],[-122.42999911308289,37.75143535951549],[-122.42966115474701,37.748457761603355],[-122.42937147617342,37.74838141136348],[-122.42971479892731,37.751524431111605]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.42963969707488,37.75155624236994],[-122.42932319641112,37.75147777457463],[-122.42904424667357,37.748500178369234],[-122.42932856082915,37.748398378090265],[-122.42963969707488,37.75155624236994]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43181228637695,37.75121480081607],[-122.43146896362306,37.751129970372],[-122.4312114715576,37.748364444632806],[-122.43151187896729,37.74826264416712],[-122.43181228637695,37.75121480081607]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43162989616395,37.748254160788655],[-122.43194103240965,37.75122328385513],[-122.4322521686554,37.75109603816714],[-122.43194103240965,37.74829657767125],[-122.43162989616395,37.748254160788655]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43387222290038,37.748169326950546],[-122.43407607078551,37.75034104258429],[-122.43436574935912,37.750230761685835],[-122.43418335914612,37.74822022726506],[-122.43387222290038,37.748169326950546]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43394196033478,37.7496835963359],[-122.43359327316283,37.74959452252393],[-122.43346452713013,37.74826264416712],[-122.43378102779388,37.748160843561365],[-122.43394196033478,37.7496835963359]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43611454963684,37.74959452252393],[-122.43600726127623,37.749806602852374],[-122.42742419242857,37.75030711001764],[-122.42732763290405,37.7501247222054],[-122.43611454963684,37.74959452252393]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43612527847289,37.74954362315467],[-122.43598043918611,37.74934426695459],[-122.42737591266632,37.74988719321781],[-122.42732226848602,37.75006534002999],[-122.43612527847289,37.74954362315467]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43603944778442,37.74878861173256],[-122.43587851524353,37.74904311082538],[-122.42740273475647,37.74954362315467],[-122.42726325988768,37.74933154207251],[-122.43603944778442,37.74878861173256]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43605017662047,37.748746195131986],[-122.43582487106323,37.74849169501802],[-122.42736518383026,37.749051594113396],[-122.42725789546967,37.749263675997845],[-122.43605017662047,37.748746195131986]]]}}]",
+    "hours": "24/7",
+    "id": 42,
+    "image_urls": [],
+    "instructions": "Noe Valley street parking on Jersey, 25th, or Clipper between Diamond and Church, on Castro between Jersey and Clipper, on Noe or Sanchez between 24th and 26th, or on Vicksburg between 24th and Jersey in areas marked green on the map. Check for parking restrictions. You must enter street cleaning information.",
+    "latitude": "37.74981",
+    "long_instructions": "Noe Valley street parking on Jersey, 25th, or Clipper between Diamond and Church, on Castro between Jersey and Clipper, on Noe or Sanchez between 24th and 26th, or on Vicksburg between 24th and Jersey in areas marked green on the map. Check for parking restrictions. You must enter street cleaning information. <p>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning or other parking restrictions in the next 48 hours. <p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>",
+    "longitude": "-122.43179",
+    "name": "Noe Valley",
+    "orientation_text": "",
+    "radius": "300.0",
+    "short_name": "",
+    "spots_taken": 11,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:32:05-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.429848909378,37.7516474345681],[-122.427349090576,37.7518340601115],[-122.427027225494,37.748355961266],[-122.436189651489,37.7477790900426],[-122.436511516571,37.751325080248],[-122.429848909378,37.7516474345681]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 4,
+    "public_scoots": 4,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 1061093375,
+    "address_description": "271 7th Ave., behind the home (never on the street).",
+    "capacity": 4,
+    "created_at": "2014-01-28T13:33:02-08:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 20,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1432679005/7thAve_Clement1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1432678972/7thAve_Clement2.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1432678972/7thAve_Clement3.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1432678976/7thAve_Clement4.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1432678976/7thAve_Clement5.jpg"
+    ],
+    "instructions": "Scoots are parked at a residence here. Go through the gate and park at the end of the driveway on the left. Back in and plug in.",
+    "latitude": "37.783412",
+    "long_instructions": "Scoots are parked at a residence here. Go through the gate and park at the end of the driveway on the left. Back in and plug in.",
+    "longitude": "-122.465859",
+    "name": "7thAve&Clement",
+    "orientation_text": "the gate in front of the residence at 271 7th Ave, San Francisco, CA 94118 ‎(http://goo.gl/maps/dMGbg).",
+    "radius": "50.0",
+    "short_name": "",
+    "spots_taken": 2,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T19:50:11-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 1,
+    "public_scoots": 1,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147418111,
+    "address_description": "3255 21st St, Mission-Bartlett Parking Garage. ",
+    "capacity": 7,
+    "created_at": "2012-11-13T12:04:59-08:00",
+    "gathering_threshold": 7,
+    "geojson": null,
+    "hours": "Not 24/7 See info.",
+    "id": 2,
+    "image_urls": [],
+    "instructions": "Enter through the car entrance and ride around the gate. Do not pul a ticket. The scoots are parked near the pedestrian entrance on 21st St. on your left as you enter. Back in and plug in.",
+    "latitude": "37.756834",
+    "long_instructions": "<strong>Open</strong> Mon-Thurs 7am-midnight, Fri & Sat 8am-2:30am, Sun 8am-midnight.<p> Address: 3255 21st St, Mission-Bartlett Parking Garage. Enter through the car entrance and ride around the gate, <strong>do NOT</strong> pull a ticket.<p>The scoots are parked near the pedestrian entrance on 21st St. <strong>Do NOT</strong> ride through this entrance.",
+    "longitude": "-122.420208",
+    "name": "21st&Valencia",
+    "orientation_text": "21st St. just west of Bartlett St. at the Pedestrian Entrance to the garage (http://goo.gl/maps/3IOdx).",
+    "radius": "100.0",
+    "short_name": "",
+    "spots_taken": 7,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:30:55-07:00",
+    "is_open": true,
+    "is_24x7": false,
+    "formatted_hours": {
+      "12am - 2:30am": "Sun",
+      "8am - 11:59pm": "Sat - Sun",
+      "7am - 11:59pm": "Mon - Thu",
+      "8am - 2:30am": "Fri"
+    },
+    "num_available_scooters": 3,
+    "public_scoots": 3,
+    "closing_at": 1438844340,
+    "closing_at_english": "11:59pm",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "Scoot Zone parking in SOMA. Park only on the sides of streets marked in green on the app map.",
+    "capacity": 6,
+    "created_at": "2014-11-12T23:09:30-08:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.39755511283875,37.77916325628758],[-122.39764899015427,37.77939433141493],[-122.3965761065483,37.78019990877894],[-122.3963239789009,37.780093912258934],[-122.39755511283875,37.77916325628758]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.39708304405212,37.77876258302435],[-122.39715278148651,37.7789788196584],[-122.39607989788055,37.77978440155068],[-122.39586532115936,37.77972504318453],[-122.39708304405212,37.77876258302435]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.39683091640472,37.780539096621524],[-122.39657342433928,37.78060693400326],[-122.39525377750397,37.77950668878466],[-122.39533424377441,37.77929893351411],[-122.39683091640472,37.780539096621524]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.39633202552794,37.780861323630305],[-122.39648491144179,37.780676891237974],[-122.3950982093811,37.77963176565572],[-122.39484339952467,37.77968052437866],[-122.39633202552794,37.780861323630305]]]}}]",
+    "hours": "24/7",
+    "id": 63,
+    "image_urls": [],
+    "instructions": "Street parking on Freelon and Welsh between 4th St. and Zoe, or Zoe St. and Ritch between Brannan and Bryant. ",
+    "latitude": "37.7797245",
+    "long_instructions": "<strong>Expanded Scoot Stop!</strong>Street parking on Freelon and Welsh between 4th St. and Zoe, or Zoe St. and Ritch between Brannan and Bryant.<p>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning or other parking restrictions in the next 48 hours. <strong>Never park in metered parking stalls.</strong> <p>If parking on Freelon, try to use the motorcycle parking mid-block and use the address 50 Freelon if  you don't see an address. On Zoe, if you don't find an address north of Freelon use 55 Zoe and, if you are south of Freelon, use 79 Zoe. Please remember Freelon and Zoe, south of Freelon, are one-way streets.   <strong>Never park in commercial zones or where parallel parking is not permitted.</strong> <p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>",
+    "longitude": "-122.3958602",
+    "name": "SOMA South Park",
+    "orientation_text": "",
+    "radius": "175.0",
+    "short_name": "",
+    "spots_taken": 1,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T18:37:33-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.398263216019,37.7795681672731],[-122.396192550659,37.781179309433],[-122.394465208054,37.7798479997472],[-122.396525144577,37.7781859489079],[-122.398263216019,37.7795681672731]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "381 16th Ave., Geary Mall Parking Garage.",
+    "capacity": 4,
+    "created_at": "2014-04-15T14:22:53-07:00",
+    "gathering_threshold": 12,
+    "geojson": null,
+    "hours": "Not 24/7 See info. ",
+    "id": 28,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1432240647/16thAve_Geary4.jpg"
+    ],
+    "instructions": "Enter through the car entrance on 16th Ave between Geary and Clement. Ride around the barrier arm, do not pull a ticket. Ride up the entrance ramp and around to the left with the flow of traffic. Scoots are parked by the stairwell. Follow the flow of traffic when entering and exiting.",
+    "latitude": "37.7807707",
+    "long_instructions": "Enter through the car entrance on 16th Ave between Geary and Clement. Ride around the barrier arm, do not pull a ticket. Ride up the entrance ramp and around to the left with the flow of traffic. Scoots are parked by the stairwell. Follow the flow of traffic when entering and exiting.",
+    "longitude": "-122.4755623",
+    "name": "16thAve&Geary",
+    "orientation_text": "the scoots on the 3rd floor of the 16th and Geary parking garage.  They are right next to the elevators.  \r\n",
+    "radius": "80.0",
+    "short_name": "",
+    "spots_taken": 3,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:27:22-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.475746870041,37.7806111738376],[-122.475789785385,37.7812471462271],[-122.474459409714,37.781306503371],[-122.47441649437,37.7806874908132],[-122.475746870041,37.7806111738376]]]}}]",
+    "is_24x7": false,
+    "formatted_hours": {
+      "9am - 11pm": "Sat - Sun",
+      "5:30am - 11pm": "Mon - Fri"
+    },
+    "num_available_scooters": 2,
+    "public_scoots": 2,
+    "closing_at": 1438840800,
+    "closing_at_english": "11pm",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 30,
+    "created_at": "2014-07-08T17:56:36-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46749639511108,37.76570453409027],[-122.46722012758255,37.76566848822444],[-122.46712356805801,37.76422451879849],[-122.46739178895949,37.76415242560663],[-122.46749639511108,37.76570453409027]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46753126382828,37.7656981730564],[-122.4678236246109,37.765653645804],[-122.4676975607872,37.764188472211366],[-122.46741324663162,37.76415454599562],[-122.46753126382828,37.7656981730564]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46738106012344,37.76359052037919],[-122.46767073869704,37.76351630616208],[-122.46755808591841,37.762229207752256],[-122.46728450059891,37.76220800330754],[-122.46738106012344,37.76359052037919]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46734619140625,37.763582038758145],[-122.46704310178757,37.763545991857846],[-122.46696263551712,37.762282218837385],[-122.4672657251358,37.76221436464161],[-122.46734619140625,37.763582038758145]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4684512615204,37.76411213820408],[-122.46816962957384,37.76416726832834],[-122.46831178665161,37.76572573753255],[-122.4685800075531,37.765749061312036],[-122.4684512615204,37.76411213820408]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46848344802855,37.76410153625241],[-122.4687623977661,37.764124860544094],[-122.46889650821686,37.765681210296734],[-122.46862292289734,37.76574270028198],[-122.46848344802855,37.76410153625241]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46846467256546,37.76381316258373],[-122.46873289346696,37.763760152595815],[-122.4686336517334,37.76221224419697],[-122.46836274862288,37.76215499216921],[-122.46846467256546,37.76381316258373]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46843248605728,37.7638046809882],[-122.4681481719017,37.76377287499636],[-122.46807307004927,37.762252532634406],[-122.46831983327864,37.76215923306169],[-122.46843248605728,37.7638046809882]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46963679790497,37.76571513581217],[-122.46930420398712,37.76565152545798],[-122.46917009353636,37.76411637898432],[-122.46951341629028,37.764031563333155],[-122.46963679790497,37.76571513581217]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.46970117092134,37.76571089512358],[-122.47002840042114,37.76561759991336],[-122.46992647647856,37.76407397117089],[-122.4695724248886,37.764023081762694],[-122.46970117092134,37.76571089512358]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47069358825682,37.765672728915426],[-122.47032344341278,37.765596396440095],[-122.47020542621613,37.76406124882214],[-122.47057557106017,37.76397643310775],[-122.47069358825682,37.765672728915426]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47079014778137,37.76565152545798],[-122.47118711471556,37.76554126738111],[-122.47107982635498,37.76406548960529],[-122.47065067291258,37.763997637045456],[-122.47079014778137,37.76565152545798]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47622966766357,37.76543100913986],[-122.47665345668791,37.765329232155906],[-122.47654080390929,37.76379831979093],[-122.47611701488495,37.76378135659553],[-122.47622966766357,37.76543100913986]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47614920139313,37.765418287024545],[-122.47573077678679,37.7653758799576],[-122.47559130191803,37.76383648696635],[-122.47603118419647,37.76377287499636],[-122.47614920139313,37.765418287024545]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47607409954071,37.76343785105159],[-122.47649788856505,37.76334879379831],[-122.4763798713684,37.76197899491748],[-122.47596681118011,37.761847526817654],[-122.47607409954071,37.76343785105159]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47600972652434,37.763442091870516],[-122.47561275959013,37.76340816531241],[-122.47548937797545,37.76200444032917],[-122.47586488723756,37.761885694999734],[-122.47600972652434,37.763442091870516]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4751889705658,37.76543949054888],[-122.47557520866393,37.76533771357658],[-122.47543573379517,37.76389585808897],[-122.47506022453308,37.7638195237797],[-122.4751889705658,37.76543949054888]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47511386871338,37.76546493477005],[-122.47467398643494,37.76535467641502],[-122.47456669807433,37.76392978442336],[-122.47497439384459,37.76384496855821],[-122.47511386871338,37.76546493477005]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4750280380249,37.76346329596142],[-122.47541427612303,37.76336999791596],[-122.47532844543456,37.76201292213113],[-122.47494220733643,37.761911140443516],[-122.4750280380249,37.76346329596142]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47495293617249,37.76347177759608],[-122.47450232505798,37.76341240613304],[-122.47442722320557,37.76207229471754],[-122.47484564781188,37.76194506768828],[-122.47495293617249,37.76347177759608]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47067213058472,37.763683818146475],[-122.47102618217467,37.763556593889184],[-122.47092962265015,37.76225041219086],[-122.47052192687988,37.762106221888395],[-122.47067213058472,37.763683818146475]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47054338455199,37.763683818146475],[-122.4702000617981,37.76359900199927],[-122.47010350227357,37.762284339280015],[-122.47041463851927,37.76212318546798],[-122.47054338455199,37.763683818146475]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47186303138731,37.76555823017286],[-122.47223854064943,37.76543949054888],[-122.47214198112486,37.76407397117089],[-122.47173428535461,37.763972192319464],[-122.47186303138731,37.76555823017286]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4717664718628,37.76560063713522],[-122.47134804725646,37.765481897579335],[-122.47124075889587,37.76405700803871],[-122.47169137001038,37.76398067389578],[-122.4717664718628,37.76560063713522]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47172355651855,37.76360748361836],[-122.47209906578064,37.76344633268918],[-122.4720346927643,37.76225041219086],[-122.471626996994,37.76205533112628],[-122.47172355651855,37.76360748361836]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4716055393219,37.76359052037919],[-122.47124075889587,37.76345481432577],[-122.4711549282074,37.762267375737395],[-122.47153043746948,37.762106221888395],[-122.4716055393219,37.76359052037919]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47281789779663,37.763565075513156],[-122.4732255935669,37.76341240613304],[-122.47313976287842,37.762216485086164],[-122.47274279594421,37.762021403932096],[-122.47281789779663,37.763565075513156]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47276425361633,37.763565075513156],[-122.47234582901,37.76343785105159],[-122.47225999832153,37.76224193041616],[-122.47264623641968,37.76204684932921],[-122.47276425361633,37.763565075513156]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47397661209106,37.763505704124995],[-122.47431993484496,37.76342088777353],[-122.47422337532043,37.76204684932921],[-122.47384786605836,37.76197051311163],[-122.47397661209106,37.763505704124995]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47390151023865,37.763514185754794],[-122.47350454330444,37.76344633268918],[-122.47340798377991,37.762140149043674],[-122.47377276420593,37.76197899491748],[-122.47390151023865,37.763514185754794]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47409462928772,37.76546493477005],[-122.47452378273009,37.76535467641502],[-122.47443795204161,37.763904339674035],[-122.47394442558289,37.76386193173904],[-122.47409462928772,37.76546493477005]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47400879859926,37.7654903789825],[-122.47359037399292,37.765371639249565],[-122.47348308563231,37.7639891554711],[-122.47390151023865,37.76384496855821],[-122.47400879859926,37.7654903789825]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47294664382935,37.76554974877748],[-122.47338652610779,37.765371639249565],[-122.47331142425536,37.76404004490265],[-122.47285008430481,37.76392130284122],[-122.47294664382935,37.76554974877748]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47286081314087,37.76555823017286],[-122.47247457504271,37.76544797195693],[-122.47234582901,37.76405700803871],[-122.47275352478026,37.76392130284122],[-122.47286081314087,37.76555823017286]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47598290443422,37.761639721925185],[-122.47635841369629,37.76150401229253],[-122.47613310813902,37.75811967280416],[-122.47572541236877,37.7580857438048],[-122.47598290443422,37.761639721925185]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47586488723756,37.761622758234715],[-122.47552156448364,37.76158034899154],[-122.4752426147461,37.75818753075613],[-122.47565031051634,37.75811119055579],[-122.47586488723756,37.761622758234715]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4749207496643,37.76167364929443],[-122.47527480125427,37.76159731269173],[-122.47500658035277,37.75820449523439],[-122.4746310710907,37.75810270830642],[-122.4749207496643,37.76167364929443]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4748134613037,37.76166516745359],[-122.47439503669739,37.76163124008043],[-122.47419118881226,37.75824690641305],[-122.47454524040222,37.75812815505155],[-122.4748134613037,37.76166516745359]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47573614120482,37.759943333621045],[-122.4754786491394,37.760223240371246],[-122.47057557106017,37.760486182111165],[-122.4703824520111,37.76013842025578],[-122.47573614120482,37.759943333621045]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47573614120482,37.759841549085664],[-122.47545719146727,37.75946833792429],[-122.47052192687988,37.75979065676543],[-122.47039318084717,37.760087528139785],[-122.47573614120482,37.759841549085664]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47383713722228,37.761724540319136],[-122.47421264648439,37.76163124008043],[-122.47409462928772,37.760104492182336],[-122.47371912002562,37.759985743802794],[-122.47383713722228,37.761724540319136]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47374057769775,37.761724540319136],[-122.47338652610779,37.76163124008043],[-122.47330069541931,37.7601638663006],[-122.47363328933714,37.76002815396022],[-122.47374057769775,37.761724540319136]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47271060943602,37.761783913137066],[-122.47312903404236,37.76168213113432],[-122.47303247451781,37.76025716839021],[-122.47260332107544,37.760087528139785],[-122.47271060943602,37.761783913137066]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47264623641968,37.761783913137066],[-122.47228145599365,37.761699094811156],[-122.47215270996092,37.76030806038946],[-122.47256040573122,37.76006208206867],[-122.47264623641968,37.761783913137066]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47161626815796,37.761800876790566],[-122.47202396392821,37.761690612973226],[-122.47190594673155,37.760350470362106],[-122.47145533561707,37.76012993823887],[-122.47161626815796,37.761800876790566]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47150897979735,37.761800876790566],[-122.47106909751894,37.76167364929443],[-122.47098326683043,37.76035895235373],[-122.47139096260072,37.76014690227167],[-122.47150897979735,37.761800876790566]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47054338455199,37.761877213183176],[-122.47083306312561,37.761690612973226],[-122.47073650360106,37.76030806038946],[-122.47039318084717,37.7601638663006],[-122.47054338455199,37.761877213183176]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47044682502747,37.761877213183176],[-122.47006058692934,37.76174150398625],[-122.46997475624083,37.760350470362106],[-122.47029662132262,37.76018931233673],[-122.47044682502747,37.761877213183176]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47052192687988,37.76208925830491],[-122.47070431709288,37.762420047480965],[-122.47575759887695,37.762216485086164],[-122.47589707374571,37.76182632226351],[-122.47052192687988,37.76208925830491]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47591853141785,37.76165668561174],[-122.47568249702454,37.76133437490157],[-122.4706184864044,37.761563385287445],[-122.47053265571593,37.761877213183176],[-122.47591853141785,37.76165668561174]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47656762599945,37.75799668010753],[-122.47650057077406,37.75818753075613],[-122.47383713722228,37.75828083533845],[-122.47371375560759,37.75811543168009],[-122.47656762599945,37.75799668010753]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47657030820847,37.75796911275094],[-122.47648179531097,37.75780582896658],[-122.47382372617722,37.75791821914251],[-122.47371912002562,37.75807726155256],[-122.47657030820847,37.75796911275094]]]}}]",
+    "hours": "24/7",
+    "id": 40,
+    "image_urls": [],
+    "instructions": "Street parking on 10th Ave. through 16th Ave. between Lincoln and Judah, on 17th Ave. and 18th Ave. between Lincoln and Lawton, on Judah or Kirkham between 18th Ave. and Funston, or on Lawton between 19th Ave. and 16th Ave.",
+    "latitude": "37.762109",
+    "long_instructions": "<body style=\"font-family: Helvetica\"> <p><strong>Street parking on 10th Ave. through 16th Ave. between Lincoln and Judah, on 17th Ave. and 18th Ave. between Lincoln and Lawton, on Judah or Kirkham between 18th Ave. and Funston, or on Lawton between 19th Ave. and 16th Ave. </strong>.<p>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning or other parking restrictions in the next 48 hours. <strong>NEVER park in metered stalls </strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up spaces that could fit a car.</li> </ul><p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>\r\n</p></body>",
+    "longitude": "-122.472704",
+    "name": "Inner Sunset",
+    "orientation_text": "",
+    "radius": "100.0",
+    "short_name": "",
+    "spots_taken": 14,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:31:13-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.466659545898,37.7620638129224],[-122.466959953308,37.7660501494414],[-122.477195262909,37.7656091185248],[-122.476530075073,37.7574665368336],[-122.473590373993,37.7576277007908],[-122.473729848862,37.7595531588081],[-122.469964027405,37.75968887202],[-122.47011423111,37.7620807765117],[-122.470189332962,37.7631155481029],[-122.468730211258,37.763183401472],[-122.468676567078,37.7620468493292],[-122.466659545898,37.7620638129224]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 8,
+    "public_scoots": 8,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147418111,
+    "address_description": "",
+    "capacity": 6,
+    "created_at": "2015-02-20T00:53:55-08:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43715524673462,37.77223278674347],[-122.43704795837402,37.77252960817701],[-122.4342155456543,37.772877311769385],[-122.43396878242493,37.77263561554308],[-122.43715524673462,37.77223278674347]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43715524673462,37.7721925037428],[-122.43695139884949,37.77195292544332],[-122.43406534194946,37.77232607360814],[-122.43396073579787,37.772599573055665],[-122.43715524673462,37.7721925037428]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43576586246489,37.77328861756628],[-122.43602871894836,37.77314020852199],[-122.43571758270264,37.77155857363158],[-122.43540108203887,37.77149708848215],[-122.43576586246489,37.77328861756628]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43571758270264,37.77328013705751],[-122.4354064464569,37.77320805269348],[-122.43508994579314,37.77162641925437],[-122.4353715777397,37.771499208660586],[-122.43571758270264,37.77328013705751]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43412703275682,37.77352183117692],[-122.43438184261322,37.77344338668089],[-122.43402779102325,37.77176635065476],[-122.43376493453981,37.77171758671197],[-122.43412703275682,37.77352183117692]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4340894818306,37.77353031165798],[-122.43381589651108,37.773526071417564],[-122.43365228176117,37.7727373824715],[-122.43391513824461,37.77263561554308],[-122.4340894818306,37.77353031165798]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43390440940857,37.772601693202475],[-122.43359863758086,37.77258473202632],[-122.43346452713013,37.77182147507311],[-122.43374347686768,37.77171758671197],[-122.43390440940857,37.772601693202475]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43249356746674,37.77373384291187],[-122.43274837732314,37.77364691817406],[-122.4323782324791,37.77193808428421],[-122.43212878704071,37.77192748345444],[-122.43249356746674,37.77373384291187]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43245333433151,37.773735963026134],[-122.43217170238495,37.77372748256866],[-122.43187665939331,37.77199532873871],[-122.43210196495055,37.7719253632883],[-122.43245333433151,37.773735963026134]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43227094411849,37.77283702911988],[-122.43217706680296,37.77305964348743],[-122.42916494607924,37.77344126655823],[-122.4290120601654,37.77325469552528],[-122.43227094411849,37.77283702911988]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43227094411849,37.77281370757591],[-122.43213951587676,37.77261653422838],[-122.4290281534195,37.773006640127385],[-122.42900401353835,37.773239854627434],[-122.43227094411849,37.77281370757591]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43084132671356,37.773947974147056],[-122.43110954761505,37.77385256921787],[-122.43077158927916,37.77215646103938],[-122.4304711818695,37.77213101912052],[-122.43084132671356,37.773947974147056]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43080645799637,37.77395009425521],[-122.43051409721375,37.77393313338839],[-122.43014931678772,37.77222854642866],[-122.4304550886154,37.772128898960226],[-122.43080645799637,37.77395009425521]]]}}]",
+    "hours": "24/7",
+    "id": 84,
+    "image_urls": [],
+    "instructions": "Street parking on Page between Divisadero and Pierce, or on Scott between Haight and Oak.",
+    "latitude": "37.772437",
+    "long_instructions": "<p><strong>Scoot Stop! 24/7 street parking on Page between Divisadero and Pierce, or on Scott between Haight and Oak.</strong> Pay attention to the green zones in the map. <P> You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning, construction, or other parking restrictions in the next 48 hours. <strong>NEVER park in metered stalls</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Never park where the curb is colored (even faded).</li><li style=\"font-size:0.9em;\">Park 2 feet from driveways or other vehicles. </li><li style=\"font-size:0.9em;\">Don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p></p>",
+    "longitude": "-122.43555",
+    "name": "Page+Scott",
+    "orientation_text": "",
+    "radius": "175.0",
+    "short_name": "",
+    "spots_taken": 6,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:17:43-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.433689832687,37.773632077355],[-122.433335781097,37.7717069858506],[-122.437133789062,37.7712151042109],[-122.437573671341,37.7731826111365],[-122.433689832687,37.773632077355]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 4,
+    "public_scoots": 4,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "Fort Mason Center, 2 Marina Blvd.",
+    "capacity": 6,
+    "created_at": "2015-05-18T15:56:44-07:00",
+    "gathering_threshold": 12,
+    "geojson": null,
+    "hours": "See times",
+    "id": 100,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1434492060/FortMason1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1434492057/FortMason2.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1434492061/FortMason3.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1434492073/FortMason4.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1434492042/FortMason5.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1434492014/FortMason6.jpg"
+    ],
+    "instructions": "Unpowered parking for scoots behind the entrance gate and guard shack. Parking is on your left as you enter. Scoot stalls are stenciled. ",
+    "latitude": "37.805479",
+    "long_instructions": "Unpowered parking for scoots behind the entrance gate and guard shack. Parking is on your left as you enter. Scoot stalls are stenciled. ",
+    "longitude": "-122.431806",
+    "name": "Fort Mason",
+    "orientation_text": "the scooters parked right inside the front gate of Fort Mason.",
+    "radius": "120.0",
+    "short_name": "",
+    "spots_taken": 6,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T17:34:01-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 4,
+    "public_scoots": 4,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147483647,
+    "address_description": "340 Church Street, just south of 15th Street.",
+    "capacity": 14,
+    "created_at": "2015-05-11T14:41:42-07:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 94,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1431745871/Church_15th1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1431745871/Church_15th2.jpg",
+      "\r\nhttp://res.cloudinary.com/scoot-networks/image/upload/v1431745871/Church_15th3.jpg"
+    ],
+    "instructions": "Enter code to open garage door. Drive in and scoots are on your left in the second and third parking spaces. Back in and plug in the marked stalls.",
+    "latitude": "37.765613",
+    "long_instructions": "Enter code to open garage door. Drive in and scoots are on your left in the second and third parking spaces. Back in and plug in the marked stalls.",
+    "longitude": "-122.428873",
+    "name": "Church&15th",
+    "orientation_text": "the entrance to the garage at 340 Church Street.  Look for your coach in the red Scoot jacket! ",
+    "radius": "150.0",
+    "short_name": "",
+    "spots_taken": 11,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:31:13-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.428679466248,37.7660671121164],[-122.429623603821,37.7659822987023],[-122.429602146149,37.7652868250379],[-122.428421974182,37.7653716392496],[-122.428507804871,37.7662028133766],[-122.428486347199,37.7661519254332],[-122.428228855133,37.7667965034625],[-122.427349090576,37.7668134659663],[-122.427413463593,37.767848171344],[-122.428421974182,37.7677803222546],[-122.428357601166,37.7668134659663],[-122.428679466248,37.7660671121164]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 6,
+    "public_scoots": 6,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 1073610751,
+    "address_description": "904 22nd St, between Minnesota and Indiana, inside the Rickshaw Bagworks' factory. ",
+    "capacity": 4,
+    "created_at": "2013-10-31T10:55:11-07:00",
+    "gathering_threshold": 7,
+    "geojson": null,
+    "hours": "Open 24/7",
+    "id": 18,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1432245436/22nd_Minnesota1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1432245590/22nd_Minnesota2.jpg\r\n"
+    ],
+    "instructions": "When Rickshaw is open, M-F 10am-6pm, S&S 12pm-4pm: park scoots inside to the right and plug in. When Rickshaw is closed: scoots are parked in front of the garage door, on the street (in front of driveway where there is no curb). When the factory is closed there is no access to outlets at this location.",
+    "latitude": "37.757891",
+    "long_instructions": "OPEN: 24/7, charging limited <p>The scoots are parked at 904 22nd St, between Minnesota and Indiana St., inside the Rickshaw Bagworks' factory. <p>When Rickshaw is open, M-F 10am-6pm, S&S 12pm-4pm: park scoots inside to the right and plug in. <p>OUTSIDE RICKSHAW OPERATING HOURS: scoots are parked in front of the garage door, on the street (in front of driveway where there is NO curb). When the factory is closed, there is NO access to outlets at this location. NOTE: on Mondays after 6pm park on SOUTH SIDE of 22nd (because of street cleaning).",
+    "longitude": "-122.390586",
+    "name": "22nd&Minnesota",
+    "orientation_text": "the entrance to Rickshaw Bags at 904 22nd St, between Minnesota and Indiana (http://goo.gl/maps/2e3pa).",
+    "radius": "60.0",
+    "short_name": "",
+    "spots_taken": 0,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T18:14:52-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 5,
+    "created_at": "2013-06-06T10:44:41-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41571098566054,37.74159016661017],[-122.41598993539809,37.74156047210434],[-122.41618841886519,37.73911275544977],[-122.41592288017273,37.739023668915074],[-122.41571098566054,37.74159016661017]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41567343473433,37.74159865075251],[-122.41540521383286,37.74151168824747],[-122.41560906171799,37.739051243330124],[-122.41588532924652,37.739021547805805],[-122.41567343473433,37.74159865075251]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41780042648314,37.740584788858285],[-122.41739273071288,37.74077144230016],[-122.41480708122253,37.74059327311583],[-122.41451740264893,37.740372682103015],[-122.41780042648314,37.740584788858285]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4177575111389,37.74054236755584],[-122.41738200187683,37.74033026067905],[-122.41483926773071,37.74016057474001],[-122.41456031799316,37.740321776391326],[-122.4177575111389,37.74054236755584]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41637349128723,37.74151805136106],[-122.4166202545166,37.741373820652065],[-122.41685092449188,37.73913396651365],[-122.41654515266418,37.73907881773492],[-122.4167811870575,37.73891337115218],[-122.41691529750823,37.73739463909152],[-122.41662561893463,37.73729282353733],[-122.41637349128723,37.74151805136106]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41631984710695,37.741577440394835],[-122.41605162620544,37.74136533648395],[-122.41621255874634,37.73907881773492],[-122.41643786430357,37.73906184887164],[-122.41621792316437,37.73887519111902],[-122.41630911827086,37.73736918521609],[-122.41657733917236,37.73726736962689],[-122.41645932197571,37.73888791779894],[-122.41631984710695,37.741577440394835]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41582095623015,37.73892609782551],[-122.41608917713165,37.7388200421475],[-122.4162232875824,37.73739463909152],[-122.41599798202516,37.73723343106604],[-122.41582095623015,37.73892609782551]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41578340530394,37.73896427783239],[-122.41554737091063,37.73887943334591],[-122.4157190322876,37.737318277438995],[-122.41592288017273,37.73722494642339],[-122.41578340530394,37.73896427783239]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41512894630432,37.74152653551167],[-122.41545081138611,37.741433209801585],[-122.41569757461548,37.73912548208883],[-122.4153435230255,37.7389727622757],[-122.41512894630432,37.74152653551167]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41509675979613,37.74154350380995],[-122.4147641658783,37.74129746310411],[-122.41495728492737,37.73921881070843],[-122.41525769233702,37.73892185560132],[-122.41509675979613,37.74154350380995]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4151611328125,37.738904886702095],[-122.41552591323853,37.7388115576867],[-122.41564393043518,37.7374031237147],[-122.41541862487792,37.73725888498814],[-122.4151611328125,37.738904886702095]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41512894630432,37.73888791779894],[-122.41483926773071,37.73874368196526],[-122.41498947143556,37.7373352467019],[-122.41531133651735,37.7371910078431],[-122.41512894630432,37.73888791779894]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41451740264893,37.74144169396188],[-122.4147641658783,37.74128897892725],[-122.41498947143556,37.739083059950104],[-122.41465687751769,37.73891337115218],[-122.41439938545227,37.73906609108782],[-122.41421699523924,37.74128897892725],[-122.41451740264893,37.74144169396188]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41459250450134,37.73887094889193],[-122.41483926773071,37.73868429065797],[-122.41498947143556,37.73741160833692],[-122.41472125053406,37.73711464598053],[-122.41436719894409,37.73742857757845],[-122.41425991058348,37.738616414819845],[-122.41459250450134,37.73887094889193]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41582632064818,37.73847429958219],[-122.41564124822617,37.738656716106235],[-122.4140802025795,37.738559144533],[-122.41400778293608,37.73836187987259],[-122.41582632064818,37.73847429958219]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41583436727522,37.7384361193226],[-122.41572976112366,37.73820915848415],[-122.41412311792374,37.73812007086206],[-122.41401314735411,37.73832157842567],[-122.41583436727522,37.7384361193226]]]}}]",
+    "hours": "24/7",
+    "id": 15,
+    "image_urls": [],
+    "instructions": "Street parking on Eugenia between Andover and Anderson, or on Moultrie between Cortland and Powhattan.",
+    "latitude": "37.7401135",
+    "long_instructions": "<strong>Scoot Stop! 24/7 street parking on Eugenia between Andover and Anderson, or Moultrie between Cortland and Powhattan.</strong><p>You can end your ride here as long as you <strong>read ALL street signs</strong>. Don't park where there will be street cleaning or other restrictions in the next 48 hours. <strong>Never park in metered parking stalls. Never park where the curb is colored</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up wholes spaces that could fit a car (sharing is OK!).</li> </ul><p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>",
+    "longitude": "-122.4158218",
+    "name": "Bernal Heights",
+    "orientation_text": "the corner of Moultrie and Eugenia St. (http://goo.gl/maps/dhzTO).",
+    "radius": "175.0",
+    "short_name": "",
+    "spots_taken": 1,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:29:44-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.418122291565,37.7407375053457],[-122.417349815369,37.7419168053881],[-122.414066791534,37.7417980278174],[-122.414281368256,37.7387521664338],[-122.413980960846,37.7385485389195],[-122.414045333862,37.7381412822104],[-122.414410114288,37.738039467683],[-122.414474487305,37.7368007130514],[-122.418508529663,37.7370128300413],[-122.418122291565,37.7407375053457]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147418111,
+    "address_description": "",
+    "capacity": 15,
+    "created_at": "2014-07-22T15:23:06-07:00",
+    "gathering_threshold": 6,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43362542918021,37.77933361764858],[-122.43387487461858,37.77923397975637],[-122.43295490741728,37.77477269162521],[-122.4326705932617,37.774713329234814],[-122.43362542918021,37.77933361764858]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43358251383597,37.7793378575559],[-122.43330356409842,37.77932301787921],[-122.43238627910613,37.77484053429873],[-122.43262231349944,37.77472604975105],[-122.43358251383597,37.7793378575559]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.431640625,37.77771955037621],[-122.43173718452452,37.77789339017292],[-122.43482169440085,37.77751679498032],[-122.43485388090902,37.777294194033225],[-122.431640625,37.77771955037621]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43517041206358,37.77725314890201],[-122.43159234523773,37.777668670358395],[-122.43167817592621,37.77746090992214],[-122.43510603904724,37.77701570702114],[-122.43517041206358,37.77725314890201]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43522942066193,37.77914841657583],[-122.43500947952269,37.77911661718343],[-122.43463665246962,37.77739518966258],[-122.43485388090902,37.77730479409353],[-122.43522942066193,37.77914841657583]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4352616071701,37.77914417665762],[-122.43546277284622,37.779046658472055],[-122.43513017892836,37.77731674927631],[-122.43488338520818,37.777302674081604],[-122.4352616071701,37.77914417665762]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43502825498581,37.77819654884029],[-122.43489679625328,37.77800227472077],[-122.43181225588614,37.778388112240634],[-122.43178543379598,37.77861918979105],[-122.43502825498581,37.77819654884029]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43503895333106,37.77822699352119],[-122.43500944903188,37.77844323172192],[-122.43192490866477,37.778826946971996],[-122.43178275158697,37.778617069816804],[-122.43503895333106,37.77822699352119]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43300318717957,37.77657474150486],[-122.43293344974518,37.776786744485214],[-122.43154942989351,37.77694786634369],[-122.43141531944273,37.776778264377675],[-122.43300318717957,37.77657474150486]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43301391601562,37.776515380561385],[-122.4328476190567,37.77634577760317],[-122.43144750595093,37.77652386069907],[-122.43140459060669,37.776723143654955],[-122.43301391601562,37.776515380561385]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43445158004761,37.77538751357958],[-122.43429064750671,37.77524334889055],[-122.43127584457397,37.77562496068989],[-122.43123561143875,37.775815765850886],[-122.43445158004761,37.77538751357958]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.43447303771973,37.77543839516743],[-122.43438184261322,37.775654641525065],[-122.43138849735261,37.77601081061758],[-122.43123829364777,37.77584332655566],[-122.43447303771973,37.77543839516743]]]}}]",
+    "hours": "24/7",
+    "id": 43,
+    "image_urls": [],
+    "instructions": "Street parking on McAllister, Fulton, and Hayes between Fillmore and Pierce, on Grove between Steiner and Fillmore, on Pierce between Golden Gate and Fulton, or on Steiner between Golden Gate and Fell.",
+    "latitude": "37.77747",
+    "long_instructions": "<strong>Street parking on McAllister, Fulton, and Hayes between Fillmore and Pierce, on Grove between Steiner and Fillmore, on Pierce between Golden Gate and Fulton, or on Steiner between Golden Gate and Fell. </strong><p>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning or other parking restrictions in the next 48 hours. <strong>Avoid </strong>metered parking.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>",
+    "longitude": "-122.433245",
+    "name": "Western Addition",
+    "orientation_text": "",
+    "radius": "275.0",
+    "short_name": "",
+    "spots_taken": 11,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:31:21-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.435095310211,37.7740560995846],[-122.436125278473,37.7793985713188],[-122.431511878967,37.7800260744064],[-122.430374622345,37.7746497266208],[-122.435095310211,37.7740560995846]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 10,
+    "public_scoots": 10,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "Civic Center Plaza underground garage. Entrance is mid-block on McAllister between Polk and Larkin. Scoots are on the first level of the garage.",
+    "capacity": 20,
+    "created_at": "2015-02-25T18:09:06-08:00",
+    "gathering_threshold": 11,
+    "geojson": null,
+    "hours": "Open 6AM weekdays; Closes at Midnight Daily",
+    "id": 85,
+    "image_urls": [],
+    "instructions": "After you go around the gate, back in and plug in along the east wall to your left.  When entering/exiting on foot, use pedestrian pathways only: take the elevator or stairs to or from the 1st level below Civic Center Plaza. When exiting, drive around the gate when it's your turn and do not pass cars trying to exit. Be careful merging with traffic as you exit. ",
+    "latitude": "37.780241",
+    "long_instructions": "<body style=\"font-family: Helvetica\">\r\n\r\n<strong>Civic Center Plaza Garage. About 301 McAllister between Polk and Larkin. </strong><p><strong>Open only</strong> Mon-Fri 6AM-Midnight, Sat 8AM-12:00AM, & Sun 9AM-12AM.<p><strong>Do not pull a ticket! </strong>After you go around the gate, park along the east wall to your left.<p> When entering/exiting on foot, use pedestrian pathways only: take the elevator or stairs to or from the 1st level below Civic Center Plaza.<p> When exiting, drive around the gate when it's your turn and do not pass cars trying to exit. Be careful merging with traffic as you exit.</p>\r\n</body>",
+    "longitude": "-122.418011",
+    "name": "McAllister&Polk",
+    "orientation_text": "the statue on Fulton between the Asian Art Museum and the San Francisco Public Library.  Look for your coach in the red Scoot jacket! ",
+    "radius": "200.0",
+    "short_name": "",
+    "spots_taken": 13,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:31:55-07:00",
+    "is_open": true,
+    "is_24x7": false,
+    "formatted_hours": {
+      "9am - 11:59pm": "Sun",
+      "6am - 11:59pm": "Mon - Fri",
+      "8am - 11:59pm": "Sat"
+    },
+    "num_available_scooters": 9,
+    "public_scoots": 9,
+    "closing_at": 1438844340,
+    "closing_at_english": "11:59pm",
+    "has_space": true
+  },
+  {
+    "access_mask": 1073741823,
+    "address_description": "160 Liberty St., garage under small apartment building.",
+    "capacity": 6,
+    "created_at": "2014-09-30T13:19:52-07:00",
+    "gathering_threshold": 6,
+    "geojson": null,
+    "hours": "6AM until Midnight Daily",
+    "id": 51,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1432241388/Liberty_Guerrero1.jpg",
+      " http://res.cloudinary.com/scoot-networks/image/upload/v1428623608/Libert_Guerrero3.jpg",
+      "\r\nhttp://res.cloudinary.com/scoot-networks/image/upload/v1432240957/Liberty_Guerrero2.jpg"
+    ],
+    "instructions": "It's easiest to approach from Guerrero. Back in and plug in within the designated red lines. Be careful on the nearby hills.",
+    "latitude": "37.757731",
+    "long_instructions": "<p style=\"font-family: Helvetica;\"><strong>Open 6AM until Midnight Daily.</strong><p>Address: 160 Liberty St. (code:<strong> LOG IN TO SEE </strong>) <p>When leaving, be mindful of the hill on Liberty. It's easiest to approach on Guerrero from the North.<p><strong>Back in and plug in</strong> within the designated red lines.</p></body>",
+    "longitude": "-122.424756",
+    "name": "Liberty&Guerrero",
+    "orientation_text": "the garage at 160 Liberty.",
+    "radius": "100.0",
+    "short_name": "",
+    "spots_taken": 5,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:21:04-07:00",
+    "is_open": true,
+    "is_24x7": false,
+    "formatted_hours": {
+      "7am - 11:59pm": "Sat - Sun"
+    },
+    "num_available_scooters": 5,
+    "public_scoots": 5,
+    "closing_at": 1438844340,
+    "closing_at_english": "11:59pm",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 10,
+    "created_at": "2014-12-07T18:59:10-08:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47831642627715,37.765310148955805],[-122.47804015874864,37.765267741826875],[-122.47795164585112,37.76360536321367],[-122.47820377349854,37.763552353076825],[-122.47831642627715,37.765310148955805]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47821986675262,37.76336575709291],[-122.4784827232361,37.763306385544766],[-122.47806966304778,37.75798183614754],[-122.47784167528152,37.75794578651811],[-122.47821986675262,37.76336575709291]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47818768024443,37.76336151626962],[-122.47790604829787,37.76333183049981],[-122.47758150100707,37.75799243897641],[-122.47781753540039,37.75794154538406],[-122.47818768024443,37.76336151626962]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47825473546982,37.763908580466214],[-122.47853368520737,37.763950988374454],[-122.47859805822371,37.76524017718005],[-122.47834593057631,37.765310148955805],[-122.47825473546982,37.763908580466214]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47941613197327,37.76529318610716],[-122.47970312833786,37.76524017718005],[-122.47957706451416,37.763652012102675],[-122.47928470373152,37.76360748361836],[-122.47941613197327,37.76529318610716]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47938394546509,37.76530166753198],[-122.47910767793655,37.765265621469794],[-122.47898697853088,37.763624446853626],[-122.47926861047745,37.763499342901994],[-122.47938394546509,37.76530166753198]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47927397489546,37.763306385544766],[-122.47956097126006,37.76323429145795],[-122.47914522886276,37.75797123331718],[-122.47888505458833,37.7579033751668],[-122.47927397489546,37.763306385544766]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47924715280534,37.76331698761042],[-122.47896283864974,37.76326821809579],[-122.47860878705978,37.75797971558161],[-122.47886091470718,37.757897013462035],[-122.47924715280534,37.76331698761042]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48053193092345,37.765227455031855],[-122.48083233833313,37.765108714876824],[-122.48072504997252,37.76370078136424],[-122.48041391372679,37.763666854924814],[-122.48053193092345,37.765227455031855]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48047828674316,37.765218973598536],[-122.48012423515318,37.765125677767784],[-122.48000621795653,37.76373470778812],[-122.48031735420227,37.76367533653614],[-122.48047828674316,37.765218973598536]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48039245605469,37.76324277311886],[-122.48074650764465,37.76306465803526],[-122.4803602695465,37.758051814789916],[-122.48002767562866,37.75789913403033],[-122.48039245605469,37.76324277311886]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48030662536621,37.76324277311886],[-122.47997403144838,37.76313251145101],[-122.4796199798584,37.758043332533774],[-122.479909658432,37.757916098574746],[-122.48030662536621,37.76324277311886]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48159408569336,37.76516808497818],[-122.48193740844725,37.76501541890696],[-122.48183012008667,37.76365837331252],[-122.48149752616881,37.763548112264246],[-122.48159408569336,37.76516808497818]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48149752616881,37.765151122096945],[-122.4811863899231,37.765057826180595],[-122.48108983039855,37.76370078136424],[-122.4813687801361,37.763565075513156],[-122.48149752616881,37.765151122096945]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48146533966064,37.76319188313873],[-122.48183012008667,37.76300528624541],[-122.48142510652542,37.757920339710246],[-122.4810267984867,37.75779840696781],[-122.48146533966064,37.76319188313873]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48135805130005,37.76320036480453],[-122.4810254573822,37.763056176353935],[-122.48067006468771,37.75793306311527],[-122.48100534081459,37.757800527538954],[-122.48135805130005,37.76320036480453]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47797310352325,37.7597970183074],[-122.47824668884277,37.760087528139785],[-122.48306661844252,37.75991364647937],[-122.48328387737274,37.75956800245281],[-122.47797310352325,37.7597970183074]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47799992561342,37.75975672853251],[-122.47818231582642,37.759417445347324],[-122.48305320739746,37.75921387468924],[-122.48327851295471,37.759536194639146],[-122.47799992561342,37.75975672853251]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48312562704086,37.75770404149008],[-122.48301029205322,37.75806029704511],[-122.47806966304778,37.75825114752957],[-122.47784435749054,37.75794154538406],[-122.48312562704086,37.75770404149008]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48312294483185,37.757676474024436],[-122.48294591903685,37.75738171355721],[-122.47799456119536,37.75760225387353],[-122.47784972190857,37.75789065175667],[-122.48312294483185,37.757676474024436]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47810721397398,37.761690612973226],[-122.47826814651488,37.76196203130481],[-122.48313903808594,37.761724540319136],[-122.48334288597106,37.76147008484545],[-122.47810721397398,37.761690612973226]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48334288597106,37.761376784285794],[-122.48313903808594,37.76111384571172],[-122.47820913791656,37.76135133865817],[-122.47813940048218,37.76163124008043],[-122.48334288597106,37.761376784285794]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48250603675841,37.76313251145101],[-122.48289227485657,37.76292046932009],[-122.48262405395506,37.75790761630304],[-122.48217344284056,37.75780582896658],[-122.48250603675841,37.76313251145101]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48245239257812,37.76317491980425],[-122.4820554256439,37.76297135948696],[-122.48170137405394,37.75811119055579],[-122.48204469680786,37.75785672265231],[-122.48245239257812,37.76317491980425]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48263478279114,37.76511719632279],[-122.4830639362335,37.76491364135109],[-122.48295664787292,37.763565075513156],[-122.48254895210265,37.76348874086247],[-122.48263478279114,37.76511719632279]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48257040977478,37.765125677767784],[-122.48213052749634,37.76498997453111],[-122.48204469680786,37.763582038758145],[-122.48243093490602,37.763505704124995],[-122.48257040977478,37.765125677767784]]]}}]",
+    "hours": "24/7",
+    "id": 70,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1427404967/20thAve_Judah_xohysy.jpg"
+    ],
+    "instructions": "Street parking on 20th Ave., 21st Ave., 22nd Ave., or 23rd Ave. between Lincoln and Lawton and on Judah, Kirkham, or Lawton between 20th Ave. and 23rd Ave.",
+    "latitude": "37.7616618",
+    "long_instructions": "<body style=\"font-family: Helvetica\"><p><strong>Street parking on 20th Ave., 21st Ave., 22nd Ave., or 23rd Ave. between Lincoln and Lawton and on Judah, Kirkham, or Lawton between 20th Ave. and 23rd Ave. </strong>Be careful crossing the MUNI tracks on Judah.<p>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning, construction, or other parking restrictions in the next 48 hours. <strong>NEVER park in metered stalls</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Never park where the curb is colored (even faded).</li><li style=\"font-size:0.9em;\">Park 2 feet from driveways or other vehicles. </li><li style=\"font-size:0.9em;\">Don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p></p> </body>",
+    "longitude": "-122.48114",
+    "name": "Central Sunset",
+    "orientation_text": "",
+    "radius": "425.0",
+    "short_name": "",
+    "spots_taken": 10,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:31:52-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.477173805237,37.7573817135572],[-122.477731704712,37.7655921557447],[-122.485113143921,37.7653207507342],[-122.484555244446,37.7571442078659],[-122.477173805237,37.7573817135572]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 7,
+    "public_scoots": 7,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "18 10th St., NEMA Parking Garage.",
+    "capacity": 8,
+    "created_at": "2014-01-28T14:44:22-08:00",
+    "gathering_threshold": 12,
+    "geojson": null,
+    "hours": "24/7",
+    "id": 21,
+    "image_urls": [
+      "http://res.cloudinary.com/scoot-networks/image/upload/v1432242186/10th_Market4.jpg"
+    ],
+    "instructions": "On a scoot, enter by taking a right from 10th St. onto Jessie. To access by foot, enter through the NEMA lobby doors at 18 10th St, down the stairs, and to your right. Once in the garage the scoots are parked directly in front of you, across the entrance ramp.",
+    "latitude": "37.775606",
+    "long_instructions": "On a scoot, enter by taking a right from 10th St. onto Jessie. To access by foot, enter through the NEMA lobby doors at 18 10th St, down the stairs, and to your right. Once in the garage the scoots are parked directly in front of you, across the entrance ramp.",
+    "longitude": "-122.416976",
+    "name": "10th&Market",
+    "orientation_text": "the NEMA lobby doors marked 18 10th St (https://goo.gl/maps/Ds5VO).",
+    "radius": "175.0",
+    "short_name": "",
+    "spots_taken": 7,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "public",
+    "updated_at": "2015-08-05T20:31:36-07:00",
+    "is_open": true,
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 5,
+    "created_at": "2014-12-01T00:20:32-08:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4597179889679,37.777422749778545],[-122.45943903923035,37.77735490947461],[-122.45922446250917,37.77425750929187],[-122.45948195457458,37.77416210476209],[-122.4597179889679,37.777422749778545]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45974481105803,37.777422749778545],[-122.46000230312347,37.7773527894641],[-122.45989233255386,37.7756122403283],[-122.45961874723433,37.775582559476135],[-122.45974481105803,37.777422749778545]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4596133828163,37.77555499867414],[-122.45988965034485,37.77546807607748],[-122.45975285768509,37.77418118567789],[-122.45950341224669,37.77416634496604],[-122.4596133828163,37.77555499867414]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4595785140991,37.775574079230466],[-122.45850294828415,37.77563556098953],[-122.45859950780869,37.775834846339905],[-122.45960265398026,37.77578608508042],[-122.4595785140991,37.775574079230466]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.45850563049316,37.77560376008604],[-122.45855927467346,37.77538751357958],[-122.45957046747208,37.7753217914768],[-122.45958656072618,37.77557195916889],[-122.45850563049316,37.77560376008604]]]}}]",
+    "hours": "24/7",
+    "id": 67,
+    "image_urls": [],
+    "instructions": "Street parking on 2nd Ave. between Balboa and Fulton, or on Cabrillo between Arguello and 2nd Ave.",
+    "latitude": "37.7755654",
+    "long_instructions": "<body style=\"font-family: Helvetica\"> <p><strong>Scoot Stop! 24/7 street parking on 2nd Ave. between Balboa and Fulton, or on Cabrillo between Arguello and 2ndAve.</strong><p>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning, construction, or other parking restrictions in the next 48 hours. <strong>NEVER park in metered stalls</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Never park where the curb is colored (even faded).</li><li style=\"font-size:0.9em;\">Park 2 feet from driveways or other vehicles. </li><li style=\"font-size:0.9em;\">Don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p></p> </body>",
+    "longitude": "-122.4595967",
+    "name": "2ndAve+Cabrillo",
+    "orientation_text": "",
+    "radius": "210.0",
+    "short_name": "",
+    "spots_taken": 4,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:21:38-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.460200786591,37.777414269744],[-122.459235191345,37.7774397098448],[-122.459138631821,37.7759387289159],[-122.458505630493,37.7759556893226],[-122.458494901657,37.7752857502989],[-122.45908498764,37.7752687897385],[-122.45903134346,37.774234188196],[-122.460018396378,37.7741493841488],[-122.460200786591,37.777414269744]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 4,
+    "public_scoots": 4,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 8,
+    "created_at": "2014-09-03T13:09:32-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.40486949682234,37.76853301960506],[-122.40479439496993,37.768361278067296],[-122.40204781293868,37.76850757643945],[-122.40197807550432,37.76871536203574],[-122.40486949682234,37.76853301960506]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.40487217903136,37.76855634249918],[-122.40482389926909,37.76875352667364],[-122.4039924144745,37.76880017231546],[-122.40389853715895,37.768611469310585],[-122.40487217903136,37.76855634249918]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.40291684865952,37.768660235301795],[-122.40284711122513,37.76887226097671],[-122.40206390619278,37.768921026795944],[-122.40198343992233,37.76871324177751],[-122.40291684865952,37.768660235301795]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.40291684865952,37.76867507711885],[-122.40296512842178,37.76906096331606],[-122.40268617868423,37.76907580505269],[-122.40264862775801,37.76866871634047],[-122.40291684865952,37.76867507711885]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.40389049053192,37.76856270328721],[-122.40416139364243,37.7684990953823],[-122.40404337644577,37.76736898581724],[-122.40377247333527,37.76733506106051],[-122.40389049053192,37.76856270328721]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.4038502573967,37.76857330459938],[-122.40356862545013,37.76853726013182],[-122.40346670150758,37.7674113917413],[-122.40375369787216,37.76733506106051],[-122.4038502573967,37.76857330459938]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.40474611520766,37.76725873030089],[-122.40468978881836,37.76747924116922],[-122.40289002656935,37.76757041373996],[-122.40282833576202,37.76736686552041],[-122.40474611520766,37.76725873030089]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.40474879741667,37.767237527298136],[-122.40463078022002,37.767012775095154],[-122.40100443363188,37.76722904609532],[-122.40089446306229,37.76747075999414],[-122.40474879741667,37.767237527298136]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.40183055400848,37.7674431961684],[-122.40174740552902,37.76767430792772],[-122.40108221769331,37.767710352815925],[-122.4008971452713,37.76749408322326],[-122.40183055400848,37.7674431961684]]]}}]",
+    "hours": "24/7",
+    "id": 47,
+    "image_urls": [],
+    "instructions": "Street parking in the SOMA Design District on Alameda between Vermont and DeHaro, 15th Street between Vermont and Carolina, or Henry Adams between Alameda and 15th.",
+    "latitude": "37.767401",
+    "long_instructions": "<strong>Street parking in the SOMA Design District on Alameda between Vermont and DeHaro, 15th Street between Vermont and Carolina, or Henry Adams between Alameda and 15th.</strong><p>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning or other parking restrictions in the next 48 hours. <strong>Don't park in metered parking</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up wholes spaces that could fit a car (sharing is OK!).</li> </ul><p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>",
+    "longitude": "-122.402841",
+    "name": "Design District",
+    "orientation_text": "the corner of Alameda and De Haro.",
+    "radius": "250.0",
+    "short_name": "",
+    "spots_taken": 2,
+    "status": "available",
+    "street_cleaning_threshold": 24,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:24:33-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.404925823212,37.7691372922154],[-122.402050495148,37.7693069117097],[-122.401857376099,37.7678396902112],[-122.400902509689,37.7678566524758],[-122.400838136673,37.7669915720219],[-122.404754161835,37.7667625784431],[-122.404925823212,37.7691372922154]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 1,
+    "public_scoots": 1,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 2,
+    "created_at": "2014-09-22T17:30:38-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44667172431946,37.776778264377675],[-122.4449872970581,37.776975426626414],[-122.44524478912355,37.77729554915761],[-122.44648933410643,37.77713442805692],[-122.44667172431946,37.776778264377675]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44637131690978,37.7764051386828],[-122.44655907154083,37.776742223909764],[-122.4449872970581,37.776941506276984],[-122.4450945854187,37.776566261373],[-122.44637131690978,37.7764051386828]]]}}]",
+    "hours": "24/7",
+    "id": 49,
+    "image_urls": [],
+    "instructions": "Street parking on McAllister St. between Masonic and Central.",
+    "latitude": "37.776815",
+    "long_instructions": "<strong>Scoot Stop! 24/7 street parking on McAllister St. between Masonic and Central.</strong><p>You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning or other parking restrictions in the next 48 hours. <strong>NEVER park in metered stalls</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Never park where the curb is colored.</li><li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>",
+    "longitude": "-122.445783",
+    "name": "McAllister@Masonic",
+    "orientation_text": "the corner of McAllister and Masonic",
+    "radius": "100.0",
+    "short_name": "",
+    "spots_taken": 2,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T13:22:19-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.44677901268,37.7771344280569],[-122.446628808975,37.7763712180717],[-122.444922924042,37.7765917017656],[-122.445073127747,37.7773549094746],[-122.44677901268,37.7771344280569]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 0,
+    "public_scoots": 0,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  },
+  {
+    "access_mask": 2147418111,
+    "address_description": "",
+    "capacity": 4,
+    "created_at": "2014-10-28T18:28:26-07:00",
+    "gathering_threshold": 12,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41764754056932,37.76680710502786],[-122.41754829883575,37.7665781108779],[-122.4166202545166,37.76662687821001],[-122.41660684347153,37.766845270650585],[-122.41764754056932,37.76680710502786]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41764754056932,37.766804984714895],[-122.41757780313492,37.76703609846873],[-122.4167114496231,37.76708910610861],[-122.41660147905351,37.76687495501019],[-122.41764754056932,37.766804984714895]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41655319929122,37.76688131594284],[-122.41648346185684,37.76709970763204],[-122.41561979055403,37.767152715226324],[-122.41550445556639,37.76694068462119],[-122.41655319929122,37.76688131594284]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41654783487319,37.76685587220896],[-122.41644591093063,37.766622637573704],[-122.41558492183684,37.76668624709263],[-122.41549104452133,37.76692584245608],[-122.41654783487319,37.76685587220896]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41547226905824,37.76693856431207],[-122.41534084081648,37.766701089305826],[-122.41338819265366,37.76683254877851],[-122.41332113742828,37.76704882030576],[-122.41547226905824,37.76693856431207]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.41547226905824,37.76694280493026],[-122.41536229848862,37.767152715226324],[-122.41341769695283,37.7672672115003],[-122.41331845521927,37.76706366244619],[-122.41547226905824,37.76694280493026]]]}}]",
+    "hours": "24/7",
+    "id": 59,
+    "image_urls": [],
+    "instructions": "Street parking on 15th St. only between S. Van Ness and Harrison.",
+    "latitude": "37.7670272",
+    "long_instructions": "<strong>Scoot Stop! 24/7 street parking on 15th between S. Van Ness and Harrison.</strong><p>You can end your ride here as long as you <strong>read ALL street signs</strong>. Don't park where there will be street cleaning or other restrictions in the next 48 hours. <strong>Never park in metered parking stalls. Never park where the curb is colored.</strong><p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Park 2 feet from driveways, and don't take up wholes spaces that could fit a car (sharing is OK!).</li> </ul><p>If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p>",
+    "longitude": "-122.4152411",
+    "name": "15th@Folsom",
+    "orientation_text": "the corner of 15th and Folsom. Look for the red Scoot jacket!",
+    "radius": "200.0",
+    "short_name": "",
+    "spots_taken": 3,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T20:05:07-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.417736053467,37.7672205648916],[-122.417650222778,37.7664657338598],[-122.413240671158,37.7667286534082],[-122.413326501846,37.76749196293],[-122.417736053467,37.7672205648916]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 3,
+    "public_scoots": 3,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": true
+  },
+  {
+    "access_mask": 2147352575,
+    "address_description": "",
+    "capacity": 10,
+    "created_at": "2015-03-07T17:04:20-08:00",
+    "gathering_threshold": 6,
+    "geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48482346534729,37.78385033616694],[-122.4846839904785,37.783672270721034],[-122.47652739286423,37.78403900027847],[-122.4764496088028,37.78424886203896],[-122.48482346534729,37.78385033616694]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48483419418334,37.783926649798154],[-122.48472690582277,37.78413015242947],[-122.47657567262648,37.78446932223645],[-122.47646033763884,37.78428065922341],[-122.48483419418334,37.783926649798154]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47872948646545,37.785989207817885],[-122.47905671596527,37.785910776551354],[-122.47870802879332,37.78079772630563],[-122.47837543487549,37.78071292978759],[-122.47872948646545,37.785989207817885]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47869461774826,37.78598072876606],[-122.4783968925476,37.785961650895885],[-122.47797846794128,37.78084012452813],[-122.47826814651488,37.78070445013044],[-122.47869461774826,37.78598072876606]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47980773448943,37.78596377065948],[-122.48014569282532,37.785868381237506],[-122.47978091239929,37.78069597047231],[-122.4794590473175,37.780611173837556],[-122.47980773448943,37.78596377065948]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47977286577226,37.785965890423014],[-122.47940540313719,37.78591925561122],[-122.47904062271117,37.78075532805877],[-122.47935175895691,37.780611173837556],[-122.47977286577226,37.785965890423014]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47753523290157,37.7842223643748],[-122.47766733169554,37.786065519240545],[-122.47797846794128,37.78593621372801],[-122.47764587402344,37.78085708381036],[-122.47732400894165,37.7807892466582],[-122.47753523290157,37.7842223643748]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47762709856032,37.78606975876172],[-122.47733473777771,37.78598708805503],[-122.47692704200745,37.78093340053213],[-122.47723817825317,37.78081468559755],[-122.47762709856032,37.78606975876172]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48500585556029,37.78579206961129],[-122.48483419418334,37.78600404615623],[-122.47670710086821,37.78637288389507],[-122.47661054134369,37.786160908408064],[-122.48500585556029,37.78579206961129]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48499512672423,37.78571575790625],[-122.48481273651123,37.78552921785112],[-122.47669637203215,37.78588957889748],[-122.47658908367158,37.78610579468185],[-122.48499512672423,37.78571575790625]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47662127017973,37.78610579468185],[-122.47697532176971,37.78597436947654],[-122.47666418552397,37.78247243760374],[-122.47634232044219,37.78242156085736],[-122.47662127017973,37.78610579468185]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.47655153274536,37.78610155516273],[-122.47622430324556,37.78603796234702],[-122.47597217559813,37.78250635541521],[-122.47628331184387,37.78243428004723],[-122.47655153274536,37.78610155516273]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48092889785765,37.78589381842874],[-122.48127222061157,37.78579206961129],[-122.48087525367737,37.7806281331723],[-122.48052120208739,37.78055181613532],[-122.48092889785765,37.78589381842874]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48084306716918,37.785961650895885],[-122.4804675579071,37.785809027757246],[-122.48009204864503,37.78064509250315],[-122.48043537139893,37.78055181613532],[-122.48084306716918,37.785961650895885]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48199105262756,37.78583446496891],[-122.48232364654541,37.785656404303424],[-122.48196959495544,37.78059421449892],[-122.48162627220154,37.78049245838546],[-122.48199105262756,37.78583446496891]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48189449310301,37.785817506828785],[-122.48152971267699,37.78571575790625],[-122.48121857643126,37.780577255156416],[-122.48152971267699,37.78049245838546],[-122.48189449310301,37.785817506828785]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48305320739746,37.78578359053683],[-122.4833858013153,37.78560552974875],[-122.48301029205322,37.780602694168735],[-122.48263478279114,37.780483978703025],[-122.48305320739746,37.78578359053683]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48296737670898,37.78576663238502],[-122.48262405395506,37.78561400884362],[-122.48222708702089,37.78064509250315],[-122.48257040977478,37.780483978703025],[-122.48296737670898,37.78576663238502]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48401880264282,37.78574967422932],[-122.48369693756104,37.78558009245829],[-122.48335361480711,37.780577255156416],[-122.4836540222168,37.78045853964985],[-122.48401880264282,37.78574967422932]]]}},{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.48412609100342,37.78573271606973],[-122.48448014259337,37.78553769695475],[-122.4840831756592,37.78054333645971],[-122.48373985290527,37.78045853964985],[-122.48412609100342,37.78573271606973]]]}}]",
+    "hours": "24/7",
+    "id": 90,
+    "image_urls": [],
+    "instructions": "Street parking on 17th Ave. between Lake and Clement, 18th Ave. through 24th Ave. between Lake and Geary, or on California and Lake between 25th Ave. and 17th Ave.",
+    "latitude": "37.7841745",
+    "long_instructions": "<p><strong>Street parking on 17th Ave. between Lake and Clement, 18th Ave. through 24th Ave. between Lake and Geary, or on California and Lake between 25th Ave. and 17th Ave. <P> You can end your ride here as long as you <strong>read the street signs</strong>. Don't park where there will be street cleaning, construction, or other parking restrictions in the next 48 hours. <strong>NEVER park in metered stalls</strong>.<p>Remember to <strong>park nicely:</strong></p> <ul style=\"margin-top:0px; margin-bottom:0px; padding-bottom:0px; margin-left:-15px;\"> <li style=\"font-size:0.9em;\">Use designated motorcycle spaces or curblets.</li> <li style=\"font-size:0.9em;\">Never park where the curb is colored (even faded).</li><li style=\"font-size:0.9em;\">Park 2 feet from driveways or other vehicles. </li><li style=\"font-size:0.9em;\">Don't take up spaces that could fit a car.</li> </ul><p> If you have parking concerns, call the Scoot Hotline at <a href=\"tel:+1-415-418-7579\">(415) 418-7579</a>.<p></p>",
+    "longitude": "-122.48046",
+    "name": "N. Richmond",
+    "orientation_text": "",
+    "radius": "270.0",
+    "short_name": "",
+    "spots_taken": 10,
+    "status": "available",
+    "street_cleaning_threshold": 48,
+    "style": "scoot_stop",
+    "updated_at": "2015-08-05T19:25:15-07:00",
+    "is_open": true,
+    "geofence_geojson": "[{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-122.485284805298,37.7862499381867],[-122.484855651855,37.7802465471996],[-122.476637363434,37.7805857348282],[-122.476771473885,37.7821671766001],[-122.475736141205,37.7822053342945],[-122.476015090942,37.7866569300944],[-122.485284805298,37.7862499381867]]]}}]",
+    "is_24x7": true,
+    "formatted_hours": {
+      "24 / 7": true
+    },
+    "num_available_scooters": 8,
+    "public_scoots": 8,
+    "closing_at": 0,
+    "closing_at_english": "",
+    "has_space": false
+  }
+];
+module.exports = scootGarages;
+
+},{}],29:[function(require,module,exports){
 var timeSlotInfo = { 
   1: { start: '00:00', end: '00:30' },
   2: { start: '00:30', end: '01:00' },
@@ -2775,7 +5541,7 @@ var timeSlotInfo = {
 
 module.exports = timeSlotInfo;
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var assign = require('react/lib/Object.assign');    // allows us to extend objects similarly to jquery and underscore lib...
 var EventEmitter = require('events').EventEmitter;
@@ -2825,17 +5591,17 @@ var outletStore = assign({}, EventEmitter.prototype, {
           transactions[transactionId].seller_id = outletData[i].seller_id;
           transactions[transactionId].outlet = outletData[i].outlet_info;
           transactions[transactionId].seller = outletData[i].seller_info;
-          transactions[transactionId].startTime = {slot: {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].start}, date: outletData[i].date};
-          transactions[transactionId].endTime = {slot: {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].end}, date: outletData[i].date};
+          transactions[transactionId].startTime = {slot: {number: outletData[i].slot_customID, time: timeSlots[outletData[i].slot_customID].start}, date: outletData[i].date};
+          transactions[transactionId].endTime = {slot: {number: outletData[i].slot_customID, time: timeSlots[outletData[i].slot_customID].end}, date: outletData[i].date};
           transactions[transactionId].totalCost = outletData[i].transaction_info.totalCost;
           transactions[transactionId].totalEnergy = outletData[i].transaction_info.totalEnergy;
         }else{
           
-          if(new Date(outletData[i].date).getDate() === new Date(transactions[transactionId].endTime.date).getDate() && outletData[i].slot_id > transactions[transactionId].endTime.slot.number){
-            transactions[transactionId].endTime.slot = {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].end};
+          if(new Date(outletData[i].date).getDate() === new Date(transactions[transactionId].endTime.date).getDate() && outletData[i].slot_customID > transactions[transactionId].endTime.slot.number){
+            transactions[transactionId].endTime.slot = {number: outletData[i].slot_customID, time: timeSlots[outletData[i].slot_customID].end};
           }
           else if(new Date(outletData[i].date).getDate() > new Date(transactions[transactionId].endTime.date).getDate()){
-            transactions[transactionId].endTime = {slot: {number: outletData[i].slot_id, time: timeSlots[outletData[i].slot_id].end}, date: outletData[i].date};
+            transactions[transactionId].endTime = {slot: {number: outletData[i].slot_customID, time: timeSlots[outletData[i].slot_customID].end}, date: outletData[i].date};
           }
         }
       }
@@ -2870,7 +5636,28 @@ var outletStore = assign({}, EventEmitter.prototype, {
     })
   },
 
+  generateNewOutlets: function(scootGarages) {
+    var newOutlets = [];
+    var context = this;
+    scootGarages.forEach(function(scoot) {
+      newOutlet = {
+        address: scoot.address_description,
+        charge: .2,
+        description: scoot.orientation_text,
+        lat: scoot.latitude,
+        long: scoot.longitude,
+        name: scoot.name,
+        voltage: 'standard'
+      };
+      // newOutlets.push(newOutlet);
+      // post to server.
+      console.log('newScoot outlet', newOutlet);
+      context.submitOutlet(newOutlet);
+    });
+  },
+
   submitOutlet: function(newOutlet){
+    console.log('newoutlet', newOutlet);
     return OutletServices.addOutlet(newOutlet);
   },
 
@@ -2907,7 +5694,7 @@ ConnectusDispatcher.register(function(payload){
 
 module.exports = outletStore;
 
-},{"../dispatcher/ConnectusDispatcher":22,"../services/outletServices":25,"./data/timeSlots":28,"events":32,"microevent":85,"react/lib/Object.assign":365}],30:[function(require,module,exports){
+},{"../dispatcher/ConnectusDispatcher":22,"../services/outletServices":25,"./data/timeSlots":29,"events":33,"microevent":86,"react/lib/Object.assign":366}],31:[function(require,module,exports){
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 // var ConnectusConstants = require('');          // omg what is this even
 var assign = require('react/lib/Object.assign');    // allows us to extend objects similarly to jquery and underscore lib...
@@ -2939,7 +5726,7 @@ var paymentStore = assign({}, EventEmitter.prototype, {
 
 module.exports = paymentStore;
 
-},{"../dispatcher/ConnectusDispatcher":22,"../services/paymentServices":26,"events":32,"react/lib/Object.assign":365}],31:[function(require,module,exports){
+},{"../dispatcher/ConnectusDispatcher":22,"../services/paymentServices":26,"events":33,"react/lib/Object.assign":366}],32:[function(require,module,exports){
 var ConnectusDispatcher = require('../dispatcher/ConnectusDispatcher');
 var assign = require('react/lib/Object.assign');    // allows us to extend objects similarly to jquery and underscore lib...
 var EventEmitter = require('events').EventEmitter;
@@ -2959,7 +5746,7 @@ var userStore = assign({}, EventEmitter.prototype, {
 
 module.exports = userStore;
 
-},{"../dispatcher/ConnectusDispatcher":22,"../services/userServices":27,"events":32,"react/lib/Object.assign":365}],32:[function(require,module,exports){
+},{"../dispatcher/ConnectusDispatcher":22,"../services/userServices":27,"events":33,"react/lib/Object.assign":366}],33:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -3262,7 +6049,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -3354,7 +6141,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 /*!
   Copyright (c) 2015 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -3405,7 +6192,7 @@ process.umask = function() { return 0; };
 
 }());
 
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -3417,7 +6204,7 @@ process.umask = function() { return 0; };
 
 module.exports.Dispatcher = require('./lib/Dispatcher')
 
-},{"./lib/Dispatcher":36}],36:[function(require,module,exports){
+},{"./lib/Dispatcher":37}],37:[function(require,module,exports){
 /*
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -3669,7 +6456,7 @@ var _prefix = 'ID_';
 
 module.exports = Dispatcher;
 
-},{"./invariant":37}],37:[function(require,module,exports){
+},{"./invariant":38}],38:[function(require,module,exports){
 /**
  * Copyright (c) 2014, Facebook, Inc.
  * All rights reserved.
@@ -3724,7 +6511,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 
-},{}],38:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -4262,7 +7049,7 @@ exports['default'] = GoogleMap;
 module.exports = exports['default'];
 /*maps*/ /*render markers before map load done*/
 }).call(this,require('_process'))
-},{"./google_map_map.js":39,"./google_map_markers.js":40,"./google_map_markers_prerender.js":41,"./marker_dispatcher.js":43,"./utils/array_helper.js":44,"./utils/detect.js":45,"./utils/geo.js":46,"./utils/loaders/google_map_loader.js":50,"_process":33,"lodash.assign":52,"lodash.isfunction":63,"lodash.isnumber":64,"lodash.isplainobject":65,"lodash.pick":70,"react":509,"react-pure-render/function":220}],39:[function(require,module,exports){
+},{"./google_map_map.js":40,"./google_map_markers.js":41,"./google_map_markers_prerender.js":42,"./marker_dispatcher.js":44,"./utils/array_helper.js":45,"./utils/detect.js":46,"./utils/geo.js":47,"./utils/loaders/google_map_loader.js":51,"_process":34,"lodash.assign":53,"lodash.isfunction":64,"lodash.isnumber":65,"lodash.isplainobject":66,"lodash.pick":71,"react":510,"react-pure-render/function":221}],40:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4309,7 +7096,7 @@ var GoogleMapMap = (function (_Component) {
 
 exports['default'] = GoogleMapMap;
 module.exports = exports['default'];
-},{"react":509}],40:[function(require,module,exports){
+},{"react":510}],41:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4581,7 +7368,7 @@ var GoogleMapMarkers = (function (_Component) {
 
 exports['default'] = GoogleMapMarkers;
 module.exports = exports['default'];
-},{"react":509,"react-pure-render/function":220}],41:[function(require,module,exports){
+},{"react":510,"react-pure-render/function":221}],42:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4634,7 +7421,7 @@ var GoogleMapMarkersPrerender = (function (_Component) {
 
 exports['default'] = GoogleMapMarkersPrerender;
 module.exports = exports['default'];
-},{"./google_map_markers.js":40,"react":509}],42:[function(require,module,exports){
+},{"./google_map_markers.js":41,"react":510}],43:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4647,7 +7434,7 @@ var _google_mapJs2 = _interopRequireDefault(_google_mapJs);
 
 exports['default'] = _google_mapJs2['default'];
 module.exports = exports['default'];
-},{"./google_map.js":38}],43:[function(require,module,exports){
+},{"./google_map.js":39}],44:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4694,7 +7481,7 @@ var MarkerDispatcher = (function (_EventEmitter) {
 
 exports['default'] = MarkerDispatcher;
 module.exports = exports['default'];
-},{"eventemitter3":51}],44:[function(require,module,exports){
+},{"eventemitter3":52}],45:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -4713,7 +7500,7 @@ function isArraysEqualEps(arrayA, arrayB, eps) {
 }
 
 module.exports = exports["default"];
-},{}],45:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 // code here http://stackoverflow.com/questions/5899783/detect-safari-chrome-ie-firefox-opera-with-user-agent
 'use strict';
 
@@ -4751,7 +7538,7 @@ function detectBrowser() {
 }
 
 module.exports = exports['default'];
-},{}],46:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4881,7 +7668,7 @@ var Geo = (function () {
 
 exports['default'] = Geo;
 module.exports = exports['default'];
-},{"./lib_geo/lat_lng.js":47,"./lib_geo/transform.js":48,"point-geometry":82}],47:[function(require,module,exports){
+},{"./lib_geo/lat_lng.js":48,"./lib_geo/transform.js":49,"point-geometry":83}],48:[function(require,module,exports){
 'use strict';
 
 module.exports = LatLng;
@@ -4911,7 +7698,7 @@ LatLng.convert = function (a) {
     }
     return a;
 };
-},{"./wrap.js":49}],48:[function(require,module,exports){
+},{"./wrap.js":50}],49:[function(require,module,exports){
 'use strict';
 
 var LatLng = require('./lat_lng');
@@ -5072,14 +7859,14 @@ Transform.prototype = Object.defineProperties({
 });
 
 module.exports = Transform;
-},{"./lat_lng":47,"./wrap.js":49,"point-geometry":82}],49:[function(require,module,exports){
+},{"./lat_lng":48,"./wrap.js":50,"point-geometry":83}],50:[function(require,module,exports){
 'use strict';
 
 exports.wrap = function (n, min, max) {
     var d = max - min;
     return n === max ? n : ((n - min) % d + d) % d + min;
 };
-},{}],50:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 'use strict';
 
 var $script_ = null;
@@ -5127,7 +7914,7 @@ module.exports = function googleMapLoader(apiKey) {
 
   return _loadPromise;
 };
-},{"scriptjs":83}],51:[function(require,module,exports){
+},{"scriptjs":84}],52:[function(require,module,exports){
 'use strict';
 
 //
@@ -5391,7 +8178,7 @@ if ('undefined' !== typeof module) {
   module.exports = EventEmitter;
 }
 
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 /**
  * lodash 3.2.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -5473,7 +8260,7 @@ var assign = createAssigner(function(object, source, customizer) {
 
 module.exports = assign;
 
-},{"lodash._baseassign":53,"lodash._createassigner":55,"lodash.keys":59}],53:[function(require,module,exports){
+},{"lodash._baseassign":54,"lodash._createassigner":56,"lodash.keys":60}],54:[function(require,module,exports){
 /**
  * lodash 3.2.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -5502,7 +8289,7 @@ function baseAssign(object, source) {
 
 module.exports = baseAssign;
 
-},{"lodash._basecopy":54,"lodash.keys":59}],54:[function(require,module,exports){
+},{"lodash._basecopy":55,"lodash.keys":60}],55:[function(require,module,exports){
 /**
  * lodash 3.0.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -5536,7 +8323,7 @@ function baseCopy(source, props, object) {
 
 module.exports = baseCopy;
 
-},{}],55:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 /**
  * lodash 3.1.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -5590,7 +8377,7 @@ function createAssigner(assigner) {
 
 module.exports = createAssigner;
 
-},{"lodash._bindcallback":56,"lodash._isiterateecall":57,"lodash.restparam":58}],56:[function(require,module,exports){
+},{"lodash._bindcallback":57,"lodash._isiterateecall":58,"lodash.restparam":59}],57:[function(require,module,exports){
 /**
  * lodash 3.0.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -5657,7 +8444,7 @@ function identity(value) {
 
 module.exports = bindCallback;
 
-},{}],57:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 /**
  * lodash 3.0.9 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -5791,7 +8578,7 @@ function isObject(value) {
 
 module.exports = isIterateeCall;
 
-},{}],58:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 /**
  * lodash 3.6.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -5860,7 +8647,7 @@ function restParam(func, start) {
 
 module.exports = restParam;
 
-},{}],59:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 /**
  * lodash 3.1.2 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6098,7 +8885,7 @@ function keysIn(object) {
 
 module.exports = keys;
 
-},{"lodash._getnative":60,"lodash.isarguments":61,"lodash.isarray":62}],60:[function(require,module,exports){
+},{"lodash._getnative":61,"lodash.isarguments":62,"lodash.isarray":63}],61:[function(require,module,exports){
 /**
  * lodash 3.9.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6237,7 +9024,7 @@ function isNative(value) {
 
 module.exports = getNative;
 
-},{}],61:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 /**
  * lodash 3.0.4 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6345,7 +9132,7 @@ function isArguments(value) {
 
 module.exports = isArguments;
 
-},{}],62:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 /**
  * lodash 3.0.4 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6527,7 +9314,7 @@ function isNative(value) {
 
 module.exports = isArray;
 
-},{}],63:[function(require,module,exports){
+},{}],64:[function(require,module,exports){
 /**
  * lodash 3.0.6 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6601,7 +9388,7 @@ function isObject(value) {
 
 module.exports = isFunction;
 
-},{}],64:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 /**
  * lodash 3.0.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6662,7 +9449,7 @@ function isNumber(value) {
 
 module.exports = isNumber;
 
-},{}],65:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 /**
  * lodash 3.2.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6767,7 +9554,7 @@ function isPlainObject(value) {
 
 module.exports = isPlainObject;
 
-},{"lodash._basefor":66,"lodash.isarguments":67,"lodash.keysin":68}],66:[function(require,module,exports){
+},{"lodash._basefor":67,"lodash.isarguments":68,"lodash.keysin":69}],67:[function(require,module,exports){
 /**
  * lodash 3.0.2 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6855,9 +9642,9 @@ function isObject(value) {
 
 module.exports = baseFor;
 
-},{}],67:[function(require,module,exports){
-arguments[4][61][0].apply(exports,arguments)
-},{"dup":61}],68:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
+arguments[4][62][0].apply(exports,arguments)
+},{"dup":62}],69:[function(require,module,exports){
 /**
  * lodash 3.0.8 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -6991,9 +9778,9 @@ function keysIn(object) {
 
 module.exports = keysIn;
 
-},{"lodash.isarguments":67,"lodash.isarray":69}],69:[function(require,module,exports){
-arguments[4][62][0].apply(exports,arguments)
-},{"dup":62}],70:[function(require,module,exports){
+},{"lodash.isarguments":68,"lodash.isarray":70}],70:[function(require,module,exports){
+arguments[4][63][0].apply(exports,arguments)
+},{"dup":63}],71:[function(require,module,exports){
 /**
  * lodash 3.1.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -7045,7 +9832,7 @@ var pick = restParam(function(object, props) {
 
 module.exports = pick;
 
-},{"lodash._baseflatten":71,"lodash._bindcallback":74,"lodash._pickbyarray":75,"lodash._pickbycallback":76,"lodash.restparam":81}],71:[function(require,module,exports){
+},{"lodash._baseflatten":72,"lodash._bindcallback":75,"lodash._pickbyarray":76,"lodash._pickbycallback":77,"lodash.restparam":82}],72:[function(require,module,exports){
 /**
  * lodash 3.1.4 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -7178,13 +9965,13 @@ function isLength(value) {
 
 module.exports = baseFlatten;
 
-},{"lodash.isarguments":72,"lodash.isarray":73}],72:[function(require,module,exports){
-arguments[4][61][0].apply(exports,arguments)
-},{"dup":61}],73:[function(require,module,exports){
+},{"lodash.isarguments":73,"lodash.isarray":74}],73:[function(require,module,exports){
 arguments[4][62][0].apply(exports,arguments)
 },{"dup":62}],74:[function(require,module,exports){
-arguments[4][56][0].apply(exports,arguments)
-},{"dup":56}],75:[function(require,module,exports){
+arguments[4][63][0].apply(exports,arguments)
+},{"dup":63}],75:[function(require,module,exports){
+arguments[4][57][0].apply(exports,arguments)
+},{"dup":57}],76:[function(require,module,exports){
 /**
  * lodash 3.0.2 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -7259,7 +10046,7 @@ function isObject(value) {
 
 module.exports = pickByArray;
 
-},{}],76:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 /**
  * lodash 3.0.0 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
@@ -7305,17 +10092,17 @@ function pickByCallback(object, predicate) {
 
 module.exports = pickByCallback;
 
-},{"lodash._basefor":77,"lodash.keysin":78}],77:[function(require,module,exports){
-arguments[4][66][0].apply(exports,arguments)
-},{"dup":66}],78:[function(require,module,exports){
-arguments[4][68][0].apply(exports,arguments)
-},{"dup":68,"lodash.isarguments":79,"lodash.isarray":80}],79:[function(require,module,exports){
-arguments[4][61][0].apply(exports,arguments)
-},{"dup":61}],80:[function(require,module,exports){
+},{"lodash._basefor":78,"lodash.keysin":79}],78:[function(require,module,exports){
+arguments[4][67][0].apply(exports,arguments)
+},{"dup":67}],79:[function(require,module,exports){
+arguments[4][69][0].apply(exports,arguments)
+},{"dup":69,"lodash.isarguments":80,"lodash.isarray":81}],80:[function(require,module,exports){
 arguments[4][62][0].apply(exports,arguments)
 },{"dup":62}],81:[function(require,module,exports){
-arguments[4][58][0].apply(exports,arguments)
-},{"dup":58}],82:[function(require,module,exports){
+arguments[4][63][0].apply(exports,arguments)
+},{"dup":63}],82:[function(require,module,exports){
+arguments[4][59][0].apply(exports,arguments)
+},{"dup":59}],83:[function(require,module,exports){
 'use strict';
 
 module.exports = Point;
@@ -7448,7 +10235,7 @@ Point.convert = function (a) {
     return a;
 };
 
-},{}],83:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 /*!
   * $script.js JS loader & dependency manager
   * https://github.com/ded/script.js
@@ -7569,7 +10356,7 @@ Point.convert = function (a) {
   return $script
 });
 
-},{}],84:[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -16781,7 +19568,7 @@ return jQuery;
 
 }));
 
-},{}],85:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
 /**
  * MicroEvent - to make any js object an event emitter (server or browser)
  * 
@@ -16833,7 +19620,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
 	module.exports	= MicroEvent
 }
 
-},{}],86:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -20029,7 +22816,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
     return _moment;
 
 }));
-},{}],87:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -20060,7 +22847,7 @@ var Accordion = _react2['default'].createClass({
 
 exports['default'] = Accordion;
 module.exports = exports['default'];
-},{"./PanelGroup":138,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"react":509}],88:[function(require,module,exports){
+},{"./PanelGroup":139,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"react":510}],89:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -20109,7 +22896,7 @@ var Affix = _react2['default'].createClass({
 
 exports['default'] = Affix;
 module.exports = exports['default'];
-},{"./AffixMixin":89,"./utils/domUtils":166,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],89:[function(require,module,exports){
+},{"./AffixMixin":90,"./utils/domUtils":167,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],90:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -20254,7 +23041,7 @@ var AffixMixin = {
 
 exports['default'] = AffixMixin;
 module.exports = exports['default'];
-},{"./utils/EventListener":158,"./utils/domUtils":166,"babel-runtime/helpers/interop-require-default":176,"react":509}],90:[function(require,module,exports){
+},{"./utils/EventListener":159,"./utils/domUtils":167,"babel-runtime/helpers/interop-require-default":177,"react":510}],91:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -20337,7 +23124,7 @@ var Alert = _react2['default'].createClass({
 
 exports['default'] = Alert;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],91:[function(require,module,exports){
+},{"./BootstrapMixin":93,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],92:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -20385,7 +23172,7 @@ var Badge = _react2['default'].createClass({
 
 exports['default'] = Badge;
 module.exports = exports['default'];
-},{"./utils/ValidComponentChildren":160,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],92:[function(require,module,exports){
+},{"./utils/ValidComponentChildren":161,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],93:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -20449,7 +23236,7 @@ var BootstrapMixin = {
 
 exports['default'] = BootstrapMixin;
 module.exports = exports['default'];
-},{"./styleMaps":156,"./utils/CustomPropTypes":157,"babel-runtime/helpers/interop-require-default":176}],93:[function(require,module,exports){
+},{"./styleMaps":157,"./utils/CustomPropTypes":158,"babel-runtime/helpers/interop-require-default":177}],94:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -20570,7 +23357,7 @@ var Button = _react2['default'].createClass({
 
 exports['default'] = Button;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./ButtonInput":95,"./utils/CustomPropTypes":157,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],94:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./ButtonInput":96,"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],95:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -20638,7 +23425,7 @@ var ButtonGroup = _react2['default'].createClass({
 
 exports['default'] = ButtonGroup;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./utils/CustomPropTypes":157,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],95:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],96:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -20728,7 +23515,7 @@ ButtonInput.propTypes = {
 
 exports['default'] = ButtonInput;
 module.exports = exports['default'];
-},{"./Button":93,"./FormGroup":110,"./InputBase":114,"./utils/childrenValueInputValidation":161,"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"babel-runtime/helpers/object-without-properties":178,"react":509}],96:[function(require,module,exports){
+},{"./Button":94,"./FormGroup":111,"./InputBase":115,"./utils/childrenValueInputValidation":162,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"react":510}],97:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -20775,7 +23562,7 @@ var ButtonToolbar = _react2['default'].createClass({
 
 exports['default'] = ButtonToolbar;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],97:[function(require,module,exports){
+},{"./BootstrapMixin":93,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],98:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -21075,7 +23862,7 @@ var Carousel = _react2['default'].createClass({
 
 exports['default'] = Carousel;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./Glyphicon":111,"./utils/ValidComponentChildren":160,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],98:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./Glyphicon":112,"./utils/ValidComponentChildren":161,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],99:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -21186,7 +23973,7 @@ var CarouselItem = _react2['default'].createClass({
 
 exports['default'] = CarouselItem;
 module.exports = exports['default'];
-},{"./utils/TransitionEvents":159,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],99:[function(require,module,exports){
+},{"./utils/TransitionEvents":160,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],100:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -21399,7 +24186,7 @@ var Col = _react2['default'].createClass({
 
 exports['default'] = Col;
 module.exports = exports['default'];
-},{"./styleMaps":156,"./utils/CustomPropTypes":157,"babel-runtime/core-js/object/keys":171,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],100:[function(require,module,exports){
+},{"./styleMaps":157,"./utils/CustomPropTypes":158,"babel-runtime/core-js/object/keys":172,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],101:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -21630,7 +24417,7 @@ Collapse.defaultProps = {
 
 exports['default'] = Collapse;
 module.exports = exports['default'];
-},{"./Transition":153,"./utils/createChainedFunction":162,"./utils/domUtils":166,"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"react":509}],101:[function(require,module,exports){
+},{"./Transition":154,"./utils/createChainedFunction":163,"./utils/domUtils":167,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"react":510}],102:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -21821,7 +24608,7 @@ var CollapsibleMixin = {
 
 exports['default'] = CollapsibleMixin;
 module.exports = exports['default'];
-},{"./utils/TransitionEvents":159,"./utils/deprecationWarning":165,"babel-runtime/helpers/interop-require-default":176,"react":509}],102:[function(require,module,exports){
+},{"./utils/TransitionEvents":160,"./utils/deprecationWarning":166,"babel-runtime/helpers/interop-require-default":177,"react":510}],103:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -21935,7 +24722,7 @@ var CollapsibleNav = _react2['default'].createClass({
 
 exports['default'] = CollapsibleNav;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./Collapse":100,"./utils/ValidComponentChildren":160,"./utils/createChainedFunction":162,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],103:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./Collapse":101,"./utils/ValidComponentChildren":161,"./utils/createChainedFunction":163,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],104:[function(require,module,exports){
 /* eslint react/prop-types: [2, {ignore: "bsSize"}] */
 /* BootstrapMixin contains `bsSize` type validation */
 
@@ -22093,7 +24880,7 @@ var DropdownButton = _react2['default'].createClass({
 
 exports['default'] = DropdownButton;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./Button":93,"./ButtonGroup":94,"./DropdownMenu":104,"./DropdownStateMixin":105,"./utils/ValidComponentChildren":160,"./utils/createChainedFunction":162,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],104:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./Button":94,"./ButtonGroup":95,"./DropdownMenu":105,"./DropdownStateMixin":106,"./utils/ValidComponentChildren":161,"./utils/createChainedFunction":163,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],105:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -22154,7 +24941,7 @@ var DropdownMenu = _react2['default'].createClass({
 
 exports['default'] = DropdownMenu;
 module.exports = exports['default'];
-},{"./utils/ValidComponentChildren":160,"./utils/createChainedFunction":162,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],105:[function(require,module,exports){
+},{"./utils/ValidComponentChildren":161,"./utils/createChainedFunction":163,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],106:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -22254,7 +25041,7 @@ var DropdownStateMixin = {
 
 exports['default'] = DropdownStateMixin;
 module.exports = exports['default'];
-},{"./utils/EventListener":158,"./utils/domUtils":166,"babel-runtime/helpers/interop-require-default":176,"react":509}],106:[function(require,module,exports){
+},{"./utils/EventListener":159,"./utils/domUtils":167,"babel-runtime/helpers/interop-require-default":177,"react":510}],107:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -22363,7 +25150,7 @@ Fade.defaultProps = {
 
 exports['default'] = Fade;
 module.exports = exports['default'];
-},{"./Transition":153,"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"react":509}],107:[function(require,module,exports){
+},{"./Transition":154,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"react":510}],108:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -22463,7 +25250,7 @@ exports['default'] = {
   }
 };
 module.exports = exports['default'];
-},{"./utils/deprecationWarning":165,"./utils/domUtils":166,"babel-runtime/helpers/interop-require-default":176,"react":509}],108:[function(require,module,exports){
+},{"./utils/deprecationWarning":166,"./utils/domUtils":167,"babel-runtime/helpers/interop-require-default":177,"react":510}],109:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -22527,7 +25314,7 @@ Static.propTypes = {
 
 exports['default'] = Static;
 module.exports = exports['default'];
-},{"../InputBase":114,"../utils/childrenValueInputValidation":161,"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],109:[function(require,module,exports){
+},{"../InputBase":115,"../utils/childrenValueInputValidation":162,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],110:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -22539,7 +25326,7 @@ var _Static2 = require('./Static');
 var _Static3 = _interopRequireDefault(_Static2);
 
 exports.Static = _Static3['default'];
-},{"./Static":108,"babel-runtime/helpers/interop-require-default":176}],110:[function(require,module,exports){
+},{"./Static":109,"babel-runtime/helpers/interop-require-default":177}],111:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -22608,7 +25395,7 @@ FormGroup.propTypes = {
 
 exports['default'] = FormGroup;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],111:[function(require,module,exports){
+},{"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],112:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -22663,7 +25450,7 @@ var Glyphicon = _react2['default'].createClass({
 
 exports['default'] = Glyphicon;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./styleMaps":156,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],112:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./styleMaps":157,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],113:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -22721,7 +25508,7 @@ var Grid = _react2['default'].createClass({
 
 exports['default'] = Grid;
 module.exports = exports['default'];
-},{"./utils/CustomPropTypes":157,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],113:[function(require,module,exports){
+},{"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],114:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -22777,7 +25564,7 @@ Input.propTypes = {
 
 exports['default'] = Input;
 module.exports = exports['default'];
-},{"./FormControls":109,"./InputBase":114,"./utils/deprecationWarning":165,"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"babel-runtime/helpers/interop-require-wildcard":177,"react":509}],114:[function(require,module,exports){
+},{"./FormControls":110,"./InputBase":115,"./utils/deprecationWarning":166,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/interop-require-wildcard":178,"react":510}],115:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -23021,7 +25808,7 @@ InputBase.propTypes = {
 
 exports['default'] = InputBase;
 module.exports = exports['default'];
-},{"./FormGroup":110,"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],115:[function(require,module,exports){
+},{"./FormGroup":111,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],116:[function(require,module,exports){
 // https://www.npmjs.org/package/react-interpolate-component
 // TODO: Drop this in favor of es6 string interpolation
 
@@ -23117,7 +25904,7 @@ var Interpolate = _react2['default'].createClass({
 
 exports['default'] = Interpolate;
 module.exports = exports['default'];
-},{"./utils/ValidComponentChildren":160,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"react":509}],116:[function(require,module,exports){
+},{"./utils/ValidComponentChildren":161,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"react":510}],117:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -23165,7 +25952,7 @@ var Jumbotron = _react2['default'].createClass({
 
 exports['default'] = Jumbotron;
 module.exports = exports['default'];
-},{"./utils/CustomPropTypes":157,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],117:[function(require,module,exports){
+},{"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],118:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -23211,7 +25998,7 @@ var Label = _react2['default'].createClass({
 
 exports['default'] = Label;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],118:[function(require,module,exports){
+},{"./BootstrapMixin":93,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],119:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -23307,7 +26094,7 @@ ListGroup.propTypes = {
 
 exports['default'] = ListGroup;
 module.exports = exports['default'];
-},{"./utils/ValidComponentChildren":160,"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],119:[function(require,module,exports){
+},{"./utils/ValidComponentChildren":161,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],120:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -23424,7 +26211,7 @@ var ListGroupItem = _react2['default'].createClass({
 
 exports['default'] = ListGroupItem;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./SafeAnchor":145,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],120:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./SafeAnchor":146,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],121:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -23511,7 +26298,7 @@ var MenuItem = _react2['default'].createClass({
 
 exports['default'] = MenuItem;
 module.exports = exports['default'];
-},{"./SafeAnchor":145,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],121:[function(require,module,exports){
+},{"./SafeAnchor":146,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],122:[function(require,module,exports){
 /*eslint-disable react/prop-types */
 'use strict';
 
@@ -24001,7 +26788,7 @@ Modal.BACKDROP_TRANSITION_DURATION = 150;
 
 exports['default'] = Modal;
 module.exports = exports['default'];
-},{"./Fade":106,"./ModalBody":122,"./ModalDialog":123,"./ModalFooter":124,"./ModalHeader":125,"./ModalTitle":126,"./Portal":140,"./utils/EventListener":158,"./utils/createChainedFunction":162,"./utils/domUtils":166,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"babel-runtime/helpers/object-without-properties":178,"classnames":34,"react":509}],122:[function(require,module,exports){
+},{"./Fade":107,"./ModalBody":123,"./ModalDialog":124,"./ModalFooter":125,"./ModalHeader":126,"./ModalTitle":127,"./Portal":141,"./utils/EventListener":159,"./utils/createChainedFunction":163,"./utils/domUtils":167,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"classnames":35,"react":510}],123:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -24055,7 +26842,7 @@ ModalBody.defaultProps = {
 
 exports['default'] = ModalBody;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],123:[function(require,module,exports){
+},{"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],124:[function(require,module,exports){
 /*eslint-disable react/prop-types */
 'use strict';
 
@@ -24137,7 +26924,7 @@ var ModalDialog = _react2['default'].createClass({
 
 exports['default'] = ModalDialog;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],124:[function(require,module,exports){
+},{"./BootstrapMixin":93,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],125:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -24191,7 +26978,7 @@ ModalFooter.defaultProps = {
 
 exports['default'] = ModalFooter;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],125:[function(require,module,exports){
+},{"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],126:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -24280,7 +27067,7 @@ ModalHeader.defaultProps = {
 
 exports['default'] = ModalHeader;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],126:[function(require,module,exports){
+},{"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],127:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -24334,7 +27121,7 @@ ModalTitle.defaultProps = {
 
 exports['default'] = ModalTitle;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],127:[function(require,module,exports){
+},{"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],128:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -24482,7 +27269,7 @@ var Nav = _react2['default'].createClass({
 
 exports['default'] = Nav;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./Collapse":100,"./utils/ValidComponentChildren":160,"./utils/createChainedFunction":162,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],128:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./Collapse":101,"./utils/ValidComponentChildren":161,"./utils/createChainedFunction":163,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],129:[function(require,module,exports){
 'use strict';
 
 var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
@@ -24582,7 +27369,7 @@ var NavItem = _react2['default'].createClass({
 
 exports['default'] = NavItem;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./SafeAnchor":145,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"babel-runtime/helpers/object-without-properties":178,"classnames":34,"react":509}],129:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./SafeAnchor":146,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"classnames":35,"react":510}],130:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -24757,7 +27544,7 @@ var Navbar = _react2['default'].createClass({
 
 exports['default'] = Navbar;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./utils/CustomPropTypes":157,"./utils/ValidComponentChildren":160,"./utils/createChainedFunction":162,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],130:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./utils/CustomPropTypes":158,"./utils/ValidComponentChildren":161,"./utils/createChainedFunction":163,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],131:[function(require,module,exports){
 /* eslint react/prop-types: [2, {ignore: ["container", "containerPadding", "target", "placement", "children"] }] */
 /* These properties are validated in 'Portal' and 'Position' components */
 
@@ -24971,7 +27758,7 @@ Overlay.defaultProps = {
 
 exports['default'] = Overlay;
 module.exports = exports['default'];
-},{"./Fade":106,"./Portal":140,"./Position":141,"./RootCloseWrapper":143,"./utils/CustomPropTypes":157,"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"babel-runtime/helpers/object-without-properties":178,"classnames":34,"react":509}],131:[function(require,module,exports){
+},{"./Fade":107,"./Portal":141,"./Position":142,"./RootCloseWrapper":144,"./utils/CustomPropTypes":158,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"classnames":35,"react":510}],132:[function(require,module,exports){
 /*eslint-disable react/prop-types */
 'use strict';
 
@@ -25265,7 +28052,7 @@ OverlayTrigger.withContext = _utilsCreateContextWrapper2['default'](OverlayTrigg
 
 exports['default'] = OverlayTrigger;
 module.exports = exports['default'];
-},{"./Overlay":130,"./utils/createChainedFunction":162,"./utils/createContextWrapper":163,"babel-runtime/core-js/object/keys":171,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"lodash/object/pick":218,"react":509,"react/lib/warning":508}],132:[function(require,module,exports){
+},{"./Overlay":131,"./utils/createChainedFunction":163,"./utils/createContextWrapper":164,"babel-runtime/core-js/object/keys":172,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"lodash/object/pick":219,"react":510,"react/lib/warning":509}],133:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -25300,7 +28087,7 @@ var PageHeader = _react2['default'].createClass({
 
 exports['default'] = PageHeader;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],133:[function(require,module,exports){
+},{"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],134:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -25371,7 +28158,7 @@ var PageItem = _react2['default'].createClass({
 
 exports['default'] = PageItem;
 module.exports = exports['default'];
-},{"./SafeAnchor":145,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],134:[function(require,module,exports){
+},{"./SafeAnchor":146,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],135:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -25422,7 +28209,7 @@ var Pager = _react2['default'].createClass({
 
 exports['default'] = Pager;
 module.exports = exports['default'];
-},{"./utils/ValidComponentChildren":160,"./utils/createChainedFunction":162,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],135:[function(require,module,exports){
+},{"./utils/ValidComponentChildren":161,"./utils/createChainedFunction":163,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],136:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -25654,7 +28441,7 @@ var Pagination = _react2['default'].createClass({
 
 exports['default'] = Pagination;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./PaginationButton":136,"./SafeAnchor":145,"./utils/CustomPropTypes":157,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],136:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./PaginationButton":137,"./SafeAnchor":146,"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],137:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -25740,7 +28527,7 @@ var PaginationButton = _react2['default'].createClass({
 
 exports['default'] = PaginationButton;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./utils/CustomPropTypes":157,"./utils/createSelectedEvent":164,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"babel-runtime/helpers/object-without-properties":178,"classnames":34,"react":509}],137:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./utils/CustomPropTypes":158,"./utils/createSelectedEvent":165,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"classnames":35,"react":510}],138:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -25974,7 +28761,7 @@ var Panel = _react2['default'].createClass({
 
 exports['default'] = Panel;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./Collapse":100,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],138:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./Collapse":101,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],139:[function(require,module,exports){
 /* eslint react/prop-types: [2, {ignore: "bsStyle"}] */
 /* BootstrapMixin contains `bsStyle` type validation */
 
@@ -26083,7 +28870,7 @@ var PanelGroup = _react2['default'].createClass({
 
 exports['default'] = PanelGroup;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./utils/ValidComponentChildren":160,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],139:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./utils/ValidComponentChildren":161,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],140:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -26196,7 +28983,7 @@ var Popover = _react2['default'].createClass({
 
 exports['default'] = Popover;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./utils/CustomPropTypes":157,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],140:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],141:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -26302,7 +29089,7 @@ var Portal = _react2['default'].createClass({
 
 exports['default'] = Portal;
 module.exports = exports['default'];
-},{"./utils/CustomPropTypes":157,"./utils/domUtils":166,"babel-runtime/helpers/interop-require-default":176,"react":509}],141:[function(require,module,exports){
+},{"./utils/CustomPropTypes":158,"./utils/domUtils":167,"babel-runtime/helpers/interop-require-default":177,"react":510}],142:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -26467,7 +29254,7 @@ Position.defaultProps = {
 
 exports['default'] = Position;
 module.exports = exports['default'];
-},{"./utils/CustomPropTypes":157,"./utils/domUtils":166,"./utils/overlayPositionUtils":168,"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"babel-runtime/helpers/object-without-properties":178,"classnames":34,"react":509}],142:[function(require,module,exports){
+},{"./utils/CustomPropTypes":158,"./utils/domUtils":167,"./utils/overlayPositionUtils":169,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"classnames":35,"react":510}],143:[function(require,module,exports){
 /* eslint react/prop-types: [2, {ignore: "bsStyle"}] */
 /* BootstrapMixin contains `bsStyle` type validation */
 
@@ -26638,7 +29425,7 @@ function onlyProgressBar(props, propName, componentName) {
 
 exports['default'] = ProgressBar;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./Interpolate":115,"./utils/ValidComponentChildren":160,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],143:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./Interpolate":116,"./utils/ValidComponentChildren":161,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],144:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -26753,7 +29540,7 @@ RootCloseWrapper.propTypes = {
   onRootClose: _react2['default'].PropTypes.func.isRequired
 };
 module.exports = exports['default'];
-},{"./utils/EventListener":158,"./utils/domUtils":166,"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"react":509}],144:[function(require,module,exports){
+},{"./utils/EventListener":159,"./utils/domUtils":167,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"react":510}],145:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -26803,7 +29590,7 @@ var Row = _react2['default'].createClass({
 
 exports['default'] = Row;
 module.exports = exports['default'];
-},{"./utils/CustomPropTypes":157,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],145:[function(require,module,exports){
+},{"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],146:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -26864,7 +29651,7 @@ SafeAnchor.propTypes = {
   onClick: _react2['default'].PropTypes.func
 };
 module.exports = exports['default'];
-},{"./utils/createChainedFunction":162,"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"react":509}],146:[function(require,module,exports){
+},{"./utils/createChainedFunction":163,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"react":510}],147:[function(require,module,exports){
 /* eslint react/prop-types: [2, {ignore: "bsSize"}] */
 /* BootstrapMixin contains `bsSize` type validation */
 
@@ -27016,7 +29803,7 @@ var SplitButton = _react2['default'].createClass({
 
 exports['default'] = SplitButton;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./Button":93,"./ButtonGroup":94,"./DropdownMenu":104,"./DropdownStateMixin":105,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],147:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./Button":94,"./ButtonGroup":95,"./DropdownMenu":105,"./DropdownStateMixin":106,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],148:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -27170,7 +29957,7 @@ var SubNav = _react2['default'].createClass({
 
 exports['default'] = SubNav;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./SafeAnchor":145,"./utils/ValidComponentChildren":160,"./utils/createChainedFunction":162,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],148:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./SafeAnchor":146,"./utils/ValidComponentChildren":161,"./utils/createChainedFunction":163,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],149:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -27279,7 +30066,7 @@ var TabPane = _react2['default'].createClass({
 
 exports['default'] = TabPane;
 module.exports = exports['default'];
-},{"./utils/TransitionEvents":159,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],149:[function(require,module,exports){
+},{"./utils/TransitionEvents":160,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],150:[function(require,module,exports){
 'use strict';
 
 var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
@@ -27463,7 +30250,7 @@ var TabbedArea = _react2['default'].createClass({
 
 exports['default'] = TabbedArea;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./Nav":127,"./NavItem":128,"./utils/ValidComponentChildren":160,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"babel-runtime/helpers/object-without-properties":178,"react":509}],150:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./Nav":128,"./NavItem":129,"./utils/ValidComponentChildren":161,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"react":510}],151:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -27515,7 +30302,7 @@ var Table = _react2['default'].createClass({
 
 exports['default'] = Table;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],151:[function(require,module,exports){
+},{"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],152:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -27591,7 +30378,7 @@ var Thumbnail = _react2['default'].createClass({
 
 exports['default'] = Thumbnail;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"./SafeAnchor":145,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],152:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./SafeAnchor":146,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],153:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -27696,7 +30483,7 @@ var Tooltip = _react2['default'].createClass({
 exports['default'] = Tooltip;
 module.exports = exports['default'];
 // we don't want to expose the `style` property
-},{"./BootstrapMixin":92,"./utils/CustomPropTypes":157,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],153:[function(require,module,exports){
+},{"./BootstrapMixin":93,"./utils/CustomPropTypes":158,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],154:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -28011,7 +30798,7 @@ Transition.defaultProps = {
 };
 
 exports['default'] = Transition;
-},{"./utils/TransitionEvents":159,"babel-runtime/core-js/object/keys":171,"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"babel-runtime/helpers/object-without-properties":178,"classnames":34,"react":509}],154:[function(require,module,exports){
+},{"./utils/TransitionEvents":160,"babel-runtime/core-js/object/keys":172,"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"classnames":35,"react":510}],155:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -28056,7 +30843,7 @@ var Well = _react2['default'].createClass({
 
 exports['default'] = Well;
 module.exports = exports['default'];
-},{"./BootstrapMixin":92,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176,"classnames":34,"react":509}],155:[function(require,module,exports){
+},{"./BootstrapMixin":93,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177,"classnames":35,"react":510}],156:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -28440,7 +31227,7 @@ var _utils2 = require('./utils');
 var _utils = _interopRequireWildcard(_utils2);
 
 exports.utils = _utils;
-},{"./Accordion":87,"./Affix":88,"./AffixMixin":89,"./Alert":90,"./Badge":91,"./BootstrapMixin":92,"./Button":93,"./ButtonGroup":94,"./ButtonInput":95,"./ButtonToolbar":96,"./Carousel":97,"./CarouselItem":98,"./Col":99,"./Collapse":100,"./CollapsibleMixin":101,"./CollapsibleNav":102,"./DropdownButton":103,"./DropdownMenu":104,"./DropdownStateMixin":105,"./FadeMixin":107,"./FormControls":109,"./Glyphicon":111,"./Grid":112,"./Input":113,"./Interpolate":115,"./Jumbotron":116,"./Label":117,"./ListGroup":118,"./ListGroupItem":119,"./MenuItem":120,"./Modal":121,"./ModalBody":122,"./ModalFooter":124,"./ModalHeader":125,"./ModalTitle":126,"./Nav":127,"./NavItem":128,"./Navbar":129,"./Overlay":130,"./OverlayTrigger":131,"./PageHeader":132,"./PageItem":133,"./Pager":134,"./Pagination":135,"./Panel":137,"./PanelGroup":138,"./Popover":139,"./Portal":140,"./Position":141,"./ProgressBar":142,"./Row":144,"./SafeAnchor":145,"./SplitButton":146,"./SubNav":147,"./TabPane":148,"./TabbedArea":149,"./Table":150,"./Thumbnail":151,"./Tooltip":152,"./Well":154,"./styleMaps":156,"./utils":167,"babel-runtime/helpers/interop-require-default":176,"babel-runtime/helpers/interop-require-wildcard":177}],156:[function(require,module,exports){
+},{"./Accordion":88,"./Affix":89,"./AffixMixin":90,"./Alert":91,"./Badge":92,"./BootstrapMixin":93,"./Button":94,"./ButtonGroup":95,"./ButtonInput":96,"./ButtonToolbar":97,"./Carousel":98,"./CarouselItem":99,"./Col":100,"./Collapse":101,"./CollapsibleMixin":102,"./CollapsibleNav":103,"./DropdownButton":104,"./DropdownMenu":105,"./DropdownStateMixin":106,"./FadeMixin":108,"./FormControls":110,"./Glyphicon":112,"./Grid":113,"./Input":114,"./Interpolate":116,"./Jumbotron":117,"./Label":118,"./ListGroup":119,"./ListGroupItem":120,"./MenuItem":121,"./Modal":122,"./ModalBody":123,"./ModalFooter":125,"./ModalHeader":126,"./ModalTitle":127,"./Nav":128,"./NavItem":129,"./Navbar":130,"./Overlay":131,"./OverlayTrigger":132,"./PageHeader":133,"./PageItem":134,"./Pager":135,"./Pagination":136,"./Panel":138,"./PanelGroup":139,"./Popover":140,"./Portal":141,"./Position":142,"./ProgressBar":143,"./Row":145,"./SafeAnchor":146,"./SplitButton":147,"./SubNav":148,"./TabPane":149,"./TabbedArea":150,"./Table":151,"./Thumbnail":152,"./Tooltip":153,"./Well":155,"./styleMaps":157,"./utils":168,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/interop-require-wildcard":178}],157:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -28493,7 +31280,7 @@ var styleMaps = {
 
 exports['default'] = styleMaps;
 module.exports = exports['default'];
-},{}],157:[function(require,module,exports){
+},{}],158:[function(require,module,exports){
 'use strict';
 
 var _Object$keys = require('babel-runtime/core-js/object/keys')['default'];
@@ -28683,7 +31470,7 @@ function createElementTypeChecker() {
 
 exports['default'] = CustomPropTypes;
 module.exports = exports['default'];
-},{"babel-runtime/core-js/object/keys":171,"babel-runtime/helpers/interop-require-default":176,"react":509}],158:[function(require,module,exports){
+},{"babel-runtime/core-js/object/keys":172,"babel-runtime/helpers/interop-require-default":177,"react":510}],159:[function(require,module,exports){
 /**
  * Copyright 2013-2014 Facebook, Inc.
  *
@@ -28742,7 +31529,7 @@ var EventListener = {
 
 exports['default'] = EventListener;
 module.exports = exports['default'];
-},{}],159:[function(require,module,exports){
+},{}],160:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -28856,7 +31643,7 @@ var ReactTransitionEvents = {
 
 exports['default'] = ReactTransitionEvents;
 module.exports = exports['default'];
-},{}],160:[function(require,module,exports){
+},{}],161:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -28959,7 +31746,7 @@ exports['default'] = {
   hasValidComponent: hasValidComponent
 };
 module.exports = exports['default'];
-},{"babel-runtime/helpers/interop-require-default":176,"react":509}],161:[function(require,module,exports){
+},{"babel-runtime/helpers/interop-require-default":177,"react":510}],162:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -28986,7 +31773,7 @@ function valueValidation(props, propName, componentName) {
 }
 
 module.exports = exports['default'];
-},{"./CustomPropTypes":157,"babel-runtime/helpers/interop-require-default":176,"react":509}],162:[function(require,module,exports){
+},{"./CustomPropTypes":158,"babel-runtime/helpers/interop-require-default":177,"react":510}],163:[function(require,module,exports){
 /**
  * Safe chained function
  *
@@ -29028,7 +31815,7 @@ function createChainedFunction() {
 
 exports['default'] = createChainedFunction;
 module.exports = exports['default'];
-},{}],163:[function(require,module,exports){
+},{}],164:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -29116,7 +31903,7 @@ function createContextWrapper(Trigger, propName) {
 }
 
 module.exports = exports['default'];
-},{"babel-runtime/helpers/class-call-check":173,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/inherits":175,"babel-runtime/helpers/interop-require-default":176,"babel-runtime/helpers/object-without-properties":178,"react":509}],164:[function(require,module,exports){
+},{"babel-runtime/helpers/class-call-check":174,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/inherits":176,"babel-runtime/helpers/interop-require-default":177,"babel-runtime/helpers/object-without-properties":179,"react":510}],165:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -29139,7 +31926,7 @@ function createSelectedEvent(eventKey) {
 }
 
 module.exports = exports["default"];
-},{}],165:[function(require,module,exports){
+},{}],166:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -29162,7 +31949,7 @@ function deprecationWarning(oldname, newname, link) {
 }
 
 module.exports = exports['default'];
-},{"babel-runtime/helpers/interop-require-default":176,"react/lib/warning":508}],166:[function(require,module,exports){
+},{"babel-runtime/helpers/interop-require-default":177,"react/lib/warning":509}],167:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -29350,7 +32137,7 @@ exports['default'] = {
   offsetParent: offsetParentFunc
 };
 module.exports = exports['default'];
-},{"babel-runtime/helpers/interop-require-default":176,"react":509}],167:[function(require,module,exports){
+},{"babel-runtime/helpers/interop-require-default":177,"react":510}],168:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -29386,7 +32173,7 @@ var _ValidComponentChildren2 = require('./ValidComponentChildren');
 var _ValidComponentChildren3 = _interopRequireDefault(_ValidComponentChildren2);
 
 exports.ValidComponentChildren = _ValidComponentChildren3['default'];
-},{"./CustomPropTypes":157,"./ValidComponentChildren":160,"./childrenValueInputValidation":161,"./createChainedFunction":162,"./domUtils":166,"babel-runtime/helpers/interop-require-default":176}],168:[function(require,module,exports){
+},{"./CustomPropTypes":158,"./ValidComponentChildren":161,"./childrenValueInputValidation":162,"./createChainedFunction":163,"./domUtils":167,"babel-runtime/helpers/interop-require-default":177}],169:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -29511,15 +32298,15 @@ function getLeftDelta(left, overlayWidth, container, padding) {
 }
 exports['default'] = utils;
 module.exports = exports['default'];
-},{"./domUtils":166,"babel-runtime/helpers/extends":174,"babel-runtime/helpers/interop-require-default":176}],169:[function(require,module,exports){
+},{"./domUtils":167,"babel-runtime/helpers/extends":175,"babel-runtime/helpers/interop-require-default":177}],170:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/assign"), __esModule: true };
-},{"core-js/library/fn/object/assign":179}],170:[function(require,module,exports){
+},{"core-js/library/fn/object/assign":180}],171:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/create"), __esModule: true };
-},{"core-js/library/fn/object/create":180}],171:[function(require,module,exports){
+},{"core-js/library/fn/object/create":181}],172:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/keys"), __esModule: true };
-},{"core-js/library/fn/object/keys":181}],172:[function(require,module,exports){
+},{"core-js/library/fn/object/keys":182}],173:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/set-prototype-of"), __esModule: true };
-},{"core-js/library/fn/object/set-prototype-of":182}],173:[function(require,module,exports){
+},{"core-js/library/fn/object/set-prototype-of":183}],174:[function(require,module,exports){
 "use strict";
 
 exports["default"] = function (instance, Constructor) {
@@ -29529,7 +32316,7 @@ exports["default"] = function (instance, Constructor) {
 };
 
 exports.__esModule = true;
-},{}],174:[function(require,module,exports){
+},{}],175:[function(require,module,exports){
 "use strict";
 
 var _Object$assign = require("babel-runtime/core-js/object/assign")["default"];
@@ -29549,7 +32336,7 @@ exports["default"] = _Object$assign || function (target) {
 };
 
 exports.__esModule = true;
-},{"babel-runtime/core-js/object/assign":169}],175:[function(require,module,exports){
+},{"babel-runtime/core-js/object/assign":170}],176:[function(require,module,exports){
 "use strict";
 
 var _Object$create = require("babel-runtime/core-js/object/create")["default"];
@@ -29573,7 +32360,7 @@ exports["default"] = function (subClass, superClass) {
 };
 
 exports.__esModule = true;
-},{"babel-runtime/core-js/object/create":170,"babel-runtime/core-js/object/set-prototype-of":172}],176:[function(require,module,exports){
+},{"babel-runtime/core-js/object/create":171,"babel-runtime/core-js/object/set-prototype-of":173}],177:[function(require,module,exports){
 "use strict";
 
 exports["default"] = function (obj) {
@@ -29583,7 +32370,7 @@ exports["default"] = function (obj) {
 };
 
 exports.__esModule = true;
-},{}],177:[function(require,module,exports){
+},{}],178:[function(require,module,exports){
 "use strict";
 
 exports["default"] = function (obj) {
@@ -29604,7 +32391,7 @@ exports["default"] = function (obj) {
 };
 
 exports.__esModule = true;
-},{}],178:[function(require,module,exports){
+},{}],179:[function(require,module,exports){
 "use strict";
 
 exports["default"] = function (obj, keys) {
@@ -29620,21 +32407,21 @@ exports["default"] = function (obj, keys) {
 };
 
 exports.__esModule = true;
-},{}],179:[function(require,module,exports){
+},{}],180:[function(require,module,exports){
 require('../../modules/es6.object.assign');
 module.exports = require('../../modules/$').core.Object.assign;
-},{"../../modules/$":190,"../../modules/es6.object.assign":192}],180:[function(require,module,exports){
+},{"../../modules/$":191,"../../modules/es6.object.assign":193}],181:[function(require,module,exports){
 var $ = require('../../modules/$');
 module.exports = function create(P, D){
   return $.create(P, D);
 };
-},{"../../modules/$":190}],181:[function(require,module,exports){
+},{"../../modules/$":191}],182:[function(require,module,exports){
 require('../../modules/es6.object.statics-accept-primitives');
 module.exports = require('../../modules/$').core.Object.keys;
-},{"../../modules/$":190,"../../modules/es6.object.statics-accept-primitives":194}],182:[function(require,module,exports){
+},{"../../modules/$":191,"../../modules/es6.object.statics-accept-primitives":195}],183:[function(require,module,exports){
 require('../../modules/es6.object.set-prototype-of');
 module.exports = require('../../modules/$').core.Object.setPrototypeOf;
-},{"../../modules/$":190,"../../modules/es6.object.set-prototype-of":193}],183:[function(require,module,exports){
+},{"../../modules/$":191,"../../modules/es6.object.set-prototype-of":194}],184:[function(require,module,exports){
 var $ = require('./$');
 function assert(condition, msg1, msg2){
   if(!condition)throw TypeError(msg2 ? msg1 + msg2 : msg1);
@@ -29653,7 +32440,7 @@ assert.inst = function(it, Constructor, name){
   return it;
 };
 module.exports = assert;
-},{"./$":190}],184:[function(require,module,exports){
+},{"./$":191}],185:[function(require,module,exports){
 var $        = require('./$')
   , enumKeys = require('./$.enum-keys');
 // 19.1.2.1 Object.assign(target, source, ...)
@@ -29673,7 +32460,7 @@ module.exports = Object.assign || function assign(target, source){
   }
   return T;
 };
-},{"./$":190,"./$.enum-keys":187}],185:[function(require,module,exports){
+},{"./$":191,"./$.enum-keys":188}],186:[function(require,module,exports){
 // Optional / simple context binding
 var assertFunction = require('./$.assert').fn;
 module.exports = function(fn, that, length){
@@ -29693,7 +32480,7 @@ module.exports = function(fn, that, length){
       return fn.apply(that, arguments);
     };
 };
-},{"./$.assert":183}],186:[function(require,module,exports){
+},{"./$.assert":184}],187:[function(require,module,exports){
 var $          = require('./$')
   , global     = $.g
   , core       = $.core
@@ -29742,7 +32529,7 @@ function $def(type, name, source){
   }
 }
 module.exports = $def;
-},{"./$":190}],187:[function(require,module,exports){
+},{"./$":191}],188:[function(require,module,exports){
 var $ = require('./$');
 module.exports = function(it){
   var keys       = $.getKeys(it)
@@ -29753,13 +32540,13 @@ module.exports = function(it){
   });
   return keys;
 };
-},{"./$":190}],188:[function(require,module,exports){
+},{"./$":191}],189:[function(require,module,exports){
 module.exports = function($){
   $.FW   = false;
   $.path = $.core;
   return $;
 };
-},{}],189:[function(require,module,exports){
+},{}],190:[function(require,module,exports){
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
 var $ = require('./$')
   , toString = {}.toString
@@ -29780,7 +32567,7 @@ module.exports.get = function getOwnPropertyNames(it){
   if(windowNames && toString.call(it) == '[object Window]')return getWindowNames(it);
   return getNames($.toObject(it));
 };
-},{"./$":190}],190:[function(require,module,exports){
+},{"./$":191}],191:[function(require,module,exports){
 'use strict';
 var global = typeof self != 'undefined' ? self : Function('return this')()
   , core   = {}
@@ -29877,7 +32664,7 @@ var $ = module.exports = require('./$.fw')({
 /* eslint-disable no-undef */
 if(typeof __e != 'undefined')__e = core;
 if(typeof __g != 'undefined')__g = global;
-},{"./$.fw":188}],191:[function(require,module,exports){
+},{"./$.fw":189}],192:[function(require,module,exports){
 // Works with __proto__ only. Old v8 can't work with null proto objects.
 /* eslint-disable no-proto */
 var $      = require('./$')
@@ -29903,15 +32690,15 @@ module.exports = {
     : undefined),
   check: check
 };
-},{"./$":190,"./$.assert":183,"./$.ctx":185}],192:[function(require,module,exports){
+},{"./$":191,"./$.assert":184,"./$.ctx":186}],193:[function(require,module,exports){
 // 19.1.3.1 Object.assign(target, source)
 var $def = require('./$.def');
 $def($def.S, 'Object', {assign: require('./$.assign')});
-},{"./$.assign":184,"./$.def":186}],193:[function(require,module,exports){
+},{"./$.assign":185,"./$.def":187}],194:[function(require,module,exports){
 // 19.1.3.19 Object.setPrototypeOf(O, proto)
 var $def = require('./$.def');
 $def($def.S, 'Object', {setPrototypeOf: require('./$.set-proto').set});
-},{"./$.def":186,"./$.set-proto":191}],194:[function(require,module,exports){
+},{"./$.def":187,"./$.set-proto":192}],195:[function(require,module,exports){
 var $        = require('./$')
   , $def     = require('./$.def')
   , isObject = $.isObject
@@ -29948,7 +32735,7 @@ $.each.call(('freeze,seal,preventExtensions,isFrozen,isSealed,isExtensible,' +
   }
   $def($def.S + $def.F * forced, 'Object', method);
 });
-},{"./$":190,"./$.def":186,"./$.get-names":189}],195:[function(require,module,exports){
+},{"./$":191,"./$.def":187,"./$.get-names":190}],196:[function(require,module,exports){
 /** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT = 'Expected a function';
 
@@ -30008,7 +32795,7 @@ function restParam(func, start) {
 
 module.exports = restParam;
 
-},{}],196:[function(require,module,exports){
+},{}],197:[function(require,module,exports){
 /**
  * Appends the elements of `values` to `array`.
  *
@@ -30030,7 +32817,7 @@ function arrayPush(array, values) {
 
 module.exports = arrayPush;
 
-},{}],197:[function(require,module,exports){
+},{}],198:[function(require,module,exports){
 var arrayPush = require('./arrayPush'),
     isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
@@ -30073,7 +32860,7 @@ function baseFlatten(array, isDeep, isStrict, result) {
 
 module.exports = baseFlatten;
 
-},{"../lang/isArguments":212,"../lang/isArray":213,"./arrayPush":196,"./isArrayLike":205,"./isObjectLike":208}],198:[function(require,module,exports){
+},{"../lang/isArguments":213,"../lang/isArray":214,"./arrayPush":197,"./isArrayLike":206,"./isObjectLike":209}],199:[function(require,module,exports){
 var createBaseFor = require('./createBaseFor');
 
 /**
@@ -30092,7 +32879,7 @@ var baseFor = createBaseFor();
 
 module.exports = baseFor;
 
-},{"./createBaseFor":202}],199:[function(require,module,exports){
+},{"./createBaseFor":203}],200:[function(require,module,exports){
 var baseFor = require('./baseFor'),
     keysIn = require('../object/keysIn');
 
@@ -30111,7 +32898,7 @@ function baseForIn(object, iteratee) {
 
 module.exports = baseForIn;
 
-},{"../object/keysIn":217,"./baseFor":198}],200:[function(require,module,exports){
+},{"../object/keysIn":218,"./baseFor":199}],201:[function(require,module,exports){
 /**
  * The base implementation of `_.property` without support for deep paths.
  *
@@ -30127,7 +32914,7 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-},{}],201:[function(require,module,exports){
+},{}],202:[function(require,module,exports){
 var identity = require('../utility/identity');
 
 /**
@@ -30168,7 +32955,7 @@ function bindCallback(func, thisArg, argCount) {
 
 module.exports = bindCallback;
 
-},{"../utility/identity":219}],202:[function(require,module,exports){
+},{"../utility/identity":220}],203:[function(require,module,exports){
 var toObject = require('./toObject');
 
 /**
@@ -30197,7 +32984,7 @@ function createBaseFor(fromRight) {
 
 module.exports = createBaseFor;
 
-},{"./toObject":211}],203:[function(require,module,exports){
+},{"./toObject":212}],204:[function(require,module,exports){
 var baseProperty = require('./baseProperty');
 
 /**
@@ -30214,7 +33001,7 @@ var getLength = baseProperty('length');
 
 module.exports = getLength;
 
-},{"./baseProperty":200}],204:[function(require,module,exports){
+},{"./baseProperty":201}],205:[function(require,module,exports){
 var isNative = require('../lang/isNative');
 
 /**
@@ -30232,7 +33019,7 @@ function getNative(object, key) {
 
 module.exports = getNative;
 
-},{"../lang/isNative":215}],205:[function(require,module,exports){
+},{"../lang/isNative":216}],206:[function(require,module,exports){
 var getLength = require('./getLength'),
     isLength = require('./isLength');
 
@@ -30249,7 +33036,7 @@ function isArrayLike(value) {
 
 module.exports = isArrayLike;
 
-},{"./getLength":203,"./isLength":207}],206:[function(require,module,exports){
+},{"./getLength":204,"./isLength":208}],207:[function(require,module,exports){
 /** Used to detect unsigned integer values. */
 var reIsUint = /^\d+$/;
 
@@ -30275,7 +33062,7 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-},{}],207:[function(require,module,exports){
+},{}],208:[function(require,module,exports){
 /**
  * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
  * of an array-like value.
@@ -30297,7 +33084,7 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],208:[function(require,module,exports){
+},{}],209:[function(require,module,exports){
 /**
  * Checks if `value` is object-like.
  *
@@ -30311,7 +33098,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],209:[function(require,module,exports){
+},{}],210:[function(require,module,exports){
 var toObject = require('./toObject');
 
 /**
@@ -30341,7 +33128,7 @@ function pickByArray(object, props) {
 
 module.exports = pickByArray;
 
-},{"./toObject":211}],210:[function(require,module,exports){
+},{"./toObject":212}],211:[function(require,module,exports){
 var baseForIn = require('./baseForIn');
 
 /**
@@ -30365,7 +33152,7 @@ function pickByCallback(object, predicate) {
 
 module.exports = pickByCallback;
 
-},{"./baseForIn":199}],211:[function(require,module,exports){
+},{"./baseForIn":200}],212:[function(require,module,exports){
 var isObject = require('../lang/isObject');
 
 /**
@@ -30381,7 +33168,7 @@ function toObject(value) {
 
 module.exports = toObject;
 
-},{"../lang/isObject":216}],212:[function(require,module,exports){
+},{"../lang/isObject":217}],213:[function(require,module,exports){
 var isArrayLike = require('../internal/isArrayLike'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -30417,7 +33204,7 @@ function isArguments(value) {
 
 module.exports = isArguments;
 
-},{"../internal/isArrayLike":205,"../internal/isObjectLike":208}],213:[function(require,module,exports){
+},{"../internal/isArrayLike":206,"../internal/isObjectLike":209}],214:[function(require,module,exports){
 var getNative = require('../internal/getNative'),
     isLength = require('../internal/isLength'),
     isObjectLike = require('../internal/isObjectLike');
@@ -30459,7 +33246,7 @@ var isArray = nativeIsArray || function(value) {
 
 module.exports = isArray;
 
-},{"../internal/getNative":204,"../internal/isLength":207,"../internal/isObjectLike":208}],214:[function(require,module,exports){
+},{"../internal/getNative":205,"../internal/isLength":208,"../internal/isObjectLike":209}],215:[function(require,module,exports){
 var isObject = require('./isObject');
 
 /** `Object#toString` result references. */
@@ -30499,7 +33286,7 @@ function isFunction(value) {
 
 module.exports = isFunction;
 
-},{"./isObject":216}],215:[function(require,module,exports){
+},{"./isObject":217}],216:[function(require,module,exports){
 var isFunction = require('./isFunction'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -30549,7 +33336,7 @@ function isNative(value) {
 
 module.exports = isNative;
 
-},{"../internal/isObjectLike":208,"./isFunction":214}],216:[function(require,module,exports){
+},{"../internal/isObjectLike":209,"./isFunction":215}],217:[function(require,module,exports){
 /**
  * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
  * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
@@ -30579,7 +33366,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],217:[function(require,module,exports){
+},{}],218:[function(require,module,exports){
 var isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
     isIndex = require('../internal/isIndex'),
@@ -30645,7 +33432,7 @@ function keysIn(object) {
 
 module.exports = keysIn;
 
-},{"../internal/isIndex":206,"../internal/isLength":207,"../lang/isArguments":212,"../lang/isArray":213,"../lang/isObject":216}],218:[function(require,module,exports){
+},{"../internal/isIndex":207,"../internal/isLength":208,"../lang/isArguments":213,"../lang/isArray":214,"../lang/isObject":217}],219:[function(require,module,exports){
 var baseFlatten = require('../internal/baseFlatten'),
     bindCallback = require('../internal/bindCallback'),
     pickByArray = require('../internal/pickByArray'),
@@ -30689,7 +33476,7 @@ var pick = restParam(function(object, props) {
 
 module.exports = pick;
 
-},{"../function/restParam":195,"../internal/baseFlatten":197,"../internal/bindCallback":201,"../internal/pickByArray":209,"../internal/pickByCallback":210}],219:[function(require,module,exports){
+},{"../function/restParam":196,"../internal/baseFlatten":198,"../internal/bindCallback":202,"../internal/pickByArray":210,"../internal/pickByCallback":211}],220:[function(require,module,exports){
 /**
  * This method returns the first argument provided to it.
  *
@@ -30711,7 +33498,7 @@ function identity(value) {
 
 module.exports = identity;
 
-},{}],220:[function(require,module,exports){
+},{}],221:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -30728,7 +33515,7 @@ function shouldPureComponentUpdate(nextProps, nextState) {
 }
 
 module.exports = exports['default'];
-},{"./shallowEqual":221}],221:[function(require,module,exports){
+},{"./shallowEqual":222}],222:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -30762,7 +33549,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = exports['default'];
-},{}],222:[function(require,module,exports){
+},{}],223:[function(require,module,exports){
 /**
  * Represents a cancellation caused by navigating away
  * before the previous transition has fully resolved.
@@ -30772,7 +33559,7 @@ module.exports = exports['default'];
 function Cancellation() {}
 
 module.exports = Cancellation;
-},{}],223:[function(require,module,exports){
+},{}],224:[function(require,module,exports){
 'use strict';
 
 var invariant = require('react/lib/invariant');
@@ -30803,7 +33590,7 @@ var History = {
 };
 
 module.exports = History;
-},{"react/lib/ExecutionEnvironment":358,"react/lib/invariant":487}],224:[function(require,module,exports){
+},{"react/lib/ExecutionEnvironment":359,"react/lib/invariant":488}],225:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -30879,7 +33666,7 @@ var Match = (function () {
 })();
 
 module.exports = Match;
-},{"./PathUtils":226}],225:[function(require,module,exports){
+},{"./PathUtils":227}],226:[function(require,module,exports){
 'use strict';
 
 var PropTypes = require('./PropTypes');
@@ -30950,7 +33737,7 @@ var Navigation = {
 };
 
 module.exports = Navigation;
-},{"./PropTypes":227}],226:[function(require,module,exports){
+},{"./PropTypes":228}],227:[function(require,module,exports){
 'use strict';
 
 var invariant = require('react/lib/invariant');
@@ -31104,7 +33891,7 @@ var PathUtils = {
 };
 
 module.exports = PathUtils;
-},{"object-assign":255,"qs":256,"react/lib/invariant":487}],227:[function(require,module,exports){
+},{"object-assign":256,"qs":257,"react/lib/invariant":488}],228:[function(require,module,exports){
 'use strict';
 
 var assign = require('react/lib/Object.assign');
@@ -31136,7 +33923,7 @@ var PropTypes = assign({}, ReactPropTypes, {
 });
 
 module.exports = PropTypes;
-},{"./Route":229,"react":509,"react/lib/Object.assign":365}],228:[function(require,module,exports){
+},{"./Route":230,"react":510,"react/lib/Object.assign":366}],229:[function(require,module,exports){
 /**
  * Encapsulates a redirect to the given route.
  */
@@ -31149,7 +33936,7 @@ function Redirect(to, params, query) {
 }
 
 module.exports = Redirect;
-},{}],229:[function(require,module,exports){
+},{}],230:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -31350,7 +34137,7 @@ var Route = (function () {
 })();
 
 module.exports = Route;
-},{"./PathUtils":226,"react/lib/Object.assign":365,"react/lib/invariant":487,"react/lib/warning":508}],230:[function(require,module,exports){
+},{"./PathUtils":227,"react/lib/Object.assign":366,"react/lib/invariant":488,"react/lib/warning":509}],231:[function(require,module,exports){
 'use strict';
 
 var invariant = require('react/lib/invariant');
@@ -31426,7 +34213,7 @@ var ScrollHistory = {
 };
 
 module.exports = ScrollHistory;
-},{"./getWindowScrollPosition":245,"react/lib/ExecutionEnvironment":358,"react/lib/invariant":487}],231:[function(require,module,exports){
+},{"./getWindowScrollPosition":246,"react/lib/ExecutionEnvironment":359,"react/lib/invariant":488}],232:[function(require,module,exports){
 'use strict';
 
 var PropTypes = require('./PropTypes');
@@ -31501,7 +34288,7 @@ var State = {
 };
 
 module.exports = State;
-},{"./PropTypes":227}],232:[function(require,module,exports){
+},{"./PropTypes":228}],233:[function(require,module,exports){
 /* jshint -W058 */
 
 'use strict';
@@ -31577,7 +34364,7 @@ Transition.to = function (transition, routes, params, query, callback) {
 };
 
 module.exports = Transition;
-},{"./Cancellation":222,"./Redirect":228}],233:[function(require,module,exports){
+},{"./Cancellation":223,"./Redirect":229}],234:[function(require,module,exports){
 /**
  * Actions that modify the URL.
  */
@@ -31603,7 +34390,7 @@ var LocationActions = {
 };
 
 module.exports = LocationActions;
-},{}],234:[function(require,module,exports){
+},{}],235:[function(require,module,exports){
 'use strict';
 
 var LocationActions = require('../actions/LocationActions');
@@ -31633,7 +34420,7 @@ var ImitateBrowserBehavior = {
 };
 
 module.exports = ImitateBrowserBehavior;
-},{"../actions/LocationActions":233}],235:[function(require,module,exports){
+},{"../actions/LocationActions":234}],236:[function(require,module,exports){
 /**
  * A scroll behavior that always scrolls to the top of the page
  * after a transition.
@@ -31649,7 +34436,7 @@ var ScrollToTopBehavior = {
 };
 
 module.exports = ScrollToTopBehavior;
-},{}],236:[function(require,module,exports){
+},{}],237:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -31688,7 +34475,7 @@ var ContextWrapper = (function (_React$Component) {
 })(React.Component);
 
 module.exports = ContextWrapper;
-},{"react":509}],237:[function(require,module,exports){
+},{"react":510}],238:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -31736,7 +34523,7 @@ DefaultRoute.defaultProps = {
 };
 
 module.exports = DefaultRoute;
-},{"../PropTypes":227,"./Route":241,"./RouteHandler":242}],238:[function(require,module,exports){
+},{"../PropTypes":228,"./Route":242,"./RouteHandler":243}],239:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -31872,7 +34659,7 @@ Link.defaultProps = {
 };
 
 module.exports = Link;
-},{"../PropTypes":227,"react":509,"react/lib/Object.assign":365}],239:[function(require,module,exports){
+},{"../PropTypes":228,"react":510,"react/lib/Object.assign":366}],240:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -31921,7 +34708,7 @@ NotFoundRoute.defaultProps = {
 };
 
 module.exports = NotFoundRoute;
-},{"../PropTypes":227,"./Route":241,"./RouteHandler":242}],240:[function(require,module,exports){
+},{"../PropTypes":228,"./Route":242,"./RouteHandler":243}],241:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -31965,7 +34752,7 @@ Redirect.propTypes = {
 Redirect.defaultProps = {};
 
 module.exports = Redirect;
-},{"../PropTypes":227,"./Route":241}],241:[function(require,module,exports){
+},{"../PropTypes":228,"./Route":242}],242:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -32057,7 +34844,7 @@ Route.defaultProps = {
 };
 
 module.exports = Route;
-},{"../PropTypes":227,"./RouteHandler":242,"react":509,"react/lib/invariant":487}],242:[function(require,module,exports){
+},{"../PropTypes":228,"./RouteHandler":243,"react":510,"react/lib/invariant":488}],243:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -32166,7 +34953,7 @@ RouteHandler.childContextTypes = {
 };
 
 module.exports = RouteHandler;
-},{"../PropTypes":227,"./ContextWrapper":236,"react":509,"react/lib/Object.assign":365}],243:[function(require,module,exports){
+},{"../PropTypes":228,"./ContextWrapper":237,"react":510,"react/lib/Object.assign":366}],244:[function(require,module,exports){
 (function (process){
 /* jshint -W058 */
 'use strict';
@@ -32683,7 +35470,7 @@ function createRouter(options) {
 
 module.exports = createRouter;
 }).call(this,require('_process'))
-},{"./Cancellation":222,"./History":223,"./Match":224,"./PathUtils":226,"./PropTypes":227,"./Redirect":228,"./Route":229,"./ScrollHistory":230,"./Transition":232,"./actions/LocationActions":233,"./behaviors/ImitateBrowserBehavior":234,"./createRoutesFromReactChildren":244,"./isReactChildren":247,"./locations/HashLocation":248,"./locations/HistoryLocation":249,"./locations/RefreshLocation":250,"./locations/StaticLocation":251,"./supportsHistory":254,"_process":33,"react":509,"react/lib/ExecutionEnvironment":358,"react/lib/invariant":487,"react/lib/warning":508}],244:[function(require,module,exports){
+},{"./Cancellation":223,"./History":224,"./Match":225,"./PathUtils":227,"./PropTypes":228,"./Redirect":229,"./Route":230,"./ScrollHistory":231,"./Transition":233,"./actions/LocationActions":234,"./behaviors/ImitateBrowserBehavior":235,"./createRoutesFromReactChildren":245,"./isReactChildren":248,"./locations/HashLocation":249,"./locations/HistoryLocation":250,"./locations/RefreshLocation":251,"./locations/StaticLocation":252,"./supportsHistory":255,"_process":34,"react":510,"react/lib/ExecutionEnvironment":359,"react/lib/invariant":488,"react/lib/warning":509}],245:[function(require,module,exports){
 /* jshint -W084 */
 'use strict';
 
@@ -32765,7 +35552,7 @@ function createRoutesFromReactChildren(children) {
 }
 
 module.exports = createRoutesFromReactChildren;
-},{"./Route":229,"./components/DefaultRoute":237,"./components/NotFoundRoute":239,"./components/Redirect":240,"react":509,"react/lib/Object.assign":365,"react/lib/warning":508}],245:[function(require,module,exports){
+},{"./Route":230,"./components/DefaultRoute":238,"./components/NotFoundRoute":240,"./components/Redirect":241,"react":510,"react/lib/Object.assign":366,"react/lib/warning":509}],246:[function(require,module,exports){
 'use strict';
 
 var invariant = require('react/lib/invariant');
@@ -32784,7 +35571,7 @@ function getWindowScrollPosition() {
 }
 
 module.exports = getWindowScrollPosition;
-},{"react/lib/ExecutionEnvironment":358,"react/lib/invariant":487}],246:[function(require,module,exports){
+},{"react/lib/ExecutionEnvironment":359,"react/lib/invariant":488}],247:[function(require,module,exports){
 'use strict';
 
 exports.DefaultRoute = require('./components/DefaultRoute');
@@ -32816,7 +35603,7 @@ exports.createRoutesFromReactChildren = require('./createRoutesFromReactChildren
 
 exports.create = require('./createRouter');
 exports.run = require('./runRouter');
-},{"./History":223,"./Navigation":225,"./Route":229,"./State":231,"./behaviors/ImitateBrowserBehavior":234,"./behaviors/ScrollToTopBehavior":235,"./components/DefaultRoute":237,"./components/Link":238,"./components/NotFoundRoute":239,"./components/Redirect":240,"./components/Route":241,"./components/RouteHandler":242,"./createRouter":243,"./createRoutesFromReactChildren":244,"./locations/HashLocation":248,"./locations/HistoryLocation":249,"./locations/RefreshLocation":250,"./locations/StaticLocation":251,"./locations/TestLocation":252,"./runRouter":253}],247:[function(require,module,exports){
+},{"./History":224,"./Navigation":226,"./Route":230,"./State":232,"./behaviors/ImitateBrowserBehavior":235,"./behaviors/ScrollToTopBehavior":236,"./components/DefaultRoute":238,"./components/Link":239,"./components/NotFoundRoute":240,"./components/Redirect":241,"./components/Route":242,"./components/RouteHandler":243,"./createRouter":244,"./createRoutesFromReactChildren":245,"./locations/HashLocation":249,"./locations/HistoryLocation":250,"./locations/RefreshLocation":251,"./locations/StaticLocation":252,"./locations/TestLocation":253,"./runRouter":254}],248:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32830,7 +35617,7 @@ function isReactChildren(object) {
 }
 
 module.exports = isReactChildren;
-},{"react":509}],248:[function(require,module,exports){
+},{"react":510}],249:[function(require,module,exports){
 'use strict';
 
 var LocationActions = require('../actions/LocationActions');
@@ -32942,7 +35729,7 @@ var HashLocation = {
 };
 
 module.exports = HashLocation;
-},{"../History":223,"../actions/LocationActions":233}],249:[function(require,module,exports){
+},{"../History":224,"../actions/LocationActions":234}],250:[function(require,module,exports){
 'use strict';
 
 var LocationActions = require('../actions/LocationActions');
@@ -33029,7 +35816,7 @@ var HistoryLocation = {
 };
 
 module.exports = HistoryLocation;
-},{"../History":223,"../actions/LocationActions":233}],250:[function(require,module,exports){
+},{"../History":224,"../actions/LocationActions":234}],251:[function(require,module,exports){
 'use strict';
 
 var HistoryLocation = require('./HistoryLocation');
@@ -33061,7 +35848,7 @@ var RefreshLocation = {
 };
 
 module.exports = RefreshLocation;
-},{"../History":223,"./HistoryLocation":249}],251:[function(require,module,exports){
+},{"../History":224,"./HistoryLocation":250}],252:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -33111,7 +35898,7 @@ StaticLocation.prototype.replace = throwCannotModify;
 StaticLocation.prototype.pop = throwCannotModify;
 
 module.exports = StaticLocation;
-},{"react/lib/invariant":487}],252:[function(require,module,exports){
+},{"react/lib/invariant":488}],253:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -33206,7 +35993,7 @@ var TestLocation = (function () {
 })();
 
 module.exports = TestLocation;
-},{"../History":223,"../actions/LocationActions":233,"react/lib/invariant":487}],253:[function(require,module,exports){
+},{"../History":224,"../actions/LocationActions":234,"react/lib/invariant":488}],254:[function(require,module,exports){
 'use strict';
 
 var createRouter = require('./createRouter');
@@ -33257,7 +36044,7 @@ function runRouter(routes, location, callback) {
 }
 
 module.exports = runRouter;
-},{"./createRouter":243}],254:[function(require,module,exports){
+},{"./createRouter":244}],255:[function(require,module,exports){
 'use strict';
 
 function supportsHistory() {
@@ -33274,7 +36061,7 @@ function supportsHistory() {
 }
 
 module.exports = supportsHistory;
-},{}],255:[function(require,module,exports){
+},{}],256:[function(require,module,exports){
 'use strict';
 
 function ToObject(val) {
@@ -33302,10 +36089,10 @@ module.exports = Object.assign || function (target, source) {
 	return to;
 };
 
-},{}],256:[function(require,module,exports){
+},{}],257:[function(require,module,exports){
 module.exports = require('./lib/');
 
-},{"./lib/":257}],257:[function(require,module,exports){
+},{"./lib/":258}],258:[function(require,module,exports){
 // Load modules
 
 var Stringify = require('./stringify');
@@ -33322,7 +36109,7 @@ module.exports = {
     parse: Parse
 };
 
-},{"./parse":258,"./stringify":259}],258:[function(require,module,exports){
+},{"./parse":259,"./stringify":260}],259:[function(require,module,exports){
 // Load modules
 
 var Utils = require('./utils');
@@ -33485,7 +36272,7 @@ module.exports = function (str, options) {
     return Utils.compact(obj);
 };
 
-},{"./utils":260}],259:[function(require,module,exports){
+},{"./utils":261}],260:[function(require,module,exports){
 // Load modules
 
 var Utils = require('./utils');
@@ -33584,7 +36371,7 @@ module.exports = function (obj, options) {
     return keys.join(delimiter);
 };
 
-},{"./utils":260}],260:[function(require,module,exports){
+},{"./utils":261}],261:[function(require,module,exports){
 // Load modules
 
 
@@ -33718,7 +36505,7 @@ exports.isBuffer = function (obj) {
         obj.constructor.isBuffer(obj));
 };
 
-},{}],261:[function(require,module,exports){
+},{}],262:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -34091,7 +36878,7 @@ function msgs(msgs) {
 module.exports = createUncontrolledWidget(Calendar, { value: 'onChange' });
 
 module.exports.BaseCalendar = Calendar;
-},{"./Century":262,"./Decade":267,"./Footer":269,"./Header":270,"./Month":273,"./SlideTransition":282,"./Year":285,"./mixins/PureRenderMixin":293,"./mixins/RtlParentContextMixin":295,"./mixins/TimeoutMixin":296,"./mixins/WidgetMixin":297,"./util/_":298,"./util/babelHelpers.js":299,"./util/compat":301,"./util/configuration":302,"./util/constants":303,"./util/dates":304,"./util/propTypes":309,"classnames":312,"react":509,"uncontrollable":335}],262:[function(require,module,exports){
+},{"./Century":263,"./Decade":268,"./Footer":270,"./Header":271,"./Month":274,"./SlideTransition":283,"./Year":286,"./mixins/PureRenderMixin":294,"./mixins/RtlParentContextMixin":296,"./mixins/TimeoutMixin":297,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"./util/constants":304,"./util/dates":305,"./util/propTypes":310,"classnames":313,"react":510,"uncontrollable":336}],263:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -34209,7 +36996,7 @@ function getCenturyDecades(_date) {
     return date = dates.add(date, 10, 'year');
   });
 }
-},{"./WidgetButton":284,"./mixins/PureRenderMixin":293,"./mixins/RtlChildContextMixin":294,"./mixins/WidgetMixin":297,"./util/_":298,"./util/babelHelpers.js":299,"./util/configuration":302,"./util/constants":303,"./util/dates":304,"./util/propTypes":309,"classnames":312,"react":509}],263:[function(require,module,exports){
+},{"./WidgetButton":285,"./mixins/PureRenderMixin":294,"./mixins/RtlChildContextMixin":295,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/configuration":303,"./util/constants":304,"./util/dates":305,"./util/propTypes":310,"classnames":313,"react":510}],264:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -34580,7 +37367,7 @@ function getFilter(suggest, word, ctx) {
 module.exports = createUncontrolledWidget(ComboBox, { open: 'onToggle', value: 'onChange' });
 
 module.exports.BaseComboBox = ComboBox;
-},{"./ComboboxInput":264,"./List":271,"./ListGroupable":272,"./Popup":279,"./WidgetButton":284,"./mixins/DataFilterMixin":289,"./mixins/DataHelpersMixin":290,"./mixins/PopupScrollToMixin":292,"./mixins/RtlParentContextMixin":295,"./mixins/TimeoutMixin":296,"./mixins/WidgetMixin":297,"./util/_":298,"./util/babelHelpers.js":299,"./util/compat":301,"./util/filter":307,"./util/propTypes":309,"./util/validateListInterface":311,"classnames":312,"react":509,"uncontrollable":335}],264:[function(require,module,exports){
+},{"./ComboboxInput":265,"./List":272,"./ListGroupable":273,"./Popup":280,"./WidgetButton":285,"./mixins/DataFilterMixin":290,"./mixins/DataHelpersMixin":291,"./mixins/PopupScrollToMixin":293,"./mixins/RtlParentContextMixin":296,"./mixins/TimeoutMixin":297,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/filter":308,"./util/propTypes":310,"./util/validateListInterface":312,"classnames":313,"react":510,"uncontrollable":336}],265:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -34660,7 +37447,7 @@ module.exports = React.createClass({
     compat.findDOMNode(this).focus();
   }
 });
-},{"./util/babelHelpers.js":299,"./util/caret":300,"./util/compat":301,"react":509}],265:[function(require,module,exports){
+},{"./util/babelHelpers.js":300,"./util/caret":301,"./util/compat":302,"react":510}],266:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -34764,7 +37551,7 @@ function chain(a, b, thisArg) {
     b && b.apply(thisArg, arguments);
   };
 }
-},{"./util/babelHelpers.js":299,"./util/compat":301,"./util/configuration":302,"./util/dates":304,"./util/propTypes":309,"classnames":312,"react":509}],266:[function(require,module,exports){
+},{"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"./util/dates":305,"./util/propTypes":310,"classnames":313,"react":510}],267:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -35163,7 +37950,7 @@ function dateOrNull(dt) {
 }
 // #75: need to aggressively reclaim focus from the calendar otherwise
 // disabled header/footer buttons will drop focus completely from the widget
-},{"./Calendar":261,"./DateInput":265,"./Popup":279,"./TimeList":283,"./WidgetButton":284,"./mixins/PopupScrollToMixin":292,"./mixins/PureRenderMixin":293,"./mixins/RtlParentContextMixin":295,"./mixins/TimeoutMixin":296,"./mixins/WidgetMixin":297,"./util/_":298,"./util/babelHelpers.js":299,"./util/compat":301,"./util/configuration":302,"./util/constants":303,"./util/dates":304,"./util/propTypes":309,"classnames":312,"react":509,"react/lib/getActiveElement":473,"react/lib/invariant":487,"uncontrollable":335}],267:[function(require,module,exports){
+},{"./Calendar":262,"./DateInput":266,"./Popup":280,"./TimeList":284,"./WidgetButton":285,"./mixins/PopupScrollToMixin":293,"./mixins/PureRenderMixin":294,"./mixins/RtlParentContextMixin":296,"./mixins/TimeoutMixin":297,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"./util/constants":304,"./util/dates":305,"./util/propTypes":310,"classnames":313,"react":510,"react/lib/getActiveElement":474,"react/lib/invariant":488,"uncontrollable":336}],268:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -35273,7 +38060,7 @@ function getDecadeYears(_date) {
 }
 
 //require('./mixins/DateFocusMixin')('decade', 'year')
-},{"./WidgetButton":284,"./mixins/PureRenderMixin":293,"./mixins/RtlChildContextMixin":294,"./mixins/WidgetMixin":297,"./util/_":298,"./util/babelHelpers.js":299,"./util/configuration":302,"./util/dates":304,"./util/propTypes":309,"classnames":312,"react":509}],268:[function(require,module,exports){
+},{"./WidgetButton":285,"./mixins/PureRenderMixin":294,"./mixins/RtlChildContextMixin":295,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/configuration":303,"./util/dates":305,"./util/propTypes":310,"classnames":313,"react":510}],269:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -35618,7 +38405,7 @@ function msgs(msgs) {
 module.exports = createUncontrolledWidget(DropdownList, { open: 'onToggle', value: 'onChange', searchTerm: 'onSearch' });
 
 module.exports.BaseDropdownList = DropdownList;
-},{"./List":271,"./ListGroupable":272,"./Popup":279,"./mixins/DataFilterMixin":289,"./mixins/DataHelpersMixin":290,"./mixins/PopupScrollToMixin":292,"./mixins/PureRenderMixin":293,"./mixins/RtlParentContextMixin":295,"./mixins/TimeoutMixin":296,"./mixins/WidgetMixin":297,"./util/_":298,"./util/babelHelpers.js":299,"./util/compat":301,"./util/propTypes":309,"./util/validateListInterface":311,"classnames":312,"dom-helpers/query/contains":316,"react":509,"react/lib/getActiveElement":473,"uncontrollable":335}],269:[function(require,module,exports){
+},{"./List":272,"./ListGroupable":273,"./Popup":280,"./mixins/DataFilterMixin":290,"./mixins/DataHelpersMixin":291,"./mixins/PopupScrollToMixin":293,"./mixins/PureRenderMixin":294,"./mixins/RtlParentContextMixin":296,"./mixins/TimeoutMixin":297,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/propTypes":310,"./util/validateListInterface":312,"classnames":313,"dom-helpers/query/contains":317,"react":510,"react/lib/getActiveElement":474,"uncontrollable":336}],270:[function(require,module,exports){
 'use strict';
 
 var React = require('react'),
@@ -35656,7 +38443,7 @@ module.exports = React.createClass({
   }
 
 });
-},{"./WidgetButton":284,"./util/configuration":302,"./util/dates":304,"react":509}],270:[function(require,module,exports){
+},{"./WidgetButton":285,"./util/configuration":303,"./util/dates":305,"react":510}],271:[function(require,module,exports){
 'use strict';
 var React = require('react'),
     Btn = require('./WidgetButton');
@@ -35740,7 +38527,7 @@ module.exports = React.createClass({
     );
   }
 });
-},{"./WidgetButton":284,"./mixins/PureRenderMixin":293,"./mixins/RtlChildContextMixin":294,"react":509}],271:[function(require,module,exports){
+},{"./WidgetButton":285,"./mixins/PureRenderMixin":294,"./mixins/RtlChildContextMixin":295,"react":510}],272:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -35859,7 +38646,7 @@ module.exports = React.createClass({
   }
 
 });
-},{"./mixins/DataHelpersMixin":290,"./mixins/ListMovementMixin":291,"./mixins/WidgetMixin":297,"./util/_":298,"./util/babelHelpers.js":299,"./util/compat":301,"./util/propTypes":309,"classnames":312,"react":509}],272:[function(require,module,exports){
+},{"./mixins/DataHelpersMixin":291,"./mixins/ListMovementMixin":292,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/propTypes":310,"classnames":313,"react":510}],273:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -36073,7 +38860,7 @@ module.exports = React.createClass({
   }
 
 });
-},{"./mixins/DataHelpersMixin":290,"./mixins/ListMovementMixin":291,"./mixins/WidgetMixin":297,"./util/_":298,"./util/babelHelpers.js":299,"./util/compat":301,"./util/propTypes":309,"classnames":312,"react":509,"react/lib/warning":508}],273:[function(require,module,exports){
+},{"./mixins/DataHelpersMixin":291,"./mixins/ListMovementMixin":292,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/propTypes":310,"classnames":313,"react":510,"react/lib/warning":509}],274:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -36197,7 +38984,7 @@ module.exports = React.createClass({
 
 });
 //value is chosen
-},{"./WidgetButton":284,"./mixins/RtlChildContextMixin":294,"./mixins/WidgetMixin":297,"./util/_":298,"./util/babelHelpers.js":299,"./util/configuration":302,"./util/dates":304,"./util/propTypes":309,"classnames":312,"react":509}],274:[function(require,module,exports){
+},{"./WidgetButton":285,"./mixins/RtlChildContextMixin":295,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/configuration":303,"./util/dates":305,"./util/propTypes":310,"classnames":313,"react":510}],275:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -36606,7 +39393,7 @@ module.exports = createUncontrolledWidget(Multiselect, { open: 'onToggle', value
 // }
 
 module.exports.BaseMultiselect = Multiselect;
-},{"./List":271,"./ListGroupable":272,"./MultiselectInput":275,"./MultiselectTagList":276,"./Popup":279,"./mixins/DataFilterMixin":289,"./mixins/DataHelpersMixin":290,"./mixins/PopupScrollToMixin":292,"./mixins/RtlParentContextMixin":295,"./mixins/TimeoutMixin":296,"./mixins/WidgetMixin":297,"./util/_":298,"./util/babelHelpers.js":299,"./util/compat":301,"./util/dom/support":306,"./util/propTypes":309,"./util/validateListInterface":311,"classnames":312,"react":509,"uncontrollable":335}],275:[function(require,module,exports){
+},{"./List":272,"./ListGroupable":273,"./MultiselectInput":276,"./MultiselectTagList":277,"./Popup":280,"./mixins/DataFilterMixin":290,"./mixins/DataHelpersMixin":291,"./mixins/PopupScrollToMixin":293,"./mixins/RtlParentContextMixin":296,"./mixins/TimeoutMixin":297,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/dom/support":307,"./util/propTypes":310,"./util/validateListInterface":312,"classnames":313,"react":510,"uncontrollable":336}],276:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -36651,7 +39438,7 @@ module.exports = React.createClass({
   }
 
 });
-},{"./util/babelHelpers.js":299,"./util/compat":301,"react":509}],276:[function(require,module,exports){
+},{"./util/babelHelpers.js":300,"./util/compat":302,"react":510}],277:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -36802,7 +39589,7 @@ module.exports = React.createClass({
     if (nextIdx >= 0) this.setState({ focused: nextIdx });
   }
 });
-},{"./WidgetButton":284,"./mixins/DataHelpersMixin":290,"./mixins/PureRenderMixin":293,"./util/_":298,"./util/babelHelpers.js":299,"./util/propTypes":309,"classnames":312,"react":509}],277:[function(require,module,exports){
+},{"./WidgetButton":285,"./mixins/DataHelpersMixin":291,"./mixins/PureRenderMixin":294,"./util/_":299,"./util/babelHelpers.js":300,"./util/propTypes":310,"classnames":313,"react":510}],278:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -36931,7 +39718,7 @@ module.exports = React.createClass({
 function formatNumber(number, format, culture) {
   return localizers.number.format(number, format, culture);
 }
-},{"./util/babelHelpers.js":299,"./util/configuration":302,"./util/propTypes":309,"react":509}],278:[function(require,module,exports){
+},{"./util/babelHelpers.js":300,"./util/configuration":303,"./util/propTypes":310,"react":510}],279:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -37204,7 +39991,7 @@ function round(value, precision) {
 module.exports = createUncontrolledWidget(NumberPicker, { value: 'onChange' });
 
 module.exports.BaseNumberPicker = NumberPicker;
-},{"./NumberInput":277,"./WidgetButton":284,"./mixins/PureRenderMixin":293,"./mixins/RtlParentContextMixin":295,"./mixins/TimeoutMixin":296,"./mixins/WidgetMixin":297,"./util/_":298,"./util/babelHelpers.js":299,"./util/compat":301,"./util/configuration":302,"./util/constants":303,"./util/propTypes":309,"./util/repeater":310,"classnames":312,"react":509,"uncontrollable":335}],279:[function(require,module,exports){
+},{"./NumberInput":278,"./WidgetButton":285,"./mixins/PureRenderMixin":294,"./mixins/RtlParentContextMixin":296,"./mixins/TimeoutMixin":297,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"./util/constants":304,"./util/propTypes":310,"./util/repeater":311,"classnames":313,"react":510,"uncontrollable":336}],280:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -37413,7 +40200,7 @@ function childKey(children) {
   });
   for (var key in nextChildMapping) return key;
 }
-},{"./util/babelHelpers.js":299,"./util/compat":301,"./util/configuration":302,"classnames":312,"dom-helpers/query/height":317,"dom-helpers/style":324,"react":509}],280:[function(require,module,exports){
+},{"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"classnames":313,"dom-helpers/query/height":318,"dom-helpers/style":325,"react":510}],281:[function(require,module,exports){
 /**
  * A streamlined version of TransitionGroup built for managing at most two active children
  * also provides additional hooks for animation start/end
@@ -37602,7 +40389,7 @@ function key(child) {
   return child && child.key;
 }
 // This entered again before it fully left. Add it again.
-},{"./util/_":298,"./util/compat":301,"dom-helpers/query/height":317,"dom-helpers/query/width":322,"dom-helpers/style":324,"react":509}],281:[function(require,module,exports){
+},{"./util/_":299,"./util/compat":302,"dom-helpers/query/height":318,"dom-helpers/query/width":323,"dom-helpers/style":325,"react":510}],282:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -37941,7 +40728,7 @@ function getListItem(parent) {
 module.exports = createUncontrolledWidget(SelectList, { value: 'onChange' });
 
 module.exports.BaseSelectList = SelectList;
-},{"./List":271,"./ListGroupable":272,"./mixins/DataHelpersMixin":290,"./mixins/RtlParentContextMixin":295,"./mixins/TimeoutMixin":296,"./mixins/WidgetMixin":297,"./util/_":298,"./util/babelHelpers.js":299,"./util/compat":301,"./util/propTypes":309,"./util/validateListInterface":311,"classnames":312,"dom-helpers/util/scrollTo":333,"react":509,"uncontrollable":335}],282:[function(require,module,exports){
+},{"./List":272,"./ListGroupable":273,"./mixins/DataHelpersMixin":291,"./mixins/RtlParentContextMixin":296,"./mixins/TimeoutMixin":297,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/propTypes":310,"./util/validateListInterface":312,"classnames":313,"dom-helpers/util/scrollTo":334,"react":510,"uncontrollable":336}],283:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -38064,7 +40851,7 @@ module.exports = React.createClass({
     return this.isMounted() && this.refs.container.isTransitioning();
   }
 });
-},{"./ReplaceTransitionGroup":280,"./util/babelHelpers.js":299,"./util/compat":301,"./util/configuration":302,"dom-helpers/query/width":322,"dom-helpers/style":324,"react":509}],283:[function(require,module,exports){
+},{"./ReplaceTransitionGroup":281,"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"dom-helpers/query/width":323,"dom-helpers/style":325,"react":510}],284:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -38260,7 +41047,7 @@ module.exports = React.createClass({
   }
 
 });
-},{"./List":271,"./mixins/TimeoutMixin":296,"./util/_":298,"./util/babelHelpers.js":299,"./util/compat":301,"./util/configuration":302,"./util/dates":304,"./util/propTypes":309,"react":509}],284:[function(require,module,exports){
+},{"./List":272,"./mixins/TimeoutMixin":297,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"./util/dates":305,"./util/propTypes":310,"react":510}],285:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -38283,7 +41070,7 @@ module.exports = React.createClass({
     );
   }
 });
-},{"./util/babelHelpers.js":299,"classnames":312,"react":509}],285:[function(require,module,exports){
+},{"./util/babelHelpers.js":300,"classnames":313,"react":510}],286:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -38378,7 +41165,7 @@ module.exports = React.createClass({
   }
 
 });
-},{"./WidgetButton":284,"./mixins/RtlChildContextMixin":294,"./mixins/WidgetMixin":297,"./util/_":298,"./util/babelHelpers.js":299,"./util/compat":301,"./util/configuration":302,"./util/constants":303,"./util/dates":304,"./util/propTypes":309,"classnames":312,"react":509}],286:[function(require,module,exports){
+},{"./WidgetButton":285,"./mixins/RtlChildContextMixin":295,"./mixins/WidgetMixin":298,"./util/_":299,"./util/babelHelpers.js":300,"./util/compat":302,"./util/configuration":303,"./util/constants":304,"./util/dates":305,"./util/propTypes":310,"classnames":313,"react":510}],287:[function(require,module,exports){
 'use strict';
 
 var warning = require('react/lib/warning');
@@ -38421,7 +41208,7 @@ function depreciateMethod(fn) {
     return fn.apply(this, arguments);
   };
 }
-},{"./globalize-localizers":287,"./util/configuration":302,"./util/localizers":308,"react/lib/warning":508}],287:[function(require,module,exports){
+},{"./globalize-localizers":288,"./util/configuration":303,"./util/localizers":309,"react/lib/warning":509}],288:[function(require,module,exports){
 'use strict';
 
 var _require = require('./util/localizers');
@@ -38541,7 +41328,7 @@ function globalizeNumberLocalizer(globalize) {
 module.exports = {
   globalizeNumberLocalizer: globalizeNumberLocalizer, globalizeDateLocalizer: globalizeDateLocalizer
 };
-},{"./util/localizers":308,"date-arithmetic":313}],288:[function(require,module,exports){
+},{"./util/localizers":309,"date-arithmetic":314}],289:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -38572,7 +41359,7 @@ module.exports = {
   }
 };
 }).call(this,require('_process'))
-},{"./Calendar":261,"./Combobox":263,"./DateTimePicker":266,"./DropdownList":268,"./Multiselect":274,"./NumberPicker":278,"./ReplaceTransitionGroup":280,"./SelectList":281,"./SlideTransition":282,"./configure":286,"_process":33}],289:[function(require,module,exports){
+},{"./Calendar":262,"./Combobox":264,"./DateTimePicker":267,"./DropdownList":269,"./Multiselect":275,"./NumberPicker":279,"./ReplaceTransitionGroup":281,"./SelectList":282,"./SlideTransition":283,"./configure":287,"_process":34}],290:[function(require,module,exports){
 'use strict';
 var React = require('react'),
     filters = require('../util/filter'),
@@ -38637,7 +41424,7 @@ function getFilter(matcher, searchTerm, ctx) {
     return matcher(val, searchTerm);
   };
 }
-},{"../util/filter":307,"../util/propTypes":309,"./DataHelpersMixin":290,"react":509}],290:[function(require,module,exports){
+},{"../util/filter":308,"../util/propTypes":310,"./DataHelpersMixin":291,"react":510}],291:[function(require,module,exports){
 'use strict';
 var React = require('react');
 var propTypes = require('../util/propTypes');
@@ -38710,7 +41497,7 @@ module.exports = {
     return item;
   }
 };
-},{"../util/_":298,"../util/propTypes":309,"react":509}],291:[function(require,module,exports){
+},{"../util/_":299,"../util/propTypes":310,"react":510}],292:[function(require,module,exports){
 'use strict';
 var React = require('react'),
     filter = require('../util/filter'),
@@ -38781,7 +41568,7 @@ function findPrevInstance(ctx, data, word, startIndex) {
     if (foundStart && matches(itemText, word)) return data[idx];
   }
 }
-},{"../util/filter":307,"./DataHelpersMixin":290,"react":509}],292:[function(require,module,exports){
+},{"../util/filter":308,"./DataHelpersMixin":291,"react":510}],293:[function(require,module,exports){
 'use strict';
 var scrollTo = require('dom-helpers/util/scrollTo');
 
@@ -38809,7 +41596,7 @@ module.exports = {
     }
   }
 };
-},{"dom-helpers/util/scrollTo":333}],293:[function(require,module,exports){
+},{"dom-helpers/util/scrollTo":334}],294:[function(require,module,exports){
 'use strict';
 var _ = require('../util/_');
 
@@ -38820,7 +41607,7 @@ module.exports = {
     return !_.isShallowEqual(this.props, nextProps) || !_.isShallowEqual(this.state, nextState);
   }
 };
-},{"../util/_":298}],294:[function(require,module,exports){
+},{"../util/_":299}],295:[function(require,module,exports){
 'use strict';
 var React = require('react');
 
@@ -38835,7 +41622,7 @@ module.exports = {
   }
 
 };
-},{"react":509}],295:[function(require,module,exports){
+},{"react":510}],296:[function(require,module,exports){
 'use strict';
 var React = require('react');
 
@@ -38864,7 +41651,7 @@ module.exports = {
   }
 
 };
-},{"react":509}],296:[function(require,module,exports){
+},{"react":510}],297:[function(require,module,exports){
 'use strict';
 
 var _require = require('../util/_');
@@ -38891,7 +41678,7 @@ module.exports = {
   }
 
 };
-},{"../util/_":298}],297:[function(require,module,exports){
+},{"../util/_":299}],298:[function(require,module,exports){
 'use strict';
 var React = require('react'),
     _ = require('../util/_'); //uniqueID
@@ -38927,7 +41714,7 @@ module.exports = {
     return function () {};
   }
 };
-},{"../util/_":298,"react":509}],298:[function(require,module,exports){
+},{"../util/_":299,"react":510}],299:[function(require,module,exports){
 'use strict';
 var idCount = 0;
 
@@ -39058,7 +41845,7 @@ function shallowEqual(objA, objB) {
 
   return true;
 }
-},{}],299:[function(require,module,exports){
+},{}],300:[function(require,module,exports){
 (function (root, factory) {
   if (typeof define === "function" && define.amd) {
     define(["exports"], factory);
@@ -39102,7 +41889,7 @@ function shallowEqual(objA, objB) {
     }
   };
 })
-},{}],300:[function(require,module,exports){
+},{}],301:[function(require,module,exports){
 /*eslint-disable no-empty */
 'use strict';
 
@@ -39153,7 +41940,7 @@ function set(el, start, end) {
   } catch (e) {}
 }
 /* not focused or not visible */ /* not focused or not visible */
-},{}],301:[function(require,module,exports){
+},{}],302:[function(require,module,exports){
 'use strict';
 var React = require('react'),
     _ = require('./_');
@@ -39189,7 +41976,7 @@ module.exports = {
     return child;
   }
 };
-},{"./_":298,"react":509}],302:[function(require,module,exports){
+},{"./_":299,"react":510}],303:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -39222,7 +42009,7 @@ module.exports = {
   }
 };
 }).call(this,require('_process'))
-},{"../globalize-localizers":287,"./dom/animate":305,"_process":33,"globalize":334}],303:[function(require,module,exports){
+},{"../globalize-localizers":288,"./dom/animate":306,"_process":34,"globalize":335}],304:[function(require,module,exports){
 'use strict';
 
 var _calendarViewHierarchy, _calendarViewUnits;
@@ -39254,7 +42041,7 @@ module.exports = {
 
   calendarViewUnits: (_calendarViewUnits = {}, _calendarViewUnits[views.MONTH] = 'day', _calendarViewUnits[views.YEAR] = views.MONTH, _calendarViewUnits[views.DECADE] = views.YEAR, _calendarViewUnits[views.CENTURY] = views.DECADE, _calendarViewUnits)
 };
-},{}],304:[function(require,module,exports){
+},{}],305:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./babelHelpers.js');
@@ -39355,7 +42142,7 @@ var dates = module.exports = babelHelpers._extends(dateMath, {
     return this.add(this.startOf(new Date(), 'day'), 1, 'day');
   }
 });
-},{"./babelHelpers.js":299,"./configuration":302,"./constants":303,"date-arithmetic":313}],305:[function(require,module,exports){
+},{"./babelHelpers.js":300,"./configuration":303,"./constants":304,"date-arithmetic":314}],306:[function(require,module,exports){
 'use strict';
 var hyphenate = require('dom-helpers/util/hyphenate'),
     css = require('dom-helpers/style'),
@@ -39436,13 +42223,13 @@ function animate(node, properties, duration, easing, callback) {
     callback && callback.call(this);
   }
 }
-},{"dom-helpers/events/off":314,"dom-helpers/events/on":315,"dom-helpers/style":324,"dom-helpers/transition/properties":326,"dom-helpers/util/hyphenate":329}],306:[function(require,module,exports){
+},{"dom-helpers/events/off":315,"dom-helpers/events/on":316,"dom-helpers/style":325,"dom-helpers/transition/properties":327,"dom-helpers/util/hyphenate":330}],307:[function(require,module,exports){
 'use strict';
 
 module.exports = {
   ios: typeof navigator !== 'undefined' && navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/)
 };
-},{}],307:[function(require,module,exports){
+},{}],308:[function(require,module,exports){
 'use strict';
 var common = {
   eq: function eq(a, b) {
@@ -39481,7 +42268,7 @@ var common = {
 };
 
 module.exports = common;
-},{}],308:[function(require,module,exports){
+},{}],309:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -39583,7 +42370,7 @@ module.exports = {
   NumberLocalizer: NumberLocalizer, DateLocalizer: DateLocalizer
 };
 }).call(this,require('_process'))
-},{"./_":298,"./babelHelpers.js":299,"_process":33,"react":509,"react/lib/invariant":487}],309:[function(require,module,exports){
+},{"./_":299,"./babelHelpers.js":300,"_process":34,"react":510,"react/lib/invariant":488}],310:[function(require,module,exports){
 'use strict';
 var React = require('react'),
     localizers = require('./configuration').locale,
@@ -39648,7 +42435,7 @@ function createChainableTypeChecker(validate) {
 
   return chainedCheckType;
 }
-},{"./configuration":302,"./filter":307,"react":509}],310:[function(require,module,exports){
+},{"./configuration":303,"./filter":308,"react":510}],311:[function(require,module,exports){
 // my tests in ie11/chrome/FF indicate that keyDown repeats
 // at about 35ms+/- 5ms after an initial 500ms delay. callback fires on the leading edge
 "use strict";
@@ -39670,7 +42457,7 @@ function Repeater(callback) {
 
 module.exports = Repeater;
 //fire after everything in case the user cancels on the first call
-},{}],311:[function(require,module,exports){
+},{}],312:[function(require,module,exports){
 (function (process){
 'use strict';
 var METHODS = ['next', 'prev', 'first', 'last'];
@@ -39694,7 +42481,7 @@ function assert(condition, msg) {
   }
 }
 }).call(this,require('_process'))
-},{"_process":33}],312:[function(require,module,exports){
+},{"_process":34}],313:[function(require,module,exports){
 /*!
   Copyright (c) 2015 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -39739,7 +42526,7 @@ if (typeof define !== 'undefined' && define.amd) {
 	});
 }
 
-},{}],313:[function(require,module,exports){
+},{}],314:[function(require,module,exports){
 var MILI    = 'milliseconds'
   , SECONDS = 'seconds'
   , MINUTES = 'minutes'
@@ -39909,7 +42696,7 @@ function createComparer(operator) {
   };
 }
 
-},{}],314:[function(require,module,exports){
+},{}],315:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 var off = function off() {};
@@ -39927,7 +42714,7 @@ if (canUseDOM) {
 }
 
 module.exports = off;
-},{"../util/inDOM":331}],315:[function(require,module,exports){
+},{"../util/inDOM":332}],316:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 var on = function on() {};
@@ -39944,7 +42731,7 @@ if (canUseDOM) {
 }
 
 module.exports = on;
-},{"../util/inDOM":331}],316:[function(require,module,exports){
+},{"../util/inDOM":332}],317:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 
@@ -39965,7 +42752,7 @@ var contains = (function () {
 })();
 
 module.exports = contains;
-},{"../util/inDOM":331}],317:[function(require,module,exports){
+},{"../util/inDOM":332}],318:[function(require,module,exports){
 'use strict';
 
 var offset = require('./offset'),
@@ -39975,13 +42762,13 @@ module.exports = function height(node, client) {
   var win = getWindow(node);
   return win ? win.innerHeight : client ? node.clientHeight : offset(node).height;
 };
-},{"./isWindow":318,"./offset":319}],318:[function(require,module,exports){
+},{"./isWindow":319,"./offset":320}],319:[function(require,module,exports){
 'use strict';
 
 module.exports = function getWindow(node) {
   return node === node.window ? node : node.nodeType === 9 ? node.defaultView || node.parentWindow : false;
 };
-},{}],319:[function(require,module,exports){
+},{}],320:[function(require,module,exports){
 'use strict';
 var contains = require('./contains'),
     getWindow = require('./isWindow');
@@ -40006,7 +42793,7 @@ module.exports = function offset(node) {
     height: box.height || node.offsetHeight
   };
 };
-},{"./contains":316,"./isWindow":318}],320:[function(require,module,exports){
+},{"./contains":317,"./isWindow":319}],321:[function(require,module,exports){
 'use strict';
 
 var css = require('../style'),
@@ -40031,7 +42818,7 @@ module.exports = function scrollPrarent(node) {
 
   return document;
 };
-},{"../style":324,"./height":317}],321:[function(require,module,exports){
+},{"../style":325,"./height":318}],322:[function(require,module,exports){
 'use strict';
 var getWindow = require('./isWindow');
 
@@ -40042,7 +42829,7 @@ module.exports = function scrollTop(node, val) {
 
   if (win) win.scrollTo('pageXOffset' in win ? win.pageXOffset : win.document.documentElement.scrollLeft, val);else node.scrollTop = val;
 };
-},{"./isWindow":318}],322:[function(require,module,exports){
+},{"./isWindow":319}],323:[function(require,module,exports){
 'use strict';
 
 var offset = require('./offset'),
@@ -40052,7 +42839,7 @@ module.exports = function width(node, client) {
   var win = getWindow(node);
   return win ? win.innerWidth : client ? node.clientWidth : offset(node).width;
 };
-},{"./isWindow":318,"./offset":319}],323:[function(require,module,exports){
+},{"./isWindow":319,"./offset":320}],324:[function(require,module,exports){
 "use strict";
 
 module.exports = function _getComputedStyle(node) {
@@ -40071,7 +42858,7 @@ module.exports = function _getComputedStyle(node) {
     }
   };
 };
-},{}],324:[function(require,module,exports){
+},{}],325:[function(require,module,exports){
 'use strict';
 
 var camelize = require('../util/camelizeStyle'),
@@ -40095,13 +42882,13 @@ module.exports = function style(node, property, value) {
 
   node.style.cssText += ';' + css;
 };
-},{"../util/camelizeStyle":328,"../util/hyphenateStyle":330,"./getComputedStyle":323,"./removeStyle":325}],325:[function(require,module,exports){
+},{"../util/camelizeStyle":329,"../util/hyphenateStyle":331,"./getComputedStyle":324,"./removeStyle":326}],326:[function(require,module,exports){
 'use strict';
 
 module.exports = function removeStyle(node, key) {
   return 'removeProperty' in node.style ? node.style.removeProperty(key) : node.style.removeAttribute(key);
 };
-},{}],326:[function(require,module,exports){
+},{}],327:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 
@@ -40157,7 +42944,7 @@ function getTransitionProperties() {
 
   return { end: endEvent, prefix: prefix };
 }
-},{"../util/inDOM":331}],327:[function(require,module,exports){
+},{"../util/inDOM":332}],328:[function(require,module,exports){
 "use strict";
 
 var rHyphen = /-(.)/g;
@@ -40167,7 +42954,7 @@ module.exports = function camelize(string) {
     return char.toUpperCase();
   });
 };
-},{}],328:[function(require,module,exports){
+},{}],329:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -40181,7 +42968,7 @@ var msPattern = /^-ms-/;
 module.exports = function camelizeStyleName(string) {
   return camelize(string.replace(msPattern, 'ms-'));
 };
-},{"./camelize":327}],329:[function(require,module,exports){
+},{"./camelize":328}],330:[function(require,module,exports){
 'use strict';
 
 var rUpper = /([A-Z])/g;
@@ -40189,7 +42976,7 @@ var rUpper = /([A-Z])/g;
 module.exports = function hyphenate(string) {
   return string.replace(rUpper, '-$1').toLowerCase();
 };
-},{}],330:[function(require,module,exports){
+},{}],331:[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -40204,10 +42991,10 @@ var msPattern = /^ms-/;
 module.exports = function hyphenateStyleName(string) {
   return hyphenate(string).replace(msPattern, "-ms-");
 };
-},{"./hyphenate":329}],331:[function(require,module,exports){
+},{"./hyphenate":330}],332:[function(require,module,exports){
 'use strict';
 module.exports = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-},{}],332:[function(require,module,exports){
+},{}],333:[function(require,module,exports){
 'use strict';
 
 var canUseDOM = require('./inDOM');
@@ -40254,7 +43041,7 @@ compatRaf.cancel = function (id) {
 };
 
 module.exports = compatRaf;
-},{"./inDOM":331}],333:[function(require,module,exports){
+},{"./inDOM":332}],334:[function(require,module,exports){
 'use strict';
 var getOffset = require('../query/offset'),
     height = require('../query/height'),
@@ -40306,7 +43093,7 @@ module.exports = function scrollTo(selected, scrollParent) {
         return raf.cancel(id);
     };
 };
-},{"../query/height":317,"../query/isWindow":318,"../query/offset":319,"../query/scrollParent":320,"../query/scrollTop":321,"./requestAnimationFrame":332}],334:[function(require,module,exports){
+},{"../query/height":318,"../query/isWindow":319,"../query/offset":320,"../query/scrollParent":321,"../query/scrollTop":322,"./requestAnimationFrame":333}],335:[function(require,module,exports){
 /*!
  * Globalize
  *
@@ -41894,7 +44681,7 @@ Globalize.culture = function( cultureSelector ) {
 
 }( this ));
 
-},{}],335:[function(require,module,exports){
+},{}],336:[function(require,module,exports){
 (function (process){
 "use strict";
 var babelHelpers = require("./util/babelHelpers.js");
@@ -42063,7 +44850,7 @@ function has(o, k) {
 }
 //return !controlled
 }).call(this,require('_process'))
-},{"./util/babelHelpers.js":336,"_process":33,"react":509,"react/lib/invariant":487}],336:[function(require,module,exports){
+},{"./util/babelHelpers.js":337,"_process":34,"react":510,"react/lib/invariant":488}],337:[function(require,module,exports){
 (function (root, factory) {
   if (typeof define === "function" && define.amd) {
     define(["exports"], factory);
@@ -42101,10 +44888,10 @@ function has(o, k) {
     return target;
   };
 })
-},{}],337:[function(require,module,exports){
+},{}],338:[function(require,module,exports){
 module.exports = require('./lib/ReactWithAddons');
 
-},{"./lib/ReactWithAddons":437}],338:[function(require,module,exports){
+},{"./lib/ReactWithAddons":438}],339:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42131,7 +44918,7 @@ var AutoFocusMixin = {
 
 module.exports = AutoFocusMixin;
 
-},{"./focusNode":471}],339:[function(require,module,exports){
+},{"./focusNode":472}],340:[function(require,module,exports){
 /**
  * Copyright 2013-2015 Facebook, Inc.
  * All rights reserved.
@@ -42626,7 +45413,7 @@ var BeforeInputEventPlugin = {
 
 module.exports = BeforeInputEventPlugin;
 
-},{"./EventConstants":352,"./EventPropagators":357,"./ExecutionEnvironment":358,"./FallbackCompositionState":359,"./SyntheticCompositionEvent":443,"./SyntheticInputEvent":447,"./keyOf":494}],340:[function(require,module,exports){
+},{"./EventConstants":353,"./EventPropagators":358,"./ExecutionEnvironment":359,"./FallbackCompositionState":360,"./SyntheticCompositionEvent":444,"./SyntheticInputEvent":448,"./keyOf":495}],341:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -42738,7 +45525,7 @@ var CSSCore = {
 module.exports = CSSCore;
 
 }).call(this,require('_process'))
-},{"./invariant":487,"_process":33}],341:[function(require,module,exports){
+},{"./invariant":488,"_process":34}],342:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -42863,7 +45650,7 @@ var CSSProperty = {
 
 module.exports = CSSProperty;
 
-},{}],342:[function(require,module,exports){
+},{}],343:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -43045,7 +45832,7 @@ var CSSPropertyOperations = {
 module.exports = CSSPropertyOperations;
 
 }).call(this,require('_process'))
-},{"./CSSProperty":341,"./ExecutionEnvironment":358,"./camelizeStyleName":458,"./dangerousStyleValue":465,"./hyphenateStyleName":485,"./memoizeStringOnly":496,"./warning":508,"_process":33}],343:[function(require,module,exports){
+},{"./CSSProperty":342,"./ExecutionEnvironment":359,"./camelizeStyleName":459,"./dangerousStyleValue":466,"./hyphenateStyleName":486,"./memoizeStringOnly":497,"./warning":509,"_process":34}],344:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -43145,7 +45932,7 @@ PooledClass.addPoolingTo(CallbackQueue);
 module.exports = CallbackQueue;
 
 }).call(this,require('_process'))
-},{"./Object.assign":365,"./PooledClass":366,"./invariant":487,"_process":33}],344:[function(require,module,exports){
+},{"./Object.assign":366,"./PooledClass":367,"./invariant":488,"_process":34}],345:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43527,7 +46314,7 @@ var ChangeEventPlugin = {
 
 module.exports = ChangeEventPlugin;
 
-},{"./EventConstants":352,"./EventPluginHub":354,"./EventPropagators":357,"./ExecutionEnvironment":358,"./ReactUpdates":436,"./SyntheticEvent":445,"./isEventSupported":488,"./isTextInputElement":490,"./keyOf":494}],345:[function(require,module,exports){
+},{"./EventConstants":353,"./EventPluginHub":355,"./EventPropagators":358,"./ExecutionEnvironment":359,"./ReactUpdates":437,"./SyntheticEvent":446,"./isEventSupported":489,"./isTextInputElement":491,"./keyOf":495}],346:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -43552,7 +46339,7 @@ var ClientReactRootIndex = {
 
 module.exports = ClientReactRootIndex;
 
-},{}],346:[function(require,module,exports){
+},{}],347:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -43690,7 +46477,7 @@ var DOMChildrenOperations = {
 module.exports = DOMChildrenOperations;
 
 }).call(this,require('_process'))
-},{"./Danger":349,"./ReactMultiChildUpdateTypes":415,"./invariant":487,"./setTextContent":502,"_process":33}],347:[function(require,module,exports){
+},{"./Danger":350,"./ReactMultiChildUpdateTypes":416,"./invariant":488,"./setTextContent":503,"_process":34}],348:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -43989,7 +46776,7 @@ var DOMProperty = {
 module.exports = DOMProperty;
 
 }).call(this,require('_process'))
-},{"./invariant":487,"_process":33}],348:[function(require,module,exports){
+},{"./invariant":488,"_process":34}],349:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -44181,7 +46968,7 @@ var DOMPropertyOperations = {
 module.exports = DOMPropertyOperations;
 
 }).call(this,require('_process'))
-},{"./DOMProperty":347,"./quoteAttributeValueForBrowser":500,"./warning":508,"_process":33}],349:[function(require,module,exports){
+},{"./DOMProperty":348,"./quoteAttributeValueForBrowser":501,"./warning":509,"_process":34}],350:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -44368,7 +47155,7 @@ var Danger = {
 module.exports = Danger;
 
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":358,"./createNodesFromMarkup":463,"./emptyFunction":466,"./getMarkupWrap":479,"./invariant":487,"_process":33}],350:[function(require,module,exports){
+},{"./ExecutionEnvironment":359,"./createNodesFromMarkup":464,"./emptyFunction":467,"./getMarkupWrap":480,"./invariant":488,"_process":34}],351:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44407,7 +47194,7 @@ var DefaultEventPluginOrder = [
 
 module.exports = DefaultEventPluginOrder;
 
-},{"./keyOf":494}],351:[function(require,module,exports){
+},{"./keyOf":495}],352:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44547,7 +47334,7 @@ var EnterLeaveEventPlugin = {
 
 module.exports = EnterLeaveEventPlugin;
 
-},{"./EventConstants":352,"./EventPropagators":357,"./ReactMount":413,"./SyntheticMouseEvent":449,"./keyOf":494}],352:[function(require,module,exports){
+},{"./EventConstants":353,"./EventPropagators":358,"./ReactMount":414,"./SyntheticMouseEvent":450,"./keyOf":495}],353:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -44619,7 +47406,7 @@ var EventConstants = {
 
 module.exports = EventConstants;
 
-},{"./keyMirror":493}],353:[function(require,module,exports){
+},{"./keyMirror":494}],354:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -44709,7 +47496,7 @@ var EventListener = {
 module.exports = EventListener;
 
 }).call(this,require('_process'))
-},{"./emptyFunction":466,"_process":33}],354:[function(require,module,exports){
+},{"./emptyFunction":467,"_process":34}],355:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -44987,7 +47774,7 @@ var EventPluginHub = {
 module.exports = EventPluginHub;
 
 }).call(this,require('_process'))
-},{"./EventPluginRegistry":355,"./EventPluginUtils":356,"./accumulateInto":455,"./forEachAccumulated":472,"./invariant":487,"_process":33}],355:[function(require,module,exports){
+},{"./EventPluginRegistry":356,"./EventPluginUtils":357,"./accumulateInto":456,"./forEachAccumulated":473,"./invariant":488,"_process":34}],356:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -45267,7 +48054,7 @@ var EventPluginRegistry = {
 module.exports = EventPluginRegistry;
 
 }).call(this,require('_process'))
-},{"./invariant":487,"_process":33}],356:[function(require,module,exports){
+},{"./invariant":488,"_process":34}],357:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -45488,7 +48275,7 @@ var EventPluginUtils = {
 module.exports = EventPluginUtils;
 
 }).call(this,require('_process'))
-},{"./EventConstants":352,"./invariant":487,"_process":33}],357:[function(require,module,exports){
+},{"./EventConstants":353,"./invariant":488,"_process":34}],358:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -45630,7 +48417,7 @@ var EventPropagators = {
 module.exports = EventPropagators;
 
 }).call(this,require('_process'))
-},{"./EventConstants":352,"./EventPluginHub":354,"./accumulateInto":455,"./forEachAccumulated":472,"_process":33}],358:[function(require,module,exports){
+},{"./EventConstants":353,"./EventPluginHub":355,"./accumulateInto":456,"./forEachAccumulated":473,"_process":34}],359:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45674,7 +48461,7 @@ var ExecutionEnvironment = {
 
 module.exports = ExecutionEnvironment;
 
-},{}],359:[function(require,module,exports){
+},{}],360:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45765,7 +48552,7 @@ PooledClass.addPoolingTo(FallbackCompositionState);
 
 module.exports = FallbackCompositionState;
 
-},{"./Object.assign":365,"./PooledClass":366,"./getTextContentAccessor":482}],360:[function(require,module,exports){
+},{"./Object.assign":366,"./PooledClass":367,"./getTextContentAccessor":483}],361:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -45976,7 +48763,7 @@ var HTMLDOMPropertyConfig = {
 
 module.exports = HTMLDOMPropertyConfig;
 
-},{"./DOMProperty":347,"./ExecutionEnvironment":358}],361:[function(require,module,exports){
+},{"./DOMProperty":348,"./ExecutionEnvironment":359}],362:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46017,7 +48804,7 @@ var LinkedStateMixin = {
 
 module.exports = LinkedStateMixin;
 
-},{"./ReactLink":411,"./ReactStateSetters":430}],362:[function(require,module,exports){
+},{"./ReactLink":412,"./ReactStateSetters":431}],363:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -46173,7 +48960,7 @@ var LinkedValueUtils = {
 module.exports = LinkedValueUtils;
 
 }).call(this,require('_process'))
-},{"./ReactPropTypes":422,"./invariant":487,"_process":33}],363:[function(require,module,exports){
+},{"./ReactPropTypes":423,"./invariant":488,"_process":34}],364:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -46230,7 +49017,7 @@ var LocalEventTrapMixin = {
 module.exports = LocalEventTrapMixin;
 
 }).call(this,require('_process'))
-},{"./ReactBrowserEventEmitter":369,"./accumulateInto":455,"./forEachAccumulated":472,"./invariant":487,"_process":33}],364:[function(require,module,exports){
+},{"./ReactBrowserEventEmitter":370,"./accumulateInto":456,"./forEachAccumulated":473,"./invariant":488,"_process":34}],365:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46288,7 +49075,7 @@ var MobileSafariClickEventPlugin = {
 
 module.exports = MobileSafariClickEventPlugin;
 
-},{"./EventConstants":352,"./emptyFunction":466}],365:[function(require,module,exports){
+},{"./EventConstants":353,"./emptyFunction":467}],366:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -46337,7 +49124,7 @@ function assign(target, sources) {
 
 module.exports = assign;
 
-},{}],366:[function(require,module,exports){
+},{}],367:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -46453,7 +49240,7 @@ var PooledClass = {
 module.exports = PooledClass;
 
 }).call(this,require('_process'))
-},{"./invariant":487,"_process":33}],367:[function(require,module,exports){
+},{"./invariant":488,"_process":34}],368:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -46605,7 +49392,7 @@ React.version = '0.13.3';
 module.exports = React;
 
 }).call(this,require('_process'))
-},{"./EventPluginUtils":356,"./ExecutionEnvironment":358,"./Object.assign":365,"./ReactChildren":373,"./ReactClass":374,"./ReactComponent":375,"./ReactContext":380,"./ReactCurrentOwner":381,"./ReactDOM":382,"./ReactDOMTextComponent":393,"./ReactDefaultInjection":396,"./ReactElement":399,"./ReactElementValidator":400,"./ReactInstanceHandles":408,"./ReactMount":413,"./ReactPerf":418,"./ReactPropTypes":422,"./ReactReconciler":425,"./ReactServerRendering":428,"./findDOMNode":469,"./onlyChild":497,"_process":33}],368:[function(require,module,exports){
+},{"./EventPluginUtils":357,"./ExecutionEnvironment":359,"./Object.assign":366,"./ReactChildren":374,"./ReactClass":375,"./ReactComponent":376,"./ReactContext":381,"./ReactCurrentOwner":382,"./ReactDOM":383,"./ReactDOMTextComponent":394,"./ReactDefaultInjection":397,"./ReactElement":400,"./ReactElementValidator":401,"./ReactInstanceHandles":409,"./ReactMount":414,"./ReactPerf":419,"./ReactPropTypes":423,"./ReactReconciler":426,"./ReactServerRendering":429,"./findDOMNode":470,"./onlyChild":498,"_process":34}],369:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46636,7 +49423,7 @@ var ReactBrowserComponentMixin = {
 
 module.exports = ReactBrowserComponentMixin;
 
-},{"./findDOMNode":469}],369:[function(require,module,exports){
+},{"./findDOMNode":470}],370:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -46989,7 +49776,7 @@ var ReactBrowserEventEmitter = assign({}, ReactEventEmitterMixin, {
 
 module.exports = ReactBrowserEventEmitter;
 
-},{"./EventConstants":352,"./EventPluginHub":354,"./EventPluginRegistry":355,"./Object.assign":365,"./ReactEventEmitterMixin":403,"./ViewportMetrics":454,"./isEventSupported":488}],370:[function(require,module,exports){
+},{"./EventConstants":353,"./EventPluginHub":355,"./EventPluginRegistry":356,"./Object.assign":366,"./ReactEventEmitterMixin":404,"./ViewportMetrics":455,"./isEventSupported":489}],371:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -47059,7 +49846,7 @@ var ReactCSSTransitionGroup = React.createClass({
 
 module.exports = ReactCSSTransitionGroup;
 
-},{"./Object.assign":365,"./React":367,"./ReactCSSTransitionGroupChild":371,"./ReactTransitionGroup":434}],371:[function(require,module,exports){
+},{"./Object.assign":366,"./React":368,"./ReactCSSTransitionGroupChild":372,"./ReactTransitionGroup":435}],372:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -47207,7 +49994,7 @@ var ReactCSSTransitionGroupChild = React.createClass({
 module.exports = ReactCSSTransitionGroupChild;
 
 }).call(this,require('_process'))
-},{"./CSSCore":340,"./React":367,"./ReactTransitionEvents":433,"./onlyChild":497,"./warning":508,"_process":33}],372:[function(require,module,exports){
+},{"./CSSCore":341,"./React":368,"./ReactTransitionEvents":434,"./onlyChild":498,"./warning":509,"_process":34}],373:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -47334,7 +50121,7 @@ var ReactChildReconciler = {
 
 module.exports = ReactChildReconciler;
 
-},{"./ReactReconciler":425,"./flattenChildren":470,"./instantiateReactComponent":486,"./shouldUpdateReactComponent":504}],373:[function(require,module,exports){
+},{"./ReactReconciler":426,"./flattenChildren":471,"./instantiateReactComponent":487,"./shouldUpdateReactComponent":505}],374:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -47487,7 +50274,7 @@ var ReactChildren = {
 module.exports = ReactChildren;
 
 }).call(this,require('_process'))
-},{"./PooledClass":366,"./ReactFragment":405,"./traverseAllChildren":506,"./warning":508,"_process":33}],374:[function(require,module,exports){
+},{"./PooledClass":367,"./ReactFragment":406,"./traverseAllChildren":507,"./warning":509,"_process":34}],375:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -48433,7 +51220,7 @@ var ReactClass = {
 module.exports = ReactClass;
 
 }).call(this,require('_process'))
-},{"./Object.assign":365,"./ReactComponent":375,"./ReactCurrentOwner":381,"./ReactElement":399,"./ReactErrorUtils":402,"./ReactInstanceMap":409,"./ReactLifeCycle":410,"./ReactPropTypeLocationNames":420,"./ReactPropTypeLocations":421,"./ReactUpdateQueue":435,"./invariant":487,"./keyMirror":493,"./keyOf":494,"./warning":508,"_process":33}],375:[function(require,module,exports){
+},{"./Object.assign":366,"./ReactComponent":376,"./ReactCurrentOwner":382,"./ReactElement":400,"./ReactErrorUtils":403,"./ReactInstanceMap":410,"./ReactLifeCycle":411,"./ReactPropTypeLocationNames":421,"./ReactPropTypeLocations":422,"./ReactUpdateQueue":436,"./invariant":488,"./keyMirror":494,"./keyOf":495,"./warning":509,"_process":34}],376:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -48587,7 +51374,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = ReactComponent;
 
 }).call(this,require('_process'))
-},{"./ReactUpdateQueue":435,"./invariant":487,"./warning":508,"_process":33}],376:[function(require,module,exports){
+},{"./ReactUpdateQueue":436,"./invariant":488,"./warning":509,"_process":34}],377:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48634,7 +51421,7 @@ var ReactComponentBrowserEnvironment = {
 
 module.exports = ReactComponentBrowserEnvironment;
 
-},{"./ReactDOMIDOperations":386,"./ReactMount":413}],377:[function(require,module,exports){
+},{"./ReactDOMIDOperations":387,"./ReactMount":414}],378:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -48695,7 +51482,7 @@ var ReactComponentEnvironment = {
 module.exports = ReactComponentEnvironment;
 
 }).call(this,require('_process'))
-},{"./invariant":487,"_process":33}],378:[function(require,module,exports){
+},{"./invariant":488,"_process":34}],379:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -48744,7 +51531,7 @@ var ReactComponentWithPureRenderMixin = {
 
 module.exports = ReactComponentWithPureRenderMixin;
 
-},{"./shallowEqual":503}],379:[function(require,module,exports){
+},{"./shallowEqual":504}],380:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -49657,7 +52444,7 @@ var ReactCompositeComponent = {
 module.exports = ReactCompositeComponent;
 
 }).call(this,require('_process'))
-},{"./Object.assign":365,"./ReactComponentEnvironment":377,"./ReactContext":380,"./ReactCurrentOwner":381,"./ReactElement":399,"./ReactElementValidator":400,"./ReactInstanceMap":409,"./ReactLifeCycle":410,"./ReactNativeComponent":416,"./ReactPerf":418,"./ReactPropTypeLocationNames":420,"./ReactPropTypeLocations":421,"./ReactReconciler":425,"./ReactUpdates":436,"./emptyObject":467,"./invariant":487,"./shouldUpdateReactComponent":504,"./warning":508,"_process":33}],380:[function(require,module,exports){
+},{"./Object.assign":366,"./ReactComponentEnvironment":378,"./ReactContext":381,"./ReactCurrentOwner":382,"./ReactElement":400,"./ReactElementValidator":401,"./ReactInstanceMap":410,"./ReactLifeCycle":411,"./ReactNativeComponent":417,"./ReactPerf":419,"./ReactPropTypeLocationNames":421,"./ReactPropTypeLocations":422,"./ReactReconciler":426,"./ReactUpdates":437,"./emptyObject":468,"./invariant":488,"./shouldUpdateReactComponent":505,"./warning":509,"_process":34}],381:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -49735,7 +52522,7 @@ var ReactContext = {
 module.exports = ReactContext;
 
 }).call(this,require('_process'))
-},{"./Object.assign":365,"./emptyObject":467,"./warning":508,"_process":33}],381:[function(require,module,exports){
+},{"./Object.assign":366,"./emptyObject":468,"./warning":509,"_process":34}],382:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -49769,7 +52556,7 @@ var ReactCurrentOwner = {
 
 module.exports = ReactCurrentOwner;
 
-},{}],382:[function(require,module,exports){
+},{}],383:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -49948,7 +52735,7 @@ var ReactDOM = mapObject({
 module.exports = ReactDOM;
 
 }).call(this,require('_process'))
-},{"./ReactElement":399,"./ReactElementValidator":400,"./mapObject":495,"_process":33}],383:[function(require,module,exports){
+},{"./ReactElement":400,"./ReactElementValidator":401,"./mapObject":496,"_process":34}],384:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50012,7 +52799,7 @@ var ReactDOMButton = ReactClass.createClass({
 
 module.exports = ReactDOMButton;
 
-},{"./AutoFocusMixin":338,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399,"./keyMirror":493}],384:[function(require,module,exports){
+},{"./AutoFocusMixin":339,"./ReactBrowserComponentMixin":369,"./ReactClass":375,"./ReactElement":400,"./keyMirror":494}],385:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -50522,7 +53309,7 @@ ReactDOMComponent.injection = {
 module.exports = ReactDOMComponent;
 
 }).call(this,require('_process'))
-},{"./CSSPropertyOperations":342,"./DOMProperty":347,"./DOMPropertyOperations":348,"./Object.assign":365,"./ReactBrowserEventEmitter":369,"./ReactComponentBrowserEnvironment":376,"./ReactMount":413,"./ReactMultiChild":414,"./ReactPerf":418,"./escapeTextContentForBrowser":468,"./invariant":487,"./isEventSupported":488,"./keyOf":494,"./warning":508,"_process":33}],385:[function(require,module,exports){
+},{"./CSSPropertyOperations":343,"./DOMProperty":348,"./DOMPropertyOperations":349,"./Object.assign":366,"./ReactBrowserEventEmitter":370,"./ReactComponentBrowserEnvironment":377,"./ReactMount":414,"./ReactMultiChild":415,"./ReactPerf":419,"./escapeTextContentForBrowser":469,"./invariant":488,"./isEventSupported":489,"./keyOf":495,"./warning":509,"_process":34}],386:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50571,7 +53358,7 @@ var ReactDOMForm = ReactClass.createClass({
 
 module.exports = ReactDOMForm;
 
-},{"./EventConstants":352,"./LocalEventTrapMixin":363,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399}],386:[function(require,module,exports){
+},{"./EventConstants":353,"./LocalEventTrapMixin":364,"./ReactBrowserComponentMixin":369,"./ReactClass":375,"./ReactElement":400}],387:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -50739,7 +53526,7 @@ ReactPerf.measureMethods(ReactDOMIDOperations, 'ReactDOMIDOperations', {
 module.exports = ReactDOMIDOperations;
 
 }).call(this,require('_process'))
-},{"./CSSPropertyOperations":342,"./DOMChildrenOperations":346,"./DOMPropertyOperations":348,"./ReactMount":413,"./ReactPerf":418,"./invariant":487,"./setInnerHTML":501,"_process":33}],387:[function(require,module,exports){
+},{"./CSSPropertyOperations":343,"./DOMChildrenOperations":347,"./DOMPropertyOperations":349,"./ReactMount":414,"./ReactPerf":419,"./invariant":488,"./setInnerHTML":502,"_process":34}],388:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50784,7 +53571,7 @@ var ReactDOMIframe = ReactClass.createClass({
 
 module.exports = ReactDOMIframe;
 
-},{"./EventConstants":352,"./LocalEventTrapMixin":363,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399}],388:[function(require,module,exports){
+},{"./EventConstants":353,"./LocalEventTrapMixin":364,"./ReactBrowserComponentMixin":369,"./ReactClass":375,"./ReactElement":400}],389:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -50830,7 +53617,7 @@ var ReactDOMImg = ReactClass.createClass({
 
 module.exports = ReactDOMImg;
 
-},{"./EventConstants":352,"./LocalEventTrapMixin":363,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399}],389:[function(require,module,exports){
+},{"./EventConstants":353,"./LocalEventTrapMixin":364,"./ReactBrowserComponentMixin":369,"./ReactClass":375,"./ReactElement":400}],390:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -51007,7 +53794,7 @@ var ReactDOMInput = ReactClass.createClass({
 module.exports = ReactDOMInput;
 
 }).call(this,require('_process'))
-},{"./AutoFocusMixin":338,"./DOMPropertyOperations":348,"./LinkedValueUtils":362,"./Object.assign":365,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399,"./ReactMount":413,"./ReactUpdates":436,"./invariant":487,"_process":33}],390:[function(require,module,exports){
+},{"./AutoFocusMixin":339,"./DOMPropertyOperations":349,"./LinkedValueUtils":363,"./Object.assign":366,"./ReactBrowserComponentMixin":369,"./ReactClass":375,"./ReactElement":400,"./ReactMount":414,"./ReactUpdates":437,"./invariant":488,"_process":34}],391:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -51059,7 +53846,7 @@ var ReactDOMOption = ReactClass.createClass({
 module.exports = ReactDOMOption;
 
 }).call(this,require('_process'))
-},{"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399,"./warning":508,"_process":33}],391:[function(require,module,exports){
+},{"./ReactBrowserComponentMixin":369,"./ReactClass":375,"./ReactElement":400,"./warning":509,"_process":34}],392:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51237,7 +54024,7 @@ var ReactDOMSelect = ReactClass.createClass({
 
 module.exports = ReactDOMSelect;
 
-},{"./AutoFocusMixin":338,"./LinkedValueUtils":362,"./Object.assign":365,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399,"./ReactUpdates":436}],392:[function(require,module,exports){
+},{"./AutoFocusMixin":339,"./LinkedValueUtils":363,"./Object.assign":366,"./ReactBrowserComponentMixin":369,"./ReactClass":375,"./ReactElement":400,"./ReactUpdates":437}],393:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51450,7 +54237,7 @@ var ReactDOMSelection = {
 
 module.exports = ReactDOMSelection;
 
-},{"./ExecutionEnvironment":358,"./getNodeForCharacterOffset":480,"./getTextContentAccessor":482}],393:[function(require,module,exports){
+},{"./ExecutionEnvironment":359,"./getNodeForCharacterOffset":481,"./getTextContentAccessor":483}],394:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51567,7 +54354,7 @@ assign(ReactDOMTextComponent.prototype, {
 
 module.exports = ReactDOMTextComponent;
 
-},{"./DOMPropertyOperations":348,"./Object.assign":365,"./ReactComponentBrowserEnvironment":376,"./ReactDOMComponent":384,"./escapeTextContentForBrowser":468}],394:[function(require,module,exports){
+},{"./DOMPropertyOperations":349,"./Object.assign":366,"./ReactComponentBrowserEnvironment":377,"./ReactDOMComponent":385,"./escapeTextContentForBrowser":469}],395:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -51707,7 +54494,7 @@ var ReactDOMTextarea = ReactClass.createClass({
 module.exports = ReactDOMTextarea;
 
 }).call(this,require('_process'))
-},{"./AutoFocusMixin":338,"./DOMPropertyOperations":348,"./LinkedValueUtils":362,"./Object.assign":365,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactElement":399,"./ReactUpdates":436,"./invariant":487,"./warning":508,"_process":33}],395:[function(require,module,exports){
+},{"./AutoFocusMixin":339,"./DOMPropertyOperations":349,"./LinkedValueUtils":363,"./Object.assign":366,"./ReactBrowserComponentMixin":369,"./ReactClass":375,"./ReactElement":400,"./ReactUpdates":437,"./invariant":488,"./warning":509,"_process":34}],396:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -51780,7 +54567,7 @@ var ReactDefaultBatchingStrategy = {
 
 module.exports = ReactDefaultBatchingStrategy;
 
-},{"./Object.assign":365,"./ReactUpdates":436,"./Transaction":453,"./emptyFunction":466}],396:[function(require,module,exports){
+},{"./Object.assign":366,"./ReactUpdates":437,"./Transaction":454,"./emptyFunction":467}],397:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -51939,7 +54726,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'))
-},{"./BeforeInputEventPlugin":339,"./ChangeEventPlugin":344,"./ClientReactRootIndex":345,"./DefaultEventPluginOrder":350,"./EnterLeaveEventPlugin":351,"./ExecutionEnvironment":358,"./HTMLDOMPropertyConfig":360,"./MobileSafariClickEventPlugin":364,"./ReactBrowserComponentMixin":368,"./ReactClass":374,"./ReactComponentBrowserEnvironment":376,"./ReactDOMButton":383,"./ReactDOMComponent":384,"./ReactDOMForm":385,"./ReactDOMIDOperations":386,"./ReactDOMIframe":387,"./ReactDOMImg":388,"./ReactDOMInput":389,"./ReactDOMOption":390,"./ReactDOMSelect":391,"./ReactDOMTextComponent":393,"./ReactDOMTextarea":394,"./ReactDefaultBatchingStrategy":395,"./ReactDefaultPerf":397,"./ReactElement":399,"./ReactEventListener":404,"./ReactInjection":406,"./ReactInstanceHandles":408,"./ReactMount":413,"./ReactReconcileTransaction":424,"./SVGDOMPropertyConfig":438,"./SelectEventPlugin":439,"./ServerReactRootIndex":440,"./SimpleEventPlugin":441,"./createFullPageComponent":462,"_process":33}],397:[function(require,module,exports){
+},{"./BeforeInputEventPlugin":340,"./ChangeEventPlugin":345,"./ClientReactRootIndex":346,"./DefaultEventPluginOrder":351,"./EnterLeaveEventPlugin":352,"./ExecutionEnvironment":359,"./HTMLDOMPropertyConfig":361,"./MobileSafariClickEventPlugin":365,"./ReactBrowserComponentMixin":369,"./ReactClass":375,"./ReactComponentBrowserEnvironment":377,"./ReactDOMButton":384,"./ReactDOMComponent":385,"./ReactDOMForm":386,"./ReactDOMIDOperations":387,"./ReactDOMIframe":388,"./ReactDOMImg":389,"./ReactDOMInput":390,"./ReactDOMOption":391,"./ReactDOMSelect":392,"./ReactDOMTextComponent":394,"./ReactDOMTextarea":395,"./ReactDefaultBatchingStrategy":396,"./ReactDefaultPerf":398,"./ReactElement":400,"./ReactEventListener":405,"./ReactInjection":407,"./ReactInstanceHandles":409,"./ReactMount":414,"./ReactReconcileTransaction":425,"./SVGDOMPropertyConfig":439,"./SelectEventPlugin":440,"./ServerReactRootIndex":441,"./SimpleEventPlugin":442,"./createFullPageComponent":463,"_process":34}],398:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -52205,7 +54992,7 @@ var ReactDefaultPerf = {
 
 module.exports = ReactDefaultPerf;
 
-},{"./DOMProperty":347,"./ReactDefaultPerfAnalysis":398,"./ReactMount":413,"./ReactPerf":418,"./performanceNow":499}],398:[function(require,module,exports){
+},{"./DOMProperty":348,"./ReactDefaultPerfAnalysis":399,"./ReactMount":414,"./ReactPerf":419,"./performanceNow":500}],399:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -52411,7 +55198,7 @@ var ReactDefaultPerfAnalysis = {
 
 module.exports = ReactDefaultPerfAnalysis;
 
-},{"./Object.assign":365}],399:[function(require,module,exports){
+},{"./Object.assign":366}],400:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -52719,7 +55506,7 @@ ReactElement.isValidElement = function(object) {
 module.exports = ReactElement;
 
 }).call(this,require('_process'))
-},{"./Object.assign":365,"./ReactContext":380,"./ReactCurrentOwner":381,"./warning":508,"_process":33}],400:[function(require,module,exports){
+},{"./Object.assign":366,"./ReactContext":381,"./ReactCurrentOwner":382,"./warning":509,"_process":34}],401:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -53184,7 +55971,7 @@ var ReactElementValidator = {
 module.exports = ReactElementValidator;
 
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":381,"./ReactElement":399,"./ReactFragment":405,"./ReactNativeComponent":416,"./ReactPropTypeLocationNames":420,"./ReactPropTypeLocations":421,"./getIteratorFn":478,"./invariant":487,"./warning":508,"_process":33}],401:[function(require,module,exports){
+},{"./ReactCurrentOwner":382,"./ReactElement":400,"./ReactFragment":406,"./ReactNativeComponent":417,"./ReactPropTypeLocationNames":421,"./ReactPropTypeLocations":422,"./getIteratorFn":479,"./invariant":488,"./warning":509,"_process":34}],402:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -53279,7 +56066,7 @@ var ReactEmptyComponent = {
 module.exports = ReactEmptyComponent;
 
 }).call(this,require('_process'))
-},{"./ReactElement":399,"./ReactInstanceMap":409,"./invariant":487,"_process":33}],402:[function(require,module,exports){
+},{"./ReactElement":400,"./ReactInstanceMap":410,"./invariant":488,"_process":34}],403:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -53311,7 +56098,7 @@ var ReactErrorUtils = {
 
 module.exports = ReactErrorUtils;
 
-},{}],403:[function(require,module,exports){
+},{}],404:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -53361,7 +56148,7 @@ var ReactEventEmitterMixin = {
 
 module.exports = ReactEventEmitterMixin;
 
-},{"./EventPluginHub":354}],404:[function(require,module,exports){
+},{"./EventPluginHub":355}],405:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -53544,7 +56331,7 @@ var ReactEventListener = {
 
 module.exports = ReactEventListener;
 
-},{"./EventListener":353,"./ExecutionEnvironment":358,"./Object.assign":365,"./PooledClass":366,"./ReactInstanceHandles":408,"./ReactMount":413,"./ReactUpdates":436,"./getEventTarget":477,"./getUnboundedScrollPosition":483}],405:[function(require,module,exports){
+},{"./EventListener":354,"./ExecutionEnvironment":359,"./Object.assign":366,"./PooledClass":367,"./ReactInstanceHandles":409,"./ReactMount":414,"./ReactUpdates":437,"./getEventTarget":478,"./getUnboundedScrollPosition":484}],406:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -53729,7 +56516,7 @@ var ReactFragment = {
 module.exports = ReactFragment;
 
 }).call(this,require('_process'))
-},{"./ReactElement":399,"./warning":508,"_process":33}],406:[function(require,module,exports){
+},{"./ReactElement":400,"./warning":509,"_process":34}],407:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -53771,7 +56558,7 @@ var ReactInjection = {
 
 module.exports = ReactInjection;
 
-},{"./DOMProperty":347,"./EventPluginHub":354,"./ReactBrowserEventEmitter":369,"./ReactClass":374,"./ReactComponentEnvironment":377,"./ReactDOMComponent":384,"./ReactEmptyComponent":401,"./ReactNativeComponent":416,"./ReactPerf":418,"./ReactRootIndex":427,"./ReactUpdates":436}],407:[function(require,module,exports){
+},{"./DOMProperty":348,"./EventPluginHub":355,"./ReactBrowserEventEmitter":370,"./ReactClass":375,"./ReactComponentEnvironment":378,"./ReactDOMComponent":385,"./ReactEmptyComponent":402,"./ReactNativeComponent":417,"./ReactPerf":419,"./ReactRootIndex":428,"./ReactUpdates":437}],408:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -53906,7 +56693,7 @@ var ReactInputSelection = {
 
 module.exports = ReactInputSelection;
 
-},{"./ReactDOMSelection":392,"./containsNode":460,"./focusNode":471,"./getActiveElement":473}],408:[function(require,module,exports){
+},{"./ReactDOMSelection":393,"./containsNode":461,"./focusNode":472,"./getActiveElement":474}],409:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -54242,7 +57029,7 @@ var ReactInstanceHandles = {
 module.exports = ReactInstanceHandles;
 
 }).call(this,require('_process'))
-},{"./ReactRootIndex":427,"./invariant":487,"_process":33}],409:[function(require,module,exports){
+},{"./ReactRootIndex":428,"./invariant":488,"_process":34}],410:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -54291,7 +57078,7 @@ var ReactInstanceMap = {
 
 module.exports = ReactInstanceMap;
 
-},{}],410:[function(require,module,exports){
+},{}],411:[function(require,module,exports){
 /**
  * Copyright 2015, Facebook, Inc.
  * All rights reserved.
@@ -54328,7 +57115,7 @@ var ReactLifeCycle = {
 
 module.exports = ReactLifeCycle;
 
-},{}],411:[function(require,module,exports){
+},{}],412:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -54401,7 +57188,7 @@ ReactLink.PropTypes = {
 
 module.exports = ReactLink;
 
-},{"./React":367}],412:[function(require,module,exports){
+},{"./React":368}],413:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -54449,7 +57236,7 @@ var ReactMarkupChecksum = {
 
 module.exports = ReactMarkupChecksum;
 
-},{"./adler32":456}],413:[function(require,module,exports){
+},{"./adler32":457}],414:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -55340,7 +58127,7 @@ ReactPerf.measureMethods(ReactMount, 'ReactMount', {
 module.exports = ReactMount;
 
 }).call(this,require('_process'))
-},{"./DOMProperty":347,"./ReactBrowserEventEmitter":369,"./ReactCurrentOwner":381,"./ReactElement":399,"./ReactElementValidator":400,"./ReactEmptyComponent":401,"./ReactInstanceHandles":408,"./ReactInstanceMap":409,"./ReactMarkupChecksum":412,"./ReactPerf":418,"./ReactReconciler":425,"./ReactUpdateQueue":435,"./ReactUpdates":436,"./containsNode":460,"./emptyObject":467,"./getReactRootElementInContainer":481,"./instantiateReactComponent":486,"./invariant":487,"./setInnerHTML":501,"./shouldUpdateReactComponent":504,"./warning":508,"_process":33}],414:[function(require,module,exports){
+},{"./DOMProperty":348,"./ReactBrowserEventEmitter":370,"./ReactCurrentOwner":382,"./ReactElement":400,"./ReactElementValidator":401,"./ReactEmptyComponent":402,"./ReactInstanceHandles":409,"./ReactInstanceMap":410,"./ReactMarkupChecksum":413,"./ReactPerf":419,"./ReactReconciler":426,"./ReactUpdateQueue":436,"./ReactUpdates":437,"./containsNode":461,"./emptyObject":468,"./getReactRootElementInContainer":482,"./instantiateReactComponent":487,"./invariant":488,"./setInnerHTML":502,"./shouldUpdateReactComponent":505,"./warning":509,"_process":34}],415:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -55770,7 +58557,7 @@ var ReactMultiChild = {
 
 module.exports = ReactMultiChild;
 
-},{"./ReactChildReconciler":372,"./ReactComponentEnvironment":377,"./ReactMultiChildUpdateTypes":415,"./ReactReconciler":425}],415:[function(require,module,exports){
+},{"./ReactChildReconciler":373,"./ReactComponentEnvironment":378,"./ReactMultiChildUpdateTypes":416,"./ReactReconciler":426}],416:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -55803,7 +58590,7 @@ var ReactMultiChildUpdateTypes = keyMirror({
 
 module.exports = ReactMultiChildUpdateTypes;
 
-},{"./keyMirror":493}],416:[function(require,module,exports){
+},{"./keyMirror":494}],417:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -55910,7 +58697,7 @@ var ReactNativeComponent = {
 module.exports = ReactNativeComponent;
 
 }).call(this,require('_process'))
-},{"./Object.assign":365,"./invariant":487,"_process":33}],417:[function(require,module,exports){
+},{"./Object.assign":366,"./invariant":488,"_process":34}],418:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -56022,7 +58809,7 @@ var ReactOwner = {
 module.exports = ReactOwner;
 
 }).call(this,require('_process'))
-},{"./invariant":487,"_process":33}],418:[function(require,module,exports){
+},{"./invariant":488,"_process":34}],419:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -56126,7 +58913,7 @@ function _noMeasure(objName, fnName, func) {
 module.exports = ReactPerf;
 
 }).call(this,require('_process'))
-},{"_process":33}],419:[function(require,module,exports){
+},{"_process":34}],420:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -56236,7 +59023,7 @@ var ReactPropTransferer = {
 
 module.exports = ReactPropTransferer;
 
-},{"./Object.assign":365,"./emptyFunction":466,"./joinClasses":492}],420:[function(require,module,exports){
+},{"./Object.assign":366,"./emptyFunction":467,"./joinClasses":493}],421:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -56264,7 +59051,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = ReactPropTypeLocationNames;
 
 }).call(this,require('_process'))
-},{"_process":33}],421:[function(require,module,exports){
+},{"_process":34}],422:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -56288,7 +59075,7 @@ var ReactPropTypeLocations = keyMirror({
 
 module.exports = ReactPropTypeLocations;
 
-},{"./keyMirror":493}],422:[function(require,module,exports){
+},{"./keyMirror":494}],423:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -56637,7 +59424,7 @@ function getPreciseType(propValue) {
 
 module.exports = ReactPropTypes;
 
-},{"./ReactElement":399,"./ReactFragment":405,"./ReactPropTypeLocationNames":420,"./emptyFunction":466}],423:[function(require,module,exports){
+},{"./ReactElement":400,"./ReactFragment":406,"./ReactPropTypeLocationNames":421,"./emptyFunction":467}],424:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -56693,7 +59480,7 @@ PooledClass.addPoolingTo(ReactPutListenerQueue);
 
 module.exports = ReactPutListenerQueue;
 
-},{"./Object.assign":365,"./PooledClass":366,"./ReactBrowserEventEmitter":369}],424:[function(require,module,exports){
+},{"./Object.assign":366,"./PooledClass":367,"./ReactBrowserEventEmitter":370}],425:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -56869,7 +59656,7 @@ PooledClass.addPoolingTo(ReactReconcileTransaction);
 
 module.exports = ReactReconcileTransaction;
 
-},{"./CallbackQueue":343,"./Object.assign":365,"./PooledClass":366,"./ReactBrowserEventEmitter":369,"./ReactInputSelection":407,"./ReactPutListenerQueue":423,"./Transaction":453}],425:[function(require,module,exports){
+},{"./CallbackQueue":344,"./Object.assign":366,"./PooledClass":367,"./ReactBrowserEventEmitter":370,"./ReactInputSelection":408,"./ReactPutListenerQueue":424,"./Transaction":454}],426:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -56993,7 +59780,7 @@ var ReactReconciler = {
 module.exports = ReactReconciler;
 
 }).call(this,require('_process'))
-},{"./ReactElementValidator":400,"./ReactRef":426,"_process":33}],426:[function(require,module,exports){
+},{"./ReactElementValidator":401,"./ReactRef":427,"_process":34}],427:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -57064,7 +59851,7 @@ ReactRef.detachRefs = function(instance, element) {
 
 module.exports = ReactRef;
 
-},{"./ReactOwner":417}],427:[function(require,module,exports){
+},{"./ReactOwner":418}],428:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -57095,7 +59882,7 @@ var ReactRootIndex = {
 
 module.exports = ReactRootIndex;
 
-},{}],428:[function(require,module,exports){
+},{}],429:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -57177,7 +59964,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'))
-},{"./ReactElement":399,"./ReactInstanceHandles":408,"./ReactMarkupChecksum":412,"./ReactServerRenderingTransaction":429,"./emptyObject":467,"./instantiateReactComponent":486,"./invariant":487,"_process":33}],429:[function(require,module,exports){
+},{"./ReactElement":400,"./ReactInstanceHandles":409,"./ReactMarkupChecksum":413,"./ReactServerRenderingTransaction":430,"./emptyObject":468,"./instantiateReactComponent":487,"./invariant":488,"_process":34}],430:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -57290,7 +60077,7 @@ PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 
 module.exports = ReactServerRenderingTransaction;
 
-},{"./CallbackQueue":343,"./Object.assign":365,"./PooledClass":366,"./ReactPutListenerQueue":423,"./Transaction":453,"./emptyFunction":466}],430:[function(require,module,exports){
+},{"./CallbackQueue":344,"./Object.assign":366,"./PooledClass":367,"./ReactPutListenerQueue":424,"./Transaction":454,"./emptyFunction":467}],431:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -57396,7 +60183,7 @@ ReactStateSetters.Mixin = {
 
 module.exports = ReactStateSetters;
 
-},{}],431:[function(require,module,exports){
+},{}],432:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -57910,7 +60697,7 @@ for (eventType in topLevelTypes) {
 
 module.exports = ReactTestUtils;
 
-},{"./EventConstants":352,"./EventPluginHub":354,"./EventPropagators":357,"./Object.assign":365,"./React":367,"./ReactBrowserEventEmitter":369,"./ReactCompositeComponent":379,"./ReactElement":399,"./ReactEmptyComponent":401,"./ReactInstanceHandles":408,"./ReactInstanceMap":409,"./ReactMount":413,"./ReactUpdates":436,"./SyntheticEvent":445,"./emptyObject":467}],432:[function(require,module,exports){
+},{"./EventConstants":353,"./EventPluginHub":355,"./EventPropagators":358,"./Object.assign":366,"./React":368,"./ReactBrowserEventEmitter":370,"./ReactCompositeComponent":380,"./ReactElement":400,"./ReactEmptyComponent":402,"./ReactInstanceHandles":409,"./ReactInstanceMap":410,"./ReactMount":414,"./ReactUpdates":437,"./SyntheticEvent":446,"./emptyObject":468}],433:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -58015,7 +60802,7 @@ var ReactTransitionChildMapping = {
 
 module.exports = ReactTransitionChildMapping;
 
-},{"./ReactChildren":373,"./ReactFragment":405}],433:[function(require,module,exports){
+},{"./ReactChildren":374,"./ReactFragment":406}],434:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -58126,7 +60913,7 @@ var ReactTransitionEvents = {
 
 module.exports = ReactTransitionEvents;
 
-},{"./ExecutionEnvironment":358}],434:[function(require,module,exports){
+},{"./ExecutionEnvironment":359}],435:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -58356,7 +61143,7 @@ var ReactTransitionGroup = React.createClass({
 
 module.exports = ReactTransitionGroup;
 
-},{"./Object.assign":365,"./React":367,"./ReactTransitionChildMapping":432,"./cloneWithProps":459,"./emptyFunction":466}],435:[function(require,module,exports){
+},{"./Object.assign":366,"./React":368,"./ReactTransitionChildMapping":433,"./cloneWithProps":460,"./emptyFunction":467}],436:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -58655,7 +61442,7 @@ var ReactUpdateQueue = {
 module.exports = ReactUpdateQueue;
 
 }).call(this,require('_process'))
-},{"./Object.assign":365,"./ReactCurrentOwner":381,"./ReactElement":399,"./ReactInstanceMap":409,"./ReactLifeCycle":410,"./ReactUpdates":436,"./invariant":487,"./warning":508,"_process":33}],436:[function(require,module,exports){
+},{"./Object.assign":366,"./ReactCurrentOwner":382,"./ReactElement":400,"./ReactInstanceMap":410,"./ReactLifeCycle":411,"./ReactUpdates":437,"./invariant":488,"./warning":509,"_process":34}],437:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -58937,7 +61724,7 @@ var ReactUpdates = {
 module.exports = ReactUpdates;
 
 }).call(this,require('_process'))
-},{"./CallbackQueue":343,"./Object.assign":365,"./PooledClass":366,"./ReactCurrentOwner":381,"./ReactPerf":418,"./ReactReconciler":425,"./Transaction":453,"./invariant":487,"./warning":508,"_process":33}],437:[function(require,module,exports){
+},{"./CallbackQueue":344,"./Object.assign":366,"./PooledClass":367,"./ReactCurrentOwner":382,"./ReactPerf":419,"./ReactReconciler":426,"./Transaction":454,"./invariant":488,"./warning":509,"_process":34}],438:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -58993,7 +61780,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = React;
 
 }).call(this,require('_process'))
-},{"./LinkedStateMixin":361,"./React":367,"./ReactCSSTransitionGroup":370,"./ReactComponentWithPureRenderMixin":378,"./ReactDefaultPerf":397,"./ReactFragment":405,"./ReactTestUtils":431,"./ReactTransitionGroup":434,"./ReactUpdates":436,"./cloneWithProps":459,"./cx":464,"./update":507,"_process":33}],438:[function(require,module,exports){
+},{"./LinkedStateMixin":362,"./React":368,"./ReactCSSTransitionGroup":371,"./ReactComponentWithPureRenderMixin":379,"./ReactDefaultPerf":398,"./ReactFragment":406,"./ReactTestUtils":432,"./ReactTransitionGroup":435,"./ReactUpdates":437,"./cloneWithProps":460,"./cx":465,"./update":508,"_process":34}],439:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -59087,7 +61874,7 @@ var SVGDOMPropertyConfig = {
 
 module.exports = SVGDOMPropertyConfig;
 
-},{"./DOMProperty":347}],439:[function(require,module,exports){
+},{"./DOMProperty":348}],440:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -59282,7 +62069,7 @@ var SelectEventPlugin = {
 
 module.exports = SelectEventPlugin;
 
-},{"./EventConstants":352,"./EventPropagators":357,"./ReactInputSelection":407,"./SyntheticEvent":445,"./getActiveElement":473,"./isTextInputElement":490,"./keyOf":494,"./shallowEqual":503}],440:[function(require,module,exports){
+},{"./EventConstants":353,"./EventPropagators":358,"./ReactInputSelection":408,"./SyntheticEvent":446,"./getActiveElement":474,"./isTextInputElement":491,"./keyOf":495,"./shallowEqual":504}],441:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -59313,7 +62100,7 @@ var ServerReactRootIndex = {
 
 module.exports = ServerReactRootIndex;
 
-},{}],441:[function(require,module,exports){
+},{}],442:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -59741,7 +62528,7 @@ var SimpleEventPlugin = {
 module.exports = SimpleEventPlugin;
 
 }).call(this,require('_process'))
-},{"./EventConstants":352,"./EventPluginUtils":356,"./EventPropagators":357,"./SyntheticClipboardEvent":442,"./SyntheticDragEvent":444,"./SyntheticEvent":445,"./SyntheticFocusEvent":446,"./SyntheticKeyboardEvent":448,"./SyntheticMouseEvent":449,"./SyntheticTouchEvent":450,"./SyntheticUIEvent":451,"./SyntheticWheelEvent":452,"./getEventCharCode":474,"./invariant":487,"./keyOf":494,"./warning":508,"_process":33}],442:[function(require,module,exports){
+},{"./EventConstants":353,"./EventPluginUtils":357,"./EventPropagators":358,"./SyntheticClipboardEvent":443,"./SyntheticDragEvent":445,"./SyntheticEvent":446,"./SyntheticFocusEvent":447,"./SyntheticKeyboardEvent":449,"./SyntheticMouseEvent":450,"./SyntheticTouchEvent":451,"./SyntheticUIEvent":452,"./SyntheticWheelEvent":453,"./getEventCharCode":475,"./invariant":488,"./keyOf":495,"./warning":509,"_process":34}],443:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -59786,7 +62573,7 @@ SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 
 module.exports = SyntheticClipboardEvent;
 
-},{"./SyntheticEvent":445}],443:[function(require,module,exports){
+},{"./SyntheticEvent":446}],444:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -59831,7 +62618,7 @@ SyntheticEvent.augmentClass(
 
 module.exports = SyntheticCompositionEvent;
 
-},{"./SyntheticEvent":445}],444:[function(require,module,exports){
+},{"./SyntheticEvent":446}],445:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -59870,7 +62657,7 @@ SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 module.exports = SyntheticDragEvent;
 
-},{"./SyntheticMouseEvent":449}],445:[function(require,module,exports){
+},{"./SyntheticMouseEvent":450}],446:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60036,7 +62823,7 @@ PooledClass.addPoolingTo(SyntheticEvent, PooledClass.threeArgumentPooler);
 
 module.exports = SyntheticEvent;
 
-},{"./Object.assign":365,"./PooledClass":366,"./emptyFunction":466,"./getEventTarget":477}],446:[function(require,module,exports){
+},{"./Object.assign":366,"./PooledClass":367,"./emptyFunction":467,"./getEventTarget":478}],447:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60075,7 +62862,7 @@ SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 
 module.exports = SyntheticFocusEvent;
 
-},{"./SyntheticUIEvent":451}],447:[function(require,module,exports){
+},{"./SyntheticUIEvent":452}],448:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60121,7 +62908,7 @@ SyntheticEvent.augmentClass(
 
 module.exports = SyntheticInputEvent;
 
-},{"./SyntheticEvent":445}],448:[function(require,module,exports){
+},{"./SyntheticEvent":446}],449:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60208,7 +62995,7 @@ SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 module.exports = SyntheticKeyboardEvent;
 
-},{"./SyntheticUIEvent":451,"./getEventCharCode":474,"./getEventKey":475,"./getEventModifierState":476}],449:[function(require,module,exports){
+},{"./SyntheticUIEvent":452,"./getEventCharCode":475,"./getEventKey":476,"./getEventModifierState":477}],450:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60289,7 +63076,7 @@ SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 
 module.exports = SyntheticMouseEvent;
 
-},{"./SyntheticUIEvent":451,"./ViewportMetrics":454,"./getEventModifierState":476}],450:[function(require,module,exports){
+},{"./SyntheticUIEvent":452,"./ViewportMetrics":455,"./getEventModifierState":477}],451:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60337,7 +63124,7 @@ SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 module.exports = SyntheticTouchEvent;
 
-},{"./SyntheticUIEvent":451,"./getEventModifierState":476}],451:[function(require,module,exports){
+},{"./SyntheticUIEvent":452,"./getEventModifierState":477}],452:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60399,7 +63186,7 @@ SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 
 module.exports = SyntheticUIEvent;
 
-},{"./SyntheticEvent":445,"./getEventTarget":477}],452:[function(require,module,exports){
+},{"./SyntheticEvent":446,"./getEventTarget":478}],453:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60460,7 +63247,7 @@ SyntheticMouseEvent.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 module.exports = SyntheticWheelEvent;
 
-},{"./SyntheticMouseEvent":449}],453:[function(require,module,exports){
+},{"./SyntheticMouseEvent":450}],454:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -60701,7 +63488,7 @@ var Transaction = {
 module.exports = Transaction;
 
 }).call(this,require('_process'))
-},{"./invariant":487,"_process":33}],454:[function(require,module,exports){
+},{"./invariant":488,"_process":34}],455:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60730,7 +63517,7 @@ var ViewportMetrics = {
 
 module.exports = ViewportMetrics;
 
-},{}],455:[function(require,module,exports){
+},{}],456:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -60796,7 +63583,7 @@ function accumulateInto(current, next) {
 module.exports = accumulateInto;
 
 }).call(this,require('_process'))
-},{"./invariant":487,"_process":33}],456:[function(require,module,exports){
+},{"./invariant":488,"_process":34}],457:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60830,7 +63617,7 @@ function adler32(data) {
 
 module.exports = adler32;
 
-},{}],457:[function(require,module,exports){
+},{}],458:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -60862,7 +63649,7 @@ function camelize(string) {
 
 module.exports = camelize;
 
-},{}],458:[function(require,module,exports){
+},{}],459:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -60904,7 +63691,7 @@ function camelizeStyleName(string) {
 
 module.exports = camelizeStyleName;
 
-},{"./camelize":457}],459:[function(require,module,exports){
+},{"./camelize":458}],460:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -60963,7 +63750,7 @@ function cloneWithProps(child, props) {
 module.exports = cloneWithProps;
 
 }).call(this,require('_process'))
-},{"./ReactElement":399,"./ReactPropTransferer":419,"./keyOf":494,"./warning":508,"_process":33}],460:[function(require,module,exports){
+},{"./ReactElement":400,"./ReactPropTransferer":420,"./keyOf":495,"./warning":509,"_process":34}],461:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61007,7 +63794,7 @@ function containsNode(outerNode, innerNode) {
 
 module.exports = containsNode;
 
-},{"./isTextNode":491}],461:[function(require,module,exports){
+},{"./isTextNode":492}],462:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61093,7 +63880,7 @@ function createArrayFromMixed(obj) {
 
 module.exports = createArrayFromMixed;
 
-},{"./toArray":505}],462:[function(require,module,exports){
+},{"./toArray":506}],463:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -61155,7 +63942,7 @@ function createFullPageComponent(tag) {
 module.exports = createFullPageComponent;
 
 }).call(this,require('_process'))
-},{"./ReactClass":374,"./ReactElement":399,"./invariant":487,"_process":33}],463:[function(require,module,exports){
+},{"./ReactClass":375,"./ReactElement":400,"./invariant":488,"_process":34}],464:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -61245,7 +64032,7 @@ function createNodesFromMarkup(markup, handleScript) {
 module.exports = createNodesFromMarkup;
 
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":358,"./createArrayFromMixed":461,"./getMarkupWrap":479,"./invariant":487,"_process":33}],464:[function(require,module,exports){
+},{"./ExecutionEnvironment":359,"./createArrayFromMixed":462,"./getMarkupWrap":480,"./invariant":488,"_process":34}],465:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -61301,7 +64088,7 @@ function cx(classNames) {
 module.exports = cx;
 
 }).call(this,require('_process'))
-},{"./warning":508,"_process":33}],465:[function(require,module,exports){
+},{"./warning":509,"_process":34}],466:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61359,7 +64146,7 @@ function dangerousStyleValue(name, value) {
 
 module.exports = dangerousStyleValue;
 
-},{"./CSSProperty":341}],466:[function(require,module,exports){
+},{"./CSSProperty":342}],467:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61393,7 +64180,7 @@ emptyFunction.thatReturnsArgument = function(arg) { return arg; };
 
 module.exports = emptyFunction;
 
-},{}],467:[function(require,module,exports){
+},{}],468:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -61417,7 +64204,7 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = emptyObject;
 
 }).call(this,require('_process'))
-},{"_process":33}],468:[function(require,module,exports){
+},{"_process":34}],469:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61457,7 +64244,7 @@ function escapeTextContentForBrowser(text) {
 
 module.exports = escapeTextContentForBrowser;
 
-},{}],469:[function(require,module,exports){
+},{}],470:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -61530,7 +64317,7 @@ function findDOMNode(componentOrElement) {
 module.exports = findDOMNode;
 
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":381,"./ReactInstanceMap":409,"./ReactMount":413,"./invariant":487,"./isNode":489,"./warning":508,"_process":33}],470:[function(require,module,exports){
+},{"./ReactCurrentOwner":382,"./ReactInstanceMap":410,"./ReactMount":414,"./invariant":488,"./isNode":490,"./warning":509,"_process":34}],471:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -61588,7 +64375,7 @@ function flattenChildren(children) {
 module.exports = flattenChildren;
 
 }).call(this,require('_process'))
-},{"./traverseAllChildren":506,"./warning":508,"_process":33}],471:[function(require,module,exports){
+},{"./traverseAllChildren":507,"./warning":509,"_process":34}],472:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -61617,7 +64404,7 @@ function focusNode(node) {
 
 module.exports = focusNode;
 
-},{}],472:[function(require,module,exports){
+},{}],473:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61648,7 +64435,7 @@ var forEachAccumulated = function(arr, cb, scope) {
 
 module.exports = forEachAccumulated;
 
-},{}],473:[function(require,module,exports){
+},{}],474:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61677,7 +64464,7 @@ function getActiveElement() /*?DOMElement*/ {
 
 module.exports = getActiveElement;
 
-},{}],474:[function(require,module,exports){
+},{}],475:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61729,7 +64516,7 @@ function getEventCharCode(nativeEvent) {
 
 module.exports = getEventCharCode;
 
-},{}],475:[function(require,module,exports){
+},{}],476:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61834,7 +64621,7 @@ function getEventKey(nativeEvent) {
 
 module.exports = getEventKey;
 
-},{"./getEventCharCode":474}],476:[function(require,module,exports){
+},{"./getEventCharCode":475}],477:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61881,7 +64668,7 @@ function getEventModifierState(nativeEvent) {
 
 module.exports = getEventModifierState;
 
-},{}],477:[function(require,module,exports){
+},{}],478:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61912,7 +64699,7 @@ function getEventTarget(nativeEvent) {
 
 module.exports = getEventTarget;
 
-},{}],478:[function(require,module,exports){
+},{}],479:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -61956,7 +64743,7 @@ function getIteratorFn(maybeIterable) {
 
 module.exports = getIteratorFn;
 
-},{}],479:[function(require,module,exports){
+},{}],480:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -62075,7 +64862,7 @@ function getMarkupWrap(nodeName) {
 module.exports = getMarkupWrap;
 
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":358,"./invariant":487,"_process":33}],480:[function(require,module,exports){
+},{"./ExecutionEnvironment":359,"./invariant":488,"_process":34}],481:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62150,7 +64937,7 @@ function getNodeForCharacterOffset(root, offset) {
 
 module.exports = getNodeForCharacterOffset;
 
-},{}],481:[function(require,module,exports){
+},{}],482:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62185,7 +64972,7 @@ function getReactRootElementInContainer(container) {
 
 module.exports = getReactRootElementInContainer;
 
-},{}],482:[function(require,module,exports){
+},{}],483:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62222,7 +65009,7 @@ function getTextContentAccessor() {
 
 module.exports = getTextContentAccessor;
 
-},{"./ExecutionEnvironment":358}],483:[function(require,module,exports){
+},{"./ExecutionEnvironment":359}],484:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62262,7 +65049,7 @@ function getUnboundedScrollPosition(scrollable) {
 
 module.exports = getUnboundedScrollPosition;
 
-},{}],484:[function(require,module,exports){
+},{}],485:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62295,7 +65082,7 @@ function hyphenate(string) {
 
 module.exports = hyphenate;
 
-},{}],485:[function(require,module,exports){
+},{}],486:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62336,7 +65123,7 @@ function hyphenateStyleName(string) {
 
 module.exports = hyphenateStyleName;
 
-},{"./hyphenate":484}],486:[function(require,module,exports){
+},{"./hyphenate":485}],487:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -62474,7 +65261,7 @@ function instantiateReactComponent(node, parentCompositeType) {
 module.exports = instantiateReactComponent;
 
 }).call(this,require('_process'))
-},{"./Object.assign":365,"./ReactCompositeComponent":379,"./ReactEmptyComponent":401,"./ReactNativeComponent":416,"./invariant":487,"./warning":508,"_process":33}],487:[function(require,module,exports){
+},{"./Object.assign":366,"./ReactCompositeComponent":380,"./ReactEmptyComponent":402,"./ReactNativeComponent":417,"./invariant":488,"./warning":509,"_process":34}],488:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -62531,7 +65318,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 }).call(this,require('_process'))
-},{"_process":33}],488:[function(require,module,exports){
+},{"_process":34}],489:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62596,7 +65383,7 @@ function isEventSupported(eventNameSuffix, capture) {
 
 module.exports = isEventSupported;
 
-},{"./ExecutionEnvironment":358}],489:[function(require,module,exports){
+},{"./ExecutionEnvironment":359}],490:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62623,7 +65410,7 @@ function isNode(object) {
 
 module.exports = isNode;
 
-},{}],490:[function(require,module,exports){
+},{}],491:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62666,7 +65453,7 @@ function isTextInputElement(elem) {
 
 module.exports = isTextInputElement;
 
-},{}],491:[function(require,module,exports){
+},{}],492:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62691,7 +65478,7 @@ function isTextNode(object) {
 
 module.exports = isTextNode;
 
-},{"./isNode":489}],492:[function(require,module,exports){
+},{"./isNode":490}],493:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62732,7 +65519,7 @@ function joinClasses(className/*, ... */) {
 
 module.exports = joinClasses;
 
-},{}],493:[function(require,module,exports){
+},{}],494:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -62787,7 +65574,7 @@ var keyMirror = function(obj) {
 module.exports = keyMirror;
 
 }).call(this,require('_process'))
-},{"./invariant":487,"_process":33}],494:[function(require,module,exports){
+},{"./invariant":488,"_process":34}],495:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62823,7 +65610,7 @@ var keyOf = function(oneKeyObj) {
 
 module.exports = keyOf;
 
-},{}],495:[function(require,module,exports){
+},{}],496:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62876,7 +65663,7 @@ function mapObject(object, callback, context) {
 
 module.exports = mapObject;
 
-},{}],496:[function(require,module,exports){
+},{}],497:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62909,7 +65696,7 @@ function memoizeStringOnly(callback) {
 
 module.exports = memoizeStringOnly;
 
-},{}],497:[function(require,module,exports){
+},{}],498:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -62949,7 +65736,7 @@ function onlyChild(children) {
 module.exports = onlyChild;
 
 }).call(this,require('_process'))
-},{"./ReactElement":399,"./invariant":487,"_process":33}],498:[function(require,module,exports){
+},{"./ReactElement":400,"./invariant":488,"_process":34}],499:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -62977,7 +65764,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = performance || {};
 
-},{"./ExecutionEnvironment":358}],499:[function(require,module,exports){
+},{"./ExecutionEnvironment":359}],500:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -63005,7 +65792,7 @@ var performanceNow = performance.now.bind(performance);
 
 module.exports = performanceNow;
 
-},{"./performance":498}],500:[function(require,module,exports){
+},{"./performance":499}],501:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -63033,7 +65820,7 @@ function quoteAttributeValueForBrowser(value) {
 
 module.exports = quoteAttributeValueForBrowser;
 
-},{"./escapeTextContentForBrowser":468}],501:[function(require,module,exports){
+},{"./escapeTextContentForBrowser":469}],502:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -63122,7 +65909,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = setInnerHTML;
 
-},{"./ExecutionEnvironment":358}],502:[function(require,module,exports){
+},{"./ExecutionEnvironment":359}],503:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -63164,7 +65951,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = setTextContent;
 
-},{"./ExecutionEnvironment":358,"./escapeTextContentForBrowser":468,"./setInnerHTML":501}],503:[function(require,module,exports){
+},{"./ExecutionEnvironment":359,"./escapeTextContentForBrowser":469,"./setInnerHTML":502}],504:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -63208,7 +65995,7 @@ function shallowEqual(objA, objB) {
 
 module.exports = shallowEqual;
 
-},{}],504:[function(require,module,exports){
+},{}],505:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -63312,7 +66099,7 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 module.exports = shouldUpdateReactComponent;
 
 }).call(this,require('_process'))
-},{"./warning":508,"_process":33}],505:[function(require,module,exports){
+},{"./warning":509,"_process":34}],506:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -63384,7 +66171,7 @@ function toArray(obj) {
 module.exports = toArray;
 
 }).call(this,require('_process'))
-},{"./invariant":487,"_process":33}],506:[function(require,module,exports){
+},{"./invariant":488,"_process":34}],507:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -63637,7 +66424,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 module.exports = traverseAllChildren;
 
 }).call(this,require('_process'))
-},{"./ReactElement":399,"./ReactFragment":405,"./ReactInstanceHandles":408,"./getIteratorFn":478,"./invariant":487,"./warning":508,"_process":33}],507:[function(require,module,exports){
+},{"./ReactElement":400,"./ReactFragment":406,"./ReactInstanceHandles":409,"./getIteratorFn":479,"./invariant":488,"./warning":509,"_process":34}],508:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -63808,7 +66595,7 @@ function update(value, spec) {
 module.exports = update;
 
 }).call(this,require('_process'))
-},{"./Object.assign":365,"./invariant":487,"./keyOf":494,"_process":33}],508:[function(require,module,exports){
+},{"./Object.assign":366,"./invariant":488,"./keyOf":495,"_process":34}],509:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -63871,10 +66658,10 @@ if ("production" !== process.env.NODE_ENV) {
 module.exports = warning;
 
 }).call(this,require('_process'))
-},{"./emptyFunction":466,"_process":33}],509:[function(require,module,exports){
+},{"./emptyFunction":467,"_process":34}],510:[function(require,module,exports){
 module.exports = require('./lib/React');
 
-},{"./lib/React":367}],510:[function(require,module,exports){
+},{"./lib/React":368}],511:[function(require,module,exports){
 /*!
   * Reqwest! A general purpose XHR connection manager
   * license MIT (c) Dustin Diaz 2014
@@ -64491,7 +67278,7 @@ module.exports = require('./lib/React');
   return reqwest
 });
 
-},{}],511:[function(require,module,exports){
+},{}],512:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -66041,7 +68828,7 @@ module.exports = require('./lib/React');
   }
 }.call(this));
 
-},{}],512:[function(require,module,exports){
+},{}],513:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -66060,7 +68847,7 @@ define(function (require) {
 });
 })(typeof define === 'function' && define.amd ? define : function (factory) { module.exports = factory(require); });
 
-},{"./Scheduler":513,"./env":525,"./makePromise":527}],513:[function(require,module,exports){
+},{"./Scheduler":514,"./env":526,"./makePromise":528}],514:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -66142,7 +68929,7 @@ define(function() {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
-},{}],514:[function(require,module,exports){
+},{}],515:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -66170,7 +68957,7 @@ define(function() {
 	return TimeoutError;
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
-},{}],515:[function(require,module,exports){
+},{}],516:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -66227,7 +69014,7 @@ define(function() {
 
 
 
-},{}],516:[function(require,module,exports){
+},{}],517:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -66518,7 +69305,7 @@ define(function(require) {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(require); }));
 
-},{"../apply":515,"../state":528}],517:[function(require,module,exports){
+},{"../apply":516,"../state":529}],518:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -66680,7 +69467,7 @@ define(function() {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
-},{}],518:[function(require,module,exports){
+},{}],519:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -66709,7 +69496,7 @@ define(function() {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
-},{}],519:[function(require,module,exports){
+},{}],520:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -66731,7 +69518,7 @@ define(function(require) {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(require); }));
 
-},{"../state":528}],520:[function(require,module,exports){
+},{"../state":529}],521:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -66798,7 +69585,7 @@ define(function() {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
-},{}],521:[function(require,module,exports){
+},{}],522:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -66824,7 +69611,7 @@ define(function() {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
-},{}],522:[function(require,module,exports){
+},{}],523:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -66904,7 +69691,7 @@ define(function(require) {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(require); }));
 
-},{"../TimeoutError":514,"../env":525}],523:[function(require,module,exports){
+},{"../TimeoutError":515,"../env":526}],524:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -66992,7 +69779,7 @@ define(function(require) {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(require); }));
 
-},{"../env":525,"../format":526}],524:[function(require,module,exports){
+},{"../env":526,"../format":527}],525:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -67032,7 +69819,7 @@ define(function() {
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
 
-},{}],525:[function(require,module,exports){
+},{}],526:[function(require,module,exports){
 (function (process){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
@@ -67109,7 +69896,7 @@ define(function(require) {
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(require); }));
 
 }).call(this,require('_process'))
-},{"_process":33}],526:[function(require,module,exports){
+},{"_process":34}],527:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -67167,7 +69954,7 @@ define(function() {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
-},{}],527:[function(require,module,exports){
+},{}],528:[function(require,module,exports){
 (function (process){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
@@ -68098,7 +70885,7 @@ define(function() {
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
 }).call(this,require('_process'))
-},{"_process":33}],528:[function(require,module,exports){
+},{"_process":34}],529:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 /** @author Brian Cavalier */
 /** @author John Hann */
@@ -68135,7 +70922,7 @@ define(function() {
 });
 }(typeof define === 'function' && define.amd ? define : function(factory) { module.exports = factory(); }));
 
-},{}],529:[function(require,module,exports){
+},{}],530:[function(require,module,exports){
 /** @license MIT License (c) copyright 2010-2014 original author or authors */
 
 /**
@@ -68365,4 +71152,4 @@ define(function (require) {
 });
 })(typeof define === 'function' && define.amd ? define : function (factory) { module.exports = factory(require); });
 
-},{"./lib/Promise":512,"./lib/TimeoutError":514,"./lib/apply":515,"./lib/decorators/array":516,"./lib/decorators/flow":517,"./lib/decorators/fold":518,"./lib/decorators/inspect":519,"./lib/decorators/iterate":520,"./lib/decorators/progress":521,"./lib/decorators/timed":522,"./lib/decorators/unhandledRejection":523,"./lib/decorators/with":524}]},{},[3]);
+},{"./lib/Promise":513,"./lib/TimeoutError":515,"./lib/apply":516,"./lib/decorators/array":517,"./lib/decorators/flow":518,"./lib/decorators/fold":519,"./lib/decorators/inspect":520,"./lib/decorators/iterate":521,"./lib/decorators/progress":522,"./lib/decorators/timed":523,"./lib/decorators/unhandledRejection":524,"./lib/decorators/with":525}]},{},[3]);

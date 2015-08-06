@@ -92,7 +92,28 @@ var outletStore = assign({}, EventEmitter.prototype, {
     })
   },
 
+  generateNewOutlets: function(scootGarages) {
+    var newOutlets = [];
+    var context = this;
+    scootGarages.forEach(function(scoot) {
+      newOutlet = {
+        address: scoot.address_description,
+        charge: .2,
+        description: scoot.orientation_text,
+        lat: scoot.latitude,
+        long: scoot.longitude,
+        name: scoot.name,
+        voltage: 'standard'
+      };
+      // newOutlets.push(newOutlet);
+      // post to server.
+      console.log('newScoot outlet', newOutlet);
+      context.submitOutlet(newOutlet);
+    });
+  },
+
   submitOutlet: function(newOutlet){
+    console.log('newoutlet', newOutlet);
     return OutletServices.addOutlet(newOutlet);
   },
 
