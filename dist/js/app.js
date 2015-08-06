@@ -5642,12 +5642,12 @@ var outletStore = assign({}, EventEmitter.prototype, {
     scootGarages.forEach(function(scoot) {
       newOutlet = {
         address: scoot.address_description,
-        charge: .2,
+        charge: .1 + Math.random()* .3,
         description: scoot.orientation_text,
         lat: scoot.latitude,
         long: scoot.longitude,
         name: scoot.name,
-        voltage: 'standard'
+        voltage: ['Standard', 'High'][ Math.round(Math.random()) ]
       };
       // newOutlets.push(newOutlet);
       // post to server.
