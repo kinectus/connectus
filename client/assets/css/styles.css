@@ -751,6 +751,9 @@ a:focus {
 .nav .navbar-nav {
   display: block;
 }
+.navbar {
+  margin-bottom: 0px !important;
+}
 .topNavBar {
   position: relative;
   background-color: #343434;
