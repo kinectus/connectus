@@ -415,7 +415,7 @@ var addOutlet = React.createClass({displayName: "addOutlet",
 
   componentDidMount: function() {
     FooterCheck.checker();
-    outletStore.generateNewOutlets(newOutlets);
+    // outletStore.generateNewOutlets(newOutlets);
   },
 
   getInitialState: function(){
@@ -1408,7 +1408,9 @@ var outletsList = React.createClass({displayName: "outletsList",
     var outlets = this.state.data;
     if(this.state.sortBy[by] % 2 !== 0) {
       // sort ascending
-      this.state.data = _.sortBy(outlets, by);
+      this.state.data = _.sortBy(outlets, function(outlet) {
+        return outlet[by].toUpperCase();
+      });
     } else {
       // sort descending
       this.state.data.reverse();
