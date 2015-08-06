@@ -3,12 +3,13 @@ var outletStore = require('../stores/outletStore');
 var _ = require('underscore');
 var Router = require('react-router'); //need this for redirection
 var FooterCheck = require('./footerCheck');
-
+var newOutlets = require('../stores/data/newOutlets');
 var addOutlet = React.createClass({
   mixins: [Router.Navigation],
 
   componentDidMount: function() {
     FooterCheck.checker();
+    // outletStore.generateNewOutlets(newOutlets);
   },
 
   getInitialState: function(){

@@ -38,19 +38,19 @@ db.schema.hasTable('outlets').then(function(exists){
   if(!exists){
     db.schema.createTable('outlets', function(outlet){
       outlet.increments('id').primary();
-      outlet.string('name', 30).notNullable();
+      outlet.string('name', 50).notNullable();
       outlet.integer('seller_id', 30).notNullable();
       outlet.integer('thumbs_up', 30).notNullable();
       outlet.integer('thumbs_down', 30).notNullable();
       outlet.integer('transaction_id', 30);
-      outlet.decimal('priceEnergy', 5, 2).notNullable();
-      outlet.decimal('priceHourly', 5, 2).notNullable();
-      outlet.decimal('lat', 12, 9).notNullable();
-      outlet.decimal('long', 12, 9).notNullable();
-      outlet.string('description', 300).notNullable();
-      outlet.decimal('priceSuggest', 5, 2).notNullable();
-      outlet.string('address', 100).notNullable();
-      outlet.string('voltage', 8).notNullable();
+      outlet.decimal('priceEnergy', 23, 2).notNullable();
+      outlet.decimal('priceHourly', 23, 2).notNullable();
+      outlet.decimal('lat', 30, 9).notNullable();
+      outlet.decimal('long', 30, 9).notNullable();
+      outlet.string('description', 500).notNullable();
+      outlet.decimal('priceSuggest', 10, 2).notNullable();
+      outlet.string('address', 500).notNullable();
+      outlet.string('voltage', 20).notNullable();
     }).then(function(table){
       console.log('Created outlets table', table);
     }); 
@@ -63,8 +63,8 @@ db.schema.hasTable('transactions').then(function(exists){
       transaction.increments('id').primary();
       transaction.decimal('totalEnergy', 23, 8).notNullable(); //random precision choice
       transaction.decimal('totalCost', 23, 8).notNullable(); //random precision choice
-      transaction.string('paid', 5).notNullable();
-      transaction.string('current', 5).notNullable();
+      transaction.string('paid', 10).notNullable();
+      transaction.string('current', 10).notNullable();
     }).then(function(table){
       console.log('Created transactions table', table);
     });
