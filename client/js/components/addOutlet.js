@@ -9,11 +9,8 @@ var addOutlet = React.createClass({
 
   componentDidMount: function() {
     FooterCheck.checker();
-<<<<<<< HEAD
     outletStore.generateNewOutlets(newOutlets);
-=======
-    // outletStore.generateNewOutlets(newOutlets);
->>>>>>> master
+
   },
 
   getInitialState: function(){

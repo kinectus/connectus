@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node",
-    "postinstall": "bower cache clean && bower install && gulp deploy" // for deployment do gulp deploy. for localhost do gulp deploy
+    "postinstall": "bower cache clean && bower install && gulp deploy" // for deployment do gulp deploy. for localhost do gulp deploytest
   },
   "repository": {
     "type": "git",
