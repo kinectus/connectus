@@ -9,7 +9,7 @@ var addOutlet = React.createClass({
 
   componentDidMount: function() {
     FooterCheck.checker();
-    outletStore.generateNewOutlets(newOutlets);
+    // outletStore.generateNewOutlets(newOutlets);
 
   },
 
