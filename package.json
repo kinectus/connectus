@@ -1,3 +1,4 @@
+
 {
   "name": "connectus",
   "version": "1.0.0",
@@ -5,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node",
-    "postinstall": "bower cache clean && bower install && gulp deploy"
+    "postinstall": "bower cache clean && bower install && gulp deploy" // for deployment do gulp deploy. for localhost do gulp deploy
   },
   "repository": {
     "type": "git",
