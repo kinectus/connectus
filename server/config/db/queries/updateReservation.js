@@ -23,7 +23,7 @@ module.exports = updateReservation = function(req, res){
   // START RESERVATION PROCESS
   var startID, endID;
 
-  new User({
+  return new User({
     username: req.user.id
   }).fetch()
   .then(function(user){  
@@ -88,7 +88,7 @@ module.exports = updateReservation = function(req, res){
                 }
 
                 if(!validReservations){
-                  res.send(202, {error: true, errorMessage:'One or more of your reservation slots are not avilable'});
+                  return res.status(200).send({error: true, errorMessage:'One or more of your reservation slots are not avilable'});
                 } else {
                   return reservations.mapThen(function(reservation){
                     return reservation.set({

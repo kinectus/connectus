@@ -13,7 +13,7 @@ var getOutletsByUser = require('../config/db/queries/getOutletsByUserId.js');
 var getBuyerReservations = require('../config/db/queries/getBuyerReservations');
 var setCurrentTransaction = require('../config/db/queries/setCurrentTransaction');
 var setInitialTransactionCost = require('../config/db/queries/setInitialTransactionCost.js');
-
+var M = require('moment');
 var io = require('../server.js');
 var rp = require('request-promise');
 var addressValidator = require('address-validator');
@@ -92,13 +92,16 @@ module.exports = {
   },
 
   makeReservation: function(req, res) {
-    updateReservation(req, res);
+    updateReservation(req, res)
+    .then(function(reservation) {
+      res.status(200).send(reservation);
+    });
   },
 
   getUserInfo: function(req, res){
     getUserInfo(req, res)
       .then(function(user){
-        res.send(200, user);
+        res.status(200).send(user);
       });
   },
 

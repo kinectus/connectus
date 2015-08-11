@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node",
-    "postinstall": "bower cache clean && bower install && gulp deploy"
+    "postinstall": "bower cache clean && bower install && gulp"
   },
   "repository": {
     "type": "git",
