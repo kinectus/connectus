@@ -98,7 +98,7 @@ module.exports = updateReservation = function(req, res){
                     }).save();
                   })
                   .then(function(){
-                    res.send(201, JSON.stringify('Posted'));
+                    res.status(201).send(JSON.stringify('Posted'));
                   });
                 }
               });
