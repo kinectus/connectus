@@ -57,7 +57,7 @@ var Connectus = React.createClass({
           <div className='row footer'>
             <div className='col-md-4'>
               <h4>Connect.us Team</h4>
-              <h5>Sean Conner, Valerie Liang,</h5>
+              <h5>Sean Connor, Valerie Liang,</h5>
               <h5>Dianna Faulk, Jammie Mountz</h5>
             </div>
             <div className="col-md-4">

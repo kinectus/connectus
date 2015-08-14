@@ -101,6 +101,7 @@ var About = React.createClass({
                 </div>
       	          <div className='row'>
                     <div className="col-md-4">
+                      <img src="../assets/img/outlet.png"></img>
                       <span className="column-headers"><h3>Sell your electricity.</h3></span>
                       <ul className="feature-list">
                         <li>Use our smart outlet to become a seller</li>
@@ -109,6 +110,7 @@ var About = React.createClass({
                       </ul>
                     </div>
                   <div className="col-md-4">
+                    <img src="../assets/img/location.png"></img>
                     <span className="column-headers"><h3>Find power near you.</h3></span>
                       <ul className="feature-list">
                         <li>Find outlets in your area</li>
@@ -117,7 +119,8 @@ var About = React.createClass({
                       </ul>
                   </div>
                   <div className="col-md-4">
-                    <span className="column-headers"><h3>Keep it green.</h3></span>
+                    <img src="../assets/img/trees.png"></img>
+                    <span className="column-headers center-img"><h3>Keep it green.</h3></span>
                     <ul className="feature-list">
                       <li>Supplies electricity to replace diesel generators</li>
                       <li>Supports easy charging of electric vehicles</li>
