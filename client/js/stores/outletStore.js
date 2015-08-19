@@ -96,7 +96,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
     var newOutlets = [];
     var context = this;
     scootGarages.forEach(function(scoot) {
-      newOutlet = {
+      var newOutlet = {
         address: scoot.address_description.slice(0,499),
         charge: .1 + Math.random()* .3,
         description: scoot.orientation_text.slice(0,499),
@@ -123,6 +123,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
 
   submitReservation: function(newReservation) {
     return OutletServices.makeReservation(newReservation).then(function(reservation){
+      console.log('in store', reservation);
       return reservation;
     });
   }

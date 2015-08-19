@@ -11,6 +11,6 @@ module.exports = getAvailability = function(req, res){
     })
     .fetchAll()
     .then(function(reservations){
-      res.send(201, reservations);
+      res.status(200).send(reservations);
     });
 }

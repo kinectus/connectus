@@ -283,6 +283,7 @@ var About = React.createClass({displayName: "About",
                 ), 
       	          React.createElement("div", {className: "row"}, 
                     React.createElement("div", {className: "col-md-4"}, 
+                      React.createElement("img", {src: "../assets/img/outlet.png"}), 
                       React.createElement("span", {className: "column-headers"}, React.createElement("h3", null, "Sell your electricity.")), 
                       React.createElement("ul", {className: "feature-list"}, 
                         React.createElement("li", null, "Use our smart outlet to become a seller"), 
@@ -291,6 +292,7 @@ var About = React.createClass({displayName: "About",
                       )
                     ), 
                   React.createElement("div", {className: "col-md-4"}, 
+                    React.createElement("img", {src: "../assets/img/location.png"}), 
                     React.createElement("span", {className: "column-headers"}, React.createElement("h3", null, "Find power near you.")), 
                       React.createElement("ul", {className: "feature-list"}, 
                         React.createElement("li", null, "Find outlets in your area"), 
@@ -299,7 +301,8 @@ var About = React.createClass({displayName: "About",
                       )
                   ), 
                   React.createElement("div", {className: "col-md-4"}, 
-                    React.createElement("span", {className: "column-headers"}, React.createElement("h3", null, "Keep it green.")), 
+                    React.createElement("img", {src: "../assets/img/trees.png"}), 
+                    React.createElement("span", {className: "column-headers center-img"}, React.createElement("h3", null, "Keep it green.")), 
                     React.createElement("ul", {className: "feature-list"}, 
                       React.createElement("li", null, "Supplies electricity to replace diesel generators"), 
                       React.createElement("li", null, "Supports easy charging of electric vehicles"), 
@@ -416,6 +419,7 @@ var addOutlet = React.createClass({displayName: "addOutlet",
   componentDidMount: function() {
     FooterCheck.checker();
     // outletStore.generateNewOutlets(newOutlets);
+
   },
 
   getInitialState: function(){
@@ -790,7 +794,7 @@ var Connectus = React.createClass({displayName: "Connectus",
           React.createElement("div", {className: "row footer"}, 
             React.createElement("div", {className: "col-md-4"}, 
               React.createElement("h4", null, "Connect.us Team"), 
-              React.createElement("h5", null, "Sean Conner, Valerie Liang,"), 
+              React.createElement("h5", null, "Sean Connor, Valerie Liang,"), 
               React.createElement("h5", null, "Dianna Faulk, Jammie Mountz")
             ), 
             React.createElement("div", {className: "col-md-4"}, 
@@ -1932,6 +1936,7 @@ var DateTime = React.createClass({displayName: "DateTime",
     } else if (moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) < 0 ) {
       var that = this;
       outletStore.submitReservation(newReservation).then(function(res){
+        console.log('hello');
         if(res.errorMessage){
           message = 'One or more of your selected time slots are not available';
           that.setState({message: message, error: true});
@@ -5642,7 +5647,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
     var newOutlets = [];
     var context = this;
     scootGarages.forEach(function(scoot) {
-      newOutlet = {
+      var newOutlet = {
         address: scoot.address_description.slice(0,499),
         charge: .1 + Math.random()* .3,
         description: scoot.orientation_text.slice(0,499),
@@ -5669,6 +5674,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
 
   submitReservation: function(newReservation) {
     return OutletServices.makeReservation(newReservation).then(function(reservation){
+      console.log('in store', reservation);
       return reservation;
     });
   }
