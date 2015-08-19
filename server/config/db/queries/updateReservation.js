@@ -9,6 +9,7 @@ var transactionID;
 
 module.exports = updateReservation = function(req, res){
   var data = req.body;
+  console.log(data);
 
   // Track reservation update by date and time slot
   var currentDate = moment( data.start.date, 'YYYY-MM-DD' );
