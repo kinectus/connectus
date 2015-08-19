@@ -79,7 +79,7 @@ module.exports = {
   seeTimeSlots: function(req, res){
     getTimeSlotInfo(req, res)
     .then(function(slots){
-      res.send(200, slots.models);
+      res.status(200).send(slots.models);
     });
   },
 
@@ -94,7 +94,7 @@ module.exports = {
   makeReservation: function(req, res) {
     updateReservation(req, res)
     .then(function(reservation) {
-      res.status(200).send(reservation);
+      res.status(201).send(reservation);
     });
   },
 

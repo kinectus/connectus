@@ -123,6 +123,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
 
   submitReservation: function(newReservation) {
     return OutletServices.makeReservation(newReservation).then(function(reservation){
+      console.log('in store', reservation);
       return reservation;
     });
   }

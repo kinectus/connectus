@@ -116,6 +116,7 @@ var DateTime = React.createClass({
     } else if (moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) < 0 ) {
       var that = this;
       outletStore.submitReservation(newReservation).then(function(res){
+        console.log('hello');
         if(res.errorMessage){
           message = 'One or more of your selected time slots are not available';
           that.setState({message: message, error: true});

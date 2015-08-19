@@ -60,7 +60,7 @@ module.exports = updateReservation = function(req, res){
             }).save().then(function(newTransaction){
               transactionID = newTransaction.get('id');
               // Query for collection of all reservations between start and end reservation, inclusive
-              new Reservation()
+              return new Reservation()
               .query(function(qb){
                 qb.where('outlet_id', data.outletID)
                 qb.where(db.knex.raw(dateQuery))
@@ -88,7 +88,7 @@ module.exports = updateReservation = function(req, res){
                 }
 
                 if(!validReservations){
-                  return res.status(200).send({error: true, errorMessage:'One or more of your reservation slots are not avilable'});
+                  return 'not valid'//res.status(200).send({error: true, errorMessage:'One or more of your reservation slots are not avilable'});
                 } else {
                   return reservations.mapThen(function(reservation){
                     return reservation.set({
@@ -97,8 +97,8 @@ module.exports = updateReservation = function(req, res){
                       transaction_id: transactionID
                     }).save();
                   })
-                  .then(function(){
-                    res.status(201).send(JSON.stringify('Posted'));
+                  .then(function(stuff){
+                    return stuff // res.status(200).send(JSON.stringify('Posted'));
                   });
                 }
               });

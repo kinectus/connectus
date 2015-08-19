@@ -1936,6 +1936,7 @@ var DateTime = React.createClass({displayName: "DateTime",
     } else if (moment().diff(moment(start)) < 0 && moment(start).diff(moment(end)) < 0 ) {
       var that = this;
       outletStore.submitReservation(newReservation).then(function(res){
+        console.log('hello');
         if(res.errorMessage){
           message = 'One or more of your selected time slots are not available';
           that.setState({message: message, error: true});
@@ -5673,6 +5674,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
 
   submitReservation: function(newReservation) {
     return OutletServices.makeReservation(newReservation).then(function(reservation){
+      console.log('in store', reservation);
       return reservation;
     });
   }
