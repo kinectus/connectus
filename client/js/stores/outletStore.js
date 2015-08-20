@@ -92,7 +92,28 @@ var outletStore = assign({}, EventEmitter.prototype, {
     })
   },
 
+  generateNewOutlets: function(scootGarages) {
+    var newOutlets = [];
+    var context = this;
+    scootGarages.forEach(function(scoot) {
+      var newOutlet = {
+        address: scoot.address_description.slice(0,499),
+        charge: .1 + Math.random()* .3,
+        description: scoot.orientation_text.slice(0,499),
+        lat: scoot.latitude,
+        long: scoot.longitude,
+        name: scoot.name.slice(0,49),
+        voltage: ['Standard', 'High'][ Math.round(Math.random()) ]
+      };
+      // newOutlets.push(newOutlet);
+      // post to server.
+      console.log('newScoot outlet', newOutlet);
+      context.submitOutlet(newOutlet);
+    });
+  },
+
   submitOutlet: function(newOutlet){
+    console.log('newoutlet', newOutlet);
     return OutletServices.addOutlet(newOutlet);
   },
 
@@ -102,6 +123,7 @@ var outletStore = assign({}, EventEmitter.prototype, {
 
   submitReservation: function(newReservation) {
     return OutletServices.makeReservation(newReservation).then(function(reservation){
+      console.log('in store', reservation);
       return reservation;
     });
   }

@@ -16,6 +16,7 @@ module.exports = function(app) {
     });
 
   app.get('/logout', function(req, res){
+    console.log('backend logout');
     req.logout();
     res.clearCookie('connect.sid');
     res.send('logged out');

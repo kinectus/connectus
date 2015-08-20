@@ -10,6 +10,7 @@ var transactionID;
 module.exports = updateReservation = function(req, res){
   var data = req.body;
 
+
   // Track reservation update by date and time slot
   var currentDate = moment( data.start.date, 'YYYY-MM-DD' );
   var stringDate = currentDate.format('YYYY-MM-DD');
@@ -23,7 +24,7 @@ module.exports = updateReservation = function(req, res){
   // START RESERVATION PROCESS
   var startID, endID;
 
-  new User({
+  return new User({
     username: req.user.id
   }).fetch()
   .then(function(user){  
@@ -33,6 +34,7 @@ module.exports = updateReservation = function(req, res){
       start: data.start.time
     })
     .fetch().then(function(slot){
+      console.log(slot);
       return new Reservation({
         outlet_id: data.outletID,
         date: data.start.date,
@@ -60,7 +62,7 @@ module.exports = updateReservation = function(req, res){
             }).save().then(function(newTransaction){
               transactionID = newTransaction.get('id');
               // Query for collection of all reservations between start and end reservation, inclusive
-              new Reservation()
+              return new Reservation()
               .query(function(qb){
                 qb.where('outlet_id', data.outletID)
                 qb.where(db.knex.raw(dateQuery))
@@ -88,7 +90,7 @@ module.exports = updateReservation = function(req, res){
                 }
 
                 if(!validReservations){
-                  res.send(202, {error: true, errorMessage:'One or more of your reservation slots are not avilable'});
+                  return 'not valid'//res.status(200).send({error: true, errorMessage:'One or more of your reservation slots are not avilable'});
                 } else {
                   return reservations.mapThen(function(reservation){
                     return reservation.set({
@@ -97,8 +99,8 @@ module.exports = updateReservation = function(req, res){
                       transaction_id: transactionID
                     }).save();
                   })
-                  .then(function(){
-                    res.send(201, JSON.stringify('Posted'));
+                  .then(function(stuff){
+                    return stuff // res.status(200).send(JSON.stringify('Posted'));
                   });
                 }
               });

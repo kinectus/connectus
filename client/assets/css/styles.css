@@ -751,6 +751,9 @@ a:focus {
 .nav .navbar-nav {
   display: block;
 }
+.navbar {
+  margin-bottom: 0px !important;
+}
 .topNavBar {
   position: relative;
   background-color: #343434;
@@ -942,6 +945,9 @@ a:focus {
   margin-bottom: 20px;
   text-align: center;
 }
+.about .howitworks .center-img {
+  margin-top: 60px;
+}
 .about .howitworks .column-headers-mobile h3 {
   font-size: 40px;
   color: white;
@@ -972,7 +978,6 @@ a:focus {
   width: 100%;
 }
 .about .howitworks .outlet {
-  background: url("../img/outlet.png");
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
@@ -980,7 +985,6 @@ a:focus {
   margin-top: 20px;
 }
 .about .howitworks .outlet-mobile {
-  background: url("../img/outlet.png");
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
@@ -988,7 +992,6 @@ a:focus {
   margin-top: 20px;
 }
 .about .howitworks .location {
-  background: url("../img/location.png");
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
@@ -996,7 +999,6 @@ a:focus {
   margin-top: 20px;
 }
 .about .howitworks .location-mobile {
-  background: url("../img/location.png");
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
@@ -1004,7 +1006,6 @@ a:focus {
   margin-top: 20px;
 }
 .about .howitworks .trees {
-  background: url("../img/trees.png");
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;
@@ -1012,7 +1013,6 @@ a:focus {
   margin-top: 20px;
 }
 .about .howitworks .trees-mobile {
-  background: url("../img/trees.png");
   height: 100px;
   background-position: center;
   background-repeat: no-repeat;

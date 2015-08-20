@@ -54,6 +54,9 @@ a:focus {
 .nav .navbar-nav {
   display: block;
 }
+.navbar {
+  margin-bottom: 0px !important;
+}
 
 .topNavBar {
   position: relative;
@@ -281,6 +284,9 @@ a:focus {
         text-align: center;
       }
     }
+    .center-img {
+      margin-top: 60px;
+    }
     .column-headers-mobile {
       h3 {
         font-size: 40px;
@@ -313,7 +319,7 @@ a:focus {
       width: 100%;
     }
     .outlet {
-      background: url("../img/outlet.png");
+      //background: url("../img/outlet.png");
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
@@ -321,7 +327,7 @@ a:focus {
       margin-top: 20px;
     }
     .outlet-mobile {
-      background: url("../img/outlet.png");
+      //background: url("../img/outlet.png");
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
@@ -329,7 +335,7 @@ a:focus {
       margin-top: 20px;
     }
     .location {
-      background: url("../img/location.png");
+      //background: url("../img/location.png");
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
@@ -337,7 +343,7 @@ a:focus {
       margin-top: 20px;
     }
     .location-mobile {
-      background: url("../img/location.png");
+      //background: url("../img/location.png");
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
@@ -345,7 +351,7 @@ a:focus {
       margin-top: 20px;
     }
     .trees {
-      background: url("../img/trees.png");
+      //background: url("../img/trees.png");
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
@@ -353,7 +359,7 @@ a:focus {
       margin-top: 20px;
     }
     .trees-mobile {
-      background: url("../img/trees.png");
+      //background: url("../img/trees.png");
       height: 100px;
       background-position: center;
       background-repeat: no-repeat;
@@ -435,27 +441,28 @@ a:focus {
 .footer-banner {
   position: relative;
   display: block;
-  height: 160px;
+  height: 100px;
   background-color: @dark;
   width: 100%;
   .footer {
     background-color: @dark;
   }
-  h3 {
+  h4 {
     color: white;
     margin-left: 20px;
   }
-  h4 {
+  h5 {
     color: @greylight;
     margin-left: 30px;
   }
   .octocat {
-    background: url('https://i2.wp.com/assets-cdn.github.com/images/gravatars/gravatar-user-420.png?ssl=1gith');
+    background: url('../img/octocat.png');
     height: 115px;
-    background-size: 20%;
+    background-size: 15%;
     background-repeat: no-repeat;
     background-position: top center;
     background-position-y: 17px;
+    height: 80px;
   }
   .footer-1 {
     float: left;
@@ -636,13 +643,13 @@ span.light {
 }
 
 .reserveConfirm{
-  width: 60vw;
   margin: 1vw auto;
 }
 
 .alertButton{
   width: 20vw;
   margin: 0 .5vw;
+  margin-bottom: 10px;
 }
 
 .authBox {
@@ -728,6 +735,7 @@ span.light {
 
 .holder {
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .map-outlets {
@@ -785,5 +793,21 @@ span.light {
   margin-top: 80px;
 }
 
+.table.table-hover {
+  h4 {
+    padding-left: 23px;
+  }
+}
+
+.arrows {
+  height: 20px;
+  width: 13px;
+  background-color: black;
+  position: relative;
+  top: 29px;
+  background: url('../img/arrows-09.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
 
 

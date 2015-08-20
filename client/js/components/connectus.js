@@ -57,7 +57,7 @@ var Connectus = React.createClass({
           <div className='row footer'>
             <div className='col-md-4'>
               <h4>Connect.us Team</h4>
-              <h5>Sean Conner, Valerie Liang,</h5>
+              <h5>Sean Connor, Valerie Liang,</h5>
               <h5>Dianna Faulk, Jammie Mountz</h5>
             </div>
             <div className="col-md-4">
@@ -106,21 +106,42 @@ var Connectus = React.createClass({
 
       // non-mobile rendering
       } else {
-
+        // <div className="logo-image"></div>
+        //             <span className="logo">
+        //               <Link to="about">Connect.us</Link>
+        //             </span>
+        //             <ul className="nav nav-pills pull-right">
+        //               <li className="check-footer" role="presentation"><Link to="outletsList">Outlets</Link></li>
+        //               <li className="check-footer" role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
+        //               <li className="check-footer" role="presentation"><Link to="buyerReservations">My Reservations</Link></li>
+        //               <li className="check-footer" role="presentation"><Link to="manageOutlets">Manage Outlets</Link></li>
+        //               <li className="check-footer" role="presentation"><a className="logout" onClick={this.logout}>Logout</a></li>
+        //             </ul>
         pageHtml = (
-          <div className="topNavBar">
-          <div className="logo-image"></div>
-            <span className="logo">
-              <Link to="about">Connect.us</Link>
-            </span>
-            <ul className="nav nav-pills pull-right">
-              <li className="check-footer" role="presentation"><Link to="outletsList">Outlets</Link></li>
-              <li className="check-footer" role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
-              <li className="check-footer" role="presentation"><Link to="buyerReservations">My Reservations</Link></li>
-              <li className="check-footer" role="presentation"><Link to="manageOutlets">Manage Outlets</Link></li>
-              <li className="check-footer" role="presentation"><a className="logout" onClick={this.logout}>Logout</a></li>
-            </ul>
-          </div> 
+          <div className="navbar navbar-inverse topNavBar" role="navigation">
+            <div className="container">
+              <div className="navbar-header">
+                <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span className="icon-bar"></span>
+                  <span className="icon-bar"></span>
+                  <span className="icon-bar"></span>
+                </button>
+                <div className="logo-image"></div>
+                <span className="logo">
+                    <Link to="about">Connect.us</Link>
+                </span>
+              </div>
+              <div className="navbar-collapse collapse">
+                <ul className="nav navbar-nav navbar-right">
+                  <li className="check-footer" role="presentation"><Link to="outletsList">Outlets</Link></li>
+                  <li className="check-footer" role="presentation"><Link to="addOutlet">Add Outlet</Link></li>
+                  <li className="check-footer" role="presentation"><Link to="buyerReservations">My Reservations</Link></li>
+                  <li className="check-footer" role="presentation"><Link to="manageOutlets">Manage Outlets</Link></li>
+                  <li className="check-footer" role="presentation"><a className="logout" onClick={this.logout}>Logout</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
           );
       } 
     }
