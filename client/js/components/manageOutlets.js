@@ -7,6 +7,8 @@ var Router = require('react-router'); //need this for redirection
 var mobile = require('./mobilecheck');
 var FooterCheck = require('./footerCheck');
 
+// Allow user to view and edit all of the outlets they manage
+
 var myOutlets = React.createClass({
 
   getInitialState: function(){

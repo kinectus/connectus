@@ -9,6 +9,7 @@ var mobile = require('./mobilecheck');
 var FooterCheck = require('./footerCheck');
 var _ = require('underscore');
 
+// Show all outlets and some information for each in list
 
 var outletsList = React.createClass({
 

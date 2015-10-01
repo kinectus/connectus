@@ -4,6 +4,9 @@ var _ = require('underscore');
 var Router = require('react-router'); //need this for redirection
 var FooterCheck = require('./footerCheck');
 var newOutlets = require('../stores/data/newOutlets');
+
+// Create outlet and submit to database
+
 var addOutlet = React.createClass({
   mixins: [Router.Navigation],
 

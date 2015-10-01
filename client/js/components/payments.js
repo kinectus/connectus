@@ -6,6 +6,8 @@ var Auth = require('../services/authServices.js');
 var Link = require('react-router').Link;
 var mobile = require('./mobilecheck');
 
+// Handle user payment
+
 var Connectus = React.createClass({
   getInitialState: function(){
     return {

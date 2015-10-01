@@ -9,6 +9,8 @@ var GoogleMap = require('google-map-react');
 var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
 var FooterCheck = require('./footerCheck');
 
+// Show all outlets, localizes to user IP location
+
 var outletsListMap = React.createClass({
   getLocation: function() {
     if ("geolocation" in navigator) {

@@ -1,9 +1,10 @@
-//Page that users first see - explains the mission statement of CONNECTUS
 var React = require('react');
 var Link = require('react-router').Link;
 var mobileCheck = require('./mobilecheck');
 var AuthConstants = require('../constants/authConstants.js');
 var FooterCheck = require('./footerCheck');
+
+//Page that users first see - explains the mission statement of CONNECTUS
 
 var About = React.createClass({
 
