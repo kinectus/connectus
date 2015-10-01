@@ -1,45 +1,11 @@
 var React = require('react');
-var outletStore = require('../stores/outletStore');
-var userStore = require('../stores/userStore');
-var GoogleMap = require('google-map-react');
-var Marker = require('../../assets/markers/reserveOutlet/marker.jsx');
+var outletStore = require('../../stores/outletStore');
+var moment = require('moment');
 var DateTimePicker = require('react-widgets').DateTimePicker;
 var Alert = require('react-bootstrap').Alert;
-var moment = require('moment');
-var Router = require('react-router'); //need this for redirection
 var Link = require('react-router').Link;
-var FooterCheck = require('./footerCheck');
-var Availability = require('./availability/availability');
-var Viewer = require('./availability/viewer');
-// http://jquense.github.io/react-widgets/docs/#/datetime-picker
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-  //MAP
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-
-var Map = React.createClass({
-
-  render: function() {
-    return (
-      <div className='reservationMap'>
-        <GoogleMap
-          zoom={15}
-          center={[this.props.outletData.lat,this.props.outletData.long]}
-        >
-          <Marker lat={this.props.outletData.lat} lng={this.props.outletData.long} />
-        </GoogleMap>
-      </div>
-    )
-  }
-});
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-  //DATETIME
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
+// Handle user scroll and reservation choice and submit validation.
 
 var DateTime = React.createClass({
   getInitialState: function(){
@@ -170,87 +136,4 @@ var DateTime = React.createClass({
   }
 });
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-  // OUTLETINFO
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-
-var OutletInfo = React.createClass({
-  render: function() {
-    // do something with the photo
-    var outletPhoto = <div className="outletPhoto"></div>
-    return (
-      <div>
-        <h2>{ this.props.outletData.name }</h2>
-        <h4 className="light">{ this.props.outletData.description }</h4>
-        <h4>Seller: <span className="light">{ this.props.outletData.seller }</span></h4>
-        <h4>Voltage: <span className="light">{ this.props.outletData.voltage }</span></h4> 
-        <h4>$<span className="light">{ this.props.outletData.priceHourly }</span>/hour</h4>
-        <h4>$<span className="light">{ this.props.outletData.priceEnergy }</span>/kWh</h4>
-      </div>
-    )
-  }
-});
-          // <div>
-          //   <p className="description-text"><div className="ui star rating" data-rating={ this.props.outletData.rating } data-max-rating={ this.props.outletData.rating }></div></p>
-          // </div>
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-  //RESERVE OUTLET
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-
-var reserveOutlet = React.createClass({
-  getInitialState: function(){
-   return {
-      data: []
-    }
-  },
-
-  mixins: [Router.Navigation],
-
-  componentDidMount: function() {
-    var that = this;
-    var outletID = this.props.params.id
-    outletStore.getOutletById(outletID).then(function(outlet){
-      userStore.getUsernameById(outlet.seller_id).then(function(user){
-          outlet['seller'] = user.fullname;
-          that.setState({data: outlet});
-        });
-    });
-    FooterCheck.checker();
-  },
-
-  render: function() {
-    var that = this;
-    // is user authenticated
-    if(!document.cookie){
-      this.transitionTo('about');
-      return <h1></h1>;
-    }
-    return (
-      <div className='container'>
-        <div>
-          <Map outletData={this.state.data} />
-        </div>
-        <div>
-          <Viewer outletID = {this.props.params.id} />
-        </div>
-        <div className="row">
-          <div className="outlet-data col-md-8">
-            <OutletInfo outletData = {this.state.data} />
-          </div>
-          <div className="date-time col-md-4">
-            <h3>Reserve this outlet:</h3>
-            <DateTime outletData = {this.state.data} />
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-});
-
-module.exports = reserveOutlet;
+module.exports = DateTime;

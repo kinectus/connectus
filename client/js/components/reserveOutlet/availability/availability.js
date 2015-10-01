@@ -1,8 +1,9 @@
 var React = require('react');
-var outletStore = require('../../stores/outletStore');
+var outletStore = require('../../../stores/outletStore');
 var moment = require('moment');
 
 // Differentiates available and unavailable slots by color, updates with user scroll
+
 var Availability = React.createClass({
   getInitialState: function(){
    return {

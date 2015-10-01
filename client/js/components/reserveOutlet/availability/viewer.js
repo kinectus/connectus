@@ -2,6 +2,7 @@ var React = require('react');
 var Availability = require('./availability');
 
 // Contains buttons, passes their events to Availability
+
 var Viewer = React.createClass({
   getInitialState: function(){
     return { 
