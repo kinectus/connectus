@@ -1,10 +1,11 @@
-//Navigation bar and base page - renders conditionally based on whether or not a user is logged in
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
 var Auth = require('../services/authServices.js');
 var Link = require('react-router').Link;
 var mobile = require('./mobilecheck');
 var FooterCheck = require('./footerCheck');
+
+//Navigation bar and base page - renders conditionally based on whether or not a user is logged in
 
 var Connectus = React.createClass({
   logout: function(){

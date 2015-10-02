@@ -5,6 +5,8 @@ var Link = require('react-router').Link;
 var Router = require('react-router');
 var FooterCheck = require('./footerCheck');
 
+// Prefilled outlet form to update information
+
 var editOutlet = React.createClass({
   getInitialState: function(){
    return {

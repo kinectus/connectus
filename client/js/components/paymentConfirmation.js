@@ -9,6 +9,8 @@ var Link = require('react-router').Link;
 var mobile = require('./mobilecheck');
 var FooterCheck = require('./footerCheck')
 
+// Acknowledge user payment
+
 var Connectus = React.createClass({
   getInitialState: function(){
     return {
@@ -16,6 +18,7 @@ var Connectus = React.createClass({
       confirmation: ''
     };
   },
+
   componentDidMount: function() {
     var that = this;
 

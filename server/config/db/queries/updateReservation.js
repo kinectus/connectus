@@ -10,6 +10,7 @@ var transactionID;
 module.exports = updateReservation = function(req, res){
   var data = req.body;
 
+
   // Track reservation update by date and time slot
   var currentDate = moment( data.start.date, 'YYYY-MM-DD' );
   var stringDate = currentDate.format('YYYY-MM-DD');
@@ -33,6 +34,7 @@ module.exports = updateReservation = function(req, res){
       start: data.start.time
     })
     .fetch().then(function(slot){
+      console.log(slot);
       return new Reservation({
         outlet_id: data.outletID,
         date: data.start.date,

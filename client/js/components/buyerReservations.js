@@ -10,6 +10,8 @@ var moment = require('moment');
 var $ = require('jquery');
 var FooterCheck = require('./footerCheck');
 
+// View reservations made and show real time data use updates
+
 var buyerReservations = React.createClass({
 
   getInitialState: function(){
