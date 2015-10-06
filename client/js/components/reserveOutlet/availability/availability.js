@@ -48,25 +48,24 @@ var Availability = React.createClass({
   // Check for button events
   componentDidUpdate: function(){
     // Move forward event
-    if (this.props.mouseDown && this.props.forward && this.props.move && this.hasHappened === false){
-      this.hasHappened = true;
+    if (this.props.mouseDown && this.props.forward && this.props.move && this.propertiesReceived === false){
+      this.propertiesReceived = true;
       this.goForward();
       this.interval = setInterval(this.goForward, 30);
     // Move backward event  
-    } else if (this.props.mouseDown && !this.props.forward && this.props.move && this.hasHappened === false) {
-      this.hasHappened = true;
+    } else if (this.props.mouseDown && !this.props.forward && this.props.move && this.propertiesReceived === false) {
+      this.propertiesReceived = true;
       this.goBack();
       this.interval = setInterval(this.goBack, 30);
     // Stop event  
-    } else if (!this.props.mouseDown && !this.props.move && this.hasHappened === false){
-      this.hasHappened = true;
+    } else if (!this.props.mouseDown && !this.props.move && this.propertiesReceived === false){
+      this.propertiesReceived = true;
       this.stop();
     }
   },
 
   componentWillReceiveProps: function(){
-    var that = this;
-    this.hasHappened = false;
+    this.propertiesReceived = false;
   },
 
   // Scroll functionality
