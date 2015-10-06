@@ -89,7 +89,7 @@ module.exports = updateReservation = function(req, res){
                 }
 
                 if(!validReservations){
-                  return 'not valid'//res.status(200).send({error: true, errorMessage:'One or more of your reservation slots are not avilable'});
+                  return 'not valid'
                 } else {
                   // Associate transaction and user as buyer of each reservation, set each reservation as unavailable to future users
                   return reservations.mapThen(function(reservation){
@@ -99,9 +99,8 @@ module.exports = updateReservation = function(req, res){
                       transaction_id: transactionID
                     }).save();
                   })
-                  .then(function(stuff){
-                    console.log('-------------------------- STUFF', stuff)
-                    return stuff // res.status(200).send(JSON.stringify('Posted'));
+                  .then(function(modelBase){
+                    return modelBase
                   });
                 }
               });
