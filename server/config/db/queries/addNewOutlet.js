@@ -36,7 +36,6 @@ module.exports = addNewOutlet = function(req, res){
         });
         // Save outlet and create corresponding reservation slots
         outlet.save().then(function(newOutlet){
-          console.log('newOutlet before addReservations: ', newOutlet.attributes);
           addReservations(newOutlet.attributes);
           return newOutlet;
         })
