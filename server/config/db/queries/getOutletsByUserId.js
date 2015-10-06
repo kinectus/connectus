@@ -11,7 +11,6 @@ module.exports = getOutletsByUser = function(user, next){
     .fetch();
   })
   .then(function(outlets){
-    console.log(outlets);
     return outlets;
   })
   .catch(function(error){

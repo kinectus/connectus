@@ -1,8 +1,22 @@
+ 
 // Hardware ID and network ID: 0xc528100000584f80 on network 0x2777
 // ^These are always the same
 
 // I, [2015-07-13T20:06:15.137579 #84220]  INFO -- : 45w at 2015-07-13 20:06:01 -0700
 // ^This is what the wattage line of data looks like
+
+// Command to turn top socket on or off using ShellJS
+// shell.exec('hacklet on -n 0x2777 -s 0')
+// shell.exec('hacklet off -n 0x2777 -s 0')
+
+// Command to turn bottom socket on or off using ShellJS
+// shell.exec('hacklet on -n 0x2777 -s 1')
+// shell.exec('hacklet off -n 0x2777 -s 1')
+
+// // EXAMPLE EXECUTION, CAN BE RUN WITHOUT CLIENT
+// shell.exec('hacklet on -n 0x2777 -s 0');
+// setInterval(execute, 10000, 'hacklet read -n 0x2777 -s 0 >> data.txt | cat');
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
@@ -18,7 +32,6 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-// watch = require('node-watch'); If necessary, can be used to execute function on file change
 
 // Total wattage since start
 var totalKwh = 0;
@@ -30,6 +43,7 @@ var totalKwh = 0;
 // It is used as the callback in the function readLines
 
 var CONNECTUS_SERVER_URL = 'http://localhost:3000/realtimeData';
+
 var postDataToConnectus = function(data) {
   var options = {
     method: 'POST',
@@ -39,6 +53,7 @@ var postDataToConnectus = function(data) {
   };
   rp(options);
 };
+
 var getWatts = function(string){
   var start = string.indexOf(': ')+2;
   var end = string.indexOf('w');
@@ -49,6 +64,7 @@ var getWatts = function(string){
   if (end > 0){
     totalKwh += kwh;
   }
+  console.log(string)
   console.log('total: ', totalKwh);
   cbDone = true;
   var data = {
@@ -122,23 +138,14 @@ app.post('/api/on', function(req, res) {
   console.log('in the app.post ON handler with req.body: ', req.body);
   clientData = req.body;
   setInterval(execute, 10000, 'hacklet read -n 0x2777 -s 0 >> data.txt | cat');
-
 });
+
 
 app.post('/api/off', function(req,res) {
   shell.exec('hacklet off -n 0x2777 -s 0')
 });
 
 
-/*
-Command to turn top socket on or off using ShellJS
-shell.exec('hacklet on -n 0x2777 -s 0')
-shell.exec('hacklet off -n 0x2777 -s 0')
-
-Command to turn bottom socket on or off using ShellJS
-shell.exec('hacklet on -n 0x2777 -s 1')
-shell.exec('hacklet off -n 0x2777 -s 1')
-*/
 
 var port = process.env.PORT || 3030;
 app.listen(port);
