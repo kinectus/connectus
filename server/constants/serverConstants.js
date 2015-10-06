@@ -1,6 +1,7 @@
 
 var BASE_URL = process.env.PORT===undefined? 'http://localhost:3000/' : 'https://econnectus.herokuapp.com/';
-var POWER_SERVER_BASE_URL = 'https://4ed668a.ngrok.com/'; //set this manually
+var POWER_SERVER_BASE_URL = process.env.PORT===undefined? 'http://localhost:3030/' : 'https://4ed668a.ngrok.com/';
+
 var authConstants = {
   BASE_URL: BASE_URL,
   FACEBOOK: BASE_URL + 'auth/facebook',
@@ -10,7 +11,6 @@ var authConstants = {
   POWER_SERVER_ON:  POWER_SERVER_BASE_URL +'api/on',
   POWER_SERVER_OFF: POWER_SERVER_BASE_URL+'api/off',
   SPECIAL_OUTLET: 'Hack Reactor 963'
-
 };
 
 module.exports = authConstants;
