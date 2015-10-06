@@ -6,7 +6,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
-// require('./powerReader.js');
 
 var shell = require('shelljs'),
     make = require('shelljs/make'),
@@ -19,8 +18,7 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-
-    // watch = require('node-watch'); If necessary, can be used to execute function on file change
+// watch = require('node-watch'); If necessary, can be used to execute function on file change
 
 // Total wattage since start
 var totalKwh = 0;
@@ -49,11 +47,9 @@ var getWatts = function(string){
   console.log('watts', watts);
   kwh = watts/1000/(60*60) * 10;
   if (end > 0){
-    console.log('in the if statement')
     totalKwh += kwh;
   }
-  // console.log('string: ', string, ' total: ', total, ' start: ', start, ' end: ', end, ' watts: ', watts);
-  console.log('total: ', totalKwh); // logs to server
+  console.log('total: ', totalKwh);
   cbDone = true;
   var data = {
     avgWatts: watts,
@@ -66,7 +62,6 @@ var getWatts = function(string){
 
 
 
-// If asynchronous issues arise, cbDone could be used to wait to execute a task
 var cbDone = false;
 // Input is defined in execute, it's equal to a live stream of data from data.txt
 // FYI, no data is visible in data.txt because of the rapid turn over
@@ -118,10 +113,10 @@ var execute = function(command){
   input = fs.createReadStream('data.txt', 'utf8');
   readLines(input, getWatts);
 };
-// Runs execute every 10s
 
 var clientData;
 
+// Runs execute every 10s
 app.post('/api/on', function(req, res) {
   shell.exec('hacklet on -n 0x2777 -s 0');
   console.log('in the app.post ON handler with req.body: ', req.body);
@@ -144,36 +139,6 @@ Command to turn bottom socket on or off using ShellJS
 shell.exec('hacklet on -n 0x2777 -s 1')
 shell.exec('hacklet off -n 0x2777 -s 1')
 */
-
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-// Commented code contains parts of previous strategy without data erase       //
-// This is not a working version, but is easy to switch to a live data read    //
-// on the command line (Saving in case of armageddon)                          //
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-
-// // COMMENTS ON GRABBING LAST 7 LINES
-// var readFile = function(cb){
-//   fs.readFile('data.txt', 'utf-8', function(err, data){
-//     if (err){
-//       console.log('err', err);
-//     } else {
-//       // console.log('data',data);
-//       // Grab last 7 lines
-//       // var section = 
-//       var arr = data.split('\n');
-//       line = arr[arr.length-3];
-//       cb(line);
-//       console.log('split', arr[arr.length-3]);
-//     }
-//   })
-// };
-
-//fs.writeFile('/path/to/file', '', function(){console.log('done')})
-//{ recursive: false },
-
-// watch('data.txt', { recursive: false }, function(){ readFile(getWatts); });
 
 var port = process.env.PORT || 3030;
 app.listen(port);
