@@ -1,18 +1,29 @@
 var Outlets = require('../outlets/outlets.collection');
 var ServerConstants = require('../constants/serverConstants');
 
+// Query locations
+// User information
+var getUserInfo = require('../config/db/queries/getUserInfo');
+
+// View outlet information
 var getOutletsByUser = require('../config/db/queries/getOutletsByUserId');
+var getOutletAvailability = require('../config/db/queries/getAvailability');
+
+// Outlet creation
 var addNewOutlet = require('../config/db/queries/addNewOutlet');
 var updateOutlet = require('../config/db/queries/updateOutlet');
-var getOutletAvailability = require('../config/db/queries/getAvailability');
 var addReservationSlots = require('../config/db/queries/addReservationSlots');
+
+// Reservation management
 var updateReservation = require('../config/db/queries/updateReservation');
-var getTimeSlotInfo = require('../config/db/queries/getTimeSlotInfo');
-var getUserInfo = require('../config/db/queries/getUserInfo');
-var getOutletsByUser = require('../config/db/queries/getOutletsByUserId.js');
 var getBuyerReservations = require('../config/db/queries/getBuyerReservations');
+
+// Control prototype and transaction
+var getTimeSlotInfo = require('../config/db/queries/getTimeSlotInfo');
 var setCurrentTransaction = require('../config/db/queries/setCurrentTransaction');
 var setInitialTransactionCost = require('../config/db/queries/setInitialTransactionCost.js');
+
+// Dependencies
 var M = require('moment');
 var io = require('../server.js');
 var rp = require('request-promise');
@@ -20,8 +31,6 @@ var addressValidator = require('address-validator');
 var Address = addressValidator.Address;
 
 var intervalIds = {};
-
-
 
 module.exports = {
   
@@ -120,8 +129,7 @@ module.exports = {
     var info = req.body;
     var transactionId = info.id;
     var hourlyPrice = info.outlet.priceHourly;
-    // query the database for validation - CAN they turn on this outlet??
-    // if so...
+    // query the database for validation
     var startDate = M(info.endTime.date);
     var endDate = M(info.startTime.date);
     var reservationHours = startDate.diff(endDate,'hours') + (-info.startTime.slot.number + info.endTime.slot.number+1)/2;

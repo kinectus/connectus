@@ -7,12 +7,9 @@ var db = require('knex')({
   client: 'mysql',
   connection: process.env.CLEARDB_DATABASE_URL || {
     host: '127.0.0.1',
-    // port: '',
     user: 'root',
-    // password: '',
     database: 'connectus',
     charset: 'utf8'
-    // filename: path.join(__dirname, './kinectus/kinectus.mysql/')
   }
 });
 
